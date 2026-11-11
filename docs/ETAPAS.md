@@ -34,13 +34,13 @@ Feita pelo agente, em paralelo às tarefas da semana 0 do dono:
 8. Relatório em português simples: o que funcionou, riscos, se a stack se confirma e o peso atual do app.
 
 **PORTÕES PARA INICIAR A ETAPA 1 (todos com OK do dono):**
-- [ ] Prova técnica aprovada (navegação no celular e no Android Auto).
+- [x] Prova técnica aprovada (navegação no celular e no Android Auto) — 11/11/2026.
 - [ ] Telas de `docs/telas/` aprovadas.
 - [ ] Contato feito com a sede nacional sobre a licença da marca (se ainda não houver resposta, o código usa nome provisório e tema trocável).
 - [ ] Orçamento aceito e decisão sobre abrir empresa antes do lançamento.
 - [ ] Lista inicial de capítulos, sedes e diretorias de Cuiabá obtida.
 - [ ] Catálogo de componentes aprovado pelo dono (visual "Patch de Colete").
-- [ ] Pelo menos os Lotes 1 a 8 e 22 a 25 de imagens gerados (Caminho A ou B).
+- [x] Pelo menos os Lotes 1 a 8 e 22 a 25 de imagens gerados (Caminho A ou B) — todos os 26 recebidos.
 
 **PONTO DE TESTE 0** — o dono vê uma rota navegando no próprio celular, com o estilo de mapa próprio, e no Android Auto do PC; e navega pelo Catálogo de componentes.
 

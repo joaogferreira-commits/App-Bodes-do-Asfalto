@@ -4,9 +4,9 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Situação atual
 
-- **Etapa:** 0 — Prova técnica e portões (não iniciada)
+- **Etapa:** 0 — Ponto de Teste 0 **aprovado** (A–E); faltam portões do dono para iniciar a Etapa 1
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** PONTO DE TESTE 0 com o dono (roteiro em `docs/TESTE_ETAPA0.md`). Builds na fila do EAS: 1ffe622f (navegação + mapa) e 1bf6ab89 (+ Android Auto). Depois: medir peso do APK e relatório final (tarefas 11 e 12).
+- **Próxima tarefa:** dono responder aos portões da Etapa 1 (telas, catálogo, licença da marca, orçamento/empresa, capítulos de Cuiabá); depois apresentar o plano da Etapa 1.
 
 ## Feito
 
@@ -32,14 +32,12 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Causa do D: `SecurityException: my location requires permission` — o `NavigationView` era montado com `myLocationEnabled` antes da permissão. Correção: a tela só monta o mapa do Google depois da permissão (3 testes novos em `src/__tests__/navegacao-tela.test.tsx`). Causa do E: DHU 2.0 (2022) do dono conecta e o celular derruba a conexão — atualizar o DHU no SDK Manager. Build 6 pedida.
 - 11/11/2026 — DHU 2.0 é a versão mais recente; abriu e conectou, mas com lentidão (decodificação do vídeo no PC; Google Maps e música também travam — não é do app). Orientado `headunit.ini` com 800x480. Fluidez real fica para o teste no carro.
 - 11/11/2026 — **Build 6: item D (navegação) funcionou no celular.** Falta o E (navegação no Android Auto/DHU).
+- 11/11/2026 — **Item E funcionou** (app, Alerta/SOS e rota no DHU). Ponto de Teste 0 completo. Peso do APK (build 6, só arm64): **80,7 MB** — acima da meta de ~60 MB; plano no `docs/RELATORIO_ETAPA0.md`. Relatório final da Etapa 0 escrito.
 
 ## Falta nesta etapa
 
 1. Texto do pedido de CarPlay (fica para quando a conta Apple existir).
-8. Prova de navegação Google no Android — código pronto; falta testar no celular.
-9. Prova no Android Auto (DHU) — código pronto; falta compilar no EAS e testar no PC do dono.
-11. Versão de teste (EAS) e medição do peso.
-12. Relatório e roteiro do PONTO DE TESTE 0.
+Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: reduzir o peso do APK, restringir a chave do Google.
 
 ## Decisões tomadas durante o desenvolvimento
 
