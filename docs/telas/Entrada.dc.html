@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Pedido de entrada</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F26B1D}a:hover{color:#FF8A45}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0E0E0E; color: #F5F1EA; font-family: Inter, system-ui, sans-serif; font-size: 17px; padding: 24px 18px; display: flex; flex-direction: column; gap: 16px">
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <span style="font: 700 13px Inter; letter-spacing: 0.08em; color: #F26B1D">PASSO 2 DE 3</span>
+    <h1 style="margin: 0; font: 700 32px 'Barlow Condensed', sans-serif; line-height: 1.05">Comprove que você é do Bodes do Asfalto</h1>
+    <p style="margin: 0; color: #B3ADA4; line-height: 1.45">Seu capítulo ainda não tem diretoria no app. Um moderador vai analisar seu pedido.</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cap" style="font-weight: 600; font-size: 15px">Capítulo</label>
+    <input id="cap" value="Cuiabá (MT)" style="height: 52px; border-radius: 12px; background: #1C1C1C; border: 1px solid #444; color: #F5F1EA; padding: 0 14px; font: 500 17px Inter">
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <button style="height: 120px; border-radius: 14px; background: #1C1C1C; border: 1.5px dashed #F26B1D; color: #F5F1EA; font: 600 15px Inter; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F26B1D" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"></rect><circle cx="12" cy="13" r="3.5"></circle><path d="M8 6l1.5-2h5L16 6"></path></svg>
+      Foto com o colete
+    </button>
+    <button style="height: 120px; border-radius: 14px; background: #1C1C1C; border: 1.5px dashed #F26B1D; color: #F5F1EA; font: 600 15px Inter; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F26B1D" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2.5"></circle><path d="M14 10h4M14 14h4M6 16c.6-1.5 1.7-2.2 3-2.2s2.4.7 3 2.2"></path></svg>
+      Foto da carteirinha
+    </button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="ind" style="font-weight: 600; font-size: 15px">Irmão do clube que indica você</label>
+    <input id="ind" placeholder="Busque pelo nome ou apelido" style="height: 52px; border-radius: 12px; background: #1C1C1C; border: 1px solid #444; color: #F5F1EA; padding: 0 14px; font: 500 17px Inter">
+    <span style="color: #B3ADA4; font-size: 14px">Ele recebe um pedido para confirmar no app.</span>
+  </div>
+
+  <div style="border-radius: 12px; background: #1C1C1C; border: 1px solid #333; padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start">
+    <input id="lgpd" type="checkbox" style="width: 24px; height: 24px; margin: 2px 0 0; accent-color: #F26B1D; flex-shrink: 0">
+    <label for="lgpd" style="font-size: 14px; line-height: 1.45; color: #D9D3CA">Autorizo o tratamento da minha filiação maçônica (dado sensível) apenas para verificar minha entrada e conectar irmãos, conforme a Política de Privacidade.</label>
+  </div>
+
+  <button style="margin-top: auto; height: 60px; border-radius: 14px; background: #F26B1D; border: 0; color: #111; font: 700 19px Inter">Enviar pedido</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
