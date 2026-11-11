@@ -23,6 +23,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Etapa 0, tarefa 9 (código): plugin `app/plugins/withAndroidAuto.js` + classes Java em `app/plugins/android-auto/` (CarAppService categoria NAVIGATION, Session, tela que estende `AndroidAutoBaseScreen` do Google com botões Alerta e SOS). Manifesto, permissões e descritor conferidos no prebuild; compilação Java só é verificada no EAS (sem Android SDK no ambiente do agente). Build 2 pedida.
 - 11/11/2026 — Etapa 0, tarefa 10: `docs/CUSTOS.md` — R$ 0/mês até o lançamento; ~R$ 230/mês (300 irmãos) e ~R$ 365/mês (1.000) depois. Atenção: Vercel grátis não permite uso comercial → painel no Cloudflare Pages (grátis).
 - 11/11/2026 — Dono instalou Android Studio + DHU e preparou o celular (depuração USB, Android Auto em modo desenvolvedor com fontes desconhecidas). Roteiro do teste em `docs/TESTE_ETAPA0.md`. As duas builds estavam em fila (IN_QUEUE) às 18:18 UTC — fila do plano grátis.
+- 11/11/2026 — Builds 1 e 2 falharam na etapa "Bundle JavaScript": o teste `telas.test.tsx` estava dentro de `src/app/` e o Expo Router o tratou como tela (puxando a biblioteca de testes para o app). Corrigido: testes de tela ficam em `src/__tests__/`. O CI agora roda `expo export` para pegar esse tipo de erro antes do EAS. Build 3 pedida.
 
 ## Falta nesta etapa
 

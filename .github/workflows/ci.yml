@@ -21,3 +21,5 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test -- --ci
+      - name: Empacotar o JavaScript (mesma etapa que roda no EAS)
+        run: npx expo export --platform android --output-dir /tmp/export

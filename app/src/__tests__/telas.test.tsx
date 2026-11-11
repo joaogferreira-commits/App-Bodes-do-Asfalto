@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
-import Catalogo from './catalogo';
-import MenuDeTestes from './index';
+import Catalogo from '@/app/catalogo';
+import MenuDeTestes from '@/app/index';
 
 jest.mock('expo-router', () => ({ router: { push: jest.fn(), back: jest.fn() } }));
 
