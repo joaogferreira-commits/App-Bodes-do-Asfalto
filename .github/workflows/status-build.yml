@@ -42,3 +42,11 @@ jobs:
                 | grep -iE "error|fail|exception|what went wrong|cannot|unresolved|> Task|BUILD FAILED" | tail -120
             done
           done
+      - name: Tamanho do APK da última build concluída
+        shell: bash {0}
+        run: |
+          url=$(eas build:list --limit 5 --non-interactive --json | jq -r '[.[] | select(.status=="FINISHED")][0].artifacts.buildUrl')
+          echo "APK: $url"
+          bytes=$(curl -sIL "$url" | grep -i '^content-length' | tail -1 | tr -dc '0-9')
+          echo "TAMANHO_APK_BYTES=$bytes"
+          echo "TAMANHO_APK_MB=$(awk "BEGIN {printf \"%.1f\", $bytes/1048576}")"
