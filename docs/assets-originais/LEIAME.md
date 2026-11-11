@@ -29,8 +29,13 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 | lote-20.webp | 20 | ilustra-boas-vindas, ilustra-entrada-aprovada |
 | lote-21.webp | 21 | ilustra-nivel-novo |
 | lote-22.webp | 22 | textura-sarja (1536x1024, emenda não perfeita: o conversor corrige) |
+| lote-23.webp | 23 | textura-couro |
+| lote-24.webp | 24 | textura-jeans (metade esquerda), textura-lona (metade direita); costura no meio é descartada |
+| lote-25.webp | 25 | borda-overlock-9slice (fundo branco, não transparente: o conversor remove) |
+| extra-bordas-formatos.webp | extra | referência de bordas em vários formatos (retângulo, círculo, oval, escudos) |
+| lote-26a.webp | 26a | splash (tela de abertura) |
 
-Pendentes: lotes 23 a 26.
+Conjunto completo para a Etapa 0. O lote 26b (referência da tela do mapa) foi dispensado: é só referência e as telas aprovadas em docs/telas/ já cumprem esse papel.
 
 ## LOG de geração (Caminho B)
 

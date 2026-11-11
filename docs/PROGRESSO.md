@@ -6,11 +6,12 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 - **Etapa:** 0 — Prova técnica e portões (não iniciada)
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** Etapa 0, tarefa 2 (projeto base do app). Dono: enviar as imagens para `docs/assets-originais/`.
+- **Próxima tarefa:** Etapa 0, tarefa 2 (projeto base do app). Dono: tarefa 2 (conta Expo + segredo EXPO_TOKEN no GitHub).
 
 ## Feito
 
 - 11/11/2026 — `.claude/settings.json` criado; especificação renomeada para `docs/ESPECIFICACAO.md`; `settings.json` da raiz removido (movido para `.claude/`).
+- 11/11/2026 — Imagens recebidas (Caminho A), lotes 1 a 26a, em `docs/assets-originais/` (detalhes no LEIAME de lá). Portão "Lotes 1 a 8 e 22 a 25" da Etapa 0 cumprido.
 
 ## Falta nesta etapa
 
