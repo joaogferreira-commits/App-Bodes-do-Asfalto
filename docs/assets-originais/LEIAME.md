@@ -19,6 +19,12 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 
 Observação: vieram com fundo branco (não transparente); o conversor remove o fundo.
 
+Vistos na conversa em 11/11/2026 mas **não salvos** (o arquivo não chegou ao ambiente; o dono vai reenviar):
+- Lotes 11 a 16: fugiram do guia de estilo (borda amarela de corda, cenas fotográficas, sem sarja/overlock; Bodinho com texto e com o nome do clube; triciclo com bandeira e caveira). **Refazer** em conversa nova do ChatGPT.
+- Lote 17 (ícones de referência), 18 (ilustrações, vieram em retrato) e 19 (sem sinal): aproveitáveis; reenviar.
+- Uma imagem extra com 3 ícones (fotos, rota, moto de frente): aproveitável como referência.
+- Faltam os lotes 20 a 26.
+
 ## LOG de geração (Caminho B)
 
 | Data | Item | Modelo | Qualidade | Custo estimado |
