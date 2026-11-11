@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Feed do clube</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F26B1D}a:hover{color:#FF8A45}
+</style>
+</helmet>
+<div style="width: 390px; height: 1180px; position: relative; overflow: hidden; background: #0E0E0E; color: #F5F1EA; font-family: Inter, system-ui, sans-serif; font-size: 16px">
+  <div style="padding: 16px 16px 6px; display: flex; justify-content: space-between; align-items: center">
+    <h1 style="margin: 0; font: 700 32px 'Barlow Condensed', sans-serif">Feed</h1>
+    <div style="display: flex; gap: 8px">
+      <button aria-label="Notificações, 4 novas" style="position: relative; width: 48px; height: 48px; border-radius: 14px; background: #1C1C1C; border: 1px solid #333; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5F1EA" stroke-width="2" stroke-linecap="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"></path><path d="M10 21h4"></path></svg>
+        <span style="position: absolute; right: 6px; top: 6px; min-width: 18px; height: 18px; border-radius: 9px; background: #F26B1D; color: #111; font: 700 11px/18px Inter; text-align: center">4</span>
+      </button>
+      <button aria-label="Mensagens" style="width: 48px; height: 48px; border-radius: 14px; background: #1C1C1C; border: 1px solid #333; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5F1EA" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div style="padding: 8px 16px 12px; display: flex; gap: 14px; overflow: hidden">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0">
+      <div style="width: 64px; height: 64px; border-radius: 50%; border: 2px dashed #F26B1D; display: flex; align-items: center; justify-content: center; background: #1C1C1C">
+        <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F26B1D" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+      </div>
+      <span style="font-size: 12px; font-weight: 600">Seu story</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0">
+      <div style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid #F26B1D; padding: 2px; box-sizing: border-box"><svg aria-hidden="true" width="54" height="54" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#2F4858"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#1C1C1C"></path><circle cx="24" cy="22" r="10" fill="#C68A5E"></circle><path d="M14 19c0-7 5-10 10-10s10 3 10 10c-3-2-6-3-10-3s-7 1-10 3z" fill="#F26B1D"></path><rect x="16.5" y="20" width="6.5" height="4" rx="2" fill="#111"></rect><rect x="25" y="20" width="6.5" height="4" rx="2" fill="#111"></rect><path d="M15 25c1 7 5 10 9 10s8-3 9-10c-2 3-5 4-9 4s-7-1-9-4z" fill="#C9C4BC"></path></svg></div>
+      <span style="font-size: 12px; font-weight: 600">Zé</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0">
+      <div style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid #F26B1D; padding: 2px; box-sizing: border-box"><svg aria-hidden="true" width="54" height="54" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#6B3E26"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#2A2A2A"></path><circle cx="24" cy="23" r="9" fill="#8D5A3B"></circle><path d="M12 24c0-9 5-15 12-15s12 6 12 15v5h-4v-4c0-3-3-5-8-5s-8 2-8 5v4h-4z" fill="#222"></path><path d="M22 9.3h4V17h-4z" fill="#F26B1D"></path></svg></div>
+      <span style="font-size: 12px; font-weight: 600">Edu</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0">
+      <div style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid #F26B1D; padding: 2px; box-sizing: border-box"><svg aria-hidden="true" width="54" height="54" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#3D5A40"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#6B4A2B"></path><circle cx="24" cy="23" r="10" fill="#F1C27D"></circle><path d="M14 20c0-7 4-10 10-10s10 3 10 10z" fill="#1C1C1C"></path><path d="M24 19h15v2.5H24z" fill="#1C1C1C"></path><path d="M18 28c2-2 4-2 6-.5 2-1.5 4-1.5 6 .5-2 1-4 1-6 0-2 1-4 1-6 0z" fill="#5A3A1E"></path></svg></div>
+      <span style="font-size: 12px; font-weight: 600">Marcos</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0">
+      <div style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid #555; padding: 2px; box-sizing: border-box"><svg aria-hidden="true" width="54" height="54" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#4B3F63"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#1C1C1C"></path><circle cx="24" cy="22" r="10.5" fill="#A86B45"></circle><circle cx="20" cy="22" r="3" fill="none" stroke="#F5F1EA" stroke-width="1.4"></circle><circle cx="28" cy="22" r="3" fill="none" stroke="#F5F1EA" stroke-width="1.4"></circle><path d="M21 30c1 3 2 4 3 4s2-1 3-4z" fill="#3A2A20"></path></svg></div>
+      <span style="font-size: 12px; font-weight: 600">Ivan</span>
+    </div>
+  </div>
+
+  <div style="margin: 0 16px 12px; border-radius: 16px; background: #1C1C1C; border: 1px solid #333; padding: 12px; display: flex; flex-direction: column; gap: 12px">
+    <a href="NovaPublicacao.dc.html" style="display: flex; gap: 10px; align-items: center; text-decoration: none; color: #B3ADA4">
+      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#4B3F63"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#1C1C1C"></path><circle cx="24" cy="22" r="10.5" fill="#A86B45"></circle><circle cx="20" cy="22" r="3" fill="none" stroke="#F5F1EA" stroke-width="1.4"></circle><circle cx="28" cy="22" r="3" fill="none" stroke="#F5F1EA" stroke-width="1.4"></circle></svg>
+      <span style="flex-grow: 1; height: 44px; border-radius: 22px; background: #2A2A2A; display: flex; align-items: center; padding: 0 16px; font-size: 15px">O que rolou na estrada?</span>
+    </a>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+      <a href="NovaPublicacao.dc.html" style="min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #F5F1EA; text-decoration: none; font: 600 12px Inter"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3FBF86" stroke-width="2"><rect x="3" y="5" width="18" height="15" rx="3"></rect><circle cx="12" cy="12.5" r="3.5"></circle></svg>Foto</a>
+      <a href="NovaPublicacao.dc.html" style="min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #F5F1EA; text-decoration: none; font: 600 12px Inter"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E05A5A" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="3"></rect><path d="M16 10l5-3v10l-5-3z"></path></svg>Vídeo</a>
+      <a href="NovaPublicacao.dc.html" style="min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #F5F1EA; text-decoration: none; font: 600 12px Inter"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F26B1D" stroke-width="2" stroke-linecap="round"><path d="M4 20c4-2 4-8 8-10s6-6 8-6"></path><circle cx="4" cy="20" r="1.5"></circle><circle cx="20" cy="4" r="1.5"></circle></svg>Rota</a>
+      <a href="NovaPublicacao.dc.html" style="min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #F5F1EA; text-decoration: none; font: 600 12px Inter"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5BA4E6" stroke-width="2" stroke-linecap="round"><path d="M5 20V10M12 20V4M19 20v-7"></path></svg>Enquete</a>
+      <a href="NovaPublicacao.dc.html" style="min-height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #F5F1EA; text-decoration: none; font: 600 12px Inter"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C518" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Evento</a>
+    </div>
+  </div>
+
+  <article style="margin: 0 16px 14px; border-radius: 18px; background: #1C1C1C; border: 1px solid #333; overflow: hidden">
+    <div style="padding: 12px 14px; display: flex; gap: 10px; align-items: center">
+      <svg aria-hidden="true" width="46" height="46" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#3D5A40"></circle><path d="M8 46c3-8 9-11 16-11s13 3 16 11" fill="#6B4A2B"></path><circle cx="24" cy="23" r="10" fill="#F1C27D"></circle><path d="M14 20c0-7 4-10 10-10s10 3 10 10z" fill="#1C1C1C"></path><path d="M24 19h15v2.5H24z" fill="#1C1C1C"></path><path d="M18 28c2-2 4-2 6-.5 2-1.5 4-1.5 6 .5-2 1-4 1-6 0-2 1-4 1-6 0z" fill="#5A3A1E"></path></svg>
+      <div style="flex-grow: 1; display: flex; flex-direction: column">
+        <span style="font-weight: 700">Marcos "Ferrugem" <span style="padding: 1px 6px; border-radius: 5px; background: #2A2A2A; color: #F26B1D; font-size: 11px; font-weight: 700; vertical-align: 2px">BODE VELHO</span></span>
+        <span style="color: #B3ADA4; font-size: 13px">Rondonópolis · Chapada dos Guimarães · há 2 h</span>
+      </div>
+      <button aria-label="Mais opções: salvar, denunciar ou bloquear" style="width: 44px; height: 44px; border-radius: 10px; background: transparent; border: 0">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#B3ADA4"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+      </button>
+    </div>
+    <p style="margin: 0; padding: 0 14px 10px; line-height: 1.45">Bate-volta à Chapada com os irmãos de Cuiabá. Mirante do Véu de Noiva ao pôr do sol e ágape no fim. Que dia!</p>
+
+    <div style="position: relative">
+      <svg role="img" aria-label="Ilustração: três motos na estrada diante dos paredões da Chapada ao pôr do sol" width="356" height="236" viewBox="0 0 356 236" style="display: block">
+        <rect width="356" height="236" fill="#F2A65A"></rect>
+        <rect width="356" height="70" fill="#E8894A"></rect>
+        <circle cx="250" cy="92" r="30" fill="#FFD48A"></circle>
+        <path d="M0 150V96l30-6 20-18 40 4 20-20 60 6 10 18h40l20-14 50 8 30-6 36 10v72z" fill="#B5532A"></path>
+        <path d="M0 150v-22l40-10 60 8 50-12 60 10 70-8 76 12v22z" fill="#8E3D1E"></path>
+        <path d="M0 236V150h356v86z" fill="#4A2A18"></path>
+        <path d="M120 236l45-86h26l45 86z" fill="#2B2B2B"></path>
+        <path d="M176 160h4v10h-4zM175 182h6v14h-6zM174 208h8v20h-8z" fill="#F5C518"></path>
+        <g fill="#111"><circle cx="160" cy="205" r="7"></circle><circle cx="182" cy="205" r="7"></circle><path d="M156 200l10-12h12l8 12z"></path><circle cx="171" cy="183" r="5"></circle></g>
+        <g fill="#111"><circle cx="196" cy="178" r="5"></circle><circle cx="211" cy="178" r="5"></circle><path d="M193 175l7-8h8l6 8z"></path><circle cx="203" cy="163" r="3.5"></circle></g>
+        <g fill="#111"><circle cx="146" cy="174" r="4.5"></circle><circle cx="160" cy="174" r="4.5"></circle><path d="M143 171l6-7h8l5 7z"></path><circle cx="152" cy="160" r="3.2"></circle></g>
+      </svg>
+      <span style="position: absolute; right: 10px; top: 10px; padding: 4px 8px; border-radius: 8px; background: rgba(0,0,0,0.65); font: 700 12px Inter">1/6</span>
+      <span style="position: absolute; left: 10px; bottom: 10px; padding: 5px 9px; border-radius: 8px; background: rgba(0,0,0,0.7); font: 700 12px Inter; display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#F5F1EA"><path d="M8 5v14l11-7z"></path></svg>Recap 3D da viagem</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 12px 6px; border-bottom: 1px solid #2A2A2A">
+      <div style="display: flex; flex-direction: column; align-items: center"><span style="font: 700 22px 'Barlow Condensed', sans-serif">412 km</span><span style="color: #B3ADA4; font-size: 12px">distância</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center"><span style="font: 700 22px 'Barlow Condensed', sans-serif">6h20</span><span style="color: #B3ADA4; font-size: 12px">rodando</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center"><span style="font: 700 22px 'Barlow Condensed', sans-serif">5</span><span style="color: #B3ADA4; font-size: 12px">irmãos</span></div>
+      <div style="display: flex; flex-direction: column; align-items: center"><span style="font: 700 22px 'Barlow Condensed', sans-serif">+350</span><span style="color: #B3ADA4; font-size: 12px">XP</span></div>
+    </div>
+
+    <div style="padding: 10px 14px; display: flex; align-items: center; gap: 8px; color: #D9D3CA; font-size: 14px">
+      <span style="padding: 4px 8px; border-radius: 8px; background: rgba(212,175,55,0.16); border: 1px solid #D4AF37; color: #F2D27A; font-weight: 700; font-size: 12px">Selo Chapada</span>
+      <span>com Zé, Edu e mais 3</span>
+    </div>
+
+    <div style="padding: 0 6px 6px; display: flex; gap: 2px; align-items: center">
+      <button style="min-height: 48px; padding: 0 12px; border-radius: 10px; background: rgba(242,107,29,0.12); border: 0; color: #F26B1D; font: 800 15px Inter; letter-spacing: 0.04em">TFA 32</button>
+      <button style="min-height: 48px; padding: 0 10px; border-radius: 10px; background: transparent; border: 0; color: #F5F1EA; font: 600 15px Inter; display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B3ADA4" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"></path></svg>8</button>
+      <button aria-label="Compartilhar" style="min-height: 48px; width: 48px; border-radius: 10px; background: transparent; border: 0"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B3ADA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7h16v-7"></path><path d="M12 3v12M7 8l5-5 5 5"></path></svg></button>
+      <button aria-label="Usar esta rota" style="margin-left: auto; min-height: 44px; padding: 0 12px; border-radius: 10px; background: transparent; border: 1px solid #555; color: #F5F1EA; font: 600 14px Inter">Usar rota</button>
+    </div>
+    <div style="padding: 0 14px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.4">
+      <span><b>Zé Ferreira</b> <span style="color: #D9D3CA">Que pôr do sol, irmão! Próxima vamos até Nobres.</span></span>
+      <span style="color: #B3ADA4">Ver os 8 comentários</span>
+    </div>
+  </article>
+
+  <article style="margin: 0 16px 14px; border-radius: 18px; background: #1C1C1C; border: 1px solid #F5C518; overflow: hidden">
+    <div style="padding: 14px; display: flex; gap: 14px; align-items: center">
+      <div style="width: 64px; height: 70px; flex-shrink: 0; border-radius: 12px; background: #F5C518; color: #111; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font: 700 12px Inter">NOV</span><span style="font: 700 30px/1 'Barlow Condensed', sans-serif">22</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 3px">
+        <span style="font: 700 12px Inter; letter-spacing: 0.06em; color: #F5C518">PASSEIO · CAPÍTULO CUIABÁ</span>
+        <span style="font: 700 22px 'Barlow Condensed', sans-serif">Rota das Cachoeiras · Nobres</span>
+        <span style="color: #B3ADA4; font-size: 13px">Saída 7h da sede · 280 km · 18 confirmados</span>
+      </div>
+    </div>
+    <div style="padding: 0 14px 14px; display: flex; gap: 10px">
+      <button style="flex-grow: 1; height: 48px; border-radius: 12px; background: #F26B1D; border: 0; color: #111; font: 700 16px Inter">Vou</button>
+      <button style="height: 48px; padding: 0 16px; border-radius: 12px; background: transparent; border: 1px solid #555; color: #F5F1EA; font: 600 16px Inter">Talvez</button>
+    </div>
+  </article>
+
+  <a href="NovaPublicacao.dc.html" aria-label="Nova publicação" style="position: absolute; right: 18px; bottom: 104px; width: 64px; height: 64px; border-radius: 20px; background: #F26B1D; display: flex; align-items: center; justify-content: center">
+    <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+  </a>
+
+  <nav aria-label="Navegação principal" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: #0E0E0E; border-top: 1px solid #2A2A2A; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; padding-bottom: 8px; box-sizing: border-box">
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: #B3ADA4; text-decoration: none; font: 600 12px Inter">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"></path><path d="M9 4v14M15 6v14"></path></svg>Mapa</a>
+    <a href="Feed.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: #F26B1D; text-decoration: none; font: 600 12px Inter">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 14l4-4 4 4 3-3 5 5"></path></svg>Feed</a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: #B3ADA4; text-decoration: none; font: 600 12px Inter">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Passeios</a>
+    <a href="Passaporte.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: #B3ADA4; text-decoration: none; font: 600 12px Inter">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14L7 22l5-3 5 3-1.5-8"></path></svg>Conquistas</a>
+    <a href="Perfil.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; color: #B3ADA4; text-decoration: none; font: 600 12px Inter">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"></path></svg>Perfil</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

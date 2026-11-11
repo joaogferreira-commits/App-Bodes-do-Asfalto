@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Como apareço no mapa</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F26B1D}a:hover{color:#FF8A45}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0E0E0E; color: #F5F1EA; font-family: Inter, system-ui, sans-serif; font-size: 17px; padding: 20px 16px; display: flex; flex-direction: column; gap: 14px">
+  <div style="display: flex; align-items: center; gap: 12px">
+    <a href="Main.dc.html" aria-label="Voltar ao mapa" style="width: 48px; height: 48px; border-radius: 12px; background: #1C1C1C; display: flex; align-items: center; justify-content: center">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5F1EA" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg>
+    </a>
+    <h1 style="margin: 0; font: 700 30px 'Barlow Condensed', sans-serif">Como apareço no mapa</h1>
+  </div>
+  <p style="margin: 0; color: #B3ADA4; line-height: 1.45">Você decide quem vê onde você está. Sua casa e seu trabalho nunca aparecem.</p>
+
+  <div role="radiogroup" aria-label="Nível de visibilidade" style="display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{opcoes}}" as="op" hint-placeholder-count="5">
+      <button role="radio" aria-checked="{{op.marcado}}" onClick="{{op.pick}}" style="{{op.estilo}}">
+        <span style="{{op.bolinha}}"></span>
+        <span style="display: flex; flex-direction: column; gap: 3px; text-align: left">
+          <span style="font: 600 17px Inter; color: #F5F1EA">{{op.nome}}</span>
+          <span style="font: 400 14px Inter; color: #B3ADA4; line-height: 1.35">{{op.desc}}</span>
+        </span>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="border-radius: 14px; background: #1C1C1C; border: 1px solid #333; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-weight: 600">Visível só por um tempo</span>
+      <span style="padding: 6px 10px; border-radius: 8px; background: #2A2A2A; font-size: 14px">2 horas</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-weight: 600">Meu status</span>
+      <span style="padding: 6px 10px; border-radius: 8px; background: #F26B1D; color: #111; font-weight: 700; font-size: 14px">Aberto a encontro</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-weight: 600">Zonas privadas</span>
+      <span style="color: #B3ADA4; font-size: 15px">Casa · Trabalho</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 'aprox' }; }
+  renderVals() {
+    const base = [
+      { id: 'invisivel', nome: 'Invisível', desc: 'Ninguém vê você no mapa.' },
+      { id: 'cidade', nome: 'Só a cidade', desc: 'Aparece apenas "em Cuiabá".' },
+      { id: 'aprox', nome: 'Aproximado (padrão)', desc: 'Um círculo de cerca de 5 km, nunca o ponto exato.' },
+      { id: 'amigos', nome: 'Preciso para amigos', desc: 'Amigos veem o ponto exato; os demais, aproximado.' },
+      { id: 'comboio', nome: 'Preciso só no comboio', desc: 'Exato apenas para quem está no seu passeio.' }
+    ];
+    const opcoes = base.map((o) => {
+      const on = this.state.sel === o.id;
+      return Object.assign({}, o, {
+        marcado: on ? 'true' : 'false',
+        pick: () => this.setState({ sel: o.id }),
+        estilo: 'min-height: 72px; border-radius: 14px; padding: 12px 14px; display: flex; gap: 14px; align-items: center; cursor: pointer; background: ' + (on ? 'rgba(242,107,29,0.12)' : '#1C1C1C') + '; border: ' + (on ? '2px solid #F26B1D' : '1px solid #333'),
+        bolinha: 'flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; box-sizing: border-box; border: ' + (on ? '7px solid #F26B1D' : '2px solid #777')
+      });
+    });
+    return { opcoes };
+  }
+}
+</script>
+</body>
+</html>
