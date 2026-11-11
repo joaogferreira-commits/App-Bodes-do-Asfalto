@@ -31,3 +31,14 @@ jobs:
           eas build:list --limit 3 --non-interactive --json
           | jq '.[] | {id, status, platform, buildProfile, createdAt, appBuildVersion,
           erro: .error.message, apk: .artifacts.buildUrl, pagina: ("https://expo.dev/accounts/joaogferreira/projects/bodes-do-asfalto/builds/" + .id)}'
+      - name: Registro das builds que falharam
+        shell: bash {0}
+        run: |
+          for id in $(eas build:list --limit 3 --non-interactive --json | jq -r '.[] | select(.status=="ERRORED") | .id'); do
+            echo "=================== BUILD $id ==================="
+            eas build:view "$id" --json | jq '{erro: .error}'
+            for url in $(eas build:view "$id" --json | jq -r '.logFiles[]?'); do
+              curl -sL "$url" | jq -r 'select(.msg != null) | .msg' 2>/dev/null \
+                | grep -iE "error|fail|exception|what went wrong|cannot|unresolved|> Task|BUILD FAILED" | tail -80
+            done
+          done
