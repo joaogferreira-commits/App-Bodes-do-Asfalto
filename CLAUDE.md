@@ -188,7 +188,9 @@ O agente roda na assinatura Pro, com limite a cada 5 horas e semanal.
 
 ## Comandos (atualize quando criar o projeto)
 
-- App: `cd app && npm run lint && npm run typecheck && npm test`
+- App: `cd app && npm run lint && npm run typecheck && npm test` (instalar pacotes com `EXPO_OFFLINE=1 npx expo install ...`; a rede do agente bloqueia api.expo.dev)
+- Imagens: `python3 tools/converter_imagens.py` (testes: `cd tools && python3 -m unittest`)
+- Build de teste a partir do agente: editar `.github/build-request.txt` (plataforma=, perfil=) e fazer push — o GitHub Actions dispara o EAS
 - Banco: `supabase start`, `supabase db reset`, `supabase test db`
 - E2E: `maestro test e2e/`
 - Build de teste: `eas build --profile preview --platform all`
