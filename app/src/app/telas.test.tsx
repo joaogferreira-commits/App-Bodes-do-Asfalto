@@ -9,7 +9,7 @@ describe('telas da Etapa 0', () => {
   it('menu de testes mostra o catálogo e os itens em breve', async () => {
     await render(<MenuDeTestes />);
     expect(screen.getByText('Catálogo de componentes')).toBeTruthy();
-    expect(screen.getAllByText('Em breve')).toHaveLength(1);
+    expect(screen.queryByText('Em breve')).toBeNull();
     expect(screen.getByText('Prova de navegação')).toBeTruthy();
   });
 

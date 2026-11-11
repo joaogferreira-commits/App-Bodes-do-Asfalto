@@ -18,11 +18,12 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Dono criou o projeto `bodes-do-asfalto` no Google Cloud (Navigation SDK, Maps SDK Android/iOS e Routes API ativados; orçamento com alerta em R$ 50) e o segredo `GOOGLE_MAPS_API_KEY` no GitHub.
 - 11/11/2026 — Etapa 0, tarefa 8 (código): Google Navigation SDK 0.19 (Navigation SDK Android 8.0), plugin `app/plugins/withNavegacaoGoogle.js` (desugaring + Jetifier; Kotlin 2.3.21 via expo-build-properties), `app.config.ts` lê a chave do ambiente do EAS, tela `src/app/navegacao.tsx` (destinos: Chapada, Centro de Cuiabá, ponto a 5 km; modo moto TWO_WHEELER; voz com Bluetooth; modo noite). Lógica em `src/navegacao/` com 10 testes. Prebuild Android conferido localmente. Primeira build EAS pedida pelo workflow.
 - 11/11/2026 — Etapa 0, tarefa 7: pesquisa ANP em `docs/decisoes/postos-anp.md`. Cadastro de postos com coordenadas: aberto. Preço ANP: parcial (LPC, até 390 municípios). Nota de qualidade do "ANP com VC": sem dado aberto/API — não exibir até acesso oficial (pedido via Fala.BR é opção futura do dono). Preço colaborativo dos irmãos completa.
+- 11/11/2026 — Primeira build EAS (Android, preview) enviada: projeto `@joaogferreira/bodes-do-asfalto` (ID 59391c5b-87c0-4b6a-8861-bff6fefd01c6), keystore criada no servidor do Expo. Workflow `status-build.yml` mostra o resultado das builds no log do GitHub (o agente não alcança expo.dev).
+- 11/11/2026 — Etapa 0, tarefa 6: estilo `app/src/map/estilo-bodes.json` (MapLibre, dados OpenFreeMap, cores da seção 3 do DESIGN.md, atribuição OSM) validado por teste com o style-spec; tela `src/app/mapa.tsx` centrada em Cuiabá. Relevo (hillshade) fica para a Etapa 2 (precisa de fonte de elevação).
 
 ## Falta nesta etapa
 
 1. Texto do pedido de CarPlay (fica para quando a conta Apple existir).
-6. Estilo do mapa `app/src/map/estilo-bodes.json` (MapLibre + OpenFreeMap) e tela do mapa.
 8. Prova de navegação Google no Android — código pronto; falta testar no celular.
 9. Prova no Android Auto (DHU).
 10. Estimativa de custos (300 e 1.000 irmãos).

@@ -10,7 +10,7 @@ type Item = { chave: 'catalogo' | 'mapa' | 'navegacao'; rota?: Href };
 
 const itens: Item[] = [
   { chave: 'catalogo', rota: '/catalogo' },
-  { chave: 'mapa' },
+  { chave: 'mapa', rota: '/mapa' },
   { chave: 'navegacao', rota: '/navegacao' },
 ];
 

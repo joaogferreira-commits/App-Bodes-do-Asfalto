@@ -1,0 +1,26 @@
+name: Situação das versões de teste (EAS)
+
+# O agente não alcança o expo.dev; este workflow lista as últimas builds no log.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/status-request.txt
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Últimas builds
+        run: >
+          eas build:list --limit 3 --non-interactive --json
+          | jq '.[] | {id, status, platform, buildProfile, createdAt, appBuildVersion,
+          erro: .error.message, apk: .artifacts.buildUrl, pagina: ("https://expo.dev/accounts/joaogferreira/projects/bodes-do-asfalto/builds/" + .id)}'

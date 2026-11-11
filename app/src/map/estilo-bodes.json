@@ -1,0 +1,208 @@
+{
+  "version": 8,
+  "name": "Bodes do Asfalto",
+  "metadata": {
+    "fonte": "docs/DESIGN.md seção 3",
+    "pendente": "relevo (hillshade) precisa de fonte raster-dem; entra na Etapa 2"
+  },
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet",
+      "attribution": "<a href=\"https://openfreemap.org\">OpenFreeMap</a> © <a href=\"https://www.openmaptiles.org/\">OpenMapTiles</a> © <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>"
+    }
+  },
+  "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "fundo",
+      "type": "background",
+      "paint": {
+        "background-color": "#1A1712"
+      }
+    },
+    {
+      "id": "vegetacao",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landcover",
+      "filter": ["in", ["get", "class"], ["literal", ["wood", "forest", "grass", "scrub", "farmland"]]],
+      "paint": {
+        "fill-color": "#1E2A1C",
+        "fill-opacity": 0.8
+      }
+    },
+    {
+      "id": "parques",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "park",
+      "paint": {
+        "fill-color": "#1E2A1C",
+        "fill-opacity": 0.6
+      }
+    },
+    {
+      "id": "urbano",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "filter": ["in", ["get", "class"], ["literal", ["residential", "commercial", "industrial", "retail"]]],
+      "paint": {
+        "fill-color": "#211C16"
+      }
+    },
+    {
+      "id": "agua",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "#22323D"
+      }
+    },
+    {
+      "id": "rios",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "waterway",
+      "paint": {
+        "line-color": "#3E5C7A",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.6, 12, 2.2]
+      }
+    },
+    {
+      "id": "limites",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "filter": ["<=", ["get", "admin_level"], 4],
+      "paint": {
+        "line-color": "#3A3028",
+        "line-width": 1.2,
+        "line-dasharray": [3, 2]
+      }
+    },
+    {
+      "id": "estradas-menores",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["in", ["get", "class"], ["literal", ["secondary", "tertiary", "minor", "service", "track"]]],
+      "minzoom": 8,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#C9A46A",
+        "line-opacity": 0.35,
+        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.4, 14, 3]
+      }
+    },
+    {
+      "id": "rodovias-contorno",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["in", ["get", "class"], ["literal", ["motorway", "trunk", "primary"]]],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#0C0A08",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.6, 14, 9]
+      }
+    },
+    {
+      "id": "rodovias",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["in", ["get", "class"], ["literal", ["motorway", "trunk", "primary"]]],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#EFE3C8",
+        "line-opacity": 0.6,
+        "line-width": ["interpolate", ["linear"], ["zoom"], 5, 0.8, 14, 6]
+      }
+    },
+    {
+      "id": "rotulos-rodovias",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "filter": ["in", ["get", "class"], ["literal", ["motorway", "trunk", "primary"]]],
+      "minzoom": 9,
+      "layout": {
+        "text-field": ["coalesce", ["get", "ref"], ["get", "name"]],
+        "text-font": ["Noto Sans Bold"],
+        "text-size": 12,
+        "symbol-placement": "line"
+      },
+      "paint": {
+        "text-color": "#EFE3C8",
+        "text-halo-color": "#0C0A08",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "rotulos-rios",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "waterway",
+      "minzoom": 10,
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 12,
+        "symbol-placement": "line"
+      },
+      "paint": {
+        "text-color": "#3E5C7A",
+        "text-halo-color": "#0C0A08",
+        "text-halo-width": 1.2
+      }
+    },
+    {
+      "id": "rotulos-vilas",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "filter": ["in", ["get", "class"], ["literal", ["village", "suburb", "neighbourhood"]]],
+      "minzoom": 10,
+      "layout": {
+        "text-field": ["get", "name"],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "#C9A46A",
+        "text-halo-color": "#0C0A08",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "rotulos-cidades",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "filter": ["in", ["get", "class"], ["literal", ["city", "town"]]],
+      "layout": {
+        "text-field": ["upcase", ["get", "name"]],
+        "text-font": ["Noto Sans Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 5, 12, 10, 17],
+        "text-letter-spacing": 0.08
+      },
+      "paint": {
+        "text-color": "#EFE3C8",
+        "text-halo-color": "#0C0A08",
+        "text-halo-width": 2
+      }
+    }
+  ]
+}
