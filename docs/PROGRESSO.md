@@ -21,13 +21,13 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Primeira build EAS (Android, preview) enviada: projeto `@joaogferreira/bodes-do-asfalto` (ID 59391c5b-87c0-4b6a-8861-bff6fefd01c6), keystore criada no servidor do Expo. Workflow `status-build.yml` mostra o resultado das builds no log do GitHub (o agente não alcança expo.dev).
 - 11/11/2026 — Etapa 0, tarefa 6: estilo `app/src/map/estilo-bodes.json` (MapLibre, dados OpenFreeMap, cores da seção 3 do DESIGN.md, atribuição OSM) validado por teste com o style-spec; tela `src/app/mapa.tsx` centrada em Cuiabá. Relevo (hillshade) fica para a Etapa 2 (precisa de fonte de elevação).
 - 11/11/2026 — Etapa 0, tarefa 9 (código): plugin `app/plugins/withAndroidAuto.js` + classes Java em `app/plugins/android-auto/` (CarAppService categoria NAVIGATION, Session, tela que estende `AndroidAutoBaseScreen` do Google com botões Alerta e SOS). Manifesto, permissões e descritor conferidos no prebuild; compilação Java só é verificada no EAS (sem Android SDK no ambiente do agente). Build 2 pedida.
+- 11/11/2026 — Etapa 0, tarefa 10: `docs/CUSTOS.md` — R$ 0/mês até o lançamento; ~R$ 230/mês (300 irmãos) e ~R$ 365/mês (1.000) depois. Atenção: Vercel grátis não permite uso comercial → painel no Cloudflare Pages (grátis).
 
 ## Falta nesta etapa
 
 1. Texto do pedido de CarPlay (fica para quando a conta Apple existir).
 8. Prova de navegação Google no Android — código pronto; falta testar no celular.
 9. Prova no Android Auto (DHU) — código pronto; falta compilar no EAS e testar no PC do dono.
-10. Estimativa de custos (300 e 1.000 irmãos).
 11. Versão de teste (EAS) e medição do peso.
 12. Relatório e roteiro do PONTO DE TESTE 0.
 
