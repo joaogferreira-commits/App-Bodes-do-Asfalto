@@ -42,6 +42,8 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Problemas em aberto / aguardando o dono do projeto
 
+- 11/11/2026 — Pendência leve (fazer junto com a próxima correção): avisos do `npm ci` no EAS — pacotes obsoletos dentro das ferramentas (glob, inflight, whatwg-encoding), ESLint 9 sem suporte (subir para a versão atual) e 31 avisos do `npm audit` (1 baixo, 30 moderados; quase todos em ferramentas de desenvolvimento, não no app). Não impedem a build.
+
 - 11/11/2026 — O ambiente do agente não alcança `api.expo.dev` (bloqueio de rede); por isso as versões de teste são geradas pelo GitHub Actions, com o `EXPO_TOKEN`. `npx expo install` funciona com `EXPO_OFFLINE=1`.
 
 - 11/11/2026 — Perguntas enviadas ao dono antes da Etapa 0 (contradições entre CLAUDE.md, ETAPAS.md, DESIGN.md e a atualização de 11/11 da especificação): mapa/navegação (Mapbox × Google + MapLibre + Valhalla); navegação curva a curva grátis × Premium; contas em CPF × empresa; CarPlay espera ou não; teto de custo (R$ 200 × R$ 500); limite do avatar por IA; revisão de segurança externa; anúncios e aviso de rastreamento do iPhone; caminho das imagens (A ou B).
