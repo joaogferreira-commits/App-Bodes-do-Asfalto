@@ -27,13 +27,26 @@
       "expo-image",
       "expo-localization",
       [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "O Bodes do Asfalto usa sua localização para traçar e guiar a rota.",
+          "isAndroidBackgroundLocationEnabled": false,
+          "isIosBackgroundLocationEnabled": false
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 26
+            "minSdkVersion": 26,
+            "kotlinVersion": "2.3.21"
+          },
+          "ios": {
+            "deploymentTarget": "17.0"
           }
         }
-      ]
+      ],
+      "./plugins/withNavegacaoGoogle"
     ],
     "owner": "joaogferreira",
     "scheme": "bodesdoasfalto",

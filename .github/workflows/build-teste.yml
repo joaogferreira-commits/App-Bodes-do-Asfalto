@@ -47,6 +47,15 @@ jobs:
           echo "perfil=${PERFIL:-preview}" >> "$GITHUB_OUTPUT"
       - name: Ligar o projeto ao Expo (só na primeira vez)
         run: eas init --non-interactive --force
+      - name: Enviar a chave do Google para o EAS (fica guardada como sensível)
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          if [ -n "$GOOGLE_MAPS_API_KEY" ]; then
+            eas env:create --environment ${{ steps.pedido.outputs.perfil }} \
+              --name GOOGLE_MAPS_API_KEY --value "$GOOGLE_MAPS_API_KEY" \
+              --visibility sensitive --force --non-interactive
+          fi
       - name: Gerar versão de teste
         run: >
           eas build --non-interactive --no-wait

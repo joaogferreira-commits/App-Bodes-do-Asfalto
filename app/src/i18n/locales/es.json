@@ -43,5 +43,27 @@
     "abrirFolha": "Abrir hoja",
     "folhaTexto": "Zé en la Gasolinera Trevo · 4 km · 3 hermanos confirmados",
     "barra": "Barra de navegación"
+  },
+  "navegacao": {
+    "titulo": "Prueba de navegación",
+    "escolha": "Elige el destino",
+    "chapada": "Chapada dos Guimarães",
+    "centroCuiaba": "Centro de Cuiabá",
+    "cincoKm": "Punto a 5 km de aquí",
+    "iniciar": "Iniciar navegación",
+    "encerrar": "Terminar",
+    "preparando": "Preparando la ruta…",
+    "aviso": "Prueba detenido o con acompañante. No uses el celular conduciendo.",
+    "termosTitulo": "Términos de la navegación",
+    "permissaoMotivo": "Necesitamos tu ubicación para trazar la ruta.",
+    "erros": {
+      "semPermissao": "Sin permiso de ubicación. Actívalo en los ajustes del celular.",
+      "termosRecusados": "Debes aceptar los términos de Google para navegar.",
+      "chaveNaoAutorizada": "La clave de Google no fue aceptada. Avisa al desarrollador.",
+      "semRede": "Sin internet. La navegación de Google necesita conexión.",
+      "semRota": "No fue posible trazar la ruta a ese destino.",
+      "semLocalizacao": "Todavía sin señal GPS. Ve a un lugar abierto e inténtalo de nuevo.",
+      "erro": "Algo salió mal. Inténtalo de nuevo."
+    }
   }
 }

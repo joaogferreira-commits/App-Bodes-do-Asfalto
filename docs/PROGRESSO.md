@@ -6,7 +6,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 - **Etapa:** 0 — Prova técnica e portões (não iniciada)
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** Etapa 0 — estilo do mapa (6) e pesquisa ANP (7). Dono: tarefa 3 (Google Cloud).
+- **Próxima tarefa:** Etapa 0 — estilo do mapa (6) e pesquisa ANP (7). Dono: aguardando a primeira versão de teste (EAS).
 
 ## Feito
 
@@ -15,13 +15,15 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Dono criou conta Expo (usuário `joaogferreira`) e o segredo `EXPO_TOKEN` no GitHub.
 - 11/11/2026 — Etapa 0, tarefas 2 a 4: app Expo SDK 58 (React Native 0.88, TypeScript estrito, Expo Router em `app/src/app`), tema "Patch de Colete" em `app/src/theme` (com teste de contraste), traduções pt-BR/es/en em `app/src/i18n` (teste de chaves iguais), componentes base em `app/src/ui` (botão, chip, cartão bordado com overlock, avatar com anel de status, divisória, folha inferior, barra com 5 abas, ícones vetoriais) e telas "menu de testes" e "Catálogo de componentes". 26 testes passando; lint e tipos limpos. CI no GitHub (`.github/workflows/ci.yml`) e build de teste pelo EAS (`build-teste.yml`, disparada ao mudar `.github/build-request.txt`).
 - 11/11/2026 — Etapa 0, tarefa 5: conversor `tools/converter_imagens.py` (Python + Pillow + numpy; 5 testes em `tools/test_converter_imagens.py`). Gerou 44 WebP em `app/assets/gerados/` (≈2 MB no total; emblemas ≤ 40 KB, texturas ≤ 50 KB e sem emenda, ilustrações ≤ 150 KB). Prancha de conferência: `docs/assets-originais/prancha-convertidos.png`.
+- 11/11/2026 — Dono criou o projeto `bodes-do-asfalto` no Google Cloud (Navigation SDK, Maps SDK Android/iOS e Routes API ativados; orçamento com alerta em R$ 50) e o segredo `GOOGLE_MAPS_API_KEY` no GitHub.
+- 11/11/2026 — Etapa 0, tarefa 8 (código): Google Navigation SDK 0.19 (Navigation SDK Android 8.0), plugin `app/plugins/withNavegacaoGoogle.js` (desugaring + Jetifier; Kotlin 2.3.21 via expo-build-properties), `app.config.ts` lê a chave do ambiente do EAS, tela `src/app/navegacao.tsx` (destinos: Chapada, Centro de Cuiabá, ponto a 5 km; modo moto TWO_WHEELER; voz com Bluetooth; modo noite). Lógica em `src/navegacao/` com 10 testes. Prebuild Android conferido localmente. Primeira build EAS pedida pelo workflow.
 
 ## Falta nesta etapa
 
 1. Texto do pedido de CarPlay (fica para quando a conta Apple existir).
 6. Estilo do mapa `app/src/map/estilo-bodes.json` (MapLibre + OpenFreeMap) e tela do mapa.
 7. Pesquisa ANP (preço e nota dos postos).
-8. Prova de navegação Google no Android (depende da chave do Google — tarefa 3 do dono).
+8. Prova de navegação Google no Android — código pronto; falta testar no celular.
 9. Prova no Android Auto (DHU).
 10. Estimativa de custos (300 e 1.000 irmãos).
 11. Versão de teste (EAS) e medição do peso.
@@ -41,3 +43,4 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 ## Contas e chaves configuradas
 
 - Expo (usuário `joaogferreira`): token em GitHub Secrets como `EXPO_TOKEN`.
+- Google Cloud (projeto `bodes-do-asfalto`): chave em GitHub Secrets como `GOOGLE_MAPS_API_KEY`; o workflow copia para as variáveis do EAS (sensível). Falta restringir a chave ao app (pacote + SHA-1) depois da primeira build.

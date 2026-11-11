@@ -43,5 +43,27 @@
     "abrirFolha": "Abrir folha",
     "folhaTexto": "Zé no Posto Trevo · 4 km · 3 irmãos confirmados",
     "barra": "Barra de navegação"
+  },
+  "navegacao": {
+    "titulo": "Prova de navegação",
+    "escolha": "Escolha o destino",
+    "chapada": "Chapada dos Guimarães",
+    "centroCuiaba": "Centro de Cuiabá",
+    "cincoKm": "Ponto a 5 km daqui",
+    "iniciar": "Iniciar navegação",
+    "encerrar": "Encerrar",
+    "preparando": "Preparando a rota…",
+    "aviso": "Teste parado ou com garupa. Não mexa no celular pilotando.",
+    "termosTitulo": "Termos da navegação",
+    "permissaoMotivo": "Precisamos da sua localização para traçar a rota.",
+    "erros": {
+      "semPermissao": "Sem permissão de localização. Libere nas configurações do celular.",
+      "termosRecusados": "Os termos do Google precisam ser aceitos para navegar.",
+      "chaveNaoAutorizada": "A chave do Google não foi aceita. Avise o desenvolvedor.",
+      "semRede": "Sem internet. A navegação do Google precisa de conexão.",
+      "semRota": "Não foi possível traçar a rota até esse destino.",
+      "semLocalizacao": "Ainda sem sinal de GPS. Vá para um lugar aberto e tente de novo.",
+      "erro": "Algo deu errado. Tente de novo."
+    }
   }
 }

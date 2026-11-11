@@ -8,7 +8,11 @@ import { CartaoBordado, Texto } from '@/ui';
 
 type Item = { chave: 'catalogo' | 'mapa' | 'navegacao'; rota?: Href };
 
-const itens: Item[] = [{ chave: 'catalogo', rota: '/catalogo' }, { chave: 'mapa' }, { chave: 'navegacao' }];
+const itens: Item[] = [
+  { chave: 'catalogo', rota: '/catalogo' },
+  { chave: 'mapa' },
+  { chave: 'navegacao', rota: '/navegacao' },
+];
 
 /** Menu da versão de teste da Etapa 0. */
 export default function MenuDeTestes() {

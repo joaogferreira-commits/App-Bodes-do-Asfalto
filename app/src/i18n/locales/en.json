@@ -43,5 +43,27 @@
     "abrirFolha": "Open sheet",
     "folhaTexto": "Zé at Trevo Gas Station · 4 km · 3 brothers going",
     "barra": "Navigation bar"
+  },
+  "navegacao": {
+    "titulo": "Navigation proof",
+    "escolha": "Choose the destination",
+    "chapada": "Chapada dos Guimarães",
+    "centroCuiaba": "Downtown Cuiabá",
+    "cincoKm": "Point 5 km from here",
+    "iniciar": "Start navigation",
+    "encerrar": "End",
+    "preparando": "Preparing the route…",
+    "aviso": "Test while stopped or as a passenger. Don't touch the phone while riding.",
+    "termosTitulo": "Navigation terms",
+    "permissaoMotivo": "We need your location to plan the route.",
+    "erros": {
+      "semPermissao": "No location permission. Allow it in the phone settings.",
+      "termosRecusados": "Google's terms must be accepted to navigate.",
+      "chaveNaoAutorizada": "The Google key was not accepted. Tell the developer.",
+      "semRede": "No internet. Google navigation needs a connection.",
+      "semRota": "Could not plan a route to that destination.",
+      "semLocalizacao": "No GPS signal yet. Go somewhere open and try again.",
+      "erro": "Something went wrong. Try again."
+    }
   }
 }
