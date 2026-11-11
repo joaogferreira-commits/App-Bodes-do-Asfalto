@@ -34,8 +34,9 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 | lote-25.webp | 25 | borda-overlock-9slice (fundo branco, não transparente: o conversor remove) |
 | extra-bordas-formatos.webp | extra | referência de bordas em vários formatos (retângulo, círculo, oval, escudos) |
 | lote-26a.webp | 26a | splash (tela de abertura) |
+| lote-26b.png | 26b | ref-tela-mapa: referência só do visual do mapa (cores, estradas, pinos). Barra inferior e textos NÃO valem: seguir docs/telas/Main.dc.html (5 abas). |
 
-Conjunto completo para a Etapa 0. O lote 26b (referência da tela do mapa) foi dispensado: é só referência e as telas aprovadas em docs/telas/ já cumprem esse papel.
+Conjunto completo para a Etapa 0.
 
 ## LOG de geração (Caminho B)
 
