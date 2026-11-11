@@ -1,0 +1,47 @@
+{
+  "comum": {
+    "voltar": "Voltar",
+    "fechar": "Fechar"
+  },
+  "abas": {
+    "mapa": "Mapa",
+    "feed": "Feed",
+    "passeios": "Passeios",
+    "conquistas": "Conquistas",
+    "perfil": "Perfil"
+  },
+  "testes": {
+    "titulo": "Prova técnica",
+    "subtitulo": "Etapa 0 · versão de teste",
+    "catalogo": "Catálogo de componentes",
+    "catalogoDesc": "Botões, cartões, chips e avatares no visual Patch de Colete",
+    "mapa": "Mapa com estilo próprio",
+    "mapaDesc": "Mapa escuro dos Bodes, com estradas creme",
+    "navegacao": "Prova de navegação",
+    "navegacaoDesc": "Rota curva a curva com voz",
+    "emBreve": "Em breve"
+  },
+  "catalogo": {
+    "titulo": "Catálogo",
+    "botoes": "Botões",
+    "principal": "Vou",
+    "secundario": "Talvez",
+    "sos": "SOS",
+    "chips": "Filtros",
+    "chipTudo": "Tudo",
+    "chipIrmaos": "Irmãos",
+    "chipPostos": "Postos",
+    "chipLojas": "Lojas",
+    "cartoes": "Cartões",
+    "cartaoTitulo": "Rota das Cachoeiras · Nobres",
+    "cartaoTexto": "Saída 7h da sede · 280 km · 18 confirmados",
+    "avatares": "Avatares",
+    "statusAberto": "Aberto a encontro",
+    "statusEstrada": "Na estrada",
+    "statusNaoPerturbe": "Não perturbe",
+    "folha": "Folha inferior",
+    "abrirFolha": "Abrir folha",
+    "folhaTexto": "Zé no Posto Trevo · 4 km · 3 irmãos confirmados",
+    "barra": "Barra de navegação"
+  }
+}

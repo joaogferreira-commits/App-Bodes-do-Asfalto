@@ -1,0 +1,47 @@
+{
+  "comum": {
+    "voltar": "Volver",
+    "fechar": "Cerrar"
+  },
+  "abas": {
+    "mapa": "Mapa",
+    "feed": "Feed",
+    "passeios": "Paseos",
+    "conquistas": "Logros",
+    "perfil": "Perfil"
+  },
+  "testes": {
+    "titulo": "Prueba técnica",
+    "subtitulo": "Etapa 0 · versión de prueba",
+    "catalogo": "Catálogo de componentes",
+    "catalogoDesc": "Botones, tarjetas, chips y avatares en el estilo Parche de Chaleco",
+    "mapa": "Mapa con estilo propio",
+    "mapaDesc": "Mapa oscuro de los Bodes, con rutas crema",
+    "navegacao": "Prueba de navegación",
+    "navegacaoDesc": "Ruta giro a giro con voz",
+    "emBreve": "Próximamente"
+  },
+  "catalogo": {
+    "titulo": "Catálogo",
+    "botoes": "Botones",
+    "principal": "Voy",
+    "secundario": "Tal vez",
+    "sos": "SOS",
+    "chips": "Filtros",
+    "chipTudo": "Todo",
+    "chipIrmaos": "Hermanos",
+    "chipPostos": "Gasolineras",
+    "chipLojas": "Logias",
+    "cartoes": "Tarjetas",
+    "cartaoTitulo": "Ruta de las Cascadas · Nobres",
+    "cartaoTexto": "Salida 7h de la sede · 280 km · 18 confirmados",
+    "avatares": "Avatares",
+    "statusAberto": "Abierto a encuentro",
+    "statusEstrada": "En la ruta",
+    "statusNaoPerturbe": "No molestar",
+    "folha": "Hoja inferior",
+    "abrirFolha": "Abrir hoja",
+    "folhaTexto": "Zé en la Gasolinera Trevo · 4 km · 3 hermanos confirmados",
+    "barra": "Barra de navegación"
+  }
+}

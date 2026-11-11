@@ -1,0 +1,47 @@
+{
+  "comum": {
+    "voltar": "Back",
+    "fechar": "Close"
+  },
+  "abas": {
+    "mapa": "Map",
+    "feed": "Feed",
+    "passeios": "Rides",
+    "conquistas": "Badges",
+    "perfil": "Profile"
+  },
+  "testes": {
+    "titulo": "Technical proof",
+    "subtitulo": "Stage 0 · test build",
+    "catalogo": "Component catalog",
+    "catalogoDesc": "Buttons, cards, chips and avatars in the Vest Patch style",
+    "mapa": "Custom-styled map",
+    "mapaDesc": "Dark Bodes map with cream roads",
+    "navegacao": "Navigation proof",
+    "navegacaoDesc": "Turn-by-turn route with voice",
+    "emBreve": "Coming soon"
+  },
+  "catalogo": {
+    "titulo": "Catalog",
+    "botoes": "Buttons",
+    "principal": "Going",
+    "secundario": "Maybe",
+    "sos": "SOS",
+    "chips": "Filters",
+    "chipTudo": "All",
+    "chipIrmaos": "Brothers",
+    "chipPostos": "Gas stations",
+    "chipLojas": "Lodges",
+    "cartoes": "Cards",
+    "cartaoTitulo": "Waterfalls Route · Nobres",
+    "cartaoTexto": "Leaves 7am from the clubhouse · 280 km · 18 going",
+    "avatares": "Avatars",
+    "statusAberto": "Open to meet",
+    "statusEstrada": "On the road",
+    "statusNaoPerturbe": "Do not disturb",
+    "folha": "Bottom sheet",
+    "abrirFolha": "Open sheet",
+    "folhaTexto": "Zé at Trevo Gas Station · 4 km · 3 brothers going",
+    "barra": "Navigation bar"
+  }
+}

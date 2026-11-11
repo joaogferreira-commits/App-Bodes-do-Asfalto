@@ -1,0 +1,54 @@
+name: Versão de teste (EAS Build)
+
+# Dispara pelo botão "Run workflow" (ramo principal) ou quando o agente
+# altera .github/build-request.txt em qualquer ramo.
+on:
+  workflow_dispatch:
+    inputs:
+      plataforma:
+        description: android, ios ou all
+        default: android
+      perfil:
+        description: development, preview ou production
+        default: preview
+  push:
+    paths:
+      - .github/build-request.txt
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: npm ci
+      - name: Ler pedido de build
+        id: pedido
+        working-directory: .
+        run: |
+          PLATAFORMA="${{ github.event.inputs.plataforma }}"
+          PERFIL="${{ github.event.inputs.perfil }}"
+          if [ -z "$PLATAFORMA" ] && [ -f .github/build-request.txt ]; then
+            PLATAFORMA=$(grep -E '^plataforma=' .github/build-request.txt | cut -d= -f2)
+            PERFIL=$(grep -E '^perfil=' .github/build-request.txt | cut -d= -f2)
+          fi
+          echo "plataforma=${PLATAFORMA:-android}" >> "$GITHUB_OUTPUT"
+          echo "perfil=${PERFIL:-preview}" >> "$GITHUB_OUTPUT"
+      - name: Ligar o projeto ao Expo (só na primeira vez)
+        run: eas init --non-interactive --force
+      - name: Gerar versão de teste
+        run: >
+          eas build --non-interactive --no-wait
+          --platform ${{ steps.pedido.outputs.plataforma }}
+          --profile ${{ steps.pedido.outputs.perfil }}
