@@ -15,15 +15,14 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 | lote-07.webp | 7 | nivel-cabrito, nivel-bode |
 | lote-08.webp | 8 | nivel-bode-velho, nivel-bode-lendario |
 | lote-09.webp | 9 | selo-agape, selo-socorro-fraterno |
-| lote-10.webp | 10 | selo-pantanal (ok), selo-visita-lojas (**refazer**: tem esquadro e compasso, proibido pelo guia) |
+| lote-10.webp | 10 | selo-pantanal, selo-visita-lojas (com esquadro e compasso: **mantido por decisão do dono em 11/11/2026**) |
+| lote-11-antigo.webp | 11 | selo-irmao-na-rota, selo-sedes-mt — fora do estilo, guardado só como referência; **refazer** |
+| lote-17.webp | 17 | referência dos ícones da barra (serão redesenhados em vetor) |
+| extra-icones-compositor.webp | extra | referência: fotos, rota, moto de frente (vetor) |
+| lote-18.webp | 18 | ilustra-vazio-estrada, ilustra-primeira-viagem (vieram em retrato; aproveitáveis) |
+| lote-19.webp | 19 | ilustra-sem-sinal |
 
-Observação: vieram com fundo branco (não transparente); o conversor remove o fundo.
-
-Vistos na conversa em 11/11/2026 mas **não salvos** (o arquivo não chegou ao ambiente; o dono vai reenviar):
-- Lotes 11 a 16: fugiram do guia de estilo (borda amarela de corda, cenas fotográficas, sem sarja/overlock; Bodinho com texto e com o nome do clube; triciclo com bandeira e caveira). **Refazer** em conversa nova do ChatGPT.
-- Lote 17 (ícones de referência), 18 (ilustrações, vieram em retrato) e 19 (sem sinal): aproveitáveis; reenviar.
-- Uma imagem extra com 3 ícones (fotos, rota, moto de frente): aproveitável como referência.
-- Faltam os lotes 20 a 26.
+Pendentes: refazer lotes 11 a 16 (fora do estilo); gerar lotes 20 a 26.
 
 ## LOG de geração (Caminho B)
 

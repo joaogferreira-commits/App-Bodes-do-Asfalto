@@ -19,6 +19,7 @@ _(o agente preenche a partir do plano aprovado)_
 ## Decisões tomadas durante o desenvolvimento
 
 - 11/11/2026 — Dono aceitou todas as recomendações (lista no topo do CLAUDE.md) e pediu orçamento o mais apertado possível e uma tarefa por vez. Plano da Etapa 0 aprovado. Caminho A para imagens.
+- 11/11/2026 — Selo "Visita a Lojas" mantém esquadro e compasso, por decisão do dono (exceção à regra do guia de estilo; vale só para esse selo).
 
 ## Problemas em aberto / aguardando o dono do projeto
 
