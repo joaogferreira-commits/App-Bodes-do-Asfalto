@@ -21,12 +21,16 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 | lote-13.webp | 13 | moto-big-trail, moto-naked |
 | lote-14.webp | 14 | moto-esportiva, moto-street |
 | lote-15.webp | 15 | moto-trail, moto-scooter |
+| lote-16.webp | 16 | moto-triciclo, mascote-bodinho |
 | lote-17.webp | 17 | referência dos ícones da barra (serão redesenhados em vetor) |
 | extra-icones-compositor.webp | extra | referência: fotos, rota, moto de frente (vetor) |
 | lote-18.webp | 18 | ilustra-vazio-estrada, ilustra-primeira-viagem (vieram em retrato; aproveitáveis) |
 | lote-19.webp | 19 | ilustra-sem-sinal |
+| lote-20.webp | 20 | ilustra-boas-vindas, ilustra-entrada-aprovada |
+| lote-21.webp | 21 | ilustra-nivel-novo |
+| lote-22.webp | 22 | textura-sarja (1536x1024, emenda não perfeita: o conversor corrige) |
 
-Pendentes: lote 16 (triciclo e Bodinho) e lotes 20 a 26.
+Pendentes: lotes 23 a 26.
 
 ## LOG de geração (Caminho B)
 
