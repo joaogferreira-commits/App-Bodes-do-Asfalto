@@ -57,7 +57,7 @@ Contraste mínimo 4,5:1 para texto (creme e caramelo sobre sarja passam).
 - **Divisória:** linha de pesponto tracejado (`caramelo` 40%).
 
 ## 3. Mapa (estilo próprio)
-- Criar um estilo **Mapbox** próprio como arquivo de estilo (JSON, especificação Mapbox GL) em `app/src/map/estilo-bodes.json`, versionado no repositório.
+- Criar um estilo **MapLibre** próprio como arquivo de estilo (JSON, especificação MapLibre, dados OpenFreeMap) em `app/src/map/estilo-bodes.json`, versionado no repositório.
 - Base escura quente: terra `#1A1712`, água `#22323D` com rios `#3E5C7A`, vegetação `#1E2A1C`, relevo em sombreamento suave (hillshade) a 25%.
 - Estradas: rodovias creme `#EFE3C8` 60%, demais caramelo 35%; rótulos em Inter, creme/caramelo com halo escuro.
 - **Destaque de estradas com curvas** (opcional, v2): camada em laranja 40% para trechos sinuosos.
@@ -110,5 +110,5 @@ Os prompts estão em `docs/PROMPTS_IMAGENS.md`. Destino: `app/assets/gerados/` (
 ## 7. Avatar com IA (recurso do app)
 - Fluxo: foto do irmão + moto cadastrada (categoria e cor) + detalhes opcionais → 3 opções no estilo do app.
 - Chamada feita por uma Edge Function do Supabase (a chave da API nunca fica no app).
-- Foto apagada logo após a geração; consentimento específico (dado biométrico, LGPD); moderação de conteúdo antes de exibir; 2 por mês grátis, ilimitado no Premium.
+- Foto apagada logo após a geração; consentimento específico (dado biométrico, LGPD); moderação de conteúdo antes de exibir; 1 grátis por conta, 2 por mês no Premium.
 - Lista de marcas e modelos: Tabela FIPE (importar marcas/modelos/anos para uma tabela própria, atualização mensal), mapeando cada modelo para uma das 9 categorias; sem logotipos de fabricantes.

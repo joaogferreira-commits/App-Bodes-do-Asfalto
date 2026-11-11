@@ -4,7 +4,7 @@ Regras permanentes deste projeto. Leia este arquivo, `docs/PROGRESSO.md` e a eta
 
 ## O produto
 
-Rede social, copiloto de estrada e ferramenta de **confraternização** do motoclube **Bodes do Asfalto**, um motoclube de **maçons**. Publicado na App Store e no Google Play com o nome "Bodes do Asfalto". Funciona no celular, no **Android Auto** e no **CarPlay**, todos já no lançamento.
+Rede social, copiloto de estrada e ferramenta de **confraternização** do motoclube **Bodes do Asfalto**, um motoclube de **maçons**. Publicado na App Store e no Google Play com o nome "Bodes do Asfalto". Funciona no celular, no **Android Auto** e no **CarPlay**, no lançamento (o CarPlay pode entrar depois, por atualização, se a Apple atrasar).
 
 **O app é propriedade do dono do projeto (pessoa física), não da diretoria do clube.** A diretoria do clube participa abonando membros; o dono nomeia moderadores. O uso do nome e do escudo depende de autorização/licença escrita do clube (tarefa do dono).
 
@@ -14,11 +14,17 @@ Princípios, nesta ordem:
 3. **Confraternização.** Facilitar que irmãos se encontrem, se ajudem e se visitem na estrada.
 4. **Identidade do clube.** Capítulos, patches e sedes estão no centro.
 
+## Decisões de 11/11/2026 (prevalecem sobre qualquer outro trecho)
+
+O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Valhalla (sem Mapbox); navegação curva a curva no Premium com 7 dias grátis (SOS, alertas e comboio grátis); Apple em CPF e Google Play como empresa; CarPlay não segura o lançamento; teto de alerta R$ 500/mês com orçamento o mais apertado possível; avatar por IA 1 grátis por conta e 2/mês no Premium (avatar "montar" na Etapa 1, por IA na Etapa 8); revisão de segurança por um desenvolvedor (4 a 8 h) antes do envio às lojas; v1 sem anúncios e sem aviso de rastreamento (ATT); imagens pelo Caminho A (dono gera no ChatGPT); cores do DESIGN.md; modo pilotando com 6 botões.
+
+**Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
+
 ## Decisões fechadas (não mude sem perguntar)
 
 | Tema | Decisão |
 | --- | --- |
-| Propriedade | App do dono do projeto (CPF). Papel `admin` = dono. Moderadores nomeados pelo dono. |
+| Propriedade | App do dono do projeto, operado pela empresa dele (SLU, aberta até mar/2027). Até lá, CPF. Papel `admin` = dono. Moderadores nomeados pelo dono. |
 | Quem entra | **Somente membros do Bodes do Asfalto.** Regra por capítulo: (a) se o capítulo (cidade) do candidato **já tem diretoria ativa no app**, só essa diretoria aprova os próprios membros; (b) se o capítulo **ainda não tem diretoria no app**, o candidato preenche o formulário de solicitação (nome, apelido, capítulo, cidade, telefone, foto, membro que indica) e o **admin (dono) ou um moderador** aprova. Quando a diretoria de um capítulo entra no app, a aprovação daquele capítulo passa automaticamente para ela (admin mantém poder de exceção). Até a aprovação, o usuário fica `pendente` e só vê a tela de espera. Sem papel de convidado na v1. |
 | Organização | Vários capítulos. Cada membro pertence a um capítulo. Rankings geral e por capítulo. |
 | Papéis | `pendente`, `membro`, `diretoria_capitulo`, `diretoria_geral`, `moderador`, `admin`. Diretoria: abona membros e cria passeios do seu capítulo. Moderador: modera conteúdo, revisa formulários. Admin: tudo. |
@@ -28,12 +34,12 @@ Princípios, nesta ordem:
 | Confraternização | Irmão na Rota, Ágape Relâmpago, Socorro Fraterno, Chegada na Cidade, Visitação de Lojas, Guia de Negócios de Irmãos — regras em `docs/ETAPAS.md` (Etapas 2, 4 e 6). Toda notificação de confraternização é opcional (opt-in) e configurável por tipo e raio. |
 | Lojas | Cadastradas por um irmão da própria Loja (Oriente, Potência, dias de sessão, irmão de contato), visíveis só para membros. O app só aproxima; a entrada segue o procedimento da Loja. |
 | Idiomas | pt-BR (padrão), es, en. Nenhum texto fixo no código: tudo em arquivos de tradução. |
-| Receita | Freemium + anúncios + parceiros/negócios. Premium (RevenueCat): estatísticas e diário de viagem, sem anúncios, visual exclusivo. Anúncios (AdMob) **somente não personalizados**, só no feed e em listas — nunca no modo pilotando, no mapa ao vivo, no chat, no Android Auto ou no CarPlay. Guia de Negócios: cadastro gratuito; destaque no mapa como plano pago. |
+| Receita | Freemium + parceiros/negócios. **v1 sem anúncios** (decisão de 11/11/2026: anúncios revelariam a filiação a terceiros; reavaliar após o lançamento, e nunca com o aviso de rastreamento do iPhone/ATT). Premium (RevenueCat): navegação curva a curva no app e no carro, estatísticas e diário, visual exclusivo, regiões offline, avatar por IA 2/mês; 7 dias grátis. SOS, alertas e comboio sempre grátis, inclusive no carro. Guia de Negócios: cadastro gratuito; destaque no mapa como plano pago. |
 | SOS | Push para o grupo do passeio e contatos que usam o app + WhatsApp com mensagem pronta e link da localização. Sem SMS pago. Não substitui 192/193. |
 | Lugares | Monumentos e pontos turísticos do OpenStreetMap (atribuição visível); sedes, Lojas e negócios cadastrados no app/painel. |
 | Gamificação | Tabela de XP e níveis da especificação (Cabrito, Bode, Bode Velho, Bode Lendário), configurável no painel, mais selos de confraternização (Ágape, Socorro Fraterno, Visitação de Lojas, Irmão na Rota). |
-| Visual | Provisório: tema escuro, preto (#0E0E0E), laranja (#F26B1D), cinza-asfalto (#2B2B2B). Tudo em `app/src/theme/`. Logo provisório. |
-| Publicação | Contas Apple e Google em CPF do dono. Google exige teste fechado com 12+ testadores por 14 dias. Como o app exige login aprovado, preparar **conta de demonstração** para os revisores da Apple e do Google. |
+| Visual | Identidade "Patch de Colete" com os tokens de `docs/DESIGN.md`. Tudo em `app/src/theme/`. Logo provisório. |
+| Publicação | Apple em CPF (migrada depois para a empresa), aberta só quando for necessária. Google Play como conta de organização da empresa (exige CNPJ e D-U-N-S), o que dispensa a regra dos 12 testadores por 14 dias; teste fechado com irmãos mantido. Android testado antes disso por link de instalação do EAS. Como o app exige login aprovado, preparar **conta de demonstração** para os revisores da Apple e do Google. |
 
 ## Regras detalhadas (revisão de 10/11/2026)
 
@@ -59,17 +65,17 @@ Princípios, nesta ordem:
 **Negócio**
 - Premium: R$ 9,90/mês ou R$ 89/ano (configurado no RevenueCat e nas lojas). Inclui: estatísticas e diário de viagem, sem anúncios, visual exclusivo e regiões inteiras offline.
 - Destaque no Guia de Negócios: cobrado **fora do app** (Pix/boleto direto com o dono), ativado manualmente no painel com data de validade. Nenhum link de pagamento externo dentro do app.
-- Receita no CPF do dono por enquanto.
+- Receita no nome da empresa do dono (SLU) quando existir; até lá, CPF.
 
 **Estrada e gamificação**
 - Rota em navegação funciona offline de graça (rota e mapas do trajeto salvos no aparelho).
 - Importar/exportar GPX: grátis.
 - O irmão pode sair dos rankings (continua com XP e selos).
-- CarPlay: o lançamento **espera** a aprovação do entitlement da Apple. Se atrasar, avise o dono com antecedência e mantenha o resto pronto.
+- CarPlay: o lançamento **não espera** a aprovação da Apple; se atrasar, o CarPlay entra por atualização. Avise o dono com antecedência.
 
 **Operação e lançamento**
-- Escala esperada: 300 a 1.000 irmãos no primeiro ano. Dimensione planos de Supabase e Mapbox para isso.
-- Orçamento: alerta ao dono quando a soma de servidores e mapas se aproximar de **R$ 200/mês**; configure alertas de uso no Supabase, Mapbox e Expo.
+- Escala esperada: 300 a 1.000 irmãos no primeiro ano. Dimensione planos de Supabase, Google e servidor de rotas para isso.
+- Orçamento: **o mais apertado possível** (pedido do dono em 11/11/2026). Use planos gratuitos até o lançamento; só crie conta paga quando ela for indispensável para a tarefa atual e avise o custo antes. Alerta ao dono se a infraestrutura passar de **R$ 500/mês**; limite diário e alerta de orçamento no Google Cloud; alertas de uso no Supabase e Expo.
 - Lançamento em fases: primeiro o capítulo de **Cuiabá** (cerca de 1 mês), depois os demais. Prever um interruptor por capítulo no painel.
 - Domínio novo (sugira opções livres) para site simples, e-mail de suporte, política de privacidade e termos.
 - Suporte: botão "Ajuda" no app (texto, print e dados do aparelho, chega no painel), e-mail de suporte e link para o WhatsApp de suporte.
@@ -79,7 +85,7 @@ Princípios, nesta ordem:
 
 As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML para ver). Elas definem visual, hierarquia e textos; reproduza-as em React Native com fidelidade. Telas sem referência seguem o mesmo padrão.
 
-- **Estilo:** robusto de estrada. Fundo #0E0E0E, cartões #1C1C1C, bordas #333, texto #F5F1EA, texto secundário #B3ADA4, laranja #F26B1D só para ações principais e destaques, vermelho #D7261E só para SOS, amarelo #F5C518 só para alertas.
+- **Estilo:** robusto de estrada, com as cores de `docs/DESIGN.md` (fundo `noite`, cartões `sarja`, texto `creme`, secundário `caramelo`, `laranja` só para ações principais e destaques, `vermelho` só para SOS, `alerta` só para alertas).
 - **Tipografia:** Barlow Condensed (títulos, números grandes) e Inter (textos). Corpo 17 px, nunca menor que 13 px. Público majoritariamente de 40 a 60 anos: letras grandes, poucos itens por tela, frases curtas.
 - **Toque:** mínimo 48 px no app. Modo pilotando: 6 botões de ~100 px em grade 3×2 (Alerta, Reagrupar, SOS, Posto mais próximo, Posto na rota, Encerrar). Carro/painel da moto: 5 botões de 66 px (Alerta, Comboio, Posto mais próximo, Posto na rota, SOS). Alto contraste sempre.
 - **Tela inicial:** o Mapa. Mostra tudo o que está na área visível: irmãos (avatares com anel de status), capítulos/sedes, Lojas, postos (preço e nota ANP), monumentos, pontos turísticos, negócios de irmãos e Ágapes; contador "Nesta área"; filtros; botão de visibilidade; botões "Posto mais próximo" e "Posto na rota"; cartão do evento mais próximo.
@@ -94,7 +100,7 @@ As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML p
 - **Regra de ouro:** a IA de imagem gera matéria-prima (emblemas, texturas, ilustrações); a interface é desenhada em código. Nunca use imagem para botão, cartão, texto ou layout.
 - **Identidade escolhida:** "Patch de Colete" refinada (`docs/telas/IconesPatch.dc.html`). Tokens de cor, tipografia, raios, 3 níveis de profundidade e componentes em `docs/DESIGN.md`.
 - **Bibliotecas de acabamento:** React Native Skia (sombras internas, textura, curvas, brilho de fio), `react-native-svg` (ícones vetoriais), Lottie ou Rive (animações ≤ 100 KB), `expo-image` (cache de imagens).
-- **Mapa:** estilo Mapbox próprio em `app/src/map/estilo-bodes.json`, conforme a seção 3 do DESIGN.md.
+- **Mapa:** estilo MapLibre próprio em `app/src/map/estilo-bodes.json`, conforme a seção 3 do DESIGN.md.
 - **Limite de peso:** seção 4 do DESIGN.md. Medir a cada build de teste.
 - **Imagens geradas:** Caminho A (dono gera no ChatGPT com `docs/PROMPTS_IMAGENS.md` e salva em `docs/assets-originais/`) ou Caminho B (agente gera pela API, só se o segredo de rede estiver configurado; limite de US$ 10 sem nova autorização; registrar no LOG). Antes de gerar ou converter, pergunte ao dono qual caminho está ativo.
 - **Enquanto as imagens não existirem:** use as versões vetoriais das pranchetas `.dc.html` como provisórias; nada trava por falta de imagem.
@@ -113,10 +119,10 @@ As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML p
 
 - **App:** React Native + Expo (SDK estável mais recente), TypeScript estrito, Expo Router. **Development builds** (`expo prebuild` / EAS Build), nunca Expo Go.
 - **Módulos nativos:** criados com Expo Modules API dentro de `app/modules/`:
-  - navegação Mapbox (Navigation SDK iOS e Android);
+  - navegação: Google Navigation SDK (pacote React Native oficial, em Beta), com ponte própria se faltar algo;
   - Android Auto (Car App Library, Kotlin, categoria navegação);
   - CarPlay (framework CarPlay, Swift, entitlement de navegação).
-- **Mapas:** `@rnmapbox/maps` para exibição; Mapbox Navigation SDK para curva a curva.
+- **Mapas:** MapLibre (`@maplibre/maplibre-react-native`) com dados OpenFreeMap para o mapa principal; Google Navigation SDK para curva a curva (app, Android Auto e CarPlay); servidor Valhalla próprio para planejar rotas (só a partir da Etapa 3). Plano B da navegação: Ferrostar + Valhalla. **Mapbox fora do projeto.**
 - **Backend:** Supabase — Postgres + PostGIS, Auth, Storage, Realtime, Edge Functions. Migrations em `supabase/migrations`, seed em `supabase/seed.sql`.
 - **Dados no app:** TanStack Query. Formulários: react-hook-form + zod. Traduções: i18next.
 - **Monetização:** RevenueCat (`react-native-purchases`), Google AdMob (`react-native-google-mobile-ads`) com consentimento UMP e App Tracking Transparency no iOS.

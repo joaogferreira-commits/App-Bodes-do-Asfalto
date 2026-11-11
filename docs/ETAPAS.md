@@ -11,9 +11,9 @@ Estimativa total com plano Claude Pro: 14 a 18 semanas.
 ## Semana 0 — Tarefas do dono do projeto (em paralelo, fora do código)
 
 - [ ] Criar conta no GitHub e o repositório privado `bodes-do-asfalto`.
-- [ ] Abrir Apple Developer Program (CPF, US$ 99/ano) e Google Play Console (CPF, US$ 25).
-- [ ] Pedir à Apple o entitlement de navegação do CarPlay (o agente prepara o texto do pedido).
-- [ ] Criar contas gratuitas: Supabase, Mapbox, Expo, RevenueCat, AdMob, Sentry, Vercel.
+- [ ] Abrir Apple Developer Program (CPF, US$ 99/ano) só quando o agente pedir; Google Play Console como organização, quando a empresa (CNPJ + D-U-N-S) existir.
+- [ ] Pedir à Apple o entitlement de navegação do CarPlay assim que a conta Apple existir (o agente prepara o texto).
+- [ ] Criar contas gratuitas uma a uma, quando o agente pedir: Expo e Google Cloud (Etapa 0); Supabase (Etapa 1); RevenueCat (Etapa 8); Sentry e Vercel (Etapa 11). Sem AdMob na v1.
 - [ ] Obter do clube autorização/licença escrita para uso do nome e do escudo num app de propriedade do dono.
 - [ ] Combinar com a diretoria do clube como será o abono de membros e quem serão os primeiros moderadores.
 - [ ] Separar pelo menos 15 irmãos testadores (Android e iPhone) e um carro com Android Auto e outro com CarPlay.
@@ -24,13 +24,13 @@ Estimativa total com plano Claude Pro: 14 a 18 semanas.
 
 Feita pelo agente, em paralelo às tarefas da semana 0 do dono:
 1. Projeto Expo mínimo com development build rodando num Android e num iPhone (via EAS).
-2. Prova de navegação: rota real com Mapbox Navigation SDK, curva a curva com voz, num celular.
+2. Prova de navegação: rota real com o Google Navigation SDK, curva a curva com voz, num celular Android (iPhone quando a conta Apple existir).
 2b. Levantamento de dados de postos: há dados abertos da ANP (preços por posto, nota de qualidade)? Se não, plano de preço colaborativo.
 3. Prova de Android Auto: a mesma navegação aparecendo no Desktop Head Unit no PC do dono.
-4. Estimativa de custos mensais (Supabase, Mapbox incluindo cobrança por navegação, Expo) para 300 e 1.000 usuários.
+4. Estimativa de custos mensais (Supabase, Google incluindo cobrança por navegação, servidor Valhalla, Expo) para 300 e 1.000 usuários.
 5. Sistema de design em código: tema com os tokens de `docs/DESIGN.md`, componentes base (cartão bordado, botões, chip, avatar, barra de navegação, folha inferior) com React Native Skia e uma tela interna "Catálogo de componentes".
 6. Pipeline de imagens: script para converter os PNGs de `docs/assets-originais/` em WebP nos tamanhos e pesos do DESIGN.md; se o Caminho B estiver ativo, `tools/gerar-imagem.ts` com registro de custo.
-7. Primeira versão do estilo de mapa `estilo-bodes.json` aplicada na prova de navegação.
+7. Primeira versão do estilo de mapa `estilo-bodes.json` (MapLibre + OpenFreeMap) aplicada no mapa principal.
 8. Relatório em português simples: o que funcionou, riscos, se a stack se confirma e o peso atual do app.
 
 **PORTÕES PARA INICIAR A ETAPA 1 (todos com OK do dono):**
@@ -79,7 +79,7 @@ Também: avatares ilustrados padrão e mascote Bodinho nas telas de boas-vindas 
 ## Etapa 2 — Mapa, lugares, Lojas e negócios
 
 Entregar:
-1. Mapa Mapbox com sedes, monumentos e pontos turísticos; importação do OpenStreetMap (começando por MT e rotas do clube) com atribuição; filtros; detalhe do lugar.
+1. Mapa MapLibre com sedes, monumentos e pontos turísticos; importação do OpenStreetMap (começando por MT e rotas do clube) com atribuição; filtros; detalhe do lugar.
 2. Check-in por GPS (≤200 m) e lista de lugares visitados.
 3. **Lojas:** cadastro feito por um irmão da Loja (nome, Oriente, Potência, dias de sessão, irmão de contato), visível só a membros; moderação de cadastros.
 4. **Guia de Negócios de Irmãos:** irmão cadastra seu negócio (oficina, concessionária, hotel, pousada, restaurante etc.), com benefício para membros; categorias e filtro no mapa; campo "destaque" (o pagamento entra na Etapa 8).
@@ -94,7 +94,7 @@ Também: estilo de mapa refinado (relevo, rios, rodovias, rótulos) e pinos com 
 
 ## Etapa 3 — Rotas e navegação
 
-Entregar: criar rota com paradas, salvar, compartilhar (todos, capítulo ou amigos); navegação curva a curva com voz (módulo nativo Mapbox Navigation); recálculo; gravação da trilha e km; **modo pilotando** (tela cheia, próxima manobra grande, botões alerta/reagrupar/SOS/encerrar).
+Entregar: criar rota com paradas, salvar, compartilhar (todos, capítulo ou amigos); navegação curva a curva com voz (Google Navigation SDK, Premium com 7 dias grátis; gratuitos abrem no Waze/Google Maps); servidor Valhalla para planejar rotas; recálculo; gravação da trilha e km; **modo pilotando** (tela cheia, próxima manobra grande, botões alerta/reagrupar/SOS/encerrar).
 
 Também: rota em navegação salva para uso offline; importar e exportar GPX; trilhas privadas por padrão.
 
@@ -165,13 +165,13 @@ Também: animação Lottie de selo sendo bordado ao desbloquear e de subida de n
 
 ## Etapa 8 — Monetização
 
-Entregar: assinatura premium via RevenueCat (estatísticas e diário de viagem, sem anúncios, visual exclusivo); AdMob **não personalizado** no feed e listas, com consentimento (UMP + ATT); destaque pago do Guia de Negócios; tela "Seja Premium" e restaurar compras.
+Entregar: assinatura premium via RevenueCat (estatísticas e diário de viagem, sem anúncios, visual exclusivo); sem anúncios na v1 (decisão de 11/11/2026); avatar por IA (1 grátis por conta, 2/mês no Premium); destaque pago do Guia de Negócios; tela "Seja Premium" e restaurar compras.
 
 Também: preços R$ 9,90/mês e R$ 89/ano; regiões offline no premium; destaque do Guia de Negócios ativado manualmente no painel (pagamento fora do app).
 
 Também: recap 3D da viagem (vídeo curto com marca d'água) como recurso premium.
 
-**PONTO DE TESTE 8** — compra de teste (sandbox) libera o premium e remove anúncios; nenhum anúncio no modo pilotando, mapa ao vivo ou chat.
+**PONTO DE TESTE 8** — compra de teste (sandbox) libera o premium (navegação, estatísticas, visual); SOS, alertas e comboio seguem grátis.
 
 ---
 
@@ -199,7 +199,7 @@ Também: botões Posto mais próximo e Posto na rota no CarPlay.
 
 Entregar: painel web (Next.js, Vercel). Dono (admin): tudo, incluindo nomear moderadores. Moderadores: formulários de entrada, denúncias, Lojas e negócios. Diretoria: abono e passeios do seu capítulo (diretoria geral: todos os capítulos). Também: capítulos, sedes, desafios, valores de XP, destaques pagos, estatísticas simples.
 
-Também: interruptor por capítulo para o lançamento em fases; alertas de custo (R$ 200/mês); fila do botão Ajuda.
+Também: interruptor por capítulo para o lançamento em fases; alertas de custo (R$ 500/mês); fila do botão Ajuda.
 
 **PONTO DE TESTE 11** — cada papel só vê e faz o que lhe cabe.
 
@@ -207,9 +207,9 @@ Também: interruptor por capítulo para o lançamento em fases; alertas de custo
 
 ## Etapa 12 — Teste fechado e publicação
 
-Entregar: textos das lojas em pt, es e en; capturas; política de privacidade e termos (com a seção de dados sensíveis); formulários de privacidade das lojas; **conta de demonstração para os revisores**; teste fechado no Google Play (12+ testadores, 14 dias) e TestFlight; correções; envio para revisão.
+Entregar: textos das lojas em pt, es e en; capturas; política de privacidade e termos (com a seção de dados sensíveis); formulários de privacidade das lojas; **conta de demonstração para os revisores**; teste fechado com irmãos no Google Play (conta de organização) e TestFlight; correções; envio para revisão.
 
-Também: domínio novo, e-mail de suporte, política e termos redigidos pelo agente e revisados pelo dono (encarregado de dados); lançamento primeiro em Cuiabá. O lançamento espera a aprovação do CarPlay.
+Também: domínio novo, e-mail de suporte, política e termos redigidos pelo agente e revisados pelo dono (encarregado de dados); lançamento primeiro em Cuiabá. O lançamento não espera a aprovação do CarPlay.
 
 Também: tela de abertura (splash) e ícone do app a partir dos ativos gerados; conferir limite de peso final.
 
