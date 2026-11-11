@@ -15,8 +15,17 @@ import __PACOTE__.R;
  * Os demais botões (Comboio, Posto mais próximo, Posto na rota) entram na Etapa 9.
  */
 public final class BodesCarScreen extends AndroidAutoBaseScreen {
+  /** Preferência de modo noite pedida pelo app (o próprio Android Auto decide dia/noite na tela do carro). */
+  private int modoNoite = 0;
+
   public BodesCarScreen(@NonNull CarContext carContext) {
     super(carContext);
+  }
+
+  // Exigido pela interface INavigationViewController do SDK 0.19, que a tela base não implementa.
+  @Override
+  public void setNightModeOption(int nightMode) {
+    modoNoite = nightMode;
   }
 
   private Action botao(int texto, String evento) {

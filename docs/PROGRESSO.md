@@ -26,6 +26,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Builds 1 e 2 falharam na etapa "Bundle JavaScript": o teste `telas.test.tsx` estava dentro de `src/app/` e o Expo Router o tratou como tela (puxando a biblioteca de testes para o app). Corrigido: testes de tela ficam em `src/__tests__/`. O CI agora roda `expo export` para pegar esse tipo de erro antes do EAS. Build 3 pedida (fbd1b759).
 - 11/11/2026 — Build 3 também falhou (fase ainda desconhecida). O GitHub Actions ficou parado (fila sem iniciar por 8+ min, aviso de instabilidade do GitHub), então pedi ao dono o texto do erro na página do Expo.
 - 11/11/2026 — Build 3: o JavaScript empacotou; a compilação Android passou pelo MapLibre e começou o Google Navigation SDK, mas o Gradle morreu por falta de memória (servidor grátis do EAS). Correção: só arm64-v8a, Gradle com 4 GB, 2 tarefas, sem paralelo (plugin `withNavegacaoGoogle`). Aviso falso do expo-doctor sobre o SDK do Google silenciado em package.json. Build 4 pedida.
+- 11/11/2026 — Build 4 (64d008b8): memória resolvida, compilou todo o Android; falhou só em `BodesCarScreen.java` — o SDK do Google 0.19 declara `setNightModeOption` na interface `INavigationViewController` e a tela base não implementa (bug do pacote em Beta). Corrigido na nossa tela + teste `plugins/android-auto.test.js` que compara a interface do SDK com a base e a nossa tela. `npm audit fix` aplicado (sem quebra). Build 5 pedida.
 
 ## Falta nesta etapa
 
@@ -42,7 +43,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Problemas em aberto / aguardando o dono do projeto
 
-- 11/11/2026 — Pendência leve (fazer junto com a próxima correção): avisos do `npm ci` no EAS — pacotes obsoletos dentro das ferramentas (glob, inflight, whatwg-encoding), ESLint 9 sem suporte (subir para a versão atual) e 31 avisos do `npm audit` (1 baixo, 30 moderados; quase todos em ferramentas de desenvolvimento, não no app). Não impedem a build.
+- 11/11/2026 — Avisos do `npm`: `npm audit fix` seguro aplicado. Restam 31 avisos (glob/minimatch/deepmerge) só em ferramentas de build e teste (Expo CLI, Jest, typescript-eslint) — não entram no app instalado; a correção depende de versões novas do Expo/Jest (exigiriam `--force`, com quebra). Reavaliar a cada atualização do Expo. ESLint 9 é o exigido pelo eslint-config-expo do SDK 58; subir junto com o próximo SDK.
 
 - 11/11/2026 — O ambiente do agente não alcança `api.expo.dev` (bloqueio de rede); por isso as versões de teste são geradas pelo GitHub Actions, com o `EXPO_TOKEN`. `npx expo install` funciona com `EXPO_OFFLINE=1`.
 
