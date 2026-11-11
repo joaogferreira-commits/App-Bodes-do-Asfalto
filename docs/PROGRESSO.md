@@ -29,6 +29,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Build 4 (64d008b8): memória resolvida, compilou todo o Android; falhou só em `BodesCarScreen.java` — o SDK do Google 0.19 declara `setNightModeOption` na interface `INavigationViewController` e a tela base não implementa (bug do pacote em Beta). Corrigido na nossa tela + teste `plugins/android-auto.test.js` que compara a interface do SDK com a base e a nossa tela. `npm audit fix` aplicado (sem quebra). Build 5 pedida.
 - 11/11/2026 — **Build 5 terminou sem erros** (Android, preview, só arm64). Enviado ao dono o roteiro do PONTO DE TESTE 0. Peso do APK: medir na próxima consulta de situação.
 - 11/11/2026 — Resultado parcial do PONTO DE TESTE 0: A (instalar), B (catálogo) e C (mapa) **funcionaram**. D (navegação) **fecha o app** — falta o registro do erro (pedido ao dono via `adb logcat -b crash`). E (Android Auto/DHU): a janela do DHU abre e fecha — pedido o texto do Prompt de Comando.
+- 11/11/2026 — Causa do D: `SecurityException: my location requires permission` — o `NavigationView` era montado com `myLocationEnabled` antes da permissão. Correção: a tela só monta o mapa do Google depois da permissão (3 testes novos em `src/__tests__/navegacao-tela.test.tsx`). Causa do E: DHU 2.0 (2022) do dono conecta e o celular derruba a conexão — atualizar o DHU no SDK Manager. Build 6 pedida.
 
 ## Falta nesta etapa
 

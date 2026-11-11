@@ -27,9 +27,32 @@ async function posicaoAtual() {
   return p ? { lat: p.coords.latitude, lng: p.coords.longitude } : null;
 }
 
+type Permissao = 'verificando' | 'concedida' | 'negada';
+
+/** O mapa do Google só pode ser montado depois da permissão de localização (senão o Android fecha o app). */
+function usePermissaoLocalizacao() {
+  const [permissao, setPermissao] = useState<Permissao>('verificando');
+  useEffect(() => {
+    let ativo = true;
+    void Location.getForegroundPermissionsAsync()
+      .then(({ granted }) => ativo && setPermissao(granted ? 'concedida' : 'negada'))
+      .catch(() => ativo && setPermissao('negada'));
+    return () => {
+      ativo = false;
+    };
+  }, []);
+  const pedir = async () => {
+    const ok = await pedirPermissao().catch(() => false);
+    setPermissao(ok ? 'concedida' : 'negada');
+    return ok;
+  };
+  return { permissao, pedir };
+}
+
 function ProvaDeNavegacao() {
   const { t } = useTranslation();
   const { navigationController } = useNavigation();
+  const { permissao, pedir } = usePermissaoLocalizacao();
   const [destino, setDestino] = useState<Destino>(destinosDaProva[0]!);
   const [estado, setEstado] = useState<'parado' | 'preparando' | 'guiando'>('parado');
   const [erro, setErro] = useState<Exclude<ResultadoNavegacao, 'ok'> | null>(null);
@@ -46,7 +69,7 @@ function ProvaDeNavegacao() {
     setEstado('preparando');
     const resultado = await iniciarNavegacao({
       controlador: navigationController as unknown as ControladorNavegacao,
-      pedirPermissaoLocalizacao: pedirPermissao,
+      pedirPermissaoLocalizacao: pedir,
       posicaoAtual,
       destino: (atual) => posicaoDoDestino(destino, atual),
       tituloDestino: t(`navegacao.${destino.chave}`),
@@ -67,13 +90,17 @@ function ProvaDeNavegacao() {
 
   return (
     <View style={estilos.tela}>
-      <NavigationView
-        style={StyleSheet.absoluteFill}
-        navigationNightMode={NavigationNightMode.FORCE_NIGHT}
-        myLocationEnabled
-        speedometerEnabled
-        reportIncidentButtonEnabled={false}
-      />
+      {permissao === 'concedida' && (
+        <View testID="mapa-navegacao" style={StyleSheet.absoluteFill}>
+          <NavigationView
+            style={StyleSheet.absoluteFill}
+            navigationNightMode={NavigationNightMode.FORCE_NIGHT}
+            myLocationEnabled
+            speedometerEnabled
+            reportIncidentButtonEnabled={false}
+          />
+        </View>
+      )}
       <SafeAreaView edges={['bottom']} style={estilos.painelArea} pointerEvents="box-none">
         {estado === 'guiando' ? (
           <Botao titulo={t('navegacao.encerrar')} variante="secundario" onPress={encerrar} />
@@ -90,6 +117,7 @@ function ProvaDeNavegacao() {
                 />
               ))}
             </View>
+            {permissao === 'negada' && <Texto>{t('navegacao.permissaoMotivo')}</Texto>}
             {erro && <Texto style={{ color: cores.alerta }}>{t(`navegacao.erros.${erro}`)}</Texto>}
             <Texto variante="secundario">{t('navegacao.aviso')}</Texto>
             <Botao
