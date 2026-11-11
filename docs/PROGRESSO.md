@@ -6,7 +6,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 - **Etapa:** 0 — Prova técnica e portões (não iniciada)
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** Etapa 0 — estilo do mapa (6) e pesquisa ANP (7). Dono: aguardando a primeira versão de teste (EAS).
+- **Próxima tarefa:** PONTO DE TESTE 0 com o dono (roteiro em `docs/TESTE_ETAPA0.md`). Builds na fila do EAS: 1ffe622f (navegação + mapa) e 1bf6ab89 (+ Android Auto). Depois: medir peso do APK e relatório final (tarefas 11 e 12).
 
 ## Feito
 
@@ -22,6 +22,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Etapa 0, tarefa 6: estilo `app/src/map/estilo-bodes.json` (MapLibre, dados OpenFreeMap, cores da seção 3 do DESIGN.md, atribuição OSM) validado por teste com o style-spec; tela `src/app/mapa.tsx` centrada em Cuiabá. Relevo (hillshade) fica para a Etapa 2 (precisa de fonte de elevação).
 - 11/11/2026 — Etapa 0, tarefa 9 (código): plugin `app/plugins/withAndroidAuto.js` + classes Java em `app/plugins/android-auto/` (CarAppService categoria NAVIGATION, Session, tela que estende `AndroidAutoBaseScreen` do Google com botões Alerta e SOS). Manifesto, permissões e descritor conferidos no prebuild; compilação Java só é verificada no EAS (sem Android SDK no ambiente do agente). Build 2 pedida.
 - 11/11/2026 — Etapa 0, tarefa 10: `docs/CUSTOS.md` — R$ 0/mês até o lançamento; ~R$ 230/mês (300 irmãos) e ~R$ 365/mês (1.000) depois. Atenção: Vercel grátis não permite uso comercial → painel no Cloudflare Pages (grátis).
+- 11/11/2026 — Dono instalou Android Studio + DHU e preparou o celular (depuração USB, Android Auto em modo desenvolvedor com fontes desconhecidas). Roteiro do teste em `docs/TESTE_ETAPA0.md`. As duas builds estavam em fila (IN_QUEUE) às 18:18 UTC — fila do plano grátis.
 
 ## Falta nesta etapa
 
