@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Tela do carro — Android Auto</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0907}
+a{color:#E8692A}a:hover{color:#F0884F}
+button{font-family:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 1280px; height: 720px; position: relative; overflow: hidden; background: #000; font-family: Inter, system-ui, sans-serif; color: #F3EADB;">
+
+  <!-- Barra do sistema Android Auto (do carro, não é nossa) -->
+  <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 96px; background: #101010; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px 0;">
+    <span style="font-size: 20px; font-weight: 600; color: #DDD;">10:21</span>
+    <div style="display: flex; flex-direction: column; gap: 22px; align-items: center;">
+      <span style="width: 44px; height: 44px; border-radius: 12px; background: #E8692A; display: grid; place-items: center;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#0B0907" aria-hidden="true"><path d="M12 2l7 19-7-4-7 4z"></path></svg>
+      </span>
+      <span style="width: 36px; height: 36px; border-radius: 50%; background: #2A2A2A;"></span>
+      <span style="width: 36px; height: 36px; border-radius: 50%; background: #2A2A2A;"></span>
+    </div>
+    <span style="width: 40px; height: 40px; border-radius: 50%; background: #2A2A2A;"></span>
+  </div>
+
+  <!-- Mapa (estilo Bodes na nuvem do Google) -->
+  <svg width="1184" height="720" viewBox="0 0 1184 720" style="position: absolute; left: 96px; top: 0;" aria-hidden="true">
+    <rect width="1184" height="720" fill="#15120E"></rect>
+    <path d="M0 140 C260 110 420 200 700 160 S1050 90 1184 120 L1184 0 L0 0 Z" fill="#191F16"></path>
+    <path d="M-10 560 C200 520 380 600 600 560 S960 470 1200 520" fill="none" stroke="#3D6E8F" stroke-width="7" stroke-linecap="round"></path>
+    <path d="M140 0 C180 200 140 400 230 720" fill="none" stroke="#E9DCC4" stroke-width="6" stroke-opacity="0.55"></path>
+    <path d="M900 0 C860 160 980 340 940 720" fill="none" stroke="#5A3E1F" stroke-width="10"></path>
+    <path d="M900 0 C860 160 980 340 940 720" fill="none" stroke="#C68A45" stroke-width="5" stroke-dasharray="10 8"></path>
+    <path d="M640 720 L640 420 C640 370 670 350 720 350 L1184 350" fill="none" stroke="#0B0907" stroke-width="22" stroke-linecap="round"></path>
+    <path d="M640 720 L640 420 C640 370 670 350 720 350 L1184 350" fill="none" stroke="#E8692A" stroke-width="14" stroke-linecap="round"></path>
+    <path d="M640 600 l-20 36 h40 z" fill="#F3EADB" stroke="#0B0907" stroke-width="4" stroke-linejoin="round"></path>
+    <circle cx="560" cy="520" r="18" fill="#2A2219" stroke="#7FA6C2" stroke-width="4"></circle>
+    <text x="560" y="526" text-anchor="middle" fill="#F3EADB" font-family="Barlow Condensed" font-size="16" font-weight="700">ED</text>
+    <rect x="1000" y="300" width="44" height="44" rx="12" fill="#1F1A14" stroke="#3FA27A" stroke-width="3"></rect>
+    <path d="M1012 334V312a1.5 1.5 0 011.5-1.5h10a1.5 1.5 0 011.5 1.5v22M1011 334h16M1015 317h7" fill="none" stroke="#3FA27A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+
+  <!-- Cartão de manobra (cor de fundo definida pelo app) -->
+  <div style="position: absolute; left: 120px; top: 24px; width: 380px; background: #1E1813; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div style="display: flex; gap: 18px; align-items: center; padding: 20px 22px;">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#E8692A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-label="Vire à direita" role="img"><path d="M7 21V12a4 4 0 014-4h8"></path><path d="M15 4l4 4-4 4"></path></svg>
+      <div>
+        <div style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 48px; line-height: 1;">800 m</div>
+        <div style="font-size: 22px; font-weight: 600; margin-top: 4px;">BR-163 · sentido Sinop</div>
+      </div>
+    </div>
+    <div style="background: #16120E; padding: 12px 22px; font-size: 17px; color: #B8A890; display: flex; align-items: center; gap: 10px;">
+      <span>Depois</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8A890" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21V12a4 4 0 00-4-4H5"></path><path d="M9 4L5 8l4 4"></path></svg>
+      <span style="color: #C68A45; font-weight: 600;">entra na terra · 12 km</span>
+    </div>
+  </div>
+
+  <!-- Botões de ação (até 4, nossos ícones) -->
+  <div style="position: absolute; right: 24px; top: 24px; display: flex; gap: 12px;">
+    <button style="height: 66px; padding: 0 20px; border-radius: 33px; border: 0; background: #F5C518; color: #0B0907; display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0B0907" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.5 17h-19z"></path><path d="M12 10v4M12 17v.5"></path></svg>
+      Alerta
+    </button>
+    <button style="height: 66px; padding: 0 20px; border-radius: 33px; border: 0; background: #241D17; color: #F3EADB; display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F3EADB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="9" r="2.5"></circle><circle cx="16" cy="9" r="2.5"></circle><path d="M3.5 19a4.5 4.5 0 019 0M11.5 19a4.5 4.5 0 019 0"></path></svg>
+      Comboio
+    </button>
+    <button style="height: 66px; padding: 0 20px; border-radius: 33px; border: 0; background: #241D17; color: #F3EADB; display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3FA27A" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 20V5a1 1 0 011-1h7a1 1 0 011 1v15"></path><path d="M4 20h11M7 8h5"></path><path d="M14 10h2l2 2v5a1.5 1.5 0 003 0V9l-3-3"></path></svg>
+      Postos
+    </button>
+    <button style="height: 66px; padding: 0 24px; border-radius: 33px; border: 0; background: #C62D22; color: #FFF6EC; font-family: 'Barlow Condensed'; font-size: 28px; font-weight: 700; letter-spacing: 1px;">SOS</button>
+  </div>
+
+  <!-- Estimativa de chegada -->
+  <div style="position: absolute; left: 120px; bottom: 24px; background: #1E1813; border-radius: 18px; padding: 16px 22px; display: flex; gap: 28px; align-items: baseline; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div><span style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 34px;">10:47</span><span style="font-size: 16px; color: #B8A890; margin-left: 6px;">chegada</span></div>
+    <div><span style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 34px;">26 min</span></div>
+    <div><span style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 34px;">31 km</span><span style="font-size: 16px; color: #C68A45; margin-left: 6px;">12 de terra</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

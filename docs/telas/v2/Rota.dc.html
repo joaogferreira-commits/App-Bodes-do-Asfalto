@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Planejar rota — tipo de estrada</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0907}
+a{color:#E8692A}a:hover{color:#F0884F}
+button{font-family:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #14110D; font-family: Inter, system-ui, sans-serif; color: #F3EADB;">
+
+  <!-- Mapa com a rota: asfalto x terra -->
+  <svg width="390" height="844" viewBox="0 0 390 844" style="position: absolute; inset: 0;" aria-hidden="true">
+    <rect width="390" height="844" fill="#15120E"></rect>
+    <path d="M0 200 C90 170 160 240 240 210 S360 160 390 180 L390 60 L0 60 Z" fill="#191F16"></path>
+    <path d="M-10 380 C70 350 140 400 200 370 S320 300 400 340" fill="none" stroke="#3D6E8F" stroke-width="5" stroke-linecap="round"></path>
+    <path d="M40 470 C70 360 110 300 170 260 S280 180 330 130" fill="none" stroke="#0B0907" stroke-width="9"></path>
+    <path d="M40 470 C70 360 110 300 170 260 S280 180 330 130" fill="none" stroke="#E9DCC4" stroke-width="5" stroke-opacity="0.8"></path>
+    <path d="M60 470 C110 430 160 400 210 340 S300 250 330 130" fill="none" stroke="#5A3E1F" stroke-width="8" stroke-linecap="round"></path>
+    <path d="M60 470 C110 430 160 400 210 340 S300 250 330 130" fill="none" stroke="#C68A45" stroke-width="4" stroke-dasharray="8 6" stroke-linecap="round"></path>
+    <path d="M40 470 C70 360 110 300 140 280" fill="none" stroke="#0B0907" stroke-width="12" stroke-linecap="round"></path>
+    <path d="M40 470 C70 360 110 300 140 280" fill="none" stroke="#E8692A" stroke-width="7" stroke-linecap="round"></path>
+    <path d="M140 280 C170 300 190 330 210 340 S300 250 330 130" fill="none" stroke="#0B0907" stroke-width="12" stroke-linecap="round"></path>
+    <path d="M140 280 C170 300 190 330 210 340 S300 250 330 130" fill="none" stroke="#E8692A" stroke-width="7" stroke-linecap="round"></path>
+    <path d="M140 280 C170 300 190 330 210 340 S300 250 330 130" fill="none" stroke="#F3D9B8" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round"></path>
+    <circle cx="40" cy="470" r="9" fill="#0B0907" stroke="#F3EADB" stroke-width="3"></circle>
+    <circle cx="330" cy="130" r="10" fill="#E8692A" stroke="#0B0907" stroke-width="3"></circle>
+  </svg>
+
+  <!-- Cabeçalho -->
+  <div style="position: absolute; top: 52px; left: 16px; right: 16px; background: rgba(22,18,14,0.95); border: 1px solid #322920; border-radius: 16px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; box-shadow: 0 8px 24px rgba(0,0,0,0.45);">
+    <a href="Main.dc.html" aria-label="Voltar" style="width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #F3EADB; flex: none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+    </a>
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 15px; color: #B8A890;"><span style="width: 9px; height: 9px; border-radius: 50%; border: 2px solid #F3EADB;"></span>Sede Cuiabá</div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #E8692A;"></span>Mirante da Chapada</div>
+    </div>
+  </div>
+
+  <!-- Legenda -->
+  <div style="position: absolute; top: 160px; left: 16px; background: rgba(11,9,7,0.85); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+    <div style="display: flex; align-items: center; gap: 10px;"><svg width="34" height="8" aria-hidden="true"><path d="M2 4h30" stroke="#E9DCC4" stroke-width="4" stroke-linecap="round"></path></svg>Asfalto</div>
+    <div style="display: flex; align-items: center; gap: 10px;"><svg width="34" height="8" aria-hidden="true"><path d="M2 4h30" stroke="#5A3E1F" stroke-width="7" stroke-linecap="round"></path><path d="M2 4h30" stroke="#C68A45" stroke-width="3.5" stroke-dasharray="6 5" stroke-linecap="round"></path></svg>Estrada de terra</div>
+    <div style="display: flex; align-items: center; gap: 10px;"><svg width="34" height="8" aria-hidden="true"><path d="M2 4h30" stroke="#E8692A" stroke-width="6" stroke-linecap="round"></path><path d="M2 4h30" stroke="#F3D9B8" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"></path></svg>Sua rota na terra</div>
+  </div>
+
+  <!-- Painel inferior -->
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; background: #16120E; border-top: 1px solid #322920; border-radius: 22px 22px 0 0; box-shadow: 0 -12px 32px rgba(0,0,0,0.5); padding: 10px 20px 30px;">
+    <div style="width: 40px; height: 4px; border-radius: 4px; background: #3A2F25; margin: 0 auto 16px;"></div>
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between;">
+      <div>
+        <div style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 40px; line-height: 1;">74 km</div>
+        <div style="font-size: 15px; color: #B8A890; margin-top: 4px;">1 h 35 min · chegada 10:05</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 13px; letter-spacing: 1.4px; color: #C68A45;">TERRA</div>
+        <div style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 26px; line-height: 1.1;">31 km</div>
+      </div>
+    </div>
+
+    <!-- barra de composição do trajeto -->
+    <div role="img" aria-label="58% asfalto, 42% terra" style="display: flex; height: 8px; border-radius: 8px; overflow: hidden; margin: 14px 0 20px; gap: 2px;">
+      <span style="flex: 58; background: #E9DCC4;"></span>
+      <span style="flex: 42; background: repeating-linear-gradient(90deg, #C68A45 0 8px, #5A3E1F 8px 13px);"></span>
+    </div>
+
+    <div style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 13px; letter-spacing: 1.6px; color: #B8A890; margin-bottom: 10px;">TIPO DE ESTRADA</div>
+    <div role="radiogroup" aria-label="Tipo de estrada" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+      <button role="radio" aria-checked="false" style="height: 76px; border-radius: 14px; border: 1px solid #322920; background: #201A15; color: #F3EADB; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 600;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E9DCC4" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3L5 21M16 3l3 18"></path><path d="M12 5v3M12 11v3M12 17v3"></path></svg>
+        Só asfalto
+      </button>
+      <button role="radio" aria-checked="true" style="height: 76px; border-radius: 14px; border: 2px solid #E8692A; background: rgba(232,105,42,0.12); color: #F3EADB; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 600;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8692A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3L5 21"></path><path d="M16 3l3 18" stroke-dasharray="2.5 2.5"></path><path d="M12 5v3M12 11v3"></path></svg>
+        Misto
+      </button>
+      <button role="radio" aria-checked="false" style="height: 76px; border-radius: 14px; border: 1px solid #322920; background: #201A15; color: #F3EADB; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 600;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C68A45" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3L5 21M16 3l3 18" stroke-dasharray="2.5 2.5"></path><circle cx="11" cy="9" r="0.8" fill="#C68A45"></circle><circle cx="13" cy="15" r="0.8" fill="#C68A45"></circle></svg>
+        Prefiro terra
+      </button>
+    </div>
+    <p style="font-size: 14px; color: #B8A890; margin: 10px 2px 18px; line-height: 1.4;">Misto: o caminho mais curto, com ou sem terra.</p>
+
+    <div style="display: flex; gap: 10px;">
+      <button aria-label="Salvar rota" style="width: 56px; height: 56px; border-radius: 14px; border: 1px solid #3A2F25; background: transparent; display: grid; place-items: center; flex: none;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F3EADB" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+      </button>
+      <a href="Pilotando.dc.html" style="flex: 1; height: 56px; border-radius: 14px; background: #E8692A; color: #0B0907; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 17px; font-weight: 700; text-decoration: none;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0B0907" aria-hidden="true"><path d="M12 2l7 19-7-4-7 4z"></path></svg>
+        Iniciar
+      </a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

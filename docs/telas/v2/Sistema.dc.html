@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sistema visual</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0907}
+a{color:#E8692A}a:hover{color:#F0884F}
+</style>
+</helmet>
+<div style="width: 1100px; min-height: 1684px; box-sizing: border-box; padding: 64px; background: #0B0907; font-family: Inter, system-ui, sans-serif; color: #F3EADB; display: flex; flex-direction: column; gap: 56px;">
+
+  <header style="display: flex; flex-direction: column; gap: 8px;">
+    <span style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 14px; letter-spacing: 2px; color: #E8692A;">BODES DO ASFALTO · SISTEMA VISUAL v2</span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 64px; line-height: 1;">Estrada à noite, couro e laranja</h1>
+    <p style="margin: 0; font-size: 18px; color: #B8A890; max-width: 720px; line-height: 1.5;">Fundo escuro quente, um único laranja para ação, texto creme. O bordado fica para emblemas, selos e conquistas; a interface é limpa, com espaçamento de 8 em 8 e cantos de 12 a 22 px.</p>
+  </header>
+
+  <!-- Cores -->
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 15px; letter-spacing: 2px; color: #B8A890;">CORES</h2>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px;">
+      <sc-for list="{{cores}}" as="c" hint-placeholder-count="12">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="height: 88px; border-radius: 14px; border: 1px solid #322920; background: {{c.hex}};"></div>
+          <div style="font-size: 15px; font-weight: 600;">{{c.nome}}</div>
+          <div style="font-size: 13px; color: #B8A890;">{{c.hex}} · {{c.uso}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Estradas no mapa -->
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 15px; letter-spacing: 2px; color: #B8A890;">ESTRADAS NO MAPA — ASFALTO E TERRA SEMPRE DIFERENTES</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+      <div style="background: #15120E; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <svg width="200" height="24" aria-hidden="true"><path d="M4 12h192" stroke="#0B0907" stroke-width="10" stroke-linecap="round"></path><path d="M4 12h192" stroke="#E9DCC4" stroke-width="6" stroke-linecap="round"></path></svg>
+        <div style="font-size: 15px; font-weight: 600;">Asfalto</div>
+        <div style="font-size: 13px; color: #B8A890;">Linha contínua creme</div>
+      </div>
+      <div style="background: #15120E; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <svg width="200" height="24" aria-hidden="true"><path d="M4 12h192" stroke="#5A3E1F" stroke-width="10" stroke-linecap="round"></path><path d="M4 12h192" stroke="#C68A45" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"></path></svg>
+        <div style="font-size: 15px; font-weight: 600;">Terra</div>
+        <div style="font-size: 13px; color: #B8A890;">Tracejado ocre sobre marrom</div>
+      </div>
+      <div style="background: #15120E; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <svg width="200" height="24" aria-hidden="true"><path d="M4 12h192" stroke="#0B0907" stroke-width="14" stroke-linecap="round"></path><path d="M4 12h192" stroke="#E8692A" stroke-width="9" stroke-linecap="round"></path></svg>
+        <div style="font-size: 15px; font-weight: 600;">Sua rota</div>
+        <div style="font-size: 13px; color: #B8A890;">Laranja grosso com contorno</div>
+      </div>
+      <div style="background: #15120E; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <svg width="200" height="24" aria-hidden="true"><path d="M4 12h192" stroke="#0B0907" stroke-width="14" stroke-linecap="round"></path><path d="M4 12h192" stroke="#E8692A" stroke-width="9" stroke-linecap="round"></path><path d="M4 12h192" stroke="#F3D9B8" stroke-width="2.5" stroke-dasharray="6 8" stroke-linecap="round"></path></svg>
+        <div style="font-size: 15px; font-weight: 600;">Sua rota na terra</div>
+        <div style="font-size: 13px; color: #B8A890;">Laranja com pesponto claro</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipografia -->
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 15px; letter-spacing: 2px; color: #B8A890;">LETRAS</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 52px; line-height: 1;">800 m <span style="font-size: 15px; font-family: Inter; font-weight: 500; color: #B8A890;">Números grandes · 52</span></div>
+        <div style="font-family: 'Barlow Condensed'; font-weight: 700; font-size: 32px; line-height: 1.1;">Rota das Cachoeiras <span style="font-size: 15px; font-family: Inter; font-weight: 500; color: #B8A890;">Título · 32</span></div>
+        <div style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 13px; letter-spacing: 1.6px; color: #B8A890;">RÓTULO DE SEÇÃO · 13</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 20px; font-weight: 600;">Destaque · Inter 20</div>
+        <div style="font-size: 17px;">Texto do app · Inter 17. Frases curtas, uma ideia por linha.</div>
+        <div style="font-size: 15px; color: #B8A890;">Texto secundário · Inter 15</div>
+        <div style="font-size: 13px; color: #B8A890;">Mínimo absoluto · Inter 13</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ícones -->
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 15px; letter-spacing: 2px; color: #B8A890;">ÍCONES — TRAÇO 1,8 · GRADE 24 · CANTOS REDONDOS</h2>
+    <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px;">
+      <sc-for list="{{icones}}" as="i" hint-placeholder-count="24">
+        <div style="background: #16120E; border: 1px solid #262019; border-radius: 14px; height: 104px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="{{i.cor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <sc-for list="{{i.d}}" as="p" hint-placeholder-count="2"><path d="{{p}}"></path></sc-for>
+          </svg>
+          <span style="font-size: 13px; color: #B8A890;">{{i.nome}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Pinos -->
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed'; font-weight: 600; font-size: 15px; letter-spacing: 2px; color: #B8A890;">PINOS DO MAPA — COR + ÍCONE (os emblemas bordados aparecem ao aproximar)</h2>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <sc-for list="{{pinos}}" as="p" hint-placeholder-count="6">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <span style="width: 48px; height: 48px; border-radius: 14px; background: #1F1A14; border: 2px solid {{p.cor}}; display: grid; place-items: center;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{p.cor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <sc-for list="{{p.d}}" as="q" hint-placeholder-count="2"><path d="{{q}}"></path></sc-for>
+            </svg>
+          </span>
+          <span style="font-size: 13px; color: #B8A890;">{{p.nome}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1100,"height":1684}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const I = {
+      mapa: ['M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z', 'M9 4v14M15 6v14'],
+      feed: ['M7 4h10a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3z', 'M4 15l4.5-4 4 3.5L16 11l4 3.5'],
+      passeios: ['M6 5h12a2.5 2.5 0 012.5 2.5v10A2.5 2.5 0 0118 20H6a2.5 2.5 0 01-2.5-2.5v-10A2.5 2.5 0 016 5z', 'M3.5 10h17M8 3v4M16 3v4'],
+      conquistas: ['M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19l1-5.8L3.5 9.2l5.9-.9z'],
+      perfil: ['M5 13a7 7 0 0114 0v1H5z', 'M5 11h14', 'M8 14v3.5A2.5 2.5 0 0010.5 20h3a2.5 2.5 0 002.5-2.5V14'],
+      busca: ['M11 4.5a6.5 6.5 0 110 13 6.5 6.5 0 010-13z', 'M16 16l4 4'],
+      visivel: ['M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z', 'M12 9a3 3 0 110 6 3 3 0 010-6z'],
+      camadas: ['M12 3l9 5-9 5-9-5 9-5z', 'M3 13l9 5 9-5'],
+      posto: ['M5 20V5a1 1 0 011-1h7a1 1 0 011 1v15', 'M4 20h11M7 8h5', 'M14 10h2l2 2v5a1.5 1.5 0 003 0V9l-3-3'],
+      postoRota: ['M6 20c0-6 12-6 12-12', 'M6 18.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z', 'M18 2.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5z'],
+      alerta: ['M12 3l9.5 17h-19z', 'M12 10v4M12 17v.5'],
+      reagrupar: ['M8 6.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM16 6.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5z', 'M3.5 19a4.5 4.5 0 019 0M11.5 19a4.5 4.5 0 019 0'],
+      asfalto: ['M8 3L5 21M16 3l3 18', 'M12 5v3M12 11v3M12 17v3'],
+      terra: ['M8 3L5 21M16 3l3 18'],
+      navegar: ['M12 2l7 19-7-4-7 4z'],
+      voz: ['M4 10v4h4l5 4V6L8 10z', 'M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11'],
+      bateria: ['M3 8h15a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V9a1 1 0 011-1z', 'M21 11v2', 'M5 11h6v2H5z'],
+      sede: ['M4 11l8-6 8 6v8H4z', 'M10 19v-5h4v5'],
+      loja: ['M3 9l9-5 9 5', 'M5 9v9M10 9v9M14 9v9M19 9v9M3 20h18'],
+      agape: ['M5 8h7v10a2 2 0 01-2 2H7a2 2 0 01-2-2V8z', 'M12 10h2a2 2 0 010 4h-2', 'M7 5c0-1 1-2 2-2M10 5c0-1 1-2 2-2'],
+      socorro: ['M7 12l3 3 7-7', 'M12 21s-8-4.5-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 6.5-8 11-8 11z'],
+      oficina: ['M14.5 6.5a4 4 0 00-5.4 5.2L4 16.8 7.2 20l5.1-5.1a4 4 0 005.2-5.4l-2.3 2.3-2.4-.6-.6-2.4z'],
+      aceno: ['M8 13V6.5a1.5 1.5 0 013 0V12M11 11V5a1.5 1.5 0 013 0v6M14 11V6.5a1.5 1.5 0 013 0V14a6 6 0 01-6 6h-.5a5 5 0 01-4-2L4 14.5a1.5 1.5 0 012.3-2L8 14'],
+      sos: ['M12 3a9 9 0 110 18 9 9 0 010-18z', 'M12 8v5M12 16v.5'],
+    };
+    const ic = (nome, k, cor) => ({ nome, d: I[k], cor: cor || '#F3EADB' });
+    return {
+      cores: [
+        { nome: 'Noite', hex: '#0B0907', uso: 'fundo' },
+        { nome: 'Superfície', hex: '#16120E', uso: 'painéis' },
+        { nome: 'Superfície 2', hex: '#201A15', uso: 'cartões' },
+        { nome: 'Linha', hex: '#322920', uso: 'bordas' },
+        { nome: 'Creme', hex: '#F3EADB', uso: 'texto' },
+        { nome: 'Areia', hex: '#B8A890', uso: 'texto 2' },
+        { nome: 'Laranja', hex: '#E8692A', uso: 'ação' },
+        { nome: 'Terra', hex: '#C68A45', uso: 'estrada de chão' },
+        { nome: 'Ouro', hex: '#D8A93B', uso: 'sedes, conquistas' },
+        { nome: 'Verde posto', hex: '#3FA27A', uso: 'postos' },
+        { nome: 'Azul rio', hex: '#7FA6C2', uso: 'Lojas, irmão na estrada' },
+        { nome: 'Vermelho SOS', hex: '#C62D22', uso: 'só SOS' },
+      ],
+      icones: [
+        ic('Mapa', 'mapa'), ic('Feed', 'feed'), ic('Passeios', 'passeios'), ic('Conquistas', 'conquistas'),
+        ic('Perfil', 'perfil'), ic('Buscar', 'busca'), ic('Visibilidade', 'visivel', '#E8692A'), ic('Camadas', 'camadas'),
+        ic('Posto', 'posto', '#3FA27A'), ic('Posto na rota', 'postoRota', '#3FA27A'), ic('Alerta', 'alerta', '#F5C518'), ic('Reagrupar', 'reagrupar'),
+        ic('Só asfalto', 'asfalto', '#E9DCC4'), ic('Terra', 'terra', '#C68A45'), ic('Navegar', 'navegar', '#E8692A'), ic('Voz', 'voz'),
+        ic('Economia', 'bateria'), ic('Sede', 'sede', '#D8A93B'), ic('Loja', 'loja', '#7FA6C2'), ic('Ágape', 'agape', '#D8A93B'),
+        ic('Socorro fraterno', 'socorro', '#E8692A'), ic('Oficina', 'oficina'), ic('Aceno', 'aceno', '#E8692A'), ic('SOS', 'sos', '#E0574C'),
+      ],
+      pinos: [
+        { nome: 'Sede', d: I.sede, cor: '#D8A93B' },
+        { nome: 'Posto', d: I.posto, cor: '#3FA27A' },
+        { nome: 'Loja', d: I.loja, cor: '#7FA6C2' },
+        { nome: 'Ágape', d: I.agape, cor: '#D8A93B' },
+        { nome: 'Oficina', d: I.oficina, cor: '#B8A890' },
+        { nome: 'Socorro', d: I.socorro, cor: '#E8692A' },
+        { nome: 'Alerta', d: I.alerta, cor: '#F5C518' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

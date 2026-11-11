@@ -48,6 +48,8 @@ Feita pelo agente, em paralelo às tarefas da semana 0 do dono:
 
 ## Etapa 1 — Fundação, acesso e perfil
 
+Antes de codar: Interface v2 aprovada pelo dono (`docs/telas/v2/`); refazer tema e componentes a partir dela; ícone do app com o Bodinho; reduzir o peso do APK; restringir a chave do Google.
+
 Entregar:
 1. Estrutura do repositório (`app/`, `supabase/`, `e2e/`, `docs/`, `admin/` vazio), README, `.env.example`, CI no GitHub Actions (lint, tipos, testes).
 2. Login: e-mail com link mágico, Google e Sign in with Apple.
@@ -97,6 +99,8 @@ Também: estilo de mapa refinado (relevo, rios, rodovias, rótulos) e pinos com 
 Entregar: criar rota com paradas, salvar, compartilhar (todos, capítulo ou amigos); navegação curva a curva com voz (Google Navigation SDK, Premium com 7 dias grátis; gratuitos abrem no Waze/Google Maps); servidor Valhalla para planejar rotas; recálculo; gravação da trilha e km; **modo pilotando** (tela cheia, próxima manobra grande, botões alerta/reagrupar/SOS/encerrar).
 
 Também: rota em navegação salva para uso offline; importar e exportar GPX; trilhas privadas por padrão.
+
+Também: **tipo de estrada** no planejamento — Só asfalto / Misto / Prefiro terra (Valhalla; navegação Google seguindo pontos de passagem; plano B Ferrostar+Valhalla para rotas com terra); estrada de terra sempre com cor/traço próprios no mapa e na rota.
 
 Também: botões "Posto mais próximo" e "Posto na rota" no mapa e no modo pilotando (grade 3×2); gerador de bate-volta; modo economia de bateria; voz pelo intercomunicador.
 
@@ -177,7 +181,7 @@ Também: recap 3D da viagem (vídeo curto com marca d'água) como recurso premiu
 
 ## Etapa 9 — Android Auto
 
-Entregar: módulo Car App Library (navegação): rota, próxima manobra, lista "na rota" (postos, sedes, Lojas, negócios de irmãos), comboio simplificado, alerta e SOS, aviso de aceno por voz. Sem feed, fotos, chat em texto ou anúncios.
+Entregar: tela do carro com a identidade do app (cor do cartão de manobra, ícones próprios, estilo de mapa na nuvem do Google, avisos de trecho de terra). Módulo Car App Library (navegação): rota, próxima manobra, lista "na rota" (postos, sedes, Lojas, negócios de irmãos), comboio simplificado, alerta e SOS, aviso de aceno por voz. Sem feed, fotos, chat em texto ou anúncios.
 
 Também: botões Posto mais próximo e Posto na rota na tela do carro/painel da moto.
 

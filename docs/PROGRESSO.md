@@ -6,7 +6,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 - **Etapa:** 0 — Ponto de Teste 0 **aprovado** (A–E); faltam portões do dono para iniciar a Etapa 1
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** dono responder aos portões da Etapa 1 (telas, catálogo, licença da marca, orçamento/empresa, capítulos de Cuiabá); depois apresentar o plano da Etapa 1.
+- **Próxima tarefa:** revisão da Interface v2 com o dono (proposta em `docs/telas/v2/` e no quadro https://claude.ai/artifact/4HWekfUJxw4eK7xP6LzewJ). Depois: plano da Etapa 1.
 
 ## Feito
 
@@ -40,6 +40,10 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: reduzir o peso do APK, restringir a chave do Google.
 
 ## Decisões tomadas durante o desenvolvimento
+
+- 12/11/2026 — Dono reprovou o visual do Catálogo (desproporcional, "feito por programador", infantil, sem ícones). A interface passa a ser tratada como prioridade igual ao desenvolvimento: revisão intensa com o dono antes de codar telas. Proposta v2 em `docs/telas/v2/` (mapa, rota com tipo de estrada, pilotando, carro, sistema visual com 24 ícones e paleta ajustada). O código do tema/componentes será refeito a partir da v2 aprovada.
+- 12/11/2026 — Novos requisitos do dono: (1) ícone próprio do app (Bodinho) na Etapa 1; (2) tipo de estrada no planejamento: Só asfalto / Misto / Prefiro terra (Valhalla; Etapa 3, caminho A = Google com pontos de passagem, plano B = Ferrostar+Valhalla para rotas com terra); (3) estrada de terra com cor e traço muito diferentes do asfalto no mapa (estilo MapLibre usa o campo `surface` do OpenMapTiles); (4) tela do carro com a cara do app (cores do cartão, ícones próprios, estilo de mapa na nuvem do Google), dentro do que o Android Auto permite.
+- 12/11/2026 — Licença da marca, empresa e demais pendências externas ficam para depois: primeiro o app pronto (pedido do dono).
 
 - 11/11/2026 — Dono aceitou todas as recomendações (lista no topo do CLAUDE.md) e pediu orçamento o mais apertado possível e uma tarefa por vez. Plano da Etapa 0 aprovado. Caminho A para imagens.
 - 11/11/2026 — Selo "Visita a Lojas" mantém esquadro e compasso, por decisão do dono (exceção à regra do guia de estilo; vale só para esse selo).

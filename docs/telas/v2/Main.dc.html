@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mapa — início</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0907}
+a{color:#E8692A}a:hover{color:#F0884F}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #14110D; font-family: Inter, system-ui, sans-serif; color: #F3EADB;">
+
+  <!-- Mapa (fundo ilustrativo) -->
+  <svg width="390" height="844" viewBox="0 0 390 844" style="position: absolute; inset: 0;" aria-hidden="true">
+    <rect width="390" height="844" fill="#15120E"></rect>
+    <path d="M0 120 C80 100 140 160 220 140 S360 90 390 110 L390 0 L0 0 Z" fill="#191F16"></path>
+    <path d="M250 420 C300 400 360 430 390 420 L390 620 C340 600 290 640 240 600 Z" fill="#191F16"></path>
+    <path d="M0 520 C40 500 90 540 130 560 L120 700 L0 720 Z" fill="#191F16"></path>
+    <path d="M-10 610 C60 580 120 620 180 590 S300 520 400 560" fill="none" stroke="#3D6E8F" stroke-width="5" stroke-linecap="round"></path>
+    <path d="M60 0 C70 120 50 240 90 330 S120 520 70 844" fill="none" stroke="#0B0907" stroke-width="9"></path>
+    <path d="M60 0 C70 120 50 240 90 330 S120 520 70 844" fill="none" stroke="#E9DCC4" stroke-width="5" stroke-opacity="0.85"></path>
+    <path d="M0 300 C120 290 220 330 390 280" fill="none" stroke="#0B0907" stroke-width="8"></path>
+    <path d="M0 300 C120 290 220 330 390 280" fill="none" stroke="#E9DCC4" stroke-width="4" stroke-opacity="0.75"></path>
+    <path d="M90 330 C160 360 200 420 260 470 S330 560 390 600" fill="none" stroke="#5A3E1F" stroke-width="7" stroke-linecap="round"></path>
+    <path d="M90 330 C160 360 200 420 260 470 S330 560 390 600" fill="none" stroke="#C68A45" stroke-width="3.5" stroke-dasharray="7 6" stroke-linecap="round"></path>
+    <path d="M230 140 C240 200 270 240 320 260" fill="none" stroke="#5A3E1F" stroke-width="6" stroke-linecap="round"></path>
+    <path d="M230 140 C240 200 270 240 320 260" fill="none" stroke="#C68A45" stroke-width="3" stroke-dasharray="6 5" stroke-linecap="round"></path>
+    <path d="M150 380 L200 520 L170 700" fill="none" stroke="#B8A890" stroke-width="2" stroke-opacity="0.35"></path>
+    <path d="M80 300 C120 260 170 240 230 220" fill="none" stroke="#0B0907" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M80 300 C120 260 170 240 230 220" fill="none" stroke="#E8692A" stroke-width="6" stroke-linecap="round"></path>
+    <text x="104" y="364" fill="#E9DCC4" font-family="Barlow Condensed" font-size="15" font-weight="600" letter-spacing="1.2">CUIABÁ</text>
+    <text x="262" y="188" fill="#B8A890" font-family="Inter" font-size="11" letter-spacing="0.4">Chapada</text>
+    <text x="196" y="603" fill="#7FA6C2" font-family="Inter" font-size="11" font-style="italic">Rio Cuiabá</text>
+  </svg>
+
+  <!-- Topo: busca e perfil -->
+  <div style="position: absolute; top: 52px; left: 16px; right: 16px; display: flex; gap: 10px; align-items: center;">
+    <label style="flex: 1; height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 16px; background: rgba(22,18,14,0.94); border: 1px solid #322920; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.45);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8A890" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path></svg>
+      <input aria-label="Buscar" placeholder="Buscar irmão, sede, posto…" style="flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #F3EADB; font-size: 16px; font-family: Inter;">
+    </label>
+    <button aria-label="Meu perfil" style="width: 48px; height: 48px; border-radius: 14px; border: 1px solid #322920; background: rgba(22,18,14,0.94); display: grid; place-items: center; padding: 0;">
+      <span style="width: 32px; height: 32px; border-radius: 50%; background: #2A2219; border: 2px solid #E8692A; display: grid; place-items: center; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 14px; color: #F3EADB;">JG</span>
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div style="position: absolute; top: 112px; left: 16px; right: 0; display: flex; gap: 8px; overflow: hidden;">
+    <button style="height: 36px; padding: 0 14px; border-radius: 999px; border: 0; background: #F3EADB; color: #0B0907; font-size: 14px; font-weight: 600;">Tudo</button>
+    <button style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid #3A2F25; background: rgba(22,18,14,0.92); color: #F3EADB; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #E8692A;"></span>Irmãos</button>
+    <button style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid #3A2F25; background: rgba(22,18,14,0.92); color: #F3EADB; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #3FA27A;"></span>Postos</button>
+    <button style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid #3A2F25; background: rgba(22,18,14,0.92); color: #F3EADB; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #D8A93B;"></span>Sedes</button>
+    <button style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid #3A2F25; background: rgba(22,18,14,0.92); color: #F3EADB; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #7FA6C2;"></span>Lojas</button>
+  </div>
+
+  <!-- Controles laterais -->
+  <div style="position: absolute; top: 172px; right: 16px; display: flex; flex-direction: column; gap: 8px;">
+    <button aria-label="Como apareço no mapa: aproximado" style="width: 48px; height: 56px; border-radius: 14px; border: 1px solid #322920; background: rgba(22,18,14,0.94); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 0; color: #F3EADB;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8692A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.3px; color: #B8A890;">APROX.</span>
+    </button>
+    <button aria-label="Camadas do mapa" style="width: 48px; height: 48px; border-radius: 14px; border: 1px solid #322920; background: rgba(22,18,14,0.94); display: grid; place-items: center; padding: 0;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F3EADB" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"></path><path d="M3 13l9 5 9-5"></path></svg>
+    </button>
+    <button aria-label="Minha localização" style="width: 48px; height: 48px; border-radius: 14px; border: 1px solid #322920; background: rgba(22,18,14,0.94); display: grid; place-items: center; padding: 0;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F3EADB" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2" fill="#F3EADB"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>
+    </button>
+  </div>
+
+  <!-- Pinos -->
+  <div style="position: absolute; left: 132px; top: 236px; display: flex; flex-direction: column; align-items: center;">
+    <span style="width: 44px; height: 44px; border-radius: 50%; background: #2A2219; border: 3px solid #E8692A; box-shadow: 0 0 0 3px rgba(11,9,7,0.8); display: grid; place-items: center; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 15px;">ZÉ</span>
+    <span style="margin-top: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(11,9,7,0.85); font-size: 12px; font-weight: 600;">Zé · café</span>
+  </div>
+  <div style="position: absolute; left: 214px; top: 186px; width: 40px; height: 40px; border-radius: 12px; background: #1F1A14; border: 2px solid #D8A93B; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D8A93B" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6 8 6v8H4z"></path><path d="M10 19v-5h4v5"></path></svg>
+  </div>
+  <div style="position: absolute; left: 286px; top: 318px; display: flex; flex-direction: column; align-items: center;">
+    <span style="width: 40px; height: 40px; border-radius: 12px; background: #1F1A14; border: 2px solid #3FA27A; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3FA27A" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 20V5a1 1 0 011-1h7a1 1 0 011 1v15"></path><path d="M4 20h11M7 8h5"></path><path d="M14 10h2l2 2v5a1.5 1.5 0 003 0V9l-3-3"></path></svg>
+    </span>
+    <span style="margin-top: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(11,9,7,0.85); font-size: 12px; font-weight: 600;">R$ 6,29</span>
+  </div>
+  <div style="position: absolute; left: 36px; top: 404px; width: 40px; height: 40px; border-radius: 12px; background: #1F1A14; border: 2px solid #7FA6C2; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7FA6C2" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5"></path><path d="M5 9v9M10 9v9M14 9v9M19 9v9M3 20h18"></path></svg>
+  </div>
+
+  <!-- Painel inferior -->
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; background: #16120E; border-top: 1px solid #322920; border-radius: 22px 22px 0 0; box-shadow: 0 -12px 32px rgba(0,0,0,0.5); padding: 10px 16px 0;">
+    <div style="width: 40px; height: 4px; border-radius: 4px; background: #3A2F25; margin: 0 auto 14px;"></div>
+
+    <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
+      <span style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 13px; letter-spacing: 1.6px; color: #B8A890;">NESTA ÁREA</span>
+      <span style="font-size: 14px; color: #B8A890;"><b style="color: #F3EADB;">7</b> irmãos · <b style="color: #F3EADB;">2</b> sedes · <b style="color: #F3EADB;">14</b> pontos</span>
+    </div>
+
+    <div style="background: #201A15; border: 1px solid #322920; border-radius: 16px; padding: 14px; display: flex; gap: 12px; align-items: center;">
+      <span style="width: 48px; height: 48px; flex: none; border-radius: 12px; background: rgba(216,169,59,0.14); display: grid; place-items: center;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D8A93B" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 8h7v10a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"></path><path d="M12 10h2a2 2 0 010 4h-2"></path><path d="M7 5c0-1 1-2 2-2M10 5c0-1 1-2 2-2"></path></svg>
+      </span>
+      <div style="flex: 1; min-width: 0;">
+        <div style="font-family: 'Barlow Condensed'; font-weight: 600; font-size: 12px; letter-spacing: 1.4px; color: #D8A93B;">ÁGAPE RELÂMPAGO · TERMINA EM 1H20</div>
+        <div style="font-size: 17px; font-weight: 600; margin-top: 2px;">Zé no Posto Trevo</div>
+        <div style="font-size: 14px; color: #B8A890; margin-top: 1px;">4 km · 3 irmãos confirmados</div>
+      </div>
+      <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #E8692A; color: #0B0907; font-size: 16px; font-weight: 700;">Vou</button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px;">
+      <button style="height: 52px; border-radius: 14px; border: 1px solid #322920; background: #201A15; color: #F3EADB; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 600;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3FA27A" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 20V5a1 1 0 011-1h7a1 1 0 011 1v15"></path><path d="M4 20h11M7 8h5"></path><path d="M14 10h2l2 2v5a1.5 1.5 0 003 0V9l-3-3"></path></svg>
+        Posto mais próximo
+      </button>
+      <button style="height: 52px; border-radius: 14px; border: 1px solid #322920; background: #201A15; color: #F3EADB; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 600;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3FA27A" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M6 20c0-6 12-6 12-12"></path><circle cx="6" cy="20" r="1.5"></circle><circle cx="18" cy="5" r="2.5"></circle></svg>
+        Posto na rota
+      </button>
+    </div>
+
+    <!-- Barra de abas -->
+    <nav aria-label="Navegação principal" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 12px -16px 0; padding: 8px 4px 26px; border-top: 1px solid #262019;">
+      <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #E8692A; min-height: 48px; justify-content: center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg>
+        <span style="font-size: 13px; font-weight: 600;">Mapa</span>
+      </a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #9C8D77; min-height: 48px; justify-content: center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M4 15l4.5-4 4 3.5L16 11l4 3.5"></path></svg>
+        <span style="font-size: 13px; font-weight: 500;">Feed</span>
+      </a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #9C8D77; min-height: 48px; justify-content: center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><circle cx="9" cy="15" r="1"></circle><circle cx="15" cy="15" r="1"></circle></svg>
+        <span style="font-size: 13px; font-weight: 500;">Passeios</span>
+      </a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #9C8D77; min-height: 48px; justify-content: center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19l1-5.8L3.5 9.2l5.9-.9z"></path></svg>
+        <span style="font-size: 13px; font-weight: 500;">Conquistas</span>
+      </a>
+      <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #9C8D77; min-height: 48px; justify-content: center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M5 13a7 7 0 0114 0v1H5z"></path><path d="M5 11h14"></path><path d="M8 14v3.5A2.5 2.5 0 0010.5 20h3a2.5 2.5 0 002.5-2.5V14"></path></svg>
+        <span style="font-size: 13px; font-weight: 500;">Perfil</span>
+      </a>
+    </nav>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
