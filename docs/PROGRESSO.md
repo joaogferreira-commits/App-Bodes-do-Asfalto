@@ -25,6 +25,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 - 11/11/2026 — Dono instalou Android Studio + DHU e preparou o celular (depuração USB, Android Auto em modo desenvolvedor com fontes desconhecidas). Roteiro do teste em `docs/TESTE_ETAPA0.md`. As duas builds estavam em fila (IN_QUEUE) às 18:18 UTC — fila do plano grátis.
 - 11/11/2026 — Builds 1 e 2 falharam na etapa "Bundle JavaScript": o teste `telas.test.tsx` estava dentro de `src/app/` e o Expo Router o tratou como tela (puxando a biblioteca de testes para o app). Corrigido: testes de tela ficam em `src/__tests__/`. O CI agora roda `expo export` para pegar esse tipo de erro antes do EAS. Build 3 pedida (fbd1b759).
 - 11/11/2026 — Build 3 também falhou (fase ainda desconhecida). O GitHub Actions ficou parado (fila sem iniciar por 8+ min, aviso de instabilidade do GitHub), então pedi ao dono o texto do erro na página do Expo.
+- 11/11/2026 — Build 3: o JavaScript empacotou; a compilação Android passou pelo MapLibre e começou o Google Navigation SDK, mas o Gradle morreu por falta de memória (servidor grátis do EAS). Correção: só arm64-v8a, Gradle com 4 GB, 2 tarefas, sem paralelo (plugin `withNavegacaoGoogle`). Aviso falso do expo-doctor sobre o SDK do Google silenciado em package.json. Build 4 pedida.
 
 ## Falta nesta etapa
 

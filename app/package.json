@@ -72,5 +72,14 @@
     "testMatch": [
       "**/?(*.)+(test).[jt]s?(x)"
     ]
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@googlemaps/react-native-navigation-sdk"
+        ]
+      }
+    }
   }
 }

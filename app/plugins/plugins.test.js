@@ -1,4 +1,4 @@
-const { comDesugaring } = require('./withNavegacaoGoogle');
+const { comDesugaring, comPropriedades } = require('./withNavegacaoGoogle');
 
 const gradle = `apply plugin: "com.android.application"
 android {
@@ -14,6 +14,19 @@ describe('withNavegacaoGoogle', () => {
     const r = comDesugaring(gradle);
     expect(r).toContain('coreLibraryDesugaringEnabled true');
     expect(r).toContain('desugar_jdk_libs_nio:2.1.5');
+  });
+
+  it('ajusta o Gradle para caber na memória do EAS e mantém o Jetifier', () => {
+    const base = [
+      { type: 'property', key: 'reactNativeArchitectures', value: 'armeabi-v7a,arm64-v8a,x86,x86_64' },
+      { type: 'property', key: 'newArchEnabled', value: 'true' },
+    ];
+    const r = Object.fromEntries(comPropriedades(comPropriedades(base)).map((p) => [p.key, p.value]));
+    expect(r.reactNativeArchitectures).toBe('arm64-v8a');
+    expect(r['android.enableJetifier']).toBe('true');
+    expect(r['org.gradle.workers.max']).toBe('2');
+    expect(r.newArchEnabled).toBe('true');
+    expect(comPropriedades(comPropriedades(base))).toHaveLength(6);
   });
 
   it('não duplica se rodar duas vezes', () => {
