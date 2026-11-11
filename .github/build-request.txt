@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
 perfil=preview
-pedido=4 (build mais leve: so arm64)
+pedido=5 (repete a 4 depois da pane do GitHub)
