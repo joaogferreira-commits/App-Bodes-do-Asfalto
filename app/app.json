@@ -47,7 +47,8 @@
           }
         }
       ],
-      "./plugins/withNavegacaoGoogle"
+      "./plugins/withNavegacaoGoogle",
+      "./plugins/withAndroidAuto"
     ],
     "owner": "joaogferreira",
     "scheme": "bodesdoasfalto",

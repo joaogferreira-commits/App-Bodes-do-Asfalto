@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
 perfil=preview
-pedido=1 (prova de navegacao Google)
+pedido=2 (navegacao + mapa + Android Auto)
