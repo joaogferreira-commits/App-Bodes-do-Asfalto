@@ -5,12 +5,12 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 ## Situação atual
 
 - **Etapa:** 0 — Prova técnica e portões (não iniciada)
-- **Última atualização:** —
-- **Próxima tarefa:** apresentar o plano da Etapa 0 e aguardar o OK
+- **Última atualização:** 11/11/2026
+- **Próxima tarefa:** aguardar respostas do dono às perguntas de 11/11 e o OK do plano da Etapa 0
 
 ## Feito
 
-_(vazio)_
+- 11/11/2026 — `.claude/settings.json` criado; especificação renomeada para `docs/ESPECIFICACAO.md`; `settings.json` da raiz removido (movido para `.claude/`).
 
 ## Falta nesta etapa
 
@@ -22,7 +22,7 @@ _(data — decisão — motivo)_
 
 ## Problemas em aberto / aguardando o dono do projeto
 
-_(o que está bloqueado e o que é preciso dele)_
+- 11/11/2026 — Perguntas enviadas ao dono antes da Etapa 0 (contradições entre CLAUDE.md, ETAPAS.md, DESIGN.md e a atualização de 11/11 da especificação): mapa/navegação (Mapbox × Google + MapLibre + Valhalla); navegação curva a curva grátis × Premium; contas em CPF × empresa; CarPlay espera ou não; teto de custo (R$ 200 × R$ 500); limite do avatar por IA; revisão de segurança externa; anúncios e aviso de rastreamento do iPhone; caminho das imagens (A ou B).
 
 ## Contas e chaves configuradas
 
