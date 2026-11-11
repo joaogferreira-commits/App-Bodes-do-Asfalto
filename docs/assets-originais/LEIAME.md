@@ -16,13 +16,17 @@ Coloque aqui os PNGs gerados (nomes em docs/DESIGN.md, seção 5). O agente conv
 | lote-08.webp | 8 | nivel-bode-velho, nivel-bode-lendario |
 | lote-09.webp | 9 | selo-agape, selo-socorro-fraterno |
 | lote-10.webp | 10 | selo-pantanal, selo-visita-lojas (com esquadro e compasso: **mantido por decisão do dono em 11/11/2026**) |
-| lote-11-antigo.webp | 11 | selo-irmao-na-rota, selo-sedes-mt — fora do estilo, guardado só como referência; **refazer** |
+| lote-11.webp | 11 | selo-irmao-na-rota, selo-sedes-mt (refeito, ok) |
+| lote-12.webp | 12 | moto-custom, moto-touring |
+| lote-13.webp | 13 | moto-big-trail, moto-naked |
+| lote-14.webp | 14 | moto-esportiva, moto-street |
+| lote-15.webp | 15 | moto-trail, moto-scooter |
 | lote-17.webp | 17 | referência dos ícones da barra (serão redesenhados em vetor) |
 | extra-icones-compositor.webp | extra | referência: fotos, rota, moto de frente (vetor) |
 | lote-18.webp | 18 | ilustra-vazio-estrada, ilustra-primeira-viagem (vieram em retrato; aproveitáveis) |
 | lote-19.webp | 19 | ilustra-sem-sinal |
 
-Pendentes: refazer lotes 11 a 16 (fora do estilo); gerar lotes 20 a 26.
+Pendentes: lote 16 (triciclo e Bodinho) e lotes 20 a 26.
 
 ## LOG de geração (Caminho B)
 
