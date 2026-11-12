@@ -12,9 +12,11 @@ import { Avatar, Cartao, Texto } from '@/ui';
 /** Posts que o irmão salvou para ver depois (marcador no feed). */
 export default function Salvos() {
   const { t } = useTranslation();
-  const { salvos, posts } = useMeusPosts();
+  const { salvos, posts, postsServidor } = useMeusPosts();
   const itens = salvos
     .map((id) => {
+      const srv = postsServidor.find((p) => p.id === id);
+      if (srv) return { id, autor: srv.autorNome, texto: srv.texto };
       const meu = posts.find((p) => p.id === id);
       if (meu) return { id, autor: t('perfil.voce'), texto: meu.texto };
       const p = postsExemplo.find((x) => x.id === id);

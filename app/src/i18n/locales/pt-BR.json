@@ -392,7 +392,20 @@
     "compartilharTexto": "Olha o que rolou no Bodes do Asfalto! Baixe o app do clube.",
     "salvar": "Salvar post",
     "salvo": "Post salvo (tocar para tirar)",
-    "verSeuStory": "Ver seu story"
+    "verSeuStory": "Ver seu story",
+    "denunciarPergunta": "Denunciar este conteúdo?",
+    "denunciarExplica": "A moderação vai analisar. Você não precisa explicar mais nada.",
+    "denunciarConfirmar": "Denunciar",
+    "motivoPadrao": "Conteúdo inadequado (denúncia feita pelo app)",
+    "bloquearPergunta": "Bloquear {{nome}}?",
+    "bloquearExplica": "Vocês deixam de ver o que o outro publica. Dá para desfazer depois, no perfil.",
+    "bloquearConfirmar": "Bloquear",
+    "erroAcao": "Não deu certo agora. Tente de novo em instantes.",
+    "vazioTitulo": "Ainda não tem nada por aqui",
+    "vazioTexto": "Seja o primeiro a contar uma viagem para os irmãos.",
+    "vazioAcao": "Publicar o primeiro post",
+    "erroCarregar": "Não consegui carregar o feed. Puxe para baixo para tentar de novo.",
+    "enqueteOpcao": "Opção: {{texto}}"
   },
   "passeios": {
     "exemplo": "Passeios de exemplo até a agenda real dos capítulos.",

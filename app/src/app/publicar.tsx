@@ -48,13 +48,21 @@ export default function Publicar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const enviar = () => {
+  const enviar = async () => {
     if (ehEnquete && (!texto.trim() || opcoesValidas.length < 2))
       return Alert.alert(t('publicar.enqueteFalta'));
     if (!texto.trim() && !foto) return Alert.alert(t('publicar.vazio'));
     const enquete = ehEnquete ? opcoesValidas : undefined;
     if (existente) editar(existente.id, { texto: texto.trim(), foto, visibilidade: vis, enquete });
-    else publicar({ texto: texto.trim(), foto, visibilidade: vis, enquete });
+    else {
+      setCarregando(true);
+      try {
+        await publicar({ texto: texto.trim(), foto, visibilidade: vis, enquete });
+      } catch {
+        setCarregando(false);
+        return Alert.alert(t('feed.erroAcao'));
+      }
+    }
     router.back();
   };
 
@@ -154,7 +162,8 @@ export default function Publicar() {
         titulo={existente ? t('publicar.salvar') : t('publicar.publicar')}
         grande
         icone="check"
-        onPress={enviar}
+        desativado={carregando}
+        onPress={() => void enviar()}
       />
     </TelaFerramenta>
   );

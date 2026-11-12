@@ -392,7 +392,20 @@
     "compartilharTexto": "Check out what happened at Bodes do Asfalto! Get the club app.",
     "salvar": "Save post",
     "salvo": "Post saved (tap to remove)",
-    "verSeuStory": "See your story"
+    "verSeuStory": "See your story",
+    "denunciarPergunta": "Report this content?",
+    "denunciarExplica": "Moderators will review it. You do not need to explain anything else.",
+    "denunciarConfirmar": "Report",
+    "motivoPadrao": "Inappropriate content (reported from the app)",
+    "bloquearPergunta": "Block {{nome}}?",
+    "bloquearExplica": "You will both stop seeing what the other posts. You can undo it later, in the profile.",
+    "bloquearConfirmar": "Block",
+    "erroAcao": "That did not work right now. Please try again in a moment.",
+    "vazioTitulo": "Nothing here yet",
+    "vazioTexto": "Be the first to tell the brothers about a ride.",
+    "vazioAcao": "Publish the first post",
+    "erroCarregar": "I could not load the feed. Pull down to try again.",
+    "enqueteOpcao": "Option: {{texto}}"
   },
   "passeios": {
     "exemplo": "Sample rides until the chapters' real calendar.",

@@ -54,6 +54,7 @@ export default function NovoStory() {
   const [modo, setModo] = useState<'picture' | 'video'>('picture');
   const [conteudo, setConteudo] = useState<ConteudoStory | null>(null);
   const [aba, setAba] = useState<Aba>('filtros');
+  const [enviando, setEnviando] = useState(false);
   const [desenhando, setDesenhando] = useState(false);
   const [corTraco, setCorTraco] = useState<string>('#E8692A');
   const [espessura, setEspessura] = useState(10);
@@ -662,9 +663,15 @@ export default function NovoStory() {
           titulo={t('story.publicar')}
           grande
           icone="check"
+          desativado={enviando}
           onPress={() => {
-            publicarStory(conteudo);
-            router.back();
+            setEnviando(true);
+            Promise.resolve(publicarStory(conteudo))
+              .then(() => router.back())
+              .catch(() => {
+                setEnviando(false);
+                Alert.alert(t('feed.erroAcao'));
+              });
           }}
         />
       </SafeAreaView>

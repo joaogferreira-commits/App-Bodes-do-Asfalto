@@ -19,9 +19,11 @@ const DURACAO_VIDEO = 60000;
 export default function Story() {
   const { t } = useTranslation();
   const { de } = useLocalSearchParams<{ de: string }>();
-  const { stories, apagarStory } = useMeusPosts();
+  const { stories, apagarStory, storiesDeOutros } = useMeusPosts();
   const meu = de === 'meu' ? stories[0] : undefined;
-  const ex = de !== 'meu' ? exemplos[Number(de)] : undefined;
+  // story de outro irmão no servidor: de=srv:<id>
+  const outro = de?.startsWith('srv:') ? storiesDeOutros.find((x) => x.id === de.slice(4)) : undefined;
+  const ex = de !== 'meu' && !outro && !de?.startsWith('srv:') ? exemplos[Number(de)] : undefined;
   const [progresso] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
@@ -35,8 +37,8 @@ export default function Story() {
     return () => anim.stop();
   }, [progresso, meu]);
 
-  const foto = meu ? { uri: meu.foto } : ex?.imagem;
-  const nome = meu ? t('perfil.voce') : (ex?.nome ?? '');
+  const foto = meu ? { uri: meu.foto } : outro ? { uri: outro.conteudo.uri } : ex?.imagem;
+  const nome = meu ? t('perfil.voce') : (outro?.autor ?? ex?.nome ?? '');
   const legenda = meu ? meu.legenda : (ex?.legenda ?? '');
   if (!foto) return null;
 
@@ -48,9 +50,9 @@ export default function Story() {
         onPress={() => router.back()}
         style={StyleSheet.absoluteFill}
       >
-        {meu?.conteudo ? (
+        {(meu ?? outro)?.conteudo ? (
           <View style={StyleSheet.absoluteFill} accessible accessibilityLabel={legenda || nome}>
-            <StoryCena c={meu.conteudo} votavel />
+            <StoryCena c={(meu?.conteudo ?? outro?.conteudo)!} votavel />
           </View>
         ) : (
           <Image

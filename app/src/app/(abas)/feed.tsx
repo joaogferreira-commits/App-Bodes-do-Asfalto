@@ -12,8 +12,10 @@ import { postsExemplo, stories, type Post } from '@/dados/feed';
 import { passeiosExemplo } from '@/dados/passeios';
 import { useAgapes } from '@/estado/agapes';
 import { useMeusPosts } from '@/estado/meusPosts';
+import { useModeracao } from '@/feed/moderacao';
+import type { PostServidor } from '@/servidor/feed';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
-import { Avatar, Botao, Cartao, Icone, pinos, Texto, type NomeIcone } from '@/ui';
+import { Avatar, Botao, Cartao, EstadoVazio, Icone, pinos, Texto, type NomeIcone } from '@/ui';
 
 const ferramentas: { chave: string; icone: NomeIcone }[] = [
   { chave: 'foto', icone: 'camera' },
@@ -38,32 +40,42 @@ export default function Feed() {
     else if (chave === 'evento') router.push('/ferramentas/agape');
     else emBreve();
   };
-  const posts: Post[] = [
-    ...meus.posts.map<Post>((m) => ({
-      id: m.id,
-      tipo: 'meu',
-      autor: { nome: t('perfil.voce'), capitulo: 'Cuiabá', status: 'aberto' },
-      quando: t('feed.agora'),
-      meu: m,
-    })),
-    ...agapes
-      .filter((a) => a.id !== agapeExemplo.id)
-      .map<Post>((a) => ({
-        id: a.id,
-        tipo: 'agape',
-        autor: { nome: a.organizador, capitulo: 'Cuiabá', status: 'aberto' },
-        quando: t('feed.agora'),
-        agape: a,
-      })),
-    ...postsExemplo,
-  ];
+  const real = meus.servidor;
+  const posts: Post[] = real
+    ? []
+    : [
+        ...meus.posts.map<Post>((m) => ({
+          id: m.id,
+          tipo: 'meu',
+          autor: { nome: t('perfil.voce'), capitulo: 'Cuiabá', status: 'aberto' },
+          quando: t('feed.agora'),
+          meu: m,
+        })),
+        ...agapes
+          .filter((a) => a.id !== agapeExemplo.id)
+          .map<Post>((a) => ({
+            id: a.id,
+            tipo: 'agape',
+            autor: { nome: a.organizador, capitulo: 'Cuiabá', status: 'aberto' },
+            quando: t('feed.agora'),
+            agape: a,
+          })),
+        ...postsExemplo,
+      ];
 
   const cabecalho = (
     <View style={{ gap: espaco.md }}>
       {/* Sem o título "Feed" (pedido do dono): a aba já diz onde o irmão está. */}
-      <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
-        {t('feed.exemplo')}
-      </Texto>
+      {!real && (
+        <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
+          {t('feed.exemplo')}
+        </Texto>
+      )}
+      {real && meus.falhaServidor && (
+        <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
+          {t('feed.erroCarregar')}
+        </Texto>
+      )}
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={estilos.stories}>
         <Pressable
@@ -95,7 +107,26 @@ export default function Feed() {
             {t('feed.seuStory')}
           </Texto>
         </Pressable>
-        {stories.map((s, i) => (
+        {real &&
+          meus.storiesDeOutros
+            .filter((x, i, l) => l.findIndex((y) => y.autorId === x.autorId) === i)
+            .map((s) => (
+              <Pressable
+                key={s.id}
+                accessibilityRole="button"
+                accessibilityLabel={t('feed.storyDe', { nome: s.autor })}
+                onPress={() => router.push(`/story?de=srv:${s.id}`)}
+                style={estilos.story}
+              >
+                <View style={[estilos.anelStory, { borderColor: cores.acao }]}>
+                  <Avatar nome={s.autor} status="nenhum" tamanho={58} />
+                </View>
+                <Texto variante="pequeno" numberOfLines={1}>
+                  {s.autor.split(' ')[0]}
+                </Texto>
+              </Pressable>
+            ))}
+        {(real ? [] : stories).map((s, i) => (
           <Pressable
             key={s.nome}
             accessibilityRole="button"
@@ -151,14 +182,173 @@ export default function Feed() {
 
   return (
     <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
-      <FlatList
-        data={posts}
+      <FlatList<Post | PostServidor>
+        data={real ? meus.postsServidor : posts}
         keyExtractor={(p) => p.id}
         ListHeaderComponent={cabecalho}
         contentContainerStyle={{ gap: espaco.md, paddingBottom: espaco.xxxl }}
-        renderItem={({ item }) => <CartaoPost post={item} />}
+        renderItem={({ item }) =>
+          'tipo' in item ? <CartaoPost post={item} /> : <CartaoServidor post={item} />
+        }
+        refreshing={real && meus.carregandoServidor}
+        onRefresh={real ? () => void meus.recarregar() : undefined}
+        onEndReached={real ? () => void meus.carregarMais() : undefined}
+        onEndReachedThreshold={0.5}
+        ListEmptyComponent={
+          real && !meus.carregandoServidor && !meus.falhaServidor ? (
+            <EstadoVazio ilustracao="estrada" titulo={t('feed.vazioTitulo')} texto={t('feed.vazioTexto')}>
+              <Botao
+                titulo={t('feed.vazioAcao')}
+                icone="mais"
+                grande
+                onPress={() => router.push('/publicar')}
+              />
+            </EstadoVazio>
+          ) : (
+            <View />
+          )
+        }
       />
     </SafeAreaView>
+  );
+}
+
+/** Quando o post foi feito: "agora" no primeiro minuto, depois a data no idioma do aparelho. */
+function quandoDe(iso: string, agora: string) {
+  const dif = Date.now() - Date.parse(iso);
+  return dif < 60000 ? agora : new Date(iso).toLocaleDateString();
+}
+
+/** Post real do servidor (feed ligado ao Supabase). */
+function CartaoServidor({ post }: { post: PostServidor }) {
+  const { t } = useTranslation();
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
+  const loja = useMeusPosts();
+  const { confirmarDenuncia, confirmarBloqueio } = useModeracao();
+  const opcoes = () =>
+    post.meu
+      ? Alert.alert(t('feed.opcoes'), undefined, [
+          {
+            text: t('publicar.excluir'),
+            style: 'destructive',
+            onPress: () =>
+              Alert.alert(t('publicar.excluirPergunta'), undefined, [
+                { text: t('comum.cancelar'), style: 'cancel' },
+                { text: t('publicar.excluir'), style: 'destructive', onPress: () => loja.excluir(post.id) },
+              ]),
+          },
+          { text: t('comum.cancelar'), style: 'cancel' },
+        ])
+      : Alert.alert(t('feed.opcoes'), undefined, [
+          { text: t('feed.denunciar'), onPress: () => confirmarDenuncia('post', post.id) },
+          {
+            text: t('feed.bloquear', { nome: post.autorNome }),
+            style: 'destructive',
+            onPress: () => confirmarBloqueio(post.autorId, post.autorNome),
+          },
+          { text: t('comum.cancelar'), style: 'cancel' },
+        ]);
+  return (
+    <View style={estilos.post}>
+      <View style={[estilos.linha, { paddingHorizontal: espaco.md }]}>
+        <Avatar nome={post.autorNome} status="nenhum" tamanho={44} />
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <Texto variante="corpoForte" numberOfLines={1}>
+            {post.meu ? t('perfil.voce') : post.autorNome}
+          </Texto>
+          <Texto variante="pequeno" numberOfLines={1}>
+            {t('feed.capituloQuando', {
+              capitulo: post.capitulo ?? '',
+              quando: quandoDe(post.criadoEm, t('feed.agora')),
+            })}
+          </Texto>
+        </View>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('feed.opcoes')}
+          onPress={opcoes}
+          hitSlop={8}
+          style={estilos.botaoMais}
+        >
+          <Icone nome="opcoes" tamanho={26} cor={cores.textoSec} espessura={3} />
+        </Pressable>
+      </View>
+      {!!post.texto && (
+        <Texto style={[estilos.textoPost, post.enquete && { fontFamily: fontes.textoSemi }]}>
+          {post.texto}
+        </Texto>
+      )}
+      {post.enquete && (
+        <View style={{ paddingHorizontal: espaco.md, gap: espaco.xs }}>
+          {post.enquete.map((o) => (
+            <View
+              key={o}
+              accessible
+              accessibilityLabel={t('feed.enqueteOpcao', { texto: o })}
+              style={[estilos.opcao, { borderColor: cores.linha }]}
+            >
+              <Texto style={{ flex: 1, fontFamily: fontes.textoMedio }}>{o}</Texto>
+            </View>
+          ))}
+        </View>
+      )}
+      {post.fotos.map((uri) => (
+        <Image
+          key={uri}
+          source={{ uri }}
+          style={estilos.imagem}
+          contentFit="cover"
+          accessibilityLabel={t('feed.foto')}
+        />
+      ))}
+      <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
+        {t(`publicar.vis.${post.visibilidade}`)}
+      </Texto>
+      <View style={estilos.acoes}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityState={{ selected: post.euDeiTfa }}
+          accessibilityLabel={t('feed.tfaRotulo', { n: post.tfa })}
+          onPress={() => void loja.alternarTfa(post.id).catch(() => Alert.alert(t('feed.erroAcao')))}
+          style={[
+            estilos.acao,
+            post.euDeiTfa && { backgroundColor: cores.superficie3, borderColor: cores.acao },
+          ]}
+        >
+          <Icone nome="aceno" tamanho={22} cor={post.euDeiTfa ? cores.acao : cores.texto} />
+          <Texto style={[estilos.textoAcao, post.euDeiTfa && { color: cores.acao }]}>
+            {t('feed.tfa', { n: post.tfa })}
+          </Texto>
+        </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('feed.comentarios', { n: post.comentarios })}
+          onPress={() => router.push(`/comentarios/${post.id}`)}
+          style={estilos.acao}
+        >
+          <Icone nome="comentario" tamanho={22} />
+          <Texto style={estilos.textoAcao}>{post.comentarios}</Texto>
+        </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={post.salvo ? t('feed.salvo') : t('feed.salvar')}
+          accessibilityState={{ selected: post.salvo }}
+          onPress={() => loja.alternarSalvo(post.id)}
+          style={[estilos.acao, post.salvo && { borderColor: cores.ouro }]}
+        >
+          <Icone nome="salvar" tamanho={22} cor={post.salvo ? cores.ouro : cores.texto} />
+        </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('feed.compartilhar')}
+          onPress={() => void Share.share({ message: t('feed.compartilharTexto') })}
+          style={estilos.acao}
+        >
+          <Icone nome="compartilhar" tamanho={22} />
+        </Pressable>
+      </View>
+    </View>
   );
 }
 
