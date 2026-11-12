@@ -925,7 +925,9 @@
     "mensagemTitulo": "SOS Bodes do Asfalto",
     "rodape": "Sent from the Bodes do Asfalto app. Call 192/193 if serious.",
     "limite": "In this test version, the automatic push alert to the convoy does not exist yet (needs the server). WhatsApp asks for one tap to send.",
-    "estouBem": "I am fine, close"
+    "estouBem": "I am fine, close",
+    "botaoAjuda": "Ask for help (SOS)",
+    "botaoAjudaDica": "Opens the emergency screen: call 192/193, alert your contacts and the brothers."
   },
   "negocios": {
     "titulo": "Business Guide",

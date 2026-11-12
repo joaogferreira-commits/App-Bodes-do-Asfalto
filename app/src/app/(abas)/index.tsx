@@ -20,6 +20,7 @@ import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
 import { filtrar, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } from '@/dados/exemplos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
+import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { FichaMapa } from '@/componentes/FichaMapa';
 import { useGuardado } from '@/estado/guardado';
 import {
@@ -330,6 +331,7 @@ export default function Mapa() {
           ))}
         </ScrollView>
         <View style={estilos.lateral} pointerEvents="box-none">
+          <BotaoSOS flutuante />
           <BotaoIcone
             icone="visivel"
             corIcone={cores.acao}

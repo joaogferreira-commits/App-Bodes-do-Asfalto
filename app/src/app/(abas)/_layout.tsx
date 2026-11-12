@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
+import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { useCores } from '@/theme';
@@ -63,6 +64,13 @@ export default function LayoutAbas() {
         <Tabs.Screen name="conquistas" />
         <Tabs.Screen name="perfil" />
       </Tabs>
+      {/* Pedido de ajuda em todas as abas (no Mapa ele fica na coluna de botões da direita). */}
+      {naoEhMapa && !emMovimento && (
+        <BotaoSOS
+          flutuante
+          style={{ position: 'absolute', right: 16, bottom: 62 + Math.max(bottom, 8) + 16 }}
+        />
+      )}
       {emMovimento && naoEhMapa && (
         // Cobre a tela da aba, mas deixa a barra inferior livre (altura da barra + margem segura).
         <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 62 + Math.max(bottom, 8) }}>
