@@ -36,3 +36,8 @@ As três escrevem propostas em `docs/COMERCIAL.md`; Paulo (Produto) escolhe o qu
 | **Pedro — Lojas** (`lojas`) | Publicação na Apple e no Google | "Isso passa na revisão de primeira?" |
 
 Equilíbrio: Sofia tem poder de veto sobre funções novas que não passem no teste "quem usa e com que frequência". Toda função nova passa por Sofia (cansativo?), Rui (seguro?) e Lia (privado?).
+
+## Modelos por persona (economia de tokens, pedido do dono em 12/11/2026)
+- **Haiku** (mais barato): Paulo (produto), Sofia (simplicidade), Carlos (comunidade), Marcelo (marketing), Vera (vendas), Renata (resultados) — opiniões curtas.
+- **Sonnet** (intermediário): Dora (design), Rui (estrada), Lia (jurídico), Pedro (lojas), Quintino (QA), Otávio (confiabilidade), Mateus (mobile), Bia (backend) — revisão técnica, segurança, LGPD e código.
+- Agente principal: tarefas mecânicas (traduções, textos, buscas amplas, testes simples) vão para subagentes Haiku/Sonnet; o modelo principal fica com arquitetura, banco/segurança e correção de erros difíceis.
