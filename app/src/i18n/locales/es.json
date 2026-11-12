@@ -1267,5 +1267,23 @@
       "umPorMes": "Ya creaste un desafío este mes. Intenta el próximo.",
       "limiteCapitulo": "El capítulo ya tiene 3 desafíos de hermanos activos. Espera que termine uno."
     }
+  },
+  "aprovacoes": {
+    "titulo": "Aprobar hermanos",
+    "detalhe": "Pedidos de entrada de tu capítulo",
+    "explica": "Revisa las fotos del chaleco y del carnet. Si tienes dudas, llama al hermano antes de decidir.",
+    "carregando": "Cargando pedidos…",
+    "vazio": "Ningún pedido esperando. Avisamos cuando llegue uno nuevo.",
+    "linha": "Capítulo {{capitulo}} · {{cidade}}",
+    "indicadoPor": "Indicado por: {{nome}}",
+    "fotoColete": "Foto con el chaleco",
+    "fotoCarteirinha": "Foto del carnet",
+    "ligar": "Llamar a {{telefone}}",
+    "motivo": "Motivo (obligatorio para rechazar)",
+    "aprovar": "Aprobar",
+    "recusar": "Rechazar",
+    "motivoFalta": "Escribe el motivo del rechazo. Le llega al hermano.",
+    "erroCarregar": "No se pudieron cargar los pedidos. Revisa la internet.",
+    "erroDecidir": "No se pudo registrar la decisión. Intenta de nuevo."
   }
 }

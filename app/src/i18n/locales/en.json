@@ -1267,5 +1267,23 @@
       "umPorMes": "You already created a challenge this month. Try next month.",
       "limiteCapitulo": "The chapter already has 3 active brother challenges. Wait for one to end."
     }
+  },
+  "aprovacoes": {
+    "titulo": "Approve brothers",
+    "detalhe": "Join requests for your chapter",
+    "explica": "Check the vest and membership card photos. If in doubt, call the brother before deciding.",
+    "carregando": "Loading requests…",
+    "vazio": "No requests waiting. We will let you know when a new one arrives.",
+    "linha": "{{capitulo}} chapter · {{cidade}}",
+    "indicadoPor": "Referred by: {{nome}}",
+    "fotoColete": "Photo with the vest",
+    "fotoCarteirinha": "Membership card photo",
+    "ligar": "Call {{telefone}}",
+    "motivo": "Reason (required to decline)",
+    "aprovar": "Approve",
+    "recusar": "Decline",
+    "motivoFalta": "Write the reason for declining. It is sent to the brother.",
+    "erroCarregar": "Could not load requests. Check your internet.",
+    "erroDecidir": "Could not record the decision. Try again."
   }
 }

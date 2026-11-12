@@ -145,3 +145,54 @@ export async function enviarSolicitacaoServidor(s: {
   });
   if (error) throw error;
 }
+
+export type PedidoParaAprovar = {
+  id: string;
+  nome: string;
+  apelido: string | null;
+  cidade: string;
+  telefone: string;
+  capitulo: string;
+  indicadoPorNome: string | null;
+  criadoEm: string;
+  fotoColete?: string;
+  fotoCarteirinha?: string;
+};
+
+/** Pedidos abertos que ESTE irmão pode decidir (a RLS do banco filtra pelo capítulo/papel). */
+export async function pedidosParaAprovar(): Promise<PedidoParaAprovar[]> {
+  const sb = exigir();
+  const { data, error } = await sb
+    .from('solicitacoes_entrada')
+    .select(
+      'id, nome, apelido, cidade, telefone, indicado_por_nome, criado_em, foto_colete_path, foto_carteirinha_path, capitulos(nome)',
+    )
+    .eq('status', 'aberta')
+    .order('criado_em');
+  if (error) throw error;
+  const assinada = async (caminho: string) =>
+    (await sb.storage.from('entrada').createSignedUrl(caminho, 600)).data?.signedUrl;
+  return Promise.all(
+    (data ?? []).map(async (r) => ({
+      id: r.id as string,
+      nome: r.nome as string,
+      apelido: r.apelido as string | null,
+      cidade: r.cidade as string,
+      telefone: r.telefone as string,
+      capitulo: ((r.capitulos as unknown as { nome?: string } | null)?.nome ?? '') as string,
+      indicadoPorNome: r.indicado_por_nome as string | null,
+      criadoEm: r.criado_em as string,
+      fotoColete: await assinada(r.foto_colete_path as string),
+      fotoCarteirinha: await assinada(r.foto_carteirinha_path as string),
+    })),
+  );
+}
+
+export async function decidirPedido(id: string, aprovar: boolean, motivo?: string) {
+  const { error } = await exigir().rpc('aprovar_solicitacao', {
+    sol: id,
+    aprovar,
+    motivo_recusa: motivo ?? null,
+  });
+  if (error) throw error;
+}

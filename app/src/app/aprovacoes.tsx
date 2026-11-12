@@ -1,0 +1,135 @@
+import { Image } from 'expo-image';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert, Linking, TextInput, View } from 'react-native';
+
+import { TelaFerramenta } from '@/componentes/TelaFerramenta';
+import { decidirPedido, pedidosParaAprovar, type PedidoParaAprovar } from '@/servidor/auth';
+import { espaco, fontes, raios, useCores } from '@/theme';
+import { Botao, Cartao, Texto } from '@/ui';
+
+/**
+ * Fila de pedidos de entrada para diretoria do capítulo, moderadores e admin (a RLS do banco
+ * só devolve o que cada um pode decidir). Fotos do colete e da carteirinha por link temporário.
+ */
+export default function Aprovacoes() {
+  const { t } = useTranslation();
+  const cores = useCores();
+  const [pedidos, setPedidos] = useState<PedidoParaAprovar[] | null>(null);
+  const [motivo, setMotivo] = useState<Record<string, string>>({});
+  const [ocupado, setOcupado] = useState<string | null>(null);
+
+  const carregar = useCallback(async () => {
+    try {
+      setPedidos(await pedidosParaAprovar());
+    } catch {
+      setPedidos([]);
+      Alert.alert(t('aprovacoes.erroCarregar'));
+    }
+  }, [t]);
+
+  useEffect(() => {
+    let vivo = true;
+    void pedidosParaAprovar()
+      .then((p) => vivo && setPedidos(p))
+      .catch(() => vivo && setPedidos([]));
+    return () => {
+      vivo = false;
+    };
+  }, []);
+
+  const decidir = async (p: PedidoParaAprovar, aprovar: boolean) => {
+    if (!aprovar && !(motivo[p.id] ?? '').trim()) return Alert.alert(t('aprovacoes.motivoFalta'));
+    setOcupado(p.id);
+    try {
+      await decidirPedido(p.id, aprovar, aprovar ? undefined : motivo[p.id]!.trim());
+      await carregar();
+    } catch {
+      Alert.alert(t('aprovacoes.erroDecidir'));
+    } finally {
+      setOcupado(null);
+    }
+  };
+
+  return (
+    <TelaFerramenta titulo={t('aprovacoes.titulo')} explicacao={t('aprovacoes.explica')}>
+      {pedidos === null && <Texto variante="secundario">{t('aprovacoes.carregando')}</Texto>}
+      {pedidos?.length === 0 && (
+        <Cartao>
+          <Texto>{t('aprovacoes.vazio')}</Texto>
+        </Cartao>
+      )}
+      {pedidos?.map((p) => (
+        <Cartao key={p.id} style={{ gap: espaco.sm }}>
+          <Texto variante="destaque">
+            {p.nome}
+            {p.apelido ? ` “${p.apelido}”` : ''}
+          </Texto>
+          <Texto variante="secundario">
+            {t('aprovacoes.linha', { capitulo: p.capitulo, cidade: p.cidade })}
+          </Texto>
+          {!!p.indicadoPorNome && <Texto>{t('aprovacoes.indicadoPor', { nome: p.indicadoPorNome })}</Texto>}
+          <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+            {[p.fotoColete, p.fotoCarteirinha].map((u, i) =>
+              u ? (
+                <Image
+                  key={i}
+                  source={{ uri: u }}
+                  style={{
+                    flex: 1,
+                    aspectRatio: 1,
+                    borderRadius: raios.cartao,
+                    backgroundColor: cores.superficie3,
+                  }}
+                  contentFit="cover"
+                  accessibilityLabel={i === 0 ? t('aprovacoes.fotoColete') : t('aprovacoes.fotoCarteirinha')}
+                />
+              ) : null,
+            )}
+          </View>
+          <Botao
+            titulo={t('aprovacoes.ligar', { telefone: p.telefone })}
+            variante="secundario"
+            icone="socorro"
+            onPress={() => void Linking.openURL(`tel:${p.telefone.replace(/\D/g, '')}`)}
+          />
+          <TextInput
+            value={motivo[p.id] ?? ''}
+            onChangeText={(v) => setMotivo((m) => ({ ...m, [p.id]: v.slice(0, 200) }))}
+            placeholder={t('aprovacoes.motivo')}
+            placeholderTextColor={cores.textoSec}
+            accessibilityLabel={t('aprovacoes.motivo')}
+            style={{
+              minHeight: 52,
+              borderWidth: 1,
+              borderColor: cores.linha,
+              borderRadius: raios.botao,
+              paddingHorizontal: espaco.md,
+              color: cores.texto,
+              fontFamily: fontes.texto,
+              fontSize: 17,
+            }}
+          />
+          <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+            <View style={{ flex: 1 }}>
+              <Botao
+                titulo={t('aprovacoes.aprovar')}
+                icone="check"
+                desativado={ocupado === p.id}
+                onPress={() => void decidir(p, true)}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Botao
+                titulo={t('aprovacoes.recusar')}
+                variante="contorno"
+                desativado={ocupado === p.id}
+                onPress={() => void decidir(p, false)}
+              />
+            </View>
+          </View>
+        </Cartao>
+      ))}
+    </TelaFerramenta>
+  );
+}

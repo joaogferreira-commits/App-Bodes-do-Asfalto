@@ -72,7 +72,8 @@ export default function Perfil() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const { avatar } = useAvatar();
-  const { sair } = useAcesso();
+  const acesso = useAcesso();
+  const { sair } = acesso;
   const nivel = nivelDoXp(exemploIrmao.xp);
   const emBreve = () => Alert.alert(t('comum.emBreve'), t('perfil.emBreveCadastro'));
   // O que o irmão cadastrou substitui o exemplo.
@@ -298,6 +299,14 @@ export default function Perfil() {
               detalhe={t(`perfil.mapaModos.${eu.visibilidadeMapa}`)}
               onPress={emBreve}
             />
+            {acesso.aprova && (
+              <LinhaMenu
+                icone="check"
+                titulo={t('aprovacoes.titulo')}
+                detalhe={t('aprovacoes.detalhe')}
+                onPress={() => router.push('/aprovacoes')}
+              />
+            )}
             <LinhaMenu
               icone="socorro"
               titulo={t('perfil.contatos')}

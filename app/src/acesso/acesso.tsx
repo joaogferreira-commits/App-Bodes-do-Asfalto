@@ -62,6 +62,10 @@ type Valor = {
   atualizar: () => Promise<void>;
   /** Erro do último login no servidor (para mostrar ao irmão). */
   erro?: string;
+  /** Papel no servidor (membro, diretoria_capitulo, moderador, admin…). */
+  papel?: string;
+  /** Pode aprovar pedidos de entrada (diretoria, moderação ou admin). */
+  aprova: boolean;
 };
 
 const CHAVE = 'bodes.acesso';
@@ -80,6 +84,7 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
   const [dados, setDados] = useState<Dados | null>(comecar ? { ...inicial, ...comecar } : null);
   const [sessao, setSessao] = useState(0);
   const [erro, setErro] = useState<string>();
+  const [papel, setPapel] = useState<string>();
   const usarServidor = servidorConfigurado && !comecar;
 
   /** Com o Supabase, quem manda no estado é o servidor (o aparelho guarda só o rascunho do pedido). */
@@ -87,6 +92,7 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
     if (!usarServidor) return;
     try {
       const s = await servidor.situacao();
+      setPapel(s.papel);
       const estado = s.estado === 'desativado' ? 'deslogado' : s.estado;
       if (s.estado === 'desativado') await servidor.sairDoServidor();
       setDados((a) => ({ ...(a ?? inicial), estado, email: s.email ?? a?.email }));
@@ -189,8 +195,10 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
       sessao,
       atualizar,
       erro,
+      papel,
+      aprova: ['diretoria_capitulo', 'diretoria_geral', 'moderador', 'admin'].includes(papel ?? ''),
     };
-  }, [dados, sessao, usarServidor, atualizar, erro]);
+  }, [dados, sessao, usarServidor, atualizar, erro, papel]);
 
   return <Contexto.Provider value={valor}>{children}</Contexto.Provider>;
 }

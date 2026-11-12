@@ -1267,5 +1267,23 @@
       "umPorMes": "Você já criou um desafio este mês. Tente no próximo.",
       "limiteCapitulo": "O capítulo já tem 3 desafios de irmãos ativos. Espere um terminar."
     }
+  },
+  "aprovacoes": {
+    "titulo": "Aprovar irmãos",
+    "detalhe": "Pedidos de entrada do seu capítulo",
+    "explica": "Confira as fotos do colete e da carteirinha. Na dúvida, ligue para o irmão antes de decidir.",
+    "carregando": "Carregando pedidos…",
+    "vazio": "Nenhum pedido esperando. Avisamos quando chegar um novo.",
+    "linha": "Capítulo {{capitulo}} · {{cidade}}",
+    "indicadoPor": "Indicado por: {{nome}}",
+    "fotoColete": "Foto com o colete",
+    "fotoCarteirinha": "Foto da carteirinha",
+    "ligar": "Ligar para {{telefone}}",
+    "motivo": "Motivo (obrigatório para recusar)",
+    "aprovar": "Aprovar",
+    "recusar": "Recusar",
+    "motivoFalta": "Escreva o motivo da recusa. Ele chega ao irmão.",
+    "erroCarregar": "Não foi possível carregar os pedidos. Confira a internet.",
+    "erroDecidir": "Não foi possível registrar a decisão. Tente de novo."
   }
 }
