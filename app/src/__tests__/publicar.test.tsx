@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 import Comentarios from '@/app/comentarios/[id]';
 import Publicar from '@/app/publicar';
 import NovoStory from '@/app/story-novo';
-import { ProvedorMeusPosts, useMeusPosts } from '@/estado/meusPosts';
+import { DURACAO_STORY_MS, ProvedorMeusPosts, storiesAtivos, useMeusPosts } from '@/estado/meusPosts';
 import { prepararFoto } from '@/feed/foto';
 
 const parametros: Record<string, string> = { id: 'v1' };
@@ -82,9 +82,6 @@ describe('publicar e comentar', () => {
   });
 
   it('story some depois de 24 horas', () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { storiesAtivos, DURACAO_STORY_MS } =
-      require('@/estado/meusPosts') as typeof import('@/estado/meusPosts');
     const agora = 1_000_000_000_000;
     const l = [
       { id: 'novo', foto: 'a', legenda: '', criadoEm: agora - 1000 },
