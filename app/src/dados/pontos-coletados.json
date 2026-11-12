@@ -1,0 +1,1622 @@
+[
+ {
+  "id": "osm-n416762643",
+  "tipo": "monumento",
+  "nome": "Arrozal",
+  "lat": -14.983762,
+  "lng": -59.928358,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/416762643"
+ },
+ {
+  "id": "osm-n1141149250",
+  "tipo": "cachoeira",
+  "nome": "Salto Maciel",
+  "lat": -14.692698,
+  "lng": -57.803145,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1141149250"
+ },
+ {
+  "id": "osm-n1141149804",
+  "tipo": "cachoeira",
+  "nome": "Salto das Nuvens",
+  "lat": -14.60791,
+  "lng": -57.733791,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1141149804"
+ },
+ {
+  "id": "osm-n1528800680",
+  "tipo": "mirante",
+  "nome": "Mirante Cachoeira Véu de Noiva",
+  "lat": -15.407418,
+  "lng": -55.832616,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1528800680"
+ },
+ {
+  "id": "osm-n1528800947",
+  "tipo": "mirante",
+  "nome": "Mirante do Centro Geodésico da América do Sul",
+  "lat": -15.480074,
+  "lng": -55.687862,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1528800947"
+ },
+ {
+  "id": "osm-n1528800953",
+  "tipo": "mirante",
+  "nome": "Mirante Alto do Céu",
+  "lat": -15.483048,
+  "lng": -55.817241,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1528800953"
+ },
+ {
+  "id": "osm-n1666564377",
+  "tipo": "cachoeira",
+  "nome": "Véu de Noiva",
+  "lat": -15.408881,
+  "lng": -55.832193,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1666564377"
+ },
+ {
+  "id": "osm-n1666564413",
+  "tipo": "cachoeira",
+  "nome": "Cachoeirinha",
+  "lat": -15.406346,
+  "lng": -55.822662,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1666564413"
+ },
+ {
+  "id": "osm-n1782732404",
+  "tipo": "mirante",
+  "nome": "Mirante Natural",
+  "lat": -15.453364,
+  "lng": -55.832116,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1782732404"
+ },
+ {
+  "id": "osm-n1782732441",
+  "tipo": "mirante",
+  "nome": "Mirante Construído",
+  "lat": -15.444879,
+  "lng": -55.821865,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1782732441"
+ },
+ {
+  "id": "osm-n1812982920",
+  "tipo": "cachoeira",
+  "nome": "Cachoeirão",
+  "lat": -12.989018,
+  "lng": -58.957843,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/1812982920"
+ },
+ {
+  "id": "osm-n2479789151",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Juba",
+  "lat": -14.945263,
+  "lng": -57.785916,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2479789151"
+ },
+ {
+  "id": "osm-n2555820548",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Utiariti",
+  "lat": -13.025821,
+  "lng": -58.278185,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2555820548"
+ },
+ {
+  "id": "osm-n2555915749",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Salto Belo",
+  "lat": -13.02421,
+  "lng": -58.187175,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2555915749"
+ },
+ {
+  "id": "osm-n2825544724",
+  "tipo": "monumento",
+  "nome": "Cristo Redentor",
+  "lat": -15.872292,
+  "lng": -52.260038,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2825544724"
+ },
+ {
+  "id": "osm-n2832883339",
+  "tipo": "turistico",
+  "nome": "Escadaria do Cristo - Nível Superior",
+  "lat": -15.872302,
+  "lng": -52.259925,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2832883339"
+ },
+ {
+  "id": "osm-n2832883701",
+  "tipo": "turistico",
+  "nome": "Discoporto",
+  "lat": -15.854211,
+  "lng": -52.269368,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2832883701"
+ },
+ {
+  "id": "osm-n2832889719",
+  "tipo": "turistico",
+  "nome": "Cachoeira Cristal",
+  "lat": -15.719105,
+  "lng": -52.613633,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2832889719"
+ },
+ {
+  "id": "osm-n2832905998",
+  "tipo": "turistico",
+  "nome": "Cachoeira Bateia RPPN ECOMETA 2",
+  "lat": -15.722057,
+  "lng": -52.526213,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2832905998"
+ },
+ {
+  "id": "osm-n2832919423",
+  "tipo": "turistico",
+  "nome": "Gruta do Pezinho",
+  "lat": -15.841347,
+  "lng": -52.280603,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2832919423"
+ },
+ {
+  "id": "osm-n2834837783",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Pé da Serra",
+  "lat": -15.871964,
+  "lng": -52.253426,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2834837783"
+ },
+ {
+  "id": "osm-n2834837785",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Usina",
+  "lat": -15.870634,
+  "lng": -52.252752,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2834837785"
+ },
+ {
+  "id": "osm-n2992689263",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Serra Azul",
+  "lat": -14.474925,
+  "lng": -55.640222,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/2992689263"
+ },
+ {
+  "id": "osm-n3218034655",
+  "tipo": "cachoeira",
+  "nome": "Salto das Andorinhas",
+  "lat": -10.166465,
+  "lng": -59.457365,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3218034655"
+ },
+ {
+  "id": "osm-n3309415613",
+  "tipo": "monumento",
+  "nome": "Estátua de Maria Taquara",
+  "lat": -15.600906,
+  "lng": -56.096423,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3309415613"
+ },
+ {
+  "id": "osm-n3663050223",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Desastre",
+  "lat": -10.561799,
+  "lng": -58.416992,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3663050223"
+ },
+ {
+  "id": "osm-n3663050525",
+  "tipo": "cachoeira",
+  "nome": "Corredeiras de Santa Rosa",
+  "lat": -10.618622,
+  "lng": -58.09585,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3663050525"
+ },
+ {
+  "id": "osm-n3899572173",
+  "tipo": "turistico",
+  "nome": "Nascente do Rio Paraguai",
+  "lat": -14.626991,
+  "lng": -56.501646,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3899572173"
+ },
+ {
+  "id": "osm-n3900795351",
+  "tipo": "turistico",
+  "nome": "Gruta da Lagoa Azul",
+  "lat": -14.588,
+  "lng": -55.96675,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3900795351"
+ },
+ {
+  "id": "osm-n3955939471",
+  "tipo": "cachoeira",
+  "nome": "Salto Augusto",
+  "lat": -8.884204,
+  "lng": -58.55636,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3955939471"
+ },
+ {
+  "id": "osm-n3955939501",
+  "tipo": "cachoeira",
+  "nome": "Salto Augusto",
+  "lat": -8.887162,
+  "lng": -58.554333,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/3955939501"
+ },
+ {
+  "id": "osm-n4222415540",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Sete Quedas",
+  "lat": -16.312106,
+  "lng": -52.724536,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4222415540"
+ },
+ {
+  "id": "osm-n4525509386",
+  "tipo": "mirante",
+  "nome": "Mirante da Cachoeira da Fumaça",
+  "lat": -15.084637,
+  "lng": -52.791135,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4525509386"
+ },
+ {
+  "id": "osm-n4579470830",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira dos Namorados",
+  "lat": -15.407652,
+  "lng": -55.822624,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4579470830"
+ },
+ {
+  "id": "osm-n4579470854",
+  "tipo": "mirante",
+  "nome": "Mirante Penhasco II",
+  "lat": -15.480514,
+  "lng": -55.758916,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4579470854"
+ },
+ {
+  "id": "osm-n4579470858",
+  "tipo": "mirante",
+  "nome": "Mirante Penhasco",
+  "lat": -15.48015,
+  "lng": -55.757543,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4579470858"
+ },
+ {
+  "id": "osm-n4579844577",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Serra Azul",
+  "lat": -14.495626,
+  "lng": -55.705289,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4579844577"
+ },
+ {
+  "id": "osm-n4579845607",
+  "tipo": "mirante",
+  "nome": "Tirolesa",
+  "lat": -14.494267,
+  "lng": -55.705067,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4579845607"
+ },
+ {
+  "id": "osm-n4710991054",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Marimbondo",
+  "lat": -15.433008,
+  "lng": -55.719699,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4710991054"
+ },
+ {
+  "id": "osm-n4886528709",
+  "tipo": "mirante",
+  "nome": "Morro dos Ventos",
+  "lat": -15.484226,
+  "lng": -55.746367,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4886528709"
+ },
+ {
+  "id": "osm-n4893546153",
+  "tipo": "cachoeira",
+  "nome": "Independência",
+  "lat": -15.414316,
+  "lng": -55.84636,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546153"
+ },
+ {
+  "id": "osm-n4893546154",
+  "tipo": "cachoeira",
+  "nome": "Andorinha",
+  "lat": -15.414504,
+  "lng": -55.845652,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546154"
+ },
+ {
+  "id": "osm-n4893546155",
+  "tipo": "cachoeira",
+  "nome": "Prainha",
+  "lat": -15.416048,
+  "lng": -55.843058,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546155"
+ },
+ {
+  "id": "osm-n4893546156",
+  "tipo": "cachoeira",
+  "nome": "Degraus",
+  "lat": -15.41627,
+  "lng": -55.842783,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546156"
+ },
+ {
+  "id": "osm-n4893546157",
+  "tipo": "cachoeira",
+  "nome": "Pulo",
+  "lat": -15.41662,
+  "lng": -55.84154,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546157"
+ },
+ {
+  "id": "osm-n4893546158",
+  "tipo": "cachoeira",
+  "nome": "7 de Setembro",
+  "lat": -15.418878,
+  "lng": -55.839871,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4893546158"
+ },
+ {
+  "id": "osm-n4923074419",
+  "tipo": "monumento",
+  "nome": "Tuiuiú",
+  "lat": -16.250832,
+  "lng": -56.630457,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4923074419"
+ },
+ {
+  "id": "osm-n4927621429",
+  "tipo": "monumento",
+  "nome": "Estátua da Liberdade",
+  "lat": -15.632029,
+  "lng": -56.117168,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/4927621429"
+ },
+ {
+  "id": "osm-n5054452871",
+  "tipo": "turistico",
+  "nome": "Poço das Antas",
+  "lat": -15.313819,
+  "lng": -55.852695,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5054452871"
+ },
+ {
+  "id": "osm-n5054452898",
+  "tipo": "turistico",
+  "nome": "Poço da Esmeralda",
+  "lat": -15.317097,
+  "lng": -55.86457,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5054452898"
+ },
+ {
+  "id": "osm-n5061366859",
+  "tipo": "turistico",
+  "nome": "Cachoeira do Marouni",
+  "lat": -14.837331,
+  "lng": -52.598754,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5061366859"
+ },
+ {
+  "id": "osm-n5087167412",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Escondidinho",
+  "lat": -16.466794,
+  "lng": -54.684141,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5087167412"
+ },
+ {
+  "id": "osm-n5102031826",
+  "tipo": "monumento",
+  "nome": "Estátua do colonizador Jose Parana",
+  "lat": -11.253989,
+  "lng": -57.508248,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5102031826"
+ },
+ {
+  "id": "osm-n5109177876",
+  "tipo": "monumento",
+  "nome": "Rondonópolis",
+  "lat": -16.490613,
+  "lng": -54.646653,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5109177876"
+ },
+ {
+  "id": "osm-n5165634661",
+  "tipo": "cachoeira",
+  "nome": "Salto Bananal",
+  "lat": -14.601452,
+  "lng": -54.753274,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5165634661"
+ },
+ {
+  "id": "osm-n5189620823",
+  "tipo": "mirante",
+  "nome": "Falésias",
+  "lat": -16.801535,
+  "lng": -54.181243,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5189620823"
+ },
+ {
+  "id": "osm-n5214724309",
+  "tipo": "monumento",
+  "nome": "Preciosa",
+  "lat": -13.047012,
+  "lng": -55.931344,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5214724309"
+ },
+ {
+  "id": "osm-n5266515430",
+  "tipo": "monumento",
+  "nome": "Cruz do Cais",
+  "lat": -16.477938,
+  "lng": -54.634509,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5266515430"
+ },
+ {
+  "id": "osm-n5274259254",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Onça",
+  "lat": -16.721436,
+  "lng": -53.587398,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5274259254"
+ },
+ {
+  "id": "osm-n5283967665",
+  "tipo": "mirante",
+  "nome": "Mirante do Museu Rondon",
+  "lat": -15.613912,
+  "lng": -56.072427,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5283967665"
+ },
+ {
+  "id": "osm-n5302646607",
+  "tipo": "turistico",
+  "nome": "Escadaria do Cristo - Nível Inferior",
+  "lat": -15.875355,
+  "lng": -52.260709,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5302646607"
+ },
+ {
+  "id": "osm-n5329820510",
+  "tipo": "monumento",
+  "nome": "Monumento ao Chimarrão",
+  "lat": -12.600487,
+  "lng": -52.189974,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5329820510"
+ },
+ {
+  "id": "osm-n5345942564",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Rio Juba",
+  "lat": -14.972357,
+  "lng": -57.744865,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5345942564"
+ },
+ {
+  "id": "osm-n5365922953",
+  "tipo": "turistico",
+  "nome": "Sitio Aequeologico de Santa Elina",
+  "lat": -15.385429,
+  "lng": -56.799295,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5365922953"
+ },
+ {
+  "id": "osm-n5366044597",
+  "tipo": "turistico",
+  "nome": "Sitio Arqueologico da Pedra Preta",
+  "lat": -9.566109,
+  "lng": -56.635535,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5366044597"
+ },
+ {
+  "id": "osm-n5366154966",
+  "tipo": "turistico",
+  "nome": "Esfinge",
+  "lat": -15.355079,
+  "lng": -52.230916,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5366154966"
+ },
+ {
+  "id": "osm-n5366233338",
+  "tipo": "turistico",
+  "nome": "Dolina Água Milagrosa",
+  "lat": -16.0433,
+  "lng": -57.527618,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5366233338"
+ },
+ {
+  "id": "osm-n5368236960",
+  "tipo": "turistico",
+  "nome": "Pedra Dedo de Deus",
+  "lat": -15.309761,
+  "lng": -52.173808,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5368236960"
+ },
+ {
+  "id": "osm-n5370985281",
+  "tipo": "turistico",
+  "nome": "Sitio Arqueologico Abrigo da Serra da Estrela Azul",
+  "lat": -15.872237,
+  "lng": -52.256996,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5370985281"
+ },
+ {
+  "id": "osm-n5370985282",
+  "tipo": "turistico",
+  "nome": "Sitio Arqueologico Gruta do Moretti",
+  "lat": -15.383929,
+  "lng": -52.214542,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5370985282"
+ },
+ {
+  "id": "osm-n5506739922",
+  "tipo": "monumento",
+  "nome": "Estrada TRANSPANTANEIRA",
+  "lat": -16.406656,
+  "lng": -56.669823,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5506739922"
+ },
+ {
+  "id": "osm-n5521486423",
+  "tipo": "mirante",
+  "nome": "Mirante da Trilha do Mel",
+  "lat": -15.369852,
+  "lng": -55.844237,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5521486423"
+ },
+ {
+  "id": "osm-n5850032585",
+  "tipo": "turistico",
+  "nome": "Jacarés",
+  "lat": -16.425653,
+  "lng": -56.670148,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5850032585"
+ },
+ {
+  "id": "osm-n5862348385",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Água Limpa",
+  "lat": -15.751486,
+  "lng": -52.456785,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5862348385"
+ },
+ {
+  "id": "osm-n5902351806",
+  "tipo": "turistico",
+  "nome": "Ponte Dos Desejos",
+  "lat": -15.889507,
+  "lng": -52.257243,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5902351806"
+ },
+ {
+  "id": "osm-n5902351808",
+  "tipo": "turistico",
+  "nome": "FONTE",
+  "lat": -15.889418,
+  "lng": -52.256985,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5902351808"
+ },
+ {
+  "id": "osm-n5922274719",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira de Poxoréu",
+  "lat": -15.839042,
+  "lng": -54.381891,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5922274719"
+ },
+ {
+  "id": "osm-n5926744796",
+  "tipo": "monumento",
+  "nome": "Carro de Boi",
+  "lat": -16.469665,
+  "lng": -54.627961,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5926744796"
+ },
+ {
+  "id": "osm-n5927869626",
+  "tipo": "monumento",
+  "nome": "Gaúcho",
+  "lat": -16.472863,
+  "lng": -54.60099,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5927869626"
+ },
+ {
+  "id": "osm-n5930274177",
+  "tipo": "monumento",
+  "nome": "Imigração japonesa no Brasil",
+  "lat": -16.473967,
+  "lng": -54.611303,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5930274177"
+ },
+ {
+  "id": "osm-n5969447187",
+  "tipo": "turistico",
+  "nome": "Jardim",
+  "lat": -10.880525,
+  "lng": -51.636291,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/5969447187"
+ },
+ {
+  "id": "osm-n6090684749",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Nhonho",
+  "lat": -15.445795,
+  "lng": -55.766728,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6090684749"
+ },
+ {
+  "id": "osm-n6090684750",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Pequena",
+  "lat": -15.446081,
+  "lng": -55.766204,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6090684750"
+ },
+ {
+  "id": "osm-n6093807528",
+  "tipo": "cachoeira",
+  "nome": "Tombador",
+  "lat": -14.631646,
+  "lng": -56.261515,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6093807528"
+ },
+ {
+  "id": "osm-n6196146056",
+  "tipo": "monumento",
+  "nome": "Cristo Redentor de Jaciara",
+  "lat": -15.988513,
+  "lng": -54.9297,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6196146056"
+ },
+ {
+  "id": "osm-n6370794786",
+  "tipo": "turistico",
+  "nome": "Cachoeira do Degrau",
+  "lat": -15.416191,
+  "lng": -55.842645,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6370794786"
+ },
+ {
+  "id": "osm-n6370794886",
+  "tipo": "turistico",
+  "nome": "Cachoeira do Pulo",
+  "lat": -15.416551,
+  "lng": -55.841246,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6370794886"
+ },
+ {
+  "id": "osm-n6370794985",
+  "tipo": "turistico",
+  "nome": "Cachoeira 7 de Setembro",
+  "lat": -15.418808,
+  "lng": -55.839694,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6370794985"
+ },
+ {
+  "id": "osm-n6380826037",
+  "tipo": "monumento",
+  "nome": "Brasil 500 Anos",
+  "lat": -15.064942,
+  "lng": -57.178415,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6380826037"
+ },
+ {
+  "id": "osm-n6380838067",
+  "tipo": "monumento",
+  "nome": "Fest Bugres",
+  "lat": -15.065087,
+  "lng": -57.179319,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6380838067"
+ },
+ {
+  "id": "osm-n6565126385",
+  "tipo": "mirante",
+  "nome": "Mirante do cerrado",
+  "lat": -14.609732,
+  "lng": -55.953511,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6565126385"
+ },
+ {
+  "id": "osm-n6591767542",
+  "tipo": "monumento",
+  "nome": "EU AMO PRIMAVERA",
+  "lat": -15.541832,
+  "lng": -54.313089,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6591767542"
+ },
+ {
+  "id": "osm-n6594845592",
+  "tipo": "turistico",
+  "nome": "Entrada Parque",
+  "lat": -14.625576,
+  "lng": -57.493154,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6594845592"
+ },
+ {
+  "id": "osm-n6612366516",
+  "tipo": "monumento",
+  "nome": "SENZALA DO SINHO EDUARDO",
+  "lat": -15.862914,
+  "lng": -53.513132,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6612366516"
+ },
+ {
+  "id": "osm-n6612368817",
+  "tipo": "monumento",
+  "nome": "PLACA METALICA HOMENAGEM",
+  "lat": -15.862677,
+  "lng": -53.513999,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6612368817"
+ },
+ {
+  "id": "osm-n6778422331",
+  "tipo": "monumento",
+  "nome": "Praça Recanto dos Pássaros",
+  "lat": -15.611254,
+  "lng": -56.037037,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6778422331"
+ },
+ {
+  "id": "osm-n6783774044",
+  "tipo": "monumento",
+  "nome": "Rotary",
+  "lat": -15.598538,
+  "lng": -56.089368,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6783774044"
+ },
+ {
+  "id": "osm-n6791797628",
+  "tipo": "mirante",
+  "nome": "Mirante Rio Cuiaba",
+  "lat": -15.616104,
+  "lng": -56.109162,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6791797628"
+ },
+ {
+  "id": "osm-n6791805106",
+  "tipo": "monumento",
+  "nome": "CBA 300 Anos",
+  "lat": -15.615309,
+  "lng": -56.108536,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6791805106"
+ },
+ {
+  "id": "osm-n6868555620",
+  "tipo": "monumento",
+  "nome": "Bola da Copa do Mundo no Brasil",
+  "lat": -15.607399,
+  "lng": -56.10562,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6868555620"
+ },
+ {
+  "id": "osm-n6904777545",
+  "tipo": "monumento",
+  "nome": "Águas Pluviais de Colíder",
+  "lat": -10.811285,
+  "lng": -55.453953,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6904777545"
+ },
+ {
+  "id": "osm-n6910250419",
+  "tipo": "monumento",
+  "nome": "Monumento da Avenida do Colonizador",
+  "lat": -10.813285,
+  "lng": -55.453765,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6910250419"
+ },
+ {
+  "id": "osm-n6935927678",
+  "tipo": "monumento",
+  "nome": "Marechal Rondon",
+  "lat": -15.61405,
+  "lng": -56.072736,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6935927678"
+ },
+ {
+  "id": "osm-n6949625797",
+  "tipo": "monumento",
+  "nome": "Placa de Pavimentação",
+  "lat": -10.811485,
+  "lng": -55.447593,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/6949625797"
+ },
+ {
+  "id": "osm-n7129745441",
+  "tipo": "monumento",
+  "nome": "Cidade Universitária Gabriel Novis Neves",
+  "lat": -15.61405,
+  "lng": -56.073161,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7129745441"
+ },
+ {
+  "id": "osm-n7216141485",
+  "tipo": "turistico",
+  "nome": "Flutuação no Rio Triste",
+  "lat": -14.591867,
+  "lng": -55.75616,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7216141485"
+ },
+ {
+  "id": "osm-n7241286627",
+  "tipo": "monumento",
+  "nome": "Canhão",
+  "lat": -15.609706,
+  "lng": -56.104923,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7241286627"
+ },
+ {
+  "id": "osm-n7486838619",
+  "tipo": "monumento",
+  "nome": "O Semeador",
+  "lat": -13.081168,
+  "lng": -55.915538,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7486838619"
+ },
+ {
+  "id": "osm-n7519616858",
+  "tipo": "monumento",
+  "nome": "Monumento do Avião",
+  "lat": -13.555281,
+  "lng": -52.271651,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7519616858"
+ },
+ {
+  "id": "osm-n7519616859",
+  "tipo": "monumento",
+  "nome": "Estatua Norberto Schwantes",
+  "lat": -13.555465,
+  "lng": -52.27164,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7519616859"
+ },
+ {
+  "id": "osm-n7523781832",
+  "tipo": "monumento",
+  "nome": "Rotary International",
+  "lat": -12.595925,
+  "lng": -52.208604,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7523781832"
+ },
+ {
+  "id": "osm-n7565965735",
+  "tipo": "turistico",
+  "nome": "Morro da Mesa",
+  "lat": -15.859244,
+  "lng": -54.38727,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7565965735"
+ },
+ {
+  "id": "osm-n7644781161",
+  "tipo": "turistico",
+  "nome": "Praia do Cortado",
+  "lat": -11.75029,
+  "lng": -55.707608,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7644781161"
+ },
+ {
+  "id": "osm-n7741317668",
+  "tipo": "monumento",
+  "nome": "Estatua Colonizador Jose Olavo Gonçalves",
+  "lat": -11.254042,
+  "lng": -57.507815,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7741317668"
+ },
+ {
+  "id": "osm-n7830627037",
+  "tipo": "turistico",
+  "nome": "Cidade das Pedras",
+  "lat": -16.206278,
+  "lng": -54.946798,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7830627037"
+ },
+ {
+  "id": "osm-n7843992978",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Prata",
+  "lat": -16.104706,
+  "lng": -54.975768,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/7843992978"
+ },
+ {
+  "id": "osm-n8286328156",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Saudade",
+  "lat": -14.74908,
+  "lng": -52.566178,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/8286328156"
+ },
+ {
+  "id": "osm-n9288408976",
+  "tipo": "monumento",
+  "nome": "Cristo Redentor",
+  "lat": -15.645565,
+  "lng": -56.10896,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9288408976"
+ },
+ {
+  "id": "osm-n9309631332",
+  "tipo": "turistico",
+  "nome": "Cachoeira Do Ipê",
+  "lat": -14.654905,
+  "lng": -52.591881,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309631332"
+ },
+ {
+  "id": "osm-n9309631334",
+  "tipo": "turistico",
+  "nome": "Entrada da Cachoeira da Saudade",
+  "lat": -14.748908,
+  "lng": -52.567457,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309631334"
+ },
+ {
+  "id": "osm-n9309631335",
+  "tipo": "turistico",
+  "nome": "Casa Abonizia",
+  "lat": -14.755151,
+  "lng": -52.561736,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309631335"
+ },
+ {
+  "id": "osm-n9309695986",
+  "tipo": "turistico",
+  "nome": "Cachoeira da Usina",
+  "lat": -14.888486,
+  "lng": -52.50221,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309695986"
+ },
+ {
+  "id": "osm-n9309710215",
+  "tipo": "turistico",
+  "nome": "Rancho Ponte de Pedra",
+  "lat": -14.794889,
+  "lng": -52.623097,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309710215"
+ },
+ {
+  "id": "osm-n9309716717",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Urubu Rei",
+  "lat": -14.91733,
+  "lng": -52.639014,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309716717"
+ },
+ {
+  "id": "osm-n9309764673",
+  "tipo": "turistico",
+  "nome": "Piscinas naturais Abonizia",
+  "lat": -14.759923,
+  "lng": -52.556602,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309764673"
+ },
+ {
+  "id": "osm-n9309764674",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Abonizia",
+  "lat": -14.756915,
+  "lng": -52.55731,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309764674"
+ },
+ {
+  "id": "osm-n9309764683",
+  "tipo": "turistico",
+  "nome": "Cachoeira Buriti",
+  "lat": -14.764234,
+  "lng": -52.574615,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309764683"
+ },
+ {
+  "id": "osm-n9309764684",
+  "tipo": "turistico",
+  "nome": "Cachoeira Bailarina",
+  "lat": -14.763522,
+  "lng": -52.574891,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309764684"
+ },
+ {
+  "id": "osm-n9309764685",
+  "tipo": "turistico",
+  "nome": "Cachoeira da Nascente",
+  "lat": -14.763282,
+  "lng": -52.575344,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9309764685"
+ },
+ {
+  "id": "osm-n9662262673",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Fumaça",
+  "lat": -15.08538,
+  "lng": -52.79134,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9662262673"
+ },
+ {
+  "id": "osm-n9777939214",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do sucesso",
+  "lat": -14.749029,
+  "lng": -52.557671,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9777939214"
+ },
+ {
+  "id": "osm-n9778017429",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Gratidão",
+  "lat": -14.750826,
+  "lng": -52.553297,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9778017429"
+ },
+ {
+  "id": "osm-n9846735692",
+  "tipo": "monumento",
+  "nome": "Primeira Etapa",
+  "lat": -15.617216,
+  "lng": -56.105541,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9846735692"
+ },
+ {
+  "id": "osm-n9846894536",
+  "tipo": "monumento",
+  "nome": "Ulisses Guimarães",
+  "lat": -15.575107,
+  "lng": -56.073459,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9846894536"
+ },
+ {
+  "id": "osm-n9890790070",
+  "tipo": "monumento",
+  "nome": "Rodovia Palmiro Paes de Barros",
+  "lat": -15.700652,
+  "lng": -56.04242,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9890790070"
+ },
+ {
+  "id": "osm-n9907899084",
+  "tipo": "monumento",
+  "nome": "A Lei de Deus",
+  "lat": -11.250388,
+  "lng": -57.508356,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9907899084"
+ },
+ {
+  "id": "osm-n9922140217",
+  "tipo": "turistico",
+  "nome": "Toca das onças pintadas",
+  "lat": -17.275637,
+  "lng": -56.690219,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9922140217"
+ },
+ {
+  "id": "osm-n9976218215",
+  "tipo": "monumento",
+  "nome": "Eu ♥️ SDL",
+  "lat": -15.864191,
+  "lng": -56.075955,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/9976218215"
+ },
+ {
+  "id": "osm-n10057113059",
+  "tipo": "monumento",
+  "nome": "3 Graças",
+  "lat": -15.601467,
+  "lng": -56.088408,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10057113059"
+ },
+ {
+  "id": "osm-n10726587421",
+  "tipo": "monumento",
+  "nome": "Monumento das Monções",
+  "lat": -15.648872,
+  "lng": -56.069007,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10726587421"
+ },
+ {
+  "id": "osm-n10738435875",
+  "tipo": "monumento",
+  "nome": "DeMolay",
+  "lat": -15.574333,
+  "lng": -56.072858,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10738435875"
+ },
+ {
+  "id": "osm-n10832212554",
+  "tipo": "monumento",
+  "nome": "fundação marista",
+  "lat": -11.859798,
+  "lng": -55.534885,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10832212554"
+ },
+ {
+  "id": "osm-n10917067207",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Salgadeira",
+  "lat": -15.357104,
+  "lng": -55.830022,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10917067207"
+ },
+ {
+  "id": "osm-n10932453383",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Martinha",
+  "lat": -15.506482,
+  "lng": -55.404848,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/10932453383"
+ },
+ {
+  "id": "osm-n11400881369",
+  "tipo": "turistico",
+  "nome": "Santuário do Roncador",
+  "lat": -14.204704,
+  "lng": -51.685839,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/11400881369"
+ },
+ {
+  "id": "osm-n12107123953",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Tuin",
+  "lat": -14.681452,
+  "lng": -57.292418,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/12107123953"
+ },
+ {
+  "id": "osm-n12115875652",
+  "tipo": "monumento",
+  "nome": "Luquinhas",
+  "lat": -13.069567,
+  "lng": -55.926917,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/12115875652"
+ },
+ {
+  "id": "osm-n12749174579",
+  "tipo": "turistico",
+  "nome": "Memorial Rondon",
+  "lat": -16.27247,
+  "lng": -55.800858,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/12749174579"
+ },
+ {
+  "id": "osm-n13618552399",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Leopoldina",
+  "lat": -17.068239,
+  "lng": -54.234701,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13618552399"
+ },
+ {
+  "id": "osm-n13755161201",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira Jatobá",
+  "lat": -14.918528,
+  "lng": -60.074151,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13755161201"
+ },
+ {
+  "id": "osm-n13796339835",
+  "tipo": "turistico",
+  "nome": "Balneário Moreninha",
+  "lat": -16.368302,
+  "lng": -53.796632,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13796339835"
+ },
+ {
+  "id": "osm-n13912539170",
+  "tipo": "cachoeira",
+  "nome": "Cachoeirinha",
+  "lat": -15.879735,
+  "lng": -53.582355,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13912539170"
+ },
+ {
+  "id": "osm-n13913188318",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Fumaça",
+  "lat": -15.875371,
+  "lng": -53.535401,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13913188318"
+ },
+ {
+  "id": "osm-n13954901493",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Batéia",
+  "lat": -15.727103,
+  "lng": -52.474673,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13954901493"
+ },
+ {
+  "id": "osm-n13956111949",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira do Cristal",
+  "lat": -15.719549,
+  "lng": -52.613196,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13956111949"
+ },
+ {
+  "id": "osm-n13956585344",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira da Mata",
+  "lat": -15.726351,
+  "lng": -52.48089,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13956585344"
+ },
+ {
+  "id": "osm-n13956585774",
+  "tipo": "cachoeira",
+  "nome": "Cachoeira das Funas",
+  "lat": -15.727766,
+  "lng": -52.493867,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/node/13956585774"
+ },
+ {
+  "id": "osm-w167147735",
+  "tipo": "monumento",
+  "nome": "Centro Geodésico da América do Sul",
+  "lat": -15.60062,
+  "lng": -56.100438,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/167147735"
+ },
+ {
+  "id": "osm-w178238403",
+  "tipo": "turistico",
+  "nome": "Praça do Morro da Caixa D'Água Velha",
+  "lat": -15.599087,
+  "lng": -56.101664,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/178238403"
+ },
+ {
+  "id": "osm-w180348605",
+  "tipo": "turistico",
+  "nome": "Casa Barão de Melgaço",
+  "lat": -15.594318,
+  "lng": -56.095684,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/180348605"
+ },
+ {
+  "id": "osm-w180523437",
+  "tipo": "monumento",
+  "nome": "Monumento aos Bandeirantes",
+  "lat": -15.597818,
+  "lng": -56.089531,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/180523437"
+ },
+ {
+  "id": "osm-w278131103",
+  "tipo": "turistico",
+  "nome": "Mirante do Cristo Redentor",
+  "lat": -15.871864,
+  "lng": -52.259868,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/278131103"
+ },
+ {
+  "id": "osm-w458185673",
+  "tipo": "turistico",
+  "nome": "Arquivo Público de Mato Grosso",
+  "lat": -15.596021,
+  "lng": -56.098035,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/458185673"
+ },
+ {
+  "id": "osm-w462607258",
+  "tipo": "turistico",
+  "nome": "recepção Cachoeira Serra Azul",
+  "lat": -14.48941,
+  "lng": -55.705634,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/462607258"
+ },
+ {
+  "id": "osm-w491041126",
+  "tipo": "turistico",
+  "nome": "Padaria do Moinho",
+  "lat": -15.585538,
+  "lng": -56.077922,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/491041126"
+ },
+ {
+  "id": "osm-w491340706",
+  "tipo": "turistico",
+  "nome": "Ponte de Ferro do Coxipó",
+  "lat": -15.625643,
+  "lng": -56.059972,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/491340706"
+ },
+ {
+  "id": "osm-w532398476",
+  "tipo": "turistico",
+  "nome": "Passeio Duto do Quebó",
+  "lat": -14.442381,
+  "lng": -56.015065,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/532398476"
+ },
+ {
+  "id": "osm-w630012729",
+  "tipo": "monumento",
+  "nome": "Avião Douglas DC-3 versão cargueiro C-47",
+  "lat": -9.868443,
+  "lng": -56.082649,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/630012729"
+ },
+ {
+  "id": "osm-w724199225",
+  "tipo": "turistico",
+  "nome": "Vila Cuiabana",
+  "lat": -15.617329,
+  "lng": -56.111189,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/724199225"
+ },
+ {
+  "id": "osm-w1009005202",
+  "tipo": "turistico",
+  "nome": "Cachoeira da Usina",
+  "lat": -14.888599,
+  "lng": -52.502038,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1009005202"
+ },
+ {
+  "id": "osm-w1113515910",
+  "tipo": "turistico",
+  "nome": "Arcos da Cascata",
+  "lat": -15.599098,
+  "lng": -56.101601,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1113515910"
+ },
+ {
+  "id": "osm-w1159553938",
+  "tipo": "monumento",
+  "nome": "Memorial da Água",
+  "lat": -15.590666,
+  "lng": -56.099809,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1159553938"
+ },
+ {
+  "id": "osm-w1174898268",
+  "tipo": "mirante",
+  "nome": "Estação de Contemplação",
+  "lat": -15.356843,
+  "lng": -55.828114,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1174898268"
+ },
+ {
+  "id": "osm-w1199228885",
+  "tipo": "turistico",
+  "nome": "Mercado do Porto",
+  "lat": -15.61396,
+  "lng": -56.110423,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1199228885"
+ },
+ {
+  "id": "osm-w1204077829",
+  "tipo": "turistico",
+  "nome": "Casa do Artesão - Dona Doquinha",
+  "lat": -15.864597,
+  "lng": -56.074191,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1204077829"
+ },
+ {
+  "id": "osm-w1307169753",
+  "tipo": "monumento",
+  "nome": "Marco do Jauru",
+  "lat": -16.064618,
+  "lng": -57.687298,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1307169753"
+ },
+ {
+  "id": "osm-w1356906868",
+  "tipo": "mirante",
+  "nome": "Mirante de Vidro",
+  "lat": -15.964426,
+  "lng": -54.971794,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1356906868"
+ },
+ {
+  "id": "osm-w1376978619",
+  "tipo": "turistico",
+  "nome": "Memorial Rondon",
+  "lat": -16.272695,
+  "lng": -55.801514,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/way/1376978619"
+ },
+ {
+  "id": "osm-r18254137",
+  "tipo": "turistico",
+  "nome": "SESC Salgadeira",
+  "lat": -15.356894,
+  "lng": -55.82926,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/relation/18254137"
+ },
+ {
+  "id": "osm-r18850738",
+  "tipo": "turistico",
+  "nome": "Parque Estadual Gruta da Lagoa Azul",
+  "lat": -14.504691,
+  "lng": -55.946126,
+  "fonte": "osm",
+  "link": "https://www.openstreetmap.org/relation/18850738"
+ }
+]
