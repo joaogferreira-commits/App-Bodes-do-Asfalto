@@ -25,7 +25,8 @@
       "irmaos": "Brothers",
       "postos": "Gas",
       "sedes": "Clubhouses",
-      "lojas": "Lodges"
+      "lojas": "Lodges",
+      "passeio": "Ride"
     },
     "visibilidade": "How I appear on the map",
     "aprox": "Approx.",
@@ -991,7 +992,11 @@
       "monumento": "Monument",
       "turistico": "Tourist spot",
       "agape": "Flash Ágape",
-      "outro": "Place"
+      "outro": "Place",
+      "rotaBiker": "Rota Biker monument",
+      "rotaBikerN": "Rota Biker monument #{{n}}",
+      "cachoeira": "Waterfall",
+      "mirante": "Viewpoint"
     },
     "status": {
       "aberto": "Open to meet",
@@ -1008,7 +1013,8 @@
       "vitrine": "View storefront",
       "salvar": "Save",
       "vou": "I'm going",
-      "falarContato": "Talk to contact"
+      "falarContato": "Talk to contact",
+      "site": "Official site"
     },
     "acoesFeitas": {
       "rota": "Route here",
@@ -1018,11 +1024,14 @@
       "vitrine": "View storefront",
       "salvar": "Saved",
       "vou": "Confirmed",
-      "falarContato": "Talk to contact"
+      "falarContato": "Talk to contact",
+      "site": "Official site"
     },
     "emBreve": {
       "perfil": "Full brother profiles arrive with the club server.",
       "falarContato": "Contact with the Lodge brother arrives with the club server, always starting with a wave."
-    }
+    },
+    "rotaBikerCarimbo": "Rota Biker passport stamp point. Check opening hours before going.",
+    "fonteRotaBiker": "Source: Rota Biker (monumentobikers.com.br)."
   }
 }

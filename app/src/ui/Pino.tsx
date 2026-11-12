@@ -17,7 +17,8 @@ export type TipoPino =
   | 'monumento'
   | 'turistico'
   | 'restaurante'
-  | 'sos';
+  | 'sos'
+  | 'rotaBiker';
 
 /**
  * Pinos do mapa = emblemas bordados do kit (docs/assets-originais, convertidos em assets/gerados/pinos).
@@ -97,6 +98,14 @@ export const pinos: Record<
     cor: 'textoSec',
     agrupa: true,
     prioridade: 9,
+  },
+  rotaBiker: {
+    // Monumento da Rota Biker: provisório recolorido do monumento até o desenho próprio (fila de imagens).
+    imagem: require('../../assets/gerados/pinos/pino-rota-biker.webp'),
+    icone: 'moto',
+    cor: 'acao',
+    agrupa: true,
+    prioridade: 8,
   },
   turistico: {
     imagem: require('../../assets/gerados/pinos/pino-ponto-turistico.webp'),

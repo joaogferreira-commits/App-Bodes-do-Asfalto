@@ -41,3 +41,24 @@ describe('fichas do mapa', () => {
     ['62', null],
   ])('preço "%s" → %s', (e, s) => expect(lerPrecoCombustivel(e)).toBe(s));
 });
+
+describe('pontos coletados', () => {
+  it('Rota Biker tem ficha com número, crédito e link do site oficial', () => {
+    const { pontosColetados } = jest.requireActual('@/dados/exemplos') as typeof import('@/dados/exemplos');
+    const rb = pontosColetados.filter((p) => p.tipo === 'rotaBiker');
+    expect(rb.length).toBeGreaterThanOrEqual(40);
+    const f = fichaDoLugar(rb[0]!);
+    expect(f.acoes).toEqual(['rota', 'site']);
+    expect(f.link).toContain('monumentobikers.com.br');
+    expect(f.linhas.map((l) => l.chave)).toContain('ficha.fonteRotaBiker');
+  });
+
+  it('cachoeiras e mirantes do OpenStreetMap trazem o crédito e o tipo certo', () => {
+    const { pontosColetados } = jest.requireActual('@/dados/exemplos') as typeof import('@/dados/exemplos');
+    const c = pontosColetados.find((p) => p.subtipo === 'cachoeira')!;
+    const f = fichaDoLugar(c);
+    expect(f.subtitulo).toBe('ficha.tipos.cachoeira');
+    expect(f.linhas[0]!.chave).toBe('ficha.fonteOsm');
+    expect(new Set(pontosColetados.map((p) => p.id)).size).toBe(pontosColetados.length);
+  });
+});

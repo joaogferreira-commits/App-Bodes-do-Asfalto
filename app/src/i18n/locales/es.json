@@ -25,7 +25,8 @@
       "irmaos": "Hermanos",
       "postos": "Gasolineras",
       "sedes": "Sedes",
-      "lojas": "Logias"
+      "lojas": "Logias",
+      "passeio": "Paseo"
     },
     "visibilidade": "Cómo aparezco en el mapa",
     "aprox": "Aprox.",
@@ -991,7 +992,11 @@
       "monumento": "Monumento",
       "turistico": "Punto turístico",
       "agape": "Ágape Relámpago",
-      "outro": "Lugar"
+      "outro": "Lugar",
+      "rotaBiker": "Monumento Rota Biker",
+      "rotaBikerN": "Monumento Rota Biker nº {{n}}",
+      "cachoeira": "Cascada",
+      "mirante": "Mirador"
     },
     "status": {
       "aberto": "Abierto a encuentro",
@@ -1008,7 +1013,8 @@
       "vitrine": "Ver vitrina",
       "salvar": "Guardar",
       "vou": "Voy",
-      "falarContato": "Hablar con el contacto"
+      "falarContato": "Hablar con el contacto",
+      "site": "Sitio oficial"
     },
     "acoesFeitas": {
       "rota": "Ruta hasta aquí",
@@ -1018,11 +1024,14 @@
       "vitrine": "Ver vitrina",
       "salvar": "Guardado",
       "vou": "Confirmado",
-      "falarContato": "Hablar con el contacto"
+      "falarContato": "Hablar con el contacto",
+      "site": "Sitio oficial"
     },
     "emBreve": {
       "perfil": "El perfil completo de los hermanos llega con el servidor del club.",
       "falarContato": "El contacto con el hermano de la Logia llega con el servidor del club, siempre empezando por un saludo."
-    }
+    },
+    "rotaBikerCarimbo": "Punto de sello del pasaporte Rota Biker. Revisa el horario antes de ir.",
+    "fonteRotaBiker": "Fuente: Rota Biker (monumentobikers.com.br)."
   }
 }

@@ -17,6 +17,7 @@ const iconeDaAcao: Record<AcaoFicha, NomeIcone> = {
   salvar: 'salvar',
   vou: 'check',
   falarContato: 'comentario',
+  site: 'compartilhar',
 };
 
 type Props = {
@@ -84,7 +85,7 @@ export function FichaMapa({ ficha, status, feitas = [], aoFechar, aoAgir }: Prop
                 <Texto variante="subtitulo" accessibilityRole="header">
                   {ficha.titulo}
                 </Texto>
-                <Texto variante="secundario">{t(ficha.subtitulo)}</Texto>
+                <Texto variante="secundario">{t(ficha.subtitulo, ficha.subtituloValores ?? {})}</Texto>
               </View>
               <BotaoIcone icone="fechar" rotulo={t('comum.fechar')} onPress={fechar} />
             </View>

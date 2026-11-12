@@ -1,3 +1,4 @@
+import coletados from './pontos-coletados.json';
 import type { StatusIrmao, TipoPino } from '@/ui';
 
 /**
@@ -11,7 +12,40 @@ export type LugarExemplo = {
   rotulo?: string;
   lng: number;
   lat: number;
+  /** cachoeira/mirante usam o pino de ponto turístico, mas a ficha diz o que são */
+  subtipo?: 'cachoeira' | 'mirante';
+  /** de onde veio o ponto (crédito na ficha) */
+  fonte?: 'osm' | 'rotaBiker';
+  link?: string;
+  numero?: number | null;
 };
+
+type PontoColetado = {
+  id: string;
+  tipo: 'cachoeira' | 'mirante' | 'monumento' | 'turistico' | 'rotaBiker';
+  nome: string;
+  lat: number;
+  lng: number;
+  fonte: 'osm' | 'rotaBiker';
+  link: string;
+  numero?: number | null;
+};
+
+/**
+ * Pontos coletados de fontes abertas/públicas (tools/processar_coleta.py): OpenStreetMap de MT
+ * (ODbL) e monumentos da Rota Biker (mapa público do site oficial; decisão do dono em 12/11/2026).
+ */
+export const pontosColetados: LugarExemplo[] = (coletados as PontoColetado[]).map((p) => ({
+  id: p.id,
+  tipo: p.tipo === 'cachoeira' || p.tipo === 'mirante' ? 'turistico' : p.tipo,
+  subtipo: p.tipo === 'cachoeira' || p.tipo === 'mirante' ? p.tipo : undefined,
+  nome: p.nome.replace(/^\d+\s*-\s*/, ''),
+  lat: p.lat,
+  lng: p.lng,
+  fonte: p.fonte,
+  link: p.link,
+  numero: p.numero,
+}));
 export type IrmaoExemplo = { id: string; nome: string; status: StatusIrmao; lng: number; lat: number };
 
 export const lugaresExemplo: LugarExemplo[] = [
@@ -45,7 +79,10 @@ export const irmaosExemplo: IrmaoExemplo[] = [
   { id: 'ivan', nome: 'Ivan Coruja', status: 'aberto', lng: -56.11, lat: -15.59 },
 ];
 
-export type Filtro = 'tudo' | 'irmaos' | 'postos' | 'sedes' | 'lojas';
+export type Filtro = 'tudo' | 'irmaos' | 'postos' | 'sedes' | 'lojas' | 'passeio';
+
+/** Lugares do clube (exemplo) + pontos coletados. */
+export const todosOsLugares = (): LugarExemplo[] => [...lugaresExemplo, ...pontosColetados];
 
 export function filtrar(filtro: Filtro) {
   const tipos: Record<Filtro, TipoPino[] | 'todos' | 'nenhum'> = {
@@ -54,11 +91,16 @@ export function filtrar(filtro: Filtro) {
     postos: ['posto'],
     sedes: ['sede'],
     lojas: ['loja'],
+    passeio: ['turistico', 'monumento', 'rotaBiker'],
   };
   const t = tipos[filtro];
   return {
     lugares:
-      t === 'todos' ? lugaresExemplo : t === 'nenhum' ? [] : lugaresExemplo.filter((l) => t.includes(l.tipo)),
+      t === 'todos'
+        ? todosOsLugares()
+        : t === 'nenhum'
+          ? []
+          : todosOsLugares().filter((l) => t.includes(l.tipo)),
     irmaos: filtro === 'tudo' || filtro === 'irmaos' ? irmaosExemplo : [],
   };
 }

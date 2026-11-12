@@ -89,8 +89,19 @@ def rota_biker():
     return pontos
 
 
+def ids_unicos(pontos):
+    # o mapa da Rota Biker tem número repetido (dois "38"): o segundo ganha sufixo
+    vistos = {}
+    for p in pontos:
+        n = vistos.get(p['id'], 0)
+        vistos[p['id']] = n + 1
+        if n:
+            p['id'] = f"{p['id']}-{n + 1}"
+    return pontos
+
+
 if __name__ == '__main__':
-    pontos = rota_biker() + osm()
+    pontos = ids_unicos(rota_biker() + osm())
     SAIDA.write_text(json.dumps(pontos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     from collections import Counter
 

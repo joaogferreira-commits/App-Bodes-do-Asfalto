@@ -25,7 +25,8 @@
       "irmaos": "Irmãos",
       "postos": "Postos",
       "sedes": "Sedes",
-      "lojas": "Lojas"
+      "lojas": "Lojas",
+      "passeio": "Passeio"
     },
     "visibilidade": "Como apareço no mapa",
     "aprox": "Aprox.",
@@ -991,7 +992,11 @@
       "monumento": "Monumento",
       "turistico": "Ponto turístico",
       "agape": "Ágape Relâmpago",
-      "outro": "Lugar"
+      "outro": "Lugar",
+      "rotaBiker": "Monumento Rota Biker",
+      "rotaBikerN": "Monumento Rota Biker nº {{n}}",
+      "cachoeira": "Cachoeira",
+      "mirante": "Mirante"
     },
     "status": {
       "aberto": "Aberto a encontro",
@@ -1008,7 +1013,8 @@
       "vitrine": "Ver vitrine",
       "salvar": "Salvar",
       "vou": "Eu vou",
-      "falarContato": "Falar com o contato"
+      "falarContato": "Falar com o contato",
+      "site": "Site oficial"
     },
     "acoesFeitas": {
       "rota": "Rota até aqui",
@@ -1018,11 +1024,14 @@
       "vitrine": "Ver vitrine",
       "salvar": "Salvo",
       "vou": "Confirmado",
-      "falarContato": "Falar com o contato"
+      "falarContato": "Falar com o contato",
+      "site": "Site oficial"
     },
     "emBreve": {
       "perfil": "O perfil completo dos irmãos chega com o servidor do clube.",
       "falarContato": "O contato com o irmão da Loja chega com o servidor do clube, sempre começando por aceno."
-    }
+    },
+    "rotaBikerCarimbo": "Ponto de carimbo do passaporte Rota Biker. Confira horário antes de ir.",
+    "fonteRotaBiker": "Fonte: Rota Biker (monumentobikers.com.br)."
   }
 }

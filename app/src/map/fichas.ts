@@ -8,7 +8,7 @@ import type { NomeIcone } from '@/ui';
  * começa por aceno. Dados de exemplo até o cadastro real no painel.
  */
 export type AcaoFicha =
-  'rota' | 'acenar' | 'perfil' | 'informarPreco' | 'vitrine' | 'salvar' | 'vou' | 'falarContato';
+  'rota' | 'acenar' | 'perfil' | 'informarPreco' | 'vitrine' | 'salvar' | 'vou' | 'falarContato' | 'site';
 
 export type LinhaFicha = { icone: NomeIcone; chave: string; valores?: Record<string, string | number> };
 
@@ -18,11 +18,14 @@ export type Ficha = {
   titulo: string;
   /** chave de tradução do subtítulo (tipo do lugar ou status do irmão) */
   subtitulo: string;
+  subtituloValores?: Record<string, string | number>;
   linhas: LinhaFicha[];
   acoes: AcaoFicha[];
   posicao: { lat: number; lng: number };
   /** para "Ver vitrine": id do negócio no Guia */
   negocio?: string;
+  /** página oficial da fonte (Rota Biker, OpenStreetMap) */
+  link?: string;
 };
 
 /** Negócio do Guia ligado a cada tipo de pino de exemplo. */
@@ -81,13 +84,26 @@ export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; 
         acoes: ['rota', 'vitrine'],
         negocio: negocioDoTipo[l.tipo],
       };
+    case 'rotaBiker':
+      return {
+        ...base,
+        subtitulo: l.numero ? 'ficha.tipos.rotaBikerN' : 'ficha.tipos.rotaBiker',
+        subtituloValores: l.numero ? { n: l.numero } : undefined,
+        linhas: [
+          { icone: 'trofeu', chave: 'ficha.rotaBikerCarimbo' },
+          { icone: 'compartilhar', chave: 'ficha.fonteRotaBiker' },
+        ],
+        acoes: ['rota', 'site'],
+        link: l.link,
+      };
     case 'monumento':
     case 'turistico':
       return {
         ...base,
-        subtitulo: `ficha.tipos.${l.tipo}`,
+        subtitulo: `ficha.tipos.${l.subtipo ?? l.tipo}`,
         linhas: [{ icone: 'mapa', chave: 'ficha.fonteOsm' }],
         acoes: ['rota', 'salvar'],
+        link: l.link,
       };
     default:
       return { ...base, subtitulo: `ficha.tipos.outro`, linhas: [], acoes: ['rota'] };

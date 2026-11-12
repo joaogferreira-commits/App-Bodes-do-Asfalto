@@ -4,13 +4,13 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
 import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
-import { filtrar, irmaosExemplo, lugaresExemplo, type Filtro } from '@/dados/exemplos';
+import { filtrar, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } from '@/dados/exemplos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { FichaMapa } from '@/componentes/FichaMapa';
 import { useGuardado } from '@/estado/guardado';
@@ -38,6 +38,7 @@ const filtros: { chave: Filtro; cor?: NomeCor }[] = [
   { chave: 'postos', cor: 'verdePosto' },
   { chave: 'sedes', cor: 'ouro' },
   { chave: 'lojas', cor: 'azulRio' },
+  { chave: 'passeio', cor: 'acao' },
 ];
 
 function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean; texto: string }) {
@@ -126,7 +127,7 @@ export default function Mapa() {
   };
   const verAgape = (ag: Agape = agapeExemplo) => abrir(fichaDoAgape(ag));
   const tocarLugar = (id: string) => {
-    const l = lugaresExemplo.find((x) => x.id === id);
+    const l = todosOsLugares().find((x) => x.id === id);
     if (l) abrir(fichaDoLugar(l, precos[l.id]));
   };
   const tocarIrmao = (id: string) => {
@@ -176,6 +177,9 @@ export default function Mapa() {
       case 'vitrine':
         setFicha(null);
         router.push(ficha.negocio ? `/negocios/${ficha.negocio}` : '/negocios');
+        return;
+      case 'site':
+        if (ficha.link) void Linking.openURL(ficha.link);
         return;
       case 'salvar':
         setSalvosMapa((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
