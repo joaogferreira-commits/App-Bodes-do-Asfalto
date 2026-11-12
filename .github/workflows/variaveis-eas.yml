@@ -1,0 +1,47 @@
+name: Copiar chaves públicas do Supabase para o EAS
+
+# Plano B quando o site do expo.dev falha ao salvar variáveis ("Failed to fetch").
+# O dono cola os dois valores nos GitHub Secrets SUPABASE_URL e SUPABASE_ANON_KEY;
+# este workflow grava no EAS como EXPO_PUBLIC_SUPABASE_URL / EXPO_PUBLIC_SUPABASE_ANON_KEY.
+# São valores públicos por natureza (a proteção é a RLS); a service_role NUNCA entra aqui.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/env-request.txt
+
+jobs:
+  copiar:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Gravar variáveis
+        shell: bash {0}
+        env:
+          URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
+          CHAVE_SUPABASE: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$URL_SUPABASE" ] || [ -z "$CHAVE_SUPABASE" ]; then
+            echo "Faltam os GitHub Secrets SUPABASE_URL e/ou SUPABASE_ANON_KEY"; exit 1
+          fi
+          case "$CHAVE_SUPABASE" in sb_secret_*) echo "Esta é a chave SECRETA. Use a anon/publishable."; exit 1;; esac
+          for amb in development preview production; do
+            eas env:create --name EXPO_PUBLIC_SUPABASE_URL --value "$URL_SUPABASE" \
+              --environment "$amb" --visibility plaintext --force --non-interactive || exit 1
+            eas env:create --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value "$CHAVE_SUPABASE" \
+              --environment "$amb" --visibility plaintext --force --non-interactive || exit 1
+          done
+          eas env:list --environment preview --non-interactive | grep -c SUPABASE
