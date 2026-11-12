@@ -1,1 +1,1 @@
-pedido=6 (pacote social 20261112210000; dono: "AUTORIZO APLICAR O PACOTE SOCIAL NO BANCO"; CI verde em c06b3bb)
+Aplicar a tabela de pontos do mapa (pontos_osm). Autorizado pelo dono em 12/11/2026: "AUTORIZO CRIAR A TABELA DE PONTOS DO MAPA NO BANCO".
