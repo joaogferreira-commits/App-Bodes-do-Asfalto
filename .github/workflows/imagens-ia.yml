@@ -1,0 +1,36 @@
+name: Gerar imagens com IA (fila)
+
+# A rede do agente bloqueia os serviços de imagem; este workflow gera os itens "auto" da fila
+# (Cloudflare → Gemini → Pollinations, com limite por rodada) e faz commit no mesmo ramo.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - tools/fila_imagens.json
+      - .github/imagens-request.txt
+
+permissions:
+  contents: write
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Gerar os pendentes da fila
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python tools/gerar_imagens_ia.py
+      - name: Commit das imagens e da fila
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/assets/ia tools/fila_imagens.json docs/FILA_IMAGENS.md
+          git diff --cached --quiet || git commit -m "Imagens geradas por IA (fila)"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push
