@@ -214,7 +214,8 @@
     "voce": "Você",
     "ferramentas": "Ferramentas",
     "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais",
-    "meusDadosDetalhe": "Consentimentos, baixar dados, excluir conta"
+    "meusDadosDetalhe": "Consentimentos, baixar dados, excluir conta",
+    "garagem": "Garagem"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -762,5 +763,42 @@
       "excluida": "Conta excluída. Até a próxima estrada, irmão.",
       "encarregado": "Encarregado de dados (LGPD): o responsável pelo app. Contato pelo botão Ajuda."
     }
+  },
+  "garagem": {
+    "titulo": "Minha garagem",
+    "explica": "Cadastre suas motos. A principal aparece no seu perfil.",
+    "principal": "Principal",
+    "kmTexto": "{{km}} km",
+    "tornarPrincipal": "Tornar principal",
+    "excluirPergunta": "Excluir esta moto?",
+    "editar": "Editar moto",
+    "nova": "Nova moto",
+    "marca": "Marca",
+    "modelo": "Modelo",
+    "ano": "Ano",
+    "km": "Quilometragem",
+    "apelido": "Apelido da moto",
+    "foto": "Adicionar foto",
+    "trocarFoto": "Trocar foto",
+    "adicionar": "Adicionar moto",
+    "falta": "Informe pelo menos a marca e o modelo."
+  },
+  "contatos": {
+    "titulo": "Contatos de emergência",
+    "explica": "Até 3 pessoas que recebem o seu SOS com a sua localização.",
+    "privado": "Só você vê estes contatos. Nem a diretoria nem a moderação têm acesso.",
+    "nome": "Nome",
+    "telefone": "Telefone com DDD",
+    "adicionar": "Adicionar contato",
+    "falta": "Informe o nome e um telefone com DDD.",
+    "limite": "Você já tem {{n}} contatos, o máximo.",
+    "sosAviso": "O SOS avisa o comboio e estes contatos. Não substitui o 192/193."
+  },
+  "perfilEditar": {
+    "foto": "Sua foto",
+    "usarAvatar": "Usar o avatar em vez da foto",
+    "quemVe": "Quem pode ver este campo",
+    "precisaConsentimento": "Para informar Loja, Oriente e Potência, autorize antes os dados maçônicos em Meus dados. É opcional.",
+    "autorizar": "Abrir Meus dados"
   }
 }

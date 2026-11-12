@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
 import { AvatarMontado } from '@/componentes/AvatarMontado';
+import { usePerfilOpcional } from '@/estado/perfil';
 import { exemploIrmao, nivelDoXp } from '@/dados/conquistas';
 import { perfilExemplo as eu, type Visibilidade } from '@/dados/perfil';
 import { useAvatar } from '@/estado/avatar';
@@ -72,6 +73,26 @@ export default function Perfil() {
   const { sair } = useAcesso();
   const nivel = nivelDoXp(exemploIrmao.xp);
   const emBreve = () => Alert.alert(t('comum.emBreve'), t('perfil.emBreveCadastro'));
+  // O que o irmão cadastrou substitui o exemplo.
+  const meu = usePerfilOpcional();
+  const nome = meu?.perfil.nome || eu.nome;
+  const apelido = meu?.perfil.apelido || eu.apelido;
+  const fotoPerfil = meu?.perfil.foto;
+  const mp = meu?.motoPrincipal;
+  const moto = mp
+    ? {
+        imagem: mp.foto ? { uri: mp.foto } : eu.moto.imagem,
+        modelo: `${mp.marca} ${mp.modelo}`,
+        ano: mp.ano,
+        apelido: mp.apelido,
+        km: mp.km || '0',
+      }
+    : { ...eu.moto, km: eu.moto.kmNoApp.toLocaleString('pt-BR') };
+  const temMacom = !!meu && Object.values(meu.perfil.macom).some((c) => c.valor);
+  const macom = temMacom
+    ? (['loja', 'oriente', 'potencia'] as const).map((k) => ({ chave: k, ...meu!.perfil.macom[k] }))
+    : eu.macom;
+  const nContatos = meu ? meu.contatos.length : eu.contatos;
 
   return (
     <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
@@ -79,10 +100,17 @@ export default function Perfil() {
         {/* Cabeçalho */}
         <View style={estilos.cabecalho}>
           <View>
-            {avatar ? (
+            {fotoPerfil ? (
+              <Image
+                source={{ uri: fotoPerfil }}
+                style={{ width: 104, height: 104, borderRadius: 52, borderWidth: 3, borderColor: cores.acao }}
+                contentFit="cover"
+                accessibilityLabel={nome}
+              />
+            ) : avatar ? (
               <AvatarMontado opcoes={avatar} tamanho={104} />
             ) : (
-              <Avatar nome={eu.nome} status="aberto" tamanho={104} />
+              <Avatar nome={nome} status="aberto" tamanho={104} />
             )}
             <Image
               source={nivel.atual.imagem}
@@ -93,9 +121,9 @@ export default function Perfil() {
           </View>
           <View style={{ flex: 1, gap: 2 }}>
             <Texto variante="subtitulo" numberOfLines={2}>
-              {eu.nome}
+              {nome}
             </Texto>
-            <Texto variante="secundario">“{eu.apelido}”</Texto>
+            {!!apelido && <Texto variante="secundario">“{apelido}”</Texto>}
             <Texto variante="corpoForte" style={{ color: cores.acao }}>
               {t('perfil.capituloCargo', { capitulo: eu.capitulo, cargo: t(`perfil.cargos.${eu.cargo}`) })}
             </Texto>
@@ -115,7 +143,7 @@ export default function Perfil() {
               titulo={t('perfil.editar')}
               variante="secundario"
               icone="configuracoes"
-              onPress={emBreve}
+              onPress={() => router.push('/perfil-editar')}
             />
           </View>
         </View>
@@ -158,26 +186,22 @@ export default function Perfil() {
         <Secao
           titulo={t('perfil.minhaMoto')}
           acao={
-            <Texto variante="pequeno" style={{ color: cores.acao }} onPress={emBreve}>
-              {t('perfil.trocar')}
+            <Texto variante="pequeno" style={{ color: cores.acao }} onPress={() => router.push('/garagem')}>
+              {t('perfil.garagem')}
             </Texto>
           }
         >
           <Cartao semPadding style={{ overflow: 'hidden' }}>
             <Image
-              source={eu.moto.imagem}
+              source={moto.imagem}
               style={estilos.moto}
               contentFit="cover"
-              accessibilityLabel={eu.moto.modelo}
+              accessibilityLabel={moto.modelo}
             />
             <View style={{ padding: espaco.md, gap: 2 }}>
-              <Texto variante="destaque">{eu.moto.modelo}</Texto>
+              <Texto variante="destaque">{moto.modelo}</Texto>
               <Texto variante="secundario">
-                {t('perfil.motoDetalhe', {
-                  ano: eu.moto.ano,
-                  apelido: eu.moto.apelido,
-                  km: eu.moto.kmNoApp.toLocaleString('pt-BR'),
-                })}
+                {t('perfil.motoDetalhe', { ano: moto.ano, apelido: moto.apelido, km: moto.km })}
               </Texto>
             </View>
           </Cartao>
@@ -208,12 +232,12 @@ export default function Perfil() {
         {/* Dados maçônicos opcionais */}
         <Secao titulo={t('perfil.maconaria')}>
           <Cartao semPadding>
-            {eu.macom.map((m, i) => (
+            {macom.map((m, i) => (
               <Pressable
                 key={m.chave}
                 accessibilityRole="button"
                 accessibilityLabel={`${t(`perfil.macom.${m.chave}`)}: ${m.valor || t('perfil.naoInformado')}, ${t(`perfil.visibilidade.${m.visibilidade}`)}`}
-                onPress={emBreve}
+                onPress={() => router.push('/perfil-editar')}
                 style={[estilos.macom, i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave }]}
               >
                 <View style={{ flex: 1 }}>
@@ -244,8 +268,8 @@ export default function Perfil() {
             <LinhaMenu
               icone="socorro"
               titulo={t('perfil.contatos')}
-              detalhe={t('perfil.contatosN', { n: eu.contatos })}
-              onPress={emBreve}
+              detalhe={t('perfil.contatosN', { n: nContatos })}
+              onPress={() => router.push('/contatos')}
             />
             <LinhaMenu
               icone="alerta"

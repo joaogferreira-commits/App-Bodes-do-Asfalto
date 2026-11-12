@@ -4,6 +4,7 @@ import { Pressable, View } from 'react-native';
 
 import { useAcesso, type Finalidade } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
+import { usePerfilOpcional } from '@/estado/perfil';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, Icone, Texto } from '@/ui';
 
@@ -21,6 +22,7 @@ export function ListaConsentimentos() {
   const { t } = useTranslation();
   const cores = useCores();
   const acesso = useAcesso();
+  const perfil = usePerfilOpcional();
   return (
     <View style={{ gap: espaco.sm }}>
       {itens.map(({ f, obrigatorio }) => {
@@ -31,7 +33,12 @@ export function ListaConsentimentos() {
             accessibilityRole="switch"
             accessibilityState={{ checked: ok }}
             accessibilityLabel={t(`acesso.consentimentos.${f}.titulo`)}
-            onPress={() => (ok ? acesso.revogar(f) : acesso.consentir(f))}
+            onPress={() => {
+              if (!ok) return acesso.consentir(f);
+              acesso.revogar(f);
+              // Revogar dados maçônicos apaga Loja, Oriente e Potência (igual ao banco).
+              if (f === 'dados_macons') perfil?.apagarMacom();
+            }}
             style={{
               gap: 6,
               padding: espaco.md,

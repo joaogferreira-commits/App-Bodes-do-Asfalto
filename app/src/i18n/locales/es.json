@@ -214,7 +214,8 @@
     "voce": "Tú",
     "ferramentas": "Herramientas",
     "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más",
-    "meusDadosDetalhe": "Consentimientos, descargar datos, eliminar cuenta"
+    "meusDadosDetalhe": "Consentimientos, descargar datos, eliminar cuenta",
+    "garagem": "Garaje"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -762,5 +763,42 @@
       "excluida": "Cuenta eliminada. Hasta la próxima ruta, hermano.",
       "encarregado": "Encargado de datos (LGPD): el responsable de la app. Contacto por el botón Ayuda."
     }
+  },
+  "garagem": {
+    "titulo": "Mi garaje",
+    "explica": "Registra tus motos. La principal aparece en tu perfil.",
+    "principal": "Principal",
+    "kmTexto": "{{km}} km",
+    "tornarPrincipal": "Hacer principal",
+    "excluirPergunta": "¿Eliminar esta moto?",
+    "editar": "Editar moto",
+    "nova": "Nueva moto",
+    "marca": "Marca",
+    "modelo": "Modelo",
+    "ano": "Año",
+    "km": "Kilometraje",
+    "apelido": "Apodo de la moto",
+    "foto": "Agregar foto",
+    "trocarFoto": "Cambiar foto",
+    "adicionar": "Agregar moto",
+    "falta": "Indica al menos la marca y el modelo."
+  },
+  "contatos": {
+    "titulo": "Contactos de emergencia",
+    "explica": "Hasta 3 personas que reciben tu SOS con tu ubicación.",
+    "privado": "Solo tú ves estos contactos. Ni la directiva ni la moderación tienen acceso.",
+    "nome": "Nombre",
+    "telefone": "Teléfono con código de área",
+    "adicionar": "Agregar contacto",
+    "falta": "Indica el nombre y un teléfono con código de área.",
+    "limite": "Ya tienes {{n}} contactos, el máximo.",
+    "sosAviso": "El SOS avisa al convoy y a estos contactos. No sustituye al 192/193."
+  },
+  "perfilEditar": {
+    "foto": "Tu foto",
+    "usarAvatar": "Usar el avatar en lugar de la foto",
+    "quemVe": "Quién puede ver este campo",
+    "precisaConsentimento": "Para informar Logia, Oriente y Potencia, autoriza antes los datos masónicos en Mis datos. Es opcional.",
+    "autorizar": "Abrir Mis datos"
   }
 }

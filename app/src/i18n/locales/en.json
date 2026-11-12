@@ -214,7 +214,8 @@
     "voce": "You",
     "ferramentas": "Tools",
     "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more",
-    "meusDadosDetalhe": "Consents, download data, delete account"
+    "meusDadosDetalhe": "Consents, download data, delete account",
+    "garagem": "Garage"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -762,5 +763,42 @@
       "excluida": "Account deleted. See you on the next ride, brother.",
       "encarregado": "Data officer (LGPD): the app owner. Contact via the Help button."
     }
+  },
+  "garagem": {
+    "titulo": "My garage",
+    "explica": "Register your bikes. The main one shows on your profile.",
+    "principal": "Main",
+    "kmTexto": "{{km}} km",
+    "tornarPrincipal": "Make main",
+    "excluirPergunta": "Delete this bike?",
+    "editar": "Edit bike",
+    "nova": "New bike",
+    "marca": "Brand",
+    "modelo": "Model",
+    "ano": "Year",
+    "km": "Mileage",
+    "apelido": "Bike nickname",
+    "foto": "Add photo",
+    "trocarFoto": "Change photo",
+    "adicionar": "Add bike",
+    "falta": "Enter at least the brand and model."
+  },
+  "contatos": {
+    "titulo": "Emergency contacts",
+    "explica": "Up to 3 people who receive your SOS with your location.",
+    "privado": "Only you see these contacts. Neither the board nor moderators can.",
+    "nome": "Name",
+    "telefone": "Phone with area code",
+    "adicionar": "Add contact",
+    "falta": "Enter the name and a phone with area code.",
+    "limite": "You already have {{n}} contacts, the maximum.",
+    "sosAviso": "The SOS alerts the convoy and these contacts. It does not replace 192/193."
+  },
+  "perfilEditar": {
+    "foto": "Your photo",
+    "usarAvatar": "Use the avatar instead of the photo",
+    "quemVe": "Who can see this field",
+    "precisaConsentimento": "To add Lodge, Orient and Grand Lodge, first allow masonic data in My data. It is optional.",
+    "autorizar": "Open My data"
   }
 }

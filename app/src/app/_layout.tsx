@@ -16,6 +16,7 @@ import { ProvedorAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
+import { ProvedorPerfil } from '@/estado/perfil';
 import { ProvedorViagem } from '@/estado/viagem';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
@@ -33,13 +34,15 @@ export default function Layout() {
     <ProvedorTema>
       <ProvedorAcesso>
         <ProvedorAvatar>
-          <ProvedorAgapes>
-            <ProvedorMeusPosts>
-              <ProvedorViagem>
-                <Telas />
-              </ProvedorViagem>
-            </ProvedorMeusPosts>
-          </ProvedorAgapes>
+          <ProvedorPerfil>
+            <ProvedorAgapes>
+              <ProvedorMeusPosts>
+                <ProvedorViagem>
+                  <Telas />
+                </ProvedorViagem>
+              </ProvedorMeusPosts>
+            </ProvedorAgapes>
+          </ProvedorPerfil>
         </ProvedorAvatar>
       </ProvedorAcesso>
     </ProvedorTema>
