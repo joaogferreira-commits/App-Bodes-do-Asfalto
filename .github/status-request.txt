@@ -1,1 +1,1 @@
-pedido=7 (tamanho do APK)
+pedido=8
