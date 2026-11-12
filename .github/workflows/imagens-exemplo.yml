@@ -1,0 +1,29 @@
+name: Baixar imagens de domínio público (exemplos do feed)
+
+# A rede do agente bloqueia a Wikimedia; este workflow baixa as fotos e faz commit no mesmo ramo.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - tools/imagens_dominio_publico.json
+
+permissions:
+  contents: write
+
+jobs:
+  baixar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - run: python tools/baixar_dominio_publico.py
+      - name: Commit das imagens
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/assets/exemplos
+          git diff --cached --quiet || git commit -m "Imagens de domínio público para os exemplos do feed"
+          git push
