@@ -1,13 +1,13 @@
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
-import { cores, espaco, fontes, raios, tamanhoTexto, toque } from '@/theme';
+import { cores, espaco, fontes, raios, toque } from '@/theme';
 
 import { Texto } from './Texto';
 
-type Props = { rotulo: string; ativo?: boolean; onPress: () => void };
+type Props = { rotulo: string; ativo?: boolean; onPress: () => void; corPonto?: string };
 
-/** Filtro em forma de pílula: ativo laranja, inativo sarja com contorno. */
-export function Chip({ rotulo, ativo = false, onPress }: Props) {
+/** Filtro em pílula (36 px, área de toque 48). Ativo: creme; inativo: escuro com contorno. */
+export function Chip({ rotulo, ativo = false, onPress, corPonto }: Props) {
   return (
     <Pressable
       accessibilityRole="button"
@@ -17,19 +17,23 @@ export function Chip({ rotulo, ativo = false, onPress }: Props) {
       hitSlop={(toque.minimo - 36) / 2}
       style={[estilos.base, ativo ? estilos.ativo : estilos.inativo]}
     >
-      <Texto style={[estilos.texto, { color: ativo ? cores.noite : cores.creme }]}>{rotulo}</Texto>
+      {corPonto && !ativo && <View style={[estilos.ponto, { backgroundColor: corPonto }]} />}
+      <Texto style={[estilos.texto, { color: ativo ? cores.fundo : cores.texto }]}>{rotulo}</Texto>
     </Pressable>
   );
 }
 
 const estilos = StyleSheet.create({
   base: {
-    minHeight: 36,
-    paddingHorizontal: espaco.md,
+    height: 36,
+    paddingHorizontal: 14,
     borderRadius: raios.pilula,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: espaco.xs - 2,
   },
-  ativo: { backgroundColor: cores.laranja },
-  inativo: { backgroundColor: cores.sarja, borderWidth: 1.5, borderColor: cores.linhaEscura },
-  texto: { fontFamily: fontes.textoSemi, fontSize: tamanhoTexto.pequeno },
+  ativo: { backgroundColor: cores.texto },
+  inativo: { backgroundColor: 'rgba(22,18,14,0.92)', borderWidth: 1, borderColor: cores.linhaForte },
+  ponto: { width: 8, height: 8, borderRadius: 4 },
+  texto: { fontFamily: fontes.textoSemi, fontSize: 15 },
 });

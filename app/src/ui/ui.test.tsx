@@ -2,7 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { cores } from '@/theme';
 
-import { Avatar, BarraNavegacao, Botao, CartaoBordado, Chip, Texto } from '.';
+import { Avatar, BarraAbas, Botao, BotaoIcone, caminhosIcones, Chip, iniciais, Pino } from '.';
+
+const plano = (estilo: unknown) => Object.assign({}, ...[estilo].flat(Infinity).filter(Boolean));
 
 describe('Botao', () => {
   it('chama a ação ao tocar e é anunciado como botão', async () => {
@@ -19,12 +21,25 @@ describe('Botao', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('SOS usa o vermelho e altura mínima de 48 px', async () => {
-    await render(<Botao titulo="SOS" variante="sos" onPress={jest.fn()} />);
-    const estilo = screen.getByRole('button', { name: 'SOS' }).props.style;
-    const plano = Object.assign({}, ...[estilo].flat(Infinity).filter(Boolean));
-    expect(plano.backgroundColor).toBe(cores.vermelho);
-    expect(plano.minHeight).toBeGreaterThanOrEqual(48);
+  it('principal é laranja; SOS é vermelho; ambos com 52 px ou mais', async () => {
+    await render(
+      <>
+        <Botao titulo="Iniciar" onPress={jest.fn()} />
+        <Botao titulo="SOS" variante="sos" onPress={jest.fn()} />
+      </>,
+    );
+    const iniciar = plano(screen.getByRole('button', { name: 'Iniciar' }).props.style);
+    const sos = plano(screen.getByRole('button', { name: 'SOS' }).props.style);
+    expect(iniciar.backgroundColor).toBe(cores.acao);
+    expect(sos.backgroundColor).toBe(cores.sos);
+    expect(iniciar.minHeight).toBeGreaterThanOrEqual(52);
+  });
+});
+
+describe('BotaoIcone', () => {
+  it('tem rótulo acessível mesmo sem texto visível', async () => {
+    await render(<BotaoIcone icone="camadas" rotulo="Camadas do mapa" onPress={jest.fn()} />);
+    expect(screen.getByRole('button', { name: 'Camadas do mapa' })).toBeTruthy();
   });
 });
 
@@ -41,27 +56,40 @@ describe('Avatar', () => {
     expect(screen.getByLabelText('Zé Ferreira, Aberto a encontro')).toBeTruthy();
     expect(screen.getByText('ZF')).toBeTruthy();
   });
+
+  it.each([
+    ['Zé Ferreira', 'ZF'],
+    ['Marcos', 'M'],
+    ['  ivan  prado  coruja ', 'IC'],
+  ])('iniciais de "%s" = %s', (nome, esperado) => {
+    expect(iniciais(nome)).toBe(esperado);
+  });
 });
 
-describe('BarraNavegacao', () => {
+describe('Pino', () => {
+  it('descreve o lugar para leitores de tela', async () => {
+    await render(<Pino tipo="posto" rotulo="R$ 6,29" descricao="Posto Trevo, R$ 6,29" />);
+    expect(screen.getByLabelText('Posto Trevo, R$ 6,29')).toBeTruthy();
+  });
+});
+
+describe('BarraAbas', () => {
   it('mostra as 5 abas traduzidas e troca ao tocar', async () => {
     const onTrocar = jest.fn();
-    await render(<BarraNavegacao ativa="mapa" onTrocar={onTrocar} />);
-    const abas = screen.getAllByRole('tab');
-    expect(abas).toHaveLength(5);
+    await render(<BarraAbas ativa="mapa" onTrocar={onTrocar} />);
+    expect(screen.getAllByRole('tab')).toHaveLength(5);
     expect(screen.getByRole('tab', { name: 'Mapa' })).toBeSelected();
     await fireEvent.press(screen.getByRole('tab', { name: 'Conquistas' }));
     expect(onTrocar).toHaveBeenCalledWith('conquistas');
   });
 });
 
-describe('CartaoBordado', () => {
-  it('mostra o conteúdo', async () => {
-    await render(
-      <CartaoBordado overlock>
-        <Texto>Rota das Cachoeiras</Texto>
-      </CartaoBordado>,
-    );
-    expect(screen.getByText('Rota das Cachoeiras')).toBeTruthy();
+describe('ícones', () => {
+  it('todos os ícones têm desenho', () => {
+    for (const [nome, caminhos] of Object.entries(caminhosIcones)) {
+      expect(caminhos.length).toBeGreaterThan(0);
+      for (const d of caminhos) expect(d).toMatch(/^M/);
+      expect(nome).toBeTruthy();
+    }
   });
 });

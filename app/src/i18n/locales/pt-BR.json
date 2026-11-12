@@ -1,7 +1,10 @@
 {
   "comum": {
     "voltar": "Voltar",
-    "fechar": "Fechar"
+    "fechar": "Fechar",
+    "emBreve": "Em breve",
+    "exemplo": "exemplo",
+    "entendi": "Entendi"
   },
   "abas": {
     "mapa": "Mapa",
@@ -10,52 +13,84 @@
     "conquistas": "Conquistas",
     "perfil": "Perfil"
   },
-  "testes": {
-    "titulo": "Prova técnica",
-    "subtitulo": "Etapa 0 · versão de teste",
-    "catalogo": "Catálogo de componentes",
-    "catalogoDesc": "Botões, cartões, chips e avatares no visual Patch de Colete",
-    "mapa": "Mapa com estilo próprio",
-    "mapaDesc": "Mapa escuro dos Bodes, com estradas creme",
-    "navegacao": "Prova de navegação",
-    "navegacaoDesc": "Rota curva a curva com voz",
-    "emBreve": "Em breve"
+  "mapa": {
+    "busca": "Para onde vamos?",
+    "meuPerfil": "Meu perfil",
+    "filtros": {
+      "tudo": "Tudo",
+      "irmaos": "Irmãos",
+      "postos": "Postos",
+      "sedes": "Sedes",
+      "lojas": "Lojas"
+    },
+    "visibilidade": "Como apareço no mapa",
+    "aprox": "Aprox.",
+    "camadas": "Legenda do mapa",
+    "minhaLocalizacao": "Minha localização",
+    "nestaArea": "Nesta área",
+    "contagem": "{{irmaos}} irmãos · {{sedes}} sedes · {{pontos}} pontos",
+    "agapeRotulo": "Ágape relâmpago · termina em {{tempo}}",
+    "agapeTitulo": "Zé no Posto Trevo",
+    "agapeTexto": "4 km · 3 irmãos confirmados",
+    "vou": "Vou",
+    "postoProximo": "Posto mais próximo",
+    "postoNaRota": "Posto na rota",
+    "visibilidadeTexto": "Hoje você aparece de forma aproximada (cerca de 5 km). A escolha completa — invisível, cidade, aproximado ou preciso — chega com o mapa ao vivo dos irmãos.",
+    "agapeTextoAviso": "Os Ágapes de verdade chegam com a confraternização. Este é um exemplo do visual.",
+    "legendaAsfalto": "Asfalto",
+    "legendaTerra": "Estrada de terra",
+    "legendaRota": "Sua rota",
+    "legendaRotaTerra": "Sua rota na terra",
+    "dadosExemplo": "Irmãos, sedes e postos deste mapa são exemplos até o cadastro real."
   },
-  "catalogo": {
-    "titulo": "Catálogo",
-    "botoes": "Botões",
-    "principal": "Vou",
-    "secundario": "Talvez",
+  "rota": {
+    "titulo": "Planejar rota",
+    "origem": "Minha localização",
+    "destino": "Para onde",
+    "tipoEstrada": "Tipo de estrada",
+    "asfalto": "Só asfalto",
+    "misto": "Misto",
+    "terra": "Prefiro terra",
+    "explicacao": {
+      "asfalto": "Evita qualquer trecho de terra, mesmo que a viagem fique mais longa.",
+      "misto": "O caminho mais curto, com ou sem terra.",
+      "terra": "Procura estradas de terra sempre que possível."
+    },
+    "calculando": "Calculando a rota…",
+    "km": "{{km}} km",
+    "duracao": "{{tempo}} · chegada {{hora}}",
+    "terraKm": "{{km}} km",
+    "terraRotulo": "Terra",
+    "composicao": "{{asfalto}}% asfalto, {{terra}}% terra",
+    "iniciar": "Iniciar",
+    "tentarDeNovo": "Tentar de novo",
+    "erros": {
+      "semRede": "Sem conexão com o servidor de rotas. Confira a internet e tente de novo.",
+      "semRota": "Não achamos um caminho de moto até esse destino com esse tipo de estrada.",
+      "semLocalizacao": "Ainda sem a sua localização. Libere a localização e vá para um lugar aberto."
+    },
+    "aviso": "Trechos de terra vêm do OpenStreetMap e podem estar incompletos na sua região."
+  },
+  "pilotando": {
+    "preparando": "Preparando a navegação…",
+    "alerta": "Alerta",
+    "reagrupar": "Reagrupar",
     "sos": "SOS",
-    "chips": "Filtros",
-    "chipTudo": "Tudo",
-    "chipIrmaos": "Irmãos",
-    "chipPostos": "Postos",
-    "chipLojas": "Lojas",
-    "cartoes": "Cartões",
-    "cartaoTitulo": "Rota das Cachoeiras · Nobres",
-    "cartaoTexto": "Saída 7h da sede · 280 km · 18 confirmados",
-    "avatares": "Avatares",
-    "statusAberto": "Aberto a encontro",
-    "statusEstrada": "Na estrada",
-    "statusNaoPerturbe": "Não perturbe",
-    "folha": "Folha inferior",
-    "abrirFolha": "Abrir folha",
-    "folhaTexto": "Zé no Posto Trevo · 4 km · 3 irmãos confirmados",
-    "barra": "Barra de navegação"
+    "sosDica": "segure 2 s",
+    "postoProximo": "Posto próximo",
+    "postoNaRota": "Posto na rota",
+    "encerrar": "Encerrar",
+    "rotaRapida": "O Google não aceitou a rota planejada; seguindo a rota dele até o destino.",
+    "emBreveAlerta": "Os alertas de estrada para o comboio chegam com os passeios.",
+    "emBreveReagrupar": "O reagrupamento do comboio chega com os passeios.",
+    "emBrevePosto": "A busca de postos chega com os lugares.",
+    "sosTeste": "Versão de teste: o SOS ainda não avisa ninguém. Em emergência, ligue 192 (SAMU) ou 193 (Bombeiros)."
   },
   "navegacao": {
-    "titulo": "Prova de navegação",
-    "escolha": "Escolha o destino",
-    "chapada": "Chapada dos Guimarães",
-    "centroCuiaba": "Centro de Cuiabá",
-    "cincoKm": "Ponto a 5 km daqui",
-    "iniciar": "Iniciar navegação",
-    "encerrar": "Encerrar",
-    "preparando": "Preparando a rota…",
-    "aviso": "Teste parado ou com garupa. Não mexa no celular pilotando.",
     "termosTitulo": "Termos da navegação",
     "permissaoMotivo": "Precisamos da sua localização para traçar a rota.",
+    "permitir": "Permitir localização",
+    "aviso": "Use parado ou na garupa. Não mexa no celular pilotando.",
     "erros": {
       "semPermissao": "Sem permissão de localização. Libere nas configurações do celular.",
       "termosRecusados": "Os termos do Google precisam ser aceitos para navegar.",
@@ -65,5 +100,47 @@
       "semLocalizacao": "Ainda sem sinal de GPS. Vá para um lugar aberto e tente de novo.",
       "erro": "Algo deu errado. Tente de novo."
     }
+  },
+  "destinos": {
+    "chapada": "Mirante da Chapada",
+    "centroCuiaba": "Centro de Cuiabá",
+    "cincoKm": "Ponto a 5 km daqui",
+    "postoTrevo": "Posto Trevo (exemplo)"
+  },
+  "vazios": {
+    "feedTitulo": "O feed do clube vem aí",
+    "feedTexto": "Fotos, viagens e avisos da diretoria chegam na etapa social.",
+    "passeiosTitulo": "Nenhum passeio por enquanto",
+    "passeiosTexto": "A agenda dos capítulos e o comboio ao vivo chegam em breve.",
+    "conquistasTitulo": "Sua primeira viagem começa aqui",
+    "conquistasTexto": "Rode, visite sedes e participe de Ágapes para ganhar selos do Passaporte do Bode."
+  },
+  "perfil": {
+    "titulo": "Perfil",
+    "visitante": "Irmão em teste",
+    "capitulo": "Capítulo Cuiabá",
+    "catalogo": "Catálogo de componentes",
+    "catalogoDesc": "Todos os elementos visuais do app",
+    "versao": "Versão de teste · Etapa 0"
+  },
+  "catalogo": {
+    "titulo": "Catálogo",
+    "botoes": "Botões",
+    "principal": "Iniciar",
+    "secundario": "Posto na rota",
+    "contorno": "Cancelar",
+    "sos": "SOS",
+    "chips": "Filtros",
+    "cartoes": "Cartões",
+    "cartaoTitulo": "Rota das Cachoeiras · Nobres",
+    "cartaoTexto": "Saída 7h da sede · 280 km · 18 confirmados",
+    "avatares": "Avatares e status",
+    "statusAberto": "Aberto a encontro",
+    "statusEstrada": "Na estrada",
+    "statusCafe": "Parado para café",
+    "statusNaoPerturbe": "Não perturbe",
+    "pinos": "Pinos do mapa",
+    "icones": "Ícones",
+    "barra": "Barra de abas"
   }
 }

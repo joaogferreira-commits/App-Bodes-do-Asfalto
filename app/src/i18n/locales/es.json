@@ -1,7 +1,10 @@
 {
   "comum": {
     "voltar": "Volver",
-    "fechar": "Cerrar"
+    "fechar": "Cerrar",
+    "emBreve": "Próximamente",
+    "exemplo": "ejemplo",
+    "entendi": "Entendido"
   },
   "abas": {
     "mapa": "Mapa",
@@ -10,52 +13,84 @@
     "conquistas": "Logros",
     "perfil": "Perfil"
   },
-  "testes": {
-    "titulo": "Prueba técnica",
-    "subtitulo": "Etapa 0 · versión de prueba",
-    "catalogo": "Catálogo de componentes",
-    "catalogoDesc": "Botones, tarjetas, chips y avatares en el estilo Parche de Chaleco",
-    "mapa": "Mapa con estilo propio",
-    "mapaDesc": "Mapa oscuro de los Bodes, con rutas crema",
-    "navegacao": "Prueba de navegación",
-    "navegacaoDesc": "Ruta giro a giro con voz",
-    "emBreve": "Próximamente"
+  "mapa": {
+    "busca": "¿A dónde vamos?",
+    "meuPerfil": "Mi perfil",
+    "filtros": {
+      "tudo": "Todo",
+      "irmaos": "Hermanos",
+      "postos": "Gasolineras",
+      "sedes": "Sedes",
+      "lojas": "Logias"
+    },
+    "visibilidade": "Cómo aparezco en el mapa",
+    "aprox": "Aprox.",
+    "camadas": "Leyenda del mapa",
+    "minhaLocalizacao": "Mi ubicación",
+    "nestaArea": "En esta zona",
+    "contagem": "{{irmaos}} hermanos · {{sedes}} sedes · {{pontos}} puntos",
+    "agapeRotulo": "Ágape relámpago · termina en {{tempo}}",
+    "agapeTitulo": "Zé en la Gasolinera Trevo",
+    "agapeTexto": "4 km · 3 hermanos confirmados",
+    "vou": "Voy",
+    "postoProximo": "Gasolinera más cercana",
+    "postoNaRota": "Gasolinera en la ruta",
+    "visibilidadeTexto": "Hoy apareces de forma aproximada (unos 5 km). La elección completa — invisible, ciudad, aproximado o preciso — llega con el mapa en vivo de los hermanos.",
+    "agapeTextoAviso": "Los Ágapes reales llegan con la confraternización. Este es un ejemplo del diseño.",
+    "legendaAsfalto": "Asfalto",
+    "legendaTerra": "Camino de tierra",
+    "legendaRota": "Tu ruta",
+    "legendaRotaTerra": "Tu ruta en tierra",
+    "dadosExemplo": "Hermanos, sedes y gasolineras de este mapa son ejemplos hasta el registro real."
   },
-  "catalogo": {
-    "titulo": "Catálogo",
-    "botoes": "Botones",
-    "principal": "Voy",
-    "secundario": "Tal vez",
+  "rota": {
+    "titulo": "Planear ruta",
+    "origem": "Mi ubicación",
+    "destino": "A dónde",
+    "tipoEstrada": "Tipo de camino",
+    "asfalto": "Solo asfalto",
+    "misto": "Mixto",
+    "terra": "Prefiero tierra",
+    "explicacao": {
+      "asfalto": "Evita cualquier tramo de tierra, aunque el viaje sea más largo.",
+      "misto": "El camino más corto, con o sin tierra.",
+      "terra": "Busca caminos de tierra siempre que sea posible."
+    },
+    "calculando": "Calculando la ruta…",
+    "km": "{{km}} km",
+    "duracao": "{{tempo}} · llegada {{hora}}",
+    "terraKm": "{{km}} km",
+    "terraRotulo": "Tierra",
+    "composicao": "{{asfalto}}% asfalto, {{terra}}% tierra",
+    "iniciar": "Iniciar",
+    "tentarDeNovo": "Intentar de nuevo",
+    "erros": {
+      "semRede": "Sin conexión con el servidor de rutas. Revisa internet e inténtalo de nuevo.",
+      "semRota": "No encontramos un camino en moto hasta ese destino con ese tipo de camino.",
+      "semLocalizacao": "Todavía sin tu ubicación. Activa la ubicación y ve a un lugar abierto."
+    },
+    "aviso": "Los tramos de tierra vienen de OpenStreetMap y pueden estar incompletos en tu región."
+  },
+  "pilotando": {
+    "preparando": "Preparando la navegación…",
+    "alerta": "Alerta",
+    "reagrupar": "Reagrupar",
     "sos": "SOS",
-    "chips": "Filtros",
-    "chipTudo": "Todo",
-    "chipIrmaos": "Hermanos",
-    "chipPostos": "Gasolineras",
-    "chipLojas": "Logias",
-    "cartoes": "Tarjetas",
-    "cartaoTitulo": "Ruta de las Cascadas · Nobres",
-    "cartaoTexto": "Salida 7h de la sede · 280 km · 18 confirmados",
-    "avatares": "Avatares",
-    "statusAberto": "Abierto a encuentro",
-    "statusEstrada": "En la ruta",
-    "statusNaoPerturbe": "No molestar",
-    "folha": "Hoja inferior",
-    "abrirFolha": "Abrir hoja",
-    "folhaTexto": "Zé en la Gasolinera Trevo · 4 km · 3 hermanos confirmados",
-    "barra": "Barra de navegación"
+    "sosDica": "mantén 2 s",
+    "postoProximo": "Gasolinera cercana",
+    "postoNaRota": "Gasolinera en ruta",
+    "encerrar": "Terminar",
+    "rotaRapida": "Google no aceptó la ruta planeada; siguiendo su ruta hasta el destino.",
+    "emBreveAlerta": "Las alertas de camino para el convoy llegan con los paseos.",
+    "emBreveReagrupar": "El reagrupamiento del convoy llega con los paseos.",
+    "emBrevePosto": "La búsqueda de gasolineras llega con los lugares.",
+    "sosTeste": "Versión de prueba: el SOS todavía no avisa a nadie. En emergencia, llama al 192 (SAMU) o 193 (Bomberos)."
   },
   "navegacao": {
-    "titulo": "Prueba de navegación",
-    "escolha": "Elige el destino",
-    "chapada": "Chapada dos Guimarães",
-    "centroCuiaba": "Centro de Cuiabá",
-    "cincoKm": "Punto a 5 km de aquí",
-    "iniciar": "Iniciar navegación",
-    "encerrar": "Terminar",
-    "preparando": "Preparando la ruta…",
-    "aviso": "Prueba detenido o con acompañante. No uses el celular conduciendo.",
     "termosTitulo": "Términos de la navegación",
     "permissaoMotivo": "Necesitamos tu ubicación para trazar la ruta.",
+    "permitir": "Permitir ubicación",
+    "aviso": "Úsalo detenido o como acompañante. No uses el celular conduciendo.",
     "erros": {
       "semPermissao": "Sin permiso de ubicación. Actívalo en los ajustes del celular.",
       "termosRecusados": "Debes aceptar los términos de Google para navegar.",
@@ -65,5 +100,47 @@
       "semLocalizacao": "Todavía sin señal GPS. Ve a un lugar abierto e inténtalo de nuevo.",
       "erro": "Algo salió mal. Inténtalo de nuevo."
     }
+  },
+  "destinos": {
+    "chapada": "Mirador de la Chapada",
+    "centroCuiaba": "Centro de Cuiabá",
+    "cincoKm": "Punto a 5 km de aquí",
+    "postoTrevo": "Gasolinera Trevo (ejemplo)"
+  },
+  "vazios": {
+    "feedTitulo": "El feed del club está por llegar",
+    "feedTexto": "Fotos, viajes y avisos de la directiva llegan en la etapa social.",
+    "passeiosTitulo": "Ningún paseo por ahora",
+    "passeiosTexto": "La agenda de los capítulos y el convoy en vivo llegan pronto.",
+    "conquistasTitulo": "Tu primer viaje empieza aquí",
+    "conquistasTexto": "Rueda, visita sedes y participa en Ágapes para ganar sellos del Pasaporte del Bode."
+  },
+  "perfil": {
+    "titulo": "Perfil",
+    "visitante": "Hermano en prueba",
+    "capitulo": "Capítulo Cuiabá",
+    "catalogo": "Catálogo de componentes",
+    "catalogoDesc": "Todos los elementos visuales de la app",
+    "versao": "Versión de prueba · Etapa 0"
+  },
+  "catalogo": {
+    "titulo": "Catálogo",
+    "botoes": "Botones",
+    "principal": "Iniciar",
+    "secundario": "Gasolinera en ruta",
+    "contorno": "Cancelar",
+    "sos": "SOS",
+    "chips": "Filtros",
+    "cartoes": "Tarjetas",
+    "cartaoTitulo": "Ruta de las Cascadas · Nobres",
+    "cartaoTexto": "Salida 7h de la sede · 280 km · 18 confirmados",
+    "avatares": "Avatares y estado",
+    "statusAberto": "Abierto a encuentro",
+    "statusEstrada": "En la ruta",
+    "statusCafe": "Parado para café",
+    "statusNaoPerturbe": "No molestar",
+    "pinos": "Pines del mapa",
+    "icones": "Íconos",
+    "barra": "Barra de pestañas"
   }
 }

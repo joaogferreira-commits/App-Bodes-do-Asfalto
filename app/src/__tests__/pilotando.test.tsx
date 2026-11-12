@@ -1,16 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { render, screen } from '@testing-library/react-native';
 
-import TelaNavegacao from '@/app/navegacao';
+import { ProvedorViagem } from '@/estado/viagem';
+import TelaPilotando from '@/app/pilotando';
 
 const permissao = { granted: false };
 
 jest.mock('expo-router', () => ({ router: { back: jest.fn() } }));
 jest.mock('expo-location', () => ({
   getForegroundPermissionsAsync: jest.fn(async () => ({ granted: permissao.granted })),
-  requestForegroundPermissionsAsync: jest.fn(async () => {
-    permissao.granted = true;
-    return { granted: true };
-  }),
+  requestForegroundPermissionsAsync: jest.fn(async () => ({ granted: permissao.granted })),
   getCurrentPositionAsync: jest.fn(async () => ({ coords: { latitude: -15.6, longitude: -56.1 } })),
   Accuracy: { High: 4 },
 }));
@@ -29,33 +27,36 @@ jest.mock('@googlemaps/react-native-navigation-sdk', () => {
   };
   return {
     NavigationProvider: ({ children }: { children: React.ReactNode }) => children,
-    NavigationView: (props: object) => <View {...props} />,
+    NavigationView: () => <View testID="mapa-google" />,
     useNavigation: () => ({ navigationController: controlador }),
     NavigationNightMode: { FORCE_NIGHT: 2 },
     TaskRemovedBehavior: { QUIT_SERVICE: 1 },
   };
 });
 
-describe('tela de navegação', () => {
+const tela = () => (
+  <ProvedorViagem>
+    <TelaPilotando />
+  </ProvedorViagem>
+);
+
+describe('modo pilotando', () => {
   beforeEach(() => {
     permissao.granted = false;
   });
 
-  it('não monta o mapa do Google antes da permissão de localização (evita o app fechar)', async () => {
-    await render(<TelaNavegacao />);
-    expect(screen.queryByTestId('mapa-navegacao')).toBeNull();
-    expect(await screen.findByText('Precisamos da sua localização para traçar a rota.')).toBeTruthy();
+  it('não monta o mapa do Google sem permissão de localização (evita o app fechar)', async () => {
+    await render(tela());
+    expect(screen.queryByTestId('mapa-google')).toBeNull();
+    expect(await screen.findByRole('button', { name: 'Permitir localização' })).toBeTruthy();
   });
 
-  it('monta o mapa quando a permissão já existe', async () => {
+  it('com permissão, mostra o mapa e os 6 botões grandes', async () => {
     permissao.granted = true;
-    await render(<TelaNavegacao />);
-    expect(await screen.findByTestId('mapa-navegacao')).toBeTruthy();
-  });
-
-  it('ao iniciar, pede a permissão e só então mostra o mapa', async () => {
-    await render(<TelaNavegacao />);
-    await fireEvent.press(screen.getByRole('button', { name: 'Iniciar navegação' }));
-    expect(await screen.findByTestId('mapa-navegacao')).toBeTruthy();
+    await render(tela());
+    expect(await screen.findByTestId('mapa-google')).toBeTruthy();
+    for (const nome of ['Alerta', 'Reagrupar', 'SOS', 'Posto próximo', 'Posto na rota', 'Encerrar']) {
+      expect(screen.getByRole('button', { name: nome })).toBeTruthy();
+    }
   });
 });

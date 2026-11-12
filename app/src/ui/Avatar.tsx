@@ -1,87 +1,50 @@
 import { StyleSheet, View } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
 
 import { cores, fontes } from '@/theme';
 
 import { Texto } from './Texto';
 
-export type StatusIrmao = 'aberto' | 'estrada' | 'naoPerturbe' | 'nenhum';
+export type StatusIrmao = 'aberto' | 'estrada' | 'cafe' | 'naoPerturbe' | 'nenhum';
 
-const corDoStatus: Record<StatusIrmao, string> = {
-  aberto: cores.laranja,
-  estrada: cores.jeans,
-  naoPerturbe: '#7A7268',
-  nenhum: cores.linhaEscura,
+/** Anel por status (Kit visual): laranja aberto a encontro, azul na estrada, ouro no café, cinza não perturbe. */
+export const corDoStatus: Record<StatusIrmao, string> = {
+  aberto: cores.acao,
+  estrada: cores.azulRio,
+  cafe: cores.ouro,
+  naoPerturbe: '#6E6458',
+  nenhum: cores.linhaForte,
 };
 
-type Props = {
-  nome: string;
-  status?: StatusIrmao;
-  tamanho?: number;
-  /** Posição aproximada: círculo tracejado em volta (Kit visual). */
-  aproximado?: boolean;
-  rotuloStatus?: string;
-};
+type Props = { nome: string; status?: StatusIrmao; tamanho?: number; rotuloStatus?: string };
 
-function iniciais(nome: string): string {
-  const partes = nome.trim().split(/\s+/);
-  return (
-    (partes[0]?.[0] ?? '') + (partes.length > 1 ? (partes[partes.length - 1]?.[0] ?? '') : '')
-  ).toUpperCase();
+export function iniciais(nome: string): string {
+  const partes = nome.trim().split(/\s+/).filter(Boolean);
+  const primeira = partes[0]?.[0] ?? '';
+  const ultima = partes.length > 1 ? (partes[partes.length - 1]?.[0] ?? '') : '';
+  return (primeira + ultima).toUpperCase();
 }
 
-/** Avatar com anel de status e moldura de pesponto. Até o irmão subir foto, mostra as iniciais. */
-export function Avatar({ nome, status = 'nenhum', tamanho = 56, aproximado, rotuloStatus }: Props) {
-  const anel = 3;
-  const total = tamanho + (aproximado ? 12 : 0);
-  const c = total / 2;
+/** Avatar redondo com anel de status. Até o irmão subir foto, mostra as iniciais. */
+export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus }: Props) {
   return (
     <View
       accessible
       accessibilityRole="image"
       accessibilityLabel={rotuloStatus ? `${nome}, ${rotuloStatus}` : nome}
-      style={{ width: total, height: total }}
+      style={[
+        estilos.base,
+        { width: tamanho, height: tamanho, borderRadius: tamanho / 2, borderColor: corDoStatus[status] },
+      ]}
     >
-      <Svg width={total} height={total} style={StyleSheet.absoluteFill}>
-        {aproximado && (
-          <Circle
-            cx={c}
-            cy={c}
-            r={c - 1}
-            stroke={cores.caramelo}
-            strokeWidth={1.5}
-            strokeDasharray="4 4"
-            fill="none"
-          />
-        )}
-        <Circle
-          cx={c}
-          cy={c}
-          r={tamanho / 2 - anel / 2}
-          stroke={corDoStatus[status]}
-          strokeWidth={anel}
-          fill={cores.sarja}
-        />
-        <Circle
-          cx={c}
-          cy={c}
-          r={tamanho / 2 - anel - 3}
-          stroke={cores.creme}
-          strokeOpacity={0.6}
-          strokeWidth={1}
-          strokeDasharray="3 3"
-          fill="none"
-        />
-      </Svg>
-      <View style={[StyleSheet.absoluteFill, estilos.centro]}>
-        <Texto
-          style={{ fontFamily: fontes.titulo, fontSize: Math.max(13, tamanho * 0.36), color: cores.creme }}
-        >
-          {iniciais(nome)}
-        </Texto>
-      </View>
+      <Texto
+        style={{ fontFamily: fontes.titulo, fontSize: Math.max(13, tamanho * 0.34), color: cores.texto }}
+      >
+        {iniciais(nome)}
+      </Texto>
     </View>
   );
 }
 
-const estilos = StyleSheet.create({ centro: { alignItems: 'center', justifyContent: 'center' } });
+const estilos = StyleSheet.create({
+  base: { backgroundColor: '#2A2219', borderWidth: 3, alignItems: 'center', justifyContent: 'center' },
+});

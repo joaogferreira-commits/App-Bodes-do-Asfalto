@@ -1,6 +1,6 @@
 export type Coordenada = { lat: number; lng: number };
 
-export type Destino = { chave: 'chapada' | 'centroCuiaba' | 'cincoKm'; posicao?: Coordenada };
+export type Destino = { chave: 'chapada' | 'centroCuiaba' | 'cincoKm' | 'postoTrevo'; posicao?: Coordenada };
 
 /** Destinos fixos da prova (região de Cuiabá) e um ponto a 5 km para testar em qualquer cidade. */
 export const destinosDaProva: Destino[] = [
@@ -8,6 +8,9 @@ export const destinosDaProva: Destino[] = [
   { chave: 'centroCuiaba', posicao: { lat: -15.601, lng: -56.0974 } },
   { chave: 'cincoKm' },
 ];
+
+/** Posto de exemplo (até a importação dos postos na Etapa 2). */
+export const postoExemplo: Destino = { chave: 'postoTrevo', posicao: { lat: -15.5712, lng: -56.0751 } };
 
 const RAIO_TERRA_KM = 6371;
 

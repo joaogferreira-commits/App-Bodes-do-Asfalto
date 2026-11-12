@@ -77,6 +77,24 @@ describe('iniciarNavegacao', () => {
     expect(c.startGuidance).not.toHaveBeenCalled();
   });
 
+  it('com token, segue a rota planejada', async () => {
+    const c = controladorFalso();
+    await expect(iniciarNavegacao({ ...base(c), tokenRota: 'tok' })).resolves.toBe('ok');
+    expect(c.setDestinations).toHaveBeenCalledTimes(1);
+    expect(c.setDestinations.mock.calls[0]![1]).toEqual({
+      routeTokenOptions: { routeToken: 'tok', travelMode: MODO_MOTO },
+    });
+  });
+
+  it('se o token for recusado, usa a rota do Google e avisa', async () => {
+    const c = controladorFalso({
+      setDestinations: jest.fn().mockResolvedValueOnce('WAYPOINT_ERROR').mockResolvedValueOnce('OK'),
+    });
+    await expect(iniciarNavegacao({ ...base(c), tokenRota: 'tok' })).resolves.toBe('okRotaRapida');
+    expect(c.setDestinations).toHaveBeenCalledTimes(2);
+    expect(c.startGuidance).toHaveBeenCalled();
+  });
+
   it('erro inesperado vira "erro"', async () => {
     const c = controladorFalso({ init: jest.fn().mockRejectedValue(new Error('x')) });
     await expect(iniciarNavegacao(base(c))).resolves.toBe('erro');

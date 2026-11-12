@@ -7,7 +7,10 @@ export type ControladorNavegacao = {
   init(): Promise<string>;
   setDestinations(
     waypoints: { title?: string; position: Coordenada }[],
-    options?: { routingOptions?: { travelMode?: number; avoidFerries?: boolean } },
+    options?: {
+      routingOptions?: { travelMode?: number; avoidFerries?: boolean };
+      routeTokenOptions?: { routeToken: string; travelMode?: number };
+    },
   ): Promise<string>;
   setAudioGuidanceType(tipo: number): Promise<void>;
   startGuidance(): Promise<void>;
@@ -15,6 +18,7 @@ export type ControladorNavegacao = {
 
 export type ResultadoNavegacao =
   | 'ok'
+  | 'okRotaRapida'
   | 'semPermissao'
   | 'termosRecusados'
   | 'chaveNaoAutorizada'
@@ -33,6 +37,8 @@ type Dependencias = {
   posicaoAtual: () => Promise<Coordenada | null>;
   destino: (atual: Coordenada) => Coordenada;
   tituloDestino: string;
+  /** Token da rota planejada (Valhalla → Google Routes). Sem token, o Google escolhe a rota. */
+  tokenRota?: string | null;
 };
 
 /**
@@ -57,17 +63,27 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     const atual = await dep.posicaoAtual();
     if (!atual) return 'semLocalizacao';
 
-    const rota = await dep.controlador.setDestinations(
-      [{ title: dep.tituloDestino, position: dep.destino(atual) }],
-      { routingOptions: { travelMode: MODO_MOTO, avoidFerries: true } },
-    );
+    const destino = [{ title: dep.tituloDestino, position: dep.destino(atual) }];
+    let seguiuPlanejada = false;
+    let rota = 'UNKNOWN';
+    if (dep.tokenRota) {
+      rota = await dep.controlador
+        .setDestinations(destino, { routeTokenOptions: { routeToken: dep.tokenRota, travelMode: MODO_MOTO } })
+        .catch(() => 'UNKNOWN');
+      seguiuPlanejada = rota === 'OK';
+    }
+    if (!seguiuPlanejada) {
+      rota = await dep.controlador.setDestinations(destino, {
+        routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
+      });
+    }
     if (rota === 'LOCATION_DISABLED' || rota === 'LOCATION_UNKNOWN') return 'semLocalizacao';
     if (rota === 'NETWORK_ERROR') return 'semRede';
     if (rota !== 'OK') return 'semRota';
 
     await dep.controlador.setAudioGuidanceType(VOZ_COMPLETA_BLUETOOTH);
     await dep.controlador.startGuidance();
-    return 'ok';
+    return dep.tokenRota && !seguiuPlanejada ? 'okRotaRapida' : 'ok';
   } catch {
     return 'erro';
   }

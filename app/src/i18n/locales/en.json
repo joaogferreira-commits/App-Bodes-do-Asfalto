@@ -1,7 +1,10 @@
 {
   "comum": {
     "voltar": "Back",
-    "fechar": "Close"
+    "fechar": "Close",
+    "emBreve": "Coming soon",
+    "exemplo": "sample",
+    "entendi": "Got it"
   },
   "abas": {
     "mapa": "Map",
@@ -10,52 +13,84 @@
     "conquistas": "Badges",
     "perfil": "Profile"
   },
-  "testes": {
-    "titulo": "Technical proof",
-    "subtitulo": "Stage 0 · test build",
-    "catalogo": "Component catalog",
-    "catalogoDesc": "Buttons, cards, chips and avatars in the Vest Patch style",
-    "mapa": "Custom-styled map",
-    "mapaDesc": "Dark Bodes map with cream roads",
-    "navegacao": "Navigation proof",
-    "navegacaoDesc": "Turn-by-turn route with voice",
-    "emBreve": "Coming soon"
+  "mapa": {
+    "busca": "Where to?",
+    "meuPerfil": "My profile",
+    "filtros": {
+      "tudo": "All",
+      "irmaos": "Brothers",
+      "postos": "Gas",
+      "sedes": "Clubhouses",
+      "lojas": "Lodges"
+    },
+    "visibilidade": "How I appear on the map",
+    "aprox": "Approx.",
+    "camadas": "Map legend",
+    "minhaLocalizacao": "My location",
+    "nestaArea": "In this area",
+    "contagem": "{{irmaos}} brothers · {{sedes}} clubhouses · {{pontos}} places",
+    "agapeRotulo": "Flash Ágape · ends in {{tempo}}",
+    "agapeTitulo": "Zé at Trevo Gas Station",
+    "agapeTexto": "4 km · 3 brothers going",
+    "vou": "Going",
+    "postoProximo": "Nearest gas station",
+    "postoNaRota": "Gas on route",
+    "visibilidadeTexto": "Right now you appear approximately (about 5 km). The full choice — invisible, city, approximate or precise — comes with the live brothers map.",
+    "agapeTextoAviso": "Real Ágapes come with the fellowship features. This is a design sample.",
+    "legendaAsfalto": "Paved",
+    "legendaTerra": "Dirt road",
+    "legendaRota": "Your route",
+    "legendaRotaTerra": "Your route on dirt",
+    "dadosExemplo": "Brothers, clubhouses and gas stations on this map are samples until real data arrives."
   },
-  "catalogo": {
-    "titulo": "Catalog",
-    "botoes": "Buttons",
-    "principal": "Going",
-    "secundario": "Maybe",
+  "rota": {
+    "titulo": "Plan route",
+    "origem": "My location",
+    "destino": "Where to",
+    "tipoEstrada": "Road type",
+    "asfalto": "Paved only",
+    "misto": "Mixed",
+    "terra": "Prefer dirt",
+    "explicacao": {
+      "asfalto": "Avoids any dirt section, even if the trip gets longer.",
+      "misto": "The shortest way, with or without dirt.",
+      "terra": "Looks for dirt roads whenever possible."
+    },
+    "calculando": "Calculating route…",
+    "km": "{{km}} km",
+    "duracao": "{{tempo}} · arrive {{hora}}",
+    "terraKm": "{{km}} km",
+    "terraRotulo": "Dirt",
+    "composicao": "{{asfalto}}% paved, {{terra}}% dirt",
+    "iniciar": "Start",
+    "tentarDeNovo": "Try again",
+    "erros": {
+      "semRede": "No connection to the route server. Check your internet and try again.",
+      "semRota": "We could not find a motorcycle route to that place with this road type.",
+      "semLocalizacao": "No location yet. Allow location and go somewhere open."
+    },
+    "aviso": "Dirt sections come from OpenStreetMap and may be incomplete in your area."
+  },
+  "pilotando": {
+    "preparando": "Preparing navigation…",
+    "alerta": "Alert",
+    "reagrupar": "Regroup",
     "sos": "SOS",
-    "chips": "Filters",
-    "chipTudo": "All",
-    "chipIrmaos": "Brothers",
-    "chipPostos": "Gas stations",
-    "chipLojas": "Lodges",
-    "cartoes": "Cards",
-    "cartaoTitulo": "Waterfalls Route · Nobres",
-    "cartaoTexto": "Leaves 7am from the clubhouse · 280 km · 18 going",
-    "avatares": "Avatars",
-    "statusAberto": "Open to meet",
-    "statusEstrada": "On the road",
-    "statusNaoPerturbe": "Do not disturb",
-    "folha": "Bottom sheet",
-    "abrirFolha": "Open sheet",
-    "folhaTexto": "Zé at Trevo Gas Station · 4 km · 3 brothers going",
-    "barra": "Navigation bar"
+    "sosDica": "hold 2 s",
+    "postoProximo": "Nearest gas",
+    "postoNaRota": "Gas on route",
+    "encerrar": "End",
+    "rotaRapida": "Google did not accept the planned route; following its own route to the destination.",
+    "emBreveAlerta": "Road alerts for the group come with rides.",
+    "emBreveReagrupar": "Group regrouping comes with rides.",
+    "emBrevePosto": "Gas station search comes with places.",
+    "sosTeste": "Test version: SOS does not alert anyone yet. In an emergency, call 192 (SAMU) or 193 (Fire Department)."
   },
   "navegacao": {
-    "titulo": "Navigation proof",
-    "escolha": "Choose the destination",
-    "chapada": "Chapada dos Guimarães",
-    "centroCuiaba": "Downtown Cuiabá",
-    "cincoKm": "Point 5 km from here",
-    "iniciar": "Start navigation",
-    "encerrar": "End",
-    "preparando": "Preparing the route…",
-    "aviso": "Test while stopped or as a passenger. Don't touch the phone while riding.",
     "termosTitulo": "Navigation terms",
     "permissaoMotivo": "We need your location to plan the route.",
+    "permitir": "Allow location",
+    "aviso": "Use while stopped or as a passenger. Don't touch the phone while riding.",
     "erros": {
       "semPermissao": "No location permission. Allow it in the phone settings.",
       "termosRecusados": "Google's terms must be accepted to navigate.",
@@ -65,5 +100,47 @@
       "semLocalizacao": "No GPS signal yet. Go somewhere open and try again.",
       "erro": "Something went wrong. Try again."
     }
+  },
+  "destinos": {
+    "chapada": "Chapada lookout",
+    "centroCuiaba": "Downtown Cuiabá",
+    "cincoKm": "Point 5 km from here",
+    "postoTrevo": "Trevo Gas Station (sample)"
+  },
+  "vazios": {
+    "feedTitulo": "The club feed is coming",
+    "feedTexto": "Photos, trips and board notices arrive in the social stage.",
+    "passeiosTitulo": "No rides yet",
+    "passeiosTexto": "Chapter schedules and the live convoy are coming soon.",
+    "conquistasTitulo": "Your first trip starts here",
+    "conquistasTexto": "Ride, visit clubhouses and join Ágapes to earn Bode Passport badges."
+  },
+  "perfil": {
+    "titulo": "Profile",
+    "visitante": "Test brother",
+    "capitulo": "Cuiabá chapter",
+    "catalogo": "Component catalog",
+    "catalogoDesc": "Every visual element in the app",
+    "versao": "Test build · Stage 0"
+  },
+  "catalogo": {
+    "titulo": "Catalog",
+    "botoes": "Buttons",
+    "principal": "Start",
+    "secundario": "Gas on route",
+    "contorno": "Cancel",
+    "sos": "SOS",
+    "chips": "Filters",
+    "cartoes": "Cards",
+    "cartaoTitulo": "Waterfalls Route · Nobres",
+    "cartaoTexto": "Leaves 7am from the clubhouse · 280 km · 18 going",
+    "avatares": "Avatars and status",
+    "statusAberto": "Open to meet",
+    "statusEstrada": "On the road",
+    "statusCafe": "Coffee stop",
+    "statusNaoPerturbe": "Do not disturb",
+    "pinos": "Map pins",
+    "icones": "Icons",
+    "barra": "Tab bar"
   }
 }

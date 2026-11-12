@@ -1,22 +1,40 @@
 /**
- * Tokens da identidade "Patch de Colete" (docs/DESIGN.md, seção 1).
+ * Tokens da Interface v2 (docs/telas/v2/Sistema.dc.html).
  * Único lugar com cores, fontes, raios e espaçamentos do app.
+ * Regra: cada cor tem uma função só (laranja = ação; vermelho = só SOS; amarelo = só alerta).
  */
 export const cores = {
-  sarja: '#17130F',
-  noite: '#0C0A08',
-  linhaEscura: '#3A3028',
-  laranja: '#D9622B',
-  laranjaEscuro: '#5E230B',
-  ferrugem: '#A3401A',
-  creme: '#EFE3C8',
-  caramelo: '#C9A46A',
-  dourado: '#D8A93B',
-  jeans: '#3E5C7A',
-  oliva: '#6B7A3A',
-  vermelho: '#B3261E',
+  // fundos
+  fundo: '#0B0907',
+  superficie: '#16120E',
+  superficie2: '#201A15',
+  superficie3: '#241D17',
+  linha: '#322920',
+  linhaSuave: '#262019',
+  linhaForte: '#3A2F25',
+  // texto
+  texto: '#F3EADB',
+  textoSec: '#B8A890',
+  textoApagado: '#9C8D77',
+  // função
+  acao: '#E8692A',
+  acaoPressionada: '#C2531C',
+  sos: '#C62D22',
+  textoSobreSos: '#FFF6EC',
   alerta: '#F5C518',
-  verdePosto: '#2E7D5B',
+  // categorias
+  ouro: '#D8A93B',
+  verdePosto: '#3FA27A',
+  azulRio: '#7FA6C2',
+  // mapa
+  asfalto: '#E9DCC4',
+  terra: '#C68A45',
+  terraEscura: '#5A3E1F',
+  rotaTerra: '#F3D9B8',
+  agua: '#22323D',
+  rio: '#3D6E8F',
+  vegetacao: '#191F16',
+  chao: '#15120E',
 } as const;
 
 export type NomeCor = keyof typeof cores;
@@ -24,8 +42,8 @@ export type NomeCor = keyof typeof cores;
 export const fontes = {
   titulo: 'BarlowCondensed_700Bold',
   tituloSemi: 'BarlowCondensed_600SemiBold',
-  tituloForte: 'BarlowCondensed_800ExtraBold',
   texto: 'Inter_400Regular',
+  textoMedio: 'Inter_500Medium',
   textoSemi: 'Inter_600SemiBold',
   textoForte: 'Inter_700Bold',
 } as const;
@@ -35,14 +53,15 @@ export const tamanhoTexto = {
   pequeno: 15,
   corpo: 17,
   destaque: 20,
-  titulo: 28,
-  tituloGrande: 36,
+  subtitulo: 24,
+  titulo: 32,
+  numero: 52,
 } as const;
 
 export const raios = {
-  chip: 8,
+  pequeno: 8,
   botao: 14,
-  cartao: 18,
+  cartao: 16,
   folha: 22,
   pilula: 999,
 } as const;
@@ -60,17 +79,17 @@ export const espaco = {
 
 export const toque = {
   minimo: 48,
-  pilotando: 100,
+  botao: 52,
+  botaoGrande: 56,
+  pilotando: 112,
   carro: 66,
 } as const;
 
-/** Três níveis de profundidade (desenhados com Skia em ui/Profundidade). */
-export const profundidade = {
-  costurado: { y: 2, blur: 4, opacidade: 0.4, sombraInterna: true, brilho: false },
-  patch: { y: 6, blur: 14, opacidade: 0.5, sombraInterna: false, brilho: false },
-  flutuante: { y: 12, blur: 28, opacidade: 0.55, sombraInterna: false, brilho: true },
+/** Sombras (boxShadow nativo do React Native). */
+export const sombra = {
+  flutuante: '0px 8px 24px rgba(0,0,0,0.45)',
+  folha: '0px -12px 32px rgba(0,0,0,0.5)',
+  pino: '0px 4px 10px rgba(0,0,0,0.5)',
 } as const;
-
-export type NivelProfundidade = keyof typeof profundidade;
 
 export const movimento = { rapido: 160, normal: 200, lento: 240 } as const;

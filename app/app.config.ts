@@ -8,6 +8,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   const chaveGoogle = process.env.GOOGLE_MAPS_API_KEY ?? '';
   return {
     ...(config as ExpoConfig),
+    extra: { ...config.extra, chaveGoogle: chaveGoogle },
     android: {
       ...config.android,
       config: { ...config.android?.config, googleMaps: { apiKey: chaveGoogle } },

@@ -1,7 +1,7 @@
-import { cores, espaco, fontes, movimento, profundidade, raios, tamanhoTexto, toque } from './tokens';
+import { cores, espaco, fontes, movimento, raios, sombra, tamanhoTexto, toque } from './tokens';
 
 /**
- * Tema trocável: nome, logo, cores e fontes vêm daqui.
+ * Tema trocável: nome, cores e fontes vêm daqui.
  * O nome e o escudo podem mudar conforme a licença da marca.
  */
 export const tema = {
@@ -15,7 +15,7 @@ export const tema = {
   raios,
   espaco,
   toque,
-  profundidade,
+  sombra,
   movimento,
 } as const;
 

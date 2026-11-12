@@ -10,6 +10,8 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Feito
 
+- 12/11/2026 — Interface v2 no código: tema novo (cores com função única, testes de contraste), 30+ ícones próprios, componentes (Botão, BotãoÍcone, Chip, Cartão, Avatar com status, Pino, Painel, Estado vazio, Barra de abas). App com 5 abas (Mapa como início; Feed/Passeios/Conquistas com estados vazios ilustrados; Perfil), tela Planejar rota (Só asfalto / Misto / Prefiro terra, km de terra, barra asfalto×terra, rota no mapa com pesponto na terra), Modo pilotando (navegação Google com cabeçalho laranja + 6 botões de 112 px), Catálogo refeito. Mapa: terra em tracejado ocre sobre marrom (campo `surface`), asfalto creme. 78 testes.
+
 - 11/11/2026 — `.claude/settings.json` criado; especificação renomeada para `docs/ESPECIFICACAO.md`; `settings.json` da raiz removido (movido para `.claude/`).
 - 11/11/2026 — Imagens recebidas (Caminho A), lotes 1 a 26a, em `docs/assets-originais/` (detalhes no LEIAME de lá). Portão "Lotes 1 a 8 e 22 a 25" da Etapa 0 cumprido.
 - 11/11/2026 — Dono criou conta Expo (usuário `joaogferreira`) e o segredo `EXPO_TOKEN` no GitHub.
@@ -44,6 +46,9 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - 12/11/2026 — Dono reprovou o visual do Catálogo (desproporcional, "feito por programador", infantil, sem ícones). A interface passa a ser tratada como prioridade igual ao desenvolvimento: revisão intensa com o dono antes de codar telas. Proposta v2 em `docs/telas/v2/` (mapa, rota com tipo de estrada, pilotando, carro, sistema visual com 24 ícones e paleta ajustada). O código do tema/componentes será refeito a partir da v2 aprovada.
 - 12/11/2026 — Novos requisitos do dono: (1) ícone próprio do app (Bodinho) na Etapa 1; (2) tipo de estrada no planejamento: Só asfalto / Misto / Prefiro terra (Valhalla; Etapa 3, caminho A = Google com pontos de passagem, plano B = Ferrostar+Valhalla para rotas com terra); (3) estrada de terra com cor e traço muito diferentes do asfalto no mapa (estilo MapLibre usa o campo `surface` do OpenMapTiles); (4) tela do carro com a cara do app (cores do cartão, ícones próprios, estilo de mapa na nuvem do Google), dentro do que o Android Auto permite.
 - 12/11/2026 — Licença da marca, empresa e demais pendências externas ficam para depois: primeiro o app pronto (pedido do dono).
+- 12/11/2026 — Dono pediu trabalho autônomo por horas ("não pare por nada"). Interface v2 implementada sem esperar aprovação formal das pranchas (ajustes virão do teste no celular).
+- 12/11/2026 — Skia removido (o visual v2 não usa textura/sombra interna; sombras pelo `boxShadow` nativo). Reduz o peso do APK. Pode voltar se um efeito exigir.
+- 12/11/2026 — Tipo de estrada usa o Valhalla público da FOSSGIS (`valhalla1.openstreetmap.de`) só durante os testes; servidor próprio antes do lançamento. A navegação segue a rota planejada via token da Routes API (pontos "via"); se o Google recusar, segue a rota dele e avisa.
 
 - 11/11/2026 — Dono aceitou todas as recomendações (lista no topo do CLAUDE.md) e pediu orçamento o mais apertado possível e uma tarefa por vez. Plano da Etapa 0 aprovado. Caminho A para imagens.
 - 11/11/2026 — Selo "Visita a Lojas" mantém esquadro e compasso, por decisão do dono (exceção à regra do guia de estilo; vale só para esse selo).
