@@ -4,6 +4,14 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.13.1 — 12/11/2026 (primeira versão ligada ao servidor)
+
+- Login de verdade: link mágico por e-mail e Google; a situação do irmão (pedido, aprovado) vem do banco.
+- Pedido de entrada com fotos do colete e da carteirinha guardadas num cofre privado.
+- "Aprovar irmãos" (diretoria, moderador, admin) e "Papéis dos irmãos" (só admin) no Perfil.
+- Perfil, garagem, contatos de emergência e dados maçônicos guardados no servidor.
+- Atalho de SOS ao segurar o ícone feito no nosso próprio módulo.
+
 ## 0.13.0 — 12/11/2026 (primeira versão para a Google Play, teste interno)
 
 - Chat (6ª aba), desafios com tabela de XP por km, stories com câmera própria (foto, vídeo até 60 s, filtros, textos arrastáveis, desenho, enquete, pergunta, contagem regressiva), logo nova e abertura animada de 1,5 s.
