@@ -1,0 +1,302 @@
+[
+ {
+  "url": "https://monumentobikers.com.br/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/feed/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_feed_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/comments/feed/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_comments_feed_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2F",
+  "status": 200,
+  "arquivo": "onumentobikers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2F&",
+  "status": 200,
+  "arquivo": "numentobikers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/8",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_8.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/xmlrpc.php?rsd",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_xmlrpc_php_rsd.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/sobre-o-movimento/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_sobre_o_movimento_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/memorando/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_memorando_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/eventos/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_eventos_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/galeria-de-fotos/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_galeria_de_fotos_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/monumentos/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_monumentos_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/conquistadores/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_conquistadores_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/blog/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_blog_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/contato/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_contato_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/pre-cadastro-evento-barretos/",
+  "status": 404,
+  "arquivo": "https_monumentobikers_com_br_pre_cadastro_evento_barretos_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fsobre-o-movimento%2F",
+  "status": 200,
+  "arquivo": "r_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fsobre_o_movimento_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fsobre-o-movimento%2F&",
+  "status": 200,
+  "arquivo": "_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fsobre_o_movimento_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/110",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_110.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=110",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_110.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fmemorando%2F",
+  "status": 200,
+  "arquivo": "rs_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fmemorando_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fmemorando%2F&",
+  "status": 200,
+  "arquivo": "s_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fmemorando_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/160",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_160.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=160",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_160.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Feventos%2F",
+  "status": 200,
+  "arquivo": "kers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2feventos_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Feventos%2F&",
+  "status": 200,
+  "arquivo": "ers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2feventos_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/183",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_183.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=183",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_183.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fgaleria-de-fotos%2F",
+  "status": 200,
+  "arquivo": "br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fgaleria_de_fotos_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fgaleria-de-fotos%2F&",
+  "status": 200,
+  "arquivo": "r_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fgaleria_de_fotos_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/197",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_197.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=197",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_197.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fmonumentos%2F",
+  "status": 200,
+  "arquivo": "s_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fmonumentos_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fmonumentos%2F&",
+  "status": 200,
+  "arquivo": "_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fmonumentos_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/55",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_55.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=55",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_55.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fconquistadores%2F",
+  "status": 200,
+  "arquivo": "m_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fconquistadores_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fconquistadores%2F&",
+  "status": 200,
+  "arquivo": "_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fconquistadores_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/406",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_406.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=406",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_406.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fblog%2F",
+  "status": 200,
+  "arquivo": "obikers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fblog_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fblog%2F&",
+  "status": 200,
+  "arquivo": "bikers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fblog_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/232",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_232.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/?p=232",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_p_232.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/vai-ao-monumento-30-no-paraguai-veja-como-evitar-problemas-na-viagem/",
+  "status": 200,
+  "arquivo": "numentobikers_com_br_vai_ao_monumento_30_no_paraguai_veja_como_evitar_problemas_na_viagem_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/rota-biker-sera-destaque-no-3o-congresso-brasileiro-de-mototurismo-em-socorro-sp/",
+  "status": 200,
+  "arquivo": "s_com_br_rota_biker_sera_destaque_no_3o_congresso_brasileiro_de_mototurismo_em_socorro_sp_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/bessie-stringfield-uma-historia-de-coragem-e-liberdade-sobre-duas-rodas/",
+  "status": 200,
+  "arquivo": "entobikers_com_br_bessie_stringfield_uma_historia_de_coragem_e_liberdade_sobre_duas_rodas_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/rota-biker-estara-no-ms-moto-week-bioceanica-em-campo-grande/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_rota_biker_estara_no_ms_moto_week_bioceanica_em_campo_grande_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/29o-mercocycle-2026-quatro-dias-de-motociclismo-rock-e-encontros-em-santa-maria/",
+  "status": 200,
+  "arquivo": "rs_com_br_29o_mercocycle_2026_quatro_dias_de_motociclismo_rock_e_encontros_em_santa_maria_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/comunicado-oficial-novo-modelo-de-conquistador-rota-biker/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_comunicado_oficial_novo_modelo_de_conquistador_rota_biker_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/4o-encontro-nacional-de-motociclismo-de-sao-jose-dos-campos-sp-a-rota-estara-presente/",
+  "status": 200,
+  "arquivo": "_br_4o_encontro_nacional_de_motociclismo_de_sao_jose_dos_campos_sp_a_rota_estara_presente_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/bonde-pela-vida-a-rota-estara-presente-em-louveira-sp/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_bonde_pela_vida_a_rota_estara_presente_em_louveira_sp_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/regras-para-se-tornar-um-conquistador-da-rota-biker/",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_regras_para_se_tornar_um_conquistador_da_rota_biker_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/o-monumento-rota-bikers-chega-com-tudo-ao-22o-barretos-motorcycles/",
+  "status": 200,
+  "arquivo": "monumentobikers_com_br_o_monumento_rota_bikers_chega_com_tudo_ao_22o_barretos_motorcycles_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/mudanca-na-rota-biker-monumento-17-ganha-nova-localizacao-e-guardiao/",
+  "status": 200,
+  "arquivo": "numentobikers_com_br_mudanca_na_rota_biker_monumento_17_ganha_nova_localizacao_e_guardiao_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fcontato%2F",
+  "status": 200,
+  "arquivo": "kers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fcontato_2f.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmonumentobikers.com.br%2Fcontato%2F&",
+  "status": 200,
+  "arquivo": "ers_com_br_wp_json_oembed_1_0_embed_url_https_3a_2f_2fmonumentobikers_com_br_2fcontato_2f_.html"
+ },
+ {
+  "url": "https://monumentobikers.com.br/wp-json/wp/v2/pages/218",
+  "status": 200,
+  "arquivo": "https_monumentobikers_com_br_wp_json_wp_v2_pages_218.html"
+ }
+]

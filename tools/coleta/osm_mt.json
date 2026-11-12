@@ -1,0 +1,4884 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-12T15:24:03Z",
+    "timestamp_areas_base": "2026-11-12T08:55:14Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 346878000,
+  "lat": -8.8900673,
+  "lon": -58.5676661,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 416762643,
+  "lat": -14.9837620,
+  "lon": -59.9283580,
+  "tags": {
+    "historic": "monument",
+    "name": "Arrozal",
+    "source": "IBGE"
+  }
+},
+{
+  "type": "node",
+  "id": 1141149250,
+  "lat": -14.6926981,
+  "lon": -57.8031447,
+  "tags": {
+    "name": "Salto Maciel",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1141149804,
+  "lat": -14.6079097,
+  "lon": -57.7337911,
+  "tags": {
+    "name": "Salto das Nuvens",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1528800680,
+  "lat": -15.4074179,
+  "lon": -55.8326158,
+  "tags": {
+    "name": "Mirante Cachoeira Véu de Noiva",
+    "tourism": "viewpoint",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1528800947,
+  "lat": -15.4800739,
+  "lon": -55.6878621,
+  "tags": {
+    "name": "Mirante do Centro Geodésico da América do Sul",
+    "tourism": "viewpoint",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 1528800953,
+  "lat": -15.4830482,
+  "lon": -55.8172406,
+  "tags": {
+    "name": "Mirante Alto do Céu",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1666564377,
+  "lat": -15.4088812,
+  "lon": -55.8321934,
+  "tags": {
+    "name": "Véu de Noiva",
+    "source": "Bing",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1666564413,
+  "lat": -15.4063463,
+  "lon": -55.8226615,
+  "tags": {
+    "name": "Cachoeirinha",
+    "source": "Bing",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1782732404,
+  "lat": -15.4533644,
+  "lon": -55.8321163,
+  "tags": {
+    "name": "Mirante Natural",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1782732441,
+  "lat": -15.4448794,
+  "lon": -55.8218649,
+  "tags": {
+    "name": "Mirante Construído",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1812982920,
+  "lat": -12.9890179,
+  "lon": -58.9578429,
+  "tags": {
+    "name": "Cachoeirão",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1960916206,
+  "lat": -13.3770579,
+  "lon": -59.3951741,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 1960916224,
+  "lat": -13.3640104,
+  "lon": -59.3999646,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2479789151,
+  "lat": -14.9452632,
+  "lon": -57.7859155,
+  "tags": {
+    "name": "Cachoeira do Juba",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2555527314,
+  "lat": -12.7972120,
+  "lon": -59.0833090,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2555820548,
+  "lat": -13.0258213,
+  "lon": -58.2781852,
+  "tags": {
+    "name": "Cachoeira Utiariti",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2555822493,
+  "lat": -13.2931461,
+  "lon": -58.1341893,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2555915749,
+  "lat": -13.0242101,
+  "lon": -58.1871749,
+  "tags": {
+    "name": "Cachoeira Salto Belo",
+    "source": "bing",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2825544724,
+  "lat": -15.8722917,
+  "lon": -52.2600383,
+  "tags": {
+    "historic": "monument",
+    "name": "Cristo Redentor",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 2832883339,
+  "lat": -15.8723017,
+  "lon": -52.2599249,
+  "tags": {
+    "name": "Escadaria do Cristo - Nível Superior",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 2832883701,
+  "lat": -15.8542108,
+  "lon": -52.2693681,
+  "tags": {
+    "addr:city": "Barra do Garças",
+    "alt_name": "Disco Porto",
+    "name": "Discoporto",
+    "tourism": "attraction",
+    "website": "https://turismo.barradogarcas.mt.gov.br/Pontos-Turisticos/Discoporto-13",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2832889313,
+  "lat": -15.8578524,
+  "lon": -52.2546874,
+  "tags": {
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2832889719,
+  "lat": -15.7191046,
+  "lon": -52.6136333,
+  "tags": {
+    "name": "Cachoeira Cristal",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 2832905998,
+  "lat": -15.7220574,
+  "lon": -52.5262132,
+  "tags": {
+    "name": "Cachoeira Bateia RPPN ECOMETA 2",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 2832919423,
+  "lat": -15.8413468,
+  "lon": -52.2806029,
+  "tags": {
+    "name": "Gruta do Pezinho",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 2834837783,
+  "lat": -15.8719639,
+  "lon": -52.2534262,
+  "tags": {
+    "name": "Cachoeira Pé da Serra",
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2834837785,
+  "lat": -15.8706339,
+  "lon": -52.2527516,
+  "tags": {
+    "name": "Cachoeira da Usina",
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2834837787,
+  "lat": -15.8687339,
+  "lon": -52.2520662,
+  "tags": {
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2834837794,
+  "lat": -15.8635732,
+  "lon": -52.2520670,
+  "tags": {
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2876551356,
+  "lat": -10.1636569,
+  "lon": -59.4452625,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2876551360,
+  "lat": -10.1626665,
+  "lon": -59.4633554,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 2992689263,
+  "lat": -14.4749246,
+  "lon": -55.6402223,
+  "tags": {
+    "name": "Cachoeira da Serra Azul",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3218034631,
+  "lat": -10.1666785,
+  "lon": -59.4513661,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3218034655,
+  "lat": -10.1664647,
+  "lon": -59.4573650,
+  "tags": {
+    "name": "Salto das Andorinhas",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3309415613,
+  "lat": -15.6009062,
+  "lon": -56.0964228,
+  "tags": {
+    "historic": "monument",
+    "name": "Estátua de Maria Taquara",
+    "tourism": "attraction",
+    "wikidata": "Q125214892"
+  }
+},
+{
+  "type": "node",
+  "id": 3663050223,
+  "lat": -10.5617985,
+  "lon": -58.4169923,
+  "tags": {
+    "name": "Cachoeira do Desastre",
+    "place": "locality",
+    "source": "IBGE",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3663050525,
+  "lat": -10.6186220,
+  "lon": -58.0958505,
+  "tags": {
+    "name": "Corredeiras de Santa Rosa",
+    "place": "locality",
+    "source": "IBGE",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3899572173,
+  "lat": -14.6269907,
+  "lon": -56.5016464,
+  "tags": {
+    "geological": "outcrop",
+    "geological:outcrop": "spring",
+    "name": "Nascente do Rio Paraguai",
+    "note": "Nascente Rio Paraguaizinho",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 3899573293,
+  "lat": -14.4805207,
+  "lon": -56.3907060,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3899573299,
+  "lat": -14.4819530,
+  "lon": -56.3899174,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3900795351,
+  "lat": -14.5880000,
+  "lon": -55.9667500,
+  "tags": {
+    "description": "Parque Estadual Gruta da Lagoa Azul / LEI 7.369, DE 20 DE DEZEMBRO DE 2000-MATO GROSSO",
+    "name": "Gruta da Lagoa Azul",
+    "natural": "cave_entrance",
+    "source": "LEI 7.369, DE 20 DE DEZEMBRO DE 2000 – D.O. 20.12.00.-MATO GROSSO",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 3955939471,
+  "lat": -8.8842040,
+  "lon": -58.5563598,
+  "tags": {
+    "name": "Salto Augusto",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3955939501,
+  "lat": -8.8871616,
+  "lon": -58.5543333,
+  "tags": {
+    "name": "Salto Augusto",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 3959610932,
+  "lat": -10.1656016,
+  "lon": -59.4574620,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4222415540,
+  "lat": -16.3121065,
+  "lon": -52.7245363,
+  "tags": {
+    "name": "Cachoeira Sete Quedas",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4453597108,
+  "lat": -17.8764246,
+  "lon": -53.1342314,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4453763718,
+  "lat": -17.8532995,
+  "lon": -53.1373179,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4525509386,
+  "lat": -15.0846366,
+  "lon": -52.7911351,
+  "tags": {
+    "name": "Mirante da Cachoeira da Fumaça",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4558261811,
+  "lat": -17.9231453,
+  "lon": -53.4024948,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4579470830,
+  "lat": -15.4076521,
+  "lon": -55.8226244,
+  "tags": {
+    "intermittent": "yes",
+    "name": "Cachoeira dos Namorados",
+    "source": "visiting",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4579470854,
+  "lat": -15.4805145,
+  "lon": -55.7589165,
+  "tags": {
+    "name": "Mirante Penhasco II",
+    "source": "visiting",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4579470858,
+  "lat": -15.4801498,
+  "lon": -55.7575433,
+  "tags": {
+    "name": "Mirante Penhasco",
+    "source": "visiting",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4579844577,
+  "lat": -14.4956260,
+  "lon": -55.7052886,
+  "tags": {
+    "height": "45",
+    "name": "Cachoeira Serra Azul",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4579845607,
+  "lat": -14.4942673,
+  "lon": -55.7050665,
+  "tags": {
+    "name": "Tirolesa",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4710991054,
+  "lat": -15.4330083,
+  "lon": -55.7196989,
+  "tags": {
+    "name": "Cachoeira Marimbondo",
+    "tourism": "attraction",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4761157549,
+  "lat": -11.2117121,
+  "lon": -55.3569287,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 4833918850,
+  "lat": -15.5779249,
+  "lon": -56.0617612,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "node",
+  "id": 4886528709,
+  "lat": -15.4842256,
+  "lon": -55.7463673,
+  "tags": {
+    "name": "Morro dos Ventos",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546153,
+  "lat": -15.4143163,
+  "lon": -55.8463597,
+  "tags": {
+    "name": "Independência",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546154,
+  "lat": -15.4145044,
+  "lon": -55.8456515,
+  "tags": {
+    "name": "Andorinha",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546155,
+  "lat": -15.4160482,
+  "lon": -55.8430580,
+  "tags": {
+    "name": "Prainha",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546156,
+  "lat": -15.4162696,
+  "lon": -55.8427828,
+  "tags": {
+    "name": "Degraus",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546157,
+  "lat": -15.4166203,
+  "lon": -55.8415398,
+  "tags": {
+    "name": "Pulo",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4893546158,
+  "lat": -15.4188778,
+  "lon": -55.8398709,
+  "tags": {
+    "name": "7 de Setembro",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 4923074419,
+  "lat": -16.2508315,
+  "lon": -56.6304566,
+  "tags": {
+    "historic": "monument",
+    "name": "Tuiuiú"
+  }
+},
+{
+  "type": "node",
+  "id": 4925322227,
+  "lat": -15.4832614,
+  "lon": -55.7474667,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4927621429,
+  "lat": -15.6320294,
+  "lon": -56.1171677,
+  "tags": {
+    "historic": "monument",
+    "name": "Estátua da Liberdade"
+  }
+},
+{
+  "type": "node",
+  "id": 5054452871,
+  "lat": -15.3138185,
+  "lon": -55.8526950,
+  "tags": {
+    "name": "Poço das Antas",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5054452898,
+  "lat": -15.3170974,
+  "lon": -55.8645702,
+  "tags": {
+    "name": "Poço da Esmeralda",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5061366859,
+  "lat": -14.8373307,
+  "lon": -52.5987541,
+  "tags": {
+    "name": "Cachoeira do Marouni",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5087167412,
+  "lat": -16.4667943,
+  "lon": -54.6841411,
+  "tags": {
+    "name": "Cachoeira Escondidinho",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5087312303,
+  "lat": -16.4481252,
+  "lon": -54.6662418,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 5102031826,
+  "lat": -11.2539893,
+  "lon": -57.5082480,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Estátua do colonizador Jose Parana"
+  }
+},
+{
+  "type": "node",
+  "id": 5109177876,
+  "lat": -16.4906130,
+  "lon": -54.6466529,
+  "tags": {
+    "historic": "monument",
+    "name": "Rondonópolis"
+  }
+},
+{
+  "type": "node",
+  "id": 5165634661,
+  "lat": -14.6014522,
+  "lon": -54.7532737,
+  "tags": {
+    "name": "Salto Bananal",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5189620823,
+  "lat": -16.8015347,
+  "lon": -54.1812428,
+  "tags": {
+    "name": "Falésias",
+    "name:pt": "Falésias",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5214724309,
+  "lat": -13.0470124,
+  "lon": -55.9313442,
+  "tags": {
+    "historic": "monument",
+    "name": "Preciosa"
+  }
+},
+{
+  "type": "node",
+  "id": 5216264321,
+  "lat": -16.5269937,
+  "lon": -56.7562744,
+  "tags": {
+    "name:en": "Tapir water hole",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5266515430,
+  "lat": -16.4779383,
+  "lon": -54.6345085,
+  "tags": {
+    "historic": "monument",
+    "name": "Cruz do Cais"
+  }
+},
+{
+  "type": "node",
+  "id": 5274259254,
+  "lat": -16.7214359,
+  "lon": -53.5873979,
+  "tags": {
+    "name": "Cachoeira da Onça",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5283967665,
+  "lat": -15.6139125,
+  "lon": -56.0724266,
+  "tags": {
+    "description": "Mirante do Museu Rondon da UFMT. Muitos alunos vêm aqui para passar o tempo observando a paisagem.",
+    "name": "Mirante do Museu Rondon",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5302646607,
+  "lat": -15.8753553,
+  "lon": -52.2607090,
+  "tags": {
+    "name": "Escadaria do Cristo - Nível Inferior",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5329820510,
+  "lat": -12.6004872,
+  "lon": -52.1899736,
+  "tags": {
+    "historic": "monument",
+    "inscription": "Monumento no formato de cuia de chimarrão na entrada do CTG, homenagem a cultura gaúcha.",
+    "name": "Monumento ao Chimarrão"
+  }
+},
+{
+  "type": "node",
+  "id": 5345942546,
+  "lat": -14.9141799,
+  "lon": -57.8091708,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5345942564,
+  "lat": -14.9723565,
+  "lon": -57.7448648,
+  "tags": {
+    "name": "Cachoeira do Rio Juba",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5349742377,
+  "lat": -12.5536838,
+  "lon": -53.1079745,
+  "tags": {
+    "archaeological_site": "Kuhikugu",
+    "historic": "archaeological_site",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5365922953,
+  "lat": -15.3854291,
+  "lon": -56.7992950,
+  "tags": {
+    "archaeological_site": "settlement",
+    "historic": "archaeological_site",
+    "name": "Sitio Aequeologico de Santa Elina",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5366044597,
+  "lat": -9.5661087,
+  "lon": -56.6355354,
+  "tags": {
+    "archaeological_site": "settlement",
+    "historic": "archaeological_site",
+    "name": "Sitio Arqueologico da Pedra Preta",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5366154966,
+  "lat": -15.3550792,
+  "lon": -52.2309163,
+  "tags": {
+    "name": "Esfinge",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5366202104,
+  "lat": -15.4084414,
+  "lon": -52.3754767,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5366233338,
+  "lat": -16.0433002,
+  "lon": -57.5276180,
+  "tags": {
+    "name": "Dolina Água Milagrosa",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5366233351,
+  "lat": -15.8721239,
+  "lon": -52.2601041,
+  "tags": {
+    "direction": "270",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5368236960,
+  "lat": -15.3097607,
+  "lon": -52.1738081,
+  "tags": {
+    "name": "Pedra Dedo de Deus",
+    "natural": "rock",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5370985281,
+  "lat": -15.8722374,
+  "lon": -52.2569955,
+  "tags": {
+    "archaeological_site": "settlement",
+    "fixme": "Confirmar Posicao",
+    "historic": "archaeological_site",
+    "name": "Sitio Arqueologico Abrigo da Serra da Estrela Azul",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5370985282,
+  "lat": -15.3839291,
+  "lon": -52.2145415,
+  "tags": {
+    "archaeological_site": "settlement",
+    "fixme": "Confirmar Posicao",
+    "historic": "archaeological_site",
+    "name": "Sitio Arqueologico Gruta do Moretti",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5459302521,
+  "lat": -15.4801450,
+  "lon": -55.7571256,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5465615022,
+  "lat": -15.4548549,
+  "lon": -55.6788222,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5506739922,
+  "lat": -16.4066561,
+  "lon": -56.6698227,
+  "tags": {
+    "historic": "monument",
+    "name": "Estrada TRANSPANTANEIRA",
+    "name:en": "TRANSPANTANEIRA",
+    "name:fr": "Entrée TRANSPANTANEIRA"
+  }
+},
+{
+  "type": "node",
+  "id": 5521486423,
+  "lat": -15.3698521,
+  "lon": -55.8442372,
+  "tags": {
+    "name": "Mirante da Trilha do Mel",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5637597650,
+  "lat": -13.3991903,
+  "lon": -58.5979816,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5793832861,
+  "lat": -15.8917683,
+  "lon": -52.2537454,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5793838454,
+  "lat": -15.8921664,
+  "lon": -52.2538192,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5797241853,
+  "lat": -15.8722526,
+  "lon": -52.2533089,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5850032585,
+  "lat": -16.4256527,
+  "lon": -56.6701479,
+  "tags": {
+    "name": "Jacarés",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5862348385,
+  "lat": -15.7514861,
+  "lon": -52.4567851,
+  "tags": {
+    "name": "Cachoeira Água Limpa",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5902351805,
+  "lat": -15.8920080,
+  "lon": -52.2541138,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5902351806,
+  "lat": -15.8895073,
+  "lon": -52.2572427,
+  "tags": {
+    "name": "Ponte Dos Desejos",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5902351808,
+  "lat": -15.8894177,
+  "lon": -52.2569847,
+  "tags": {
+    "name": "FONTE",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5902351809,
+  "lat": -15.8921340,
+  "lon": -52.2544048,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5922274719,
+  "lat": -15.8390422,
+  "lon": -54.3818912,
+  "tags": {
+    "name": "Cachoeira de Poxoréu",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5926744796,
+  "lat": -16.4696650,
+  "lon": -54.6279613,
+  "tags": {
+    "historic": "monument",
+    "name": "Carro de Boi"
+  }
+},
+{
+  "type": "node",
+  "id": 5927869626,
+  "lat": -16.4728625,
+  "lon": -54.6009902,
+  "tags": {
+    "historic": "monument",
+    "name": "Gaúcho"
+  }
+},
+{
+  "type": "node",
+  "id": 5930274177,
+  "lat": -16.4739673,
+  "lon": -54.6113026,
+  "tags": {
+    "historic": "monument",
+    "name": "Imigração japonesa no Brasil"
+  }
+},
+{
+  "type": "node",
+  "id": 5931379492,
+  "lat": -16.5885070,
+  "lon": -54.7218605,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 5931379496,
+  "lat": -16.5918273,
+  "lon": -54.7734843,
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Parque Estadual Dom Osório Stoffel"
+  }
+},
+{
+  "type": "node",
+  "id": 5969447187,
+  "lat": -10.8805250,
+  "lon": -51.6362906,
+  "tags": {
+    "name": "Jardim",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 5975976429,
+  "lat": -14.5648612,
+  "lon": -54.0935808,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5975976435,
+  "lat": -14.5630834,
+  "lon": -54.0947735,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5975976436,
+  "lat": -14.5626552,
+  "lon": -54.0949115,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5975976463,
+  "lat": -14.5629053,
+  "lon": -54.0948903,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 5975976464,
+  "lat": -14.5630269,
+  "lon": -54.0948124,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 6090684749,
+  "lat": -15.4457951,
+  "lon": -55.7667276,
+  "tags": {
+    "name": "Cachoeira Nhonho",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 6090684750,
+  "lat": -15.4460809,
+  "lon": -55.7662035,
+  "tags": {
+    "name": "Cachoeira Pequena",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 6093643185,
+  "lat": -15.3017720,
+  "lon": -55.8416491,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6093643186,
+  "lat": -15.3028777,
+  "lon": -55.8412524,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6093643285,
+  "lat": -15.3044513,
+  "lon": -55.8377604,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6093643585,
+  "lat": -15.3265993,
+  "lon": -55.8551220,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6093807528,
+  "lat": -14.6316458,
+  "lon": -56.2615154,
+  "tags": {
+    "name": "Tombador",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 6095312789,
+  "lat": -15.3011789,
+  "lon": -55.8409026,
+  "tags": {
+    "name:en": "Rock Door",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 6196146056,
+  "lat": -15.9885130,
+  "lon": -54.9297000,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Cristo Redentor de Jaciara"
+  }
+},
+{
+  "type": "node",
+  "id": 6370794786,
+  "lat": -15.4161914,
+  "lon": -55.8426448,
+  "tags": {
+    "name": "Cachoeira do Degrau",
+    "name:pt": "Cachoeira do Degrau",
+    "name:ru": "Водопад Cachoeira do Degrau",
+    "tourism": "attraction",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6370794886,
+  "lat": -15.4165508,
+  "lon": -55.8412462,
+  "tags": {
+    "name": "Cachoeira do Pulo",
+    "name:pt": "Cachoeira do Pulo",
+    "name:ru": "Водопад Cachoeira do Pulo",
+    "tourism": "attraction",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6370794985,
+  "lat": -15.4188078,
+  "lon": -55.8396939,
+  "tags": {
+    "name": "Cachoeira 7 de Setembro",
+    "name:pt": "Cachoeira 7 de Setembro",
+    "name:ru": "Водопад",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 6380826037,
+  "lat": -15.0649422,
+  "lon": -57.1784147,
+  "tags": {
+    "description": "Monumento de um índio (representando os nativos) segurando um barco (representando os colonizadores).",
+    "historic": "monument",
+    "inscription": "Monumento em homenagem aos 500 anos do Brasil.",
+    "name": "Brasil 500 Anos"
+  }
+},
+{
+  "type": "node",
+  "id": 6380838067,
+  "lat": -15.0650868,
+  "lon": -57.1793186,
+  "tags": {
+    "historic": "monument",
+    "inscription": "Monumento em homenagem aos festivais de pesca de Barra do Bugres.",
+    "name": "Fest Bugres"
+  }
+},
+{
+  "type": "node",
+  "id": 6565126385,
+  "lat": -14.6097325,
+  "lon": -55.9535107,
+  "tags": {
+    "name": "Mirante do cerrado",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6591767542,
+  "lat": -15.5418319,
+  "lon": -54.3130886,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "EU AMO PRIMAVERA"
+  }
+},
+{
+  "type": "node",
+  "id": 6594845592,
+  "lat": -14.6255756,
+  "lon": -57.4931538,
+  "tags": {
+    "name": "Entrada Parque",
+    "name:en": "Entrada do Parque",
+    "name:pt": "Entrada do Parque",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 6612366516,
+  "lat": -15.8629136,
+  "lon": -53.5131323,
+  "tags": {
+    "historic": "memorial",
+    "name": "SENZALA DO SINHO EDUARDO"
+  }
+},
+{
+  "type": "node",
+  "id": 6612366525,
+  "lat": -15.8631329,
+  "lon": -53.5130559,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 6612368817,
+  "lat": -15.8626767,
+  "lon": -53.5139994,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "PLACA METALICA HOMENAGEM"
+  }
+},
+{
+  "type": "node",
+  "id": 6778422331,
+  "lat": -15.6112541,
+  "lon": -56.0370366,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Praça Recanto dos Pássaros"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425201,
+  "lat": -15.6112539,
+  "lon": -56.0328989,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425202,
+  "lat": -15.6113107,
+  "lon": -56.0329240,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425203,
+  "lat": -15.6113802,
+  "lon": -56.0327524,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425204,
+  "lat": -15.6112518,
+  "lon": -56.0326198,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425205,
+  "lat": -15.6114256,
+  "lon": -56.0327236,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6778425206,
+  "lat": -15.6112617,
+  "lon": -56.0325888,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6783774044,
+  "lat": -15.5985377,
+  "lon": -56.0893685,
+  "tags": {
+    "historic": "memorial",
+    "name": "Rotary"
+  }
+},
+{
+  "type": "node",
+  "id": 6791797628,
+  "lat": -15.6161042,
+  "lon": -56.1091625,
+  "tags": {
+    "name": "Mirante Rio Cuiaba",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6791805106,
+  "lat": -15.6153089,
+  "lon": -56.1085361,
+  "tags": {
+    "historic": "monument",
+    "name": "CBA 300 Anos"
+  }
+},
+{
+  "type": "node",
+  "id": 6858949126,
+  "lat": -15.6489630,
+  "lon": -56.0524327,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6868555620,
+  "lat": -15.6073989,
+  "lon": -56.1056202,
+  "tags": {
+    "historic": "monument",
+    "name": "Bola da Copa do Mundo no Brasil",
+    "name:en": "brazilian soccer ball world cup"
+  }
+},
+{
+  "type": "node",
+  "id": 6904777545,
+  "lat": -10.8112847,
+  "lon": -55.4539529,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Águas Pluviais de Colíder"
+  }
+},
+{
+  "type": "node",
+  "id": 6910250419,
+  "lat": -10.8132852,
+  "lon": -55.4537651,
+  "tags": {
+    "historic": "monument",
+    "inscription": "Monumento histórico da pavimentação da avenida do colonizador, 18/02/1994",
+    "name": "Monumento da Avenida do Colonizador"
+  }
+},
+{
+  "type": "node",
+  "id": 6910707530,
+  "lat": -15.5826608,
+  "lon": -56.0913496,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 6935927678,
+  "lat": -15.6140501,
+  "lon": -56.0727356,
+  "tags": {
+    "historic": "monument",
+    "name": "Marechal Rondon"
+  }
+},
+{
+  "type": "node",
+  "id": 6949625797,
+  "lat": -10.8114848,
+  "lon": -55.4475933,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Placa de Pavimentação"
+  }
+},
+{
+  "type": "node",
+  "id": 7129745441,
+  "lat": -15.6140497,
+  "lon": -56.0731615,
+  "tags": {
+    "historic": "monument",
+    "name": "Cidade Universitária Gabriel Novis Neves"
+  }
+},
+{
+  "type": "node",
+  "id": 7131374873,
+  "lat": -15.5960213,
+  "lon": -56.0924581,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 7177243840,
+  "lat": -15.5988780,
+  "lon": -56.0775400,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 7216141485,
+  "lat": -14.5918673,
+  "lon": -55.7561603,
+  "tags": {
+    "name": "Flutuação no Rio Triste",
+    "name:en": "Triste River Flutuation",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 7241286627,
+  "lat": -15.6097062,
+  "lon": -56.1049229,
+  "tags": {
+    "historic": "monument",
+    "name": "Canhão"
+  }
+},
+{
+  "type": "node",
+  "id": 7254171693,
+  "lat": -15.6046237,
+  "lon": -56.0753000,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 7321640901,
+  "lat": -17.9325598,
+  "lon": -53.3877558,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7322073586,
+  "lat": -10.1632118,
+  "lon": -59.4531584,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7322073589,
+  "lat": -10.1638718,
+  "lon": -59.4536841,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7322073591,
+  "lat": -10.1636553,
+  "lon": -59.4555295,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7322073939,
+  "lat": -10.1660209,
+  "lon": -59.4580346,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7322074150,
+  "lat": -10.1630534,
+  "lon": -59.4638014,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 7486838619,
+  "lat": -13.0811677,
+  "lon": -55.9155383,
+  "tags": {
+    "historic": "monument",
+    "name": "O Semeador"
+  }
+},
+{
+  "type": "node",
+  "id": 7519616858,
+  "lat": -13.5552805,
+  "lon": -52.2716506,
+  "tags": {
+    "historic": "monument",
+    "inscription": "Avião utilizado na colonização da região de Canarana.",
+    "name": "Monumento do Avião"
+  }
+},
+{
+  "type": "node",
+  "id": 7519616859,
+  "lat": -13.5554647,
+  "lon": -52.2716403,
+  "tags": {
+    "historic": "monument",
+    "name": "Estatua Norberto Schwantes"
+  }
+},
+{
+  "type": "node",
+  "id": 7523781832,
+  "lat": -12.5959253,
+  "lon": -52.2086045,
+  "tags": {
+    "historic": "monument",
+    "name": "Rotary International"
+  }
+},
+{
+  "type": "node",
+  "id": 7565965735,
+  "lat": -15.8592444,
+  "lon": -54.3872702,
+  "tags": {
+    "ele": "700",
+    "name": "Morro da Mesa",
+    "natural": "peak",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 7578504506,
+  "lat": -15.6534441,
+  "lon": -56.1756654,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 7593197201,
+  "lat": -15.6305874,
+  "lon": -55.9301709,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 7644781161,
+  "lat": -11.7502898,
+  "lon": -55.7076077,
+  "tags": {
+    "name": "Praia do Cortado",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 7741317668,
+  "lat": -11.2540421,
+  "lon": -57.5078148,
+  "tags": {
+    "historic": "memorial",
+    "material": "concrete",
+    "memorial": "statue",
+    "name": "Estatua Colonizador Jose Olavo Gonçalves"
+  }
+},
+{
+  "type": "node",
+  "id": 7830627037,
+  "lat": -16.2062779,
+  "lon": -54.9467979,
+  "tags": {
+    "addr:city": "Juscimeira",
+    "addr:postcode": "78.810-000",
+    "name": "Cidade das Pedras",
+    "operator": "Turismo",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 7843992978,
+  "lat": -16.1047055,
+  "lon": -54.9757683,
+  "tags": {
+    "name": "Cachoeira do Prata",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 8051316547,
+  "lat": -12.9148329,
+  "lon": -59.2181769,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 8051529633,
+  "lat": -12.7002358,
+  "lon": -59.0157238,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 8063178927,
+  "lat": -12.5487398,
+  "lon": -55.7196760,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8286328156,
+  "lat": -14.7490798,
+  "lon": -52.5661779,
+  "tags": {
+    "name": "Cachoeira da Saudade",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 8450742212,
+  "lat": -14.8869817,
+  "lon": -52.5024254,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 8832667235,
+  "lat": -11.0004076,
+  "lon": -55.2449918,
+  "tags": {
+    "addr:city": "ITAÚBA",
+    "addr:postcode": "78510-000",
+    "addr:street": "BR 163",
+    "description": "PARQUE NATURAL DEITAÚBA -MT",
+    "leisure": "nature_reserve",
+    "name": "Parque Natural de Itaúba",
+    "opening_hours": "24/7",
+    "operator": "PREFEITURA DE ITAÚBA"
+  }
+},
+{
+  "type": "node",
+  "id": 9288408976,
+  "lat": -15.6455653,
+  "lon": -56.1089603,
+  "tags": {
+    "historic": "monument",
+    "name": "Cristo Redentor"
+  }
+},
+{
+  "type": "node",
+  "id": 9307523717,
+  "lat": -16.0754155,
+  "lon": -57.7026445,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9309631332,
+  "lat": -14.6549048,
+  "lon": -52.5918814,
+  "tags": {
+    "name": "Cachoeira Do Ipê",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309631334,
+  "lat": -14.7489081,
+  "lon": -52.5674566,
+  "tags": {
+    "name": "Entrada da Cachoeira da Saudade",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309631335,
+  "lat": -14.7551513,
+  "lon": -52.5617363,
+  "tags": {
+    "name": "Casa Abonizia",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309695986,
+  "lat": -14.8884858,
+  "lon": -52.5022098,
+  "tags": {
+    "name": "Cachoeira da Usina",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309710215,
+  "lat": -14.7948885,
+  "lon": -52.6230967,
+  "tags": {
+    "name": "Rancho Ponte de Pedra",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309716717,
+  "lat": -14.9173302,
+  "lon": -52.6390136,
+  "tags": {
+    "name": "Cachoeira do Urubu Rei",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9309764673,
+  "lat": -14.7599232,
+  "lon": -52.5566023,
+  "tags": {
+    "name": "Piscinas naturais Abonizia",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309764674,
+  "lat": -14.7569146,
+  "lon": -52.5573101,
+  "tags": {
+    "name": "Cachoeira Abonizia",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9309764683,
+  "lat": -14.7642336,
+  "lon": -52.5746151,
+  "tags": {
+    "name": "Cachoeira Buriti",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309764684,
+  "lat": -14.7635217,
+  "lon": -52.5748912,
+  "tags": {
+    "name": "Cachoeira Bailarina",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9309764685,
+  "lat": -14.7632821,
+  "lon": -52.5753442,
+  "tags": {
+    "name": "Cachoeira da Nascente",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9662262673,
+  "lat": -15.0853797,
+  "lon": -52.7913398,
+  "tags": {
+    "name": "Cachoeira da Fumaça",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9666143557,
+  "lat": -15.8993025,
+  "lon": -59.2132365,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9666143585,
+  "lat": -15.8990148,
+  "lon": -59.2092952,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9666143593,
+  "lat": -15.8991056,
+  "lon": -59.2120761,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9777939214,
+  "lat": -14.7490289,
+  "lon": -52.5576712,
+  "tags": {
+    "name": "Cachoeira do sucesso",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9778017429,
+  "lat": -14.7508257,
+  "lon": -52.5532975,
+  "tags": {
+    "name": "Cachoeira da Gratidão",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9813530590,
+  "lat": -10.1645741,
+  "lon": -59.4529438,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9813530594,
+  "lat": -10.1647589,
+  "lon": -59.4535339,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9813530598,
+  "lat": -10.1648883,
+  "lon": -59.4542259,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 9846735692,
+  "lat": -15.6172165,
+  "lon": -56.1055408,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Primeira Etapa Complexo Sociocultural Jornalista Paulo Maria Ferreira Leite",
+    "material": "concrete",
+    "memorial": "plaque",
+    "name": "Primeira Etapa"
+  }
+},
+{
+  "type": "node",
+  "id": 9846894536,
+  "lat": -15.5751067,
+  "lon": -56.0734588,
+  "tags": {
+    "access": "yes",
+    "historic": "monument",
+    "inscription": "Monumento in memoriam",
+    "name": "Ulisses Guimarães"
+  }
+},
+{
+  "type": "node",
+  "id": 9890790070,
+  "lat": -15.7006520,
+  "lon": -56.0424204,
+  "tags": {
+    "historic": "memorial",
+    "material": "concrete",
+    "memorial": "plaque",
+    "name": "Rodovia Palmiro Paes de Barros"
+  }
+},
+{
+  "type": "node",
+  "id": 9907899084,
+  "lat": -11.2503885,
+  "lon": -57.5083563,
+  "tags": {
+    "historic": "monument",
+    "name": "A Lei de Deus"
+  }
+},
+{
+  "type": "node",
+  "id": 9922140217,
+  "lat": -17.2756375,
+  "lon": -56.6902190,
+  "tags": {
+    "name": "Toca das onças pintadas",
+    "name:en": "jaguar cave",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 9976218215,
+  "lat": -15.8641913,
+  "lon": -56.0759546,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Eu ♥️ SDL"
+  }
+},
+{
+  "type": "node",
+  "id": 10057113059,
+  "lat": -15.6014667,
+  "lon": -56.0884084,
+  "tags": {
+    "historic": "monument",
+    "name": "3 Graças"
+  }
+},
+{
+  "type": "node",
+  "id": 10067097217,
+  "lat": -11.5218076,
+  "lon": -55.4375610,
+  "tags": {
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 10726587421,
+  "lat": -15.6488721,
+  "lon": -56.0690069,
+  "tags": {
+    "access": "yes",
+    "historic": "monument",
+    "inscription": "Marco Zero da capital mato-grossense, que representa os três batelões, embarcações esguias que percorriam as águas do Rio Cuiabá. O monumento medindo 17 metros foi criado pelo arquiteto e desenhista Moacyr Freitas e desenvolvido pela arquiteta Jacqueline ",
+    "name": "Monumento das Monções"
+  }
+},
+{
+  "type": "node",
+  "id": 10732167979,
+  "lat": -11.8522023,
+  "lon": -55.5309246,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 10738435875,
+  "lat": -15.5743329,
+  "lon": -56.0728584,
+  "tags": {
+    "historic": "monument",
+    "name": "DeMolay",
+    "wikidata": "Q125214891"
+  }
+},
+{
+  "type": "node",
+  "id": 10832212554,
+  "lat": -11.8597977,
+  "lon": -55.5348850,
+  "tags": {
+    "historic": "memorial",
+    "material": "iron",
+    "memorial": "plaque",
+    "name": "fundação marista"
+  }
+},
+{
+  "type": "node",
+  "id": 10917067207,
+  "lat": -15.3571042,
+  "lon": -55.8300218,
+  "tags": {
+    "name": "Cachoeira da Salgadeira",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 10917067300,
+  "lat": -15.3569619,
+  "lon": -55.8297669,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10917067435,
+  "lat": -15.3573039,
+  "lon": -55.8301564,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10932453383,
+  "lat": -15.5064817,
+  "lon": -55.4048478,
+  "tags": {
+    "description": "Martinha refere-se a uma antiga moradora das redondezas. Situa-se acerca do km 38 da cidade de Chapada dos Guimarães. É um conjunto de três cachoeiras, com volume d'água maior do que as demais cachoeiras da chapada, formando entre poços profundos.",
+    "name": "Cachoeira da Martinha",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 10932453393,
+  "lat": -15.5080223,
+  "lon": -55.4044431,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 10932481356,
+  "lat": -15.5052796,
+  "lon": -55.4048939,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 11400881369,
+  "lat": -14.2047042,
+  "lon": -51.6858387,
+  "tags": {
+    "name": "Santuário do Roncador",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11530810703,
+  "lat": -15.5673290,
+  "lon": -56.1433401,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 11689072616,
+  "lat": -15.6043746,
+  "lon": -56.0635621,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11725394062,
+  "lat": -16.4668329,
+  "lon": -54.6838382,
+  "tags": {
+    "name": "Cachoeira Escondidinho",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 11860360426,
+  "lat": -12.5989064,
+  "lon": -52.2076958,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 11860360427,
+  "lat": -12.5997319,
+  "lon": -52.1940602,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12027572823,
+  "lat": -14.6815358,
+  "lon": -57.2922628,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12107123953,
+  "lat": -14.6814516,
+  "lon": -57.2924179,
+  "tags": {
+    "height": "30",
+    "intermittent": "yes",
+    "name": "Cachoeira Tuin",
+    "waterway": "waterfall",
+    "width": "5"
+  }
+},
+{
+  "type": "node",
+  "id": 12115860190,
+  "lat": -13.0912234,
+  "lon": -55.9255089,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12115875652,
+  "lat": -13.0695665,
+  "lon": -55.9269170,
+  "tags": {
+    "historic": "monument",
+    "name": "Luquinhas"
+  }
+},
+{
+  "type": "node",
+  "id": 12128995104,
+  "lat": -16.0663667,
+  "lon": -57.6844807,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 12133139109,
+  "lat": -16.0677722,
+  "lon": -57.6814685,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931544,
+  "lat": -15.5980990,
+  "lon": -56.0956441,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931545,
+  "lat": -15.5981369,
+  "lon": -56.0954698,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931547,
+  "lat": -15.5984150,
+  "lon": -56.0958827,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931548,
+  "lat": -15.5980974,
+  "lon": -56.0959660,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931549,
+  "lat": -15.5983889,
+  "lon": -56.0956195,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931550,
+  "lat": -15.5980974,
+  "lon": -56.0953206,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140931551,
+  "lat": -15.5981356,
+  "lon": -56.0955787,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140951792,
+  "lat": -15.5918967,
+  "lon": -56.0974510,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12140957223,
+  "lat": -15.5980751,
+  "lon": -56.0961694,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12141045049,
+  "lat": -15.6018275,
+  "lon": -56.0959543,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12179315429,
+  "lat": -15.6146886,
+  "lon": -56.1056863,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 12179315430,
+  "lat": -15.6147021,
+  "lon": -56.1056559,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 12195042369,
+  "lat": -15.5962717,
+  "lon": -56.0933677,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12196254462,
+  "lat": -16.0646458,
+  "lon": -57.6874551,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 12197711938,
+  "lat": -16.2844603,
+  "lon": -55.4761108,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 12282300050,
+  "lat": -15.6167079,
+  "lon": -56.1016392,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 12749174579,
+  "lat": -16.2724701,
+  "lon": -55.8008585,
+  "tags": {
+    "addr:place": "Planície Alagável da Bacia do Alto Paraguai",
+    "name": "Memorial Rondon",
+    "operator": "Governo de Mato Grosso",
+    "start_date": "2016-08-24",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 13618552399,
+  "lat": -17.0682394,
+  "lon": -54.2347005,
+  "tags": {
+    "name": "Cachoeira da Leopoldina",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13755161201,
+  "lat": -14.9185283,
+  "lon": -60.0741506,
+  "tags": {
+    "name": "Cachoeira Jatobá",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13796339835,
+  "lat": -16.3683017,
+  "lon": -53.7966324,
+  "tags": {
+    "addr:city": "Guiratinga",
+    "name": "Balneário Moreninha",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 13912539170,
+  "lat": -15.8797346,
+  "lon": -53.5823554,
+  "tags": {
+    "name": "Cachoeirinha",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13913188318,
+  "lat": -15.8753710,
+  "lon": -53.5354015,
+  "tags": {
+    "alt_name": "Cachoeira do Batovi",
+    "name": "Cachoeira da Fumaça",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13924019690,
+  "lat": -15.9003406,
+  "lon": -53.5576799,
+  "tags": {
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13926589902,
+  "lat": -16.8925040,
+  "lon": -56.6044915,
+  "tags": {
+    "name:pt": "IXU",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 13954901493,
+  "lat": -15.7271025,
+  "lon": -52.4746734,
+  "tags": {
+    "name": "Cachoeira da Batéia",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13956111949,
+  "lat": -15.7195486,
+  "lon": -52.6131961,
+  "tags": {
+    "name": "Cachoeira do Cristal",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13956585344,
+  "lat": -15.7263507,
+  "lon": -52.4808902,
+  "tags": {
+    "name": "Cachoeira da Mata",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 13956585774,
+  "lat": -15.7277656,
+  "lon": -52.4938667,
+  "tags": {
+    "name": "Cachoeira das Funas",
+    "waterway": "waterfall"
+  }
+},
+{
+  "type": "node",
+  "id": 14099425301,
+  "lat": -15.8713714,
+  "lon": -56.0749548,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 167147732,
+  "center": {
+    "lat": -15.6134875,
+    "lon": -56.1074639
+  },
+  "tags": {
+    "area": "yes",
+    "boundary": "protected_area",
+    "name": "Centro Histórico do Porto",
+    "protect_class": "22",
+    "protection_title": "patrimônio histórico estadual"
+  }
+},
+{
+  "type": "way",
+  "id": 167147735,
+  "center": {
+    "lat": -15.6006197,
+    "lon": -56.1004384
+  },
+  "tags": {
+    "historic": "monument",
+    "man_made": "obelisk",
+    "name": "Centro Geodésico da América do Sul",
+    "obelisk:size": "monumental",
+    "tourism": "attraction",
+    "wikidata": "Q19608630",
+    "wikipedia": "pt:Centro Geodésico da América do Sul"
+  }
+},
+{
+  "type": "way",
+  "id": 167852197,
+  "center": {
+    "lat": -15.5949455,
+    "lon": -56.0933030
+  },
+  "tags": {
+    "area": "yes",
+    "boundary": "protected_area",
+    "name": "Centro Histórico de Cuiabá",
+    "procted_class": "22",
+    "protection_title": "patrimônio histórico nacional"
+  }
+},
+{
+  "type": "way",
+  "id": 178178366,
+  "center": {
+    "lat": -15.6017715,
+    "lon": -56.0982291
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Zona de Restrição Máxima",
+    "note": "Dentro desta zona há restrições de horário para o trânsito de veículos com peso bruto acima de 10T"
+  }
+},
+{
+  "type": "way",
+  "id": 178238403,
+  "center": {
+    "lat": -15.5990875,
+    "lon": -56.1016636
+  },
+  "tags": {
+    "alt_name": "Praça do Morro",
+    "leisure": "park",
+    "level": "0;1;2",
+    "name": "Praça do Morro da Caixa D'Água Velha",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 180348605,
+  "center": {
+    "lat": -15.5943178,
+    "lon": -56.0956836
+  },
+  "tags": {
+    "name": "Casa Barão de Melgaço",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 180523437,
+  "center": {
+    "lat": -15.5978184,
+    "lon": -56.0895309
+  },
+  "tags": {
+    "historic": "monument",
+    "name": "Monumento aos Bandeirantes",
+    "tourism": "attraction",
+    "wikidata": "Q125214893"
+  }
+},
+{
+  "type": "way",
+  "id": 183374520,
+  "center": {
+    "lat": -15.6341133,
+    "lon": -56.0569580
+  },
+  "tags": {
+    "addr:city": "Cuiabá",
+    "addr:street": "Rua C",
+    "alt_name": "Parque da Saúde Zé Bolo Flô",
+    "boundary": "protected_area",
+    "landuse": "forest",
+    "leisure": "park",
+    "name": "Parque Estadual Zé Bolo Flô",
+    "official_name": "Parque Estadual da José Inácio da Silva (Zé Bolo Flô)",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "wikidata": "Q28220967"
+  }
+},
+{
+  "type": "way",
+  "id": 198833507,
+  "center": {
+    "lat": -13.5725182,
+    "lon": -57.3613536
+  },
+  "tags": {
+    "FUNAI:ADR": "Tangará da Serra",
+    "FUNAI:AREAETNO": "XVII",
+    "FUNAI:AREA_HA": "17000",
+    "FUNAI:CDOC": "Port Decl",
+    "FUNAI:CODAREA": "36501",
+    "FUNAI:DATADOC": "2010-09-27 00:00:00",
+    "FUNAI:DOCUMENTO": "Portaria Declaratória",
+    "FUNAI:ETAPA": "Planejamento demarcação",
+    "FUNAI:EXTENSO": "Principal",
+    "FUNAI:FLUXO": "230",
+    "FUNAI:GID": "550",
+    "FUNAI:GRUPOS": "Paresi",
+    "FUNAI:LINKAREA": "TI Ponte de Pedra",
+    "FUNAI:NOME_AREA": "Ponte de Pedra",
+    "FUNAI:PERIMETRO": "73",
+    "FUNAI:SITUACAO": "Declarada",
+    "FUNAI:TITULO": "Portaria nº 3078, de 27 de setembro de 2010",
+    "boundary": "protected_area",
+    "is_in:city": "Campo Novo do Parecis;Diamantino;Nova Maringá",
+    "is_in:state_code": "MT",
+    "name": "Ponte de Pedra",
+    "population": "1406",
+    "protected_area": "political",
+    "protection_title": "Terra Indígena",
+    "source": "Funai"
+  }
+},
+{
+  "type": "way",
+  "id": 198833518,
+  "center": {
+    "lat": -16.1505437,
+    "lon": -59.4849221
+  },
+  "tags": {
+    "FUNAI:ADR": "Vilhena",
+    "FUNAI:AREAETNO": "XVI",
+    "FUNAI:AREA_HA": "43057",
+    "FUNAI:CDOC": "Port Decl",
+    "FUNAI:CODAREA": "59001",
+    "FUNAI:DATADOC": "2010-12-30 00:00:00",
+    "FUNAI:DOCUMENTO": "Portaria Declaratória",
+    "FUNAI:ETAPA": "Planejamento demarcação",
+    "FUNAI:EXTENSO": "Principal",
+    "FUNAI:FLUXO": "230",
+    "FUNAI:GID": "4",
+    "FUNAI:GRUPOS": "Xiquitano",
+    "FUNAI:LINKAREA": "TI Portal do Encantado",
+    "FUNAI:NOME_AREA": "Portal do Encantado",
+    "FUNAI:PERIMETRO": "121",
+    "FUNAI:SITUACAO": "Declarada",
+    "FUNAI:TITULO": "Portaria nº 2219, de 30 de dezembro de 2010",
+    "boundary": "protected_area",
+    "name": "Portal do Encantado",
+    "population": "209",
+    "protected_area": "political",
+    "protection_title": "Terra Indígena",
+    "source": "Funai"
+  }
+},
+{
+  "type": "way",
+  "id": 198833600,
+  "center": {
+    "lat": -14.3832260,
+    "lon": -59.3027541
+  },
+  "tags": {
+    "FUNAI:ADR": "Tangará da Serra",
+    "FUNAI:AREAETNO": "XVII",
+    "FUNAI:AREA_HA": "21680",
+    "FUNAI:CDOC": "Contr Dem",
+    "FUNAI:CODAREA": "47901",
+    "FUNAI:DATADOC": "2010-05-18 00:00:00",
+    "FUNAI:DOCUMENTO": "Contrato para demarcação",
+    "FUNAI:ETAPA": "Demarcação física",
+    "FUNAI:EXTENSO": "Principal",
+    "FUNAI:FLUXO": "270",
+    "FUNAI:GID": "551",
+    "FUNAI:GRUPOS": "Paresi",
+    "FUNAI:LINKAREA": "TI Uirapuru",
+    "FUNAI:NOME_AREA": "Uirapuru",
+    "FUNAI:PERIMETRO": "97",
+    "FUNAI:SITUACAO": "Declarada",
+    "FUNAI:TITULO": "Contrato nº 065/2010",
+    "boundary": "protected_area",
+    "name": "Uirapuru",
+    "population": "0",
+    "protected_area": "political",
+    "protection_title": "Terra Indígena",
+    "source": "Funai"
+  }
+},
+{
+  "type": "way",
+  "id": 201749756,
+  "center": {
+    "lat": -12.5298609,
+    "lon": -55.7257691
+  },
+  "tags": {
+    "addr:city": "Sorriso",
+    "addr:housenumber": "4033",
+    "addr:street": "Avenida dos Imigrantes",
+    "addr:suburb": "Recanto dos Pássaros",
+    "leisure": "nature_reserve",
+    "name": "Unidade de Conservação",
+    "opening_hours": "Mo-Fr 08:00-17:00",
+    "operator": "Prefeitura Municipal de Sorriso",
+    "operator:type": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 245380304,
+  "center": {
+    "lat": -16.3905728,
+    "lon": -56.4985109
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "governance_type": "government_managed",
+    "name": "Estrada-Parque Poconé-Porto Cercado",
+    "ownership": "state",
+    "protect_class": "7",
+    "protection_title": "Estrada-parque",
+    "source": "IBGE"
+  }
+},
+{
+  "type": "way",
+  "id": 255739394,
+  "center": {
+    "lat": -11.9985605,
+    "lon": -59.2853745
+  },
+  "tags": {
+    "alt_name": "Estação Ecológica do Iquê",
+    "boundary": "protected_area",
+    "name": "Estação Ecológica de Iquê",
+    "name:en": "Iquê Ecological Station",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "protect_class": "1",
+    "protection_title": "estação ecológica",
+    "ref:CNUC": "00.0000.0055",
+    "related_law": "DEC 86.061 de 02/06/1981",
+    "source": "ICMBio",
+    "start_date": "1981",
+    "wikidata": "Q16862836",
+    "wikipedia": "pt:Estação Ecológica Iquê"
+  }
+},
+{
+  "type": "way",
+  "id": 255809603,
+  "center": {
+    "lat": -14.7426500,
+    "lon": -51.0177898
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Extrativista Lago do Cedro",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "protect_class": "6",
+    "protection_title": "reserva extrativista",
+    "ref:CNUC": "00.0000.0287",
+    "related_law": "DEC/SN 11/09/2006",
+    "source": "ICMBio",
+    "start_date": "2006",
+    "wikidata": "Q10359671",
+    "wikipedia": "pt:Reserva Extrativista Lago do Cedro"
+  }
+},
+{
+  "type": "way",
+  "id": 255845094,
+  "center": {
+    "lat": -15.6516494,
+    "lon": -57.1889444
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Estação Ecológica da Serra das Araras",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "protect_class": "1",
+    "protection_title": "estação ecológica",
+    "ref:CNUC": "00.0000.0075",
+    "related_law": "DEC 87.222 de 31/05/1982",
+    "source": "ICMBio",
+    "start_date": "1982",
+    "wikidata": "Q10275703",
+    "wikipedia": "pt:Estação Ecológica da Serra das Araras"
+  }
+},
+{
+  "type": "way",
+  "id": 278131103,
+  "center": {
+    "lat": -15.8718641,
+    "lon": -52.2598684
+  },
+  "tags": {
+    "name": "Mirante do Cristo Redentor",
+    "tourism": "attraction",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "way",
+  "id": 458141081,
+  "center": {
+    "lat": -15.5772305,
+    "lon": -56.0667176
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área de Preservação Permanente Córrego do Barbado",
+    "natural": "wood"
+  }
+},
+{
+  "type": "way",
+  "id": 458185673,
+  "center": {
+    "lat": -15.5960214,
+    "lon": -56.0980349
+  },
+  "tags": {
+    "building": "public",
+    "height": "12",
+    "name": "Arquivo Público de Mato Grosso",
+    "tourism": "attraction",
+    "wikidata": "Q108220396"
+  }
+},
+{
+  "type": "way",
+  "id": 458186614,
+  "center": {
+    "lat": -15.5942701,
+    "lon": -56.0955005
+  },
+  "tags": {
+    "building": "yes",
+    "historic": "building",
+    "name": "Casa Barão de Melgaço",
+    "tourism": "attraction",
+    "wikidata": "Q108221092"
+  }
+},
+{
+  "type": "way",
+  "id": 462607258,
+  "center": {
+    "lat": -14.4894102,
+    "lon": -55.7056336
+  },
+  "tags": {
+    "building": "yes",
+    "name": "recepção Cachoeira Serra Azul",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 473333598,
+  "center": {
+    "lat": -11.4204512,
+    "lon": -58.7518062
+  },
+  "tags": {
+    "addr:city": "Juína",
+    "leisure": "nature_reserve",
+    "name": "Área De Preservação"
+  }
+},
+{
+  "type": "way",
+  "id": 475440248,
+  "center": {
+    "lat": -15.5807074,
+    "lon": -56.1049823
+  },
+  "tags": {
+    "addr:city": "Cuiabá",
+    "boundary": "protected_area",
+    "leisure": "park",
+    "name": "Parque Estadual Mãe Bonifácia",
+    "natural": "wood",
+    "opening_hours": "06:00-18:00",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "wikidata": "Q10345232"
+  }
+},
+{
+  "type": "way",
+  "id": 475735449,
+  "center": {
+    "lat": -15.5671445,
+    "lon": -56.0796677
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "leisure": "park",
+    "name": "Parque das Águas"
+  }
+},
+{
+  "type": "way",
+  "id": 491041126,
+  "center": {
+    "lat": -15.5855380,
+    "lon": -56.0779222
+  },
+  "tags": {
+    "addr:city": "Cuiaba",
+    "addr:street": "Avenida F",
+    "addr:suburb": "Bosque da Saúde",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "building": "yes",
+    "capacity": "400",
+    "cuisine": "regional;coffee_shop;ice_cream;international;sushi",
+    "description": "Padaria, Restaurante e Empório",
+    "email": "contato@padariadomoinho.com.br",
+    "level": "1",
+    "name": "Padaria do Moinho",
+    "opening_hours": "24/7",
+    "outdoor_seating": "yes",
+    "payment:amex": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:maestro": "yes",
+    "payment:visa_debit": "yes",
+    "payment:visa_electron": "yes",
+    "phone": "+556521288888",
+    "smoking": "outside",
+    "start_date": "2014-08-08",
+    "takeaway": "yes",
+    "tourism": "attraction",
+    "website": "https://padariadomoinho.com.br",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 491340706,
+  "center": {
+    "lat": -15.6256427,
+    "lon": -56.0599720
+  },
+  "tags": {
+    "bridge": "yes",
+    "bridge:structure": "truss",
+    "highway": "footway",
+    "layer": "1",
+    "name": "Ponte de Ferro do Coxipó",
+    "start_date": "1896",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 491676737,
+  "center": {
+    "lat": -11.5075319,
+    "lon": -54.8700752
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Reserva Florestal"
+  }
+},
+{
+  "type": "way",
+  "id": 502767767,
+  "center": {
+    "lat": -11.5324835,
+    "lon": -57.4156854
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Horto Munipal"
+  }
+},
+{
+  "type": "way",
+  "id": 532398476,
+  "center": {
+    "lat": -14.4423814,
+    "lon": -56.0150653
+  },
+  "tags": {
+    "building": "residential",
+    "name": "Passeio Duto do Quebó",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 545036358,
+  "center": {
+    "lat": -15.6655050,
+    "lon": -56.1303439
+  },
+  "tags": {
+    "addr:city": "Várzea Grande",
+    "alt_name": "Parque Municipal Tanque do Fancho",
+    "boundary": "protected_area",
+    "leisure": "park",
+    "name": "Parque Ecológico Tanque do Fancho",
+    "natural": "wood",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "wikidata": "Q18481113",
+    "wikipedia": "pt:Parque Tanque do Fancho"
+  }
+},
+{
+  "type": "way",
+  "id": 630012729,
+  "center": {
+    "lat": -9.8684432,
+    "lon": -56.0826491
+  },
+  "tags": {
+    "historic": "monument",
+    "inscription": "Avião utilizado na segunda guerra mundial para transporte de alimentos.",
+    "name": "Avião Douglas DC-3 versão cargueiro C-47"
+  }
+},
+{
+  "type": "way",
+  "id": 630012735,
+  "center": {
+    "lat": -9.8632804,
+    "lon": -56.0742667
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Reserva/Antigo Zoológico"
+  }
+},
+{
+  "type": "way",
+  "id": 635376605,
+  "center": {
+    "lat": -10.6344901,
+    "lon": -55.7130086
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "reserva natural da Nascente córrego Santa Paulina/ Julio Maria"
+  }
+},
+{
+  "type": "way",
+  "id": 666054633,
+  "center": {
+    "lat": -9.5987720,
+    "lon": -55.9365918
+  },
+  "tags": {
+    "building": "yes",
+    "height": "50",
+    "man_made": "tower",
+    "tourism": "viewpoint",
+    "tower:type": "observation"
+  }
+},
+{
+  "type": "way",
+  "id": 724199225,
+  "center": {
+    "lat": -15.6173286,
+    "lon": -56.1111886
+  },
+  "tags": {
+    "building": "yes",
+    "historic": "building",
+    "name": "Vila Cuiabana",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 753443842,
+  "center": {
+    "lat": -16.0765811,
+    "lon": -57.6478447
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Parque do Lobo"
+  }
+},
+{
+  "type": "way",
+  "id": 760922924,
+  "center": {
+    "lat": -15.6089496,
+    "lon": -56.0486642
+  },
+  "tags": {
+    "barrier": "fence",
+    "leisure": "nature_reserve",
+    "name": "Área de Preservação Permanente",
+    "natural": "wood",
+    "note": "Entrada restrita"
+  }
+},
+{
+  "type": "way",
+  "id": 764465416,
+  "center": {
+    "lat": -16.5894892,
+    "lon": -54.7595199
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual Dom Osório Stoffel",
+    "protect_class": "5",
+    "protection_title": "Parque Estadual"
+  }
+},
+{
+  "type": "way",
+  "id": 784602734,
+  "center": {
+    "lat": -9.6816503,
+    "lon": -56.4646733
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Mata Nativa do Município de Paranaíta"
+  }
+},
+{
+  "type": "way",
+  "id": 832654833,
+  "center": {
+    "lat": -10.3880549,
+    "lon": -57.9622117
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "paredão"
+  }
+},
+{
+  "type": "way",
+  "id": 922543713,
+  "center": {
+    "lat": -16.0910445,
+    "lon": -57.6731514
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Parque Jardim Guanabara"
+  }
+},
+{
+  "type": "way",
+  "id": 957699334,
+  "center": {
+    "lat": -15.6539651,
+    "lon": -56.1007526
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área de Proteção Ambiental Lagoa do Jacaré",
+    "natural": "wood",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "source": "http://www.varzeagrande.mt.gov.br/conteudo/19020/o-local-tem-sido-utilizado-para-descarte-irregular-de-residuos-solidos-nas-margens-da-lagoa"
+  }
+},
+{
+  "type": "way",
+  "id": 1009005202,
+  "center": {
+    "lat": -14.8885991,
+    "lon": -52.5020382
+  },
+  "tags": {
+    "name": "Cachoeira da Usina",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1058018942,
+  "center": {
+    "lat": -15.4542067,
+    "lon": -56.1676073
+  },
+  "tags": {
+    "access": "private",
+    "addr:city": "Recife",
+    "addr:street": "Avenida Centenário Alberto Santos Dumont",
+    "addr:suburb": "Ibura",
+    "building": "yes",
+    "fixme": "Diminuir tamanho para coincidir com o real",
+    "historic": "monument",
+    "inscription": "Avião"
+  }
+},
+{
+  "type": "way",
+  "id": 1075434101,
+  "center": {
+    "lat": -11.8359515,
+    "lon": -55.5004512
+  },
+  "tags": {
+    "alt_name": "Parque Natural Municipal Florestal",
+    "boundary": "protected_area",
+    "name": "Parque Florestal de Sinop",
+    "protect_class": "5",
+    "protection_title": "Parque Natural Municipal"
+  }
+},
+{
+  "type": "way",
+  "id": 1108061586,
+  "center": {
+    "lat": -15.5785939,
+    "lon": -56.1012461
+  },
+  "tags": {
+    "building": "yes",
+    "man_made": "tower",
+    "opening_hours": "06:00-18:00",
+    "tourism": "attraction",
+    "tower:construction": "tower",
+    "tower:type": "observation"
+  }
+},
+{
+  "type": "way",
+  "id": 1113515910,
+  "center": {
+    "lat": -15.5990976,
+    "lon": -56.1016011
+  },
+  "tags": {
+    "alt_name": "Arcos da Caixa D'Água",
+    "bridge:structure": "arch",
+    "building": "yes",
+    "building:part": "no",
+    "historic": "aqueduct",
+    "layer": "1",
+    "man_made": "bridge",
+    "name": "Arcos da Cascata",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1159553938,
+  "center": {
+    "lat": -15.5906660,
+    "lon": -56.0998092
+  },
+  "tags": {
+    "building": "yes",
+    "historic": "memorial",
+    "material": "metal",
+    "name": "Memorial da Água"
+  }
+},
+{
+  "type": "way",
+  "id": 1174898268,
+  "center": {
+    "lat": -15.3568427,
+    "lon": -55.8281143
+  },
+  "tags": {
+    "name": "Estação de Contemplação",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 1199228885,
+  "center": {
+    "lat": -15.6139597,
+    "lon": -56.1104233
+  },
+  "tags": {
+    "amenity": "marketplace",
+    "building": "yes",
+    "name": "Mercado do Porto",
+    "note": "2ª etapa do novo mercado",
+    "official_name": "Mercado Antônio Moisés Nadaf",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1202109857,
+  "center": {
+    "lat": -11.5356276,
+    "lon": -57.4055380
+  },
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "way",
+  "id": 1204077829,
+  "center": {
+    "lat": -15.8645973,
+    "lon": -56.0741906
+  },
+  "tags": {
+    "addr:city": "Santo Antônio de Leverger",
+    "addr:street": "Avenida Santo Antônio",
+    "addr:suburb": "Nossa Senhora de Aparecida",
+    "building": "yes",
+    "name": "Casa do Artesão - Dona Doquinha",
+    "shop": "craft",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1208358704,
+  "center": {
+    "lat": -13.4213697,
+    "lon": -51.7734500
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "ethnic_group": "xavante",
+    "name": "Aldeia Aséréré",
+    "protect_class": "24"
+  }
+},
+{
+  "type": "way",
+  "id": 1234300452,
+  "center": {
+    "lat": -15.0205504,
+    "lon": -55.7735095
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 1261940011,
+  "center": {
+    "lat": -16.4665673,
+    "lon": -54.6834777
+  },
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 1261940022,
+  "center": {
+    "lat": -16.4642376,
+    "lon": -54.6831483
+  },
+  "tags": {
+    "addr:city": "Rondonópolis",
+    "addr:street": "Rua A 19",
+    "boundary": "protected_area",
+    "leisure": "park",
+    "name": "Parque Ecológico Escondidinho",
+    "natural": "wood",
+    "official_name": "Parque Ecológico Antônio Rodrigues do Nascimento",
+    "protect_class": "2",
+    "protection_title": "parque estadual"
+  }
+},
+{
+  "type": "way",
+  "id": 1304454767,
+  "center": {
+    "lat": -17.3289362,
+    "lon": -56.6855422
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "RPPN Howard Quigley (2)",
+    "protect_class": "5",
+    "protection_title": "Reserva Particular do Patrimônio Natural",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "way",
+  "id": 1307169753,
+  "center": {
+    "lat": -16.0646176,
+    "lon": -57.6872983
+  },
+  "tags": {
+    "historic": "monument",
+    "name": "Marco do Jauru",
+    "wikidata": "Q10325361",
+    "wikipedia": "pt:Marco do Jauru"
+  }
+},
+{
+  "type": "way",
+  "id": 1316760529,
+  "center": {
+    "lat": -15.5681027,
+    "lon": -56.1066154
+  },
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "way",
+  "id": 1356906868,
+  "center": {
+    "lat": -15.9644264,
+    "lon": -54.9717941
+  },
+  "tags": {
+    "highway": "pedestrian",
+    "lit": "yes",
+    "name": "Mirante de Vidro",
+    "surface": "glass",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 1367136285,
+  "center": {
+    "lat": -14.3106319,
+    "lon": -55.3617629
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Dec. nº 4.444 de 10/06/02 e Dec 2.595, de 13 de Nov de 2014",
+    "name": "Parque Estadual Águas do Cuiabá",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "PES Águas do Cuiabá",
+    "source": "InterMAT",
+    "start_date": "2014",
+    "type": "boundary"
+  }
+},
+{
+  "type": "way",
+  "id": 1376978619,
+  "center": {
+    "lat": -16.2726953,
+    "lon": -55.8015137
+  },
+  "tags": {
+    "addr:place": "Planície Alagável da Bacia do Alto Paraguai",
+    "area": "yes",
+    "name": "Memorial Rondon",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "way",
+  "id": 1394788217,
+  "center": {
+    "lat": -16.8027049,
+    "lon": -52.9948283
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "leisure": "nature_reserve",
+    "name": "Domo de Araguainha"
+  }
+},
+{
+  "type": "way",
+  "id": 1394824522,
+  "center": {
+    "lat": -16.8094822,
+    "lon": -52.9924676
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Núcleo Central do Domo de Araguainha"
+  }
+},
+{
+  "type": "relation",
+  "id": 2670411,
+  "center": {
+    "lat": -11.3629621,
+    "lon": -50.7908981
+  },
+  "tags": {
+    "FUNAI:ADR": "São Félix do Araguaia",
+    "FUNAI:AREAETNO": "I",
+    "FUNAI:AREA_HA": "32304.7226",
+    "FUNAI:CDOC": "Memora Dem",
+    "FUNAI:CODAREA": "58701",
+    "FUNAI:DATADOC": "2010-03-31 00:00:00",
+    "FUNAI:DOCUMENTO": "Memo/CGD - Libera peças técnicas",
+    "FUNAI:ETAPA": "Processo de homologação",
+    "FUNAI:EXTENSO": "Principal",
+    "FUNAI:FLUXO": "305",
+    "FUNAI:GID": "527",
+    "FUNAI:GRUPOS": "Karajá",
+    "FUNAI:LINKAREA": "TI Cacique Fontoura",
+    "FUNAI:NOME_AREA": "Cacique Fontoura",
+    "FUNAI:PERIMETRO": "116.87674",
+    "FUNAI:SITUACAO": "Declarada",
+    "FUNAI:TITULO": "Memorando nº 37/CGGEO/2010",
+    "boundary": "protected_area",
+    "is_in:city": "Luciara;São Félix do Araguaia",
+    "is_in:state_code": "MT",
+    "name": "Cacique Fontoura",
+    "population": "489",
+    "protected_area": "political",
+    "protection_title": "Terra Indígena",
+    "source": "Funai",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 3350522,
+  "center": {
+    "lat": -12.6616281,
+    "lon": -57.7297895
+  },
+  "tags": {
+    "FUNAI:ADR": "Tangará da Serra",
+    "FUNAI:AREAETNO": "XVII",
+    "FUNAI:AREA_HA": "250539.8293",
+    "FUNAI:CDOC": "Memora Dem",
+    "FUNAI:CODAREA": "17302",
+    "FUNAI:DATADOC": "2012-03-28 00:00:00",
+    "FUNAI:DOCUMENTO": "Memo/CGD - Libera peças técnicas",
+    "FUNAI:ETAPA": "Processo de homologação",
+    "FUNAI:EXTENSO": "Revisão",
+    "FUNAI:FLUXO": "305",
+    "FUNAI:GID": "522",
+    "FUNAI:GRUPOS": "Irantxe",
+    "FUNAI:LINKAREA": "TI Manoki",
+    "FUNAI:NOME_AREA": "Manoki",
+    "FUNAI:PERIMETRO": "302000.46",
+    "FUNAI:REV": "2",
+    "FUNAI:SITUACAO": "Declarada",
+    "FUNAI:TITULO": "Memorando nº 76/CGGEO/2012",
+    "boundary": "protected_area",
+    "is_in:city": "Brasnorte",
+    "is_in:state_code": "MT",
+    "name": "Área Indigena Irantxe",
+    "population": "250",
+    "protected_area": "political",
+    "protection_title": "Terra Indígena",
+    "source": "Funai",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 3351018,
+  "center": {
+    "lat": -13.8253867,
+    "lon": -53.2913070
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Biológica Culuene",
+    "official_name": "Reserva Ecológica Estadual do Culuene",
+    "operator": "Secretaria de Estado do Meio Ambiente de Mato Grosso",
+    "protect_class": "1",
+    "protection_title": "reserva biológica",
+    "ref:CNUC": "0000.51.0457",
+    "related_law": "Decreto nº 723, de 26/09/2011",
+    "source": "IBGE",
+    "start_date": "1989-01-10",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 3424546,
+  "center": {
+    "lat": -8.0412227,
+    "lon": -58.5162933
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Nacional do Juruena",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "operator:short": "ICMBio",
+    "operator:wikidata": "Q3151725",
+    "protect_class": "2",
+    "protection_title": "parque nacional",
+    "ref:CNUC": "00.0000.0281",
+    "related_law": "DEC/SN 05/06/2006",
+    "start_date": "2006",
+    "type": "multipolygon",
+    "wikidata": "Q1562707",
+    "wikipedia": "pt:Parque Nacional do Juruena"
+  }
+},
+{
+  "type": "relation",
+  "id": 3424883,
+  "center": {
+    "lat": -8.3685025,
+    "lon": -61.2643159
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Nacional dos Campos Amazônicos",
+    "name:en": "Campos Amazônicos National Park",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "operator:short": "ICMBio",
+    "operator:wikidata": "Q3151725",
+    "protect_class": "2",
+    "protection_title": "parque nacional",
+    "ref:CNUC": "00.0000.0284",
+    "related_law": "DEC/SN 21/06/2006",
+    "start_date": "2006",
+    "type": "multipolygon",
+    "wikidata": "Q17265421",
+    "wikipedia": "pt:Parque Nacional dos Campos Amazônicos"
+  }
+},
+{
+  "type": "relation",
+  "id": 3425876,
+  "center": {
+    "lat": -13.0665517,
+    "lon": -50.5221390
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área de Proteção Ambiental Meandros do Rio Araguaia",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "operator:short": "ICMBio",
+    "operator:wikidata": "Q3151725",
+    "protect_class": "5",
+    "protection_title": "Área de proteção ambiental",
+    "ref:CNUC": "00.0000.0024",
+    "related_law": "DEC/SN 02/10/1998",
+    "start_date": "1998",
+    "type": "multipolygon",
+    "website": "https://www.icmbio.gov.br/portal/apa-dos-meandros-do-rio-araguaia"
+  }
+},
+{
+  "type": "relation",
+  "id": 3829141,
+  "center": {
+    "lat": -14.7709243,
+    "lon": -55.6265062
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "governance_type": "government_managed",
+    "name": "Área de Proteção Especial DAE de Praia Rica",
+    "ownership": "municipal",
+    "protect_class": "7",
+    "protection_title": "Área de proteção especial",
+    "source": "Bing",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 3829142,
+  "center": {
+    "lat": -16.8690165,
+    "lon": -57.5176373
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Estação Ecológica de Taiamã",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "operator:short": "ICMBio",
+    "operator:wikidata": "Q3151725",
+    "protect_class": "1",
+    "protection_title": "estação ecológica",
+    "ramsar": "yes",
+    "ref:CNUC": "00.0000.0062",
+    "related_law": "DEC 86.061 de 02/06/1981",
+    "start_date": "1981",
+    "type": "multipolygon",
+    "wikidata": "Q7675867",
+    "wikipedia": "pt:Estação Ecológica de Taiamã"
+  }
+},
+{
+  "type": "relation",
+  "id": 7838101,
+  "center": {
+    "lat": -15.8719408,
+    "lon": -52.2544629
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Parque Barra do Garças",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 7893034,
+  "center": {
+    "lat": -14.5820063,
+    "lon": -60.2525479
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual Serra de Ricardo Franco",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "related_law": "DEC 1.796/1997",
+    "start_date": "1997",
+    "type": "boundary",
+    "wikidata": "Q10345040",
+    "wikipedia": "pt:Parque Estadual da Serra de Ricardo Franco"
+  }
+},
+{
+  "type": "relation",
+  "id": 9308249,
+  "center": {
+    "lat": -15.5718767,
+    "lon": -56.0668157
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual Massairo Okamura",
+    "name:en": "Massairo Okamura State Park",
+    "natural": "wood",
+    "opening_hours": "06:00-18:00",
+    "operator": "Secretaria de Estado do Meio Ambiente de Mato Grosso",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "ref:CNUC": "0000.51.0480",
+    "type": "multipolygon",
+    "wikidata": "Q10345192",
+    "wikipedia": "pt:Parque Massairo Okamura"
+  }
+},
+{
+  "type": "relation",
+  "id": 9628907,
+  "center": {
+    "lat": -15.4662169,
+    "lon": -55.7464247
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Municipal da Quineira",
+    "natural": "wood",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 10329722,
+  "center": {
+    "lat": -15.3447227,
+    "lon": -55.8829021
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Nacional da Chapada dos Guimarães",
+    "name:en": "Chapada dos Guimarães National Park",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "operator:short": "ICMBio",
+    "operator:wikidata": "Q3151725",
+    "protect_class": "2",
+    "protection_title": "Parque Nacional",
+    "ref:CNUC": "00.0000.0138",
+    "related_law": "DEC 97.656/1989",
+    "source": "ICMBio",
+    "start_date": "1989",
+    "type": "boundary",
+    "website": "https://www.icmbio.gov.br/parnaguimaraes/guia-do-visitante.html",
+    "wikidata": "Q5072892",
+    "wikipedia": "pt:Parque Nacional da Chapada dos Guimarães"
+  }
+},
+{
+  "type": "relation",
+  "id": 10331143,
+  "center": {
+    "lat": -15.4386175,
+    "lon": -55.6978577
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Decreto - 537 - 21/11/1995",
+    "name": "Área de Proteção Ambiental da Chapada dos Guimarães",
+    "operator": "SEMA-MT",
+    "protect_class": "6",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "DEC/537 21/11/1995",
+    "source": "IMCBio",
+    "start_date": "1995",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 10331206,
+  "center": {
+    "lat": -15.7678887,
+    "lon": -56.0963940
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Monumento Natural Estadual Morro de Santo Antônio",
+    "protect_class": "3",
+    "protection_title": "nature_monument",
+    "short_name": "MONAT Santo Antônio",
+    "start_date": "2006",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 10480002,
+  "center": {
+    "lat": -15.8859409,
+    "lon": -55.5113367
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual de Águas Quentes",
+    "natural": "wood",
+    "protect_class": "5",
+    "protection_title": "nature_monument",
+    "related_law": "DEC 1.240/1978",
+    "source": "SEMA",
+    "start_date": "1978",
+    "type": "boundary",
+    "wikidata": "Q22074051",
+    "wikipedia": "pt:Parque Estadual de Águas Quentes"
+  }
+},
+{
+  "type": "relation",
+  "id": 10480220,
+  "center": {
+    "lat": -15.5780575,
+    "lon": -55.7592902
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área De Proteção Ambiental Do Aricá-Açu",
+    "note": "Área De Proteção Ambiental Municipal Do Aricá-Açu",
+    "operator": "Prefeitura Municipal de Cuiabá",
+    "protect_class": "6",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "L/3874 16/07/1999",
+    "source": "ICMBio",
+    "start_date": "1999",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 10721586,
+  "center": {
+    "lat": -17.6750592,
+    "lon": -57.4279686
+  },
+  "tags": {
+    "alt_name": "Pantanal",
+    "boundary": "national_park",
+    "boundary_type": "protected_area",
+    "description": "Ecótono de transição, Savana estépica alagada, equivalente a \"Freshwater marshes\"",
+    "leisure": "nature_reserve",
+    "name": "Parque Nacional do Pantanal Matogrossense",
+    "name:en": "Pantanal Matogrossense National Park",
+    "name:tr": "Pantanal Matogrossense Milli Parkı",
+    "operator": "Instituto Chico Mendes de Conservação da Biodiversidade",
+    "protect_class": "2",
+    "protection_title": "parque nacional",
+    "ramsar": "yes",
+    "ref:CNUC": "00.0000.0175",
+    "related_law": "DEC 86.392 de 24/09/1981",
+    "seasonal": "wet_season",
+    "source": "Serviço Florestal Brasileiro/SNIF/MMA",
+    "start_date": "1981",
+    "type": "boundary",
+    "website": "https://www.florestal.gov.br/snif/recursos-florestais/os-biomas-e-suas-florestas",
+    "wikidata": "Q3179800",
+    "wikipedia": "pt:Parque Nacional do Pantanal Matogrossense"
+  }
+},
+{
+  "type": "relation",
+  "id": 11204864,
+  "center": {
+    "lat": -12.2072938,
+    "lon": -50.8086615
+  },
+  "tags": {
+    "leisure": "nature_reserve",
+    "name": "Parque Estadual do Araguaia",
+    "natural": "wood",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 11512398,
+  "center": {
+    "lat": -9.2683723,
+    "lon": -60.5059308
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Area = 164.224 hectares",
+    "name": "Reserva Extrativista Guariba-Roosevelt",
+    "name:en": "Guariba-Roosevelt Extractive Reserve",
+    "operator": "Secretaria de Estado do Meio Ambiente de Mato Grosso",
+    "protect_class": "6",
+    "protection_title": "reserva extrativista",
+    "ref:CNUC": "0000.51.0463",
+    "source": "DECRETO Nº. 9.521, DE 19 DE JUNHO DE 1996 - Governo do Mato Grosso;DECRETO LEGISLATIVO Nº 51, DE 13 DE ABRIL DE 2015. DOEAL/MT DE 13.04.15",
+    "start_date": "1996",
+    "type": "multipolygon",
+    "wikidata": "Q24886527",
+    "wikipedia": "en:Guariba-Roosevelt Extractive Reserve"
+  }
+},
+{
+  "type": "relation",
+  "id": 11523609,
+  "center": {
+    "lat": -16.0495293,
+    "lon": -54.8867621
+  },
+  "tags": {
+    "historic": "memorial",
+    "memorial": "memorial",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 12445455,
+  "center": {
+    "lat": -15.6495652,
+    "lon": -56.1644716
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "dog": "leashed",
+    "leisure": "park",
+    "name": "Parque Ambiental Bernardo Berneck",
+    "natural": "wood",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "type": "multipolygon",
+    "vaccination": "covid19",
+    "wikidata": "Q20059200",
+    "wikipedia": "pt:Parque Bernardo Berneck"
+  }
+},
+{
+  "type": "relation",
+  "id": 12882566,
+  "center": {
+    "lat": -15.6456336,
+    "lon": -56.0799428
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "leisure": "park",
+    "name": "Parque Municipal Flor do Ipê",
+    "natural": "wood",
+    "protect_class": "2",
+    "protection_title": "parque estadual",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 14317025,
+  "center": {
+    "lat": -11.8757270,
+    "lon": -55.5216849
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Natural Municipal Jardim Botânico",
+    "protect_class": "5",
+    "protection_title": "Parque Natural Municipal",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18254137,
+  "center": {
+    "lat": -15.3568938,
+    "lon": -55.8292605
+  },
+  "tags": {
+    "landuse": "recreation_ground",
+    "name": "SESC Salgadeira",
+    "opening_hours": "08:00-18:00",
+    "operator": "SESC",
+    "tourism": "attraction",
+    "type": "multipolygon",
+    "website": "https://www.instagram.com/complexosalgadeira"
+  }
+},
+{
+  "type": "relation",
+  "id": 18625712,
+  "center": {
+    "lat": -15.4638528,
+    "lon": -55.7647473
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 1.071/02 de 16/12/02",
+    "name": "Parque Municipal da Cabeceira do Coxipozinho",
+    "operator": "SEMA-MT",
+    "protect_class": "5",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "PM da Cab do Coxipozinho",
+    "source": "InterMat",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18625713,
+  "center": {
+    "lat": -15.4794342,
+    "lon": -55.6893903
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Dec. n° 350 de 23 de Janeiro de 2020",
+    "name": "Monumento Natural Centro Geodésico da América Latina",
+    "operator": "SEMA-MT",
+    "protect_class": "5",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "MONAT Centro Geodésico da América Latina",
+    "source": "InterMat",
+    "start_date": "2020",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18625714,
+  "center": {
+    "lat": -15.4977728,
+    "lon": -55.4038762
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Portaria n° 603, de 15 de Dezembro de 2014",
+    "name": "Área de Proteção Ambiental do Rio da Casca",
+    "operator": "SEMA-MT",
+    "protect_class": "6",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "27/05/1994",
+    "short_name": "APA do Rio da Casca",
+    "source": "InterMAT",
+    "start_date": "1995",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18625715,
+  "center": {
+    "lat": -15.5774871,
+    "lon": -55.3961965
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Portaria n° 603, de 15 de Dezembro de 2014",
+    "name": "Estação Ecológica do Rio da Casca",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "Lei nº 6.437 de 27/05/94",
+    "short_name": "ESEC do Rio da Casca",
+    "source": "InterMAT",
+    "start_date": "2014",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18625716,
+  "center": {
+    "lat": -15.4154022,
+    "lon": -55.9512761
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Portaria nº 104/94 de 04/10/94",
+    "name": "Reserva Particular do Patrimônio Natural Fazenda São Luiz",
+    "operator": "SEMA-MT",
+    "protect_class": "5",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "RPPN Faz. São Luiz",
+    "source": "InterMAT",
+    "start_date": "21994",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18704569,
+  "center": {
+    "lat": -15.6149727,
+    "lon": -56.1079199
+  },
+  "tags": {
+    "building": "yes",
+    "level": "1",
+    "tourism": "viewpoint",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 18818607,
+  "center": {
+    "lat": -16.6565351,
+    "lon": -56.2426865
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Particular do Patrimônio Natural Estância Ecológica SESC-Pantanal",
+    "natural": "wetland",
+    "operator": "SESC",
+    "protect_class": "2",
+    "protection_title": "Reserva Particular do Patrimônio Natural",
+    "ramsar": "yes",
+    "seasonal": "wet_season",
+    "short_name": "RPPN Est Ec SESC-Pantanal",
+    "source": "landsat",
+    "start_date": "09/11/1998",
+    "type": "boundary",
+    "wetland": "marsh"
+  }
+},
+{
+  "type": "relation",
+  "id": 18818653,
+  "center": {
+    "lat": -15.6512666,
+    "lon": -57.0138869
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área de Proteção Ambiental da Serra das Araras",
+    "operator": "SEMA",
+    "protect_class": "6",
+    "protection_title": "APA",
+    "related_law": "Lei nº 447/01 de 17/12/01",
+    "short_name": "APA da Serra das Araras",
+    "start_date": "17/12/2001",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18818660,
+  "center": {
+    "lat": -14.4392296,
+    "lon": -55.3185126
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Portaria n° 909, de 05 de Dezembro de 2017",
+    "name": "Área de Proteção Ambiental das Cabeceiras do Rio Cuiabá",
+    "operator": "SEMA",
+    "protect_class": "6",
+    "protection_title": "APA",
+    "related_law": "Dec. nº 2.206 de 23/04/98 e Lei nº 7.161 de 23/08/99",
+    "short_name": "APA das Cab do Rio Cuiabá",
+    "start_date": "23/08/1999",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18818761,
+  "center": {
+    "lat": -16.7195482,
+    "lon": -56.6919064
+  },
+  "tags": {
+    "alt_name": "Pantanal do Alto Paraguai",
+    "boundary": "protected_area",
+    "name": "Planície Alagável da Bacia do Alto Paraguai",
+    "place": "region",
+    "region:type": "natural_area",
+    "related_law": "LAW/8.830 21/01/2008",
+    "seasonal": "wet_season",
+    "short_name": "BAP",
+    "source": "InterMat",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 18818826,
+  "center": {
+    "lat": -16.0314930,
+    "lon": -55.9169968
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "governance_type": "government_managed",
+    "name": "Estrada Parque Santo Antônio-Porto de Fora-Barão de Melgaço",
+    "official_name": "Estrada-Parque MT-040/361",
+    "ownership": "state",
+    "protect_class": "6",
+    "protection_title": "Estrada-parque",
+    "source": "IBGE",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850574,
+  "center": {
+    "lat": -17.0864236,
+    "lon": -56.6458189
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Decreto - 4.881 - 22/12/2004",
+    "name": "Parque Estadual Encontro das Águas",
+    "natural": "wetland",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "DEC nº 4.881 de 22/12/2004",
+    "seasonal": "wet_season",
+    "short_name": "PES Encontro das Águas",
+    "source": "landsat",
+    "start_date": "2014",
+    "type": "boundary",
+    "wetland": "marsh"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850575,
+  "center": {
+    "lat": -16.8206224,
+    "lon": -56.7952272
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "governance_type": "government_managed",
+    "name": "Estrada-Parque Transpantaneira",
+    "natural": "wetland",
+    "ownership": "national",
+    "protect_class": "7",
+    "protection_title": "Estrada-parque",
+    "seasonal": "wet_season",
+    "source": "landsat",
+    "type": "boundary",
+    "wetland": "marsh"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850590,
+  "center": {
+    "lat": -17.4571701,
+    "lon": -57.1163059
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Port. nº 06/97 de 19/02/97",
+    "name": "Reserva Particular do Patrimônio Natural Fazenda Estância Dorochê",
+    "natural": "wetland",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "seasonal": "wet_season",
+    "short_name": "RPPN Fazenda Estância Dorochê",
+    "source": "landsat",
+    "start_date": "1997",
+    "type": "boundary",
+    "wetland": "marsh"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850602,
+  "center": {
+    "lat": -16.7785264,
+    "lon": -57.5205641
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Port. nº172/01 de 20/11/01 e Port. nº 50/02 de 18/03/02",
+    "name": "Reserva Particular do Patrimônio Natural Reserva Jubran",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "RPPN Res Jubran",
+    "source": "InterMAT",
+    "start_date": "2001",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850626,
+  "center": {
+    "lat": -17.2823664,
+    "lon": -57.8698269
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 7.625 de 15/01/02",
+    "name": "Parque Estadual Guirá",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "PES do Guirá",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850665,
+  "center": {
+    "lat": -15.8184220,
+    "lon": -59.3798322
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Dec. n 1.797 e 04/11/97 e Lei n 7.165 de 23/08/99",
+    "name": "Parque Estadual Serra de Santa Bárbara",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "PES Serra de Santa Bárbara",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850738,
+  "center": {
+    "lat": -14.5046907,
+    "lon": -55.9461264
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Dec. nº 1.472 de 09/06/00 e Lei nº 7.369 de 20/12/00",
+    "name": "Parque Estadual Gruta da Lagoa Azul",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "Parque Estadual",
+    "source": "InterMAT",
+    "start_date": "2000",
+    "tourism": "attraction",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850743,
+  "center": {
+    "lat": -14.6028036,
+    "lon": -56.4633966
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Dec. nº 7.596 de 17/05/06",
+    "name": "Área de Proteção Ambiental Nascentes do Rio Paraguai",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "área de proteção ambiental",
+    "short_name": "APA Nascentes do Rio Paraguai",
+    "source": "InterMAT",
+    "start_date": "2006",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850764,
+  "center": {
+    "lat": -17.8806218,
+    "lon": -53.1648593
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 287/02 de 07/08/02",
+    "name": "Área de Proteção Ambiental Nascente do Rio Araguaia",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "Área de Proteção Ambiental",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850765,
+  "center": {
+    "lat": -17.9702593,
+    "lon": -53.2983138
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 287/02 de 07/08/02",
+    "name": "Área de Proteção Ambiental Cachoeira do Ribeirão da Laje, do Rio Taquari e Ribeirão das Furnas",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "Área de Proteção Ambiental",
+    "short_name": "APA Cachoeira do Ribeirão da Laje, do Rio Taquari e Ribeirão das Furnas",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850783,
+  "center": {
+    "lat": -17.6067361,
+    "lon": -53.3467864
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 1.318/01 de 29/11/01",
+    "name": "Área de Proteção Ambiental do Ribeirão do Sapo",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "Área de Proteção Ambiental",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 18850784,
+  "center": {
+    "lat": -17.6449903,
+    "lon": -53.3170203
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "description": "Lei nº 287/02 de 07/08/02",
+    "name": "Área de Proteção Ambiental do Ribeirão do Sapo (margem direita)",
+    "operator": "SEMA-MT",
+    "protect_class": "1",
+    "protection_title": "Área de Proteção Ambiental",
+    "source": "InterMAT",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 19037074,
+  "center": {
+    "lat": -15.4083177,
+    "lon": -55.8121861
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "governance_type": "government_managed",
+    "name": "Estrada Parque Cuiabá-Chapada dos Guimarães",
+    "official_name": "Estrada Parque Cuiabá-Chapada dos Guimarães-Mirante",
+    "ownership": "state",
+    "protect_class": "6",
+    "protection_title": "Estrada-parque",
+    "source": "IBGE",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 19317839,
+  "center": {
+    "lat": -13.5871930,
+    "lon": -55.2626893
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Área de Proteção Ambiental Salto Magessi",
+    "protect_class": "6",
+    "protection_title": "área de proteção ambiental",
+    "related_law": "L/3874 16/07/1999",
+    "short_name": "APA Salto Magessi",
+    "source": "ICMBio",
+    "start_date": "2002",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 19352638,
+  "center": {
+    "lat": -14.5072806,
+    "lon": -55.7512284
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Sesc Serra Azul",
+    "official_name": "Reserva Particular do Patrimônio Natural Sesc Serra Azul",
+    "operator": "SESC",
+    "protect_class": "6",
+    "protection_title": "RPPN",
+    "short_name": "RPPN Parque Sesc Serra Azul",
+    "start_date": "26/09/2014",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 20623899,
+  "center": {
+    "lat": -9.5384093,
+    "lon": -55.7167236
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual Cristalino",
+    "protect_class": "6",
+    "protection_title": "Parque Estadual",
+    "source": "ICMBio",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 20623900,
+  "center": {
+    "lat": -9.6125445,
+    "lon": -55.9409809
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Particular do Patrimônio Natural Lote Cristalino",
+    "protect_class": "6",
+    "protection_title": "Reserva Particular do Patrimônio Natural",
+    "short_name": "RPPN Lote Cristalino",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 20623901,
+  "center": {
+    "lat": -9.6270851,
+    "lon": -55.9085276
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Particular do Patrimônio Natural Cristalino I",
+    "protect_class": "6",
+    "protection_title": "Reserva Particular do Patrimônio Natural",
+    "short_name": "RPPN Lote Cristalino",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 20623902,
+  "center": {
+    "lat": -9.5859332,
+    "lon": -55.8998500
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Reserva Particular do Patrimônio Natural Cristalino III",
+    "protect_class": "6",
+    "protection_title": "Reserva Particular do Patrimônio Natural",
+    "short_name": "RPPN Lote Cristalino",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 20623903,
+  "center": {
+    "lat": -9.5979262,
+    "lon": -55.5243722
+  },
+  "tags": {
+    "boundary": "protected_area",
+    "name": "Parque Estadual Cristalino II",
+    "protect_class": "6",
+    "protection_title": "Parque Estadual",
+    "source": "ICMBio",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 21076054,
+  "center": {
+    "lat": -15.4517653,
+    "lon": -56.0938402
+  },
+  "tags": {
+    "area:highway": "footway",
+    "level": "1",
+    "tourism": "viewpoint",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}
