@@ -23,8 +23,8 @@ Pinos de cachoeira, mirante, monumento, ponto de encontro e sede (Cuiabá, sem e
 ## Depois do Supabase
 Importação OSM semanal (GitHub Actions + osmium), sedes pela diretoria, fila de revisão, votos, coletor de fontes abertas, cadastro de clubes externos, termos (advogado).
 
-## Decisões do dono
-1. Confirmar Feira de Santana (BA) como sede nacional.
-2. "Capítulo" na tela (recomendado) ou "facção"?
-3. Outros motoclubes só por cadastro voluntário e depois do lançamento?
-4. Autoriza contato com a organização da Rota Biker?
+## Decisões do dono (12/11/2026)
+1. Sede nacional em Feira de Santana (BA): **sim**.
+2. "Capítulo" na tela: **sim** (busca aceita "facção").
+3. Outros motoclubes só por cadastro voluntário e depois do lançamento: **sim**.
+4. Pedir autorização à Rota Biker: **não** — "encontre os pontos e inclua". O agente coleta do site público só fatos (nome, número, cidade, local, link para o site oficial), sem copiar textos nem fotos, com crédito "Rota Biker" e link.

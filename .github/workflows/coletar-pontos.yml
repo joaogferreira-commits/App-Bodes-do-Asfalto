@@ -1,0 +1,31 @@
+name: Coletar pontos para o mapa (Rota Biker e OpenStreetMap)
+
+# A rede do agente bloqueia estes sites; o GitHub Actions baixa e faz commit dos arquivos brutos.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/pontos-request.txt
+
+permissions:
+  contents: write
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python tools/coletar_pontos.py
+      - name: Commit da coleta
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/coleta
+          git diff --cached --quiet || git commit -m "Coleta de pontos (Rota Biker e OpenStreetMap)"
+          git pull --rebase
+          git push
