@@ -1,9 +1,13 @@
 name: Aplicar o banco no Supabase (só o dono dispara)
 
 # Cria as tabelas, regras de acesso (RLS) e a chave dos dados maçônicos no projeto Supabase do dono.
-# Só roda quando o dono clica em "Run workflow" (nunca sozinho). Precisa dos GitHub Secrets:
+# Roda quando o dono clica em "Run workflow" ou, com autorização escrita do dono, quando o agente edita
+# .github/banco-request.txt (o botão só aparece para workflows do ramo principal). Precisa dos GitHub Secrets:
 # SUPABASE_ACCESS_TOKEN, SUPABASE_PROJECT_REF e SUPABASE_DB_PASSWORD.
 on:
+  push:
+    paths:
+      - .github/banco-request.txt
   workflow_dispatch:
     inputs:
       com_capitulos:
@@ -29,7 +33,7 @@ jobs:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
         run: |
-          if [ "${{ inputs.com_capitulos }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.com_capitulos }}" = "true" ]; then
             supabase db push --include-seed --yes
           else
             supabase db push --yes
