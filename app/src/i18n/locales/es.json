@@ -921,5 +921,39 @@
     "rodape": "Enviado por la app Bodes do Asfalto. Llama al 192/193 si es grave.",
     "limite": "En esta versión de prueba aún no existe el aviso automático por notificación al convoy (depende del servidor). WhatsApp pide un toque para enviar.",
     "estouBem": "Estoy bien, cerrar"
+  },
+  "negocios": {
+    "titulo": "Guía de Negocios",
+    "explica": "Negocios de hermanos, siempre con un beneficio para quien es del club.",
+    "souMembro": "Soy miembro (mostrar en el mostrador)",
+    "parceiro": "Socio",
+    "deIrmao": "de {{nome}}",
+    "beneficio": "Beneficio para hermanos",
+    "mostrarNoBalcao": "Mostrar que soy miembro",
+    "recomendacoes": "{{n}} hermanos recomiendan",
+    "recomendo": "Recomiendo",
+    "recomendei": "Recomendado",
+    "mensagem": "¡Hola! Vi {{nome}} en la Guía de Bodes do Asfalto.",
+    "privacidade": "El negocio recibe solo números sumados (cuántas veces fue visto, cuántas rutas). Nunca quién fue.",
+    "rodape": "¿Quieres anunciar tu negocio? Habla con el responsable de la app. El pago se hace fuera de la app.",
+    "capitulo": "Capítulo {{capitulo}}",
+    "membroAtivo": "Miembro activo",
+    "horaAgora": "Hora actual: {{hora}}",
+    "relogioExplica": "El reloj en marcha muestra que no es una foto de la pantalla.",
+    "categorias": {
+      "todos": "Todo",
+      "oficina": "Talleres",
+      "comida": "Comida",
+      "pouso": "Hospedaje",
+      "pecas": "Repuestos",
+      "servicos": "Servicios"
+    },
+    "comodidades": {
+      "cobertura": "Moto a la sombra",
+      "garagem": "Garaje cerrado",
+      "cafeCedo": "Café temprano",
+      "ferramentas": "Herramientas",
+      "guincho": "Grúa"
+    }
   }
 }

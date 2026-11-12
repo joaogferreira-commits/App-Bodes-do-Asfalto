@@ -921,5 +921,39 @@
     "rodape": "Sent from the Bodes do Asfalto app. Call 192/193 if serious.",
     "limite": "In this test version, the automatic push alert to the convoy does not exist yet (needs the server). WhatsApp asks for one tap to send.",
     "estouBem": "I am fine, close"
+  },
+  "negocios": {
+    "titulo": "Business Guide",
+    "explica": "Brothers' businesses, always with a benefit for club members.",
+    "souMembro": "I am a member (show at the counter)",
+    "parceiro": "Partner",
+    "deIrmao": "by {{nome}}",
+    "beneficio": "Benefit for brothers",
+    "mostrarNoBalcao": "Show I am a member",
+    "recomendacoes": "{{n}} brothers recommend",
+    "recomendo": "Recommend",
+    "recomendei": "Recommended",
+    "mensagem": "Hello! I saw {{nome}} in the Bodes do Asfalto Guide.",
+    "privacidade": "The business only gets totals (times seen, routes). Never who it was.",
+    "rodape": "Want to list your business? Talk to the app owner. Payment happens outside the app.",
+    "capitulo": "{{capitulo}} chapter",
+    "membroAtivo": "Active member",
+    "horaAgora": "Time now: {{hora}}",
+    "relogioExplica": "The running clock shows it is not a screenshot.",
+    "categorias": {
+      "todos": "All",
+      "oficina": "Workshops",
+      "comida": "Food",
+      "pouso": "Lodging",
+      "pecas": "Parts",
+      "servicos": "Services"
+    },
+    "comodidades": {
+      "cobertura": "Covered parking",
+      "garagem": "Locked garage",
+      "cafeCedo": "Early breakfast",
+      "ferramentas": "Tools",
+      "guincho": "Tow truck"
+    }
   }
 }

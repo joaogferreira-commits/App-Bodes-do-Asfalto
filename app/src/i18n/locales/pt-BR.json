@@ -921,5 +921,39 @@
     "rodape": "Enviado pelo app Bodes do Asfalto. Ligue 192/193 se for grave.",
     "limite": "Nesta versão de teste, o aviso automático por notificação ao comboio ainda não existe (depende do servidor). O WhatsApp pede um toque para enviar.",
     "estouBem": "Estou bem, fechar"
+  },
+  "negocios": {
+    "titulo": "Guia de Negócios",
+    "explica": "Negócios de irmãos, sempre com um benefício para quem é do clube.",
+    "souMembro": "Sou membro (mostrar no balcão)",
+    "parceiro": "Parceiro",
+    "deIrmao": "de {{nome}}",
+    "beneficio": "Benefício para irmãos",
+    "mostrarNoBalcao": "Mostrar que sou membro",
+    "recomendacoes": "{{n}} irmãos recomendam",
+    "recomendo": "Recomendo",
+    "recomendei": "Recomendei",
+    "mensagem": "Olá! Vi o {{nome}} no Guia dos Bodes do Asfalto.",
+    "privacidade": "O negócio recebe só números somados (quantas vezes foi visto, quantas rotas). Nunca quem foi.",
+    "rodape": "Quer anunciar seu negócio? Fale com o responsável pelo app. O pagamento é feito fora do app.",
+    "capitulo": "Capítulo {{capitulo}}",
+    "membroAtivo": "Membro ativo",
+    "horaAgora": "Hora agora: {{hora}}",
+    "relogioExplica": "O relógio andando mostra que não é uma foto da tela.",
+    "categorias": {
+      "todos": "Tudo",
+      "oficina": "Oficinas",
+      "comida": "Comida",
+      "pouso": "Pouso",
+      "pecas": "Peças",
+      "servicos": "Serviços"
+    },
+    "comodidades": {
+      "cobertura": "Moto na sombra",
+      "garagem": "Garagem fechada",
+      "cafeCedo": "Café cedo",
+      "ferramentas": "Ferramentas",
+      "guincho": "Guincho"
+    }
   }
 }

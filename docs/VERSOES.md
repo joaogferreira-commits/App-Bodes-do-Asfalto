@@ -4,6 +4,13 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.11.0 — 12/11/2026
+
+- Guia de Negócios novo: parceiros pagos aparecem primeiro com selo dourado "Parceiro"; plano vencido perde o destaque sozinho.
+- Vitrine do negócio: fotos, benefício para irmãos em destaque, horário, comodidades, botões Rota, WhatsApp e Ligar, e "Recomendo".
+- Carteirinha "Sou membro" para mostrar no balcão (relógio andando prova que não é print; nada maçônico aparece).
+- Contadores anônimos para o anunciante: só números somados, nunca quem foi; números pequenos aparecem como "menos de 5".
+
 ## 0.10.0 — 12/11/2026
 - Ferramentas virou aba (Mapa, Feed, Passeios, Ferramentas, Perfil); Conquistas abre pelo Perfil.
 - Botão "Eu" do mapa: avisa se falta permissão ou GPS, usa a última posição na hora e mostra "Você está aqui".

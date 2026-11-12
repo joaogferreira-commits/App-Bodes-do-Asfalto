@@ -98,3 +98,7 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 
 - Expo (usuário `joaogferreira`): token em GitHub Secrets como `EXPO_TOKEN`.
 - Google Cloud (projeto `bodes-do-asfalto`): chave em GitHub Secrets como `GOOGLE_MAPS_API_KEY`; o workflow copia para as variáveis do EAS (sensível). Falta restringir a chave ao app (pacote + SHA-1) depois da primeira build.
+
+### 12/11/2026 — ciclo 6: Comercial (v0.11.0)
+- Feito: Guia de Negócios (`/negocios`), vitrine (`/negocios/[id]`), carteirinha `/sou-membro`, regras `planoVigente`/`ordenarGuia`, contadores anônimos (`app/src/comercial/contadores.ts`). Traduções nos 3 idiomas; 5 testes novos (229 no total).
+- Falta: pino de parceiro no mapa, enviar contadores ao Supabase, painel de resultados para o anunciante.

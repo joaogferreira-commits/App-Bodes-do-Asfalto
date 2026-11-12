@@ -14,7 +14,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 9. **Feed:** ~~enquete~~ e ~~salvar post~~ FEITOS 12/11. ~~Stories de 24 h~~ FEITO 12/11. Faltam: vídeo (até 60 s), menções (@).
 10. **Revisões de Dora e Quintino** em cada tela nova; corrigir achados.
 
-11. **Comercial (docs/COMERCIAL.md):** vitrine do negócio, benefício para irmãos + "Sou membro", planos com validade, pino de parceiro, contadores anônimos.
+11. ~~**Comercial**~~ FEITO 12/11 (v0.11.0): Guia com parceiros primeiro e selo dourado, vitrine com fotos/benefício/comodidades/Rota/WhatsApp/Ligar/Recomendo, carteirinha "Sou membro" com relógio, planos com validade, contadores anônimos (só soma, "<5"). Falta: pino de parceiro no mapa (aguarda imagem do dono) e envio dos contadores ao Supabase. Original: vitrine do negócio, benefício para irmãos + "Sou membro", planos com validade, pino de parceiro, contadores anônimos.
 12. **Detecção de queda (experimental):** sensor de movimento + contagem regressiva de 30 s antes do SOS (decisão do dono pendente; Premium?).
 13. **Revisões das personas novas** (Rui, Sofia, Lia, Carlos, Otávio, Pedro) e corrigir os achados.
 

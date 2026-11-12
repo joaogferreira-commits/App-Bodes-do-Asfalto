@@ -35,7 +35,7 @@ export const gruposFerramentas: { grupo: string; itens: Ferramenta[] }[] = [
       { chave: 'irmaosPerto', icone: 'aceno', rota: '/ferramentas/lista/irmaosPerto', cor: 'acao' },
       { chave: 'membros', icone: 'reagrupar', rota: '/ferramentas/lista/membros', cor: 'acao' },
       { chave: 'aniversarios', icone: 'calendario', rota: '/ferramentas/lista/aniversarios', cor: 'ouro' },
-      { chave: 'negocios', icone: 'oficina', rota: '/ferramentas/lista/negocios', cor: 'verdePosto' },
+      { chave: 'negocios', icone: 'oficina', rota: '/negocios', cor: 'verdePosto' },
       { chave: 'classificados', icone: 'salvar', rota: '/classificados', cor: 'terra' },
     ],
   },
