@@ -1,5 +1,15 @@
 # Sistema de design — Bodes do Asfalto (identidade "Patch de Colete")
 
+> **Atualização de 12/11/2026 — Interface v2 (prevalece sobre as seções 1 e 2 abaixo).**
+> O dono reprovou o primeiro visual (desproporcional, infantil, sem ícones). Vale agora a Interface v2:
+> pranchas em `docs/telas/v2/` (Mapa, Planejar rota, Pilotando, Carro, Sistema) e tokens em `app/src/theme/tokens.ts`.
+> - Cores com função única: fundo `#0B0907`, superfícies `#16120E`/`#201A15`, texto `#F3EADB`/`#B8A890`, ação `#E8692A`, SOS `#C62D22`, alerta `#F5C518`, ouro `#D8A93B` (sedes/conquistas), verde `#3FA27A` (postos), azul `#7FA6C2` (Lojas).
+> - Mapa: asfalto creme contínuo; **terra em tracejado ocre `#C68A45` sobre marrom `#5A3E1F`**; rota laranja; rota na terra com pesponto claro.
+> - O bordado fica só em emblemas, selos, níveis e mascote; botões, cartões e barras são limpos (grade de 8, raios 12–22, sombras `boxShadow`).
+> - Ícones: traço 1,8 em grade 24 (`app/src/ui/icones.tsx`), nunca emoji.
+> - Skia saiu do app (não é mais necessário para o visual v2).
+
+
 Referência obrigatória para toda a interface. Telas de referência: `docs/telas/` (principal: `IconesPatch.dc.html`). Regra de ouro: **a IA de imagem gera matéria-prima (texturas, ilustrações, emblemas); a interface é desenhada em código** (cartões, botões, curvas, sombras, mapa).
 
 ## 1. Tokens

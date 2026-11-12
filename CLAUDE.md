@@ -18,6 +18,8 @@ Princípios, nesta ordem:
 
 O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Valhalla (sem Mapbox); navegação curva a curva no Premium com 7 dias grátis (SOS, alertas e comboio grátis); Apple em CPF e Google Play como empresa; CarPlay não segura o lançamento; teto de alerta R$ 500/mês com orçamento o mais apertado possível; avatar por IA 1 grátis por conta e 2/mês no Premium (avatar "montar" na Etapa 1, por IA na Etapa 8); revisão de segurança por um desenvolvedor (4 a 8 h) antes do envio às lojas; v1 sem anúncios e sem aviso de rastreamento (ATT); imagens pelo Caminho A (dono gera no ChatGPT); cores do DESIGN.md; modo pilotando com 6 botões.
 
+**12/11/2026:** a interface é prioridade igual ao desenvolvimento e passa pelo dono antes de virar código (Interface v2 em `docs/telas/v2/`). Tipo de estrada no planejamento (Só asfalto / Misto / Prefiro terra) e terra sempre com cor/traço próprios. Pendências externas (licença da marca, empresa) ficam para depois do app pronto.
+
 **Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
 
 ## Decisões fechadas (não mude sem perguntar)
@@ -99,7 +101,7 @@ As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML p
 
 - **Regra de ouro:** a IA de imagem gera matéria-prima (emblemas, texturas, ilustrações); a interface é desenhada em código. Nunca use imagem para botão, cartão, texto ou layout.
 - **Identidade escolhida:** "Patch de Colete" refinada (`docs/telas/IconesPatch.dc.html`). Tokens de cor, tipografia, raios, 3 níveis de profundidade e componentes em `docs/DESIGN.md`.
-- **Bibliotecas de acabamento:** React Native Skia (sombras internas, textura, curvas, brilho de fio), `react-native-svg` (ícones vetoriais), Lottie ou Rive (animações ≤ 100 KB), `expo-image` (cache de imagens).
+- **Bibliotecas de acabamento:** `react-native-svg` (ícones vetoriais), `boxShadow` nativo (sombras), Lottie ou Rive (animações ≤ 100 KB), `expo-image` (cache de imagens). Skia saiu em 12/11/2026 (o visual v2 não precisa; volta só se um efeito exigir).
 - **Mapa:** estilo MapLibre próprio em `app/src/map/estilo-bodes.json`, conforme a seção 3 do DESIGN.md.
 - **Limite de peso:** seção 4 do DESIGN.md. Medir a cada build de teste.
 - **Imagens geradas:** Caminho A (dono gera no ChatGPT com `docs/PROMPTS_IMAGENS.md` e salva em `docs/assets-originais/`) ou Caminho B (agente gera pela API, só se o segredo de rede estiver configurado; limite de US$ 10 sem nova autorização; registrar no LOG). Antes de gerar ou converter, pergunte ao dono qual caminho está ativo.
