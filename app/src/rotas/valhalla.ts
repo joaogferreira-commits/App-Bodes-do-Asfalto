@@ -39,7 +39,8 @@ type Buscar = (
   json(): Promise<unknown>;
 }>;
 
-type RespostaRota = { trip?: { legs?: { shape: string }[]; summary?: { length: number; time: number } } };
+type Viagem = { legs?: { shape: string }[]; summary?: { length: number; time: number } };
+type RespostaRota = { trip?: Viagem; alternates?: { trip?: Viagem }[] };
 type RespostaAtributos = {
   edges?: { unpaved?: boolean; length?: number; begin_shape_index?: number; end_shape_index?: number }[];
 };
@@ -59,9 +60,12 @@ export function separarTrechos(forma: Coordenada[], arestas: RespostaAtributos['
     const pontos = forma.slice(inicio, fim + 1);
     if (pontos.length < 2) continue;
     const terra = !!a.unpaved;
+    const km = a.length ?? 0;
     const ultimo = trechos[trechos.length - 1];
-    if (ultimo && ultimo.terra === terra) ultimo.pontos.push(...pontos.slice(1));
-    else trechos.push({ pontos, terra });
+    if (ultimo && ultimo.terra === terra) {
+      ultimo.pontos.push(...pontos.slice(1));
+      ultimo.km = (ultimo.km ?? 0) + km;
+    } else trechos.push({ pontos, terra, km });
   }
   return trechos.length ? trechos : [{ pontos: forma, terra: false }];
 }
@@ -86,6 +90,8 @@ export async function planejarRota(
       motorcycle: { ...opcoesDeCusto(tipo, semCorteDeTerra), ...(extras.curvas ? { use_highways: 0 } : {}) },
     },
     directions_options: { units: 'kilometers', language: 'pt-BR' },
+    // Até 2 caminhos alternativos (R43); o Valhalla só calcula alternativas entre 2 pontos.
+    ...(pontos.length === 2 ? { alternates: 2 } : {}),
   });
   const pedir = async (caminho: string, dados: object) => {
     let resp;
@@ -112,40 +118,62 @@ export async function planejarRota(
     rota = (await pedir('/route', corpo(true))) as RespostaRota;
     semCaminhoSoAsfalto = true;
   }
-  const pernas = rota.trip?.legs ?? [];
-  const resumo = rota.trip?.summary;
-  if (!pernas.length || !resumo) throw new ErroRota('semRota');
-  // Junta as pernas (o ponto final de uma é o inicial da próxima).
-  const forma = pernas.flatMap((pr, i) => decodificarPolyline(pr.shape, 6).slice(i === 0 ? 0 : 1));
-  const formaCodificada = pernas.length === 1 ? pernas[0]!.shape : codificarPolyline(forma, 6);
+  const montar = async (viagem: Viagem | undefined): Promise<RotaPlanejada> => {
+    const pernas = viagem?.legs ?? [];
+    const resumo = viagem?.summary;
+    if (!pernas.length || !resumo) throw new ErroRota('semRota');
+    // Junta as pernas (o ponto final de uma é o inicial da próxima).
+    const forma = pernas.flatMap((pr, i) => decodificarPolyline(pr.shape, 6).slice(i === 0 ? 0 : 1));
+    const formaCodificada = pernas.length === 1 ? pernas[0]!.shape : codificarPolyline(forma, 6);
 
-  let trechos: Trecho[] = [{ pontos: forma, terra: false }];
-  let kmTerra = 0;
-  try {
-    const atributos = (await pedir('/trace_attributes', {
-      encoded_polyline: formaCodificada,
-      shape_match: 'edge_walk',
-      costing: 'motorcycle',
-      filters: {
-        attributes: ['edge.unpaved', 'edge.length', 'edge.begin_shape_index', 'edge.end_shape_index'],
-        action: 'include',
-      },
-    })) as RespostaAtributos;
-    trechos = separarTrechos(forma, atributos.edges);
-    kmTerra = (atributos.edges ?? []).filter((a) => a.unpaved).reduce((s, a) => s + (a.length ?? 0), 0);
-  } catch {
-    // Sem os atributos a rota continua válida; só não sabemos quanto é terra.
-  }
-
-  return {
-    forma,
-    trechos,
-    km: resumo.length,
-    kmTerra: Math.round(kmTerra * 10) / 10,
-    minutos: Math.round(resumo.time / 60),
-    tipo,
-    ...(semCaminhoSoAsfalto ? { aviso: 'semCaminhoSoAsfalto' as const } : {}),
+    let trechos: Trecho[] = [{ pontos: forma, terra: false, km: resumo.length }];
+    let kmTerra = 0;
+    try {
+      const atributos = (await pedir('/trace_attributes', {
+        encoded_polyline: formaCodificada,
+        shape_match: 'edge_walk',
+        costing: 'motorcycle',
+        filters: {
+          attributes: ['edge.unpaved', 'edge.length', 'edge.begin_shape_index', 'edge.end_shape_index'],
+          action: 'include',
+        },
+      })) as RespostaAtributos;
+      trechos = separarTrechos(forma, atributos.edges);
+      kmTerra = (atributos.edges ?? [])
+        .filter((x) => x.unpaved)
+        .reduce((soma, x) => soma + (x.length ?? 0), 0);
+    } catch {
+      // Sem os atributos a rota continua válida; só não sabemos quanto é terra.
+    }
+    return {
+      forma,
+      trechos,
+      km: resumo.length,
+      kmTerra: Math.round(kmTerra * 10) / 10,
+      kmAteTerra: kmAteATerra(trechos),
+      minutos: Math.round(resumo.time / 60),
+      tipo,
+      ...(semCaminhoSoAsfalto ? { aviso: 'semCaminhoSoAsfalto' as const } : {}),
+    };
   };
+
+  const principal = await montar(rota.trip);
+  const alternativas: RotaPlanejada[] = [];
+  for (const alt of rota.alternates ?? []) {
+    const r = await montar(alt.trip).catch(() => null);
+    if (r) alternativas.push(r);
+  }
+  return alternativas.length ? { ...principal, alternativas } : principal;
+}
+
+/** Km rodados até começar o primeiro trecho de terra (undefined se não há terra). */
+export function kmAteATerra(trechos: Trecho[]): number | undefined {
+  let km = 0;
+  for (const t of trechos) {
+    if (t.terra) return Math.round(km * 10) / 10;
+    km += t.km ?? 0;
+  }
+  return undefined;
 }
 
 /** Pontos de passagem espalhados pela rota (sem início e fim), para o Google seguir o mesmo caminho. */

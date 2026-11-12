@@ -258,3 +258,60 @@ describe('rota no Google (por que recusa e como suavizar)', () => {
     });
   });
 });
+
+describe('alternativas e terra (R43)', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const v = require('./valhalla') as typeof import('./valhalla');
+  const a = { lat: -15.6, lng: -56.1 };
+  const b = { lat: -15.4, lng: -55.8 };
+  const trip = (km: number) => ({
+    legs: [{ shape: codificarPolyline([a, { lat: -15.5, lng: -56 }, b]) }],
+    summary: { length: km, time: km * 60 },
+  });
+  const attrs = (terraNoFim: boolean) => ({
+    ok: true,
+    status: 200,
+    json: async () => ({
+      edges: [
+        { unpaved: false, length: 30, begin_shape_index: 0, end_shape_index: 1 },
+        { unpaved: terraNoFim, length: 20, begin_shape_index: 1, end_shape_index: 2 },
+      ],
+    }),
+  });
+
+  it('km até a terra soma os trechos de asfalto antes do primeiro de terra', () => {
+    expect(
+      v.kmAteATerra([
+        { pontos: [], terra: false, km: 12.34 },
+        { pontos: [], terra: true, km: 5 },
+      ]),
+    ).toBe(12.3);
+    expect(v.kmAteATerra([{ pontos: [], terra: false, km: 10 }])).toBeUndefined();
+  });
+
+  it('pede 2 alternativas entre dois pontos e devolve cada uma com a sua terra', async () => {
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({ trip: trip(50), alternates: [{ trip: trip(58) }] }),
+      })
+      .mockResolvedValueOnce(attrs(true))
+      .mockResolvedValueOnce(attrs(false));
+    const r = await v.planejarRota(a, b, 'misto', buscar);
+    expect(JSON.parse(buscar.mock.calls[0][1].body).alternates).toBe(2);
+    expect(r).toMatchObject({ km: 50, kmTerra: 20, kmAteTerra: 30 });
+    expect(r.alternativas).toHaveLength(1);
+    expect(r.alternativas![0]).toMatchObject({ km: 58, kmTerra: 0 });
+  });
+
+  it('com pontos de passagem (bate-volta) não pede alternativas', async () => {
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ trip: trip(100) }) })
+      .mockResolvedValueOnce(attrs(false));
+    await v.planejarBateVolta(a, { km: 100, rumo: 'N', tipo: 'misto', curvas: false }, buscar);
+    expect(JSON.parse(buscar.mock.calls[0][1].body).alternates).toBeUndefined();
+  });
+});

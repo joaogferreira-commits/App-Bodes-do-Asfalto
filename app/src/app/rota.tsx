@@ -25,7 +25,7 @@ import {
   trechosGeoJSON,
 } from '@/rotas/formato';
 import { rotaNoGoogle, type ResultadoGoogle } from '@/rotas/google';
-import type { TipoEstrada } from '@/rotas/tipos';
+import type { RotaPlanejada, TipoEstrada } from '@/rotas/tipos';
 import { ErroRota, planejarBateVolta, planejarRota, rumos, type Rumo } from '@/rotas/valhalla';
 import { espaco, fontes, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
 import { Botao, Chip, Icone, PainelInferior, Texto, type NomeIcone } from '@/ui';
@@ -57,6 +57,8 @@ export default function Rota() {
   const [estado, setEstado] = useState<Estado>({ fase: 'calculando' });
   const [iniciando, setIniciando] = useState(false);
   const [recolhido, setRecolhido] = useState(false);
+  const [opcoes, setOpcoes] = useState<RotaPlanejada[]>([]);
+  const [escolhida, setEscolhida] = useState(0);
   const destinos = [...(destino.chave === 'busca' ? [destino] : []), ...destinosDaProva, postoExemplo];
 
   const calcular = useCallback(async () => {
@@ -75,7 +77,10 @@ export default function Rota() {
       const nova = bateVolta
         ? await planejarBateVolta(atual, { ...bateVolta, tipo: tipoEstrada })
         : await planejarRota(atual, posicaoDoDestino(destino, atual), tipoEstrada);
-      viagem.definirRota(nova, null);
+      const { alternativas, ...principal } = nova;
+      setOpcoes([principal, ...(alternativas ?? [])]);
+      setEscolhida(0);
+      viagem.definirRota(principal, null);
       setEstado({ fase: 'pronta' });
       camera.current?.fitBounds(limites(nova.forma), {
         padding: { top: 220, bottom: 470, left: 40, right: 40 },
@@ -271,9 +276,50 @@ export default function Rota() {
                 accessibilityLabel={t('rota.composicao', { asfalto: 100 - pct, terra: pct })}
                 style={estilos.barra}
               >
-                <View style={{ flex: Math.max(100 - pct, 0.01), backgroundColor: cores.asfalto }} />
-                <View style={{ flex: Math.max(pct, 0.01), backgroundColor: cores.terra }} />
+                {/* Trechos na ordem do caminho: claro = asfalto, ocre com borda escura = terra */}
+                {rota.trechos.map((tr, i) => (
+                  <View
+                    key={i}
+                    style={{
+                      flex: Math.max(tr.km ?? rota.km / rota.trechos.length, 0.01),
+                      backgroundColor: tr.terra ? cores.terra : cores.asfalto,
+                      borderTopWidth: tr.terra ? 2 : 0,
+                      borderBottomWidth: tr.terra ? 2 : 0,
+                      borderColor: cores.terraEscura,
+                    }}
+                  />
+                ))}
               </View>
+              {rota.kmAteTerra !== undefined && (
+                <Texto variante="secundario">
+                  {rota.kmAteTerra > 0
+                    ? t('rota.terraComeca', { km: formatarKm(rota.kmAteTerra) })
+                    : t('rota.terraNaSaida')}
+                </Texto>
+              )}
+              {opcoes.length > 1 && (
+                <View style={{ gap: espaco.xs }}>
+                  <Texto variante="rotulo">{t('rota.opcoes')}</Texto>
+                  <View style={estilos.quebra}>
+                    {opcoes.map((o, i) => (
+                      <Chip
+                        key={i}
+                        rotulo={t('rota.opcao', {
+                          n: i + 1,
+                          km: formatarKm(o.km),
+                          tempo: formatarDuracao(o.minutos),
+                          terra: percentualTerra(o.km, o.kmTerra),
+                        })}
+                        ativo={escolhida === i}
+                        onPress={() => {
+                          setEscolhida(i);
+                          viagem.definirRota(o, null);
+                        }}
+                      />
+                    ))}
+                  </View>
+                </View>
+              )}
               {rota.aviso === 'semCaminhoSoAsfalto' && (
                 <View style={estilos.avisoTerra} accessibilityLiveRegion="polite">
                   <Icone nome="alerta" tamanho={20} cor={cores.alerta} />

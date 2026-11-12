@@ -108,7 +108,11 @@
       "chaveSemRoutes": "Google rechazó la ruta: la clave no tiene activada la \"Routes API\". La navegación irá por la ruta de Google.",
       "semRota": "Google no conoce parte de este camino (tierra: {{terra}} km). La navegación irá por su ruta; para seguirla al pie de la letra, elige \"Solo asfalto\" o síguela en el mapa de la app.",
       "semRede": "Sin internet para comprobar con Google."
-    }
+    },
+    "terraComeca": "La tierra empieza en el km {{km}}.",
+    "terraNaSaida": "La ruta ya sale por tierra.",
+    "opcoes": "Caminos",
+    "opcao": "{{n}} · {{km}} km · {{tempo}} · {{terra}}% tierra"
   },
   "pilotando": {
     "preparando": "Preparando la navegación…",

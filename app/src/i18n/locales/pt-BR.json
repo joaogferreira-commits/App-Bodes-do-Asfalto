@@ -108,7 +108,11 @@
       "chaveSemRoutes": "O Google recusou a rota: a chave não tem a \"Routes API\" ligada. A navegação vai pela rota do Google (aviso ao dono).",
       "semRota": "O Google não conhece parte deste caminho (terra: {{terra}} km). A navegação vai pela rota dele; para segui-la à risca, escolha \"Só asfalto\" ou acompanhe pelo mapa do app.",
       "semRede": "Sem internet para conferir com o Google."
-    }
+    },
+    "terraComeca": "A terra começa no km {{km}}.",
+    "terraNaSaida": "A rota já sai pela terra.",
+    "opcoes": "Caminhos",
+    "opcao": "{{n}} · {{km}} km · {{tempo}} · {{terra}}% terra"
   },
   "pilotando": {
     "preparando": "Preparando a navegação…",

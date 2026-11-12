@@ -108,7 +108,11 @@
       "chaveSemRoutes": "Google rejected the route: the key does not have the \"Routes API\" enabled. Navigation will use Google's route.",
       "semRota": "Google doesn't know part of this way (dirt: {{terra}} km). Navigation will use its own route; to follow it exactly, choose \"Paved only\" or follow on the app map.",
       "semRede": "No internet to check with Google."
-    }
+    },
+    "terraComeca": "Dirt starts at km {{km}}.",
+    "terraNaSaida": "The route starts on dirt.",
+    "opcoes": "Routes",
+    "opcao": "{{n}} · {{km}} km · {{tempo}} · {{terra}}% dirt"
   },
   "pilotando": {
     "preparando": "Preparing navigation…",

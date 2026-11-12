@@ -10,6 +10,8 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Feito
 
+- 12/11/2026 (ciclo 3) — **Rota (R43):** o Valhalla devolve até 2 alternativas (rota até um destino); a tela mostra os caminhos com km, tempo e % de terra para escolher; barra de piso com os trechos na ordem do percurso; "a terra começa no km X". `Trecho.km` e `RotaPlanejada.kmAteTerra`/`alternativas`. 203 testes.
+
 - 12/11/2026 (ciclo 2) — **Revisão do QA (Quintino) aplicada**: sair/excluir apagam os dados pessoais do aparelho e remontam as telas (ninguém herda Loja ou contatos); guarda de acesso para todas as telas (não só as abas); modo demonstração só na versão de teste e passando pelos consentimentos; "Baixar meus dados" não quebra com o tema gravado como texto; confirmação antes de revogar dados maçônicos e de apagar contato; termos não se desmarcam em Meus dados (usar Excluir conta); "Corrigir meu pedido" na tela de espera; Chip com 48 dp; campos que quebram linha em telas estreitas; capítulos num arquivo de dados. 200 testes.
 
 - 12/11/2026 (ciclo 2) — Testes pgTAP do banco 20/20 no CI. **Garagem** (`/garagem`: várias motos, foto, km, uma principal que aparece no perfil), **contatos de emergência** (`/contatos`: até 3, só o dono vê), **editar perfil** (`/perfil-editar`: nome, apelido, cidade, foto da câmera/galeria sem EXIF; Loja/Oriente/Potência só com consentimento, visibilidade por campo; revogar apaga). Perfil mostra os dados reais no lugar do exemplo. `src/estado/perfil.tsx` guarda no aparelho até o Supabase. 198 testes Jest.
