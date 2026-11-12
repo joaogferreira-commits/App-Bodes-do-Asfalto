@@ -8,6 +8,7 @@ on:
       - 'reports/**'
       - 'research_notes/**'
       - '**.md'
+      - '!supabase/pendentes/**'
       - '.github/*-request.txt'
       - 'tools/coleta/**'
   pull_request:
@@ -51,6 +52,12 @@ jobs:
       - uses: supabase/setup-cli@v1
         with:
           version: latest
+      - name: Incluir no teste as migrations que aguardam autorização (só nesta máquina de teste)
+        run: |
+          for f in supabase/pendentes/*.sql; do
+            [ -e "$f" ] || continue
+            case "$f" in *.test.sql) cp "$f" supabase/tests/ ;; *) cp "$f" supabase/migrations/ ;; esac
+          done
       - name: Banco local (só o Postgres) com as migrations e o seed
         run: supabase db start
       - name: Testes das regras de acesso (pgTAP)
