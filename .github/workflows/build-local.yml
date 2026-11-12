@@ -1,0 +1,64 @@
+name: Versão do app montada no GitHub (sem gastar as builds da Expo)
+
+# O plano grátis da Expo tem poucas builds por mês. Aqui o próprio GitHub monta o app
+# ("eas build --local"), usando as mesmas credenciais e variáveis guardadas no EAS.
+# Pedido: editar .github/build-local-request.txt (perfil=preview → APK, production → AAB da loja).
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/build-local-request.txt
+
+jobs:
+  montar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Liberar espaço em disco
+        working-directory: /
+        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost "$AGENT_TOOLSDIRECTORY/CodeQL" || true
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: npm ci
+      - name: Ler pedido
+        id: pedido
+        working-directory: .
+        run: |
+          PERFIL=$(grep -E '^perfil=' .github/build-local-request.txt | cut -d= -f2)
+          PERFIL=${PERFIL:-preview}
+          echo "perfil=$PERFIL" >> "$GITHUB_OUTPUT"
+          if [ "$PERFIL" = "production" ]; then echo "ext=aab" >> "$GITHUB_OUTPUT"; else echo "ext=apk" >> "$GITHUB_OUTPUT"; fi
+      - name: Enviar a chave do Google para o EAS (sensível)
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          if [ -n "$GOOGLE_MAPS_API_KEY" ]; then
+            eas env:create --environment ${{ steps.pedido.outputs.perfil }} \
+              --name GOOGLE_MAPS_API_KEY --value "$GOOGLE_MAPS_API_KEY" \
+              --visibility sensitive --force --non-interactive
+          fi
+      - name: Montar o app
+        run: >
+          eas build --local --non-interactive --platform android
+          --profile ${{ steps.pedido.outputs.perfil }}
+          --output "$GITHUB_WORKSPACE/bodes-do-asfalto.${{ steps.pedido.outputs.ext }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bodes-do-asfalto-${{ steps.pedido.outputs.perfil }}
+          path: bodes-do-asfalto.${{ steps.pedido.outputs.ext }}
+          retention-days: 30
