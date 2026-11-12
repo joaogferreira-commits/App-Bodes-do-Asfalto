@@ -1,4 +1,5 @@
 import { act, render, screen } from '@testing-library/react-native';
+import { useEffect } from 'react';
 import { Text } from 'react-native';
 
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
@@ -26,13 +27,13 @@ jest.mock('@/servidor/auth', () => ({
   excluirContaNoServidor: jest.fn(async () => undefined),
 }));
 
-const ref: { acesso?: ReturnType<typeof useAcesso> } = {};
+const guardar = jest.fn();
 function Espiao() {
   const a = useAcesso();
-  ref.acesso = a;
+  useEffect(() => guardar(a));
   return <Text testID="estado">{a.estado}</Text>;
 }
-const acesso = () => ref.acesso!;
+const acesso = (): ReturnType<typeof useAcesso> => guardar.mock.lastCall![0];
 
 describe('acesso com o servidor', () => {
   it('o estado vem do servidor e as ações chamam o Supabase', async () => {
