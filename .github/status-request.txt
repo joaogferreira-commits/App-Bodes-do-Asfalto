@@ -1,1 +1,1 @@
-pedido=1112-1236 (ciclo 6)
+pedido=(ciclo 8) confere a 0.11.1
