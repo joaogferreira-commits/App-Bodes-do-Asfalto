@@ -1218,7 +1218,19 @@
       "tudoCerto": "Todo bien por aquí",
       "atrasado": "Voy a llegar un poco tarde",
       "tfa": "¡TFA!"
-    }
+    },
+    "acenosRecebidos": "Saludos recibidos",
+    "acenouParaVoce": "{{nome}} te saludó",
+    "aceitar": "Aceptar",
+    "recusar": "Rechazar",
+    "vazio": "Aún no hay conversaciones. Toca + para saludar a un hermano.",
+    "buscarIrmao": "Buscar hermano por nombre",
+    "falhaCarga": "No se pudieron actualizar las conversaciones. Inténtalo de nuevo en un momento.",
+    "falhaEnvio": "No se pudo enviar. Inténtalo de nuevo.",
+    "anteriores": "Ver mensajes anteriores",
+    "motivoDenuncia": "Mensaje denunciado por el hermano",
+    "jaAcenou": "Ya saludaste a {{nome}}. Espera su respuesta.",
+    "acenoFalhou": "No se pudo enviar el saludo ahora. Inténtalo de nuevo."
   },
   "desafios": {
     "titulo": "Desafíos",

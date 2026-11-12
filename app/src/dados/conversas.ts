@@ -12,6 +12,8 @@ export type Conversa = {
   titulo: string;
   /** para 1:1: nome do irmão */
   com?: string;
+  /** para 1:1 no servidor: id do irmão */
+  comId?: string;
   /** 1:1 ainda esperando o outro aceitar o aceno */
   aguardandoAceno?: boolean;
   participantes: number;
@@ -25,6 +27,8 @@ export type Mensagem = {
   id: string;
   conversa: string;
   autor: string;
+  /** só no servidor: id de quem escreveu (denunciar/bloquear) */
+  autorId?: string;
   texto: string;
   /** ISO */
   quando: string;
@@ -145,7 +149,8 @@ export function podeEscrever(
   papel: 'membro' | 'diretoria_capitulo' | 'moderador' | 'admin' | string,
   bloqueados: string[],
 ) {
-  if (c.tipo === 'avisos') return papel === 'diretoria_capitulo' || papel === 'admin';
+  if (c.tipo === 'avisos')
+    return papel === 'diretoria_capitulo' || papel === 'diretoria_geral' || papel === 'admin';
   if (c.tipo === 'direto') return !c.aguardandoAceno && !(c.com && bloqueados.includes(c.com));
   return true;
 }

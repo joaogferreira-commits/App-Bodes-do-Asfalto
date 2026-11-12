@@ -14,10 +14,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useAcessoOpcional } from '@/acesso/acesso';
 import { podeEscrever, respostasRapidas, type Mensagem } from '@/dados/conversas';
 import { useConversas } from '@/estado/conversas';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
-import { BotaoIcone, Chip, Icone, Texto } from '@/ui';
+import { BotaoIcone, Botao, Chip, Icone, Texto } from '@/ui';
 
 /** Uma conversa (1:1 ou grupo). Pilotando, a tela fica travada pela trava global (só voz). */
 export default function Conversa() {
@@ -26,18 +27,26 @@ export default function Conversa() {
   const estilos = useEstilos(criarEstilos);
   const { id } = useLocalSearchParams<{ id: string }>();
   const chat = useConversas();
-  // Papéis chegam com o Supabase (Etapa B); no modo local o irmão é membro comum.
-  const papel = 'membro';
+  // Papel real vem do servidor; no modo local o irmão é membro comum.
+  const papel = useAcessoOpcional()?.papel ?? 'membro';
   const [texto, setTexto] = useState('');
   const lista = useRef<FlatList<Mensagem>>(null);
   const c = chat.conversas.find((x) => x.id === id);
-  const { marcarLida } = chat;
+  const { marcarLida, carregarMensagens, servidor } = chat;
+  const ultimaId = chat.mensagens.filter((m) => m.conversa === id).at(-1)?.id;
 
   useEffect(() => {
     if (id) marcarLida(id);
-    // marca como lida ao abrir
+    if (id) void carregarMensagens(id);
+    // marca como lida e carrega as mensagens ao abrir
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  useEffect(() => {
+    // no servidor, mensagem que chega com a conversa aberta já nasce lida
+    if (id && servidor && ultimaId) marcarLida(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ultimaId]);
 
   if (!c) return null;
   const mensagens = chat.mensagens.filter((m) => m.conversa === c.id);
@@ -69,7 +78,7 @@ export default function Conversa() {
                   {
                     text: t('chat.bloquearCurto'),
                     style: 'destructive',
-                    onPress: () => chat.bloquear(c.com!),
+                    onPress: () => chat.bloquear(c.com!, c.comId),
                   },
                 ]),
             },
@@ -91,7 +100,7 @@ export default function Conversa() {
         },
       },
       ...(c.tipo !== 'avisos'
-        ? [{ text: t('chat.bloquear', { nome: m.autor }), onPress: () => chat.bloquear(m.autor) }]
+        ? [{ text: t('chat.bloquear', { nome: m.autor }), onPress: () => chat.bloquear(m.autor, m.autorId) }]
         : []),
       { text: t('comum.cancelar'), style: 'cancel' as const },
     ]);
@@ -120,7 +129,13 @@ export default function Conversa() {
           contentContainerStyle={{ padding: espaco.md, gap: espaco.sm }}
           onContentSizeChange={() => lista.current?.scrollToEnd({ animated: false })}
           ListHeaderComponent={
-            c.aguardandoAceno ? (
+            chat.temMais(c.id) ? (
+              <Botao
+                titulo={t('chat.anteriores')}
+                variante="contorno"
+                onPress={() => void chat.carregarAnteriores(c.id)}
+              />
+            ) : c.aguardandoAceno ? (
               <View style={estilos.aviso}>
                 <Icone nome="aceno" tamanho={28} cor={cores.acao} />
                 <Texto style={{ flex: 1 }}>{t('chat.acenoEnviado', { nome: c.com })}</Texto>
@@ -162,6 +177,11 @@ export default function Conversa() {
 
         {escreve ? (
           <View style={estilos.rodape}>
+            {chat.falhaEnvio && (
+              <Texto variante="pequeno" style={{ color: cores.alerta }}>
+                {t('chat.falhaEnvio')}
+              </Texto>
+            )}
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}

@@ -22,7 +22,10 @@ import { filtrar, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } f
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { FichaMapa } from '@/componentes/FichaMapa';
+import { useAcessoOpcional } from '@/acesso/acesso';
+import { avisarResultadoAceno, enviarAceno } from '@/estado/avisoAceno';
 import { useGuardado } from '@/estado/guardado';
+import { servidorConfigurado } from '@/servidor/supabase';
 import {
   acenar,
   fichaDoAgape,
@@ -130,6 +133,8 @@ export default function Mapa() {
   const [salvosMapa, setSalvosMapa] = useGuardado<string[]>('lugaresSalvos', []);
   const [vouAgape, setVouAgape] = useGuardado<string[]>('agapesVou', []);
   const hoje = new Date().toISOString().slice(0, 10);
+  const acesso = useAcessoOpcional();
+  const chatNoServidor = servidorConfigurado && acesso?.modo === 'supabase' && acesso.estado === 'membro';
 
   const abrir = (f: Ficha) => {
     camera.current?.flyTo({ center: [f.posicao.lng, f.posicao.lat], duration: 600 });
@@ -163,6 +168,14 @@ export default function Mapa() {
         router.push('/rota');
         return;
       case 'acenar': {
+        if (chatNoServidor) {
+          const { id, titulo } = ficha;
+          void enviarAceno(id).then(
+            (r) => avisarResultadoAceno(r, titulo, t),
+            () => avisarResultadoAceno('erro', titulo, t),
+          );
+          return;
+        }
         const novo = acenar(acenos, ficha.id, hoje);
         if (!novo) {
           if (!acenos.para.includes(ficha.id)) Alert.alert(t('ficha.limiteAcenos'));

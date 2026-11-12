@@ -1,12 +1,14 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Modal, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ordenarConversas, type Conversa, type TipoConversa } from '@/dados/conversas';
 import { diretorios } from '@/dados/diretorios';
+import { avisarResultadoAceno } from '@/estado/avisoAceno';
 import { useConversas } from '@/estado/conversas';
+import { listarMembros, type MembroChat } from '@/servidor/chat';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, BotaoIcone, Chip, Icone, Texto, type NomeIcone } from '@/ui';
 
@@ -29,6 +31,34 @@ export default function Conversas() {
   const chat = useConversas();
   const [filtro, setFiltro] = useState<Filtro>('todas');
   const [nova, setNova] = useState(false);
+  const [busca, setBusca] = useState('');
+  const [membros, setMembros] = useState<MembroChat[]>([]);
+  const { servidor, recarregar } = chat;
+
+  // Ao abrir a aba: garante o grupo do capítulo e traz conversas, não lidas e acenos do servidor.
+  useEffect(() => {
+    if (servidor) void recarregar();
+  }, [servidor, recarregar]);
+
+  useEffect(() => {
+    if (!servidor || !nova) return;
+    let vivo = true;
+    void listarMembros(busca)
+      .then((m) => vivo && setMembros(m))
+      .catch(() => vivo && setMembros([]));
+    return () => {
+      vivo = false;
+    };
+  }, [servidor, nova, busca]);
+
+  const acenarPara = async (id: string, nome: string) => {
+    setNova(false);
+    avisarResultadoAceno(await chat.acenar(id), nome, t);
+  };
+  const aceitar = async (id: string) => {
+    const conversa = await chat.aceitarAceno(id);
+    if (conversa) router.push(`/conversa/${conversa}`);
+  };
 
   const lista = ordenarConversas(chat.conversas, chat.mensagens).filter((c) =>
     filtro === 'todas' ? true : filtro === 'diretas' ? c.tipo === 'direto' : c.tipo !== 'direto',
@@ -48,11 +78,50 @@ export default function Conversas() {
           <Chip key={f} rotulo={t(`chat.filtros.${f}`)} ativo={filtro === f} onPress={() => setFiltro(f)} />
         ))}
       </View>
-      <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md, paddingBottom: espaco.xs }}>
-        {t('chat.modoLocal')}
-      </Texto>
+      {!servidor && (
+        <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md, paddingBottom: espaco.xs }}>
+          {t('chat.modoLocal')}
+        </Texto>
+      )}
+      {servidor && chat.falhaCarga && (
+        <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md, color: cores.alerta }}>
+          {t('chat.falhaCarga')}
+        </Texto>
+      )}
       <FlatList
         data={lista}
+        ListHeaderComponent={
+          servidor && chat.acenosRecebidos.length > 0 ? (
+            <View style={estilos.acenos}>
+              <Texto variante="subtitulo" accessibilityRole="header">
+                {t('chat.acenosRecebidos')}
+              </Texto>
+              {chat.acenosRecebidos.map((a) => (
+                <View key={a.id} style={estilos.linhaAceno}>
+                  <Avatar nome={a.nome} tamanho={44} />
+                  <Texto variante="destaque" style={{ flex: 1 }} numberOfLines={2}>
+                    {t('chat.acenouParaVoce', { nome: a.nome })}
+                  </Texto>
+                  <View style={{ gap: espaco.xs }}>
+                    <Botao titulo={t('chat.aceitar')} onPress={() => void aceitar(a.id)} />
+                    <Botao
+                      titulo={t('chat.recusar')}
+                      variante="contorno"
+                      onPress={() => void chat.recusarAceno(a.id)}
+                    />
+                  </View>
+                </View>
+              ))}
+            </View>
+          ) : undefined
+        }
+        ListEmptyComponent={
+          servidor ? (
+            <Texto variante="secundario" style={{ padding: espaco.md }}>
+              {t('chat.vazio')}
+            </Texto>
+          ) : undefined
+        }
         keyExtractor={(c) => c.id}
         contentContainerStyle={{ paddingBottom: 140 }}
         renderItem={({ item: c }) => {
@@ -122,12 +191,30 @@ export default function Conversas() {
         <View style={estilos.folha}>
           <Texto variante="subtitulo">{t('chat.novaTitulo')}</Texto>
           <Texto variante="secundario">{t('chat.novaExplica')}</Texto>
-          {diretorios.membros.map((m) => (
+          {servidor && (
+            <TextInput
+              value={busca}
+              onChangeText={setBusca}
+              placeholder={t('chat.buscarIrmao')}
+              placeholderTextColor={cores.textoSec}
+              accessibilityLabel={t('chat.buscarIrmao')}
+              style={estilos.busca}
+            />
+          )}
+          {(servidor
+            ? membros.map((m) => ({
+                id: m.id,
+                titulo: m.apelido || m.nome,
+                subtitulo: m.capitulo ?? '',
+              }))
+            : diretorios.membros
+          ).map((m) => (
             <Pressable
               key={m.id}
               accessibilityRole="button"
               accessibilityLabel={t('chat.acenarPara', { nome: m.titulo })}
               onPress={() => {
+                if (servidor) return void acenarPara(m.id, m.titulo);
                 setNova(false);
                 router.push(`/conversa/${chat.iniciarDireto(m.titulo)}`);
               }}
@@ -193,6 +280,26 @@ const criarEstilos = (c: Paleta) =>
       padding: espaco.lg,
       gap: espaco.sm,
       paddingBottom: espaco.xl,
+    },
+    acenos: {
+      margin: espaco.md,
+      padding: espaco.md,
+      gap: espaco.sm,
+      borderRadius: raios.cartao,
+      backgroundColor: c.superficie,
+      borderWidth: 1,
+      borderColor: c.linhaForte,
+    },
+    linhaAceno: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
+    busca: {
+      minHeight: 52,
+      borderRadius: raios.botao,
+      borderWidth: 1,
+      borderColor: c.linha,
+      paddingHorizontal: espaco.md,
+      color: c.texto,
+      fontFamily: fontes.texto,
+      fontSize: 17,
     },
     linhaMembro: { flexDirection: 'row', alignItems: 'center', gap: espaco.md, minHeight: 56 },
   });

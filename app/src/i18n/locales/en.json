@@ -1218,7 +1218,19 @@
       "tudoCerto": "All good here",
       "atrasado": "Running a bit late",
       "tfa": "TFA!"
-    }
+    },
+    "acenosRecebidos": "Waves received",
+    "acenouParaVoce": "{{nome}} waved at you",
+    "aceitar": "Accept",
+    "recusar": "Decline",
+    "vazio": "No conversations yet. Tap + to wave at a brother.",
+    "buscarIrmao": "Search brother by name",
+    "falhaCarga": "Could not refresh the conversations. Try again in a moment.",
+    "falhaEnvio": "Could not send. Try again.",
+    "anteriores": "Show earlier messages",
+    "motivoDenuncia": "Message reported by the brother",
+    "jaAcenou": "You already waved at {{nome}}. Wait for the reply.",
+    "acenoFalhou": "Could not send the wave right now. Try again."
   },
   "desafios": {
     "titulo": "Challenges",

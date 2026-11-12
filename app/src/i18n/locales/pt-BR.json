@@ -1218,7 +1218,19 @@
       "tudoCerto": "Tudo certo por aqui",
       "atrasado": "Vou atrasar um pouco",
       "tfa": "TFA!"
-    }
+    },
+    "acenosRecebidos": "Acenos recebidos",
+    "acenouParaVoce": "{{nome}} acenou para você",
+    "aceitar": "Aceitar",
+    "recusar": "Recusar",
+    "vazio": "Nenhuma conversa ainda. Toque em + para acenar para um irmão.",
+    "buscarIrmao": "Buscar irmão pelo nome",
+    "falhaCarga": "Não deu para atualizar as conversas. Tente de novo em instantes.",
+    "falhaEnvio": "Não foi possível enviar. Tente de novo.",
+    "anteriores": "Ver mensagens anteriores",
+    "motivoDenuncia": "Mensagem denunciada pelo irmão",
+    "jaAcenou": "Você já acenou para {{nome}}. Aguarde ele responder.",
+    "acenoFalhou": "Não foi possível enviar o aceno agora. Tente de novo."
   },
   "desafios": {
     "titulo": "Desafios",
