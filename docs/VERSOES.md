@@ -4,6 +4,13 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.15.0 — 12/11/2026 (mapa revisado e notificações)
+
+- Notificações de verdade: mensagem, aceno, pedido de entrada e decisão chegam no celular (cada tipo pode ser desligado; SOS sempre ligado).
+- Mapa: Ágape vira ponto ao afastar o zoom; irmãos tocáveis em qualquer zoom; banner do Ágape com Vou, Não vou e X; botão de visibilidade abre a escolha real (invisível, cidade, aproximado, amigos, comboio, só por 2 h); legenda fecha ao tocar fora.
+- Ícones próprios para 13 tipos de ponto (atração, museu, praia, hospital, PRF, oficina, borracharia etc.) e filtros por grupo.
+- O mapa já busca pontos no banco (OpenStreetMap); enquanto o banco de pontos não for carregado, mostra os pontos do app.
+
 ## 0.14.0 — 12/11/2026 (feed e chat de verdade)
 
 - Feed no servidor: posts com fotos, TFA, comentários, salvos, stories, denunciar e bloquear; sem posts de exemplo.
