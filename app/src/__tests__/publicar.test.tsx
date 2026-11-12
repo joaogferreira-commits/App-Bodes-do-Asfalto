@@ -59,4 +59,24 @@ describe('publicar e comentar', () => {
     expect(screen.getByText('Que viagem!')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Apagar' })).toBeTruthy();
   });
+
+  it('cria enquete com pergunta e opções', async () => {
+    parametros.id = '';
+    parametros.enquete = '1';
+    await render(
+      <ProvedorMeusPosts>
+        <Publicar />
+        <Espiao />
+      </ProvedorMeusPosts>,
+    );
+    await fireEvent.changeText(screen.getByLabelText('Pergunta'), 'Próximo destino?');
+    await fireEvent.changeText(screen.getByLabelText('Opção 1'), 'Chapada');
+    await fireEvent.changeText(screen.getByLabelText('Opção 2'), 'Pantanal');
+    await fireEvent.press(screen.getByRole('button', { name: 'Publicar' }));
+    expect(JSON.parse(screen.getByTestId('posts').props.children)[0]).toMatchObject({
+      texto: 'Próximo destino?',
+      enquete: ['Chapada', 'Pantanal'],
+    });
+    delete parametros.enquete;
+  });
 });

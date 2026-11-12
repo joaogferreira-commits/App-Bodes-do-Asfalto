@@ -17,12 +17,23 @@ export default function Publicar() {
   const { t } = useTranslation();
   const cores = useCores();
   const { posts, publicar, editar } = useMeusPosts();
-  const { id, foto: abrirFoto } = useLocalSearchParams<{ id?: string; foto?: 'galeria' | 'camera' }>();
+  const {
+    id,
+    foto: abrirFoto,
+    enquete: modoEnquete,
+  } = useLocalSearchParams<{
+    id?: string;
+    foto?: 'galeria' | 'camera';
+    enquete?: string;
+  }>();
   const existente = posts.find((p) => p.id === id);
   const [texto, setTexto] = useState(existente?.texto ?? '');
   const [foto, setFoto] = useState<string | undefined>(existente?.foto);
   const [vis, setVis] = useState<VisibilidadePost>(existente?.visibilidade ?? 'todos');
   const [carregando, setCarregando] = useState(false);
+  const ehEnquete = !!existente?.enquete || modoEnquete === '1';
+  const [opcoes, setOpcoes] = useState<string[]>(existente?.enquete ?? ['', '']);
+  const opcoesValidas = opcoes.map((o) => o.trim()).filter(Boolean);
 
   const pegar = async (origem: 'galeria' | 'camera') => {
     setCarregando(true);
@@ -38,16 +49,52 @@ export default function Publicar() {
   }, []);
 
   const enviar = () => {
+    if (ehEnquete && (!texto.trim() || opcoesValidas.length < 2))
+      return Alert.alert(t('publicar.enqueteFalta'));
     if (!texto.trim() && !foto) return Alert.alert(t('publicar.vazio'));
-    if (existente) editar(existente.id, { texto: texto.trim(), foto, visibilidade: vis });
-    else publicar({ texto: texto.trim(), foto, visibilidade: vis });
+    const enquete = ehEnquete ? opcoesValidas : undefined;
+    if (existente) editar(existente.id, { texto: texto.trim(), foto, visibilidade: vis, enquete });
+    else publicar({ texto: texto.trim(), foto, visibilidade: vis, enquete });
     router.back();
   };
 
   return (
-    <TelaFerramenta titulo={existente ? t('publicar.editarTitulo') : t('publicar.titulo')}>
-      <Campo rotulo={t('publicar.texto')} valor={texto} aoMudar={setTexto} linhas={5} />
-      {foto ? (
+    <TelaFerramenta
+      titulo={
+        existente
+          ? t('publicar.editarTitulo')
+          : ehEnquete
+            ? t('publicar.enqueteTitulo')
+            : t('publicar.titulo')
+      }
+    >
+      <Campo
+        rotulo={ehEnquete ? t('publicar.pergunta') : t('publicar.texto')}
+        valor={texto}
+        aoMudar={setTexto}
+        linhas={ehEnquete ? 2 : 5}
+      />
+      {ehEnquete && (
+        <View style={{ gap: espaco.xs }}>
+          {opcoes.map((o, i) => (
+            <Campo
+              key={i}
+              rotulo={t('publicar.opcao', { n: i + 1 })}
+              valor={o}
+              aoMudar={(v) => setOpcoes((l) => l.map((x, j) => (j === i ? v : x)))}
+            />
+          ))}
+          {opcoes.length < 4 && (
+            <Botao
+              titulo={t('publicar.maisOpcao')}
+              icone="mais"
+              variante="contorno"
+              onPress={() => setOpcoes((l) => [...l, ''])}
+            />
+          )}
+        </View>
+      )}
+      {ehEnquete ? null : foto ? (
         <View>
           <Image
             source={{ uri: foto }}

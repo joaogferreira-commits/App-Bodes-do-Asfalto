@@ -219,7 +219,9 @@
     "ferramentas": "Herramientas",
     "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más",
     "meusDadosDetalhe": "Consentimientos, descargar datos, eliminar cuenta",
-    "garagem": "Garaje"
+    "garagem": "Garaje",
+    "salvos": "Publicaciones guardadas",
+    "salvosDetalhe": "Lo que guardaste para ver después"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -374,7 +376,9 @@
     "irmaosPerto": "{{n}} hermanos cerca. ¿Un saludo?",
     "acenar": "Saludar",
     "agora": "ahora",
-    "compartilharTexto": "¡Mira lo que pasó en Bodes do Asfalto! Descarga la app del club."
+    "compartilharTexto": "¡Mira lo que pasó en Bodes do Asfalto! Descarga la app del club.",
+    "salvar": "Guardar publicación",
+    "salvo": "Publicación guardada (toca para quitar)"
   },
   "passeios": {
     "exemplo": "Paseos de ejemplo hasta la agenda real de los capítulos.",
@@ -688,7 +692,12 @@
     "editar": "Editar",
     "excluir": "Eliminar",
     "excluirPergunta": "¿Eliminar esta publicación?",
-    "editado": "editado"
+    "editado": "editado",
+    "enqueteTitulo": "Nueva encuesta",
+    "pergunta": "Pregunta",
+    "opcao": "Opción {{n}}",
+    "maisOpcao": "Una opción más",
+    "enqueteFalta": "Escribe la pregunta y al menos 2 opciones."
   },
   "comentarios": {
     "titulo": "Comentarios",
@@ -812,5 +821,9 @@
     "quemVe": "Quién puede ver este campo",
     "precisaConsentimento": "Para informar Logia, Oriente y Potencia, autoriza antes los datos masónicos en Mis datos. Es opcional.",
     "autorizar": "Abrir Mis datos"
+  },
+  "salvos": {
+    "titulo": "Publicaciones guardadas",
+    "vazio": "Aún no guardaste ninguna publicación. Toca el marcador de una para guardarla."
   }
 }

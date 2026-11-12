@@ -219,7 +219,9 @@
     "ferramentas": "Ferramentas",
     "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais",
     "meusDadosDetalhe": "Consentimentos, baixar dados, excluir conta",
-    "garagem": "Garagem"
+    "garagem": "Garagem",
+    "salvos": "Posts salvos",
+    "salvosDetalhe": "O que você guardou para ver depois"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -374,7 +376,9 @@
     "irmaosPerto": "{{n}} irmãos por perto. Que tal um aceno?",
     "acenar": "Acenar",
     "agora": "agora",
-    "compartilharTexto": "Olha o que rolou no Bodes do Asfalto! Baixe o app do clube."
+    "compartilharTexto": "Olha o que rolou no Bodes do Asfalto! Baixe o app do clube.",
+    "salvar": "Salvar post",
+    "salvo": "Post salvo (tocar para tirar)"
   },
   "passeios": {
     "exemplo": "Passeios de exemplo até a agenda real dos capítulos.",
@@ -688,7 +692,12 @@
     "editar": "Editar",
     "excluir": "Excluir",
     "excluirPergunta": "Excluir esta publicação?",
-    "editado": "editado"
+    "editado": "editado",
+    "enqueteTitulo": "Nova enquete",
+    "pergunta": "Pergunta",
+    "opcao": "Opção {{n}}",
+    "maisOpcao": "Mais uma opção",
+    "enqueteFalta": "Escreva a pergunta e pelo menos 2 opções."
   },
   "comentarios": {
     "titulo": "Comentários",
@@ -812,5 +821,9 @@
     "quemVe": "Quem pode ver este campo",
     "precisaConsentimento": "Para informar Loja, Oriente e Potência, autorize antes os dados maçônicos em Meus dados. É opcional.",
     "autorizar": "Abrir Meus dados"
+  },
+  "salvos": {
+    "titulo": "Posts salvos",
+    "vazio": "Você ainda não salvou nenhum post. Toque no marcador de um post para guardar."
   }
 }

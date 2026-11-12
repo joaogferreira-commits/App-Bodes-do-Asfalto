@@ -219,7 +219,9 @@
     "ferramentas": "Tools",
     "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more",
     "meusDadosDetalhe": "Consents, download data, delete account",
-    "garagem": "Garage"
+    "garagem": "Garage",
+    "salvos": "Saved posts",
+    "salvosDetalhe": "What you kept to see later"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -374,7 +376,9 @@
     "irmaosPerto": "{{n}} brothers nearby. Send a wave?",
     "acenar": "Wave",
     "agora": "now",
-    "compartilharTexto": "Check out what happened at Bodes do Asfalto! Get the club app."
+    "compartilharTexto": "Check out what happened at Bodes do Asfalto! Get the club app.",
+    "salvar": "Save post",
+    "salvo": "Post saved (tap to remove)"
   },
   "passeios": {
     "exemplo": "Sample rides until the chapters' real calendar.",
@@ -688,7 +692,12 @@
     "editar": "Edit",
     "excluir": "Delete",
     "excluirPergunta": "Delete this post?",
-    "editado": "edited"
+    "editado": "edited",
+    "enqueteTitulo": "New poll",
+    "pergunta": "Question",
+    "opcao": "Option {{n}}",
+    "maisOpcao": "One more option",
+    "enqueteFalta": "Write the question and at least 2 options."
   },
   "comentarios": {
     "titulo": "Comments",
@@ -812,5 +821,9 @@
     "quemVe": "Who can see this field",
     "precisaConsentimento": "To add Lodge, Orient and Grand Lodge, first allow masonic data in My data. It is optional.",
     "autorizar": "Open My data"
+  },
+  "salvos": {
+    "titulo": "Saved posts",
+    "vazio": "You haven't saved any posts yet. Tap a post's bookmark to keep it."
   }
 }

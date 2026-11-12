@@ -150,6 +150,12 @@ export default function Perfil() {
 
         <Cartao semPadding>
           <LinhaMenu
+            icone="salvar"
+            titulo={t('perfil.salvos')}
+            detalhe={t('perfil.salvosDetalhe')}
+            onPress={() => router.push('/salvos')}
+          />
+          <LinhaMenu
             icone="grade"
             titulo={t('perfil.ferramentas')}
             detalhe={t('perfil.ferramentasDetalhe')}

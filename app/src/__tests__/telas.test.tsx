@@ -50,6 +50,8 @@ describe('telas simples', () => {
     expect(screen.getByRole('button', { name: 'Dar um TFA, 24 até agora' })).toBeSelected();
     await fireEvent.press(screen.getAllByRole('button', { name: 'Vou' })[0]!);
     expect(screen.getByText('5 irmãos vão')).toBeTruthy();
+    await fireEvent.press(screen.getAllByRole('button', { name: 'Salvar post' })[0]!);
+    expect(screen.getByRole('button', { name: 'Post salvo (tocar para tirar)' })).toBeSelected();
     // todo post tem como denunciar/bloquear (exigência das lojas)
     expect(screen.getAllByRole('button', { name: 'Mais opções' }).length).toBeGreaterThanOrEqual(5);
   });

@@ -11,6 +11,8 @@ export type MeuPost = {
   id: string;
   texto: string;
   foto?: string;
+  /** Opções da enquete (o texto é a pergunta). */
+  enquete?: string[];
   visibilidade: VisibilidadePost;
   criadoEm: number;
   editadoEm?: number;
@@ -24,6 +26,8 @@ type Valor = {
   excluir: (id: string) => void;
   comentar: (postId: string, texto: string, autor: string) => void;
   apagarComentario: (postId: string, id: string) => void;
+  salvos: string[];
+  alternarSalvo: (postId: string) => void;
 };
 
 const Contexto = createContext<Valor | null>(null);
@@ -32,15 +36,21 @@ const CHAVE = 'bodes.meusPosts';
 export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<MeuPost[]>([]);
   const [comentarios, setComentarios] = useState<Record<string, Comentario[]>>({});
+  const [salvos, setSalvos] = useState<string[]>([]);
   const [carregou, setCarregou] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(CHAVE)
       .then((v) => {
         if (v) {
-          const d = JSON.parse(v) as { posts: MeuPost[]; comentarios: Record<string, Comentario[]> };
+          const d = JSON.parse(v) as {
+            posts: MeuPost[];
+            comentarios: Record<string, Comentario[]>;
+            salvos?: string[];
+          };
           setPosts(d.posts ?? []);
           setComentarios(d.comentarios ?? {});
+          setSalvos(d.salvos ?? []);
         }
       })
       .catch(() => undefined)
@@ -49,8 +59,8 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (carregou)
-      void AsyncStorage.setItem(CHAVE, JSON.stringify({ posts, comentarios })).catch(() => undefined);
-  }, [posts, comentarios, carregou]);
+      void AsyncStorage.setItem(CHAVE, JSON.stringify({ posts, comentarios, salvos })).catch(() => undefined);
+  }, [posts, comentarios, salvos, carregou]);
 
   const valor = useMemo<Valor>(
     () => ({
@@ -67,8 +77,10 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
         })),
       apagarComentario: (postId, id) =>
         setComentarios((c) => ({ ...c, [postId]: (c[postId] ?? []).filter((x) => x.id !== id) })),
+      salvos,
+      alternarSalvo: (id) => setSalvos((l) => (l.includes(id) ? l.filter((x) => x !== id) : [id, ...l])),
     }),
-    [posts, comentarios],
+    [posts, comentarios, salvos],
   );
   return <Contexto.Provider value={valor}>{children}</Contexto.Provider>;
 }

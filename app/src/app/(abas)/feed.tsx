@@ -33,6 +33,7 @@ export default function Feed() {
   const meus = useMeusPosts();
   const usarFerramenta = (chave: string) => {
     if (chave === 'foto') router.push('/publicar?foto=galeria');
+    else if (chave === 'enquete') router.push('/publicar?enquete=1');
     else if (chave === 'rota') router.push('/rota');
     else if (chave === 'evento') router.push('/ferramentas/agape');
     else emBreve();
@@ -212,7 +213,9 @@ function Acoes({
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const [dei, setDei] = useState(false);
-  const locais = useMeusPosts().comentarios[postId]?.length ?? 0;
+  const loja = useMeusPosts();
+  const locais = loja.comentarios[postId]?.length ?? 0;
+  const salvo = loja.salvos.includes(postId);
   comentarios += locais;
   return (
     <View style={estilos.acoes}>
@@ -236,6 +239,15 @@ function Acoes({
       >
         <Icone nome="comentario" tamanho={22} />
         <Texto style={estilos.textoAcao}>{comentarios}</Texto>
+      </Pressable>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={salvo ? t('feed.salvo') : t('feed.salvar')}
+        accessibilityState={{ selected: salvo }}
+        onPress={() => loja.alternarSalvo(postId)}
+        style={[estilos.acao, salvo && { borderColor: cores.ouro }]}
+      >
+        <Icone nome="salvar" tamanho={22} cor={salvo ? cores.ouro : cores.texto} />
       </Pressable>
       <Pressable
         accessibilityRole="button"
@@ -449,7 +461,28 @@ function CartaoPost({ post }: { post: Post }) {
     return (
       <View style={estilos.post}>
         <CabecalhoPost post={post} />
-        {!!m.texto && <Texto style={estilos.textoPost}>{m.texto}</Texto>}
+        {!!m.texto && (
+          <Texto style={[estilos.textoPost, m.enquete && { fontFamily: fontes.textoSemi }]}>{m.texto}</Texto>
+        )}
+        {m.enquete && (
+          <View style={{ paddingHorizontal: espaco.md, gap: espaco.xs }}>
+            {m.enquete.map((o, i) => (
+              <Pressable
+                key={o}
+                accessibilityRole="radio"
+                accessibilityState={{ checked: voto === i }}
+                accessibilityLabel={o}
+                onPress={() => setVoto(i)}
+                style={[estilos.opcao, { borderColor: voto === i ? cores.acao : cores.linha }]}
+              >
+                <Texto style={{ flex: 1, fontFamily: voto === i ? fontes.textoForte : fontes.textoMedio }}>
+                  {o}
+                </Texto>
+                {voto === i && <Icone nome="check" tamanho={20} cor={cores.acao} />}
+              </Pressable>
+            ))}
+          </View>
+        )}
         {m.foto && (
           <Image
             source={{ uri: m.foto }}
