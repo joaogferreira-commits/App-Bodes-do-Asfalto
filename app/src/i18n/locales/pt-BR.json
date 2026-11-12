@@ -228,7 +228,11 @@
     "garagem": "Garagem",
     "salvos": "Posts salvos",
     "salvosDetalhe": "O que você guardou para ver depois",
-    "conquistasCartao": "Ver minhas conquistas"
+    "conquistasCartao": "Ver minhas conquistas",
+    "editarMoto": "Editar {{moto}}",
+    "editarMotoCurto": "Editar moto",
+    "cadastrarMoto": "Cadastrar minha moto",
+    "exemplo": "Exemplo"
   },
   "catalogo": {
     "titulo": "Catálogo",

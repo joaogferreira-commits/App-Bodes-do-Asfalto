@@ -70,6 +70,7 @@ export const caminhosIcones = {
   opcoes: ['M5 12h.01M12 12h.01M19 12h.01'],
   grade: ['M4 4h7v7H4z', 'M13 4h7v7h-7z', 'M4 13h7v7H4z', 'M13 13h7v7h-7z'],
   check: ['M5 12.5l4.5 4.5L19 7.5'],
+  editar: ['M4 20h4L19 9l-4-4L4 16v4z', 'M13.5 6.5l4 4'],
   cadeado: ['M6 11h12v9H6z', 'M8.5 11V8a3.5 3.5 0 017 0v3'],
   rota: [
     'M6 19a2 2 0 100-4 2 2 0 000 4zM18 9a2 2 0 100-4 2 2 0 000 4z',

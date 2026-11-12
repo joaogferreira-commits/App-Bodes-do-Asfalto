@@ -187,26 +187,54 @@ export default function Perfil() {
         </Pressable>
 
         {/* Moto */}
-        <Secao
-          titulo={t('perfil.minhaMoto')}
-          acao={
-            <Texto variante="pequeno" style={{ color: cores.acao }} onPress={() => router.push('/garagem')}>
-              {t('perfil.garagem')}
-            </Texto>
-          }
-        >
+        <Secao titulo={t('perfil.minhaMoto')}>
           <Cartao semPadding style={{ overflow: 'hidden' }}>
-            <Image
-              source={moto.imagem}
-              style={estilos.moto}
-              contentFit="cover"
-              accessibilityLabel={moto.modelo}
-            />
-            <View style={{ padding: espaco.md, gap: 2 }}>
-              <Texto variante="destaque">{moto.modelo}</Texto>
-              <Texto variante="secundario">
-                {t('perfil.motoDetalhe', { ano: moto.ano, apelido: moto.apelido, km: moto.km })}
-              </Texto>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={
+                mp ? t('perfil.editarMoto', { moto: moto.modelo }) : t('perfil.cadastrarMoto')
+              }
+              onPress={() => router.push(mp ? `/garagem?editar=${mp.id}` : '/garagem')}
+            >
+              <Image source={moto.imagem} style={estilos.moto} contentFit="cover" accessible={false} />
+              {!mp && (
+                <View style={[estilos.seloExemplo, { backgroundColor: cores.fundo }]}>
+                  <Texto variante="rotulo">{t('perfil.exemplo')}</Texto>
+                </View>
+              )}
+              <View style={{ padding: espaco.md, gap: 2 }}>
+                <Texto variante="destaque">{moto.modelo}</Texto>
+                <Texto variante="secundario">
+                  {t('perfil.motoDetalhe', { ano: moto.ano, apelido: moto.apelido, km: moto.km })}
+                </Texto>
+              </View>
+            </Pressable>
+            <View
+              style={{
+                flexDirection: 'row',
+                gap: espaco.xs,
+                paddingHorizontal: espaco.md,
+                paddingBottom: espaco.md,
+              }}
+            >
+              <View style={{ flex: 1 }}>
+                <Botao
+                  titulo={mp ? t('perfil.editarMotoCurto') : t('perfil.cadastrarMoto')}
+                  icone={mp ? 'editar' : 'mais'}
+                  variante={mp ? 'secundario' : 'principal'}
+                  onPress={() => router.push(mp ? `/garagem?editar=${mp.id}` : '/garagem')}
+                />
+              </View>
+              {mp && (
+                <View style={{ flex: 1 }}>
+                  <Botao
+                    titulo={t('perfil.garagem')}
+                    icone="moto"
+                    variante="contorno"
+                    onPress={() => router.push('/garagem')}
+                  />
+                </View>
+              )}
             </View>
           </Cartao>
         </Secao>
@@ -333,6 +361,14 @@ const criarEstilos = (cores: Paleta) =>
     numeros: { flexDirection: 'row' },
     numero: { flex: 1, alignItems: 'center' },
     moto: { width: '100%', aspectRatio: 2, backgroundColor: cores.superficie3 },
+    seloExemplo: {
+      position: 'absolute',
+      top: 10,
+      left: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 999,
+    },
     macom: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm, padding: espaco.md, minHeight: 64 },
     selo: {
       flexDirection: 'row',

@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
@@ -17,7 +18,12 @@ export default function Garagem() {
   const { t } = useTranslation();
   const cores = useCores();
   const { motos, salvarMoto, apagarMoto, tornarPrincipal } = usePerfil();
-  const [rascunho, setRascunho] = useState<Rascunho | null>(motos.length ? null : vazio);
+  // Vindo do perfil ("Editar moto"), já abre a ficha daquela moto.
+  const { editar } = useLocalSearchParams<{ editar?: string }>();
+  const [rascunho, setRascunho] = useState<Rascunho | null>(() => {
+    const alvo = editar ? motos.find((m) => m.id === editar) : undefined;
+    return alvo ? { ...alvo } : motos.length ? null : vazio;
+  });
   const muda = (k: keyof Rascunho) => (v: string) => setRascunho((r) => (r ? { ...r, [k]: v } : r));
 
   const salvar = () => {
@@ -27,111 +33,120 @@ export default function Garagem() {
     setRascunho(null);
   };
 
+  const ficha = rascunho && (
+    <Cartao style={{ gap: espaco.sm }}>
+      <Texto variante="destaque">{rascunho.id ? t('garagem.editar') : t('garagem.nova')}</Texto>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
+        <Campo rotulo={t('garagem.marca')} valor={rascunho.marca} aoMudar={muda('marca')} />
+        <Campo rotulo={t('garagem.modelo')} valor={rascunho.modelo} aoMudar={muda('modelo')} />
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
+        <Campo rotulo={t('garagem.ano')} valor={rascunho.ano} aoMudar={muda('ano')} teclado="numeric" />
+        <Campo
+          rotulo={t('garagem.km')}
+          valor={rascunho.km}
+          aoMudar={muda('km')}
+          teclado="numeric"
+          sufixo="km"
+        />
+      </View>
+      <Campo rotulo={t('garagem.apelido')} valor={rascunho.apelido} aoMudar={muda('apelido')} />
+      {rascunho.foto && (
+        <Image
+          source={{ uri: rascunho.foto }}
+          style={{ width: '100%', aspectRatio: 2, borderRadius: raios.cartao }}
+          contentFit="cover"
+          accessible={false}
+        />
+      )}
+      <Botao
+        titulo={rascunho.foto ? t('garagem.trocarFoto') : t('garagem.foto')}
+        icone="camera"
+        variante="secundario"
+        onPress={() =>
+          void escolherFoto('galeria').then((u) => u && setRascunho((r) => (r ? { ...r, foto: u } : r)))
+        }
+      />
+      <Botao titulo={t('publicar.salvar')} grande icone="check" onPress={salvar} />
+      {motos.length > 0 && (
+        <Botao titulo={t('comum.cancelar')} variante="contorno" onPress={() => setRascunho(null)} />
+      )}
+    </Cartao>
+  );
+
   return (
     <TelaFerramenta titulo={t('garagem.titulo')} explicacao={t('garagem.explica')}>
-      {motos.map((m) => (
-        <Cartao
-          key={m.id}
-          semPadding
-          style={{
-            overflow: 'hidden',
-            borderColor: m.principal ? cores.acao : cores.linha,
-            borderWidth: m.principal ? 2 : 1,
-          }}
-        >
-          {m.foto && (
-            <Image
-              source={{ uri: m.foto }}
-              style={{ width: '100%', aspectRatio: 2 }}
-              contentFit="cover"
-              accessibilityLabel={`${m.marca} ${m.modelo}`}
-            />
-          )}
-          <View style={{ padding: espaco.md, gap: 4 }}>
-            {m.principal && (
-              <Texto variante="rotulo" style={{ color: cores.acao }}>
-                {t('garagem.principal')}
-              </Texto>
+      {motos.map((m) =>
+        rascunho?.id === m.id ? (
+          <View key={m.id}>{ficha}</View>
+        ) : (
+          <Cartao
+            key={m.id}
+            semPadding
+            style={{
+              overflow: 'hidden',
+              borderColor: m.principal ? cores.acao : cores.linha,
+              borderWidth: m.principal ? 2 : 1,
+            }}
+          >
+            {m.foto && (
+              <Image
+                source={{ uri: m.foto }}
+                style={{ width: '100%', aspectRatio: 2 }}
+                contentFit="cover"
+                accessibilityLabel={`${m.marca} ${m.modelo}`}
+              />
             )}
-            <Texto variante="destaque">
-              {m.marca} {m.modelo}
-            </Texto>
-            <Texto variante="secundario">
-              {[
-                m.ano,
-                m.apelido && t('garagem.apelidoTexto', { apelido: m.apelido }),
-                m.km && t('garagem.kmTexto', { km: m.km }),
-              ]
-                .filter(Boolean)
-                .join(' · ')}
-            </Texto>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs, marginTop: espaco.xs }}>
-              <Botao
-                titulo={t('publicar.editar')}
-                variante="secundario"
-                onPress={() => setRascunho({ ...m })}
-              />
-              {!m.principal && (
-                <Botao
-                  titulo={t('garagem.tornarPrincipal')}
-                  variante="contorno"
-                  onPress={() => tornarPrincipal(m.id)}
-                />
+            <View style={{ padding: espaco.md, gap: 4 }}>
+              {m.principal && (
+                <Texto variante="rotulo" style={{ color: cores.acao }}>
+                  {t('garagem.principal')}
+                </Texto>
               )}
-              <Botao
-                titulo={t('publicar.excluir')}
-                variante="contorno"
-                onPress={() =>
-                  Alert.alert(t('garagem.excluirPergunta'), undefined, [
-                    { text: t('comum.cancelar'), style: 'cancel' },
-                    { text: t('publicar.excluir'), style: 'destructive', onPress: () => apagarMoto(m.id) },
-                  ])
-                }
-              />
+              <Texto variante="destaque">
+                {m.marca} {m.modelo}
+              </Texto>
+              <Texto variante="secundario">
+                {[
+                  m.ano,
+                  m.apelido && t('garagem.apelidoTexto', { apelido: m.apelido }),
+                  m.km && t('garagem.kmTexto', { km: m.km }),
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </Texto>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs, marginTop: espaco.xs }}>
+                <Botao
+                  titulo={t('publicar.editar')}
+                  icone="editar"
+                  variante="secundario"
+                  onPress={() => setRascunho({ ...m })}
+                />
+                {!m.principal && (
+                  <Botao
+                    titulo={t('garagem.tornarPrincipal')}
+                    variante="contorno"
+                    onPress={() => tornarPrincipal(m.id)}
+                  />
+                )}
+                <Botao
+                  titulo={t('publicar.excluir')}
+                  variante="contorno"
+                  onPress={() =>
+                    Alert.alert(t('garagem.excluirPergunta'), undefined, [
+                      { text: t('comum.cancelar'), style: 'cancel' },
+                      { text: t('publicar.excluir'), style: 'destructive', onPress: () => apagarMoto(m.id) },
+                    ])
+                  }
+                />
+              </View>
             </View>
-          </View>
-        </Cartao>
-      ))}
+          </Cartao>
+        ),
+      )}
 
-      {rascunho ? (
-        <Cartao style={{ gap: espaco.sm }}>
-          <Texto variante="destaque">{rascunho.id ? t('garagem.editar') : t('garagem.nova')}</Texto>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
-            <Campo rotulo={t('garagem.marca')} valor={rascunho.marca} aoMudar={muda('marca')} />
-            <Campo rotulo={t('garagem.modelo')} valor={rascunho.modelo} aoMudar={muda('modelo')} />
-          </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
-            <Campo rotulo={t('garagem.ano')} valor={rascunho.ano} aoMudar={muda('ano')} teclado="numeric" />
-            <Campo
-              rotulo={t('garagem.km')}
-              valor={rascunho.km}
-              aoMudar={muda('km')}
-              teclado="numeric"
-              sufixo="km"
-            />
-          </View>
-          <Campo rotulo={t('garagem.apelido')} valor={rascunho.apelido} aoMudar={muda('apelido')} />
-          {rascunho.foto && (
-            <Image
-              source={{ uri: rascunho.foto }}
-              style={{ width: '100%', aspectRatio: 2, borderRadius: raios.cartao }}
-              contentFit="cover"
-              accessible={false}
-            />
-          )}
-          <Botao
-            titulo={rascunho.foto ? t('garagem.trocarFoto') : t('garagem.foto')}
-            icone="camera"
-            variante="secundario"
-            onPress={() =>
-              void escolherFoto('galeria').then((u) => u && setRascunho((r) => (r ? { ...r, foto: u } : r)))
-            }
-          />
-          <Botao titulo={t('publicar.salvar')} grande icone="check" onPress={salvar} />
-          {motos.length > 0 && (
-            <Botao titulo={t('comum.cancelar')} variante="contorno" onPress={() => setRascunho(null)} />
-          )}
-        </Cartao>
+      {rascunho && !rascunho.id ? (
+        ficha
       ) : (
         <Botao titulo={t('garagem.adicionar')} icone="mais" grande onPress={() => setRascunho(vazio)} />
       )}

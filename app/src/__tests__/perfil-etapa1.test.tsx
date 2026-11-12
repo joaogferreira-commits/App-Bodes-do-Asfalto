@@ -8,7 +8,11 @@ import Garagem from '@/app/garagem';
 import EditarPerfil from '@/app/perfil-editar';
 import { normalizarPrincipal, ProvedorPerfil, usePerfil } from '@/estado/perfil';
 
-jest.mock('expo-router', () => ({ router: { replace: jest.fn(), push: jest.fn(), back: jest.fn() } }));
+const parametros: { editar?: string } = {};
+jest.mock('expo-router', () => ({
+  router: { replace: jest.fn(), push: jest.fn(), back: jest.fn() },
+  useLocalSearchParams: () => parametros,
+}));
 jest.mock('expo-image', () => {
   const { View } = jest.requireActual('react-native');
   return { Image: (p: object) => <View {...p} /> };
@@ -39,6 +43,36 @@ describe('garagem, contatos e perfil (Etapa 1)', () => {
       false,
     ]);
     expect(normalizarPrincipal([m('a', false)])[0]!.principal).toBe(true);
+  });
+
+  it('vindo do perfil, abre a moto já cadastrada para editar e permite excluir', async () => {
+    parametros.editar = 'm1';
+    const moto = {
+      id: 'm1',
+      marca: 'Honda',
+      modelo: 'CB 500',
+      ano: '2020',
+      apelido: '',
+      km: '100',
+      principal: true,
+    };
+    await render(
+      <ProvedorPerfil inicial={{ motos: [moto] }}>
+        <Garagem />
+        <Espiao />
+      </ProvedorPerfil>,
+    );
+    expect(screen.getByText('Editar moto')).toBeTruthy();
+    await fireEvent.changeText(screen.getByLabelText('Modelo'), 'CB 650R');
+    await fireEvent.press(screen.getByRole('button', { name: 'Salvar alterações' }));
+    expect(dados().motos).toHaveLength(1);
+    expect(dados().motos[0]).toMatchObject({ id: 'm1', modelo: 'CB 650R' });
+    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    await fireEvent.press(screen.getByRole('button', { name: 'Excluir' }));
+    await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.style === 'destructive')!.onPress!());
+    alerta.mockRestore();
+    expect(dados().motos).toHaveLength(0);
+    delete parametros.editar;
   });
 
   it('cadastra a primeira moto como principal', async () => {

@@ -228,7 +228,11 @@
     "garagem": "Garage",
     "salvos": "Saved posts",
     "salvosDetalhe": "What you kept to see later",
-    "conquistasCartao": "See my achievements"
+    "conquistasCartao": "See my achievements",
+    "editarMoto": "Edit {{moto}}",
+    "editarMotoCurto": "Edit bike",
+    "cadastrarMoto": "Add my bike",
+    "exemplo": "Example"
   },
   "catalogo": {
     "titulo": "Catalog",
