@@ -1328,5 +1328,32 @@
       "moderador": "Moderador",
       "admin": "Administrador"
     }
+  },
+  "notificacoes": {
+    "titulo": "Notificaciones",
+    "explica": "Elige qué quieres recibir en el celular.",
+    "tipos": {
+      "mensagem": "Mensajes",
+      "aceno": "Saludos",
+      "aprovacao": "Aprobaciones",
+      "passeio": "Paseos",
+      "confraternizacao": "Confraternización",
+      "sos": "SOS"
+    },
+    "detalhes": {
+      "mensagem": "Aviso de nuevo mensaje en las conversaciones.",
+      "aceno": "Cuando un hermano te saluda.",
+      "aprovacao": "Solicitudes de ingreso y la respuesta a tu solicitud.",
+      "passeio": "Invitaciones y cambios en los paseos.",
+      "confraternizacao": "Ágapes, Visita a Logias y Hermano en la Ruta."
+    },
+    "sosFixo": "Siempre activado, por seguridad.",
+    "privacidade": "El aviso nunca muestra el texto del mensaje, solo que llegó algo nuevo.",
+    "erroCarregar": "No pude cargar tus preferencias.",
+    "erroSalvar": "No pude guardar. Inténtalo de nuevo.",
+    "permissaoTitulo": "¿Recibir avisos?",
+    "permissaoTexto": "Te avisamos cuando llega un mensaje, un saludo o una respuesta a tu solicitud. El aviso nunca muestra el contenido del mensaje. Puedes cambiarlo después en Perfil.",
+    "permitir": "Permitir",
+    "agoraNao": "Ahora no"
   }
 }

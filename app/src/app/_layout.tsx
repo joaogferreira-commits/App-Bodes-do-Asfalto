@@ -15,6 +15,7 @@ import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 
+import { RegistroNotificacoes } from '@/componentes/RegistroNotificacoes';
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
@@ -115,6 +116,7 @@ function Telas() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }} />
       <TravaEmMovimento />
       <GuardaDeAcesso />
+      <RegistroNotificacoes />
     </>
   );
 }

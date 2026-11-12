@@ -1,6 +1,7 @@
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 
+import { apagarToken } from './notificacoes';
 import { supabase } from './supabase';
 
 /**
@@ -87,6 +88,7 @@ export async function revogarConsentimento(finalidade: string) {
 }
 
 export async function sairDoServidor() {
+  await apagarToken(); // antes de encerrar a sessão (a RLS exige o login)
   await supabase?.auth.signOut().catch(() => undefined);
 }
 

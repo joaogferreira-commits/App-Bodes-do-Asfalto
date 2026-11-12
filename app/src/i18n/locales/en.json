@@ -1328,5 +1328,32 @@
       "moderador": "Moderator",
       "admin": "Administrator"
     }
+  },
+  "notificacoes": {
+    "titulo": "Notifications",
+    "explica": "Choose what you want to receive on your phone.",
+    "tipos": {
+      "mensagem": "Messages",
+      "aceno": "Waves",
+      "aprovacao": "Approvals",
+      "passeio": "Rides",
+      "confraternizacao": "Fellowship",
+      "sos": "SOS"
+    },
+    "detalhes": {
+      "mensagem": "Alert when a new message arrives.",
+      "aceno": "When a brother waves at you.",
+      "aprovacao": "Join requests and the answer to your request.",
+      "passeio": "Ride invitations and changes.",
+      "confraternizacao": "Agapes, Lodge Visits and Brother on the Road."
+    },
+    "sosFixo": "Always on, for safety.",
+    "privacidade": "The alert never shows the message text, only that something new arrived.",
+    "erroCarregar": "I could not load your preferences.",
+    "erroSalvar": "I could not save. Try again.",
+    "permissaoTitulo": "Receive alerts?",
+    "permissaoTexto": "We notify you when a message, a wave or an answer to your request arrives. The alert never shows the message content. You can change this later in Profile.",
+    "permitir": "Allow",
+    "agoraNao": "Not now"
   }
 }

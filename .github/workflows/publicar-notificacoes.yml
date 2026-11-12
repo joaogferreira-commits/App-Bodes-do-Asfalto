@@ -1,0 +1,40 @@
+name: Publicar as notificações (só com autorização do dono)
+
+# Publica a função "notificar", cria um segredo aleatório e configura o banco para chamá-la.
+# Nenhum segredo aparece no registro (::add-mask::) nem vai para o repositório.
+on:
+  push:
+    paths:
+      - .github/notificacoes-request.txt
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref "$REF"
+      - name: Aplicar as mudanças do banco (gatilhos das notificações)
+        run: supabase db push --linked --yes
+      - name: Segredo aleatório entre o banco e a função
+        run: |
+          SEG=$(openssl rand -hex 32)
+          echo "::add-mask::$SEG"
+          echo "SEG=$SEG" >> "$GITHUB_ENV"
+          supabase secrets set --project-ref "$REF" NOTIFICAR_SEGREDO="$SEG"
+      - name: Publicar a função
+        run: supabase functions deploy notificar --project-ref "$REF" --no-verify-jwt
+      - name: Configurar o banco para chamar a função
+        run: |
+          CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
+          echo "::add-mask::$CHAVE"
+          curl -sf -X POST "https://$REF.supabase.co/rest/v1/rpc/definir_config_notificacao" \
+            -H "apikey: $CHAVE" -H "Authorization: Bearer $CHAVE" -H "Content-Type: application/json" \
+            -d "{\"p_url\":\"https://$REF.supabase.co/functions/v1/notificar\",\"p_segredo\":\"$SEG\"}"
+          echo "Configurado."

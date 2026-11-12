@@ -1328,5 +1328,32 @@
       "moderador": "Moderador",
       "admin": "Administrador"
     }
+  },
+  "notificacoes": {
+    "titulo": "Notificações",
+    "explica": "Escolha o que você quer receber no celular.",
+    "tipos": {
+      "mensagem": "Mensagens",
+      "aceno": "Acenos",
+      "aprovacao": "Aprovações",
+      "passeio": "Passeios",
+      "confraternizacao": "Confraternização",
+      "sos": "SOS"
+    },
+    "detalhes": {
+      "mensagem": "Aviso de nova mensagem nas conversas.",
+      "aceno": "Quando um irmão acena para você.",
+      "aprovacao": "Pedidos de entrada e a resposta ao seu pedido.",
+      "passeio": "Convites e mudanças nos passeios.",
+      "confraternizacao": "Ágapes, Visitação de Lojas e Irmão na Rota."
+    },
+    "sosFixo": "Sempre ligado, por segurança.",
+    "privacidade": "O aviso nunca mostra o texto da mensagem, só que chegou algo novo.",
+    "erroCarregar": "Não consegui carregar suas preferências.",
+    "erroSalvar": "Não consegui salvar. Tente de novo.",
+    "permissaoTitulo": "Receber avisos?",
+    "permissaoTexto": "Avisamos quando chega uma mensagem, um aceno ou uma resposta ao seu pedido. O aviso nunca mostra o conteúdo da mensagem. Você pode mudar isso depois em Perfil.",
+    "permitir": "Permitir",
+    "agoraNao": "Agora não"
   }
 }

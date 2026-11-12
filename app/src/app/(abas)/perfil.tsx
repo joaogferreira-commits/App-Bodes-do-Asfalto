@@ -325,7 +325,7 @@ export default function Perfil() {
               icone="alerta"
               titulo={t('perfil.notificacoes')}
               detalhe={t('perfil.notificacoesDetalhe')}
-              onPress={emBreve}
+              onPress={() => router.push('/notificacoes')}
             />
           </Cartao>
         </Secao>

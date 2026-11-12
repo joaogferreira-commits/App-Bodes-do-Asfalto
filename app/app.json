@@ -73,7 +73,14 @@
           "recordAudioAndroid": true
         }
       ],
-      "expo-video"
+      "expo-video",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icone/adaptativo-mono.png",
+          "color": "#E8692A"
+        }
+      ]
     ],
     "owner": "joaogferreira",
     "scheme": "bodesdoasfalto",
