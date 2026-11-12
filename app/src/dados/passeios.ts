@@ -24,6 +24,9 @@ export type Passeio = {
 };
 
 const img = {
+  pantanal: require('../../assets/exemplos/pantanal.webp'),
+  porDoSol: require('../../assets/exemplos/por-do-sol.webp'),
+  terra: require('../../assets/exemplos/estrada-terra.webp'),
   estrada: require('../../assets/gerados/ilustracoes/ilustra-vazio-estrada.webp'),
   viagem: require('../../assets/gerados/ilustracoes/ilustra-primeira-viagem.webp'),
   boasVindas: require('../../assets/gerados/ilustracoes/ilustra-boas-vindas.webp'),
@@ -50,7 +53,7 @@ export const passeiosExemplo: Passeio[] = [
     vou: 14,
     talvez: 5,
     confirmados: ['Edu Prado', 'Zé Ferreira', 'Ivan Coruja', 'Marcos Ferrugem'],
-    imagem: img.estrada,
+    imagem: img.pantanal,
     quando: 'proximos',
     descricao: 'Café na sede, abastecimento em Poconé e almoço no Pantanal. Pneu misto recomendado.',
   },
@@ -71,7 +74,7 @@ export const passeiosExemplo: Passeio[] = [
     vou: 8,
     talvez: 3,
     confirmados: ['Edu Prado', 'Tião Garupa', 'Ivan Coruja'],
-    imagem: img.viagem,
+    imagem: img.porDoSol,
     quando: 'proximos',
     descricao: 'Só asfalto, ritmo tranquilo, ótimo para quem está começando.',
   },
@@ -113,7 +116,7 @@ export const passeiosExemplo: Passeio[] = [
     vou: 6,
     talvez: 2,
     confirmados: ['Marcos Ferrugem', 'Edu Prado'],
-    imagem: img.trail,
+    imagem: img.terra,
     quando: 'proximos',
     descricao: 'Para big trail e motos com pneu misto. Levar água e câmara reserva.',
   },

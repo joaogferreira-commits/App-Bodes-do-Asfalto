@@ -4,6 +4,7 @@ import Catalogo from '@/app/catalogo';
 import Perfil from '@/app/(abas)/perfil';
 import Conquistas from '@/app/(abas)/conquistas';
 import Feed from '@/app/(abas)/feed';
+import { ProvedorMeusPosts } from '@/estado/meusPosts';
 
 jest.mock('expo-router', () => ({ router: { push: jest.fn(), back: jest.fn(), navigate: jest.fn() } }));
 jest.mock('expo-image', () => {
@@ -31,7 +32,11 @@ describe('telas simples', () => {
   });
 
   it('feed parece um feed: stories, compositor, viagem com números, passeio com Vou/Talvez e TFA', async () => {
-    await render(<Feed />);
+    await render(
+      <ProvedorMeusPosts>
+        <Feed />
+      </ProvedorMeusPosts>,
+    );
     expect(screen.getByRole('button', { name: 'Seu story' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Enquete' })).toBeTruthy();
     expect(screen.getByText('Ganhou o selo Irmão na Rota')).toBeTruthy();

@@ -2,6 +2,9 @@ import { StyleSheet, View } from 'react-native';
 
 import { fontes, paletaNoite, useCores, type Paleta } from '@/theme';
 
+import { AvatarMontado } from '@/componentes/AvatarMontado';
+import { avatarDoNome } from '@/estado/avatar';
+
 import { Icone, type NomeIcone } from './icones';
 import { Texto } from './Texto';
 
@@ -36,7 +39,14 @@ const seloDoStatus: Partial<Record<StatusIrmao, NomeIcone>> = {
   naoPerturbe: 'menos',
 };
 
-type Props = { nome: string; status?: StatusIrmao; tamanho?: number; rotuloStatus?: string };
+type Props = {
+  nome: string;
+  status?: StatusIrmao;
+  tamanho?: number;
+  rotuloStatus?: string;
+  /** Avatar ilustrado gerado a partir do nome (padrão) ou só as iniciais. */
+  ilustrado?: boolean;
+};
 
 export function iniciais(nome: string): string {
   const partes = nome.trim().split(/\s+/).filter(Boolean);
@@ -46,7 +56,7 @@ export function iniciais(nome: string): string {
 }
 
 /** Avatar redondo com anel de status. Até o irmão subir foto, mostra as iniciais. */
-export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus }: Props) {
+export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus, ilustrado = true }: Props) {
   const c = useCores();
   const cor = coresDoStatus(c)[status];
   const selo = seloDoStatus[status];
@@ -68,12 +78,16 @@ export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus }: 
         },
       ]}
     >
-      <Texto
-        style={{ fontFamily: fontes.titulo, fontSize: Math.max(13, tamanho * 0.34), color: c.texto }}
-        maxFontSizeMultiplier={1}
-      >
-        {iniciais(nome)}
-      </Texto>
+      {ilustrado ? (
+        <AvatarMontado opcoes={avatarDoNome(nome)} tamanho={tamanho - 6} />
+      ) : (
+        <Texto
+          style={{ fontFamily: fontes.titulo, fontSize: Math.max(13, tamanho * 0.34), color: c.texto }}
+          maxFontSizeMultiplier={1}
+        >
+          {iniciais(nome)}
+        </Texto>
+      )}
       {selo && (
         <View
           testID={`selo-${status}`}
@@ -96,7 +110,7 @@ export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus }: 
 }
 
 const estilos = StyleSheet.create({
-  base: { borderWidth: 3, alignItems: 'center', justifyContent: 'center' },
+  base: { borderWidth: 3, alignItems: 'center', justifyContent: 'center', overflow: 'visible' },
   selo: {
     position: 'absolute',
     right: -4,

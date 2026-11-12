@@ -14,6 +14,7 @@ import { View } from 'react-native';
 
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
+import { ProvedorMeusPosts } from '@/estado/meusPosts';
 import { ProvedorViagem } from '@/estado/viagem';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
@@ -31,9 +32,11 @@ export default function Layout() {
     <ProvedorTema>
       <ProvedorAvatar>
         <ProvedorAgapes>
-          <ProvedorViagem>
-            <Telas />
-          </ProvedorViagem>
+          <ProvedorMeusPosts>
+            <ProvedorViagem>
+              <Telas />
+            </ProvedorViagem>
+          </ProvedorMeusPosts>
         </ProvedorAgapes>
       </ProvedorAvatar>
     </ProvedorTema>

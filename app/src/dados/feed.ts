@@ -1,5 +1,6 @@
 import type { agapeExemplo } from './agape';
 import type { ChaveNivel, ChaveSelo } from './conquistas';
+import type { MeuPost } from '@/estado/meusPosts';
 import type { StatusIrmao } from '@/ui';
 
 /**
@@ -28,6 +29,7 @@ export type Post =
     }
   | { id: string; tipo: 'passeio'; autor: Autor; quando: string; passeioId: string }
   | { id: string; tipo: 'agape'; autor: Autor; quando: string; agape?: typeof agapeExemplo }
+  | { id: string; tipo: 'meu'; autor: Autor; quando: string; meu: MeuPost }
   | { id: string; tipo: 'conquista'; autor: Autor; quando: string; nivel: ChaveNivel }
   | { id: string; tipo: 'chegada'; autor: Autor; quando: string; cidade: string; irmaosPerto: number }
   | {
@@ -59,13 +61,17 @@ export const stories: { nome: string; status: StatusIrmao; novo: boolean }[] = [
 ];
 
 const img = {
-  viagem: require('../../assets/gerados/ilustracoes/ilustra-primeira-viagem.webp'),
-  estrada: require('../../assets/gerados/ilustracoes/ilustra-vazio-estrada.webp'),
+  viagem: require('../../assets/exemplos/por-do-sol.webp'),
+  estrada: require('../../assets/exemplos/moto-estrada.webp'),
+  terra: require('../../assets/exemplos/estrada-terra.webp'),
+  comboio: require('../../assets/exemplos/comboio.webp'),
   custom: require('../../assets/gerados/motos/moto-custom.webp'),
-  trail: require('../../assets/gerados/motos/moto-big-trail.webp'),
+  trail: require('../../assets/exemplos/moto-trail.webp'),
   touring: require('../../assets/gerados/motos/moto-touring.webp'),
   naked: require('../../assets/gerados/motos/moto-naked.webp'),
   triciclo: require('../../assets/gerados/motos/moto-triciclo.webp'),
+  pantanal: require('../../assets/exemplos/pantanal.webp'),
+  tuiuiu: require('../../assets/exemplos/estrada-cerrado.webp'),
 };
 
 const edu: Autor = { nome: 'Edu Prado', capitulo: 'Cuiabá', status: 'estrada' };
@@ -105,8 +111,8 @@ export const postsExemplo: Post[] = [
     tipo: 'foto',
     autor: ze,
     quando: 'há 5 h',
-    texto: 'Revisão feita, pneu novo. Pronta pra Transpantaneira!',
-    imagem: img.custom,
+    texto: 'Treino de comboio domingo cedo. Formação escalonada, todo mundo no retrovisor!',
+    imagem: img.comboio,
     tfa: 31,
     comentarios: 4,
   },
@@ -136,7 +142,7 @@ export const postsExemplo: Post[] = [
     autor: marcos,
     quando: 'ontem',
     texto: 'Estradão de Tangará até Campo Novo. Poeira, chapadão e pôr do sol. Valeu cada km!',
-    imagem: img.trail,
+    imagem: img.terra,
     km: 186,
     horas: '5 h 10',
     irmaos: 3,
@@ -153,7 +159,7 @@ export const postsExemplo: Post[] = [
     autor: ivan,
     quando: 'há 2 dias',
     texto: 'Chegou a nova da casa. Quem topa estrear domingo?',
-    imagem: img.touring,
+    imagem: img.trail,
     tfa: 44,
     comentarios: 12,
   },
@@ -198,8 +204,8 @@ export const postsExemplo: Post[] = [
     tipo: 'foto',
     autor: edu,
     quando: 'há 5 dias',
-    texto: 'Primeira viagem da naked com o colete novo.',
-    imagem: img.naked,
+    texto: 'Parada na Transpantaneira: o tuiuiú veio dar boas-vindas.',
+    imagem: img.tuiuiu,
     tfa: 19,
     comentarios: 3,
   },

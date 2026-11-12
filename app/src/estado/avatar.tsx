@@ -18,6 +18,20 @@ export const opcoesAvatar = {
   oculos: ['nenhum', 'escuro', 'aviador'],
 } as const;
 
+/** Avatar ilustrado estável para cada nome (irmãos sem foto): mesmo nome → mesmo desenho. */
+export function avatarDoNome(nome: string): OpcoesAvatar {
+  let h = 0;
+  for (const ch of nome) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const pega = (n: number, d: number) => Math.floor(h / d) % n;
+  return {
+    fundo: pega(opcoesAvatar.fundo.length, 1),
+    pele: pega(opcoesAvatar.pele.length, 7),
+    capacete: pega(opcoesAvatar.capacete.length, 53),
+    barba: pega(opcoesAvatar.barba.length, 397),
+    oculos: pega(opcoesAvatar.oculos.length, 2777),
+  };
+}
+
 export const avatarPadrao: OpcoesAvatar = { fundo: 0, pele: 1, capacete: 0, barba: 2, oculos: 1 };
 
 const CHAVE = 'bodes.avatar';

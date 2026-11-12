@@ -23,3 +23,25 @@ jest.mock('expo-haptics', () => ({
   ImpactFeedbackStyle: { Light: 'light', Medium: 'medium', Heavy: 'heavy' },
   NotificationFeedbackType: { Success: 'success', Warning: 'warning', Error: 'error' },
 }));
+
+jest.mock('expo-image-picker', () => ({
+  requestMediaLibraryPermissionsAsync: jest.fn(async () => ({ granted: true })),
+  requestCameraPermissionsAsync: jest.fn(async () => ({ granted: true })),
+  launchImageLibraryAsync: jest.fn(async () => ({
+    canceled: false,
+    assets: [{ uri: 'file:///foto-original.jpg' }],
+  })),
+  launchCameraAsync: jest.fn(async () => ({ canceled: true })),
+}));
+
+jest.mock('expo-image-manipulator', () => ({
+  SaveFormat: { JPEG: 'jpeg' },
+  ImageManipulator: {
+    manipulate: jest.fn(() => ({
+      resize: jest.fn(),
+      renderAsync: jest.fn(async () => ({
+        saveAsync: jest.fn(async () => ({ uri: 'file:///foto-sem-exif.jpg' })),
+      })),
+    })),
+  },
+}));

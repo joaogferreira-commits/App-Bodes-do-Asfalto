@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, Pressable, ScrollView, Share, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CartaoPasseio } from '@/componentes/CartaoPasseio';
@@ -11,6 +11,7 @@ import { niveis, selos } from '@/dados/conquistas';
 import { postsExemplo, stories, type Post } from '@/dados/feed';
 import { passeiosExemplo } from '@/dados/passeios';
 import { useAgapes } from '@/estado/agapes';
+import { useMeusPosts } from '@/estado/meusPosts';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, Icone, pinos, Texto, type NomeIcone } from '@/ui';
 
@@ -29,7 +30,21 @@ export default function Feed() {
   const estilos = useEstilos(criarEstilos);
   const emBreve = () => Alert.alert(t('comum.emBreve'), t('feed.emBreve'));
   const { agapes } = useAgapes();
+  const meus = useMeusPosts();
+  const usarFerramenta = (chave: string) => {
+    if (chave === 'foto') router.push('/publicar?foto=galeria');
+    else if (chave === 'rota') router.push('/rota');
+    else if (chave === 'evento') router.push('/ferramentas/agape');
+    else emBreve();
+  };
   const posts: Post[] = [
+    ...meus.posts.map<Post>((m) => ({
+      id: m.id,
+      tipo: 'meu',
+      autor: { nome: t('perfil.voce'), capitulo: 'Cuiabá', status: 'aberto' },
+      quando: t('feed.agora'),
+      meu: m,
+    })),
     ...agapes
       .filter((a) => a.id !== agapeExemplo.id)
       .map<Post>((a) => ({
@@ -86,7 +101,12 @@ export default function Feed() {
       </ScrollView>
 
       <Cartao style={{ gap: espaco.sm, marginHorizontal: espaco.md }}>
-        <Pressable accessibilityRole="button" onPress={emBreve} style={estilos.linha}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('feed.compor')}
+          onPress={() => router.push('/publicar')}
+          style={estilos.linha}
+        >
           <Avatar nome="Irmão Teste" status="aberto" tamanho={44} />
           <View style={[estilos.campoPost, { borderColor: cores.linha }]}>
             <Texto variante="secundario">{t('feed.compor')}</Texto>
@@ -98,7 +118,7 @@ export default function Feed() {
               key={f.chave}
               accessibilityRole="button"
               accessibilityLabel={t(`feed.ferramentas.${f.chave}`)}
-              onPress={emBreve}
+              onPress={() => usarFerramenta(f.chave)}
               style={estilos.ferramenta}
             >
               <Icone nome={f.icone} tamanho={24} cor={cores.acao} />
@@ -129,15 +149,30 @@ function CabecalhoPost({ post }: { post: Post }) {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
+  const { excluir } = useMeusPosts();
   const opcoes = () =>
-    Alert.alert(t('feed.opcoes'), undefined, [
-      {
-        text: t('feed.denunciar'),
-        onPress: () => Alert.alert(t('feed.denunciar'), t('feed.denunciaRecebida')),
-      },
-      { text: t('feed.bloquear', { nome: post.autor.nome }), style: 'destructive' },
-      { text: t('comum.cancelar'), style: 'cancel' },
-    ]);
+    post.tipo === 'meu'
+      ? Alert.alert(t('feed.opcoes'), undefined, [
+          { text: t('publicar.editar'), onPress: () => router.push(`/publicar?id=${post.id}`) },
+          {
+            text: t('publicar.excluir'),
+            style: 'destructive',
+            onPress: () =>
+              Alert.alert(t('publicar.excluirPergunta'), undefined, [
+                { text: t('comum.cancelar'), style: 'cancel' },
+                { text: t('publicar.excluir'), style: 'destructive', onPress: () => excluir(post.id) },
+              ]),
+          },
+          { text: t('comum.cancelar'), style: 'cancel' },
+        ])
+      : Alert.alert(t('feed.opcoes'), undefined, [
+          {
+            text: t('feed.denunciar'),
+            onPress: () => Alert.alert(t('feed.denunciar'), t('feed.denunciaRecebida')),
+          },
+          { text: t('feed.bloquear', { nome: post.autor.nome }), style: 'destructive' },
+          { text: t('comum.cancelar'), style: 'cancel' },
+        ]);
   return (
     <View style={[estilos.linha, { paddingHorizontal: espaco.md }]}>
       <Avatar nome={post.autor.nome} status={post.autor.status ?? 'nenhum'} tamanho={44} />
@@ -162,12 +197,23 @@ function CabecalhoPost({ post }: { post: Post }) {
   );
 }
 
-function Acoes({ tfa, comentarios, usarRota }: { tfa: number; comentarios: number; usarRota?: boolean }) {
+function Acoes({
+  postId,
+  tfa,
+  comentarios,
+  usarRota,
+}: {
+  postId: string;
+  tfa: number;
+  comentarios: number;
+  usarRota?: boolean;
+}) {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const [dei, setDei] = useState(false);
-  const emBreve = () => Alert.alert(t('comum.emBreve'), t('feed.emBreve'));
+  const locais = useMeusPosts().comentarios[postId]?.length ?? 0;
+  comentarios += locais;
   return (
     <View style={estilos.acoes}>
       <Pressable
@@ -185,7 +231,7 @@ function Acoes({ tfa, comentarios, usarRota }: { tfa: number; comentarios: numbe
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={t('feed.comentarios', { n: comentarios })}
-        onPress={emBreve}
+        onPress={() => router.push(`/comentarios/${postId}`)}
         style={estilos.acao}
       >
         <Icone nome="comentario" tamanho={22} />
@@ -194,7 +240,7 @@ function Acoes({ tfa, comentarios, usarRota }: { tfa: number; comentarios: numbe
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={t('feed.compartilhar')}
-        onPress={emBreve}
+        onPress={() => void Share.share({ message: t('feed.compartilharTexto') })}
         style={estilos.acao}
       >
         <Icone nome="compartilhar" tamanho={22} />
@@ -272,7 +318,7 @@ function CartaoPost({ post }: { post: Post }) {
         <Texto variante="secundario" style={{ paddingHorizontal: espaco.md }}>
           {t('feed.com', { nomes: post.marcados.join(', ') })}
         </Texto>
-        <Acoes tfa={post.tfa} comentarios={post.comentarios} usarRota />
+        <Acoes postId={post.id} tfa={post.tfa} comentarios={post.comentarios} usarRota />
       </View>
     );
   }
@@ -370,7 +416,7 @@ function CartaoPost({ post }: { post: Post }) {
             })}
           </Texto>
         </View>
-        <Acoes tfa={12} comentarios={6} />
+        <Acoes postId={post.id} tfa={12} comentarios={6} />
       </View>
     );
   }
@@ -398,6 +444,29 @@ function CartaoPost({ post }: { post: Post }) {
     );
   }
 
+  if (post.tipo === 'meu') {
+    const m = post.meu;
+    return (
+      <View style={estilos.post}>
+        <CabecalhoPost post={post} />
+        {!!m.texto && <Texto style={estilos.textoPost}>{m.texto}</Texto>}
+        {m.foto && (
+          <Image
+            source={{ uri: m.foto }}
+            style={estilos.imagem}
+            contentFit="cover"
+            accessibilityLabel={t('feed.foto')}
+          />
+        )}
+        <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
+          {t(`publicar.vis.${m.visibilidade}`)}
+          {m.editadoEm ? ` · ${t('publicar.editado')}` : ''}
+        </Texto>
+        <Acoes postId={post.id} tfa={0} comentarios={0} />
+      </View>
+    );
+  }
+
   if (post.tipo === 'foto') {
     return (
       <View style={estilos.post}>
@@ -409,7 +478,7 @@ function CartaoPost({ post }: { post: Post }) {
           contentFit="cover"
           accessibilityLabel={t('feed.foto')}
         />
-        <Acoes tfa={post.tfa} comentarios={post.comentarios} />
+        <Acoes postId={post.id} tfa={post.tfa} comentarios={post.comentarios} />
       </View>
     );
   }

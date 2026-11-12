@@ -44,6 +44,14 @@
         }
       ],
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "O Bodes do Asfalto usa suas fotos só quando você escolhe uma para publicar no feed ou no perfil.",
+          "cameraPermission": "O Bodes do Asfalto usa a câmera só quando você tira uma foto para publicar no feed ou no perfil.",
+          "microphonePermission": false
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {

@@ -51,10 +51,20 @@ describe('Chip', () => {
 });
 
 describe('Avatar', () => {
-  it('tem rótulo com nome e status e mostra as iniciais', async () => {
-    await render(<Avatar nome="Zé Ferreira" status="aberto" rotuloStatus="Aberto a encontro" />);
+  it('tem rótulo com nome e status; sem ilustração mostra as iniciais', async () => {
+    await render(
+      <Avatar nome="Zé Ferreira" status="aberto" rotuloStatus="Aberto a encontro" ilustrado={false} />,
+    );
     expect(screen.getByLabelText('Zé Ferreira, Aberto a encontro')).toBeTruthy();
     expect(screen.getByText('ZF')).toBeTruthy();
+  });
+
+  it('cada nome tem sempre o mesmo avatar ilustrado, e nomes diferentes variam', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { avatarDoNome } = require('@/estado/avatar') as typeof import('@/estado/avatar');
+    expect(avatarDoNome('Zé Ferreira')).toEqual(avatarDoNome('Zé Ferreira'));
+    const nomes = ['Zé Ferreira', 'Edu Prado', 'Ivan Coruja', 'Marcos Ferrugem', 'Tião Garupa'];
+    expect(new Set(nomes.map((n) => JSON.stringify(avatarDoNome(n)))).size).toBe(5);
   });
 
   it.each([

@@ -367,7 +367,8 @@
     "chegou": "{{nome}} llegó a {{cidade}}",
     "irmaosPerto": "{{n}} hermanos cerca. ¿Un saludo?",
     "acenar": "Saludar",
-    "agora": "ahora"
+    "agora": "ahora",
+    "compartilharTexto": "¡Mira lo que pasó en Bodes do Asfalto! Descarga la app del club."
   },
   "passeios": {
     "exemplo": "Paseos de ejemplo hasta la agenda real de los capítulos.",
@@ -660,5 +661,34 @@
       },
       "revisar": "Texto provisional. La directiva puede editarlo en el panel."
     }
+  },
+  "publicar": {
+    "titulo": "Nueva publicación",
+    "editarTitulo": "Editar publicación",
+    "texto": "¿Qué quieres contar, hermano?",
+    "galeria": "De la galería",
+    "camera": "Tomar foto",
+    "tirarFoto": "Quitar la foto",
+    "semLocal": "La ubicación guardada en la foto se borra antes de publicar.",
+    "quemVe": "Quién puede ver",
+    "vis": {
+      "todos": "Todos los miembros",
+      "capitulo": "Solo mi capítulo",
+      "amigos": "Solo amigos"
+    },
+    "publicar": "Publicar",
+    "salvar": "Guardar cambios",
+    "vazio": "Escribe algo o elige una foto.",
+    "editar": "Editar",
+    "excluir": "Eliminar",
+    "excluirPergunta": "¿Eliminar esta publicación?",
+    "editado": "editado"
+  },
+  "comentarios": {
+    "titulo": "Comentarios",
+    "apagar": "Borrar",
+    "denunciar": "Denunciar",
+    "escrever": "Escribe un comentario",
+    "enviar": "Comentar"
   }
 }

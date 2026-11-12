@@ -367,7 +367,8 @@
     "chegou": "{{nome}} arrived in {{cidade}}",
     "irmaosPerto": "{{n}} brothers nearby. Send a wave?",
     "acenar": "Wave",
-    "agora": "now"
+    "agora": "now",
+    "compartilharTexto": "Check out what happened at Bodes do Asfalto! Get the club app."
   },
   "passeios": {
     "exemplo": "Sample rides until the chapters' real calendar.",
@@ -660,5 +661,34 @@
       },
       "revisar": "Provisional text. The board can edit it in the admin panel."
     }
+  },
+  "publicar": {
+    "titulo": "New post",
+    "editarTitulo": "Edit post",
+    "texto": "What do you want to share, brother?",
+    "galeria": "From gallery",
+    "camera": "Take photo",
+    "tirarFoto": "Remove photo",
+    "semLocal": "The location saved in the photo is removed before posting.",
+    "quemVe": "Who can see",
+    "vis": {
+      "todos": "All members",
+      "capitulo": "Only my chapter",
+      "amigos": "Only friends"
+    },
+    "publicar": "Post",
+    "salvar": "Save changes",
+    "vazio": "Write something or pick a photo.",
+    "editar": "Edit",
+    "excluir": "Delete",
+    "excluirPergunta": "Delete this post?",
+    "editado": "edited"
+  },
+  "comentarios": {
+    "titulo": "Comments",
+    "apagar": "Delete",
+    "denunciar": "Report",
+    "escrever": "Write a comment",
+    "enviar": "Comment"
   }
 }
