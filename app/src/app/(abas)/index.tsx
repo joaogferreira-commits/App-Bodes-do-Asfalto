@@ -1,4 +1,12 @@
-import { Camera, Map, Marker, type CameraRef, type MapRef } from '@maplibre/maplibre-react-native';
+import {
+  Camera,
+  GeoJSONSource,
+  Layer,
+  Map,
+  Marker,
+  type CameraRef,
+  type MapRef,
+} from '@maplibre/maplibre-react-native';
 import { Image } from 'expo-image';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
@@ -28,7 +36,7 @@ import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
 import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, pinos, Texto } from '@/ui';
+import { Avatar, Botao, BotaoIcone, Chip, coresDoStatus, Icone, PainelInferior, pinos, Texto } from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
@@ -69,6 +77,7 @@ function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean;
 export default function Mapa() {
   const { t } = useTranslation();
   const cores = useCores();
+  const coresStatus = coresDoStatus(cores);
   const estilos = useEstilos(criarEstilos);
   const estiloMapa = useEstiloMapa();
   const mapa = useRef<MapRef>(null);
@@ -242,6 +251,38 @@ export default function Mapa() {
             />
           </Marker>
         )}
+        {/* De longe, cada irmão vira um ponto com a cor do status (não some e não polui o mapa). */}
+        <GeoJSONSource
+          id="irmaos-pontos"
+          data={
+            {
+              type: 'FeatureCollection',
+              features: irmaos.map((i) => ({
+                type: 'Feature',
+                id: i.id,
+                properties: { id: i.id, cor: coresStatus[i.status] },
+                geometry: { type: 'Point', coordinates: [i.lng, i.lat] },
+              })),
+            } as never
+          }
+          onPress={(e) => {
+            const id = (e as unknown as { nativeEvent?: { features?: { properties?: { id?: string } }[] } })
+              .nativeEvent?.features?.[0]?.properties?.id;
+            if (id) tocarIrmao(id);
+          }}
+        >
+          <Layer
+            id="irmaos-ponto"
+            type="circle"
+            maxzoom={ZOOM_MINIMO_IRMAOS}
+            paint={{
+              'circle-color': ['get', 'cor'],
+              'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 3, 8, 6],
+              'circle-stroke-color': cores.fundo,
+              'circle-stroke-width': 1.5,
+            }}
+          />
+        </GeoJSONSource>
         {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
           irmaos.map((i) => (
             <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>

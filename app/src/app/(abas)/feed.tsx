@@ -60,10 +60,10 @@ export default function Feed() {
 
   const cabecalho = (
     <View style={{ gap: espaco.md }}>
-      <View style={estilos.topo}>
-        <Texto variante="titulo">{t('abas.feed')}</Texto>
-        <Texto variante="pequeno">{t('feed.exemplo')}</Texto>
-      </View>
+      {/* Sem o título "Feed" (pedido do dono): a aba já diz onde o irmão está. */}
+      <Texto variante="pequeno" style={{ paddingHorizontal: espaco.md }}>
+        {t('feed.exemplo')}
+      </Texto>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={estilos.stories}>
         <Pressable
