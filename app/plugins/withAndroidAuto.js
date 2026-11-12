@@ -10,6 +10,32 @@ const {
 } = require('expo/config-plugins');
 
 const CAR_APP = "implementation 'androidx.car.app:app:1.4.0'";
+/**
+ * A tela do carro usa classes do SDK de navegação do Google (NavInfo, StepInfo, GoogleMap).
+ * O pacote React Native as declara como dependência interna (implementation), então o módulo
+ * do app precisa declarar a mesma versão para compilar. Mantida igual à do pacote.
+ */
+const versaoNavSdk = () => {
+  try {
+    const g = require('fs').readFileSync(
+      require.resolve('@googlemaps/react-native-navigation-sdk/android/build.gradle'),
+      'utf8',
+    );
+    return (g.match(/com\.google\.android\.libraries\.navigation:navigation:([\d.]+)/) || [])[1] || '8.0.0';
+  } catch {
+    return '8.0.0';
+  }
+};
+/** Car App Library + SDK de navegação no módulo do app (sem duplicar). */
+function comDependenciasCarro(gradle) {
+  let g = gradle;
+  if (!g.includes('androidx.car.app:app:'))
+    g = g.replace(/dependencies\s*\{/, `dependencies {\n    ${CAR_APP}`);
+  if (!g.includes('com.google.android.libraries.navigation:navigation:'))
+    g = g.replace(/dependencies\s*\{/, `dependencies {\n    ${NAV_SDK()}`);
+  return g;
+}
+const NAV_SDK = () => `implementation 'com.google.android.libraries.navigation:navigation:${versaoNavSdk()}'`;
 
 const TEXTOS = {
   values: {
@@ -85,12 +111,7 @@ const withAndroidAuto = (config) => {
     return c;
   });
   config = withAppBuildGradle(config, (c) => {
-    if (!c.modResults.contents.includes('androidx.car.app:app:')) {
-      c.modResults.contents = c.modResults.contents.replace(
-        /dependencies\s*\{/,
-        `dependencies {\n    ${CAR_APP}`,
-      );
-    }
+    c.modResults.contents = comDependenciasCarro(c.modResults.contents);
     return c;
   });
   config = withDangerousMod(config, [
@@ -126,3 +147,4 @@ const withAndroidAuto = (config) => {
 
 module.exports = withAndroidAuto;
 module.exports.adicionarAoManifesto = adicionarAoManifesto;
+module.exports.comDependenciasCarro = comDependenciasCarro;

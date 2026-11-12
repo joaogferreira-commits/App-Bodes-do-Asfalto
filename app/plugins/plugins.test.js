@@ -37,7 +37,14 @@ describe('withNavegacaoGoogle', () => {
 });
 
 describe('withAndroidAuto', () => {
-  const { adicionarAoManifesto } = require('./withAndroidAuto');
+  const { adicionarAoManifesto, comDependenciasCarro } = require('./withAndroidAuto');
+
+  it('o app declara a Car App Library e o SDK de navegação (a tela do carro usa as classes dele)', () => {
+    const r = comDependenciasCarro(comDependenciasCarro(gradle));
+    expect(r.match(/androidx\.car\.app:app:/g)).toHaveLength(1);
+    expect(r).toMatch(/com\.google\.android\.libraries\.navigation:navigation:\d+\.\d+\.\d+/);
+    expect(r.match(/libraries\.navigation:navigation:/g)).toHaveLength(1);
+  });
   const manifesto = () => ({
     manifest: { $: {}, application: [{ $: { 'android:name': '.MainApplication' } }] },
   });
