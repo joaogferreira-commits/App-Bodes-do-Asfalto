@@ -26,13 +26,7 @@ import {
 } from '@/rotas/formato';
 import { rotaNoGoogle, type ResultadoGoogle } from '@/rotas/google';
 import type { TipoEstrada } from '@/rotas/tipos';
-import {
-  ErroRota,
-  planejarBateVolta,
-  planejarRota,
-  rumos,
-  type Rumo,
-} from '@/rotas/valhalla';
+import { ErroRota, planejarBateVolta, planejarRota, rumos, type Rumo } from '@/rotas/valhalla';
 import { espaco, fontes, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
 import { Botao, Chip, Icone, PainelInferior, Texto, type NomeIcone } from '@/ui';
 
