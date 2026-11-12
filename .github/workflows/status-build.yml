@@ -36,10 +36,17 @@ jobs:
         run: |
           for id in $(eas build:list --limit 3 --non-interactive --json | jq -r '.[] | select(.status=="ERRORED") | .id' | head -1); do
             echo "=================== BUILD $id ==================="
-            eas build:view "$id" --json | jq '{erro: .error}'
-            for url in $(eas build:view "$id" --json | jq -r '.logFiles[]?'); do
-              curl -sL "$url" | jq -r 'select(.msg != null) | .msg' 2>/dev/null \
-                | grep -iE "error|fail|exception|what went wrong|cannot|unresolved|> Task|BUILD FAILED" | tail -120
+            eas build:view "$id" --json > build.json
+            jq '{erro: .error, logs: (.logFiles | length)}' build.json
+            for url in $(jq -r '.logFiles[]?' build.json); do
+              curl -sL "$url" -o log.txt
+              # cada linha é JSON com "msg"; se não for, usa o texto puro
+              (jq -r 'select(.msg != null) | .msg' log.txt 2>/dev/null || cat log.txt) > log-msg.txt
+              [ -s log-msg.txt ] || cp log.txt log-msg.txt
+              echo "----- erros -----"
+              grep -nE "^e: |error:|ERROR|What went wrong|Unresolved reference|cannot find symbol|FAILURE|> Task .*FAILED|Execution failed" log-msg.txt | head -80
+              echo "----- fim do registro -----"
+              tail -60 log-msg.txt
             done
           done
       - name: Tamanho do APK da última build concluída
