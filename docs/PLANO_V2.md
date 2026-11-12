@@ -29,3 +29,6 @@ Revisão de segurança (desenvolvedor), conta de demonstração, teste fechado e
 1. Barra de abas: trocar **Ferramentas** por **Conversas** (Sofia) ou manter e pôr um botão "Conversas" no topo do Mapa/Feed (Paulo)?
 2. Desafio criado por irmão dá só selo, e XP só nos da diretoria/admin (Paulo)?
 3. Conceito da logo (Marcelo) aprovado? Se sim, o dono gera a arte no ChatGPT com o prompt e o agente redesenha em SVG.
+
+## Logo (12/11/2026)
+Dora (design) e Marcelo (marketing), em separado, ranquearam as 5 versões recebidas: **4, 5, 1, 3, 2**. A 4 (escudo clássico, borda fina, chifres médios abertos, rosto sério e limpo) vira a referência padrão. Ajustes: tracejado mais grosso e com menos traços, borda ≤ 6% da largura, cavanhaque mais curto e olhar neutro, versão pequena sem bordado, monocromática só silhueta, 10% de margem para o recorte do ícone. Abertura: **1,5 s** (2 s pareceria espera).
