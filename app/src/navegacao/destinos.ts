@@ -1,6 +1,16 @@
 export type Coordenada = { lat: number; lng: number };
 
-export type Destino = { chave: 'chapada' | 'centroCuiaba' | 'cincoKm' | 'postoTrevo'; posicao?: Coordenada };
+export type Destino = {
+  chave: 'chapada' | 'centroCuiaba' | 'cincoKm' | 'postoTrevo' | 'busca' | 'bateVolta';
+  posicao?: Coordenada;
+  /** Nome vindo da busca no mapa (lugar do app ou endereço). */
+  nome?: string;
+};
+
+/** Nome para mostrar: o da busca ou o texto traduzido do destino fixo. */
+export function nomeDoDestino(d: Destino, t: (chave: string) => string): string {
+  return d.nome ?? t(`destinos.${d.chave}`);
+}
 
 /** Destinos fixos da prova (região de Cuiabá) e um ponto a 5 km para testar em qualquer cidade. */
 export const destinosDaProva: Destino[] = [

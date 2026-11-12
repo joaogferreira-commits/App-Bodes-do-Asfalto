@@ -4,7 +4,8 @@
     "fechar": "Close",
     "emBreve": "Coming soon",
     "exemplo": "sample",
-    "entendi": "Got it"
+    "entendi": "Got it",
+    "cancelar": "Cancel"
   },
   "abas": {
     "mapa": "Map",
@@ -74,7 +75,25 @@
       "semLocalizacao": "No location yet. Allow location and go somewhere open."
     },
     "aviso": "Dirt sections come from OpenStreetMap and may be incomplete in your area.",
-    "semCaminhoSoAsfalto": "There is no paved-only way here. This route avoids dirt as much as possible, but has {{km}} km of dirt."
+    "semCaminhoSoAsfalto": "There is no paved-only way here. This route avoids dirt as much as possible, but has {{km}} km of dirt.",
+    "bateVolta": {
+      "chip": "Round trip",
+      "titulo": "Round trip · {{km}} km",
+      "distancia": "How far to ride (there and back)",
+      "direcao": "Which way",
+      "curvas": "More curves",
+      "outra": "Another option",
+      "rumos": {
+        "N": "North",
+        "NE": "Northeast",
+        "L": "East",
+        "SE": "Southeast",
+        "S": "South",
+        "SO": "Southwest",
+        "O": "West",
+        "NO": "Northwest"
+      }
+    }
   },
   "pilotando": {
     "preparando": "Preparing navigation…",
@@ -162,5 +181,116 @@
     "noite": "Night",
     "sol": "Sun",
     "explica": "Automatic: Sun theme by day (better in strong sunlight) and Night after 6 pm."
+  },
+  "busca": {
+    "dica": "Type the name of a chapter house, gas station, city, street or road.",
+    "buscando": "Searching…",
+    "semRede": "No internet: only club places are shown.",
+    "nada": "Nothing found. Try another name.",
+    "doClube": "From the club",
+    "enderecos": "Addresses and places",
+    "limpar": "Clear search",
+    "fonte": "Addresses: © OpenStreetMap (Photon)"
+  },
+  "conquistas": {
+    "exemplo": "Sample numbers until launch.",
+    "seuNivel": "Your level",
+    "xp": "{{xp}} XP",
+    "xpCurto": "{{xp}} XP",
+    "faltam": "{{xp}} XP to {{nivel}}",
+    "niveis": {
+      "cabrito": "Kid",
+      "bode": "Goat",
+      "bodeVelho": "Old Goat",
+      "bodeLendario": "Legendary Goat"
+    },
+    "passaporte": "Goat Passport",
+    "contagem": "{{feitos}} of {{total}}",
+    "conquistado": "Earned",
+    "progresso": "{{atual}} of {{meta}}",
+    "recompensa": "Worth +{{xp}} XP",
+    "selos": {
+      "agape": {
+        "nome": "Agape",
+        "como": "Join a Flash Agape with brothers on the road."
+      },
+      "irmaoNaRota": {
+        "nome": "Brother on the Road",
+        "como": "Meet a brother riding the same road (wave accepted and meeting confirmed)."
+      },
+      "sedesMt": {
+        "nome": "MT Chapters",
+        "como": "Check in at 5 club chapter houses in Mato Grosso."
+      },
+      "pantanal": {
+        "nome": "Pantanal",
+        "como": "Visit 3 Pantanal spots: Transpantaneira, Porto Jofre and Poconé."
+      },
+      "visitaLojas": {
+        "nome": "Lodge Visits",
+        "como": "Visit 3 Lodges in other Orients during your trips."
+      },
+      "socorroFraterno": {
+        "nome": "Fraternal Aid",
+        "como": "Help a brother stopped on the road (aid request answered and confirmed)."
+      }
+    },
+    "desafioMes": "Monthly challenge",
+    "desafios": {
+      "milKm": "Ride 1,000 km in November"
+    },
+    "desafioProgresso": "{{atual}} of {{meta}} km",
+    "posicao": "#{{n}}",
+    "rankingTitulo": "Monthly ranking · Cuiabá chapter",
+    "rankingTexto": "{{km}} km ridden with a recorded route. The ranking resets every month.",
+    "comoGanhar": "How to earn XP",
+    "ganhar": {
+      "km": "Every 10 km ridden with a recorded route",
+      "passeio": "Official club ride (check-in at start and end)",
+      "sede": "Check-in at another chapter house",
+      "monumento": "Check-in at a monument or sight",
+      "foto": "Post with a photo",
+      "alerta": "Road alert confirmed by brothers"
+    },
+    "semVelocidade": "No points for speed or travel time. Here, riding together and seeing places is what counts."
+  },
+  "feed": {
+    "exemplo": "Sample posts until the social stage.",
+    "emBreve": "Posting, commenting and sharing arrive in the social stage.",
+    "seuStory": "Your story",
+    "storyDe": "{{nome}}'s story",
+    "compor": "Tell us about your ride, brother…",
+    "ferramentas": {
+      "foto": "Photo",
+      "video": "Video",
+      "rota": "Route",
+      "enquete": "Poll",
+      "evento": "Event"
+    },
+    "opcoes": "More options",
+    "denunciar": "Report post",
+    "denunciaRecebida": "Thanks. Moderators will review it.",
+    "bloquear": "Block {{nome}}",
+    "capituloQuando": "{{capitulo}} · {{quando}}",
+    "tfa": "TFA {{n}}",
+    "tfaRotulo": "Give a TFA, {{n}} so far",
+    "comentarios": "{{n}} comments",
+    "compartilhar": "Share",
+    "usarRota": "Use route",
+    "fotoViagem": "Trip photo",
+    "foto": "Photo",
+    "terraPct": "{{pct}}% dirt",
+    "distancia": "distance",
+    "tempo": "time",
+    "irmaos": "brothers",
+    "xp": "XP",
+    "ganhouSelo": "Earned the {{selo}} badge",
+    "com": "With {{nomes}}",
+    "passeio": "Official ride",
+    "saida": "Start: {{lugar}} · {{km}} km",
+    "confirmados": "{{vou}} going · {{talvez}} maybe",
+    "talvez": "Maybe",
+    "votos": "{{n}} votes",
+    "aviso": "Board notice"
   }
 }

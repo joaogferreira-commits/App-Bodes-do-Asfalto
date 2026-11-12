@@ -58,6 +58,23 @@ export const caminhosIcones = {
   voltar: ['M15 5l-7 7 7 7'],
   fechar: ['M6 6l12 12M18 6L6 18'],
   mais: ['M12 5v14M5 12h14'],
+  camera: [
+    'M4 8h3l2-3h6l2 3h3a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z',
+    'M12 10a3.5 3.5 0 110 7 3.5 3.5 0 010-7z',
+  ],
+  video: ['M3 7h12a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z', 'M16 11l6-3v8l-6-3'],
+  enquete: ['M5 20V10M12 20V4M19 20v-7'],
+  calendario: ['M4 6h16v14H4z', 'M4 10h16M8 3v4M16 3v4'],
+  comentario: ['M4 5h16v11H9l-5 4z'],
+  compartilhar: ['M12 15V3M7 8l5-5 5 5', 'M5 13v7h14v-7'],
+  opcoes: ['M5 12h.01M12 12h.01M19 12h.01'],
+  check: ['M5 12.5l4.5 4.5L19 7.5'],
+  cadeado: ['M6 11h12v9H6z', 'M8.5 11V8a3.5 3.5 0 017 0v3'],
+  rota: [
+    'M6 19a2 2 0 100-4 2 2 0 000 4zM18 9a2 2 0 100-4 2 2 0 000 4z',
+    'M8 17h7a3 3 0 000-6H9a3 3 0 010-6h7',
+  ],
+  trofeu: ['M8 4h8v5a4 4 0 01-8 0z', 'M8 6H5a3 3 0 003 4M16 6h3a3 3 0 01-3 4', 'M12 13v4M9 20h6M10 17h4'],
   menos: ['M5 12h14'],
   sol: [
     'M12 8a4 4 0 110 8 4 4 0 010-8z',

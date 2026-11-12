@@ -4,7 +4,8 @@
     "fechar": "Fechar",
     "emBreve": "Em breve",
     "exemplo": "exemplo",
-    "entendi": "Entendi"
+    "entendi": "Entendi",
+    "cancelar": "Cancelar"
   },
   "abas": {
     "mapa": "Mapa",
@@ -74,7 +75,25 @@
       "semLocalizacao": "Ainda sem a sua localização. Libere a localização e vá para um lugar aberto."
     },
     "aviso": "Trechos de terra vêm do OpenStreetMap e podem estar incompletos na sua região.",
-    "semCaminhoSoAsfalto": "Não há caminho só de asfalto até aqui. Esta rota evita a terra ao máximo, mas tem {{km}} km de terra."
+    "semCaminhoSoAsfalto": "Não há caminho só de asfalto até aqui. Esta rota evita a terra ao máximo, mas tem {{km}} km de terra.",
+    "bateVolta": {
+      "chip": "Bate-volta",
+      "titulo": "Bate-volta · {{km}} km",
+      "distancia": "Quanto quer rodar (ida e volta)",
+      "direcao": "Para que lado",
+      "curvas": "Mais curvas",
+      "outra": "Outra opção",
+      "rumos": {
+        "N": "Norte",
+        "NE": "Nordeste",
+        "L": "Leste",
+        "SE": "Sudeste",
+        "S": "Sul",
+        "SO": "Sudoeste",
+        "O": "Oeste",
+        "NO": "Noroeste"
+      }
+    }
   },
   "pilotando": {
     "preparando": "Preparando a navegação…",
@@ -162,5 +181,116 @@
     "noite": "Noite",
     "sol": "Sol",
     "explica": "Automático: tema Sol de dia (melhor sob sol forte) e Noite depois das 18h."
+  },
+  "busca": {
+    "dica": "Digite o nome de uma sede, posto, cidade, rua ou estrada.",
+    "buscando": "Buscando…",
+    "semRede": "Sem internet: só os lugares do clube aparecem.",
+    "nada": "Nada encontrado. Tente outro nome.",
+    "doClube": "Do clube",
+    "enderecos": "Endereços e lugares",
+    "limpar": "Limpar busca",
+    "fonte": "Endereços: © OpenStreetMap (Photon)"
+  },
+  "conquistas": {
+    "exemplo": "Números de exemplo até o lançamento.",
+    "seuNivel": "Seu nível",
+    "xp": "{{xp}} XP",
+    "xpCurto": "{{xp}} XP",
+    "faltam": "Faltam {{xp}} XP para {{nivel}}",
+    "niveis": {
+      "cabrito": "Cabrito",
+      "bode": "Bode",
+      "bodeVelho": "Bode Velho",
+      "bodeLendario": "Bode Lendário"
+    },
+    "passaporte": "Passaporte do Bode",
+    "contagem": "{{feitos}} de {{total}}",
+    "conquistado": "Conquistado",
+    "progresso": "{{atual}} de {{meta}}",
+    "recompensa": "Vale +{{xp}} XP",
+    "selos": {
+      "agape": {
+        "nome": "Ágape",
+        "como": "Participe de um Ágape Relâmpago com irmãos na estrada."
+      },
+      "irmaoNaRota": {
+        "nome": "Irmão na Rota",
+        "como": "Encontre um irmão que está na mesma estrada que você (aceno aceito e encontro confirmado)."
+      },
+      "sedesMt": {
+        "nome": "Sedes do MT",
+        "como": "Faça check-in em 5 sedes do clube em Mato Grosso."
+      },
+      "pantanal": {
+        "nome": "Pantanal",
+        "como": "Visite 3 pontos do Pantanal: Transpantaneira, Porto Jofre e Poconé."
+      },
+      "visitaLojas": {
+        "nome": "Visita a Lojas",
+        "como": "Visite 3 Lojas de outros Orientes durante as suas viagens."
+      },
+      "socorroFraterno": {
+        "nome": "Socorro Fraterno",
+        "como": "Ajude um irmão parado na estrada (pedido de socorro atendido e confirmado)."
+      }
+    },
+    "desafioMes": "Desafio do mês",
+    "desafios": {
+      "milKm": "Rodar 1.000 km em novembro"
+    },
+    "desafioProgresso": "{{atual}} de {{meta}} km",
+    "posicao": "{{n}}º",
+    "rankingTitulo": "Ranking do mês · Capítulo Cuiabá",
+    "rankingTexto": "{{km}} km rodados com rota gravada. O ranking zera todo mês.",
+    "comoGanhar": "Como ganhar XP",
+    "ganhar": {
+      "km": "A cada 10 km rodados com rota gravada",
+      "passeio": "Passeio oficial do clube (check-in no início e no fim)",
+      "sede": "Check-in em sede de outro capítulo",
+      "monumento": "Check-in em monumento ou ponto turístico",
+      "foto": "Post com foto",
+      "alerta": "Alerta da estrada confirmado por irmãos"
+    },
+    "semVelocidade": "Nenhum ponto por velocidade ou tempo de percurso. Aqui vale rodar junto e conhecer lugares."
+  },
+  "feed": {
+    "exemplo": "Posts de exemplo até a etapa social.",
+    "emBreve": "Publicar, comentar e compartilhar chegam na etapa social.",
+    "seuStory": "Seu story",
+    "storyDe": "Story de {{nome}}",
+    "compor": "Conte sua viagem, irmão…",
+    "ferramentas": {
+      "foto": "Foto",
+      "video": "Vídeo",
+      "rota": "Rota",
+      "enquete": "Enquete",
+      "evento": "Evento"
+    },
+    "opcoes": "Mais opções",
+    "denunciar": "Denunciar post",
+    "denunciaRecebida": "Obrigado. A moderação vai analisar.",
+    "bloquear": "Bloquear {{nome}}",
+    "capituloQuando": "{{capitulo}} · {{quando}}",
+    "tfa": "TFA {{n}}",
+    "tfaRotulo": "Dar um TFA, {{n}} até agora",
+    "comentarios": "{{n}} comentários",
+    "compartilhar": "Compartilhar",
+    "usarRota": "Usar rota",
+    "fotoViagem": "Foto da viagem",
+    "foto": "Foto",
+    "terraPct": "{{pct}}% de terra",
+    "distancia": "distância",
+    "tempo": "tempo",
+    "irmaos": "irmãos",
+    "xp": "XP",
+    "ganhouSelo": "Ganhou o selo {{selo}}",
+    "com": "Com {{nomes}}",
+    "passeio": "Passeio oficial",
+    "saida": "Saída: {{lugar}} · {{km}} km",
+    "confirmados": "{{vou}} vão · {{talvez}} talvez",
+    "talvez": "Talvez",
+    "votos": "{{n}} votos",
+    "aviso": "Aviso da diretoria"
   }
 }

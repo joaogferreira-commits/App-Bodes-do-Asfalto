@@ -16,7 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useViagem } from '@/estado/viagem';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
-import { posicaoDoDestino } from '@/navegacao/destinos';
+import { nomeDoDestino, posicaoDoDestino } from '@/navegacao/destinos';
 import { iniciarNavegacao, type ControladorNavegacao, type ResultadoNavegacao } from '@/navegacao/fluxo';
 import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
 import { Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
@@ -97,7 +97,9 @@ function Pilotando() {
       posicaoAtual,
       destino: (atual) =>
         viagem.rota?.forma[viagem.rota.forma.length - 1] ?? posicaoDoDestino(viagem.destino, atual),
-      tituloDestino: t(`destinos.${viagem.destino.chave}`),
+      tituloDestino: viagem.bateVolta
+        ? t('rota.bateVolta.titulo', { km: viagem.bateVolta.km })
+        : nomeDoDestino(viagem.destino, t),
       tokenRota: viagem.tokenRota,
     });
     if (resultado === 'ok' || resultado === 'okRotaRapida') {

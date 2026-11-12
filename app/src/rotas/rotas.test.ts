@@ -1,6 +1,16 @@
 import { tokenDaRota, URL_ROUTES } from './google';
 import { codificarPolyline, decodificarPolyline } from './polyline';
-import { amostrarPassagens, ErroRota, opcoesDeCusto, planejarRota, separarTrechos } from './valhalla';
+import { distanciaKm } from '@/navegacao/destinos';
+
+import {
+  amostrarPassagens,
+  ErroRota,
+  opcoesDeCusto,
+  planejarBateVolta,
+  planejarRota,
+  pontosBateVolta,
+  separarTrechos,
+} from './valhalla';
 
 const cuiaba = { lat: -15.601, lng: -56.0974 };
 const chapada = { lat: -15.4604, lng: -55.7497 };
@@ -149,5 +159,57 @@ describe('passagens para o Google', () => {
     await expect(
       tokenDaRota('k', cuiaba, chapada, [], jest.fn().mockRejectedValue(new Error('x'))),
     ).resolves.toBeNull();
+  });
+});
+
+describe('bate-volta', () => {
+  const casa = { lat: -15.6, lng: -56.1 };
+
+  it('laço com perímetro em linha reta ≈ distância pedida ÷ 1,3', () => {
+    const [a, b] = pontosBateVolta(casa, 150, 0);
+    const perimetro = distanciaKm(casa, a!) + distanciaKm(a!, b!) + distanciaKm(b!, casa);
+    expect(perimetro * 1.3).toBeGreaterThan(140);
+    expect(perimetro * 1.3).toBeLessThan(160);
+  });
+
+  it('vai para o lado escolhido (norte = latitude maior)', () => {
+    const [a, b] = pontosBateVolta(casa, 100, 0);
+    expect(a!.lat).toBeGreaterThan(casa.lat);
+    expect(b!.lat).toBeGreaterThan(casa.lat);
+    const [c] = pontosBateVolta(casa, 100, 90);
+    expect(c!.lng).toBeGreaterThan(casa.lng);
+  });
+
+  it('"outra opção" gira o laço', () => {
+    expect(pontosBateVolta(casa, 100, 0, 1)).not.toEqual(pontosBateVolta(casa, 100, 0, 0));
+  });
+
+  it('pede volta à origem passando pelos pontos, sem paradas, e "mais curvas" evita rodovias', async () => {
+    const forma = [casa, { lat: -15.2, lng: -56 }, casa];
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          trip: {
+            legs: [
+              { shape: codificarPolyline(forma.slice(0, 2)) },
+              { shape: codificarPolyline(forma.slice(1)) },
+            ],
+            summary: { length: 98, time: 7200 },
+          },
+        }),
+      })
+      .mockRejectedValueOnce(new Error('sem atributos'));
+    const rota = await planejarBateVolta(casa, { km: 100, rumo: 'N', tipo: 'terra', curvas: true }, buscar);
+    const corpo = JSON.parse(buscar.mock.calls[0][1].body);
+    expect(corpo.locations).toHaveLength(4);
+    expect(corpo.locations[0]).toEqual({ lat: casa.lat, lon: casa.lng });
+    expect(corpo.locations[3]).toEqual({ lat: casa.lat, lon: casa.lng });
+    expect(corpo.locations[1].type).toBe('through');
+    expect(corpo.costing_options.motorcycle.use_highways).toBe(0);
+    expect(rota.forma).toHaveLength(3);
+    expect(rota.km).toBe(98);
   });
 });

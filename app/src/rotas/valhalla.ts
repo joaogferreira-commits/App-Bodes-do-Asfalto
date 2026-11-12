@@ -1,6 +1,6 @@
-import type { Coordenada } from '@/navegacao/destinos';
+import { pontoADistancia, type Coordenada } from '@/navegacao/destinos';
 
-import { decodificarPolyline } from './polyline';
+import { codificarPolyline, decodificarPolyline } from './polyline';
 import type { RotaPlanejada, TipoEstrada, Trecho } from './tipos';
 
 /**
@@ -71,14 +71,20 @@ export async function planejarRota(
   destino: Coordenada,
   tipo: TipoEstrada,
   buscar: Buscar = fetch as unknown as Buscar,
+  extras: { passagens?: Coordenada[]; curvas?: boolean } = {},
 ): Promise<RotaPlanejada> {
+  const pontos = [origem, ...(extras.passagens ?? []), destino];
   const corpo = (semCorteDeTerra: boolean) => ({
-    locations: [
-      { lat: origem.lat, lon: origem.lng },
-      { lat: destino.lat, lon: destino.lng },
-    ],
+    locations: pontos.map((p, i) => ({
+      lat: p.lat,
+      lon: p.lng,
+      // pontos intermediários são "passe por aqui" (sem parada), para formar o laço do bate-volta
+      ...(i > 0 && i < pontos.length - 1 ? { type: 'through' } : {}),
+    })),
     costing: 'motorcycle',
-    costing_options: { motorcycle: opcoesDeCusto(tipo, semCorteDeTerra) },
+    costing_options: {
+      motorcycle: { ...opcoesDeCusto(tipo, semCorteDeTerra), ...(extras.curvas ? { use_highways: 0 } : {}) },
+    },
     directions_options: { units: 'kilometers', language: 'pt-BR' },
   });
   const pedir = async (caminho: string, dados: object) => {
@@ -106,16 +112,18 @@ export async function planejarRota(
     rota = (await pedir('/route', corpo(true))) as RespostaRota;
     semCaminhoSoAsfalto = true;
   }
-  const perna = rota.trip?.legs?.[0];
+  const pernas = rota.trip?.legs ?? [];
   const resumo = rota.trip?.summary;
-  if (!perna || !resumo) throw new ErroRota('semRota');
-  const forma = decodificarPolyline(perna.shape, 6);
+  if (!pernas.length || !resumo) throw new ErroRota('semRota');
+  // Junta as pernas (o ponto final de uma é o inicial da próxima).
+  const forma = pernas.flatMap((pr, i) => decodificarPolyline(pr.shape, 6).slice(i === 0 ? 0 : 1));
+  const formaCodificada = pernas.length === 1 ? pernas[0]!.shape : codificarPolyline(forma, 6);
 
   let trechos: Trecho[] = [{ pontos: forma, terra: false }];
   let kmTerra = 0;
   try {
     const atributos = (await pedir('/trace_attributes', {
-      encoded_polyline: perna.shape,
+      encoded_polyline: formaCodificada,
       shape_match: 'edge_walk',
       costing: 'motorcycle',
       filters: {
@@ -150,4 +158,40 @@ export function amostrarPassagens(forma: Coordenada[], quantidade = 12): Coorden
     if (p) saida.push(p);
   }
   return saida;
+}
+
+/** Direções da rosa de 8 setores (R45): graus a partir do norte. */
+export const rumos = { N: 0, NE: 45, L: 90, SE: 135, S: 180, SO: 225, O: 270, NO: 315 } as const;
+export type Rumo = keyof typeof rumos;
+
+/** As estradas fazem a viagem ~30 % mais longa que a linha reta. */
+const FATOR_ESTRADA = 1.3;
+
+/**
+ * Pontos de passagem do bate-volta: um laço em forma de gota para o lado escolhido.
+ * Origem → A → B → origem, com A e B a ±35° do rumo. Perímetro em linha reta ≈ r·(2 + 2·sen 35°),
+ * então r = km / (FATOR_ESTRADA · (2 + 2·sen 35°)). "variacao" gira o laço para gerar outra opção.
+ */
+export function pontosBateVolta(
+  origem: Coordenada,
+  km: number,
+  rumoGraus: number,
+  variacao = 0,
+): Coordenada[] {
+  const abertura = 35;
+  const r = km / (FATOR_ESTRADA * (2 + 2 * Math.sin((abertura * Math.PI) / 180)));
+  const giros = [0, -25, 25, -50, 50];
+  const giro = giros[variacao % giros.length]!;
+  const centro = rumoGraus + giro;
+  return [pontoADistancia(origem, r, centro - abertura), pontoADistancia(origem, r, centro + abertura)];
+}
+
+/** Rota de ida e volta pela distância e direção escolhidas, com a preferência de estrada e "mais curvas". */
+export function planejarBateVolta(
+  origem: Coordenada,
+  opcoes: { km: number; rumo: Rumo; tipo: TipoEstrada; curvas: boolean; variacao?: number },
+  buscar: Buscar = fetch as unknown as Buscar,
+) {
+  const passagens = pontosBateVolta(origem, opcoes.km, rumos[opcoes.rumo], opcoes.variacao ?? 0);
+  return planejarRota(origem, origem, opcoes.tipo, buscar, { passagens, curvas: opcoes.curvas });
 }

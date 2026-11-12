@@ -140,6 +140,10 @@ def estilo(nome, p):
         # Rótulos (halo de 2 px, R40).
         rotulo("rotulos-rodovias", "transportation_name", classe(RODOVIAS), ["coalesce", ["get", "ref"], ["get", "name"]],
                p["rotulo"], p["halo"], 13, fonte="Noto Sans Bold", minzoom=9, linha_=True),
+        # Nomes de ruas e estradas menores (antes só as rodovias tinham nome).
+        rotulo("rotulos-ruas", "transportation_name", classe(SECUNDARIAS + LOCAIS), ["get", "name"],
+               p["rotuloSec"], p["halo"], ["interpolate", ["linear"], ["zoom"], 13, 12, 17, 15],
+               minzoom=13, linha_=True),
         rotulo("rotulos-terra", "transportation_name", TRILHA, ["get", "name"], p["terra"], p["halo"], 12,
                minzoom=12, linha_=True),
         rotulo("rotulos-rios", "waterway", None, ["get", "name"], p["rotuloRio"], p["halo"], 12, minzoom=10, linha_=True),

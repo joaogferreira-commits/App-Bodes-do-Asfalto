@@ -96,7 +96,7 @@ export default function Mapa() {
       >
         <Camera ref={camera} initialViewState={{ center: CUIABA, zoom: 11 }} />
         {lugares.map((l) => (
-          <Marker key={l.id} id={l.id} lngLat={[l.lng, l.lat]} anchor="top">
+          <Marker key={l.id} id={l.id} lngLat={[l.lng, l.lat]} anchor="bottom">
             <Pino tipo={l.tipo} rotulo={l.rotulo} descricao={`${l.nome}${l.rotulo ? `, ${l.rotulo}` : ''}`} />
           </Marker>
         ))}
@@ -112,7 +112,7 @@ export default function Mapa() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t('mapa.busca')}
-            onPress={() => router.push('/rota')}
+            onPress={() => router.push('/busca')}
             style={estilos.busca}
           >
             <Icone nome="busca" tamanho={20} cor={cores.textoSec} />

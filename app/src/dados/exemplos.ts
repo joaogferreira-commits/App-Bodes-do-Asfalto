@@ -21,6 +21,22 @@ export const lugaresExemplo: LugarExemplo[] = [
   { id: 'loja-exemplo', tipo: 'loja', nome: 'Loja (exemplo)', lng: -56.1032, lat: -15.6081 },
   { id: 'oficina-exemplo', tipo: 'oficina', nome: 'Oficina de irmão', lng: -56.06, lat: -15.62 },
   { id: 'agape-trevo', tipo: 'agape', nome: 'Ágape no Posto Trevo', lng: -56.0731, lat: -15.5699 },
+  {
+    id: 'centro-geodesico',
+    tipo: 'monumento',
+    nome: 'Centro Geodésico da América do Sul',
+    lng: -56.0967,
+    lat: -15.5989,
+  },
+  { id: 'veu-de-noiva', tipo: 'turistico', nome: 'Cachoeira Véu de Noiva', lng: -55.8339, lat: -15.4142 },
+  { id: 'mirante-chapada', tipo: 'turistico', nome: 'Mirante da Chapada', lng: -55.7497, lat: -15.4604 },
+  {
+    id: 'restaurante-irmao',
+    tipo: 'restaurante',
+    nome: 'Restaurante de irmão (exemplo)',
+    lng: -56.08,
+    lat: -15.6,
+  },
 ];
 
 export const irmaosExemplo: IrmaoExemplo[] = [

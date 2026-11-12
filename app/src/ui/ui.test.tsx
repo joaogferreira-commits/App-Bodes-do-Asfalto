@@ -162,15 +162,15 @@ describe('pesquisa de usabilidade (R15–R25)', () => {
     expect(screen.getByTestId('selo-estrada')).toBeTruthy();
   });
 
-  it('pinos com forma própria por tipo; sede e Ágape nunca agrupam (R23, R44)', async () => {
+  it('cada pino tem o seu emblema; sede e Ágape nunca agrupam (R23, R44)', async () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { pinos } = require('.') as typeof import('.');
-    const formas = new Set(Object.values(pinos).map((p) => p.forma));
-    expect(formas.size).toBeGreaterThanOrEqual(4);
+    const imagens = new Set(Object.values(pinos).map((p) => p.imagem));
+    expect(imagens.size).toBe(Object.keys(pinos).length);
     expect(pinos.sede.agrupa).toBe(false);
     expect(pinos.agape.agrupa).toBe(false);
-    await render(<Pino tipo="alerta" descricao="Alerta" />);
-    expect(screen.getByTestId('pino-losango')).toBeTruthy();
+    await render(<Pino tipo="monumento" descricao="Monumento" />);
+    expect(screen.getByTestId('pino-monumento')).toBeTruthy();
   });
 
   it('botão de ícone do mapa pode mostrar o rótulo embaixo (R22)', async () => {

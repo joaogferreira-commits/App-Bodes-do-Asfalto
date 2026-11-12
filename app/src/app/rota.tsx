@@ -4,12 +4,18 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useViagem } from '@/estado/viagem';
+import { bateVoltaPadrao, useViagem } from '@/estado/viagem';
 import { camadasDaRota, useEstiloMapa } from '@/map/estilos';
-import { destinosDaProva, postoExemplo, posicaoDoDestino, type Coordenada } from '@/navegacao/destinos';
+import {
+  destinosDaProva,
+  nomeDoDestino,
+  postoExemplo,
+  posicaoDoDestino,
+  type Coordenada,
+} from '@/navegacao/destinos';
 import {
   formatarDuracao,
   formatarKm,
@@ -20,9 +26,18 @@ import {
 } from '@/rotas/formato';
 import { tokenDaRota } from '@/rotas/google';
 import type { TipoEstrada } from '@/rotas/tipos';
-import { amostrarPassagens, ErroRota, planejarRota } from '@/rotas/valhalla';
+import {
+  amostrarPassagens,
+  ErroRota,
+  planejarBateVolta,
+  planejarRota,
+  rumos,
+  type Rumo,
+} from '@/rotas/valhalla';
 import { espaco, fontes, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
 import { Botao, Chip, Icone, PainelInferior, Texto, type NomeIcone } from '@/ui';
+
+const distancias = [50, 100, 150, 200, 300];
 
 const tipos: { chave: TipoEstrada; icone: NomeIcone; cor: NomeCor }[] = [
   { chave: 'asfalto', icone: 'asfalto', cor: 'texto' },
@@ -43,11 +58,12 @@ export default function Rota() {
   const pintura = camadasDaRota(cores);
   const camera = useRef<CameraRef>(null);
   const viagem = useViagem();
-  const { destino, tipoEstrada, rota } = viagem;
+  const { destino, tipoEstrada, rota, bateVolta } = viagem;
+  const { height: alturaTela } = useWindowDimensions();
   const [origem, setOrigem] = useState<Coordenada | null>(null);
   const [estado, setEstado] = useState<Estado>({ fase: 'calculando' });
   const [iniciando, setIniciando] = useState(false);
-  const destinos = [...destinosDaProva, postoExemplo];
+  const destinos = [...(destino.chave === 'busca' ? [destino] : []), ...destinosDaProva, postoExemplo];
 
   const calcular = useCallback(async () => {
     setEstado({ fase: 'calculando' });
@@ -62,7 +78,9 @@ export default function Rota() {
       setOrigem(atual);
     }
     try {
-      const nova = await planejarRota(atual, posicaoDoDestino(destino, atual), tipoEstrada);
+      const nova = bateVolta
+        ? await planejarBateVolta(atual, { ...bateVolta, tipo: tipoEstrada })
+        : await planejarRota(atual, posicaoDoDestino(destino, atual), tipoEstrada);
       viagem.definirRota(nova, null);
       setEstado({ fase: 'pronta' });
       camera.current?.fitBounds(limites(nova.forma), {
@@ -75,7 +93,7 @@ export default function Rota() {
     }
     // viagem.definirRota é estável o bastante para este uso
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [destino, tipoEstrada, origem]);
+  }, [destino, tipoEstrada, origem, bateVolta]);
 
   useEffect(() => {
     // recalcula quando o destino ou o tipo de estrada mudam (fora do ciclo de renderização)
@@ -152,7 +170,7 @@ export default function Rota() {
             <View style={estilos.ponto}>
               <View style={[estilos.bolinha, { backgroundColor: cores.acao }]} />
               <Texto variante="corpoForte" numberOfLines={1}>
-                {t(`destinos.${destino.chave}`)}
+                {bateVolta ? t('rota.bateVolta.titulo', { km: bateVolta.km }) : nomeDoDestino(destino, t)}
               </Texto>
             </View>
           </View>
@@ -162,98 +180,152 @@ export default function Rota() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={estilos.destinos}
         >
+          <Chip
+            rotulo={t('rota.bateVolta.chip')}
+            ativo={!!bateVolta}
+            onPress={() => viagem.definirBateVolta(bateVolta ?? bateVoltaPadrao)}
+          />
           {destinos.map((d) => (
             <Chip
               key={d.chave}
-              rotulo={t(`destinos.${d.chave}`)}
-              ativo={d.chave === destino.chave}
-              onPress={() => viagem.definirDestino(d)}
+              rotulo={nomeDoDestino(d, t)}
+              ativo={!bateVolta && d.chave === destino.chave}
+              onPress={() => {
+                viagem.definirBateVolta(null);
+                viagem.definirDestino(d);
+              }}
             />
           ))}
         </ScrollView>
       </SafeAreaView>
 
       <PainelInferior style={estilos.painel}>
-        {estado.fase === 'calculando' && <Texto variante="secundario">{t('rota.calculando')}</Texto>}
-        {estado.fase === 'erro' && (
-          <View style={{ gap: espaco.sm }}>
-            <Texto style={{ color: cores.alerta }}>{t(`rota.erros.${estado.motivo}`)}</Texto>
-            <Botao titulo={t('rota.tentarDeNovo')} variante="secundario" onPress={calcular} />
-          </View>
-        )}
-        {estado.fase === 'pronta' && rota && (
-          <>
-            <View style={estilos.resumo}>
-              <View>
-                <Texto variante="numero" style={{ fontSize: 40, lineHeight: 42 }}>
-                  {t('rota.km', { km: formatarKm(rota.km) })}
-                </Texto>
-                <Texto variante="secundario">
-                  {t('rota.duracao', {
-                    tempo: formatarDuracao(rota.minutos),
-                    hora: horaChegada(rota.minutos),
-                  })}
-                </Texto>
-              </View>
-              <View style={{ alignItems: 'flex-end' }}>
-                <Texto variante="rotulo" style={{ color: cores.terra }}>
-                  {t('rota.terraRotulo')}
-                </Texto>
-                <Texto variante="subtitulo">{t('rota.terraKm', { km: formatarKm(rota.kmTerra) })}</Texto>
-              </View>
+        <ScrollView
+          style={{ maxHeight: alturaTela * 0.62 }}
+          contentContainerStyle={{ gap: espaco.sm }}
+          showsVerticalScrollIndicator={false}
+        >
+          {estado.fase === 'calculando' && <Texto variante="secundario">{t('rota.calculando')}</Texto>}
+          {estado.fase === 'erro' && (
+            <View style={{ gap: espaco.sm }}>
+              <Texto style={{ color: cores.alerta }}>{t(`rota.erros.${estado.motivo}`)}</Texto>
+              <Botao titulo={t('rota.tentarDeNovo')} variante="secundario" onPress={calcular} />
             </View>
-            <View
-              accessible
-              accessibilityLabel={t('rota.composicao', { asfalto: 100 - pct, terra: pct })}
-              style={estilos.barra}
-            >
-              <View style={{ flex: Math.max(100 - pct, 0.01), backgroundColor: cores.asfalto }} />
-              <View style={{ flex: Math.max(pct, 0.01), backgroundColor: cores.terra }} />
-            </View>
-            {rota.aviso === 'semCaminhoSoAsfalto' && (
-              <View style={estilos.avisoTerra} accessibilityLiveRegion="polite">
-                <Icone nome="alerta" tamanho={20} cor={cores.alerta} />
-                <Texto variante="secundario" style={{ flex: 1, color: cores.texto }}>
-                  {t('rota.semCaminhoSoAsfalto', { km: formatarKm(rota.kmTerra) })}
-                </Texto>
+          )}
+          {estado.fase === 'pronta' && rota && (
+            <>
+              <View style={estilos.resumo}>
+                <View>
+                  <Texto variante="numero" style={{ fontSize: 40, lineHeight: 42 }}>
+                    {t('rota.km', { km: formatarKm(rota.km) })}
+                  </Texto>
+                  <Texto variante="secundario">
+                    {t('rota.duracao', {
+                      tempo: formatarDuracao(rota.minutos),
+                      hora: horaChegada(rota.minutos),
+                    })}
+                  </Texto>
+                </View>
+                <View style={{ alignItems: 'flex-end' }}>
+                  <Texto variante="rotulo" style={{ color: cores.terra }}>
+                    {t('rota.terraRotulo')}
+                  </Texto>
+                  <Texto variante="subtitulo">{t('rota.terraKm', { km: formatarKm(rota.kmTerra) })}</Texto>
+                </View>
               </View>
-            )}
-          </>
-        )}
-
-        <Texto variante="rotulo">{t('rota.tipoEstrada')}</Texto>
-        <View accessibilityRole="radiogroup" style={estilos.tipos}>
-          {tipos.map((tp) => {
-            const ativo = tp.chave === tipoEstrada;
-            return (
-              <Pressable
-                key={tp.chave}
-                accessibilityRole="radio"
-                accessibilityState={{ checked: ativo }}
-                accessibilityLabel={t(`rota.${tp.chave}`)}
-                onPress={() => viagem.definirTipoEstrada(tp.chave)}
-                style={[estilos.tipo, ativo && estilos.tipoAtivo]}
+              <View
+                accessible
+                accessibilityLabel={t('rota.composicao', { asfalto: 100 - pct, terra: pct })}
+                style={estilos.barra}
               >
-                <Icone nome={tp.icone} tamanho={26} cor={ativo ? cores.acao : cores[tp.cor]} />
-                <Texto style={estilos.textoTipo}>{t(`rota.${tp.chave}`)}</Texto>
-              </Pressable>
-            );
-          })}
-        </View>
-        <Texto variante="secundario">{t(`rota.explicacao.${tipoEstrada}`)}</Texto>
+                <View style={{ flex: Math.max(100 - pct, 0.01), backgroundColor: cores.asfalto }} />
+                <View style={{ flex: Math.max(pct, 0.01), backgroundColor: cores.terra }} />
+              </View>
+              {rota.aviso === 'semCaminhoSoAsfalto' && (
+                <View style={estilos.avisoTerra} accessibilityLiveRegion="polite">
+                  <Icone nome="alerta" tamanho={20} cor={cores.alerta} />
+                  <Texto variante="secundario" style={{ flex: 1, color: cores.texto }}>
+                    {t('rota.semCaminhoSoAsfalto', { km: formatarKm(rota.kmTerra) })}
+                  </Texto>
+                </View>
+              )}
+            </>
+          )}
 
-        <View style={estilos.acoes}>
-          <View style={{ flex: 1 }}>
-            <Botao
-              titulo={t('rota.iniciar')}
-              grande
-              icone="navegar"
-              desativado={estado.fase !== 'pronta' || iniciando}
-              onPress={iniciar}
-            />
+          {bateVolta && (
+            <View style={{ gap: espaco.sm }}>
+              <Texto variante="rotulo">{t('rota.bateVolta.distancia')}</Texto>
+              <View style={estilos.quebra}>
+                {distancias.map((km) => (
+                  <Chip
+                    key={km}
+                    rotulo={t('rota.km', { km })}
+                    ativo={bateVolta.km === km}
+                    onPress={() => viagem.definirBateVolta({ ...bateVolta, km, variacao: 0 })}
+                  />
+                ))}
+              </View>
+              <Texto variante="rotulo">{t('rota.bateVolta.direcao')}</Texto>
+              <View style={estilos.quebra} accessibilityRole="radiogroup">
+                {(Object.keys(rumos) as Rumo[]).map((r) => (
+                  <Chip
+                    key={r}
+                    rotulo={t(`rota.bateVolta.rumos.${r}`)}
+                    ativo={bateVolta.rumo === r}
+                    onPress={() => viagem.definirBateVolta({ ...bateVolta, rumo: r, variacao: 0 })}
+                  />
+                ))}
+              </View>
+              <View style={estilos.quebra}>
+                <Chip
+                  rotulo={t('rota.bateVolta.curvas')}
+                  ativo={bateVolta.curvas}
+                  onPress={() =>
+                    viagem.definirBateVolta({ ...bateVolta, curvas: !bateVolta.curvas, variacao: 0 })
+                  }
+                />
+                <Chip
+                  rotulo={t('rota.bateVolta.outra')}
+                  onPress={() => viagem.definirBateVolta({ ...bateVolta, variacao: bateVolta.variacao + 1 })}
+                />
+              </View>
+            </View>
+          )}
+
+          <Texto variante="rotulo">{t('rota.tipoEstrada')}</Texto>
+          <View accessibilityRole="radiogroup" style={estilos.tipos}>
+            {tipos.map((tp) => {
+              const ativo = tp.chave === tipoEstrada;
+              return (
+                <Pressable
+                  key={tp.chave}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: ativo }}
+                  accessibilityLabel={t(`rota.${tp.chave}`)}
+                  onPress={() => viagem.definirTipoEstrada(tp.chave)}
+                  style={[estilos.tipo, ativo && estilos.tipoAtivo]}
+                >
+                  <Icone nome={tp.icone} tamanho={26} cor={ativo ? cores.acao : cores[tp.cor]} />
+                  <Texto style={estilos.textoTipo}>{t(`rota.${tp.chave}`)}</Texto>
+                </Pressable>
+              );
+            })}
           </View>
-        </View>
-        <Texto variante="pequeno">{t('rota.aviso')}</Texto>
+          <Texto variante="secundario">{t(`rota.explicacao.${tipoEstrada}`)}</Texto>
+
+          <View style={estilos.acoes}>
+            <View style={{ flex: 1 }}>
+              <Botao
+                titulo={t('rota.iniciar')}
+                grande
+                icone="navegar"
+                desativado={estado.fase !== 'pronta' || iniciando}
+                onPress={iniciar}
+              />
+            </View>
+          </View>
+          <Texto variante="pequeno">{t('rota.aviso')}</Texto>
+        </ScrollView>
       </PainelInferior>
     </View>
   );
@@ -299,6 +371,7 @@ const criarEstilos = (cores: Paleta) =>
       marginVertical: espaco.xs,
     },
     tipos: { flexDirection: 'row', gap: espaco.xs },
+    quebra: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs },
     tipo: {
       flex: 1,
       height: 76,

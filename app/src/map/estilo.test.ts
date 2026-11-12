@@ -74,3 +74,19 @@ describe.each([
     expect(contraste(r.linha['line-color'], r.contorno['line-color'])).toBeGreaterThanOrEqual(3);
   });
 });
+
+describe('nomes de ruas', () => {
+  it.each([
+    ['noite', noite as Estilo],
+    ['sol', sol as unknown as Estilo],
+  ])('o estilo %s mostra o nome das ruas a partir do zoom 13', (_n, e) => {
+    const ruas = e.layers.find((l) => l.id === 'rotulos-ruas') as unknown as {
+      minzoom: number;
+      filter: unknown;
+      layout: Record<string, unknown>;
+    };
+    expect(ruas.minzoom).toBe(13);
+    expect(JSON.stringify(ruas.filter)).toContain('minor');
+    expect(ruas.layout['text-field']).toEqual(['get', 'name']);
+  });
+});
