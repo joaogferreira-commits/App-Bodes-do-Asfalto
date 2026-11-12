@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
-      - run: python tools/coletar_pontos.py
+      - run: python tools/coletar_pontos.py $(grep -oP '(?<=passos=).*' .github/pontos-request.txt || true)
       - name: Commit da coleta
         run: |
           git config user.name "github-actions[bot]"

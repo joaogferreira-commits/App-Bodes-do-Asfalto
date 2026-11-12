@@ -64,9 +64,24 @@ def rota_biker(base='https://monumentobikers.com.br/', limite=60):
 
 
 def overpass(nome, consulta):
-    r = requests.post(OVERPASS, data={'data': consulta}, headers={'User-Agent': AGENTE}, timeout=300)
-    (SAIDA / f'{nome}.json').write_text(r.text, encoding='utf-8')
-    time.sleep(10)
+    # O servidor público vive cheio (502/429): tenta de novo com espera dobrando.
+    espera = 30
+    for _ in range(5):
+        r = requests.post(OVERPASS, data={'data': consulta}, headers={'User-Agent': AGENTE}, timeout=300)
+        if r.ok and r.text.lstrip().startswith('{'):
+            (SAIDA / f'{nome}.json').write_text(r.text, encoding='utf-8')
+            return
+        print(nome, r.status_code, 'tentando de novo em', espera, 's')
+        time.sleep(espera)
+        espera *= 2
+
+
+def mapa_rota_biker(mid='1ZHPck3Yykbhc8M1GYPrCcKf5pajiTvk'):
+    # Mapa público ("Meus Mapas") que a própria Rota Biker publica no site oficial (página /monumentos/).
+    url = f'https://www.google.com/maps/d/kml?mid={mid}&forcekml=1'
+    r = requests.get(url, headers={'User-Agent': AGENTE}, timeout=60)
+    (SAIDA / 'rota_biker' / 'mapa.kml').write_text(r.text, encoding='utf-8')
+    print('kml', r.status_code, len(r.text))
 
 
 MT = """[out:json][timeout:240];
@@ -91,8 +106,19 @@ out center tags;"""
 
 if __name__ == '__main__':
     SAIDA.mkdir(exist_ok=True)
-    for passo in (rota_biker, lambda: overpass('osm_mt', MT), lambda: overpass('osm_bikers_br', BIKERS_BR)):
+    import sys
+
+    so = sys.argv[1:]  # ex.: python coletar_pontos.py mapa osm_bikers
+    passos = {
+        'site': rota_biker,
+        'mapa': mapa_rota_biker,
+        'osm_mt': lambda: overpass('osm_mt', MT),
+        'osm_bikers': lambda: overpass('osm_bikers_br', BIKERS_BR),
+    }
+    for nome, passo in passos.items():
+        if so and nome not in so:
+            continue
         try:
             passo()
         except Exception as e:  # um site fora do ar não impede os outros
-            print('falhou:', e)
+            print(nome, 'falhou:', e)
