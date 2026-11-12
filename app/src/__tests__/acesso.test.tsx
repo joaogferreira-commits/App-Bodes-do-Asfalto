@@ -93,12 +93,10 @@ describe('acesso (Etapa 1)', () => {
   it('sair apaga os dados pessoais do aparelho (fica só o tema) e muda a sessão', async () => {
     await AsyncStorage.setItem('bodes.perfil', '{"x":1}');
     await AsyncStorage.setItem('bodes.tema', 'sol');
-    let sessao = -1;
-    let sair: () => Promise<void> = async () => undefined;
+    const ref: { sessao: number; sair: () => Promise<void> } = { sessao: -1, sair: async () => undefined };
     function Pega() {
       const a = useAcesso();
-      sessao = a.sessao;
-      sair = a.sair;
+      Object.assign(ref, { sessao: a.sessao, sair: a.sair });
       return null;
     }
     await render(
@@ -106,16 +104,18 @@ describe('acesso (Etapa 1)', () => {
         <Pega />
       </ProvedorAcesso>,
     );
-    const antes = sessao;
-    await act(async () => sair());
-    expect(sessao).toBe(antes + 1);
+    const antes = ref.sessao;
+    await act(async () => ref.sair());
+    expect(ref.sessao).toBe(antes + 1);
     expect(await AsyncStorage.getItem('bodes.perfil')).toBeNull();
     expect(await AsyncStorage.getItem('bodes.tema')).toBe('sol');
   });
 
   it('baixar meus dados funciona mesmo com valores gravados como texto (tema)', async () => {
     await AsyncStorage.setItem('bodes.tema', 'sol');
-    const compartilhar = jest.spyOn(Share, 'share').mockResolvedValue({ action: 'sharedAction' });
+    const compartilhar = jest
+      .spyOn(Share, 'share')
+      .mockResolvedValue({ action: 'sharedAction', activityType: undefined });
     await render(
       <ProvedorAcesso comecar={{ estado: 'membro' }}>
         <MeusDados />
