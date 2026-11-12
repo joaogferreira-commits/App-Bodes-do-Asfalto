@@ -13,3 +13,13 @@ Pedido do dono em 12/11/2026. As personas são agentes do Claude Code definidos 
 Ciclo: Paulo escolhe o próximo item → Mateus/Bia implementam (o agente principal coordena) → Dora e Quintino revisam → commit → PROGRESSO.md → próximo item.
 
 Limite honesto: o agente roda no plano Pro, com teto a cada 5 horas e por semana. Quando o teto chega, o trabalho pausa e retoma sozinho no próximo agendamento.
+
+## Equipe comercial (pedido do dono em 12/11/2026)
+
+| Persona | Papel |
+| --- | --- |
+| **Vera — Vendas** (`vendas`) | O que faz o anunciante pagar e voltar: pacotes, vitrine, ofertas para irmãos |
+| **Marcelo — Marketing** (`marketing`) | Formatos nativos e bonitos, patrocínio identificado, crescimento do clube sem perder a confiança |
+| **Renata — Resultados** (`resultados`) | O que medir para o anunciante sem rastrear o irmão, planos e preços |
+
+As três escrevem propostas em `docs/COMERCIAL.md`; Paulo (Produto) escolhe o que entra no backlog. Regra que não muda: v1 sem anúncios de terceiros e sem rastreamento; pagamento de destaque fora do app.
