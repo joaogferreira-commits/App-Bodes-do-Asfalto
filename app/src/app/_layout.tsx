@@ -12,6 +12,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
+import { ProvedorAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
@@ -30,15 +31,17 @@ export default function Layout() {
   if (!carregou) return <View style={{ flex: 1, backgroundColor: paletaNoite.fundo }} />;
   return (
     <ProvedorTema>
-      <ProvedorAvatar>
-        <ProvedorAgapes>
-          <ProvedorMeusPosts>
-            <ProvedorViagem>
-              <Telas />
-            </ProvedorViagem>
-          </ProvedorMeusPosts>
-        </ProvedorAgapes>
-      </ProvedorAvatar>
+      <ProvedorAcesso>
+        <ProvedorAvatar>
+          <ProvedorAgapes>
+            <ProvedorMeusPosts>
+              <ProvedorViagem>
+                <Telas />
+              </ProvedorViagem>
+            </ProvedorMeusPosts>
+          </ProvedorAgapes>
+        </ProvedorAvatar>
+      </ProvedorAcesso>
     </ProvedorTema>
   );
 }

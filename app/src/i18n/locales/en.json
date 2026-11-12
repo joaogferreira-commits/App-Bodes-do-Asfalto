@@ -213,7 +213,8 @@
     "sair": "Sign out",
     "voce": "You",
     "ferramentas": "Tools",
-    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more"
+    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more",
+    "meusDadosDetalhe": "Consents, download data, delete account"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -690,5 +691,76 @@
     "denunciar": "Report",
     "escrever": "Write a comment",
     "enviar": "Comment"
+  },
+  "acesso": {
+    "boasVindas": "The app for Bodes do Asfalto brothers: road, convoy and fellowship.",
+    "email": "Your email",
+    "receberLink": "Get sign-in link",
+    "linkEnviado": "We sent a link to {{email}}",
+    "linkExplica": "Open the email on this phone and tap the link. No password needed.",
+    "jaCliquei": "I tapped the link",
+    "outroEmail": "Use another email",
+    "google": "Sign in with Google",
+    "apple": "Sign in with Apple",
+    "soMembros": "Members of Bodes do Asfalto only. After signing in, your chapter's board confirms your access.",
+    "demonstracao": "See the app in demo mode",
+    "modoLocal": "Test version: sign-in does not talk to the club server yet.",
+    "obrigatorio": "Required",
+    "opcional": "Optional",
+    "continuar": "Continue",
+    "consentimentosTitulo": "Your privacy",
+    "consentimentosExplica": "Choose what you allow. You can change it anytime in Profile → My data.",
+    "consentimentos": {
+      "termos": {
+        "titulo": "Terms of use and privacy",
+        "texto": "Name, nickname, chapter and photo so brothers recognize you; your posts and trips.",
+        "base": "Legal basis: performance of contract (LGPD, art. 7, V)."
+      },
+      "localizacao": {
+        "titulo": "Location",
+        "texto": "For routes, navigation, SOS and the live map. By default brothers only see your area (~5 km). Home and work never show.",
+        "base": "Legal basis: consent (art. 7, I). You control who sees it, anytime."
+      },
+      "dados_macons": {
+        "titulo": "Masonic data (optional)",
+        "texto": "Lodge, Orient and Grand Lodge, only if you want to share. Encrypted, and each field has who can see it. We never ask for degree.",
+        "base": "Sensitive data (art. 5, II): specific consent (art. 11, I). Revoking deletes this data."
+      }
+    },
+    "form": {
+      "titulo": "Request access",
+      "explica": "Your chapter has no board in the app yet. Club moderators check your details and grant access.",
+      "nome": "Full name",
+      "apelido": "Road nickname",
+      "capitulo": "Your chapter",
+      "cidade": "City",
+      "telefone": "Phone with area code",
+      "fotoColete": "Photo of you wearing the club vest",
+      "fotoCarteirinha": "Photo of your club card",
+      "indicadoPor": "Club brother who vouches for you",
+      "quemAprova": "The brother you name gets a confirmation request. Once your chapter has a board in the app, the board approves.",
+      "enviar": "Send request",
+      "falta": "Still missing"
+    },
+    "espera": {
+      "titulo": "Request sent",
+      "texto": "Your request for the {{capitulo}} chapter is with the board. You'll be notified when it's approved.",
+      "resumo": "{{capitulo}} chapter · vouched by {{indicado}}",
+      "aviso": "Until approval, only this screen is available.",
+      "simular": "Simulate approval (test version)"
+    },
+    "meusDados": {
+      "titulo": "My data",
+      "explica": "Review and change what you allowed, download a copy of your data or delete your account.",
+      "consentimentos": "What you allowed",
+      "revogarAviso": "Revoking \"masonic data\" deletes Lodge, Orient and Grand Lodge. Revoking the terms ends app use.",
+      "baixar": "Download a copy of my data",
+      "excluir": "Delete my account",
+      "excluirTitulo": "Delete the account?",
+      "excluirTexto": "Your data, posts, bikes and contacts will be deleted. This cannot be undone.",
+      "excluirConfirmar": "Delete everything",
+      "excluida": "Account deleted. See you on the next ride, brother.",
+      "encarregado": "Data officer (LGPD): the app owner. Contact via the Help button."
+    }
   }
 }

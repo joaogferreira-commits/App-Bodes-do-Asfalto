@@ -1,0 +1,64 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
+import { Alert, Share } from 'react-native';
+
+import { useAcesso } from '@/acesso/acesso';
+import { TelaFerramenta } from '@/componentes/TelaFerramenta';
+import { Botao, Texto } from '@/ui';
+
+import { ListaConsentimentos } from './consentimentos';
+
+/** "Meus dados" (LGPD): rever e revogar consentimentos, baixar uma cópia dos dados e excluir a conta. */
+export default function MeusDados() {
+  const { t } = useTranslation();
+  const acesso = useAcesso();
+
+  const baixar = async () => {
+    const chaves = (await AsyncStorage.getAllKeys().catch(() => [] as string[])).filter((k) =>
+      k.startsWith('bodes.'),
+    );
+    const pares = await AsyncStorage.multiGet(chaves).catch(() => []);
+    const dados = Object.fromEntries(pares.map(([k, v]) => [k, v ? (JSON.parse(v) as unknown) : null]));
+    await Share.share({ message: JSON.stringify({ geradoEm: new Date().toISOString(), dados }, null, 2) });
+  };
+
+  const excluir = () =>
+    Alert.alert(t('acesso.meusDados.excluirTitulo'), t('acesso.meusDados.excluirTexto'), [
+      { text: t('comum.cancelar'), style: 'cancel' },
+      {
+        text: t('acesso.meusDados.excluirConfirmar'),
+        style: 'destructive',
+        onPress: () =>
+          void acesso.excluirConta().then(() => {
+            Alert.alert(t('acesso.meusDados.excluida'));
+            router.replace('/acesso/entrada');
+          }),
+      },
+    ]);
+
+  return (
+    <TelaFerramenta titulo={t('acesso.meusDados.titulo')} explicacao={t('acesso.meusDados.explica')}>
+      <Texto variante="rotulo">{t('acesso.meusDados.consentimentos')}</Texto>
+      <ListaConsentimentos />
+      <Texto variante="pequeno">{t('acesso.meusDados.revogarAviso')}</Texto>
+      <Botao
+        titulo={t('acesso.meusDados.baixar')}
+        icone="compartilhar"
+        variante="secundario"
+        grande
+        onPress={() => void baixar()}
+      />
+      <Botao
+        titulo={t('perfil.sair')}
+        variante="contorno"
+        onPress={() => {
+          acesso.sair();
+          router.replace('/acesso/entrada');
+        }}
+      />
+      <Botao titulo={t('acesso.meusDados.excluir')} variante="sos" onPress={excluir} />
+      <Texto variante="pequeno">{t('acesso.meusDados.encarregado')}</Texto>
+    </TelaFerramenta>
+  );
+}

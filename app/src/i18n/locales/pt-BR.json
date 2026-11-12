@@ -213,7 +213,8 @@
     "sair": "Sair da conta",
     "voce": "Você",
     "ferramentas": "Ferramentas",
-    "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais"
+    "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais",
+    "meusDadosDetalhe": "Consentimentos, baixar dados, excluir conta"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -690,5 +691,76 @@
     "denunciar": "Denunciar",
     "escrever": "Escreva um comentário",
     "enviar": "Comentar"
+  },
+  "acesso": {
+    "boasVindas": "O app dos irmãos do Bodes do Asfalto: estrada, comboio e confraternização.",
+    "email": "Seu e-mail",
+    "receberLink": "Receber link de acesso",
+    "linkEnviado": "Enviamos um link para {{email}}",
+    "linkExplica": "Abra o e-mail neste celular e toque no link. Não precisa de senha.",
+    "jaCliquei": "Já toquei no link",
+    "outroEmail": "Usar outro e-mail",
+    "google": "Entrar com Google",
+    "apple": "Entrar com Apple",
+    "soMembros": "Só para membros do Bodes do Asfalto. Depois de entrar, a diretoria do seu capítulo confirma o seu acesso.",
+    "demonstracao": "Ver o app em modo demonstração",
+    "modoLocal": "Versão de teste: o login ainda não fala com o servidor do clube.",
+    "obrigatorio": "Obrigatório",
+    "opcional": "Opcional",
+    "continuar": "Continuar",
+    "consentimentosTitulo": "Sua privacidade",
+    "consentimentosExplica": "Escolha o que autoriza. Você pode mudar quando quiser em Perfil → Meus dados.",
+    "consentimentos": {
+      "termos": {
+        "titulo": "Termos de uso e privacidade",
+        "texto": "Nome, apelido, capítulo e foto para os irmãos te reconhecerem; suas publicações e viagens.",
+        "base": "Base legal: execução do contrato (LGPD, art. 7º, V)."
+      },
+      "localizacao": {
+        "titulo": "Localização",
+        "texto": "Para rota, navegação, SOS e o mapa ao vivo. Por padrão, os irmãos veem só a sua região (~5 km). Casa e trabalho nunca aparecem.",
+        "base": "Base legal: consentimento (art. 7º, I). Você controla quem vê, a qualquer momento."
+      },
+      "dados_macons": {
+        "titulo": "Dados maçônicos (opcional)",
+        "texto": "Loja, Oriente e Potência, só se você quiser informar. Ficam cifrados e cada campo tem quem pode ver. Nunca pedimos grau.",
+        "base": "Dado sensível (art. 5º, II): consentimento específico (art. 11, I). Revogar apaga esses dados."
+      }
+    },
+    "form": {
+      "titulo": "Pedir entrada",
+      "explica": "Seu capítulo ainda não tem diretoria no app. A moderação do clube confere seus dados e libera o acesso.",
+      "nome": "Nome completo",
+      "apelido": "Apelido de estrada",
+      "capitulo": "Seu capítulo",
+      "cidade": "Cidade",
+      "telefone": "Telefone com DDD",
+      "fotoColete": "Foto sua com o colete do clube",
+      "fotoCarteirinha": "Foto da carteirinha do clube",
+      "indicadoPor": "Irmão do clube que te indica",
+      "quemAprova": "O irmão indicado recebe um pedido de confirmação. Quando o seu capítulo tiver diretoria no app, é ela quem aprova.",
+      "enviar": "Enviar pedido",
+      "falta": "Falta preencher"
+    },
+    "espera": {
+      "titulo": "Pedido enviado",
+      "texto": "Seu pedido para o capítulo {{capitulo}} está com a diretoria. Você recebe um aviso quando for aprovado.",
+      "resumo": "Capítulo {{capitulo}} · indicado por {{indicado}}",
+      "aviso": "Até a aprovação, só esta tela fica disponível.",
+      "simular": "Simular aprovação (versão de teste)"
+    },
+    "meusDados": {
+      "titulo": "Meus dados",
+      "explica": "Veja e mude o que você autorizou, baixe uma cópia dos seus dados ou exclua a conta.",
+      "consentimentos": "O que você autorizou",
+      "revogarAviso": "Revogar \"dados maçônicos\" apaga Loja, Oriente e Potência. Revogar os termos encerra o uso do app.",
+      "baixar": "Baixar uma cópia dos meus dados",
+      "excluir": "Excluir minha conta",
+      "excluirTitulo": "Excluir a conta?",
+      "excluirTexto": "Seus dados, posts, motos e contatos serão apagados. Não dá para desfazer.",
+      "excluirConfirmar": "Excluir tudo",
+      "excluida": "Conta excluída. Até a próxima estrada, irmão.",
+      "encarregado": "Encarregado de dados (LGPD): o responsável pelo app. Contato pelo botão Ajuda."
+    }
   }
 }

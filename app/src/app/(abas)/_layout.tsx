@@ -1,7 +1,8 @@
-import { router, Tabs, useSegments } from 'expo-router';
+import { Redirect, router, Tabs, useSegments } from 'expo-router';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useAcesso } from '@/acesso/acesso';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { useCores } from '@/theme';
@@ -30,6 +31,12 @@ export default function LayoutAbas() {
   const segmentos = useSegments() as string[];
   const { bottom } = useSafeAreaInsets();
   const aba = segmentos[segmentos.length - 1];
+  const { estado } = useAcesso();
+  // Só membro aprovado vê as abas (CLAUDE.md: pendente só vê a tela de espera).
+  if (estado === 'carregando') return <View style={{ flex: 1, backgroundColor: cores.fundo }} />;
+  if (estado === 'deslogado') return <Redirect href="/acesso/entrada" />;
+  if (estado === 'semSolicitacao') return <Redirect href="/acesso/consentimentos" />;
+  if (estado === 'pendente') return <Redirect href="/acesso/espera" />;
   const naoEhMapa = !!aba && aba !== '(abas)' && aba !== 'index';
   return (
     <View style={{ flex: 1 }}>

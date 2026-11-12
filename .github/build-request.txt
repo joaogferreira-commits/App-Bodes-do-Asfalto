@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
 perfil=preview
-pedido=12 (correções do teste, feed com publicar/comentar, fotos de domínio público)
+pedido=13 (Etapa 1: entrada, consentimentos, meus dados)

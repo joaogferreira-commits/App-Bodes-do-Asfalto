@@ -332,7 +332,8 @@ create policy solicitacoes_criar on public.solicitacoes_entrada for insert to au
 -- contatos de emergência: só o dono (nem moderação lê)
 create policy contatos_dono on public.contatos_emergencia for all to authenticated using (dono = auth.uid()) with check (dono = auth.uid());
 
--- perfil maçônico: sem políticas → nenhum acesso direto; só pelas funções definir_macom/ler_macom
+-- perfil maçônico: sem políticas e sem permissão → o app nunca lê a tabela; só pelas funções definir_macom/ler_macom
+revoke all on table public.perfil_macom from anon, authenticated;
 
 -- consentimentos: só o dono lê, registra e revoga (não apaga o histórico)
 create policy consentimentos_ler on public.consentimentos for select to authenticated using (usuario_id = auth.uid());

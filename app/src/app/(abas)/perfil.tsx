@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useAcesso } from '@/acesso/acesso';
 import { AvatarMontado } from '@/componentes/AvatarMontado';
 import { exemploIrmao, nivelDoXp } from '@/dados/conquistas';
 import { perfilExemplo as eu, type Visibilidade } from '@/dados/perfil';
@@ -68,6 +69,7 @@ export default function Perfil() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const { avatar } = useAvatar();
+  const { sair } = useAcesso();
   const nivel = nivelDoXp(exemploIrmao.xp);
   const emBreve = () => Alert.alert(t('comum.emBreve'), t('perfil.emBreveCadastro'));
 
@@ -265,9 +267,21 @@ export default function Perfil() {
             detalhe={t('perfil.ajudaDetalhe')}
             onPress={emBreve}
           />
-          <LinhaMenu icone="cadeado" titulo={t('perfil.termos')} onPress={emBreve} />
+          <LinhaMenu
+            icone="cadeado"
+            titulo={t('acesso.meusDados.titulo')}
+            detalhe={t('perfil.meusDadosDetalhe')}
+            onPress={() => router.push('/acesso/meus-dados')}
+          />
         </Cartao>
-        <Botao titulo={t('perfil.sair')} variante="contorno" onPress={emBreve} />
+        <Botao
+          titulo={t('perfil.sair')}
+          variante="contorno"
+          onPress={() => {
+            sair();
+            router.replace('/acesso/entrada');
+          }}
+        />
 
         {/* Toque longo na versão abre o catálogo de componentes (só para o desenvolvimento) */}
         <Texto

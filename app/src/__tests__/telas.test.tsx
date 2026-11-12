@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
+import { ProvedorAcesso } from '@/acesso/acesso';
 import Catalogo from '@/app/catalogo';
 import Perfil from '@/app/(abas)/perfil';
 import Conquistas from '@/app/(abas)/conquistas';
@@ -22,7 +23,11 @@ describe('telas simples', () => {
 
   it('perfil mostra moto, capítulo, Loja opcional e leva a criar o avatar', async () => {
     const { router } = jest.requireMock('expo-router');
-    await render(<Perfil />);
+    await render(
+      <ProvedorAcesso>
+        <Perfil />
+      </ProvedorAcesso>,
+    );
     expect(screen.getByText('Harley-Davidson Fat Boy 114')).toBeTruthy();
     expect(screen.getByText('Bodes do Asfalto · Cuiabá')).toBeTruthy();
     expect(screen.getByText('Minha Loja (opcional)')).toBeTruthy();
