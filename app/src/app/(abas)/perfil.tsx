@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import type { ReactNode } from 'react';
@@ -315,7 +316,7 @@ export default function Perfil() {
           style={{ textAlign: 'center' }}
           onLongPress={() => router.push('/catalogo')}
         >
-          {t('perfil.versao')}
+          {t('perfil.versao', { versao: Constants.expoConfig?.version ?? '' })}
         </Texto>
       </ScrollView>
     </SafeAreaView>

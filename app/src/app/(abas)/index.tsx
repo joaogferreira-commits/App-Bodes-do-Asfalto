@@ -12,7 +12,7 @@ import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
 import { filtrar, lugaresExemplo, type Filtro } from '@/dados/exemplos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
-import { ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
+import { ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
@@ -153,7 +153,12 @@ export default function Mapa() {
         {/* Ágape Relâmpago: sempre visível, por cima dos outros, flutuando */}
         {agapes.map((ag) => (
           <Marker key={ag.id} id={ag.id} lngLat={[ag.lng, ag.lat]} anchor="bottom">
-            <MarcadorAgape comecaEm={ag.comecaEm} local={ag.local} onPress={() => verAgape(ag)} />
+            <MarcadorAgape
+              comecaEm={ag.comecaEm}
+              local={ag.local}
+              compacto={zoomAtual < ZOOM_EMBLEMA}
+              onPress={() => verAgape(ag)}
+            />
           </Marker>
         ))}
         {minhaPosicao && (

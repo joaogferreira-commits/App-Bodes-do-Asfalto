@@ -14,10 +14,13 @@ export function MarcadorAgape({
   comecaEm,
   local,
   onPress,
+  compacto,
 }: {
   comecaEm: string;
   local: string;
   onPress: () => void;
+  /** De longe (zoom < 10): só o emblema pequeno, sem etiqueta. */
+  compacto?: boolean;
 }) {
   const { t } = useTranslation();
   const cores = useCores();
@@ -47,7 +50,7 @@ export function MarcadorAgape({
       onPress={onPress}
       style={estilos.coluna}
     >
-      <View style={estilos.area}>
+      <View style={[estilos.area, compacto && { width: 44, height: 44 }]}>
         <Animated.View
           style={[
             estilos.anel,
@@ -63,11 +66,13 @@ export function MarcadorAgape({
           />
         </Animated.View>
       </View>
-      <View style={[estilos.etiqueta, { backgroundColor: cores.ouro }]}>
-        <Texto style={[estilos.texto, { color: cores.textoSobreAlerta }]} maxFontSizeMultiplier={1.3}>
-          {t('mapa.agapeEtiqueta', { tempo: comecaEm })}
-        </Texto>
-      </View>
+      {!compacto && (
+        <View style={[estilos.etiqueta, { backgroundColor: cores.ouro }]}>
+          <Texto style={[estilos.texto, { color: cores.textoSobreAlerta }]} maxFontSizeMultiplier={1.3}>
+            {t('mapa.agapeEtiqueta', { tempo: comecaEm })}
+          </Texto>
+        </View>
+      )}
     </Pressable>
   );
 }

@@ -35,9 +35,15 @@ export const imagensPinos = Object.fromEntries(
 
 /**
  * Tamanho do emblema conforme o zoom: pequeno de longe, normal de perto
- * (imagens de 256 px de altura → ~28 px no z8, ~52 px no z15).
+ * (imagens de 256 px de altura → ~28 px no z10, ~49 px no z16; abaixo do z10 vira ponto).
  */
-export const tamanhoPino = ['interpolate', ['linear'], ['zoom'], 6, 0.09, 10, 0.14, 15, 0.2] as const;
+export const tamanhoPino = ['interpolate', ['linear'], ['zoom'], 10, 0.11, 13, 0.15, 16, 0.19] as const;
+
+/**
+ * Abaixo deste zoom o emblema some e o lugar vira um pontinho colorido (pedido do dono em 12/11:
+ * "não dá para manter um ícone gigante indefinidamente no mapa").
+ */
+export const ZOOM_EMBLEMA = 10;
 
 /** Agrupamento (R44): raio 50, até o zoom 13; acima disso cada lugar aparece sozinho. */
 export const agrupamento = { cluster: true, clusterRadius: 50, clusterMaxZoom: 13 } as const;

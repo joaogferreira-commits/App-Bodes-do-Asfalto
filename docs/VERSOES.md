@@ -1,0 +1,45 @@
+# Mapa de versões
+
+Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o número sobe a cada versão de teste pedida
+(`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
+sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
+
+## 0.10.0 — 12/11/2026
+- Ferramentas virou aba (Mapa, Feed, Passeios, Ferramentas, Perfil); Conquistas abre pelo Perfil.
+- Botão "Eu" do mapa: avisa se falta permissão ou GPS, usa a última posição na hora e mostra "Você está aqui".
+- Mapa: de longe, os emblemas viram pontinhos coloridos; o emblema só aparece de perto.
+- Manutenção: dá para editar nome, intervalo e km de cada item, criar itens novos e apagar.
+- Classificados novos: categorias, fotos, preço, estado, cidade, anunciar e marcar como vendido.
+- Stories de 24 h; R8 desligado (ganho de só 0,2 MB).
+- Número da versão e este mapa de versões.
+
+## 0.9.0 — 12/11/2026 (build 265c0b66)
+- Teste da compactação R8 (70,2 MB). Enquete e posts salvos no feed.
+
+## 0.8.0 — 12/11/2026 (build 517bc726)
+- Garagem de motos, contatos de emergência, editar perfil (Loja/Oriente/Potência com consentimento).
+- 8 correções da revisão de QA (sair limpa os dados, guarda de acesso, confirmações, toques de 48 dp).
+- Rota com até 3 caminhos, barra de trechos de terra e km onde a terra começa.
+
+## 0.7.0 — 12/11/2026 (build 78454dcd)
+- Etapa 1: entrada (link mágico, Google, Apple, demonstração), consentimentos LGPD, pedido de entrada, espera, Meus dados.
+- Banco do clube (Supabase) com regras de acesso e 20 testes.
+
+## 0.6.0 — 12/11/2026 (build af4a8692)
+- Retorno do dono: painel recolhível, botões do pilotando menores, pinos agrupados, tema Sol, aviso de rota × Google.
+- Feed: publicar, editar, excluir, comentar; fotos de domínio público; avatares ilustrados.
+
+## 0.5.0 — 12/11/2026 (build 4224aa0c)
+- Perfil novo, criador de avatar, aba Passeios, Ágape flutuante no mapa, 20 ferramentas.
+
+## 0.4.0 — 12/11/2026 (build 75e40885)
+- Feed com cara de feed, conquistas, busca no mapa, bate-volta, pinos bordados, nomes de ruas.
+
+## 0.3.0 — 12/11/2026 (build 4eb03b5e)
+- Pesquisa de usabilidade aplicada: tema Sol, trava em movimento, modo pilotando, estilo do mapa, carro.
+
+## 0.2.0 — 12/11/2026 (build 10955da2)
+- Interface v2 (visual novo), tipo de estrada (Só asfalto / Misto / Prefiro terra), ícone do app.
+
+## 0.1.0 — 11/11/2026 (builds 1 a 6)
+- Etapa 0: prova técnica — mapa, navegação do Google, Android Auto no DHU.

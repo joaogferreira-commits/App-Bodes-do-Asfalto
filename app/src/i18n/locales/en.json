@@ -172,7 +172,7 @@
     "capitulo": "Cuiabá chapter",
     "catalogo": "Component catalog",
     "catalogoDesc": "Every visual element in the app",
-    "versao": "Test build · Stage 0",
+    "versao": "Version {{versao}} (test)",
     "emBreveCadastro": "Profile editing arrives with member registration (Stage 1).",
     "capituloCargo": "{{capitulo}} chapter · {{cargo}}",
     "cargos": {

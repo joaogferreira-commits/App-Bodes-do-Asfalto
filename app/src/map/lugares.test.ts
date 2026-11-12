@@ -1,7 +1,7 @@
 import { lugaresExemplo } from '@/dados/exemplos';
 import { pinos } from '@/ui';
 
-import { agrupamento, imagensPinos, lugaresGeoJSON } from './lugares';
+import { agrupamento, imagensPinos, lugaresGeoJSON, tamanhoPino, ZOOM_EMBLEMA } from './lugares';
 
 describe('lugares no mapa', () => {
   it('sede nunca agrupa; postos e Lojas agrupam; Ágape fica de fora (é marcador flutuante)', () => {
@@ -19,5 +19,11 @@ describe('lugares no mapa', () => {
 
   it('tem imagem para cada tipo de pino', () => {
     expect(Object.keys(imagensPinos)).toHaveLength(Object.keys(pinos).length);
+  });
+
+  it('de longe vira ponto; o emblema só aparece de perto e não fica gigante', () => {
+    expect(ZOOM_EMBLEMA).toBeGreaterThanOrEqual(9);
+    const tamanhos = tamanhoPino.filter((_, i) => i >= 4 && i % 2 === 0) as number[];
+    expect(Math.max(...tamanhos)).toBeLessThanOrEqual(0.2);
   });
 });

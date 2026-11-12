@@ -108,3 +108,14 @@ describe('tamanho do APK', () => {
     expect(props.enableMinifyInReleaseBuilds).toBeUndefined();
   });
 });
+
+describe('mapa de versões', () => {
+  it('a versão do app.json é a primeira do docs/VERSOES.md', () => {
+    const fs = require('fs');
+    const path = require('path');
+    const app = require('../app.json');
+    const mapa = fs.readFileSync(path.join(__dirname, '..', '..', 'docs', 'VERSOES.md'), 'utf8');
+    const primeira = mapa.match(/^## (\d+\.\d+\.\d+)/m)[1];
+    expect(app.expo.version).toBe(primeira);
+  });
+});

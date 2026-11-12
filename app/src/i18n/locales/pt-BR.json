@@ -172,7 +172,7 @@
     "capitulo": "Capítulo Cuiabá",
     "catalogo": "Catálogo de componentes",
     "catalogoDesc": "Todos os elementos visuais do app",
-    "versao": "Versão de teste · Etapa 0",
+    "versao": "Versão {{versao}} (teste)",
     "emBreveCadastro": "A edição do perfil chega com o cadastro dos irmãos (Etapa 1).",
     "capituloCargo": "Capítulo {{capitulo}} · {{cargo}}",
     "cargos": {

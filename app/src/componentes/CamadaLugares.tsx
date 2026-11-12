@@ -2,8 +2,9 @@ import { GeoJSONSource, Images, Layer, type GeoJSONSourceRef } from '@maplibre/m
 import { useRef } from 'react';
 
 import type { LugarExemplo } from '@/dados/exemplos';
-import { agrupamento, imagensPinos, lugaresGeoJSON, tamanhoPino } from '@/map/lugares';
+import { agrupamento, imagensPinos, lugaresGeoJSON, tamanhoPino, ZOOM_EMBLEMA } from '@/map/lugares';
 import { useCores } from '@/theme';
+import { pinos, type TipoPino } from '@/ui';
 
 type Props = {
   lugares: LugarExemplo[];
@@ -38,10 +39,34 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
     if (typeof p.id === 'string') aoTocarLugar(p.id);
   };
 
+  /** Cor do pontinho por tipo (de longe o emblema vira um ponto, R44). */
+  const corPorTipo = [
+    'match',
+    ['get', 'tipo'],
+    ...(Object.keys(pinos) as TipoPino[]).flatMap((tp) => [tp, cores[pinos[tp].cor]]),
+    cores.acao,
+  ];
+
+  const ponto = (id: string, filtro?: unknown[]) => (
+    <Layer
+      id={id}
+      type="circle"
+      maxzoom={ZOOM_EMBLEMA}
+      {...(filtro ? { filter: filtro as never } : {})}
+      paint={{
+        'circle-color': corPorTipo as never,
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 3, ZOOM_EMBLEMA, 6] as never,
+        'circle-stroke-color': cores.superficie,
+        'circle-stroke-width': 1.5,
+      }}
+    />
+  );
+
   const simbolo = (id: string, filtro?: unknown[]) => (
     <Layer
       id={id}
       type="symbol"
+      minzoom={ZOOM_EMBLEMA}
       {...(filtro ? { filter: filtro as never } : {})}
       layout={{
         'icon-image': ['concat', 'pino-', ['get', 'tipo']],
@@ -92,6 +117,7 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
           }}
           paint={{ 'text-color': cores.texto }}
         />
+        {ponto('lugares-soltos-ponto', ['!', ['has', 'point_count']])}
         {simbolo('lugares-soltos', ['!', ['has', 'point_count']])}
       </GeoJSONSource>
       <GeoJSONSource
@@ -99,6 +125,7 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
         data={dados.fixos as never}
         onPress={(e) => void tocar(e as unknown as EventoToque)}
       >
+        {ponto('lugares-fixos-ponto')}
         {simbolo('lugares-fixos-simbolo')}
       </GeoJSONSource>
     </>
