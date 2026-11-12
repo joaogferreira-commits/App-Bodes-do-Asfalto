@@ -11,6 +11,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     extra: { ...config.extra, chaveGoogle: chaveGoogle },
     android: {
       ...config.android,
+      // Arquivo do Firebase (notificações) vem como variável do tipo "arquivo" do EAS, nunca do repositório.
+      ...(process.env.GOOGLE_SERVICES_JSON ? { googleServicesFile: process.env.GOOGLE_SERVICES_JSON } : {}),
       config: { ...config.android?.config, googleMaps: { apiKey: chaveGoogle } },
     },
     ios: {
