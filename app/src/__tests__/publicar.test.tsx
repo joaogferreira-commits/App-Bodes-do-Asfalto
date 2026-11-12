@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 
 import Comentarios from '@/app/comentarios/[id]';
 import Publicar from '@/app/publicar';
+import NovoStory from '@/app/story-novo';
 import { ProvedorMeusPosts, useMeusPosts } from '@/estado/meusPosts';
 import { prepararFoto } from '@/feed/foto';
 
@@ -93,8 +94,6 @@ describe('publicar e comentar', () => {
   });
 
   it('publica um story com foto da galeria', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const NovoStory = (require('@/app/story-novo') as { default: () => React.JSX.Element }).default;
     function Conta() {
       return <Text testID="stories">{useMeusPosts().stories.length}</Text>;
     }
