@@ -13,6 +13,7 @@ import { usePerfilOpcional } from '@/estado/perfil';
 import { exemploIrmao, nivelDoXp } from '@/dados/conquistas';
 import { perfilExemplo as eu, type Visibilidade } from '@/dados/perfil';
 import { useAvatar } from '@/estado/avatar';
+import { useVisibilidadeMapa } from '@/estado/visibilidadeMapa';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, Icone, pinos, SeletorTema, Texto, type NomeIcone } from '@/ui';
 
@@ -72,6 +73,7 @@ export default function Perfil() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const { avatar } = useAvatar();
+  const visibilidadeMapa = useVisibilidadeMapa();
   const acesso = useAcesso();
   const { sair } = acesso;
   const nivel = nivelDoXp(exemploIrmao.xp);
@@ -296,7 +298,7 @@ export default function Perfil() {
             <LinhaMenu
               icone="visivel"
               titulo={t('perfil.noMapa')}
-              detalhe={t(`perfil.mapaModos.${eu.visibilidadeMapa}`)}
+              detalhe={t(`mapa.visib.modos.${visibilidadeMapa.modo}`)}
               onPress={emBreve}
             />
             {acesso.papel === 'admin' && (

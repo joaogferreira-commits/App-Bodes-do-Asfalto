@@ -60,7 +60,44 @@
     "semPermissaoTexto": "Para ver onde você está, permita a localização para o Bodes do Asfalto nas configurações do celular.",
     "semGpsTitulo": "Sem sinal de GPS",
     "semGpsTexto": "Não conseguimos achar sua posição agora. Vá para um lugar aberto e tente de novo.",
-    "voceEstaAqui": "Você está aqui"
+    "voceEstaAqui": "Você está aqui",
+    "agapeFechar": "Fechar aviso do Ágape",
+    "naoVou": "Não vou",
+    "fecharLegenda": "Fechar legenda",
+    "visib": {
+      "fechar": "Fechar",
+      "pronto": "Pronto",
+      "curto": {
+        "invisivel": "Invisível",
+        "cidade": "Cidade",
+        "aproximado": "Aprox.",
+        "precisoAmigos": "Amigos",
+        "precisoComboio": "Comboio"
+      },
+      "modos": {
+        "invisivel": "Invisível",
+        "cidade": "Só a cidade",
+        "aproximado": "Aproximado (~5 km)",
+        "precisoAmigos": "Preciso para amigos",
+        "precisoComboio": "Preciso no comboio"
+      },
+      "desc": {
+        "invisivel": "Ninguém vê você no mapa.",
+        "cidade": "Mostra só a cidade onde você está.",
+        "aproximado": "Mostra uma área de cerca de 5 km. É o padrão.",
+        "precisoAmigos": "Seus amigos veem o ponto exato.",
+        "precisoComboio": "Só o grupo do passeio vê o ponto exato."
+      },
+      "temporario": "Só por 2 horas",
+      "temporarioDesc": "Depois de 2 horas, volta sozinho para a escolha anterior.",
+      "status": "Seu status",
+      "statusNomes": {
+        "estrada": "Na estrada",
+        "cafe": "Parado para café",
+        "aberto": "Aberto a encontro",
+        "naoPerturbe": "Não perturbe"
+      }
+    }
   },
   "rota": {
     "titulo": "Planejar rota",

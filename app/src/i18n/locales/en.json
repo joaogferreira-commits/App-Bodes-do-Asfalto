@@ -60,7 +60,44 @@
     "semPermissaoTexto": "To see where you are, allow location for Bodes do Asfalto in your phone settings.",
     "semGpsTitulo": "No GPS signal",
     "semGpsTexto": "We could not find your position now. Go somewhere open and try again.",
-    "voceEstaAqui": "You are here"
+    "voceEstaAqui": "You are here",
+    "agapeFechar": "Close the Agape notice",
+    "naoVou": "Not going",
+    "fecharLegenda": "Close legend",
+    "visib": {
+      "fechar": "Close",
+      "pronto": "Done",
+      "curto": {
+        "invisivel": "Hidden",
+        "cidade": "City",
+        "aproximado": "Approx.",
+        "precisoAmigos": "Friends",
+        "precisoComboio": "Convoy"
+      },
+      "modos": {
+        "invisivel": "Hidden",
+        "cidade": "City only",
+        "aproximado": "Approximate (~5 km)",
+        "precisoAmigos": "Exact for friends",
+        "precisoComboio": "Exact in the convoy"
+      },
+      "desc": {
+        "invisivel": "Nobody sees you on the map.",
+        "cidade": "Shows only the city you are in.",
+        "aproximado": "Shows an area of about 5 km. This is the default.",
+        "precisoAmigos": "Your friends see your exact spot.",
+        "precisoComboio": "Only the ride group sees your exact spot."
+      },
+      "temporario": "For 2 hours only",
+      "temporarioDesc": "After 2 hours, it goes back to your previous choice by itself.",
+      "status": "Your status",
+      "statusNomes": {
+        "estrada": "On the road",
+        "cafe": "Stopped for coffee",
+        "aberto": "Open to meet",
+        "naoPerturbe": "Do not disturb"
+      }
+    }
   },
   "rota": {
     "titulo": "Plan route",

@@ -22,6 +22,8 @@ import { filtrar, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } f
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { FichaMapa } from '@/componentes/FichaMapa';
+import { SeletorVisibilidade } from '@/componentes/SeletorVisibilidade';
+import { useVisibilidadeMapa } from '@/estado/visibilidadeMapa';
 import { useAcessoOpcional } from '@/acesso/acesso';
 import { avisarResultadoAceno, enviarAceno } from '@/estado/avisoAceno';
 import { useGuardado } from '@/estado/guardado';
@@ -78,6 +80,12 @@ function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean;
   );
 }
 
+/** Id do ponto tocado numa camada GeoJSON. */
+function idTocado(e: unknown): string | undefined {
+  return (e as { nativeEvent?: { features?: { properties?: { id?: string } }[] } }).nativeEvent?.features?.[0]
+    ?.properties?.id;
+}
+
 export default function Mapa() {
   const { t } = useTranslation();
   const cores = useCores();
@@ -88,6 +96,8 @@ export default function Mapa() {
   const camera = useRef<CameraRef>(null);
   const [filtro, setFiltro] = useState<Filtro>('tudo');
   const [legenda, setLegenda] = useState(false);
+  const [seletorAberto, setSeletorAberto] = useState(false);
+  const visibilidade = useVisibilidadeMapa();
   const [recolhido, setRecolhido] = useState(false);
   const [zoomAtual, setZoomAtual] = useState(11);
   const { definirDestino, definirBateVolta } = useViagem();
@@ -132,6 +142,12 @@ export default function Mapa() {
   const [acenos, setAcenos] = useGuardado<RegistroAcenos>('acenos', { dia: '', para: [] });
   const [salvosMapa, setSalvosMapa] = useGuardado<string[]>('lugaresSalvos', []);
   const [vouAgape, setVouAgape] = useGuardado<string[]>('agapesVou', []);
+  const [agapesDispensados, setAgapesDispensados] = useGuardado<string[]>('agapesDispensados', []);
+  const dispensarAgape = (id: string) => setAgapesDispensados((l) => (l.includes(id) ? l : [...l, id]));
+  const responderAgape = (id: string, vou: boolean) => {
+    setVouAgape((l) => (vou ? (l.includes(id) ? l : [...l, id]) : l.filter((x) => x !== id)));
+    dispensarAgape(id);
+  };
   const hoje = new Date().toISOString().slice(0, 10);
   const acesso = useAcessoOpcional();
   const chatNoServidor = servidorConfigurado && acesso?.modo === 'supabase' && acesso.estado === 'membro';
@@ -237,17 +253,58 @@ export default function Mapa() {
             camera.current?.flyTo({ center: centro, zoom: z + 0.5, duration: 600 })
           }
         />
-        {/* Ágape Relâmpago: sempre visível, por cima dos outros, flutuando */}
-        {agapes.map((ag) => (
-          <Marker key={ag.id} id={ag.id} lngLat={[ag.lng, ag.lat]} anchor="bottom">
-            <MarcadorAgape
-              comecaEm={ag.comecaEm}
-              local={ag.local}
-              compacto={zoomAtual < ZOOM_EMBLEMA}
-              onPress={() => verAgape(ag)}
-            />
-          </Marker>
-        ))}
+        {/* Ágape Relâmpago: de longe vira ponto dourado (como os outros pinos); de perto, emblema flutuante.
+            Toques passam pela camada do mapa (Marker com Pressable não recebe toque no MapLibre Android). */}
+        <GeoJSONSource
+          id="agapes-pontos"
+          data={
+            {
+              type: 'FeatureCollection',
+              features: agapes.map((ag) => ({
+                type: 'Feature',
+                id: ag.id,
+                properties: { id: ag.id },
+                geometry: { type: 'Point', coordinates: [ag.lng, ag.lat] },
+              })),
+            } as never
+          }
+          onPress={(e) => {
+            const id = idTocado(e);
+            const ag = agapes.find((a) => a.id === id);
+            if (ag) verAgape(ag);
+          }}
+        >
+          <Layer
+            id="agapes-ponto"
+            type="circle"
+            maxzoom={ZOOM_EMBLEMA}
+            paint={{
+              'circle-color': cores.ouro,
+              'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 4, ZOOM_EMBLEMA, 7] as never,
+              'circle-stroke-color': cores.fundo,
+              'circle-stroke-width': 1.5,
+            }}
+          />
+          <Layer
+            id="agapes-toque"
+            type="circle"
+            minzoom={ZOOM_EMBLEMA}
+            paint={{
+              'circle-color': cores.ouro,
+              'circle-opacity': 0,
+              'circle-radius': 34,
+              'circle-translate': [0, -40],
+            }}
+          />
+        </GeoJSONSource>
+        {zoomAtual >= ZOOM_EMBLEMA &&
+          agapes.map((ag) => (
+            <Marker key={ag.id} id={ag.id} lngLat={[ag.lng, ag.lat]} anchor="bottom">
+              <View pointerEvents="none">
+                <MarcadorAgape comecaEm={ag.comecaEm} local={ag.local} onPress={() => verAgape(ag)} />
+              </View>
+            </Marker>
+          ))}
         {minhaPosicao && (
           <Marker id="eu" lngLat={minhaPosicao}>
             <View
@@ -280,8 +337,7 @@ export default function Mapa() {
             } as never
           }
           onPress={(e) => {
-            const id = (e as unknown as { nativeEvent?: { features?: { properties?: { id?: string } }[] } })
-              .nativeEvent?.features?.[0]?.properties?.id;
+            const id = idTocado(e);
             if (id) tocarIrmao(id);
           }}
         >
@@ -296,22 +352,32 @@ export default function Mapa() {
               'circle-stroke-width': 1.5,
             }}
           />
+          {/* Área de toque invisível sobre os avatares (de perto, os avatares não recebem toque). */}
+          <Layer
+            id="irmaos-toque"
+            type="circle"
+            minzoom={ZOOM_MINIMO_IRMAOS}
+            paint={{ 'circle-color': cores.fundo, 'circle-opacity': 0, 'circle-radius': 28 }}
+          />
         </GeoJSONSource>
         {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
           irmaos.map((i) => (
             <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel={t('ficha.abrirIrmao', { nome: i.nome })}
-                hitSlop={8}
-                onPress={() => tocarIrmao(i.id)}
-              >
+              <View pointerEvents="none">
                 <Avatar nome={i.nome} status={i.status} tamanho={44} />
-              </Pressable>
+              </View>
             </Marker>
           ))}
       </Map>
 
+      {legenda && (
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          accessibilityRole="button"
+          accessibilityLabel={t('mapa.fecharLegenda')}
+          onPress={() => setLegenda(false)}
+        />
+      )}
       <SafeAreaView edges={['top']} style={estilos.topo} pointerEvents="box-none">
         <View style={estilos.linhaBusca}>
           <Pressable
@@ -348,11 +414,11 @@ export default function Mapa() {
           <BotaoIcone
             icone="visivel"
             corIcone={cores.acao}
-            legenda={t('mapa.aprox')}
+            legenda={t(`mapa.visib.curto.${visibilidade.modo}`)}
             legendaAbaixo
             rotulo={t('mapa.visibilidade')}
             flutuante
-            onPress={() => Alert.alert(t('mapa.visibilidade'), t('mapa.visibilidadeTexto'))}
+            onPress={() => setSeletorAberto(true)}
           />
           <BotaoIcone
             icone="camadas"
@@ -399,39 +465,54 @@ export default function Mapa() {
           </View>
         }
       >
-        <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel={t('mapa.agapeMarcador', {
-              local: agapeExemplo.local,
-              tempo: agapeExemplo.comecaEm,
-            })}
-            onPress={() => verAgape()}
-            style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
-          >
-            <Image
-              source={pinos.agape.imagem}
-              style={{ width: 40, height: 50 }}
-              contentFit="contain"
-              accessible={false}
-            />
-            <View style={{ flex: 1, minWidth: 0 }}>
-              <Texto variante="rotulo" style={{ color: cores.ouro }} numberOfLines={1}>
-                {t('mapa.agapeRotulo', { tempo: agapeExemplo.comecaEm })}
-              </Texto>
-              <Texto variante="corpoForte" numberOfLines={1}>
-                {t('feed.agapeEm', { local: agapeExemplo.local })}
-              </Texto>
-              <Texto variante="secundario" numberOfLines={1}>
-                {t('feed.vaoN', { n: agapeExemplo.vao.length })}
-              </Texto>
+        {!agapesDispensados.includes(agapeExemplo.id) && (
+          <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('mapa.agapeMarcador', {
+                local: agapeExemplo.local,
+                tempo: agapeExemplo.comecaEm,
+              })}
+              onPress={() => verAgape()}
+              style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
+            >
+              <Image
+                source={pinos.agape.imagem}
+                style={{ width: 40, height: 50 }}
+                contentFit="contain"
+                accessible={false}
+              />
+              <View style={{ flex: 1, minWidth: 0 }}>
+                <Texto variante="rotulo" style={{ color: cores.ouro }} numberOfLines={1}>
+                  {t('mapa.agapeRotulo', { tempo: agapeExemplo.comecaEm })}
+                </Texto>
+                <Texto variante="corpoForte" numberOfLines={1}>
+                  {t('feed.agapeEm', { local: agapeExemplo.local })}
+                </Texto>
+                <Texto variante="secundario" numberOfLines={1}>
+                  {t('feed.vaoN', { n: agapeExemplo.vao.length })}
+                </Texto>
+              </View>
+            </Pressable>
+            <View style={{ gap: espaco.xs }}>
+              <Botao titulo={t('mapa.vou')} onPress={() => responderAgape(agapeExemplo.id, true)} />
+              <Botao
+                titulo={t('mapa.naoVou')}
+                variante="secundario"
+                onPress={() => responderAgape(agapeExemplo.id, false)}
+              />
             </View>
-          </Pressable>
-          <Botao
-            titulo={t('mapa.vou')}
-            onPress={() => Alert.alert(t('comum.emBreve'), t('mapa.agapeTextoAviso'))}
-          />
-        </View>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('mapa.agapeFechar')}
+              hitSlop={8}
+              onPress={() => dispensarAgape(agapeExemplo.id)}
+              style={estilos.fecharAgape}
+            >
+              <Icone nome="fechar" tamanho={20} cor={cores.textoSec} />
+            </Pressable>
+          </View>
+        )}
 
         <View style={estilos.postos}>
           <View style={{ flex: 1 }}>
@@ -454,6 +535,14 @@ export default function Mapa() {
           </View>
         </View>
       </PainelInferior>
+      <SeletorVisibilidade
+        aberto={seletorAberto}
+        estado={visibilidade.estado}
+        modoAtual={visibilidade.modo}
+        aoEscolher={visibilidade.escolher}
+        aoMudarStatus={visibilidade.definirStatus}
+        aoFechar={() => setSeletorAberto(false)}
+      />
       <FichaMapa
         ficha={ficha}
         status={irmaosExemplo.find((i) => i.id === ficha?.id)?.status}
@@ -522,6 +611,12 @@ const criarEstilos = (cores: Paleta) =>
       borderWidth: 1,
       borderColor: cores.linha,
       padding: 14,
+    },
+    fecharAgape: {
+      width: 40,
+      height: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     iconeAgape: {
       width: 48,
