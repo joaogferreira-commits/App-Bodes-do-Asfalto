@@ -48,7 +48,9 @@
     "legendaCurta": "Leyenda",
     "euCurto": "Yo",
     "agapeMarcador": "Ágape Relámpago en {{local}}, empieza en {{tempo}}",
-    "agapeEtiqueta": "Ágape · {{tempo}}"
+    "agapeEtiqueta": "Ágape · {{tempo}}",
+    "ferramentas": "Herramientas",
+    "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más"
   },
   "rota": {
     "titulo": "Planear ruta",
@@ -197,7 +199,10 @@
     "ajuda": "Ayuda",
     "ajudaDetalhe": "Habla con soporte por texto o WhatsApp",
     "termos": "Privacidad y términos",
-    "sair": "Cerrar sesión"
+    "sair": "Cerrar sesión",
+    "voce": "Tú",
+    "ferramentas": "Herramientas",
+    "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -302,7 +307,8 @@
       "foto": "Publicación con foto",
       "alerta": "Alerta de carretera confirmada por hermanos"
     },
-    "semVelocidade": "Ningún punto por velocidad o tiempo de recorrido. Aquí vale rodar juntos y conocer lugares."
+    "semVelocidade": "Ningún punto por velocidad o tiempo de recorrido. Aquí vale rodar juntos y conocer lugares.",
+    "capitulosTitulo": "Capítulos del mes"
   },
   "feed": {
     "exemplo": "Publicaciones de ejemplo hasta la etapa social.",
@@ -349,7 +355,8 @@
     "subiuNivel": "¡{{nome}} subió a {{nivel}}!",
     "chegou": "{{nome}} llegó a {{cidade}}",
     "irmaosPerto": "{{n}} hermanos cerca. ¿Un saludo?",
-    "acenar": "Saludar"
+    "acenar": "Saludar",
+    "agora": "ahora"
   },
   "passeios": {
     "exemplo": "Paseos de ejemplo hasta la agenda real de los capítulos.",
@@ -387,5 +394,260 @@
     },
     "ia": "Pronto: avatar hecho por inteligencia artificial a partir de tu foto (1 gratis por cuenta).",
     "salvar": "Guardar avatar"
+  },
+  "ferramentas": {
+    "titulo": "Herramientas",
+    "explicacao": "Todo para antes de salir, para las paradas y para la vida del club. Úsalo siempre con la moto detenida.",
+    "grupos": {
+      "estrada": "Carretera",
+      "seguranca": "Seguridad",
+      "irmaos": "Hermanos",
+      "clube": "Club y Logias",
+      "moto": "Mi moto"
+    },
+    "itens": {
+      "tempo": {
+        "titulo": "Clima y sol",
+        "resumo": "Lluvia, viento y atardecer",
+        "explicacao": "Pronóstico de las próximas horas donde estás y la hora del atardecer para no rodar de noche."
+      },
+      "combustivel": {
+        "titulo": "Combustible",
+        "resumo": "Autonomía y paradas",
+        "explicacao": "Cuántas paradas para cargar, cuántos litros y cuánto gastarás. Reserva el 15% del tanque."
+      },
+      "viagem": {
+        "titulo": "Viaje largo",
+        "resumo": "Dividir en días",
+        "explicacao": "Divide un viaje largo en etapas por día, con pausas para descansar."
+      },
+      "checklist": {
+        "titulo": "Checklist de salida",
+        "resumo": "Moto y equipaje listos",
+        "explicacao": "Revisa todo antes de salir. Queda guardado hasta que lo reinicies."
+      },
+      "comboio": {
+        "titulo": "Avisos del convoy",
+        "resumo": "Dónde estoy y recados rápidos",
+        "explicacao": "Envía tu ubicación y recados listos al grupo de WhatsApp con un toque."
+      },
+      "telefones": {
+        "titulo": "Teléfonos de emergencia",
+        "resumo": "SAMU, Bomberos, PRF",
+        "explicacao": "Llama con un toque. El SOS de la app avisa al convoy, pero no sustituye estos números."
+      },
+      "ficha": {
+        "titulo": "Ficha de emergencia",
+        "resumo": "Sangre, alergias, remedios",
+        "explicacao": "Información para quien te auxilie. Queda solo en tu celular."
+      },
+      "bodeAmigo": {
+        "titulo": "Red Bode Amigo",
+        "resumo": "Hospedaje, grúa, taller",
+        "explicacao": "Hermanos que ofrecen hospedaje, grúa, garaje y taller en el camino."
+      },
+      "agape": {
+        "titulo": "Crear Ágape Relámpago",
+        "resumo": "Encuentro rápido donde estás",
+        "explicacao": "Marca un encuentro rápido donde estás. Aparece al instante en el mapa y en el feed."
+      },
+      "irmaosPerto": {
+        "titulo": "Hermanos cerca",
+        "resumo": "Quién está en la zona",
+        "explicacao": "Hermanos visibles cerca de ti, con la posición que cada uno eligió mostrar."
+      },
+      "membros": {
+        "titulo": "Miembros",
+        "resumo": "Lista del club e invitar",
+        "explicacao": "Nombre, apodo y capítulo de los hermanos. Invita a un hermano del club a la app."
+      },
+      "aniversarios": {
+        "titulo": "Cumpleaños",
+        "resumo": "Envía un TFA",
+        "explicacao": "Los cumpleaños del mes en tu capítulo."
+      },
+      "negocios": {
+        "titulo": "Guía de Negocios",
+        "resumo": "Comercios de hermanos",
+        "explicacao": "Negocios de hermanos con descuento o atención especial para el club."
+      },
+      "classificados": {
+        "titulo": "Clasificados",
+        "resumo": "Compra y venta entre hermanos",
+        "explicacao": "Repuestos, equipos y motos a la venta entre hermanos."
+      },
+      "lojas": {
+        "titulo": "Visita a Logias",
+        "resumo": "Logias y días de sesión",
+        "explicacao": "Logias registradas por hermanos, con días de sesión y contacto. La entrada sigue el procedimiento de cada Logia."
+      },
+      "eventos": {
+        "titulo": "Eventos",
+        "resumo": "Club, motoclubes y Logias",
+        "explicacao": "Agenda de eventos del club, de motoclubes amigos y de Logias."
+      },
+      "sobre": {
+        "titulo": "Sobre el club",
+        "resumo": "Historia y código de la carretera",
+        "explicacao": "Historia y código de la carretera"
+      },
+      "manutencao": {
+        "titulo": "Mantenimiento de la moto",
+        "resumo": "Aceite, neumáticos, transmisión",
+        "explicacao": "Anota el km de cada cambio. La app avisa lo que está por vencer."
+      },
+      "meta": {
+        "titulo": "Meta del año",
+        "resumo": "Km que quiero rodar",
+        "explicacao": "Define cuántos km quieres rodar en el año y síguelo."
+      },
+      "bateVolta": {
+        "titulo": "Ida y vuelta",
+        "resumo": "Ruta de ida y vuelta por km",
+        "explicacao": "Ruta de ida y vuelta por km"
+      }
+    },
+    "filtrar": "Filtrar la lista",
+    "indicar": "Invitar a un hermano del club",
+    "indicarTexto": "Hermano, descarga la app Bodes do Asfalto y pide tu ingreso por nuestro capítulo. ¡TFA!",
+    "ligar": "Llamar al {{numero}}",
+    "ligarCurto": "Llamar",
+    "whatsapp": "WhatsApp",
+    "oiIrmao": "¡Hola, hermano! Vi tu contacto en la app Bodes do Asfalto.",
+    "rota": "Ruta",
+    "rotaAte": "Ruta hasta {{lugar}}",
+    "exemplo": "Datos de ejemplo hasta el registro real en el panel.",
+    "telefonesAviso": "Números oficiales de Brasil. La app no llama sola: tú confirmas en el celular.",
+    "semWhatsApp": "No se pudo abrir WhatsApp.",
+    "status": {
+      "aberto": "Abierto a encuentro",
+      "estrada": "En la carretera",
+      "cafe": "Parado para café",
+      "naoPerturbe": "No molestar"
+    },
+    "agape": {
+      "local": "Dónde (ej.: Posto Trevo, km 40)",
+      "quando": "Empieza en",
+      "recado": "Recado (opcional)",
+      "aviso": "El Ágape usa tu posición actual y queda visible para los hermanos.",
+      "publicar": "Publicar Ágape",
+      "faltaLocal": "Di dónde será el Ágape.",
+      "textoPadrao": "¡Acércate, hermano!",
+      "publicado": "Ágape publicado",
+      "publicadoTexto": "Ya aparece en el mapa y en el feed."
+    },
+    "checklist": {
+      "pronto": "Todo listo. ¡Buena ruta!",
+      "contagem": "{{n}} de {{total}} revisados",
+      "zerar": "Reiniciar para el próximo viaje",
+      "itens": {
+        "pneus": "Neumáticos calibrados y sin cortes",
+        "oleo": "Nivel de aceite",
+        "freios": "Frenos y pastillas",
+        "corrente": "Cadena lubricada y tensada",
+        "luzes": "Faro, luz trasera e intermitentes",
+        "documentos": "Licencia, documento de la moto y seguro",
+        "chuva": "Traje de lluvia",
+        "ferramentas": "Kit de herramientas y reparación de neumático",
+        "agua": "Agua y merienda",
+        "celular": "Celular cargado y soporte firme",
+        "rota": "Ruta planificada y descargada",
+        "avisar": "Avisé a alguien de mi ruta"
+      }
+    },
+    "combustivel": {
+      "distancia": "Distancia",
+      "tanque": "Tanque",
+      "consumo": "Consumo",
+      "preco": "Precio del litro",
+      "autonomia": "km de autonomía",
+      "paradas": "paradas para cargar",
+      "litros": "litros en el viaje",
+      "custo": "costo del viaje",
+      "dica": "Carga cada {{km}} km como máximo, sin depender de la reserva."
+    },
+    "viagem": {
+      "total": "Distancia total",
+      "porDia": "Quiero rodar por día",
+      "dias": "días",
+      "kmDia": "km por día",
+      "horasDia": "horas por día",
+      "pausas": "Haz {{n}} pausas de 15 min por día (una cada 2 h).",
+      "dica": "Evita pilotar más de 8 horas por día y llega antes de oscurecer."
+    },
+    "tempo": {
+      "carregando": "Buscando el pronóstico…",
+      "semRede": "Sin internet para el pronóstico.",
+      "agora": "Ahora",
+      "chuvaAviso": "Probabilidad de lluvia de hasta {{pct}}% en las próximas horas. Lleva el traje.",
+      "nascer": "amanecer",
+      "por": "atardecer",
+      "chegarAntes": "Planea llegar antes de las {{hora}}.",
+      "proximas": "Próximas horas",
+      "vento": "viento {{kmh}} km/h",
+      "fonte": "Pronóstico: Open-Meteo"
+    },
+    "comboio": {
+      "ondeEstou": "Enviar dónde estoy",
+      "ondeEstouTexto": "Hermanos, estoy aquí:",
+      "pontoEncontro": "Marcar punto de encuentro aquí",
+      "pontoEncontroTexto": "Punto de encuentro del convoy:",
+      "rapidos": "Recados rápidos (con tu ubicación)",
+      "avisos": {
+        "pausa": "Parada para café",
+        "combustivel": "Combustible bajo",
+        "fiqueiPraTras": "Me quedé atrás",
+        "esperem": "Esperen, estoy llegando",
+        "tudoBem": "Llegué, todo bien",
+        "pneu": "Problema en la moto"
+      },
+      "parado": "Úsalo detenido. Con la moto en marcha, usa los botones del modo pilotando."
+    },
+    "ficha": {
+      "privacidade": "Queda solo en este celular. No va al servidor ni a otros hermanos.",
+      "sangue": "Tipo de sangre",
+      "alergias": "Alergias",
+      "remedios": "Medicamentos de uso continuo",
+      "plano": "Seguro médico",
+      "contato": "Teléfono de un contacto",
+      "salvo": "Guardado automáticamente."
+    },
+    "manutencao": {
+      "kmAtual": "Km actual de la moto",
+      "servicos": {
+        "oleo": "Aceite del motor",
+        "relacao": "Transmisión (cadena, corona y piñón)",
+        "pneuTraseiro": "Neumático trasero",
+        "pneuDianteiro": "Neumático delantero",
+        "pastilhas": "Pastillas de freno",
+        "revisao": "Revisión general"
+      },
+      "vencida": "Vencida hace {{km}} km",
+      "falta": "Faltan {{km}} km (cambio a los {{proximo}} km)",
+      "ultimaTroca": "Km del último cambio (cada {{intervalo}} km)",
+      "fizHoje": "Lo cambié hoy"
+    },
+    "meta": {
+      "meta": "Mi meta del año",
+      "feito": "km rodados",
+      "falta": "km faltan",
+      "porSemana": "km por semana",
+      "dica": "Cuentan los km con ruta grabada. La velocidad nunca cuenta."
+    },
+    "sobre": {
+      "lema": "Hermanos en la carretera, hermanos en la vida.",
+      "historiaTitulo": "Nuestra historia",
+      "historia": "Los Bodes do Asfalto nacieron del deseo de hermanos masones de rodar juntos, ayudarse en la carretera y visitarse en el camino. Hoy son varios capítulos, cada uno con su sede y directiva. (Texto de ejemplo para que la directiva revise.)",
+      "conduta": "Código de la carretera",
+      "regras": {
+        "formacao": "Rueda en formación escalonada; el líder marca el ritmo y el cierre no adelanta.",
+        "distancia": "Mantén 2 segundos de distancia de la moto de adelante.",
+        "sinais": "Repite las señas de mano para quien viene atrás.",
+        "abastecer": "Sal siempre con el tanque lleno y carga en las paradas acordadas.",
+        "alcool": "Alcohol y carretera no combinan: Ágape con bebida solo después de estacionar.",
+        "ninguem": "Nadie se queda atrás: si uno para, el convoy espera."
+      },
+      "revisar": "Texto provisional. La directiva puede editarlo en el panel."
+    }
   }
 }

@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
 import { agapeExemplo } from '@/dados/agape';
+import { useAgapes, type Agape } from '@/estado/agapes';
 import { filtrar, type Filtro } from '@/dados/exemplos';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
@@ -82,11 +83,12 @@ export default function Mapa() {
     if (atual != null) camera.current?.zoomTo(atual + delta, { duration: 250 });
   };
 
-  const verAgape = () => {
-    camera.current?.flyTo({ center: [agapeExemplo.lng, agapeExemplo.lat], zoom: 14, duration: 800 });
+  const { agapes } = useAgapes();
+  const verAgape = (ag: Agape = agapeExemplo) => {
+    camera.current?.flyTo({ center: [ag.lng, ag.lat], zoom: 14, duration: 800 });
     Alert.alert(
-      t('feed.agapeEm', { local: agapeExemplo.local }),
-      `${agapeExemplo.texto}\n\n${t('feed.agapeHora', { hora: agapeExemplo.horario })}\n${t('feed.vaoN', { n: agapeExemplo.vao.length })}`,
+      t('feed.agapeEm', { local: ag.local }),
+      `${ag.texto}\n\n${t('feed.agapeHora', { hora: ag.horario })}\n${t('feed.vaoN', { n: ag.vao.length })}`,
     );
   };
 
@@ -118,9 +120,11 @@ export default function Mapa() {
             </Marker>
           ))}
         {/* Ágape Relâmpago: sempre visível, por cima dos outros, flutuando */}
-        <Marker id="agape-ativo" lngLat={[agapeExemplo.lng, agapeExemplo.lat]} anchor="bottom">
-          <MarcadorAgape comecaEm={agapeExemplo.comecaEm} local={agapeExemplo.local} onPress={verAgape} />
-        </Marker>
+        {agapes.map((ag) => (
+          <Marker key={ag.id} id={ag.id} lngLat={[ag.lng, ag.lat]} anchor="bottom">
+            <MarcadorAgape comecaEm={ag.comecaEm} local={ag.local} onPress={() => verAgape(ag)} />
+          </Marker>
+        ))}
         {irmaos.map((i) => (
           <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
             <Avatar nome={i.nome} status={i.status} tamanho={44} />
@@ -139,6 +143,13 @@ export default function Mapa() {
             <Icone nome="busca" tamanho={20} cor={cores.textoSec} />
             <Texto style={{ color: cores.textoSec, fontSize: 16 }}>{t('mapa.busca')}</Texto>
           </Pressable>
+          <BotaoIcone
+            icone="grade"
+            corIcone={cores.acao}
+            rotulo={t('mapa.ferramentas')}
+            flutuante
+            onPress={() => router.push('/ferramentas')}
+          />
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t('mapa.meuPerfil')}
@@ -216,7 +227,7 @@ export default function Mapa() {
               local: agapeExemplo.local,
               tempo: agapeExemplo.comecaEm,
             })}
-            onPress={verAgape}
+            onPress={() => verAgape()}
             style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
           >
             <Image

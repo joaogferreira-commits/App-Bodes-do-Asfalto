@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
 perfil=preview
-pedido=10 (feed, conquistas, busca, bate-volta, pinos bordados, nomes de ruas)
+pedido=11 (perfil, passeios, ágape no mapa, 20 ferramentas)

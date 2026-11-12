@@ -48,7 +48,9 @@
     "legendaCurta": "Legend",
     "euCurto": "Me",
     "agapeMarcador": "Flash Agape at {{local}}, starts in {{tempo}}",
-    "agapeEtiqueta": "Agape · {{tempo}}"
+    "agapeEtiqueta": "Agape · {{tempo}}",
+    "ferramentas": "Tools",
+    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more"
   },
   "rota": {
     "titulo": "Plan route",
@@ -197,7 +199,10 @@
     "ajuda": "Help",
     "ajudaDetalhe": "Contact support by text or WhatsApp",
     "termos": "Privacy and terms",
-    "sair": "Sign out"
+    "sair": "Sign out",
+    "voce": "You",
+    "ferramentas": "Tools",
+    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -302,7 +307,8 @@
       "foto": "Post with a photo",
       "alerta": "Road alert confirmed by brothers"
     },
-    "semVelocidade": "No points for speed or travel time. Here, riding together and seeing places is what counts."
+    "semVelocidade": "No points for speed or travel time. Here, riding together and seeing places is what counts.",
+    "capitulosTitulo": "Chapters this month"
   },
   "feed": {
     "exemplo": "Sample posts until the social stage.",
@@ -349,7 +355,8 @@
     "subiuNivel": "{{nome}} reached {{nivel}}!",
     "chegou": "{{nome}} arrived in {{cidade}}",
     "irmaosPerto": "{{n}} brothers nearby. Send a wave?",
-    "acenar": "Wave"
+    "acenar": "Wave",
+    "agora": "now"
   },
   "passeios": {
     "exemplo": "Sample rides until the chapters' real calendar.",
@@ -387,5 +394,260 @@
     },
     "ia": "Coming soon: AI-made avatar from your photo (1 free per account).",
     "salvar": "Save avatar"
+  },
+  "ferramentas": {
+    "titulo": "Tools",
+    "explicacao": "Everything for before you leave, for stops and for club life. Always use with the bike stopped.",
+    "grupos": {
+      "estrada": "Road",
+      "seguranca": "Safety",
+      "irmaos": "Brothers",
+      "clube": "Club and Lodges",
+      "moto": "My bike"
+    },
+    "itens": {
+      "tempo": {
+        "titulo": "Weather and sun",
+        "resumo": "Rain, wind and sunset",
+        "explicacao": "Forecast for the next hours where you are, and sunset time so you don't ride in the dark."
+      },
+      "combustivel": {
+        "titulo": "Fuel",
+        "resumo": "Range and stops",
+        "explicacao": "How many fuel stops, how many liters and how much you'll spend. Keeps 15% of the tank in reserve."
+      },
+      "viagem": {
+        "titulo": "Long trip",
+        "resumo": "Split into days",
+        "explicacao": "Splits a long trip into daily legs, with rest breaks."
+      },
+      "checklist": {
+        "titulo": "Departure checklist",
+        "resumo": "Bike and luggage ready",
+        "explicacao": "Check everything before leaving. Saved until you reset it."
+      },
+      "comboio": {
+        "titulo": "Convoy messages",
+        "resumo": "Where I am and quick notes",
+        "explicacao": "Send your location and ready-made notes to the WhatsApp group with one tap."
+      },
+      "telefones": {
+        "titulo": "Emergency numbers",
+        "resumo": "Ambulance, Fire, Highway Police",
+        "explicacao": "Call with one tap. The app SOS alerts the convoy but does not replace these numbers."
+      },
+      "ficha": {
+        "titulo": "Emergency card",
+        "resumo": "Blood, allergies, medication",
+        "explicacao": "Information for whoever helps you. It stays only on your phone."
+      },
+      "bodeAmigo": {
+        "titulo": "Bode Amigo network",
+        "resumo": "Lodging, tow, workshop",
+        "explicacao": "Brothers who offer lodging, towing, garage and repairs along the way."
+      },
+      "agape": {
+        "titulo": "Create Flash Agape",
+        "resumo": "Quick meetup where you are",
+        "explicacao": "Set a quick meetup where you are. It shows up right away on the map and in the feed."
+      },
+      "irmaosPerto": {
+        "titulo": "Brothers nearby",
+        "resumo": "Who is around",
+        "explicacao": "Visible brothers near you, with the position each one chose to show."
+      },
+      "membros": {
+        "titulo": "Members",
+        "resumo": "Club list and invite",
+        "explicacao": "Name, nickname and chapter of the brothers. Invite a club brother to the app."
+      },
+      "aniversarios": {
+        "titulo": "Birthdays",
+        "resumo": "Send a TFA",
+        "explicacao": "This month's birthdays in your chapter."
+      },
+      "negocios": {
+        "titulo": "Business Guide",
+        "resumo": "Brothers' businesses",
+        "explicacao": "Brothers' businesses with discounts or special care for the club."
+      },
+      "classificados": {
+        "titulo": "Classifieds",
+        "resumo": "Buy and sell among brothers",
+        "explicacao": "Parts, gear and bikes for sale among brothers."
+      },
+      "lojas": {
+        "titulo": "Lodge visits",
+        "resumo": "Lodges and meeting days",
+        "explicacao": "Lodges registered by brothers, with meeting days and contact. Entry follows each Lodge's procedure."
+      },
+      "eventos": {
+        "titulo": "Events",
+        "resumo": "Club, riding clubs and Lodges",
+        "explicacao": "Events from the club, friendly riding clubs and Lodges."
+      },
+      "sobre": {
+        "titulo": "About the club",
+        "resumo": "History and road code",
+        "explicacao": "History and road code"
+      },
+      "manutencao": {
+        "titulo": "Bike maintenance",
+        "resumo": "Oil, tires, chain",
+        "explicacao": "Write down the km of each service. The app warns what is coming due."
+      },
+      "meta": {
+        "titulo": "Yearly goal",
+        "resumo": "Km I want to ride",
+        "explicacao": "Set how many km you want to ride this year and track it."
+      },
+      "bateVolta": {
+        "titulo": "Round trip",
+        "resumo": "Out-and-back route by km",
+        "explicacao": "Out-and-back route by km"
+      }
+    },
+    "filtrar": "Filter the list",
+    "indicar": "Invite a club brother",
+    "indicarTexto": "Brother, download the Bodes do Asfalto app and request access through our chapter. TFA!",
+    "ligar": "Call {{numero}}",
+    "ligarCurto": "Call",
+    "whatsapp": "WhatsApp",
+    "oiIrmao": "Hello, brother! I saw your contact in the Bodes do Asfalto app.",
+    "rota": "Route",
+    "rotaAte": "Route to {{lugar}}",
+    "exemplo": "Sample data until real registration in the admin panel.",
+    "telefonesAviso": "Official Brazilian numbers. The app never calls by itself: you confirm on the phone.",
+    "semWhatsApp": "Could not open WhatsApp.",
+    "status": {
+      "aberto": "Open to meet",
+      "estrada": "On the road",
+      "cafe": "Coffee stop",
+      "naoPerturbe": "Do not disturb"
+    },
+    "agape": {
+      "local": "Where (e.g. Posto Trevo, km 40)",
+      "quando": "Starts in",
+      "recado": "Note (optional)",
+      "aviso": "The Agape uses your current position and is visible to brothers.",
+      "publicar": "Publish Agape",
+      "faltaLocal": "Say where the Agape will be.",
+      "textoPadrao": "Come by, brother!",
+      "publicado": "Agape published",
+      "publicadoTexto": "It already shows on the map and in the feed."
+    },
+    "checklist": {
+      "pronto": "All set. Ride safe!",
+      "contagem": "{{n}} of {{total}} checked",
+      "zerar": "Reset for the next trip",
+      "itens": {
+        "pneus": "Tires inflated and without cuts",
+        "oleo": "Oil level",
+        "freios": "Brakes and pads",
+        "corrente": "Chain lubed and tensioned",
+        "luzes": "Headlight, tail light and indicators",
+        "documentos": "License, bike papers and insurance",
+        "chuva": "Rain gear",
+        "ferramentas": "Tool kit and tire repair",
+        "agua": "Water and snacks",
+        "celular": "Phone charged and mount secure",
+        "rota": "Route planned and downloaded",
+        "avisar": "Told someone my route"
+      }
+    },
+    "combustivel": {
+      "distancia": "Distance",
+      "tanque": "Tank",
+      "consumo": "Consumption",
+      "preco": "Price per liter",
+      "autonomia": "km of range",
+      "paradas": "fuel stops",
+      "litros": "liters for the trip",
+      "custo": "trip cost",
+      "dica": "Refuel every {{km}} km at most, without relying on the reserve."
+    },
+    "viagem": {
+      "total": "Total distance",
+      "porDia": "I want to ride per day",
+      "dias": "days",
+      "kmDia": "km per day",
+      "horasDia": "hours per day",
+      "pausas": "Take {{n}} 15-min breaks per day (one every 2 h riding).",
+      "dica": "Avoid riding more than 8 hours a day and arrive before dark."
+    },
+    "tempo": {
+      "carregando": "Getting the forecast…",
+      "semRede": "No internet for the forecast.",
+      "agora": "Now",
+      "chuvaAviso": "Up to {{pct}}% chance of rain in the next hours. Bring rain gear.",
+      "nascer": "sunrise",
+      "por": "sunset",
+      "chegarAntes": "Plan to arrive before {{hora}}.",
+      "proximas": "Next hours",
+      "vento": "wind {{kmh}} km/h",
+      "fonte": "Forecast: Open-Meteo"
+    },
+    "comboio": {
+      "ondeEstou": "Send where I am",
+      "ondeEstouTexto": "Brothers, I'm here:",
+      "pontoEncontro": "Set meeting point here",
+      "pontoEncontroTexto": "Convoy meeting point:",
+      "rapidos": "Quick notes (with your location)",
+      "avisos": {
+        "pausa": "Coffee stop",
+        "combustivel": "Low fuel",
+        "fiqueiPraTras": "I fell behind",
+        "esperem": "Wait, I'm coming",
+        "tudoBem": "Arrived, all good",
+        "pneu": "Bike trouble"
+      },
+      "parado": "Use while stopped. When moving, use the riding mode buttons."
+    },
+    "ficha": {
+      "privacidade": "Stays only on this phone. Not sent to the server or other brothers.",
+      "sangue": "Blood type",
+      "alergias": "Allergies",
+      "remedios": "Regular medication",
+      "plano": "Health insurance",
+      "contato": "A contact's phone",
+      "salvo": "Saved automatically."
+    },
+    "manutencao": {
+      "kmAtual": "Bike's current km",
+      "servicos": {
+        "oleo": "Engine oil",
+        "relacao": "Chain and sprockets",
+        "pneuTraseiro": "Rear tire",
+        "pneuDianteiro": "Front tire",
+        "pastilhas": "Brake pads",
+        "revisao": "General service"
+      },
+      "vencida": "Overdue by {{km}} km",
+      "falta": "{{km}} km left (due at {{proximo}} km)",
+      "ultimaTroca": "Km at last service (every {{intervalo}} km)",
+      "fizHoje": "Done today"
+    },
+    "meta": {
+      "meta": "My goal this year",
+      "feito": "km ridden",
+      "falta": "km to go",
+      "porSemana": "km per week",
+      "dica": "Km with a recorded route count. Speed never counts."
+    },
+    "sobre": {
+      "lema": "Brothers on the road, brothers for life.",
+      "historiaTitulo": "Our story",
+      "historia": "Bodes do Asfalto was born from Mason brothers wanting to ride together, help each other on the road and visit one another along the way. Today there are several chapters, each with its own house and board. (Sample text for the board to review.)",
+      "conduta": "Road code",
+      "regras": {
+        "formacao": "Ride in staggered formation; the leader sets the pace and the sweep never passes.",
+        "distancia": "Keep 2 seconds from the bike ahead.",
+        "sinais": "Repeat hand signals for those behind.",
+        "abastecer": "Always leave with a full tank and refuel at agreed stops.",
+        "alcool": "Alcohol and riding don't mix: drinks only after parking for good.",
+        "ninguem": "No one is left behind: if one stops, the convoy waits."
+      },
+      "revisar": "Provisional text. The board can edit it in the admin panel."
+    }
   }
 }

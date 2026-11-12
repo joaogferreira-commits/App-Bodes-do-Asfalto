@@ -8,6 +8,7 @@ import {
   comoGanharXp,
   conquistou,
   exemploIrmao,
+  rankingCapitulos,
   niveis,
   nivelDoXp,
   selos,
@@ -184,6 +185,29 @@ export default function Conquistas() {
             <Texto variante="corpoForte">{t('conquistas.rankingTitulo')}</Texto>
             <Texto variante="secundario">{t('conquistas.rankingTexto', { km: eu.kmMes })}</Texto>
           </View>
+        </Cartao>
+
+        {/* Ranking entre capítulos (km do mês somados) */}
+        <Texto variante="subtitulo">{t('conquistas.capitulosTitulo')}</Texto>
+        <Cartao semPadding>
+          {rankingCapitulos.map((c, i) => (
+            <View
+              key={c.nome}
+              style={[
+                estilos.xpLinha,
+                i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave },
+                c.meu && { backgroundColor: cores.superficie3 },
+              ]}
+            >
+              <Texto variante="subtitulo" style={{ width: 36, color: i === 0 ? cores.ouro : cores.textoSec }}>
+                {i + 1}
+              </Texto>
+              <Texto style={{ flex: 1, fontFamily: c.meu ? fontes.textoForte : fontes.textoMedio }}>
+                {c.nome}
+              </Texto>
+              <Texto variante="corpoForte">{t('rota.km', { km: c.km.toLocaleString('pt-BR') })}</Texto>
+            </View>
+          ))}
         </Cartao>
 
         {/* Como ganhar XP */}

@@ -10,6 +10,7 @@ import { agapeExemplo } from '@/dados/agape';
 import { niveis, selos } from '@/dados/conquistas';
 import { postsExemplo, stories, type Post } from '@/dados/feed';
 import { passeiosExemplo } from '@/dados/passeios';
+import { useAgapes } from '@/estado/agapes';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, Icone, pinos, Texto, type NomeIcone } from '@/ui';
 
@@ -27,6 +28,19 @@ export default function Feed() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const emBreve = () => Alert.alert(t('comum.emBreve'), t('feed.emBreve'));
+  const { agapes } = useAgapes();
+  const posts: Post[] = [
+    ...agapes
+      .filter((a) => a.id !== agapeExemplo.id)
+      .map<Post>((a) => ({
+        id: a.id,
+        tipo: 'agape',
+        autor: { nome: a.organizador, capitulo: 'Cuiabá', status: 'aberto' },
+        quando: t('feed.agora'),
+        agape: a,
+      })),
+    ...postsExemplo,
+  ];
 
   const cabecalho = (
     <View style={{ gap: espaco.md }}>
@@ -101,7 +115,7 @@ export default function Feed() {
   return (
     <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
       <FlatList
-        data={postsExemplo}
+        data={posts}
         keyExtractor={(p) => p.id}
         ListHeaderComponent={cabecalho}
         contentContainerStyle={{ gap: espaco.md, paddingBottom: espaco.xxxl }}
@@ -277,7 +291,7 @@ function CartaoPost({ post }: { post: Post }) {
   }
 
   if (post.tipo === 'agape') {
-    const ag = agapeExemplo;
+    const ag = post.agape ?? agapeExemplo;
     return (
       <View style={estilos.post}>
         <CabecalhoPost post={post} />

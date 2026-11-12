@@ -118,6 +118,15 @@ export default function Perfil() {
           </View>
         </View>
 
+        <Cartao semPadding>
+          <LinhaMenu
+            icone="grade"
+            titulo={t('perfil.ferramentas')}
+            detalhe={t('perfil.ferramentasDetalhe')}
+            onPress={() => router.push('/ferramentas')}
+          />
+        </Cartao>
+
         {/* Nível e números */}
         <Pressable accessibilityRole="button" onPress={() => router.navigate('/conquistas')}>
           <Cartao style={{ gap: espaco.sm }}>

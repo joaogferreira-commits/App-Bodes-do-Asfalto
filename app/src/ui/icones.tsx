@@ -68,6 +68,7 @@ export const caminhosIcones = {
   comentario: ['M4 5h16v11H9l-5 4z'],
   compartilhar: ['M12 15V3M7 8l5-5 5 5', 'M5 13v7h14v-7'],
   opcoes: ['M5 12h.01M12 12h.01M19 12h.01'],
+  grade: ['M4 4h7v7H4z', 'M13 4h7v7h-7z', 'M4 13h7v7H4z', 'M13 13h7v7h-7z'],
   check: ['M5 12.5l4.5 4.5L19 7.5'],
   cadeado: ['M6 11h12v9H6z', 'M8.5 11V8a3.5 3.5 0 017 0v3'],
   rota: [

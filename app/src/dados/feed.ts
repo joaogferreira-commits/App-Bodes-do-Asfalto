@@ -1,3 +1,4 @@
+import type { agapeExemplo } from './agape';
 import type { ChaveNivel, ChaveSelo } from './conquistas';
 import type { StatusIrmao } from '@/ui';
 
@@ -26,7 +27,7 @@ export type Post =
       comentarios: number;
     }
   | { id: string; tipo: 'passeio'; autor: Autor; quando: string; passeioId: string }
-  | { id: string; tipo: 'agape'; autor: Autor; quando: string }
+  | { id: string; tipo: 'agape'; autor: Autor; quando: string; agape?: typeof agapeExemplo }
   | { id: string; tipo: 'conquista'; autor: Autor; quando: string; nivel: ChaveNivel }
   | { id: string; tipo: 'chegada'; autor: Autor; quando: string; cidade: string; irmaosPerto: number }
   | {

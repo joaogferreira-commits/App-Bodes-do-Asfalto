@@ -90,3 +90,12 @@ export const comoGanharXp: { chave: string; xp: string }[] = [
   { chave: 'foto', xp: '5' },
   { chave: 'alerta', xp: '20' },
 ];
+
+/** Ranking do mês entre capítulos (soma dos km com rota gravada). EXEMPLO. */
+export const rankingCapitulos = [
+  { nome: 'Tangará da Serra', km: 18420, meu: false },
+  { nome: 'Cuiabá', km: 16975, meu: true },
+  { nome: 'Rondonópolis', km: 12310, meu: false },
+  { nome: 'Várzea Grande', km: 9870, meu: false },
+  { nome: 'Sinop', km: 7240, meu: false },
+];
