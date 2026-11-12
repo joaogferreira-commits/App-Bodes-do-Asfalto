@@ -6,12 +6,13 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 - **Etapa:** 0 — Ponto de Teste 0 **aprovado** (A–E); faltam portões do dono para iniciar a Etapa 1
 - **Última atualização:** 11/11/2026
-- **Próxima tarefa:** revisão da Interface v2 com o dono (proposta em `docs/telas/v2/` e no quadro https://claude.ai/artifact/4HWekfUJxw4eK7xP6LzewJ). Depois: plano da Etapa 1.
+- **Próxima tarefa:** dono testar a build 7 (Interface v2) com `docs/TESTE_V2.md` e dar retorno do visual; depois ajustes e plano da Etapa 1.
 
 ## Feito
 
 - 12/11/2026 — Interface v2 no código: tema novo (cores com função única, testes de contraste), 30+ ícones próprios, componentes (Botão, BotãoÍcone, Chip, Cartão, Avatar com status, Pino, Painel, Estado vazio, Barra de abas). App com 5 abas (Mapa como início; Feed/Passeios/Conquistas com estados vazios ilustrados; Perfil), tela Planejar rota (Só asfalto / Misto / Prefiro terra, km de terra, barra asfalto×terra, rota no mapa com pesponto na terra), Modo pilotando (navegação Google com cabeçalho laranja + 6 botões de 112 px), Catálogo refeito. Mapa: terra em tracejado ocre sobre marrom (campo `surface`), asfalto creme. 78 testes.
 - 12/11/2026 — Ícone do app e tela de abertura com o Bodinho (`app/assets/icone/`, ícone adaptativo com versão monocromática). Tela do carro com a identidade v2: cartão na cor superfície 2 e 4 botões com ícones vetoriais próprios (Alerta, Comboio, Postos, SOS) e avisos nos 3 idiomas; testes garantem ícones/textos/limite de 4 botões. Cartão de manobra no carro (RoutingInfo a partir do NavInfo) fica para a etapa do Android Auto — não dá para compilar o código do carro no ambiente do agente (Google Maven bloqueado).
+- 12/11/2026 — **Build 7 concluída sem erros** (10955da2, Interface v2). APK só arm64: **68,8 MB** (era 80,7; o Skia saiu). Meta ~60 MB: próximo passo é compactar código/recursos (R8) com teste da navegação.
 
 - 11/11/2026 — `.claude/settings.json` criado; especificação renomeada para `docs/ESPECIFICACAO.md`; `settings.json` da raiz removido (movido para `.claude/`).
 - 11/11/2026 — Imagens recebidas (Caminho A), lotes 1 a 26a, em `docs/assets-originais/` (detalhes no LEIAME de lá). Portão "Lotes 1 a 8 e 22 a 25" da Etapa 0 cumprido.
