@@ -1,7 +1,15 @@
 name: Verificação (lint, tipos e testes)
 
+# Não roda quando só mudam documentos ou pedidos de build/imagem (economiza os minutos grátis do GitHub).
 on:
   push:
+    paths-ignore:
+      - 'docs/**'
+      - 'reports/**'
+      - 'research_notes/**'
+      - '**.md'
+      - '.github/*-request.txt'
+      - 'tools/coleta/**'
   pull_request:
 
 jobs:

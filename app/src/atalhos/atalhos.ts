@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { requireOptionalNativeModule } from 'expo';
 
 type Nativo = {
+  definirAtalhoDoIcone(titulo: string): Promise<boolean>;
   podeFixarAtalho(): Promise<boolean>;
   fixarAtalhoSOS(titulo: string): Promise<boolean>;
   podeFixarWidget(): Promise<boolean>;
@@ -12,6 +13,8 @@ type Nativo = {
 const nativo = Platform.OS === 'android' ? requireOptionalNativeModule<Nativo>('Atalhos') : null;
 
 export const atalhos = {
+  definirAtalhoDoIcone: async (titulo: string) =>
+    nativo ? nativo.definirAtalhoDoIcone(titulo).catch(() => false) : false,
   podeFixarAtalho: async () => (nativo ? nativo.podeFixarAtalho().catch(() => false) : false),
   fixarAtalhoSOS: async (titulo: string) =>
     nativo ? nativo.fixarAtalhoSOS(titulo).catch(() => false) : false,

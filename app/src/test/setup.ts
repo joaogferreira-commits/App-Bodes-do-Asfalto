@@ -46,12 +46,6 @@ jest.mock('expo-image-manipulator', () => ({
   },
 }));
 
-jest.mock('expo-quick-actions', () => ({
-  setItems: jest.fn(async () => undefined),
-  isSupported: jest.fn(async () => true),
-}));
-jest.mock('expo-quick-actions/router', () => ({ useQuickActionRouting: jest.fn() }));
-
 jest.mock('expo-camera', () => {
   const { createElement, forwardRef, useImperativeHandle } = jest.requireActual('react');
   const { View } = jest.requireActual('react-native');

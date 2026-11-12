@@ -65,7 +65,6 @@
       ],
       "./plugins/withNavegacaoGoogle",
       "./plugins/withAndroidAuto",
-      "expo-quick-actions",
       [
         "expo-camera",
         {

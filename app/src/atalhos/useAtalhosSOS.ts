@@ -1,5 +1,3 @@
-import * as QuickActions from 'expo-quick-actions';
-import { useQuickActionRouting } from 'expo-quick-actions/router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Platform } from 'react-native';
@@ -10,23 +8,16 @@ import { atalhos } from './atalhos';
 
 /**
  * Atalhos do SOS (pedido do dono em 12/11/2026):
- * - segurar o ícone do app mostra "Pedir ajuda (SOS)" (Android e iPhone);
+ * - segurar o ícone do app mostra "Pedir ajuda (SOS)" (Android; no iPhone entra com a versão para iPhone);
  * - no primeiro uso pergunta se o irmão quer o atalho fixo na tela inicial (Android; o sistema confirma);
  * - no iPhone explica uma vez o atalho de segurar o ícone.
  */
 export function useAtalhosSOS() {
   const { t } = useTranslation();
-  useQuickActionRouting();
 
   useEffect(() => {
-    void QuickActions.setItems([
-      {
-        id: 'sos',
-        title: t('sos.botaoAjuda'),
-        icon: Platform.OS === 'ios' ? 'symbol:sos.circle.fill' : undefined,
-        params: { href: '/sos' },
-      },
-    ]).catch(() => undefined);
+    // segurar o ícone do app mostra "Pedir ajuda (SOS)" (abre bodesdoasfalto://sos)
+    void atalhos.definirAtalhoDoIcone(t('sos.botaoAjuda'));
   }, [t]);
 
   useEffect(() => {
