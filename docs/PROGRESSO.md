@@ -10,6 +10,8 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Feito
 
+- 12/11/2026 (ciclo 5) — R8 medido na build 265c0b66: 70,2 MB (antes 70,4). Ganho desprezível; desligado para não arriscar a navegação. O tamanho de download na loja cai com o AAB.
+
 - 12/11/2026 (ciclo 5) — **Stories de 24 h:** criar (foto da câmera/galeria sem EXIF + legenda de até 80 letras), ver em tela cheia com barra de 5 s, apagar; os de exemplo usam as fotos de domínio público; somem sozinhos 24 h depois. 208 testes.
 
 - 12/11/2026 (ciclo 4) — **Feed:** criar enquete (pergunta + 2 a 4 opções, votar), salvar posts (marcador nos posts; tela `/salvos` e atalho no perfil). 206 testes.

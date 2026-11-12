@@ -99,16 +99,12 @@ describe('desenhos vetoriais do carro', () => {
   });
 });
 
-describe('tamanho do APK (R8)', () => {
-  const app = require('../app.json');
-  const props = app.expo.plugins.find((p) => Array.isArray(p) && p[0] === 'expo-build-properties')[1].android;
-  it('compacta código e recursos na versão de release', () => {
-    expect(props.enableMinifyInReleaseBuilds).toBe(true);
-    expect(props.enableShrinkResourcesInReleaseBuilds).toBe(true);
-  });
-  it('protege a navegação do Google, o Android Auto e o MapLibre', () => {
-    for (const r of ['com.google.android.react.navsdk.**', `${app.expo.android.package}.auto.**`, 'androidx.car.app.**', 'org.maplibre.**']) {
-      expect(props.extraProguardRules).toContain(`-keep class ${r}`);
-    }
+describe('tamanho do APK', () => {
+  // R8 testado em 12/11/2026: 70,4 → 70,2 MB (o peso está nas bibliotecas nativas). Desligado por risco
+  // sem ganho; o tamanho real de download cai com o App Bundle (AAB) da Play Store, que separa por aparelho.
+  it('R8 continua desligado até haver ganho que compense o risco na navegação', () => {
+    const app = require('../app.json');
+    const props = app.expo.plugins.find((p) => Array.isArray(p) && p[0] === 'expo-build-properties')[1].android;
+    expect(props.enableMinifyInReleaseBuilds).toBeUndefined();
   });
 });
