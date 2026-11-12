@@ -108,3 +108,7 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - Correção: token novo pedido na partida a partir da posição atual (em paralelo com a abertura do SDK), token antigo como reserva, motivo da recusa mostrado na faixa, limites de tempo em Google/Valhalla, botão Iniciar não espera mais a conferência. 3 testes novos (232).
 - Próximo: se a 0.11.1 ainda recusar, o código do motivo na faixa diz o porquê.
 - Android Auto (item 8 do backlog) adiado para o próximo ciclo; leitura do SDK feita: NavInfoReceivingService.getNavInfoLiveData() + valores do enum Maneuver (0..) mapeáveis para o cartão de manobra.
+
+### 12/11/2026 — ciclo 8
+- Versão 0.11.1 pronta (build 53f3914b, 70,6 MB): https://expo.dev/artifacts/eas/ZDRYbzo_v3nE08BIMkIq-Pr67-VMyQ6ZC_gTBO_fqfU.apk
+- Android Auto: `ManobraCarro.java` (manobra do Google → tipo do Android Auto + 9 setas vetoriais próprias), `BodesCarScreen` observa `NavInfoReceivingService.getNavInfoLiveData()` e monta RoutingInfo + TravelEstimate; botões de mapa (zoom +/−, recentrar). O app liga `setTurnByTurnLoggingEnabled(true)` ao começar a guiar e desliga ao encerrar. 2 testes novos (234). Compilação Java só é verificada na próxima build do EAS.

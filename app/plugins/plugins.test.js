@@ -47,11 +47,15 @@ describe('withAndroidAuto', () => {
     const app = m.manifest.application[0];
     const servico = app.service[0];
     expect(servico.$['android:name']).toBe('com.bodesdoasfalto.app.auto.BodesCarAppService');
-    expect(servico['intent-filter'][0].category[0].$['android:name']).toBe('androidx.car.app.category.NAVIGATION');
+    expect(servico['intent-filter'][0].category[0].$['android:name']).toBe(
+      'androidx.car.app.category.NAVIGATION',
+    );
     expect(m.manifest['uses-permission'].map((p) => p.$['android:name'])).toEqual(
       expect.arrayContaining(['androidx.car.app.NAVIGATION_TEMPLATES', 'androidx.car.app.ACCESS_SURFACE']),
     );
-    expect(app['meta-data'].map((x) => x.$['android:name'])).toContain('com.google.android.gms.car.application');
+    expect(app['meta-data'].map((x) => x.$['android:name'])).toContain(
+      'com.google.android.gms.car.application',
+    );
   });
 
   it('não duplica ao rodar duas vezes', () => {
@@ -65,12 +69,14 @@ describe('tela do carro: recursos', () => {
   const fs = require('fs');
   const path = require('path');
   const tela = fs.readFileSync(path.join(__dirname, 'android-auto', 'BodesCarScreen.java'), 'utf8');
-  const desenhos = fs.readdirSync(path.join(__dirname, 'android-auto', 'drawable')).map((f) => f.replace('.xml', ''));
+  const desenhos = fs
+    .readdirSync(path.join(__dirname, 'android-auto', 'drawable'))
+    .map((f) => f.replace('.xml', ''));
   const plugin = fs.readFileSync(path.join(__dirname, 'withAndroidAuto.js'), 'utf8');
 
   it('todo ícone usado pela tela existe como desenho vetorial', () => {
     const usados = [...tela.matchAll(/R\.drawable\.(\w+)/g)].map((m) => m[1]);
-    expect(usados.length).toBe(4);
+    expect(usados.length).toBe(7); // 4 botões + Mais zoom, Menos zoom, Recentrar
     for (const u of usados) expect(desenhos).toContain(u);
   });
 
@@ -104,7 +110,8 @@ describe('tamanho do APK', () => {
   // sem ganho; o tamanho real de download cai com o App Bundle (AAB) da Play Store, que separa por aparelho.
   it('R8 continua desligado até haver ganho que compense o risco na navegação', () => {
     const app = require('../app.json');
-    const props = app.expo.plugins.find((p) => Array.isArray(p) && p[0] === 'expo-build-properties')[1].android;
+    const props = app.expo.plugins.find((p) => Array.isArray(p) && p[0] === 'expo-build-properties')[1]
+      .android;
     expect(props.enableMinifyInReleaseBuilds).toBeUndefined();
   });
 });

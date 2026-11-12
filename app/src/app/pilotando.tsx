@@ -149,6 +149,11 @@ function Pilotando() {
   }, []);
 
   const encerrar = async () => {
+    try {
+      navigationController.setTurnByTurnLoggingEnabled(false);
+    } catch {
+      // nada a desligar
+    }
     await navigationController.stopGuidance().catch(() => undefined);
     await navigationController.clearDestinations().catch(() => undefined);
     router.back();

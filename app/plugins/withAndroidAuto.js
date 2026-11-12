@@ -50,11 +50,13 @@ function adicionarAoManifesto(manifest, pacote) {
   const app = AndroidConfig.Manifest.getMainApplicationOrThrow(manifest);
   const permissoes = (manifest.manifest['uses-permission'] ??= []);
   for (const nome of ['androidx.car.app.NAVIGATION_TEMPLATES', 'androidx.car.app.ACCESS_SURFACE']) {
-    if (!permissoes.some((p) => p.$['android:name'] === nome)) permissoes.push({ $: { 'android:name': nome } });
+    if (!permissoes.some((p) => p.$['android:name'] === nome))
+      permissoes.push({ $: { 'android:name': nome } });
   }
   const metas = (app['meta-data'] ??= []);
   const meta = (nome, atributos) => {
-    if (!metas.some((m) => m.$['android:name'] === nome)) metas.push({ $: { 'android:name': nome, ...atributos } });
+    if (!metas.some((m) => m.$['android:name'] === nome))
+      metas.push({ $: { 'android:name': nome, ...atributos } });
   };
   meta('com.google.android.gms.car.application', { 'android:resource': '@xml/automotive_app_desc' });
   meta('androidx.car.app.minCarApiLevel', { 'android:value': '1' });
@@ -84,7 +86,10 @@ const withAndroidAuto = (config) => {
   });
   config = withAppBuildGradle(config, (c) => {
     if (!c.modResults.contents.includes('androidx.car.app:app:')) {
-      c.modResults.contents = c.modResults.contents.replace(/dependencies\s*\{/, `dependencies {\n    ${CAR_APP}`);
+      c.modResults.contents = c.modResults.contents.replace(
+        /dependencies\s*\{/,
+        `dependencies {\n    ${CAR_APP}`,
+      );
     }
     return c;
   });

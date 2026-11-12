@@ -14,6 +14,8 @@ export type ControladorNavegacao = {
   ): Promise<string>;
   setAudioGuidanceType(tipo: number): Promise<void>;
   startGuidance(): Promise<void>;
+  /** Liga o envio das curvas para a tela do carro (cartão de manobra do Android Auto). */
+  setTurnByTurnLoggingEnabled?(ligado: boolean): void;
 };
 
 export type ResultadoNavegacao =
@@ -121,6 +123,11 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
 
     await dep.controlador.setAudioGuidanceType(VOZ_COMPLETA_BLUETOOTH);
     await dep.controlador.startGuidance();
+    try {
+      dep.controlador.setTurnByTurnLoggingEnabled?.(true);
+    } catch {
+      // sem a tela do carro o celular guia do mesmo jeito
+    }
     return token && !seguiuPlanejada ? 'okRotaRapida' : 'ok';
   } catch {
     return 'erro';

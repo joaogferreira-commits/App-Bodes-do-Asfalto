@@ -10,7 +10,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 5. ~~**Perfil editável (Mateus):**~~ FEITO 12/11. nome, apelido, cidade, foto (câmera/galeria), Loja/Oriente/Potência com visibilidade.
 6. ~~**Rota (Mateus):**~~ FEITO 12/11: até 3 caminhos para escolher, barra de trechos na ordem do percurso, "a terra começa no km X". Pendentes: "piso desconhecido" (o Valhalla não informa quando o piso não está etiquetado no OSM) e voz "Terra em 2 km" (etapa da navegação).
 7. ~~**Peso do APK:**~~ ENCERRADO 12/11: R8 testado (70,4 → 70,2 MB, ganho desprezível; o peso são as bibliotecas nativas). Desligado. Na Play Store o App Bundle (AAB) já baixa só o necessário para cada aparelho.
-8. **Android Auto:** cartão de manobra (seta + distância) e zoom/recentrar (R26).
+8. ~~**Android Auto:**~~ FEITO 12/11 (entra na próxima versão de teste; Java só é compilado no EAS): cartão de manobra (seta própria + distância + rua), chegada prevista, "recalculando", botões Mover/Mais zoom/Menos zoom/Recentrar. Testar no DHU.
 9. **Feed:** ~~enquete~~ e ~~salvar post~~ FEITOS 12/11. ~~Stories de 24 h~~ FEITO 12/11. Faltam: vídeo (até 60 s), menções (@).
 10. **Revisões de Dora e Quintino** em cada tela nova; corrigir achados.
 

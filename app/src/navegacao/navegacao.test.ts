@@ -17,6 +17,7 @@ function controladorFalso(ajustes: Partial<Record<keyof ControladorNavegacao, un
     setDestinations: jest.fn().mockResolvedValue('OK'),
     setAudioGuidanceType: jest.fn().mockResolvedValue(undefined),
     startGuidance: jest.fn().mockResolvedValue(undefined),
+    setTurnByTurnLoggingEnabled: jest.fn(),
     ...ajustes,
   } as unknown as jest.Mocked<ControladorNavegacao>;
 }
@@ -51,6 +52,12 @@ describe('iniciarNavegacao', () => {
     });
     expect(c.setAudioGuidanceType).toHaveBeenCalledWith(VOZ_COMPLETA_BLUETOOTH);
     expect(c.startGuidance).toHaveBeenCalled();
+  });
+
+  it('liga o envio das curvas para a tela do carro', async () => {
+    const c = controladorFalso();
+    await iniciarNavegacao(base(c));
+    expect(c.setTurnByTurnLoggingEnabled).toHaveBeenCalledWith(true);
   });
 
   it('não mostra os termos de novo se já foram aceitos', async () => {

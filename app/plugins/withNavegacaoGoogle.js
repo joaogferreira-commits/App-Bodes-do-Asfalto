@@ -30,7 +30,10 @@ const PROPRIEDADES = {
 
 function comPropriedades(lista) {
   const resto = lista.filter((p) => !(p.type === 'property' && p.key in PROPRIEDADES));
-  return [...resto, ...Object.entries(PROPRIEDADES).map(([key, value]) => ({ type: 'property', key, value }))];
+  return [
+    ...resto,
+    ...Object.entries(PROPRIEDADES).map(([key, value]) => ({ type: 'property', key, value })),
+  ];
 }
 
 const withNavegacaoGoogle = (config) => {
