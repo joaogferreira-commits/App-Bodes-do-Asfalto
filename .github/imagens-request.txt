@@ -1,1 +1,1 @@
-pedido=2 (Cloudflare configurado pelo dono em 12/11)
+pedido=3 (refazer capacete e jaqueta)

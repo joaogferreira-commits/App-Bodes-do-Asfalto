@@ -57,8 +57,8 @@ Salve a imagem com o nome indicado e mande aqui na conversa (ou em `docs/assets-
 - ✅ cloudflare 2026-11-12 **Feed: posto na estrada** → `app/assets/ia/feed/posto.webp`
 - ✅ cloudflare 2026-11-12 **Feed: cachoeira Véu de Noiva** → `app/assets/ia/feed/cachoeira.webp`
 - ✅ cloudflare 2026-11-12 **Capa: estradão do Parecis** → `app/assets/ia/passeios/parecis.webp`
-- ✅ cloudflare 2026-11-12 **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
-- ✅ cloudflare 2026-11-12 **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
+- ⏳ **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
+- ⏳ **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
 - ✅ cloudflare 2026-11-12 **Classificados: par de baús** → `app/assets/ia/classificados/baus.webp`
 - ✅ cloudflare 2026-11-12 **Classificados: intercomunicador** → `app/assets/ia/classificados/intercom.webp`
 - ⏳ **Guia: oficina de irmão** → `app/assets/ia/negocios/oficina.webp`
