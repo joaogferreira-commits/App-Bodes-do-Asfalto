@@ -138,3 +138,8 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - P2: tela `aprovacoes.tsx` (Perfil → "Aprovar irmãos", só para diretoria/moderador/admin): fila pela RLS, fotos por link temporário, ligar para o candidato, aprovar, recusar com motivo (via `aprovar_solicitacao`). Migration 20261112190000 aplicada com autorização do dono. Atalho do ícone agora pelo nosso módulo (expo-quick-actions quebrava a compilação no SDK 58).
 - Papéis: migration 20261112200000 (`definir_papel`, só admin; não tira o próprio papel; pgTAP) e tela `papeis.tsx` (Perfil → "Papéis dos irmãos", só para o admin): busca e escolha entre Membro, Diretoria do capítulo, Diretoria geral e Moderador.
 - P3: perfil, garagem, contatos e dados maçônicos sincronizam com o servidor (`servidor/perfil.ts`).
+
+### 12/11/2026 — noite
+- Personas com modelos mais baratos (Haiku/Sonnet), ver docs/EQUIPE.md.
+- Banco: função de papéis aplicada (autorização do dono); pacote social 20261112210000 (feed, stories, denúncias, bloqueios, chat + acenos + Realtime, notificações, mapa ao vivo com posição aproximada no servidor, passeios; 22 pgTAP verdes) aplicado com autorização do dono. Migrations não autorizadas ficam em `supabase/pendentes/` (o CI testa, o workflow não aplica).
+- Montagem no GitHub: corrigido erro de compilação da tela do carro (o app agora declara o SDK de navegação).
