@@ -49,7 +49,7 @@ Salve a imagem com o nome indicado e mande aqui na conversa (ou em `docs/assets-
 
 ## Automáticas (geradas pelo agente com Cloudflare, Gemini ou Pollinations)
 
-- ⏳ **Feed: estrada da Chapada ao entardecer** → `app/assets/ia/feed/chapada.webp`
+- ✅ pollinations 2026-11-12 **Feed: estrada da Chapada ao entardecer** → `app/assets/ia/feed/chapada.webp`
 - ⏳ **Feed: Transpantaneira com motos** → `app/assets/ia/feed/transpantaneira.webp`
 - ⏳ **Feed: parada para café** → `app/assets/ia/feed/cafe.webp`
 - ⏳ **Capa: encontro estadual** → `app/assets/ia/passeios/encontro.webp`
