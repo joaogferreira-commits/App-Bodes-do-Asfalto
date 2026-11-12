@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { Alert } from 'react-native';
 
 import Classificados from '@/app/classificados';
 import NovoAnuncio from '@/app/classificados/novo';
@@ -43,9 +44,27 @@ describe('classificados', () => {
     await fireEvent.changeText(screen.getByLabelText('Preço'), '400');
     await fireEvent.changeText(screen.getByLabelText('Cidade'), 'Cuiabá');
     await fireEvent.changeText(screen.getByLabelText('WhatsApp para contato'), '65 99999-0000');
+    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('button', { name: 'Adicionar foto' }));
+    await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.text === 'Da galeria')!.onPress!());
+    alerta.mockRestore();
     await screen.findByRole('button', { name: 'Remover esta foto' });
     await fireEvent.press(screen.getByRole('button', { name: 'Publicar anúncio' }));
     expect(jest.requireMock('expo-router').router.back).toHaveBeenCalled();
+  });
+});
+
+describe('preço como o irmão digita', () => {
+  it.each([
+    ['98.500', 98500],
+    ['98500', 98500],
+    ['1.350,00', 1350],
+    ['R$ 1.350', 1350],
+    ['99,90', 100],
+    ['', 0],
+  ])('"%s" vira %i', (texto, esperado) => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { lerPreco } = require('@/dados/classificados') as typeof import('@/dados/classificados');
+    expect(lerPreco(texto)).toBe(esperado);
   });
 });

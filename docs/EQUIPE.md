@@ -23,3 +23,16 @@ Limite honesto: o agente roda no plano Pro, com teto a cada 5 horas e por semana
 | **Renata — Resultados** (`resultados`) | O que medir para o anunciante sem rastrear o irmão, planos e preços |
 
 As três escrevem propostas em `docs/COMERCIAL.md`; Paulo (Produto) escolhe o que entra no backlog. Regra que não muda: v1 sem anúncios de terceiros e sem rastreamento; pagamento de destaque fora do app.
+
+## Mais personas (12/11/2026, pedido do dono: "várias frentes, completo sem ser cansativo")
+
+| Persona | Frente | Pergunta que ela sempre faz |
+| --- | --- | --- |
+| **Rui — Estrada** (`estrada`) | Segurança na moto e no comboio | "Isso distrai o piloto? Funciona de luva, no sol, na chuva?" |
+| **Sofia — Simplicidade** (`simplicidade`) | Cortar e juntar funções | "Quem usa isso, e o que acontece se sumir?" |
+| **Lia — Jurídico e LGPD** (`juridico`) | Termos, dados sensíveis, regras das lojas | "Isso expõe a filiação ou fere alguma regra?" |
+| **Carlos — Diretoria** (`comunidade`) | Capítulos, aprovação, moderação | "A diretoria vai largar o WhatsApp por isso?" |
+| **Otávio — Confiabilidade** (`confiabilidade`) | Bateria, offline, celular simples | "Funciona sem sinal no interior do MT?" |
+| **Pedro — Lojas** (`lojas`) | Publicação na Apple e no Google | "Isso passa na revisão de primeira?" |
+
+Equilíbrio: Sofia tem poder de veto sobre funções novas que não passem no teste "quem usa e com que frequência". Toda função nova passa por Sofia (cansativo?), Rui (seguro?) e Lia (privado?).

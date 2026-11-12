@@ -36,6 +36,7 @@ export const paletaNoite = {
   textoSobreAlerta: '#141110',
   // categorias
   ouro: '#D8A93B',
+  textoSobreOuro: '#141110',
   verdePosto: '#3FA27A',
   azulRio: '#7FA6C2',
   /** Anel "na estrada" (jeans clareado, 6:1 sobre o fundo). */
@@ -79,6 +80,7 @@ export const paletaSol: Paleta = {
   alerta: '#F5C518',
   textoSobreAlerta: '#1A1410',
   ouro: '#8A6510',
+  textoSobreOuro: '#FFFFFF',
   verdePosto: '#1E6B4A',
   azulRio: '#2F5E86',
   estrada: '#2F5E86',

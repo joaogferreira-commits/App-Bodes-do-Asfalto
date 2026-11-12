@@ -9,7 +9,7 @@ import { formatarPreco } from '@/dados/classificados';
 import { useClassificados } from '@/estado/classificados';
 import { linkWhatsApp } from '@/ferramentas/calculos';
 import { espaco, raios, useCores } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Cartao, Chip, Texto } from '@/ui';
+import { Avatar, Botao, BotaoIcone, Cartao, Texto } from '@/ui';
 
 /** Detalhe do anúncio: fotos deslizáveis, preço, ficha, vendedor e contato pelo WhatsApp. */
 export default function Anuncio() {
@@ -55,8 +55,9 @@ export default function Anuncio() {
           >
             <BotaoIcone icone="voltar" rotulo={t('comum.voltar')} onPress={() => router.back()} />
             <BotaoIcone
-              icone="salvar"
+              icone={fav ? 'check' : 'salvar'}
               corIcone={fav ? cores.ouro : cores.texto}
+              legenda={fav ? t('classificados.guardado') : t('classificados.guardar')}
               rotulo={fav ? t('classificados.desfavoritar') : t('classificados.favoritar')}
               onPress={() => alternarFavorito(c.id)}
             />
@@ -66,22 +67,32 @@ export default function Anuncio() {
               style={{
                 position: 'absolute',
                 bottom: espaco.sm,
-                alignSelf: 'center',
-                flexDirection: 'row',
-                gap: 6,
+                right: espaco.sm,
+                paddingHorizontal: 12,
+                paddingVertical: 4,
+                borderRadius: raios.pilula,
+                backgroundColor: cores.sobreMapa,
               }}
             >
-              {c.fotos.map((_, i) => (
-                <View
-                  key={i}
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 5,
-                    backgroundColor: i === foto ? cores.acao : cores.superficie,
-                  }}
-                />
-              ))}
+              <Texto style={{ fontSize: 15 }}>
+                {t('classificados.contadorFotos', { n: foto + 1, total: c.fotos.length })}
+              </Texto>
+            </View>
+          )}
+          {c.vendido && (
+            <View
+              style={{
+                position: 'absolute',
+                top: 72,
+                left: 0,
+                right: 0,
+                paddingVertical: 6,
+                backgroundColor: cores.textoApagado,
+              }}
+            >
+              <Texto style={{ textAlign: 'center', color: cores.fundo, fontSize: 17 }}>
+                {t('classificados.vendido')}
+              </Texto>
             </View>
           )}
         </View>
@@ -89,17 +100,28 @@ export default function Anuncio() {
         <View style={{ padding: espaco.lg, gap: espaco.sm }}>
           <Texto
             variante="numero"
-            style={{ fontSize: 40, lineHeight: 44, color: c.vendido ? cores.textoApagado : cores.acao }}
+            style={{ fontSize: 40, lineHeight: 44, color: c.vendido ? cores.textoApagado : cores.texto }}
           >
             {formatarPreco(c.preco)}
           </Texto>
           <Texto variante="subtitulo">{c.titulo}</Texto>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs }}>
-            <Chip rotulo={t(`classificados.estados.${c.estado}`)} onPress={() => undefined} />
-            {c.ano && <Chip rotulo={t('classificados.ano', { ano: c.ano })} onPress={() => undefined} />}
-            {c.km && <Chip rotulo={t('classificados.kmRodados', { km: c.km })} onPress={() => undefined} />}
-            {c.aceitaTroca && <Chip rotulo={t('classificados.aceitaTroca')} onPress={() => undefined} />}
-            {c.vendido && <Chip rotulo={t('classificados.vendido')} ativo onPress={() => undefined} />}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', rowGap: espaco.sm }}>
+            {[
+              [t('classificados.form.estado'), t(`classificados.estados.${c.estado}`)],
+              c.ano ? [t('garagem.ano'), c.ano] : null,
+              c.km ? [t('garagem.km'), `${c.km} km`] : null,
+              [
+                t('classificados.aceitaTroca'),
+                c.aceitaTroca ? t('classificados.sim') : t('classificados.nao'),
+              ],
+            ]
+              .filter((x): x is string[] => !!x)
+              .map(([rotulo, valor]) => (
+                <View key={rotulo} style={{ width: '50%', gap: 2 }}>
+                  <Texto variante="rotulo">{rotulo}</Texto>
+                  <Texto variante="destaque">{valor}</Texto>
+                </View>
+              ))}
           </View>
           <Texto>{c.descricao}</Texto>
           <Texto variante="secundario">{[c.cidade, c.quando].filter(Boolean).join(' · ')}</Texto>
@@ -137,7 +159,7 @@ export default function Anuncio() {
             </>
           ) : (
             !c.vendido &&
-            c.whatsapp && (
+            (c.whatsapp ? (
               <Botao
                 titulo={t('classificados.chamar')}
                 icone="comentario"
@@ -148,7 +170,9 @@ export default function Anuncio() {
                   )
                 }
               />
-            )
+            ) : (
+              <Texto variante="secundario">{t('classificados.semContato')}</Texto>
+            ))
           )}
           <View style={{ flexDirection: 'row', gap: espaco.xs }}>
             <View style={{ flex: 1 }}>
@@ -171,9 +195,7 @@ export default function Anuncio() {
               </View>
             )}
           </View>
-          <Texto variante="pequeno" style={{ borderRadius: raios.botao }}>
-            {t('classificados.seguranca')}
-          </Texto>
+          <Texto variante="secundario">{t('classificados.seguranca')}</Texto>
         </View>
       </ScrollView>
     </SafeAreaView>

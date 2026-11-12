@@ -4,8 +4,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, View } from 'react-native';
 
-import { Campo, numero, TelaFerramenta } from '@/componentes/TelaFerramenta';
-import { categorias, type CategoriaClassificado, type EstadoItem } from '@/dados/classificados';
+import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
+import {
+  categorias,
+  formatarPreco,
+  lerPreco,
+  type CategoriaClassificado,
+  type EstadoItem,
+} from '@/dados/classificados';
 import { useClassificados } from '@/estado/classificados';
 import { usePerfilOpcional } from '@/estado/perfil';
 import { escolherFoto } from '@/feed/foto';
@@ -40,7 +46,7 @@ export default function NovoAnuncio() {
     const falta = [
       !fotos.length && t('classificados.form.fotos'),
       !f.titulo.trim() && t('classificados.form.titulo'),
-      !numero(f.preco) && t('classificados.form.preco'),
+      !lerPreco(f.preco) && t('classificados.form.preco'),
       !f.cidade.trim() && t('acesso.form.cidade'),
       f.whatsapp.replace(/\D/g, '').length < 10 && t('classificados.form.whatsapp'),
     ].filter(Boolean);
@@ -50,14 +56,14 @@ export default function NovoAnuncio() {
       estado,
       aceitaTroca,
       titulo: f.titulo.trim(),
-      preco: numero(f.preco),
+      preco: lerPreco(f.preco),
       cidade: f.cidade.trim(),
       descricao: f.descricao.trim(),
       ano: categoria === 'motos' ? f.ano.trim() || undefined : undefined,
       km: categoria === 'motos' ? f.km.trim() || undefined : undefined,
       fotos: fotos.map((uri) => ({ uri })),
       vendedor: perfil?.perfil.nome || t('perfil.voce'),
-      capitulo: 'Cuiabá',
+      capitulo: perfil?.perfil.cidade || 'Cuiabá',
       whatsapp: f.whatsapp,
     });
     router.back();
@@ -72,7 +78,16 @@ export default function NovoAnuncio() {
             key={u}
             accessibilityRole="button"
             accessibilityLabel={t('classificados.form.tirarFoto')}
-            onPress={() => setFotos((l) => l.filter((x) => x !== u))}
+            onPress={() =>
+              Alert.alert(t('classificados.form.tirarFoto'), undefined, [
+                { text: t('comum.cancelar'), style: 'cancel' },
+                {
+                  text: t('comentarios.apagar'),
+                  style: 'destructive',
+                  onPress: () => setFotos((l) => l.filter((x) => x !== u)),
+                },
+              ])
+            }
           >
             <Image
               source={{ uri: u }}
@@ -97,7 +112,19 @@ export default function NovoAnuncio() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t('classificados.form.adicionarFoto')}
-            onPress={() => void escolherFoto('galeria').then((u) => u && setFotos((l) => [...l, u]))}
+            onPress={() =>
+              Alert.alert(t('classificados.form.adicionarFoto'), undefined, [
+                {
+                  text: t('publicar.camera'),
+                  onPress: () => void escolherFoto('camera').then((u) => u && setFotos((l) => [...l, u])),
+                },
+                {
+                  text: t('publicar.galeria'),
+                  onPress: () => void escolherFoto('galeria').then((u) => u && setFotos((l) => [...l, u])),
+                },
+                { text: t('comum.cancelar'), style: 'cancel' },
+              ])
+            }
             style={{
               width: 96,
               height: 96,
@@ -110,6 +137,9 @@ export default function NovoAnuncio() {
             }}
           >
             <Icone nome="camera" tamanho={30} cor={cores.acao} />
+            <Texto variante="pequeno" style={{ textAlign: 'center' }}>
+              {t('classificados.form.adicionarFoto')}
+            </Texto>
           </Pressable>
         )}
       </View>
@@ -170,6 +200,12 @@ export default function NovoAnuncio() {
         aoMudar={muda('whatsapp')}
         teclado="phone-pad"
       />
+      <Texto variante="pequeno">{t('classificados.form.whatsappVisivel')}</Texto>
+      {lerPreco(f.preco) > 0 && (
+        <Texto variante="destaque">
+          {t('classificados.form.vaiAparecer', { preco: formatarPreco(lerPreco(f.preco)) })}
+        </Texto>
+      )}
       <Texto variante="pequeno">{t('classificados.form.semPagamento')}</Texto>
       <Botao titulo={t('classificados.form.publicar')} grande icone="check" onPress={publicar} />
     </TelaFerramenta>

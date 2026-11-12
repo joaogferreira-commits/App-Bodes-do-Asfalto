@@ -61,7 +61,13 @@ export default function Classificados() {
           <View
             style={[estilos.selo, { left: 6, backgroundColor: c.vendido ? cores.textoApagado : cores.ouro }]}
           >
-            <Texto variante="pequeno" style={{ color: cores.fundo, fontFamily: fontes.textoForte }}>
+            <Texto
+              style={{
+                color: c.vendido ? cores.fundo : cores.textoSobreOuro,
+                fontFamily: fontes.textoForte,
+                fontSize: 15,
+              }}
+            >
               {c.vendido ? t('classificados.vendido') : t('classificados.destaque')}
             </Texto>
           </View>
@@ -78,8 +84,11 @@ export default function Classificados() {
         <Texto variante="corpoForte" numberOfLines={2}>
           {c.titulo}
         </Texto>
-        <Texto variante="pequeno" numberOfLines={1}>
+        <Texto variante="secundario" numberOfLines={1}>
           {[c.ano, c.km && `${c.km} km`, c.cidade].filter(Boolean).join(' · ')}
+        </Texto>
+        <Texto variante="pequeno" numberOfLines={1}>
+          {[c.vendedor, c.quando].filter(Boolean).join(' · ')}
         </Texto>
       </View>
     </Pressable>

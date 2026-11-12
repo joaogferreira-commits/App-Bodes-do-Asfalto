@@ -11,10 +11,12 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { usePerfilOpcional } from '@/estado/perfil';
 import { useViagem } from '@/estado/viagem';
+import { useOdometro } from '@/seguranca/useOdometro';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
 import { nomeDoDestino, posicaoDoDestino } from '@/navegacao/destinos';
 import { iniciarNavegacao, type ControladorNavegacao, type ResultadoNavegacao } from '@/navegacao/fluxo';
@@ -87,6 +89,12 @@ function Pilotando() {
   const [aviso, setAviso] = useState<string | null>(null);
   const relogioAviso = useRef<ReturnType<typeof setTimeout> | null>(null);
   const iniciou = useRef(false);
+  // Km rodados vão para a Manutenção e para a moto principal da garagem.
+  const perfil = usePerfilOpcional();
+  useOdometro((km) => {
+    const m = perfil?.motoPrincipal;
+    if (m) perfil.salvarMoto({ ...m, km: String((Number(m.km.replace(/\D/g, '')) || 0) + km) });
+  });
 
   const iniciar = async () => {
     setErro(null);
@@ -263,7 +271,7 @@ function Pilotando() {
                   rotulo={t('pilotando.sos')}
                   dica={t('pilotando.sosDica')}
                   corProgresso={c.sosPressionado}
-                  aoCompletar={() => Alert.alert(t('pilotando.sos'), t('pilotando.sosTeste'))}
+                  aoCompletar={() => router.push('/sos')}
                   style={[
                     estilos.botao,
                     tamanhoBotao,

@@ -21,6 +21,7 @@ function paresDeTexto(c: Paleta): [string, string, string, number][] {
     ['texto sobre laranja (botão principal)', c.textoSobreAcao, c.acao, 4.5],
     ['texto sobre vermelho (SOS)', c.textoSobreSos, c.sos, 4.5],
     ['texto sobre amarelo (alerta)', c.textoSobreAlerta, c.alerta, 4.5],
+    ['texto sobre ouro (selo destaque)', c.textoSobreOuro, c.ouro, 4.5],
     ['fundo sobre texto (filtro ativo)', c.fundo, c.texto, 4.5],
     ['terra sobre superfície (rótulos de terra)', c.terra, c.superficie, 4.5],
     ['verde dos postos sobre superfície', c.verdePosto, c.superficie, 4.5],

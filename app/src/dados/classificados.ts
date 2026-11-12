@@ -204,3 +204,13 @@ export const classificadosExemplo: Classificado[] = [
 
 export const formatarPreco = (v: number) =>
   `R$ ${v.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+
+/** Lê preço como o irmão digita: "98.500", "98500", "1.350,00", "R$ 1.350" → reais inteiros. */
+export function lerPreco(texto: string): number {
+  const limpo = texto.replace(/[^\d,.]/g, '');
+  if (!limpo) return 0;
+  const [inteiro = '', centavos] = limpo.split(',');
+  const n = Number(inteiro.replace(/\./g, ''));
+  if (!Number.isFinite(n)) return 0;
+  return centavos && Number(centavos.slice(0, 2)) >= 50 ? n + 1 : n;
+}

@@ -894,7 +894,32 @@
       "descricao": "Description",
       "whatsapp": "Contact WhatsApp",
       "semPagamento": "Payment is arranged between you, outside the app.",
-      "publicar": "Publish ad"
-    }
+      "publicar": "Publish ad",
+      "whatsappVisivel": "This number is shown to brothers who open the ad.",
+      "vaiAparecer": "It will show as: {{preco}}"
+    },
+    "guardar": "Save",
+    "guardado": "Saved",
+    "contadorFotos": "{{n}} / {{total}}",
+    "sim": "Yes",
+    "nao": "No",
+    "semContato": "This ad has no WhatsApp. Find the brother through the chapter."
+  },
+  "sos": {
+    "titulo": "SOS",
+    "buscando": "Getting your location…",
+    "posicaoPronta": "Location ready. Choose who to alert: each button opens WhatsApp with the message ready.",
+    "semPosicao": "No location right now",
+    "ligar192": "Call 192 (Ambulance)",
+    "ligar193": "Call 193 (Fire brigade)",
+    "avisar": "Alert with your location",
+    "semContatos": "You have not added emergency contacts yet.",
+    "whatsPara": "WhatsApp {{nome}}",
+    "grupo": "Send to the convoy group",
+    "previa": "Message to be sent:",
+    "mensagemTitulo": "SOS Bodes do Asfalto",
+    "rodape": "Sent from the Bodes do Asfalto app. Call 192/193 if serious.",
+    "limite": "In this test version, the automatic push alert to the convoy does not exist yet (needs the server). WhatsApp asks for one tap to send.",
+    "estouBem": "I am fine, close"
   }
 }

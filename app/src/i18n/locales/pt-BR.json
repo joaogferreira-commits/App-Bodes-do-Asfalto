@@ -894,7 +894,32 @@
       "descricao": "Descrição",
       "whatsapp": "WhatsApp para contato",
       "semPagamento": "O pagamento é combinado entre vocês, fora do app.",
-      "publicar": "Publicar anúncio"
-    }
+      "publicar": "Publicar anúncio",
+      "whatsappVisivel": "Este número aparece para os irmãos que abrirem o anúncio.",
+      "vaiAparecer": "Vai aparecer assim: {{preco}}"
+    },
+    "guardar": "Guardar",
+    "guardado": "Guardado",
+    "contadorFotos": "{{n}} / {{total}}",
+    "sim": "Sim",
+    "nao": "Não",
+    "semContato": "Este anúncio não tem WhatsApp. Procure o irmão pelo capítulo."
+  },
+  "sos": {
+    "titulo": "SOS",
+    "buscando": "Pegando sua localização…",
+    "posicaoPronta": "Localização pronta. Escolha quem avisar: cada botão abre o WhatsApp com a mensagem pronta.",
+    "semPosicao": "Sem localização no momento",
+    "ligar192": "Ligar 192 (SAMU)",
+    "ligar193": "Ligar 193 (Bombeiros)",
+    "avisar": "Avisar com a sua localização",
+    "semContatos": "Você ainda não cadastrou contatos de emergência.",
+    "whatsPara": "WhatsApp para {{nome}}",
+    "grupo": "Mandar no grupo do comboio",
+    "previa": "Mensagem que será enviada:",
+    "mensagemTitulo": "SOS Bodes do Asfalto",
+    "rodape": "Enviado pelo app Bodes do Asfalto. Ligue 192/193 se for grave.",
+    "limite": "Nesta versão de teste, o aviso automático por notificação ao comboio ainda não existe (depende do servidor). O WhatsApp pede um toque para enviar.",
+    "estouBem": "Estou bem, fechar"
   }
 }

@@ -8,10 +8,10 @@ import {
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
-import { Redirect, Stack, useSegments } from 'expo-router';
+import { Redirect, router, Stack, useSegments } from 'expo-router';
 import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
@@ -20,6 +20,8 @@ import { ProvedorClassificados } from '@/estado/classificados';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
 import { ProvedorPerfil } from '@/estado/perfil';
 import { ProvedorViagem } from '@/estado/viagem';
+import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
+import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
 export default function Layout() {
@@ -84,12 +86,28 @@ function GuardaDeAcesso() {
   return null;
 }
 
+/** Telas que continuam liberadas com a moto andando (as abas têm a própria trava). */
+const LIVRES_EM_MOVIMENTO = ['(abas)', 'pilotando', 'sos', 'rota', 'acesso'];
+
+/** Trava em movimento (R3) para as telas fora das abas: classificados, garagem, publicar, ferramentas… */
+function TravaEmMovimento() {
+  const emMovimento = useBloqueioEmMovimento();
+  const segmentos = useSegments() as string[];
+  if (!emMovimento || LIVRES_EM_MOVIMENTO.includes(segmentos[0] ?? '(abas)')) return null;
+  return (
+    <View style={StyleSheet.absoluteFill}>
+      <TelaEmMovimento aoIrAoMapa={() => router.navigate('/')} />
+    </View>
+  );
+}
+
 function Telas() {
   const { modo, cores } = useTema();
   return (
     <>
       <StatusBar style={modo === 'sol' ? 'dark' : 'light'} />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }} />
+      <TravaEmMovimento />
       <GuardaDeAcesso />
     </>
   );

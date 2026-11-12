@@ -6,11 +6,12 @@ import TelaPilotando from '@/app/pilotando';
 
 const permissao = { granted: false };
 
-jest.mock('expo-router', () => ({ router: { back: jest.fn() } }));
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
 jest.mock('expo-location', () => ({
   getForegroundPermissionsAsync: jest.fn(async () => ({ granted: permissao.granted })),
   requestForegroundPermissionsAsync: jest.fn(async () => ({ granted: permissao.granted })),
   getCurrentPositionAsync: jest.fn(async () => ({ coords: { latitude: -15.6, longitude: -56.1 } })),
+  watchPositionAsync: jest.fn(async () => ({ remove: jest.fn() })),
   Accuracy: { High: 4 },
 }));
 jest.mock('@googlemaps/react-native-navigation-sdk', () => {
@@ -77,13 +78,14 @@ describe('modo pilotando', () => {
       await act(async () => {
         jest.advanceTimersByTime(3000);
       });
-      expect(alerta).not.toHaveBeenCalled();
+      const { router } = jest.requireMock('expo-router');
+      expect(router.push).not.toHaveBeenCalledWith('/sos');
 
       await fireEvent(sos, 'pressIn');
       await act(async () => {
         jest.advanceTimersByTime(3000);
       });
-      expect(alerta).toHaveBeenCalledWith('SOS', expect.stringContaining('193'));
+      expect(router.push).toHaveBeenCalledWith('/sos');
     } finally {
       jest.useRealTimers();
       alerta.mockRestore();

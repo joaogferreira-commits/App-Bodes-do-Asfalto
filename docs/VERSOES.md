@@ -11,6 +11,10 @@ sozinho no EAS. A versão mais nova fica no topo; o teste automático confere qu
 - Manutenção: dá para editar nome, intervalo e km de cada item, criar itens novos e apagar.
 - Classificados novos: categorias, fotos, preço, estado, cidade, anunciar e marcar como vendido.
 - Stories de 24 h; R8 desligado (ganho de só 0,2 MB).
+- **SOS funcional sem servidor:** segurar 3 s abre a tela de SOS com localização, ficha de emergência, WhatsApp de cada contato, grupo do comboio e 192/193.
+- **Km automático:** no modo pilotando o GPS soma os km rodados e atualiza a Manutenção e a moto principal da garagem.
+- Classificados revisados pela design (preço digitado "98.500" agora fica certo, ficha da moto, contador de fotos, guardar com rótulo).
+- Telas fora das abas (classificados, garagem, publicar…) também travam com a moto andando.
 - Número da versão e este mapa de versões.
 
 ## 0.9.0 — 12/11/2026 (build 265c0b66)
