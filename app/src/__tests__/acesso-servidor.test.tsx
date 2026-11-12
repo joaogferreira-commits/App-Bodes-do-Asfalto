@@ -26,11 +26,13 @@ jest.mock('@/servidor/auth', () => ({
   excluirContaNoServidor: jest.fn(async () => undefined),
 }));
 
-let acesso: ReturnType<typeof useAcesso>;
+const ref: { acesso?: ReturnType<typeof useAcesso> } = {};
 function Espiao() {
-  acesso = useAcesso();
-  return <Text testID="estado">{acesso.estado}</Text>;
+  const a = useAcesso();
+  ref.acesso = a;
+  return <Text testID="estado">{a.estado}</Text>;
 }
+const acesso = () => ref.acesso!;
 
 describe('acesso com o servidor', () => {
   it('o estado vem do servidor e as ações chamam o Supabase', async () => {
@@ -41,15 +43,15 @@ describe('acesso com o servidor', () => {
     );
     await act(async () => avisar());
     expect(screen.getByTestId('estado').props.children).toBe('pendente');
-    expect(acesso.modo).toBe('supabase');
+    expect(acesso().modo).toBe('supabase');
 
-    await act(async () => acesso.entrar('email', 'irmao@exemplo.com'));
+    await act(async () => acesso().entrar('email', 'irmao@exemplo.com'));
     expect(servidor.pedirLinkPorEmail).toHaveBeenCalledWith('irmao@exemplo.com');
 
-    await act(async () => acesso.consentir('termos'));
+    await act(async () => acesso().consentir('termos'));
     expect(servidor.registrarConsentimento).toHaveBeenCalledWith('termos', expect.any(String));
 
-    await act(async () => acesso.sair());
+    await act(async () => acesso().sair());
     expect(servidor.sairDoServidor).toHaveBeenCalled();
   });
 });
