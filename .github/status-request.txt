@@ -1,1 +1,1 @@
-pedido=(ciclo 9) confere a 0.12.0
+pedido=(ciclo 11) confere 0.12.0 e 0.13.0
