@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>ROTA BIKERS</name>
+    <description/>
+    <Style id="icon-1899-DB4436-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-DB4436-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-DB4436">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-DB4436-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1899-DB4436-nodesc-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-DB4436-nodesc-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-DB4436-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-DB4436-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-DB4436-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>MAPA ROTA BIKERS</name>
+      <Placemark>
+        <name>1 - Serpenteando Café</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.0862979,-25.0777701,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>3 - Mirante 12 Lanchonete e Entretenimento-LTDA</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.4850811,-28.3848397,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>4 - Rota 370</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.5544447,-27.9987446,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>5 - Parada Rota 218</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.7087751,-23.4197284,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>6 - Parada Rota Bike Café</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.3214022,-26.672074,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>7 - Container da Serra</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.5165773,-26.6254623,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>8 - Parada 261</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -48.5367075,-24.1898018,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>9 - Posto Rota 090</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.9592831,-24.5377613,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>10 - Terrasul Motos</name>
+        <description>Monumento pronto. Carimbo sendo realizado na loja Terra Sul Motos no endereço: Av. vinte e sete de janeiro, 494.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -53.3838142,-32.5522043,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>11 - Pad Bier Restaurante e Cervejaria</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -47.5603231,-15.9990196,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>12 - Centro Cultural Movimento</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -46.5256306,-22.5972528,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>13 - Rota 513</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.9811553,-25.1421648,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>14 - Parador 158</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -53.7677307,-29.6010665,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>15 - Garimpo em Atividade</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -53.1916744,-27.3577814,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>16 - Bar Original – Pier SP-270</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.3906025,-23.184275,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>17 - Armazém Canastra</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -45.9784098,-20.4576587,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>18 - Box 1200 Concept</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -46.9628832,-23.1918773,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>19 - Rancho Terra Crua</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -45.8982779,-23.5212416,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>20 - Casa Rural Pastelaria</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -51.4541004,-30.4075303,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>21 - Parada Penhasco</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -48.6664038,-26.8112913,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>22 - Restaurante Mata Virgem</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -45.2614054,-21.6144094,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>23 - Bar Do Hélio</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -47.1669616,-21.0256805,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>24 - Pousada e Camping Poço Do Caixão</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.8813927,-28.8141693,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>25 - Os Independentes</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -48.5976393,-20.5095141,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>26 - Restaurante Portal Grill</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -51.0541948,-26.2742813,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>27 - Restaurante Pedra do Baú</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -45.6632399,-22.680331,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>28 - Hotel Barra Bonita</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -48.5620735,-22.4980628,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>29 - Rancho Gastronomia e Cultura - Restaurante, Pizzaria e Armazém.</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -44.5767615,-22.6452812,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>30 - Drei Schritte Katuete</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -54.7702719,-24.253942,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>31 - Pro Tork</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.836561,-23.6704833,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[32 - Hell's Dogs Motorcycle Bar]]></name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -54.5751596,-25.5159988,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>33 - Zapata Garage</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -49.6494886,-22.2001017,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>34 - Lanchonete Parada da Búfala</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -47.9479979,-24.2769151,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>35 - Portal de São Lourenço</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -45.0392427,-22.1270713,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>36 - Route 60</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -48.688318,-16.1849568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>37 - Bela Vista Mall</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -43.4223614,-19.0441262,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>38 - MAPY - Restaurante e Cafe</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -51.1844918,-23.9122125,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[38 - Mar & Sol Praia Hotel]]></name>
+        <description>EM CONSTRUÇÃO</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -39.2181944,-17.340253,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>40 - Quiosque Romano</name>
+        <description>EM CONSTRUÇÃO</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -52.599415,-31.5159801,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>41 - ROTA 15</name>
+        <description>EM CONSTRUÇÃO</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -51.9385666,-28.6400737,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>42 - Tapioca do Irmão Firmino</name>
+        <description>EM CONSTRUÇÃO</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -35.3509599,-7.1684174,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>43 - Parada Route</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -48.6570364,-17.0708946,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>44 - Laranja Doce - Pão com Linguiça</name>
+        <description>MONUMENTO PRONTO E CARIMBANDO.</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -51.1689638,-22.131556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>45 - EMPÓRIO CACONDE </name>
+        <description>Status - em construção</description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -46.6383175,-21.5996867,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Cervejaria Dolomitas</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -52.8564705,-23.7434204,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,16 +1,1482 @@
-# 502 Gateway Timeout
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-12T15:33:20Z",
+    "timestamp_areas_base": "2026-11-12T11:21:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
 
-This Overpass API server is currently at capacity. All query workers are busy
-and the request queue is full.
+{
+  "type": "node",
+  "id": 2111266737,
+  "lat": -22.9107379,
+  "lon": -42.9856080,
+  "tags": {
+    "name": "Saulo Biker",
+    "note": "Avenida Ewerton da Costa Xavier esquina com Estrada Jean Vallenteau Moulliac, próximo a Rodovia Amaral Peixoto",
+    "phone:2": "+55-21-3701-2846",
+    "shop": "bicycle"
+  }
+},
+{
+  "type": "node",
+  "id": 2213478619,
+  "lat": -23.6636769,
+  "lon": -46.5243844,
+  "tags": {
+    "amenity": "bar",
+    "club": "motorcycle",
+    "name": "Assiciação Águia Dragões de Fogo Moto Clube"
+  }
+},
+{
+  "type": "node",
+  "id": 4477962343,
+  "lat": -23.6576100,
+  "lon": -46.6970224,
+  "tags": {
+    "addr:city": "São Paulo",
+    "addr:housenumber": "831",
+    "addr:street": "Avenida Washington Luís",
+    "amenity": "community_centre",
+    "club": "motorcycle",
+    "name": "Life Riders",
+    "source": "Bing,Mapillary,survey"
+  }
+},
+{
+  "type": "node",
+  "id": 4781506061,
+  "lat": -23.0097515,
+  "lon": -43.4459969,
+  "tags": {
+    "name": "Garage Biker's Store",
+    "shop": "motorcycle"
+  }
+},
+{
+  "type": "node",
+  "id": 5090167821,
+  "lat": -22.9114214,
+  "lon": -43.1863010,
+  "tags": {
+    "addr:city": "Rio de Janeiro",
+    "addr:housenumber": "41 Loja B",
+    "addr:postcode": "20230-130",
+    "addr:street": "Avenida Henrique Valadares",
+    "addr:suburb": "Lapa",
+    "club": "yes",
+    "name": "Sindmoto/RJ - Sindicato dos Empregados Motociclistas do Estado do Rio de Janeiro"
+  }
+},
+{
+  "type": "node",
+  "id": 5153637123,
+  "lat": -28.6823843,
+  "lon": -49.3524662,
+  "tags": {
+    "addr:street": "Rua Padre Estanislau Cizeski",
+    "amenity": "pub",
+    "contact:phone": "+55 48 3438-2820",
+    "name": "Maverick Bikers Pub",
+    "opening_hours": "Su,Tu,We 18:00-00:00; Th-Sa 18:00-02:00"
+  }
+},
+{
+  "type": "node",
+  "id": 6334532585,
+  "lat": -22.9851532,
+  "lon": -43.2050853,
+  "tags": {
+    "addr:street": "Rua Joana Angélica",
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "11",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private",
+    "ref": "89",
+    "website": "https://bikeitau.com.br/bikerio/"
+  }
+},
+{
+  "type": "node",
+  "id": 6381445403,
+  "lat": -29.9480754,
+  "lon": -51.1012978,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Motociclista Renildo Freitas"
+  }
+},
+{
+  "type": "node",
+  "id": 6638792359,
+  "lat": -22.9409916,
+  "lon": -43.1772363,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "fee": "yes",
+    "name": "BikeRio",
+    "network": "Bike Itaú",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 6812947704,
+  "lat": -29.3603861,
+  "lon": -50.8247995,
+  "tags": {
+    "addr:housenumber": "1038",
+    "addr:street": "Osvaldo Aranha",
+    "amenity": "pub",
+    "description": "Bar com rock e cerveja",
+    "name": "Biker's Pub",
+    "opening_hours": "Mo-Su 19:00-04:00",
+    "phone": "+55 54 3282-2861"
+  }
+},
+{
+  "type": "node",
+  "id": 7467857356,
+  "lat": -26.4568347,
+  "lon": -49.2120319,
+  "tags": {
+    "club": "motorcycle",
+    "name": "Turma da Trilha"
+  }
+},
+{
+  "type": "node",
+  "id": 8484266412,
+  "lat": -1.4310885,
+  "lon": -48.4677889,
+  "tags": {
+    "addr:housenumber": "1822 Sala8",
+    "addr:street": "Travessa Mauriti",
+    "addr:suburb": "Pedreira",
+    "name": "Bikerunpa",
+    "phone": "+55 91 98217-2658",
+    "service:bicycle:clothing": "yes",
+    "service:bicycle:parts": "yes",
+    "shop": "bicycle",
+    "website": "https://www.bikerunpa.com.br/"
+  }
+},
+{
+  "type": "node",
+  "id": 8874960271,
+  "lat": -26.4117057,
+  "lon": -49.2518807,
+  "tags": {
+    "addr:city": "Corupá",
+    "addr:housenumber": "1000",
+    "addr:street": "Rua Otto Hillbrecht",
+    "club": "motorcycle",
+    "name": "Bananalama",
+    "website": "http://www.bananalama.com.br/"
+  }
+},
+{
+  "type": "node",
+  "id": 8930533188,
+  "lat": -23.5579349,
+  "lon": -46.6754013,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "11",
+    "fee": "yes",
+    "name": "BikeRio",
+    "network": "Bike Sampa",
+    "operator": "Tembici",
+    "payment:credit_cards": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9130586511,
+  "lat": -27.8598473,
+  "lon": -48.6026131,
+  "tags": {
+    "club": "motorcycle",
+    "name": "Legendários Moto Clube",
+    "short_name": "Legendários MC"
+  }
+},
+{
+  "type": "node",
+  "id": 9363398211,
+  "lat": -22.9512848,
+  "lon": -43.1940306,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "brand:wikipedia": "pt:Bike Rio",
+    "name": "BikeRio",
+    "operator": "Tembici"
+  }
+},
+{
+  "type": "node",
+  "id": 9377150495,
+  "lat": -22.9055214,
+  "lon": -43.2203760,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "brand:wikipedia": "pt:Bike Rio",
+    "capacity": "16",
+    "name": "BikeRio",
+    "operator": "Serttel"
+  }
+},
+{
+  "type": "node",
+  "id": 9377162227,
+  "lat": -22.9089846,
+  "lon": -43.2228690,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "brand:wikipedia": "pt:Bike Rio",
+    "capacity": "15",
+    "name": "BikeRio",
+    "operator": "Serttel"
+  }
+},
+{
+  "type": "node",
+  "id": 9625025727,
+  "lat": -16.7318477,
+  "lon": -49.3079120,
+  "tags": {
+    "addr:city": "Goiânia",
+    "addr:postcode": "74343-011",
+    "addr:street": "Avenida Lisboa",
+    "addr:suburb": "Jardim Europa",
+    "club": "motorcycle",
+    "name": "Vultos Moto Clube Brasil - Sede Regional Facção Goiás",
+    "nohousenumber": "yes",
+    "operator": "Vultos Moto Clube Brasil",
+    "phone": "+5562982528727",
+    "website": "https://www.instagram.com/vultosmc_brasil/"
+  }
+},
+{
+  "type": "node",
+  "id": 9625153792,
+  "lat": -15.7473461,
+  "lon": -47.9251497,
+  "tags": {
+    "addr:city": "Brasília",
+    "addr:postcode": "70634200",
+    "addr:street": "SOFN Quadra 2 Conjunto C",
+    "addr:suburb": "SOF NORTE",
+    "club": "motorcycle",
+    "name": "Vultos Moto Clube Brasil - Sede Nacional",
+    "operator": "Vultos Moto Clube Brasil",
+    "website": "https://www.instagram.com/vultosmc_brasil/"
+  }
+},
+{
+  "type": "node",
+  "id": 9900746797,
+  "lat": -22.9244633,
+  "lon": -43.2092078,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Serttel"
+  }
+},
+{
+  "type": "node",
+  "id": 10088111836,
+  "lat": -14.2312318,
+  "lon": -42.7661382,
+  "tags": {
+    "club": "motorcycle",
+    "name": "Falcões Raça Liberta Moto Clube"
+  }
+},
+{
+  "type": "node",
+  "id": 10751022526,
+  "lat": -23.0054275,
+  "lon": -43.3130961,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "15",
+    "fee": "yes",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 11409432266,
+  "lat": -22.9048365,
+  "lon": -43.1735757,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "fee": "yes",
+    "name": "BikeRio",
+    "network": "Bike Rio",
+    "not:brand:wikidata": "Q20052802",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 11502983146,
+  "lat": -22.9012623,
+  "lon": -43.1749297,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 11569453949,
+  "lat": -22.9044824,
+  "lon": -43.2181132,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "fee": "yes",
+    "name": "BikeRio",
+    "operator": "Tembici"
+  }
+},
+{
+  "type": "node",
+  "id": 11579291070,
+  "lat": -22.9790404,
+  "lon": -43.2011587,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 11753786284,
+  "lat": -22.9204666,
+  "lon": -43.2225794,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 11820155420,
+  "lat": -22.4932780,
+  "lon": -44.0922710,
+  "tags": {
+    "addr:city": "Volta Redonda",
+    "addr:street": "Rua Mariana Godoy Barreira Cravo",
+    "addr:suburb": "Voldac",
+    "name": "The Biker Shop",
+    "shop": "bicycle"
+  }
+},
+{
+  "type": "node",
+  "id": 11898906635,
+  "lat": -23.5349865,
+  "lon": -46.4531980,
+  "tags": {
+    "addr:street": "Avenida David Domingues Ferreira",
+    "club": "social",
+    "name": "Insônia Moto Clube Associação de Motociclistas"
+  }
+},
+{
+  "type": "node",
+  "id": 12046318486,
+  "lat": -22.9289869,
+  "lon": -43.2432673,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Tembici"
+  }
+},
+{
+  "type": "node",
+  "id": 12057164799,
+  "lat": -22.8980564,
+  "lon": -43.2020402,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "name": "BikeRio",
+    "operator": "Tembici"
+  }
+},
+{
+  "type": "node",
+  "id": 12079357153,
+  "lat": -22.7970930,
+  "lon": -43.3351656,
+  "tags": {
+    "addr:city": "São João de Meriti",
+    "addr:housenumber": "5",
+    "addr:postcode": "25585-780",
+    "addr:street": "Rua Silvio Goulart",
+    "addr:suburb": "Parque Analândia",
+    "club": "motorcycle",
+    "name": "Cirroses Moto Clube"
+  }
+},
+{
+  "type": "node",
+  "id": 12092233541,
+  "lat": -22.7945880,
+  "lon": -43.3682206,
+  "tags": {
+    "club": "motorcycle",
+    "name": "Balaios MC - Sede Baixada"
+  }
+},
+{
+  "type": "node",
+  "id": 12093503197,
+  "lat": -25.0782394,
+  "lon": -49.0859489,
+  "tags": {
+    "addr:city": "Bocaiúva do Sul",
+    "addr:postcode": "83450000",
+    "addr:street": "Estrada da Ribeira, Km 71",
+    "alt_name": "Monumento Rota Biker 1",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.1, localizado junto do Serpenteando Café, em Bocaiúva do Sul/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 1",
+    "opening_hours": "24/7",
+    "operator": "Serpenteando Café",
+    "tourism": "attraction",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12093676883,
+  "lat": -25.1421001,
+  "lon": -49.9811312,
+  "tags": {
+    "addr:city": "Ponta Grossa",
+    "addr:street": "Rodovia Engenheiro Agostinho Schwab",
+    "alt_name": "Monumento Rota Biker 13",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.13, localizado junto do Bar e Restaurante Rota 513, em Ponta Grossa/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 13",
+    "reservation": "no",
+    "tourism": "attraction",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 12094087861,
+  "lat": -24.5376895,
+  "lon": -49.9588091,
+  "tags": {
+    "addr:city": "Piraí do Sul",
+    "addr:street": "Rodovia Engenheiro Ângelo Ferrário Lopes",
+    "alt_name": "Monumento Rota Biker 9",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.9, localizado junto do Hotel 090, em Piraí do Sul/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 9",
+    "tourism": "attraction",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13294560762,
+  "lat": -22.9844137,
+  "lon": -43.2031460,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "11",
+    "fee": "yes",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private",
+    "operator:wikidata": "Q28724",
+    "operator:wikipedia": "en:Bike Rio",
+    "website": "https://bikeitau.com.br/bikerio/"
+  }
+},
+{
+  "type": "node",
+  "id": 13313523217,
+  "lat": -26.2465289,
+  "lon": -48.8017086,
+  "tags": {
+    "addr:city": "Joinville",
+    "addr:housenumber": "219",
+    "addr:postcode": "89225775",
+    "addr:street": "Rua Edmilson Cardoso",
+    "addr:suburb": "Aventureiro",
+    "name": "BikeRun_Store",
+    "opening_hours": "Mo-Fr 09:00-12:00,14:00-18:30",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "payment:notes": "yes",
+    "phone": "+5547920012317",
+    "shop": "sports",
+    "sport": "running;cycling;fitness;multi"
+  }
+},
+{
+  "type": "node",
+  "id": 13328307607,
+  "lat": -26.8116562,
+  "lon": -48.6655589,
+  "tags": {
+    "addr:city": "Penha",
+    "addr:street": "Rodovia João Batista Sérgio Murad",
+    "alt_name": "Monumento Rota Biker 21",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.21, localizado junto da Cervejaria Penhasco, em Penha/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 21",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13328745240,
+  "lat": -26.6721736,
+  "lon": -49.3213893,
+  "tags": {
+    "addr:city": "Rio dos Cedros",
+    "addr:street": "Estrada Geral Rio Milânes",
+    "alt_name": "Monumento Rota Biker 6",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.6, localizado junto do Café Rota Bike, em Rio dos Cedros/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 6",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13328930147,
+  "lat": -26.6253158,
+  "lon": -49.5167558,
+  "tags": {
+    "addr:city": "Doutor Pedrinho",
+    "addr:street": "SC-477",
+    "alt_name": "Monumento Rota Biker 7",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.7, localizado junto do Container da Serra, em Doutor Pedrinho/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 7",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13330679133,
+  "lat": -26.2743586,
+  "lon": -51.0540681,
+  "tags": {
+    "addr:city": "Porto União",
+    "addr:street": "Rua Expedicionário Edmundo Arrabar",
+    "alt_name": "Monumento Rota Biker 26",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.26, localizado junto do Restaurante Portal Grill, em Porto União/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 26",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13331226141,
+  "lat": -27.3580107,
+  "lon": -53.1911775,
+  "tags": {
+    "addr:city": "Ametista do Sul",
+    "addr:street": "Avenida Bento Gonçalves",
+    "alt_name": "Monumento Rota Biker 15",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.15, localizado junto do Garimpo em Atividade e do Garimpo Parillha e Cervejaria, em Ametista do Sul/RS.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 15",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13332021382,
+  "lat": -27.9986689,
+  "lon": -49.5544522,
+  "tags": {
+    "addr:city": "Urubici",
+    "addr:street": "Rodovia Pedro Fridolin Kunhen",
+    "alt_name": "Monumento Rota Biker 4",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.4, localizado junto do Restaurante Rota 370, em Urubici/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 4",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13332206664,
+  "lat": -28.3847130,
+  "lon": -49.4855025,
+  "tags": {
+    "addr:city": "Lauro Müller",
+    "addr:street": "Rodovia Governador Irineu Bornhausen",
+    "alt_name": "Monumento Rota Biker 3",
+    "description": "Monumento da Rota Biker n.3, localizado junto do Mirante 12, em Lauro Müller/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 3",
+    "opening_hours": "Mo-Su 08:00-18:00",
+    "operator": "Mirante 12",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 13339143570,
+  "lat": -28.8145749,
+  "lon": -49.8811294,
+  "tags": {
+    "addr:city": "Timbé do Sul",
+    "addr:street": "Rodovia Abel dal Pont",
+    "alt_name": "Monumento Rota Biker 24",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.24, localizado junto da Pousada e Camping Poço do Caixão, em Timbé do Sul/SC.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 24",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13351377843,
+  "lat": -29.6010261,
+  "lon": -53.7677099,
+  "tags": {
+    "addr:city": "Itaara",
+    "addr:street": "BR-158",
+    "alt_name": "Monumento Rota Biker 14",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.14, localizado junto do Parador 158, em Itaara/RS.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 14",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13351548907,
+  "lat": -30.4077401,
+  "lon": -51.4541945,
+  "tags": {
+    "addr:city": "Barra do Ribeiro",
+    "addr:street": "Rodovia General Bento Gonçalves",
+    "alt_name": "Monumento Rota Biker 20",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.20, localizado junto da Casa Rural Restaurante e Pastelaria, em Barra do Ribeiro/RS.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 20",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13351568043,
+  "lat": -32.5524306,
+  "lon": -53.3836566,
+  "tags": {
+    "addr:city": "Jaguarão",
+    "addr:street": "Rodovia General Bento Gonçalves",
+    "alt_name": "Monumento Rota Biker 10",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.10, localizado junto da Free Shop Caraballat Garcia, em Jaguarão/RS.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 10",
+    "note": "O carimbo está sendo feito na Loja Terra Sul Motos.",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13351802783,
+  "lat": -25.4698664,
+  "lon": -49.2306418,
+  "tags": {
+    "addr:city": "Curitiba",
+    "addr:street": "Avenida Comendador Franco",
+    "alt_name": "Monumento Rota Biker 2",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.2, localizado junto da Fábrica Cafeteria, em Curitiba/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 2",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13364025247,
+  "lat": -23.4198344,
+  "lon": -49.7087118,
+  "tags": {
+    "addr:city": "Carlópolis",
+    "addr:street": "Rodovia Jayme Canet",
+    "alt_name": "Monumento Rota Biker 5",
+    "description": "Monumento da Rota Biker n.5, localizado junto da Rota PR218, em Carlópolis/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 5",
+    "operator": "Parada Rota 218",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 13524919146,
+  "lat": -22.9842267,
+  "lon": -43.2065975,
+  "tags": {
+    "addr:city": "Rio de Janeiro",
+    "addr:housenumber": "89",
+    "addr:suburb": "Ipanema",
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "14",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private",
+    "operator:wikidata": "Q28724",
+    "operator:wikipedia": "en:Bike Rio",
+    "ref": "89",
+    "website": "https://bikeitau.com.br/bikerio/"
+  }
+},
+{
+  "type": "node",
+  "id": 13524919155,
+  "lat": -22.9853792,
+  "lon": -43.2052357,
+  "tags": {
+    "amenity": "bicycle_rental",
+    "brand": "BikeRio",
+    "brand:wikidata": "Q28724",
+    "capacity": "11",
+    "name": "BikeRio",
+    "operator": "Tembici",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 13685097448,
+  "lat": -24.1897596,
+  "lon": -48.5367622,
+  "tags": {
+    "addr:city": "Guapiara",
+    "addr:street": "Rua Avelino Domingues Menk",
+    "alt_name": "Monumento Rota Biker 8",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.8, localizado junto da Parada 261, em Guapiara/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 8",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685111448,
+  "lat": -15.9991051,
+  "lon": -47.5602904,
+  "tags": {
+    "addr:city": "Brasília",
+    "addr:street": "BR-251",
+    "alt_name": "Monumento Rota Biker 11",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.11, localizado junto do Pad Bier Restaurante e Cervejaria, em Brasília/DF.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 11",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685141786,
+  "lat": -22.5976010,
+  "lon": -46.5257549,
+  "tags": {
+    "addr:city": "Socorro",
+    "addr:street": "Rua João Leonardelli",
+    "alt_name": "Monumento Rota Biker 12",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.12, localizado junto ao Centro Cultural Movimento / Antiga Estação Ferroviária, em Socorro/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 12",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685238929,
+  "lat": -23.1843621,
+  "lon": -49.3905970,
+  "tags": {
+    "addr:city": "Piraju",
+    "addr:street": "Avenida Osterno José de Amorim",
+    "alt_name": "Monumento Rota Biker 16",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.16, localizado junto do Bar e Restaurante Original, no Parque FECAPI, em Piraju/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 16",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685407111,
+  "lat": -20.4569610,
+  "lon": -45.9793470,
+  "tags": {
+    "addr:city": "Piumhi",
+    "addr:street": "MG-341",
+    "alt_name": "Monumento Rota Biker 17",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.17, localizado junto ao Armazém Canastra, em Piumhi/MG.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 17",
+    "note": "Este monumento ficava no Pit Stop Canastra/São Roque de Minas e foi movido para Piumhi, em 24/03/2026.",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685427708,
+  "lat": -23.1917986,
+  "lon": -46.9627246,
+  "tags": {
+    "addr:city": "Jundiaí",
+    "addr:housenumber": "1200",
+    "addr:street": "Avenida Luiz José Sereno",
+    "alt_name": "Monumento Rota Biker 18",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.18, localizado junto do Box 1200 Concept, em Jundiaí/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 18",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685454744,
+  "lat": -23.5211460,
+  "lon": -45.8986074,
+  "tags": {
+    "addr:city": "Salesópolis",
+    "addr:street": "Servidão do Leme",
+    "alt_name": "Monumento Rota Biker 19",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.19, localizado junto ao Terra Crua Rancho, em Salesópolis/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 19",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13685473793,
+  "lat": -21.6143324,
+  "lon": -45.2615540,
+  "tags": {
+    "addr:city": "Três Corações",
+    "addr:street": "Rodovia Fernão Dias",
+    "alt_name": "Monumento Rota Biker 22",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.22, localizado junto do Restaurante Mata Virgem, em Três Corações/MG.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 22",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13691829582,
+  "lat": -21.0257269,
+  "lon": -47.1670518,
+  "tags": {
+    "addr:city": "Santo Antônio da Alegria",
+    "addr:street": "Rodovia Altino Arantes",
+    "alt_name": "Monumento Rota Biker 23",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.23, localizado junto do Bar do Hélio, em Santo Antônio da Alegria/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 23",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13692058871,
+  "lat": -22.2000956,
+  "lon": -49.6495572,
+  "tags": {
+    "addr:city": "Garça",
+    "addr:housenumber": "318",
+    "addr:street": "Rua Alzira Nazareth",
+    "addr:suburb": "Cascata",
+    "alt_name": "Monumento Rota Biker 33",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.33, localizado junto ao Museu Zapata GarageBar do Hélio, em Garça/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 33",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13692149561,
+  "lat": -20.5078003,
+  "lon": -48.6011951,
+  "tags": {
+    "addr:city": "Barretos",
+    "addr:street": "Via das Comitivas Doutor Roberto Cardoso Alves",
+    "alt_name": "Monumento Rota Biker 25",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.25, localizado junto ao Parque do Peão, em Barretos/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 25",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13695052138,
+  "lat": -22.6801658,
+  "lon": -45.6629976,
+  "tags": {
+    "addr:city": "São Bento do Sapucaí",
+    "addr:housenumber": "450",
+    "addr:street": "Rua das Araucárias",
+    "addr:suburb": "Paiol Grande",
+    "alt_name": "Monumento Rota Biker 27",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.27, localizado junto do Restaurante Serra do Baú, em São Bento do Sapucaí/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 27",
+    "opening_hours": "Mo-Su 08:00-17:00",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13695424008,
+  "lat": -22.4980006,
+  "lon": -48.5617688,
+  "tags": {
+    "addr:city": "Barra Bonita",
+    "alt_name": "Monumento Rota Biker 28",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.28, localizado junto do Hotel Barra Bonita e Praça Belmonte, em Barra Bonita/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 28",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13695689371,
+  "lat": -23.6707346,
+  "lon": -49.8371483,
+  "tags": {
+    "addr:city": "Siqueira Campos",
+    "addr:street": "Rodovia Governador Parigot de Souza",
+    "alt_name": "Monumento Rota Biker 31",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.31, localizado junto ao Super Posto Pro Tork, em Siqueira Campos/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 31",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13698729046,
+  "lat": -22.6451301,
+  "lon": -44.5764936,
+  "tags": {
+    "addr:city": "São José do Barreiro",
+    "alt_name": "Monumento Rota Biker 29",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.29, localizado junto do Hotel Pouso do Rancho, em São José do Barreiro/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 29",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13711142238,
+  "lat": -24.2771134,
+  "lon": -47.9481478,
+  "tags": {
+    "addr:city": "São José do Barreiro",
+    "addr:suburb": "Barra do Ribeirão da Serra",
+    "alt_name": "Monumento Rota Biker 34",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.34, localizado junto da Lanchonete Parada da Búfala, em Sete Barras/SP.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 34",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13716599585,
+  "lat": -25.5161352,
+  "lon": -54.5751815,
+  "tags": {
+    "addr:city": "Foz do Iguaçu",
+    "addr:street": "Avenida Paraná",
+    "addr:suburb": "Jardim Polo Centro",
+    "alt_name": "Monumento Rota Biker 32",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.32, localizado junto do Hell's Dogs Motorcycle Bar, em Foz do Iguaçu/PR.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 32",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13730380375,
+  "lat": -24.5227388,
+  "lon": -48.8377957,
+  "tags": {
+    "artwork_type": "statue",
+    "inscription": "Homenagem aos Motociclistas do Rastro da Serpente",
+    "name": "Homem Motociclista",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13901648975,
+  "lat": -16.1851037,
+  "lon": -48.6881933,
+  "tags": {
+    "addr:city": "Abadiânia",
+    "alt_name": "Monumento Rota Biker 36",
+    "artist_name": "Moisés Rodrigues Ribas;Adriana Furtado",
+    "artwork_type": "sculpture",
+    "description": "Monumento da Rota Biker n.36, localizado junto do Restaurante Route 60, em Abadiânia/GO.",
+    "instagram": "@rota_biker",
+    "name": "Monumento Biker 36",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 13943041859,
+  "lat": -23.4121649,
+  "lon": -46.3213596,
+  "tags": {
+    "addr:street": "Rua Jurandir Sanches Maiolino",
+    "brunch": "Sede Arujá",
+    "club": "motorcycle",
+    "name": "Bodes do Asfalto Moto Clube",
+    "website": "https://bodesdoasfalto.org.br/"
+  }
+},
+{
+  "type": "node",
+  "id": 14041307824,
+  "lat": -29.1464675,
+  "lon": -51.1691621,
+  "tags": {
+    "name": "Biker Acessorios",
+    "shop": "bicycle"
+  }
+},
+{
+  "type": "node",
+  "id": 14046002648,
+  "lat": -14.2298552,
+  "lon": -42.7656963,
+  "tags": {
+    "addr:city": "Guanambi",
+    "addr:housenumber": "52",
+    "addr:street": "Rua 25 João Nogueira Sobrinho",
+    "club": "motorcycle",
+    "name": "Abade Biker Clube"
+  }
+},
+{
+  "type": "node",
+  "id": 14345669661,
+  "lat": -30.0346556,
+  "lon": -52.9131814,
+  "tags": {
+    "IBGE:COD_UNICO_ENDERECO": "71426010",
+    "addr:city": "Cachoeira do Sul",
+    "addr:housenumber": "809",
+    "addr:postcode": "96503-708",
+    "addr:street": "Rua Fontoura Xavier",
+    "addr:suburb": "Santa Helena",
+    "check_date": "2022-12-31",
+    "craft": "electronics_repair",
+    "name": "Bikers Garagem Peças Oficina e Injeção Eletrônica",
+    "repair": "bicycle",
+    "service:bicycle:parts": "yes",
+    "service:bicycle:repair": "yes",
+    "shop": "bicycle"
+  }
+},
+{
+  "type": "way",
+  "id": 166247814,
+  "center": {
+    "lat": -22.9150224,
+    "lon": -43.5791381
+  },
+  "tags": {
+    "highway": "residential",
+    "name": "Rua dos Motociclistas"
+  }
+},
+{
+  "type": "way",
+  "id": 222715409,
+  "center": {
+    "lat": -15.8066534,
+    "lon": -47.9488931
+  },
+  "tags": {
+    "leisure": "park",
+    "name": "Praça do Motociclista"
+  }
+},
+{
+  "type": "way",
+  "id": 256752214,
+  "center": {
+    "lat": -26.3808036,
+    "lon": -48.8302847
+  },
+  "tags": {
+    "highway": "residential",
+    "name": "Rua dos Motociclistas",
+    "surface": "unpaved"
+  }
+},
+{
+  "type": "way",
+  "id": 347274793,
+  "center": {
+    "lat": -25.5585113,
+    "lon": -48.8009184
+  },
+  "tags": {
+    "addr:housenumber": "729",
+    "addr:street": "Estrada das Canavieiras",
+    "building": "yes",
+    "name": "Recanto dos Motociclistas Olho de Hórus"
+  }
+},
+{
+  "type": "way",
+  "id": 413348738,
+  "center": {
+    "lat": -21.1148210,
+    "lon": -44.2368460
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "Centro de Treinamento de Motociclista"
+  }
+},
+{
+  "type": "way",
+  "id": 418313351,
+  "center": {
+    "lat": -26.9085169,
+    "lon": -49.0729683
+  },
+  "tags": {
+    "building": "office",
+    "name": "Ministério Motociclista",
+    "office": "association"
+  }
+},
+{
+  "type": "way",
+  "id": 421680476,
+  "center": {
+    "lat": -29.7031307,
+    "lon": -53.8235793
+  },
+  "tags": {
+    "addr:housenumber": "272",
+    "addr:postcode": "97070-440",
+    "addr:street": "Rua Visconde de Mauá",
+    "club": "motorcycle",
+    "contact:email": "amga@gauderiosdoasfalto.com.br",
+    "contact:facebook": "www.facebook.com/pages/Mercocycle/105432036269895",
+    "contact:phone": "+55 55 3347-9818",
+    "leisure": "recreation_ground",
+    "name": "Gaudérios do Asfalto"
+  }
+},
+{
+  "type": "way",
+  "id": 427008457,
+  "center": {
+    "lat": -27.0950101,
+    "lon": -52.6727104
+  },
+  "tags": {
+    "addr:city": "Chapecó",
+    "addr:housenumber": "120",
+    "addr:postcode": "89809-621",
+    "addr:street": "Rua Garças - D",
+    "addr:suburb": "Efapi",
+    "building": "yes",
+    "name": "CFC EFAPI - Centro de Treinamento e Testes para Motociclistas"
+  }
+},
+{
+  "type": "way",
+  "id": 607827439,
+  "center": {
+    "lat": -23.8819295,
+    "lon": -47.9882604
+  },
+  "tags": {
+    "building": "yes",
+    "club": "motorcycle",
+    "name": "Moto Clube Arcanjos da Estrada"
+  }
+},
+{
+  "type": "way",
+  "id": 718986782,
+  "center": {
+    "lat": -27.0949101,
+    "lon": -52.6728555
+  },
+  "tags": {
+    "addr:city": "Chapecó",
+    "addr:housenumber": "120",
+    "addr:postcode": "89809-621",
+    "addr:street": "Rua Garças - D",
+    "addr:suburb": "Efapi",
+    "building": "yes",
+    "name": "CFC EFAPI - Centro de Treinamento e Testes para Motociclistas"
+  }
+},
+{
+  "type": "way",
+  "id": 1092999782,
+  "center": {
+    "lat": -20.7374954,
+    "lon": -49.5945811
+  },
+  "tags": {
+    "highway": "residential",
+    "name": "Rua Iracema Pereira da Silva Biker",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1180650201,
+  "center": {
+    "lat": -25.3507865,
+    "lon": -49.3856281
+  },
+  "tags": {
+    "amenity": "fast_food",
+    "building": "yes",
+    "name": "Bar do Canelinha - Bikers Canelinha"
+  }
+},
+{
+  "type": "way",
+  "id": 1305602425,
+  "center": {
+    "lat": -22.7812423,
+    "lon": -43.2992489
+  },
+  "tags": {
+    "building": "yes",
+    "club": "motorcycle",
+    "name": "Sturgis MC - Duque de Caxias"
+  }
+},
+{
+  "type": "way",
+  "id": 1442711494,
+  "center": {
+    "lat": -22.4417660,
+    "lon": -42.6370639
+  },
+  "tags": {
+    "addr:city": "Cachoeiras de Macacu",
+    "addr:housenumber": "128",
+    "addr:postcode": "28684-050",
+    "addr:street": "Rua Dorvalino João Nogueira",
+    "addr:suburb": "Valério",
+    "building": "yes",
+    "club": "motorcycle",
+    "name": "Guerreiros de Serra Moto Clube",
+    "operator": "Guerreiros de Serra Moto",
+    "phone": "+55 21 97005 3870",
+    "website": "https://www.instagram.com/guerreirosdaserramotoclube/"
+  }
+},
+{
+  "type": "way",
+  "id": 1487274034,
+  "center": {
+    "lat": -15.7887249,
+    "lon": -47.9188538
+  },
+  "tags": {
+    "building": "yes",
+    "building:levels": "3",
+    "height": "7.99",
+    "name": "GARAGE OLD BIKERS",
+    "ref:GDF_CIU": "120III5D0011"
+  }
+},
+{
+  "type": "way",
+  "id": 1548878428,
+  "center": {
+    "lat": -5.9578761,
+    "lon": -49.8763035
+  },
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "path",
+    "horse": "yes",
+    "motor_vehicle": "no",
+    "name": "Acesso somente para pedestres e ciclistas/motociclistas",
+    "surface": "unpaved",
+    "width": "1"
+  }
+},
+{
+  "type": "way",
+  "id": 1556595034,
+  "center": {
+    "lat": -22.7189138,
+    "lon": -46.9387165
+  },
+  "tags": {
+    "addr:city": "Pedreira",
+    "addr:street": "Rodovia João Beira",
+    "building": "yes",
+    "club": "motorcycle",
+    "name": "K.R.O.S."
+  }
+},
+{
+  "type": "relation",
+  "id": 2524217,
+  "center": {
+    "lat": -22.9412878,
+    "lon": -43.3166264
+  },
+  "tags": {
+    "name": "BikeRio",
+    "type": "collection",
+    "website": "http://www.mobilicidade.com.br/bikerio.asp"
+  }
+}
 
-## What to do
-
-Retry your request using exponential backoff: wait a short interval, then retry.
-If the request fails again, double the wait time and retry again.
-
-## For heavy or automated use
-
-This public endpoint is intended for browser-based and human-operated tools.
-For automated or high-volume use, run a local Overpass API instance:
-
-https://github.com/b1tw153/Overpass-API/blob/main/README.md
+  ]
+}
