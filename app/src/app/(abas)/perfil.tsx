@@ -299,6 +299,14 @@ export default function Perfil() {
               detalhe={t(`perfil.mapaModos.${eu.visibilidadeMapa}`)}
               onPress={emBreve}
             />
+            {acesso.papel === 'admin' && (
+              <LinhaMenu
+                icone="perfil"
+                titulo={t('papeis.titulo')}
+                detalhe={t('papeis.detalhe')}
+                onPress={() => router.push('/papeis')}
+              />
+            )}
             {acesso.aprova && (
               <LinhaMenu
                 icone="check"

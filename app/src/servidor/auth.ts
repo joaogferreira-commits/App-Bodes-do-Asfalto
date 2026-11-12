@@ -196,3 +196,34 @@ export async function decidirPedido(id: string, aprovar: boolean, motivo?: strin
   });
   if (error) throw error;
 }
+
+export type IrmaoComPapel = {
+  id: string;
+  nome: string;
+  apelido: string | null;
+  capitulo: string;
+  papel: string;
+};
+
+/** Lista de irmãos aprovados com o papel de cada um (para o admin nomear moderadores e diretorias). */
+export async function irmaosComPapel(): Promise<IrmaoComPapel[]> {
+  const { data, error } = await exigir()
+    .from('perfis')
+    .select('id, nome, apelido, papel, capitulos(nome)')
+    .neq('papel', 'pendente')
+    .is('desativado_em', null)
+    .order('nome');
+  if (error) throw error;
+  return (data ?? []).map((r) => ({
+    id: r.id as string,
+    nome: r.nome as string,
+    apelido: r.apelido as string | null,
+    papel: r.papel as string,
+    capitulo: ((r.capitulos as unknown as { nome?: string } | null)?.nome ?? '') as string,
+  }));
+}
+
+export async function definirPapel(irmao: string, papel: string) {
+  const { error } = await exigir().rpc('definir_papel', { irmao, novo: papel });
+  if (error) throw error;
+}

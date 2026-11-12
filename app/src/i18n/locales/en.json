@@ -1285,5 +1285,23 @@
     "motivoFalta": "Write the reason for declining. It is sent to the brother.",
     "erroCarregar": "Could not load requests. Check your internet.",
     "erroDecidir": "Could not record the decision. Try again."
+  },
+  "papeis": {
+    "titulo": "Brothers' roles",
+    "detalhe": "Appoint moderators and boards",
+    "explica": "Only you, as administrator, choose who is moderator, chapter board or general board. Tap a brother to change.",
+    "buscar": "Search brother or chapter",
+    "escolher": "{{nome}}'s role",
+    "explicaPapeis": "Chapter board: approves brothers of their own chapter and creates its rides. General board: the same for all chapters. Moderator: moderates content and approves chapters without a board in the app.",
+    "erroCarregar": "Could not load the list. Check your internet.",
+    "erroMudar": "Could not change the role. Try again.",
+    "nomes": {
+      "pendente": "Awaiting approval",
+      "membro": "Member",
+      "diretoria_capitulo": "Chapter board",
+      "diretoria_geral": "General board",
+      "moderador": "Moderator",
+      "admin": "Administrator"
+    }
   }
 }

@@ -1285,5 +1285,23 @@
     "motivoFalta": "Escribe el motivo del rechazo. Le llega al hermano.",
     "erroCarregar": "No se pudieron cargar los pedidos. Revisa la internet.",
     "erroDecidir": "No se pudo registrar la decisión. Intenta de nuevo."
+  },
+  "papeis": {
+    "titulo": "Roles de los hermanos",
+    "detalhe": "Nombrar moderadores y directivas",
+    "explica": "Solo tú, como administrador, eliges quién es moderador, directiva del capítulo o directiva general. Toca un hermano para cambiar.",
+    "buscar": "Buscar hermano o capítulo",
+    "escolher": "Rol de {{nome}}",
+    "explicaPapeis": "Directiva del capítulo: aprueba a los hermanos de su capítulo y crea sus paseos. Directiva general: lo mismo en todos los capítulos. Moderador: modera contenido y aprueba capítulos sin directiva en la app.",
+    "erroCarregar": "No se pudo cargar la lista. Revisa la internet.",
+    "erroMudar": "No se pudo cambiar el rol. Intenta de nuevo.",
+    "nomes": {
+      "pendente": "Esperando aprobación",
+      "membro": "Miembro",
+      "diretoria_capitulo": "Directiva del capítulo",
+      "diretoria_geral": "Directiva general",
+      "moderador": "Moderador",
+      "admin": "Administrador"
+    }
   }
 }

@@ -1285,5 +1285,23 @@
     "motivoFalta": "Escreva o motivo da recusa. Ele chega ao irmão.",
     "erroCarregar": "Não foi possível carregar os pedidos. Confira a internet.",
     "erroDecidir": "Não foi possível registrar a decisão. Tente de novo."
+  },
+  "papeis": {
+    "titulo": "Papéis dos irmãos",
+    "detalhe": "Nomear moderadores e diretorias",
+    "explica": "Só você, como administrador, escolhe quem é moderador, diretoria do capítulo ou diretoria geral. Toque num irmão para mudar.",
+    "buscar": "Buscar irmão ou capítulo",
+    "escolher": "Papel de {{nome}}",
+    "explicaPapeis": "Diretoria do capítulo: aprova os irmãos do próprio capítulo e cria passeios dele. Diretoria geral: o mesmo em todos os capítulos. Moderador: modera conteúdo e aprova capítulos sem diretoria no app.",
+    "erroCarregar": "Não foi possível carregar a lista. Confira a internet.",
+    "erroMudar": "Não foi possível mudar o papel. Tente de novo.",
+    "nomes": {
+      "pendente": "Aguardando aprovação",
+      "membro": "Membro",
+      "diretoria_capitulo": "Diretoria do capítulo",
+      "diretoria_geral": "Diretoria geral",
+      "moderador": "Moderador",
+      "admin": "Administrador"
+    }
   }
 }

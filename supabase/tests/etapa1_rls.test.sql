@@ -1,7 +1,7 @@
 -- PONTO DE TESTE 1 em SQL (pgTAP): quem vê o quê. Roda com `supabase test db`.
 create extension if not exists pgtap with schema extensions;
 begin;
-select plan(20);
+select plan(21);
 
 -- ---------- preparação (como postgres)
 insert into public.capitulos (id, nome, cidade, uf, liberado) values
@@ -121,6 +121,13 @@ select set_config('request.jwt.claims', '{"sub":"a0000000-0000-0000-0000-0000000
 select public.excluir_minha_conta();
 reset role;
 select is((select count(*) from public.perfis where id = 'a0000000-0000-0000-0000-000000000005'), 0::bigint, 'excluir a conta apaga o perfil e os dados');
+
+-- só o admin muda papéis (membro comum não consegue)
+select throws_ok(
+  $$ select public.definir_papel('00000000-0000-0000-0000-000000000099'::uuid, 'moderador'::public.papel) $$,
+  'só o administrador muda papéis',
+  'membro comum não nomeia moderador'
+);
 
 select * from finish();
 rollback;
