@@ -49,18 +49,18 @@ Salve a imagem com o nome indicado e mande aqui na conversa (ou em `docs/assets-
 
 ## Automáticas (geradas pelo agente com Cloudflare, Gemini ou Pollinations)
 
-- ⏳ **Feed: estrada da Chapada ao entardecer** → `app/assets/ia/feed/chapada.webp`
-- ⏳ **Feed: Transpantaneira com motos** → `app/assets/ia/feed/transpantaneira.webp`
-- ⏳ **Feed: parada para café** → `app/assets/ia/feed/cafe.webp`
-- ⏳ **Capa: encontro estadual** → `app/assets/ia/passeios/encontro.webp`
-- ⏳ **Feed: comboio à noite** → `app/assets/ia/feed/comboio-noite.webp`
-- ⏳ **Feed: posto na estrada** → `app/assets/ia/feed/posto.webp`
-- ⏳ **Feed: cachoeira Véu de Noiva** → `app/assets/ia/feed/cachoeira.webp`
-- ⏳ **Capa: estradão do Parecis** → `app/assets/ia/passeios/parecis.webp`
-- ⏳ **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
-- ⏳ **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
-- ⏳ **Classificados: par de baús** → `app/assets/ia/classificados/baus.webp`
-- ⏳ **Classificados: intercomunicador** → `app/assets/ia/classificados/intercom.webp`
+- ✅ cloudflare 2026-11-12 **Feed: estrada da Chapada ao entardecer** → `app/assets/ia/feed/chapada.webp`
+- ✅ cloudflare 2026-11-12 **Feed: Transpantaneira com motos** → `app/assets/ia/feed/transpantaneira.webp`
+- ✅ cloudflare 2026-11-12 **Feed: parada para café** → `app/assets/ia/feed/cafe.webp`
+- ✅ cloudflare 2026-11-12 **Capa: encontro estadual** → `app/assets/ia/passeios/encontro.webp`
+- ✅ cloudflare 2026-11-12 **Feed: comboio à noite** → `app/assets/ia/feed/comboio-noite.webp`
+- ✅ cloudflare 2026-11-12 **Feed: posto na estrada** → `app/assets/ia/feed/posto.webp`
+- ✅ cloudflare 2026-11-12 **Feed: cachoeira Véu de Noiva** → `app/assets/ia/feed/cachoeira.webp`
+- ✅ cloudflare 2026-11-12 **Capa: estradão do Parecis** → `app/assets/ia/passeios/parecis.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: par de baús** → `app/assets/ia/classificados/baus.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: intercomunicador** → `app/assets/ia/classificados/intercom.webp`
 - ⏳ **Guia: oficina de irmão** → `app/assets/ia/negocios/oficina.webp`
 - ⏳ **Guia: churrascaria de estrada** → `app/assets/ia/negocios/churrascaria.webp`
 - ⏳ **Guia: pousada na Chapada** → `app/assets/ia/negocios/pousada.webp`

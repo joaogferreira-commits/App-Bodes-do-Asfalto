@@ -2,7 +2,7 @@
   {
     "id": "feed-chapada",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 1,
     "tipo": "foto",
     "exemplo": true,
@@ -10,12 +10,14 @@
     "destino": "app/assets/ia/feed/chapada.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Rodovia de asfalto sinuosa subindo entre paredões de arenito vermelho-alaranjado da Chapada dos Guimarães, ao entardecer; três motocicletas custom (motos de duas rodas, não carros) estacionadas no acostamento, vistas de longe."
+    "prompt": "Rodovia de asfalto sinuosa subindo entre paredões de arenito vermelho-alaranjado da Chapada dos Guimarães, ao entardecer; três motocicletas custom (motos de duas rodas, não carros) estacionadas no acostamento, vistas de longe.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-transpantaneira",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 1,
     "tipo": "foto",
     "exemplo": true,
@@ -23,12 +25,14 @@
     "destino": "app/assets/ia/feed/transpantaneira.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Estrada de terra reta da Transpantaneira com pontes de madeira, garças e jacarés à beira d’água, duas motos big trail empoeiradas ao longe."
+    "prompt": "Estrada de terra reta da Transpantaneira com pontes de madeira, garças e jacarés à beira d’água, duas motos big trail empoeiradas ao longe.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-cafe-beira",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 1,
     "tipo": "foto",
     "exemplo": true,
@@ -36,12 +40,14 @@
     "destino": "app/assets/ia/feed/cafe.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Mesa de madeira de um café de beira de estrada com xícaras de café e pão de queijo, capacetes sobre a mesa, motos desfocadas ao fundo."
+    "prompt": "Mesa de madeira de um café de beira de estrada com xícaras de café e pão de queijo, capacetes sobre a mesa, motos desfocadas ao fundo.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-comboio-noite",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -49,12 +55,14 @@
     "destino": "app/assets/ia/feed/comboio-noite.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Comboio de motos à noite numa rodovia reta, rastros de luz vermelha das lanternas, céu estrelado, foto de longa exposição."
+    "prompt": "Comboio de motos à noite numa rodovia reta, rastros de luz vermelha das lanternas, céu estrelado, foto de longa exposição.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-posto",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -62,7 +70,9 @@
     "destino": "app/assets/ia/feed/posto.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Posto de combustível simples na beira de uma rodovia do interior, ao amanhecer, uma moto touring abastecendo, sem logotipos."
+    "prompt": "Posto de combustível simples na beira de uma rodovia do interior, ao amanhecer, uma moto touring abastecendo, sem logotipos.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-chuva",
@@ -80,7 +90,7 @@
   {
     "id": "feed-cachoeira",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -88,7 +98,9 @@
     "destino": "app/assets/ia/feed/cachoeira.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Cachoeira alta caindo de um paredão de arenito vermelho em meio ao cerrado verde, céu azul."
+    "prompt": "Cachoeira alta caindo de um paredão de arenito vermelho em meio ao cerrado verde, céu azul.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "feed-garagem",
@@ -106,7 +118,7 @@
   {
     "id": "passeio-rondonopolis",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 1,
     "tipo": "foto",
     "exemplo": true,
@@ -114,12 +126,14 @@
     "destino": "app/assets/ia/passeios/encontro.webp",
     "largura": 1200,
     "altura": 540,
-    "prompt": "Pátio de um encontro de motoclube ao ar livre ao entardecer, dezenas de motos estacionadas em fila, bandeirinhas, sem logotipos."
+    "prompt": "Pátio de um encontro de motoclube ao ar livre ao entardecer, dezenas de motos estacionadas em fila, bandeirinhas, sem logotipos.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "passeio-parecis",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -127,7 +141,9 @@
     "destino": "app/assets/ia/passeios/parecis.webp",
     "largura": 1200,
     "altura": 540,
-    "prompt": "Estradão de terra vermelha entre plantações de soja no chapadão do Parecis, horizonte largo, uma moto big trail levantando poeira."
+    "prompt": "Estradão de terra vermelha entre plantações de soja no chapadão do Parecis, horizonte largo, uma moto big trail levantando poeira.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "passeio-aniversario",
@@ -145,7 +161,7 @@
   {
     "id": "class-capacete",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -153,12 +169,14 @@
     "destino": "app/assets/ia/classificados/capacete.webp",
     "largura": 900,
     "altura": 900,
-    "prompt": "Capacete aberto de motociclista creme sobre uma bancada de madeira, com viseira bolha ao lado, foto de produto."
+    "prompt": "Capacete aberto de motociclista creme sobre uma bancada de madeira, com viseira bolha ao lado, foto de produto.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "class-jaqueta",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -166,12 +184,14 @@
     "destino": "app/assets/ia/classificados/jaqueta.webp",
     "largura": 900,
     "altura": 900,
-    "prompt": "Jaqueta de couro marrom de motociclista pendurada num cabide em parede de tijolos, foto de produto."
+    "prompt": "Jaqueta de couro marrom de motociclista pendurada num cabide em parede de tijolos, foto de produto.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "class-baus",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -179,12 +199,14 @@
     "destino": "app/assets/ia/classificados/baus.webp",
     "largura": 900,
     "altura": 900,
-    "prompt": "Par de baús laterais pretos de moto touring sobre o chão de uma garagem, foto de produto."
+    "prompt": "Par de baús laterais pretos de moto touring sobre o chão de uma garagem, foto de produto.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "class-intercom",
     "quem": "auto",
-    "status": "pendente",
+    "status": "feito",
     "prioridade": 2,
     "tipo": "foto",
     "exemplo": true,
@@ -192,7 +214,9 @@
     "destino": "app/assets/ia/classificados/intercom.webp",
     "largura": 900,
     "altura": 900,
-    "prompt": "Dois intercomunicadores bluetooth de capacete sobre uma mesa escura com cabos, foto de produto."
+    "prompt": "Dois intercomunicadores bluetooth de capacete sobre uma mesa escura com cabos, foto de produto.",
+    "fonte": "cloudflare",
+    "data": "2026-11-12"
   },
   {
     "id": "class-pneus",
