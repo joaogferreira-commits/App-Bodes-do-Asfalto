@@ -4,6 +4,11 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.13.0 — 12/11/2026 (primeira versão para a Google Play, teste interno)
+
+- Chat (6ª aba), desafios com tabela de XP por km, stories com câmera própria (foto, vídeo até 60 s, filtros, textos arrastáveis, desenho, enquete, pergunta, contagem regressiva), logo nova e abertura animada de 1,5 s.
+- Pacote AAB (formato da loja) gerado pelo perfil "production" do EAS.
+
 ## 0.12.0 — 12/11/2026
 
 - SOS sempre à mão: botão vermelho no Mapa e em todas as abas; "Pedir ajuda (SOS)" ao segurar o ícone do app; pergunta no primeiro uso se quer o atalho de SOS na tela inicial; no Perfil, "Colocar atalho na tela inicial" e "Colocar widget de SOS" (Android).

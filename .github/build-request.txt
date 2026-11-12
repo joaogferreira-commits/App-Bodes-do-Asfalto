@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
-perfil=preview
-pedido=18 (0.12.0: SOS em todas as telas, atalhos e widget, fichas do mapa, Rota Biker, Android Auto)
+perfil=production
+pedido=19 (0.13.0: primeiro pacote AAB para o teste interno da Google Play)
