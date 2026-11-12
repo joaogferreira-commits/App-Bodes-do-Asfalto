@@ -57,15 +57,15 @@ Salve a imagem com o nome indicado e mande aqui na conversa (ou em `docs/assets-
 - ✅ cloudflare 2026-11-12 **Feed: posto na estrada** → `app/assets/ia/feed/posto.webp`
 - ✅ cloudflare 2026-11-12 **Feed: cachoeira Véu de Noiva** → `app/assets/ia/feed/cachoeira.webp`
 - ✅ cloudflare 2026-11-12 **Capa: estradão do Parecis** → `app/assets/ia/passeios/parecis.webp`
-- ⏳ **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
-- ⏳ **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: capacete aberto** → `app/assets/ia/classificados/capacete.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: jaqueta de couro** → `app/assets/ia/classificados/jaqueta.webp`
 - ✅ cloudflare 2026-11-12 **Classificados: par de baús** → `app/assets/ia/classificados/baus.webp`
 - ✅ cloudflare 2026-11-12 **Classificados: intercomunicador** → `app/assets/ia/classificados/intercom.webp`
-- ⏳ **Guia: oficina de irmão** → `app/assets/ia/negocios/oficina.webp`
-- ⏳ **Guia: churrascaria de estrada** → `app/assets/ia/negocios/churrascaria.webp`
-- ⏳ **Guia: pousada na Chapada** → `app/assets/ia/negocios/pousada.webp`
-- ⏳ **Feed: estrada com chuva chegando** → `app/assets/ia/feed/chuva.webp`
-- ⏳ **Feed: garagem com motos** → `app/assets/ia/feed/garagem.webp`
-- ⏳ **Capa: churrasco na sede** → `app/assets/ia/passeios/aniversario.webp`
-- ⏳ **Classificados: pneus de moto** → `app/assets/ia/classificados/pneus.webp`
-- ⏳ **Ilustração: sem internet** → `app/assets/ia/ilustracoes/sem-internet.webp`
+- ✅ cloudflare 2026-11-12 **Guia: oficina de irmão** → `app/assets/ia/negocios/oficina.webp`
+- ✅ cloudflare 2026-11-12 **Guia: churrascaria de estrada** → `app/assets/ia/negocios/churrascaria.webp`
+- ✅ cloudflare 2026-11-12 **Guia: pousada na Chapada** → `app/assets/ia/negocios/pousada.webp`
+- ✅ cloudflare 2026-11-12 **Feed: estrada com chuva chegando** → `app/assets/ia/feed/chuva.webp`
+- ✅ cloudflare 2026-11-12 **Feed: garagem com motos** → `app/assets/ia/feed/garagem.webp`
+- ✅ cloudflare 2026-11-12 **Capa: churrasco na sede** → `app/assets/ia/passeios/aniversario.webp`
+- ✅ cloudflare 2026-11-12 **Classificados: pneus de moto** → `app/assets/ia/classificados/pneus.webp`
+- ✅ cloudflare 2026-11-12 **Ilustração: sem internet** → `app/assets/ia/ilustracoes/sem-internet.webp`
