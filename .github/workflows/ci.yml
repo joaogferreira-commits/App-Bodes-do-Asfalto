@@ -35,3 +35,15 @@ jobs:
       - name: Testes das ferramentas (conversor de imagens e gerador do estilo do mapa)
         working-directory: tools
         run: python -m unittest
+
+  banco:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Banco local (só o Postgres) com as migrations e o seed
+        run: supabase db start
+      - name: Testes das regras de acesso (pgTAP)
+        run: supabase test db
