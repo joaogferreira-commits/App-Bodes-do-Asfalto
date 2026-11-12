@@ -5,7 +5,9 @@
     "emBreve": "Próximamente",
     "exemplo": "ejemplo",
     "entendi": "Entendido",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "abrirPainel": "Abrir el panel",
+    "recolherPainel": "Recoger el panel"
   },
   "abas": {
     "mapa": "Mapa",
@@ -97,6 +99,15 @@
         "O": "Oeste",
         "NO": "Noroeste"
       }
+    },
+    "google": {
+      "verificando": "Comprobando si la navegación de Google sigue esta ruta…",
+      "fiel": "La navegación de Google seguirá esta ruta.",
+      "parecida": "Google la aceptó, pero va por un camino un poco distinto ({{km}} km). Síguela en el mapa de la app.",
+      "semChave": "Navegación sin la ruta planificada: falta la clave de Google en esta versión.",
+      "chaveSemRoutes": "Google rechazó la ruta: la clave no tiene activada la \"Routes API\". La navegación irá por la ruta de Google.",
+      "semRota": "Google no conoce parte de este camino (tierra: {{terra}} km). La navegación irá por su ruta; para seguirla al pie de la letra, elige \"Solo asfalto\" o síguela en el mapa de la app.",
+      "semRede": "Sin internet para comprobar con Google."
     }
   },
   "pilotando": {

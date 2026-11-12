@@ -213,3 +213,48 @@ describe('bate-volta', () => {
     expect(rota.km).toBe(98);
   });
 });
+
+describe('rota no Google (por que recusa e como suavizar)', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { rotaNoGoogle } = require('./google') as typeof import('./google');
+  const longa = Array.from({ length: 50 }, (_, i) => ({ lat: -15.6 + i * 0.002, lng: -56.1 + i * 0.002 }));
+  const ok = (km: number) => ({
+    ok: true,
+    status: 200,
+    json: async () => ({ routes: [{ routeToken: 'T', distanceMeters: km * 1000 }] }),
+  });
+  const semRota = { ok: false, status: 400, json: async () => ({}) };
+
+  it('chave sem a Routes API (403): para na hora e diz o motivo', async () => {
+    const buscar = jest.fn().mockResolvedValue({ ok: false, status: 403, json: async () => ({}) });
+    await expect(rotaNoGoogle('k', longa, 50, buscar)).resolves.toEqual({
+      aceita: false,
+      motivo: 'chaveSemRoutes',
+    });
+    expect(buscar).toHaveBeenCalledTimes(1);
+  });
+
+  it('se recusar com 10 pontos, tenta com 5 e depois 2', async () => {
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce(semRota)
+      .mockResolvedValueOnce(semRota)
+      .mockResolvedValueOnce(ok(52));
+    const r = await rotaNoGoogle('k', longa, 50, buscar);
+    expect(r).toMatchObject({ aceita: true, passagens: 2, kmGoogle: 52, fiel: true });
+    const vias = buscar.mock.calls.map((c) => JSON.parse(c[1].body).intermediates.length);
+    expect(vias).toEqual([10, 5, 2]);
+  });
+
+  it('avisa quando o Google vai por outro caminho (distância > 10 % diferente)', async () => {
+    const r = await rotaNoGoogle('k', longa, 50, jest.fn().mockResolvedValue(ok(70)));
+    expect(r).toMatchObject({ aceita: true, fiel: false });
+  });
+
+  it('nada funcionou: devolve o motivo semRota', async () => {
+    await expect(rotaNoGoogle('k', longa, 50, jest.fn().mockResolvedValue(semRota))).resolves.toEqual({
+      aceita: false,
+      motivo: 'semRota',
+    });
+  });
+});

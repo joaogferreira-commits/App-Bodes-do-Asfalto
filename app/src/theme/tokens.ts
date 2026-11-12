@@ -58,13 +58,13 @@ export type NomeCor = keyof typeof paletaNoite;
 export type Paleta = Record<NomeCor, string>;
 
 export const paletaSol: Paleta = {
-  fundo: '#F6F1E7',
-  superficie: '#FFFFFF',
+  fundo: '#EFE9DF',
+  superficie: '#FBF8F3',
   superficie2: '#FFFFFF',
-  superficie3: '#EFE7DA',
-  sobreMapa: '#FFFFFF',
-  linha: '#CDBEA8',
-  linhaSuave: '#E4D9C8',
+  superficie3: '#E6DDCE',
+  sobreMapa: '#FBF8F3',
+  linha: '#A8957A',
+  linhaSuave: '#D6CAB7',
   linhaForte: '#5A4632',
   texto: '#1A1410',
   textoSec: '#5A4632',
@@ -92,7 +92,7 @@ export const paletaSol: Paleta = {
   agua: '#BCD3E0',
   rio: '#5B8DB0',
   vegetacao: '#E1E8D2',
-  chao: '#EFE9DC',
+  chao: '#EAE3D5',
 };
 
 /** Paleta padrão (noite). Componentes que trocam de tema usam `useCores()`. */
@@ -145,14 +145,15 @@ export const espaco = {
 } as const;
 
 /**
- * Alvos de toque (R4, R20). pilotando: lado menor ≥ 113 dp (≈ 18 mm), espaço ≥ 24 dp.
+ * Alvos de toque (R20). pilotando: 92 dp de altura, 10 dp de espaço (decisão do dono em 12/11/2026,
+ * abaixo dos 113 dp da pesquisa para sobrar mapa).
  */
 export const toque = {
   minimo: 48,
   botao: 52,
   botaoGrande: 56,
-  pilotando: 120,
-  pilotandoEspaco: 24,
+  pilotando: 92,
+  pilotandoEspaco: 10,
   carro: 66,
 } as const;
 

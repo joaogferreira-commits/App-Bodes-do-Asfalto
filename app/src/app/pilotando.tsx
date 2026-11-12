@@ -69,7 +69,7 @@ const estiloCabecalho = {
 
 const DURACAO_SOS = 3000;
 const DURACAO_ENCERRAR = 1500;
-const LARGURA_GRADE_DEITADO = 3 * 130 + 2 * toque.pilotandoEspaco + 2 * espaco.sm;
+const LARGURA_GRADE_DEITADO = 3 * 110 + 2 * toque.pilotandoEspaco + 2 * espaco.sm;
 
 function Pilotando() {
   const { t } = useTranslation();
@@ -293,7 +293,7 @@ function Pilotando() {
                   aoCompletar={() => void encerrar()}
                   style={[estilos.botao, tamanhoBotao, { borderWidth: 2, borderColor: c.linhaForte }]}
                 >
-                  <Icone nome="encerrar" tamanho={40} cor={c.texto} />
+                  <Icone nome="encerrar" tamanho={30} cor={c.texto} />
                   <Texto
                     style={[estilos.textoBotao, { color: c.texto }]}
                     maxFontSizeMultiplier={escalaMaxima.pilotando}
@@ -316,7 +316,7 @@ function Pilotando() {
                   { backgroundColor: a.fundo, opacity: pressed ? 0.8 : 1 },
                 ]}
               >
-                <Icone nome={a.icone} tamanho={40} cor={a.corIcone} />
+                <Icone nome={a.icone} tamanho={32} cor={a.corIcone} />
                 <Texto
                   style={[estilos.textoBotao, { color: a.cor }]}
                   numberOfLines={2}

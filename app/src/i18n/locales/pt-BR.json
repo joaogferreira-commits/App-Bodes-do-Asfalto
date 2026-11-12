@@ -5,7 +5,9 @@
     "emBreve": "Em breve",
     "exemplo": "exemplo",
     "entendi": "Entendi",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "abrirPainel": "Abrir o painel",
+    "recolherPainel": "Recolher o painel"
   },
   "abas": {
     "mapa": "Mapa",
@@ -97,6 +99,15 @@
         "O": "Oeste",
         "NO": "Noroeste"
       }
+    },
+    "google": {
+      "verificando": "Conferindo se a navegação do Google segue esta rota…",
+      "fiel": "A navegação do Google vai seguir esta rota.",
+      "parecida": "O Google aceitou, mas vai por um caminho um pouco diferente ({{km}} km). Acompanhe pelo mapa do app.",
+      "semChave": "Navegação sem a rota planejada: falta a chave do Google nesta versão.",
+      "chaveSemRoutes": "O Google recusou a rota: a chave não tem a \"Routes API\" ligada. A navegação vai pela rota do Google (aviso ao dono).",
+      "semRota": "O Google não conhece parte deste caminho (terra: {{terra}} km). A navegação vai pela rota dele; para segui-la à risca, escolha \"Só asfalto\" ou acompanhe pelo mapa do app.",
+      "semRede": "Sem internet para conferir com o Google."
     }
   },
   "pilotando": {

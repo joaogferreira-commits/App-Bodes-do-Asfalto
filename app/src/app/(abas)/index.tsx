@@ -10,12 +10,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
 import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
-import { filtrar, type Filtro } from '@/dados/exemplos';
+import { filtrar, lugaresExemplo, type Filtro } from '@/dados/exemplos';
+import { CamadaLugares } from '@/componentes/CamadaLugares';
+import { ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
 import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, Pino, pinos, Texto } from '@/ui';
+import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, pinos, Texto } from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
@@ -61,7 +63,9 @@ export default function Mapa() {
   const camera = useRef<CameraRef>(null);
   const [filtro, setFiltro] = useState<Filtro>('tudo');
   const [legenda, setLegenda] = useState(false);
-  const { definirDestino } = useViagem();
+  const [recolhido, setRecolhido] = useState(false);
+  const [zoomAtual, setZoomAtual] = useState(11);
+  const { definirDestino, definirBateVolta } = useViagem();
   const { lugares, irmaos } = useMemo(() => filtrar(filtro), [filtro]);
   const contagem = {
     irmaos: irmaos.length,
@@ -92,6 +96,23 @@ export default function Mapa() {
     );
   };
 
+  /** Toque num emblema: nome e opção de traçar rota até ele. */
+  const tocarLugar = (id: string) => {
+    const l = lugaresExemplo.find((x) => x.id === id);
+    if (!l) return;
+    Alert.alert(l.nome, l.rotulo ?? undefined, [
+      { text: t('comum.cancelar'), style: 'cancel' },
+      {
+        text: t('ferramentas.rotaAte', { lugar: l.nome }),
+        onPress: () => {
+          definirBateVolta(null);
+          definirDestino({ chave: 'busca', nome: l.nome, posicao: { lat: l.lat, lng: l.lng } });
+          router.push('/rota');
+        },
+      },
+    ]);
+  };
+
   const irAoPosto = () => {
     definirDestino(postoExemplo);
     router.push('/rota');
@@ -103,33 +124,31 @@ export default function Mapa() {
         ref={mapa}
         style={StyleSheet.absoluteFill}
         mapStyle={estiloMapa}
+        onRegionDidChange={(e) => setZoomAtual(e.nativeEvent.zoom)}
         logo={false}
         attribution
-        attributionPosition={{ bottom: 330, left: 8 }}
+        attributionPosition={{ bottom: recolhido ? 90 : 330, left: 8 }}
       >
         <Camera ref={camera} initialViewState={{ center: CUIABA, zoom: 11 }} />
-        {lugares
-          .filter((l) => l.tipo !== 'agape')
-          .map((l) => (
-            <Marker key={l.id} id={l.id} lngLat={[l.lng, l.lat]} anchor="bottom">
-              <Pino
-                tipo={l.tipo}
-                rotulo={l.rotulo}
-                descricao={`${l.nome}${l.rotulo ? `, ${l.rotulo}` : ''}`}
-              />
-            </Marker>
-          ))}
+        <CamadaLugares
+          lugares={lugares}
+          aoTocarLugar={tocarLugar}
+          aoTocarGrupo={(centro, z) =>
+            camera.current?.flyTo({ center: centro, zoom: z + 0.5, duration: 600 })
+          }
+        />
         {/* Ágape Relâmpago: sempre visível, por cima dos outros, flutuando */}
         {agapes.map((ag) => (
           <Marker key={ag.id} id={ag.id} lngLat={[ag.lng, ag.lat]} anchor="bottom">
             <MarcadorAgape comecaEm={ag.comecaEm} local={ag.local} onPress={() => verAgape(ag)} />
           </Marker>
         ))}
-        {irmaos.map((i) => (
-          <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
-            <Avatar nome={i.nome} status={i.status} tamanho={44} />
-          </Marker>
-        ))}
+        {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
+          irmaos.map((i) => (
+            <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
+              <Avatar nome={i.nome} status={i.status} tamanho={44} />
+            </Marker>
+          ))}
       </Map>
 
       <SafeAreaView edges={['top']} style={estilos.topo} pointerEvents="box-none">
@@ -214,12 +233,17 @@ export default function Mapa() {
         )}
       </SafeAreaView>
 
-      <PainelInferior style={estilos.painel}>
-        <View style={estilos.nestaArea}>
-          <Texto variante="rotulo">{t('mapa.nestaArea')}</Texto>
-          <Texto variante="secundario">{t('mapa.contagem', contagem)}</Texto>
-        </View>
-
+      <PainelInferior
+        style={estilos.painel}
+        recolhido={recolhido}
+        aoAlternar={setRecolhido}
+        resumo={
+          <View style={estilos.nestaArea}>
+            <Texto variante="rotulo">{t('mapa.nestaArea')}</Texto>
+            <Texto variante="secundario">{t('mapa.contagem', contagem)}</Texto>
+          </View>
+        }
+      >
         <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
           <Pressable
             accessibilityRole="button"

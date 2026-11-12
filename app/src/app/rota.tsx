@@ -24,10 +24,9 @@ import {
   percentualTerra,
   trechosGeoJSON,
 } from '@/rotas/formato';
-import { tokenDaRota } from '@/rotas/google';
+import { rotaNoGoogle, type ResultadoGoogle } from '@/rotas/google';
 import type { TipoEstrada } from '@/rotas/tipos';
 import {
-  amostrarPassagens,
   ErroRota,
   planejarBateVolta,
   planejarRota,
@@ -63,6 +62,7 @@ export default function Rota() {
   const [origem, setOrigem] = useState<Coordenada | null>(null);
   const [estado, setEstado] = useState<Estado>({ fase: 'calculando' });
   const [iniciando, setIniciando] = useState(false);
+  const [recolhido, setRecolhido] = useState(false);
   const destinos = [...(destino.chave === 'busca' ? [destino] : []), ...destinosDaProva, postoExemplo];
 
   const calcular = useCallback(async () => {
@@ -100,20 +100,48 @@ export default function Rota() {
     void Promise.resolve().then(calcular);
   }, [calcular]);
 
+  // Confere ANTES de sair se a navegação do Google vai seguir esta rota (e guarda o token).
+  const [google, setGoogle] = useState<ResultadoGoogle | 'verificando' | null>(null);
+  const chaveGoogle =
+    (Constants.expoConfig?.extra as { chaveGoogle?: string } | undefined)?.chaveGoogle ?? '';
+  useEffect(() => {
+    if (!rota) return;
+    let ativo = true;
+    void Promise.resolve()
+      .then(() => ativo && setGoogle('verificando'))
+      .then(() => rotaNoGoogle(chaveGoogle, rota.forma, rota.km))
+      .then((r) => ativo && setGoogle(r));
+    return () => {
+      ativo = false;
+    };
+  }, [rota, chaveGoogle]);
+
   const iniciar = async () => {
     if (!rota || !origem) return;
     setIniciando(true);
-    const chave = (Constants.expoConfig?.extra as { chaveGoogle?: string } | undefined)?.chaveGoogle ?? '';
-    const token = await tokenDaRota(
-      chave,
-      origem,
-      rota.forma[rota.forma.length - 1]!,
-      amostrarPassagens(rota.forma, 12),
-    );
-    viagem.definirRota(rota, token);
+    const r =
+      google && google !== 'verificando' ? google : await rotaNoGoogle(chaveGoogle, rota.forma, rota.km);
+    viagem.definirRota(rota, r.aceita ? r.token : null);
     setIniciando(false);
     router.push('/pilotando');
   };
+
+  const textoGoogle =
+    google === 'verificando'
+      ? t('rota.google.verificando')
+      : !google
+        ? null
+        : google.aceita
+          ? google.fiel
+            ? t('rota.google.fiel')
+            : t('rota.google.parecida', { km: formatarKm(google.kmGoogle) })
+          : t(`rota.google.${google.motivo}`, { terra: formatarKm(rota?.kmTerra ?? 0) });
+  const corGoogle =
+    google && google !== 'verificando'
+      ? google.aceita && google.fiel
+        ? cores.verdePosto
+        : cores.alerta
+      : cores.textoSec;
 
   const pct = rota ? percentualTerra(rota.km, rota.kmTerra) : 0;
 
@@ -199,7 +227,18 @@ export default function Rota() {
         </ScrollView>
       </SafeAreaView>
 
-      <PainelInferior style={estilos.painel}>
+      <PainelInferior
+        style={estilos.painel}
+        recolhido={recolhido}
+        aoAlternar={setRecolhido}
+        resumo={
+          recolhido && rota ? (
+            <Texto variante="corpoForte">
+              {t('rota.km', { km: formatarKm(rota.km) })} · {formatarDuracao(rota.minutos)}
+            </Texto>
+          ) : null
+        }
+      >
         <ScrollView
           style={{ maxHeight: alturaTela * 0.62 }}
           contentContainerStyle={{ gap: espaco.sm }}
@@ -289,6 +328,15 @@ export default function Rota() {
                   onPress={() => viagem.definirBateVolta({ ...bateVolta, variacao: bateVolta.variacao + 1 })}
                 />
               </View>
+            </View>
+          )}
+
+          {estado.fase === 'pronta' && textoGoogle && (
+            <View style={[estilos.avisoTerra, { borderColor: corGoogle }]} accessibilityLiveRegion="polite">
+              <Icone nome="navegar" tamanho={20} cor={corGoogle} />
+              <Texto variante="secundario" style={{ flex: 1, color: cores.texto }}>
+                {textoGoogle}
+              </Texto>
             </View>
           )}
 

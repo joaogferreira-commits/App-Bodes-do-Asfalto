@@ -71,10 +71,9 @@ describe('regras gerais do tema', () => {
     expect(tamanhoTexto.corpo).toBe(17);
   });
 
-  it('toque mínimo de 48 dp; modo pilotando com ≥ 113 dp e espaço ≥ 24 dp', () => {
+  it('toque mínimo de 48 dp; modo pilotando com botões ≥ 90 dp', () => {
     expect(toque.minimo).toBeGreaterThanOrEqual(48);
-    expect(toque.pilotando).toBeGreaterThanOrEqual(113);
-    expect(toque.pilotandoEspaco).toBeGreaterThanOrEqual(24);
+    expect(toque.pilotando).toBeGreaterThanOrEqual(90);
   });
 
   it('troca automática: sol de dia, noite à noite; escolha manual prevalece', () => {

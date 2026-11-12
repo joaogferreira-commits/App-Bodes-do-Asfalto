@@ -25,7 +25,7 @@
       "id": "fundo",
       "type": "background",
       "paint": {
-        "background-color": "#EFE9DC"
+        "background-color": "#EAE3D5"
       }
     },
     {
@@ -35,7 +35,7 @@
       "source-layer": "landcover",
       "filter": ["in", ["get", "class"], ["literal", ["wood", "forest", "grass", "scrub", "farmland"]]],
       "paint": {
-        "fill-color": "#E1E8D2",
+        "fill-color": "#DCE5CB",
         "fill-opacity": 0.85
       }
     },
@@ -45,7 +45,7 @@
       "source": "openmaptiles",
       "source-layer": "park",
       "paint": {
-        "fill-color": "#E1E8D2",
+        "fill-color": "#DCE5CB",
         "fill-opacity": 0.6
       }
     },
@@ -56,7 +56,7 @@
       "source-layer": "landuse",
       "filter": ["in", ["get", "class"], ["literal", ["residential", "commercial", "industrial", "retail"]]],
       "paint": {
-        "fill-color": "#E7DFD0"
+        "fill-color": "#E0D7C6"
       }
     },
     {
@@ -185,7 +185,7 @@
         "line-join": "round"
       },
       "paint": {
-        "line-color": "#857259",
+        "line-color": "#6E5D46",
         "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 8, 1.2, 12, 3.75, 15, 9.0, 17, 18.0]
       },
       "minzoom": 8
@@ -225,7 +225,7 @@
         "line-join": "round"
       },
       "paint": {
-        "line-color": "#857259",
+        "line-color": "#6E5D46",
         "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 6, 1.45, 10, 3.62, 14, 8.7, 17, 20.3]
       }
     },

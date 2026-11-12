@@ -5,7 +5,9 @@
     "emBreve": "Coming soon",
     "exemplo": "sample",
     "entendi": "Got it",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "abrirPainel": "Open the panel",
+    "recolherPainel": "Collapse the panel"
   },
   "abas": {
     "mapa": "Map",
@@ -97,6 +99,15 @@
         "O": "West",
         "NO": "Northwest"
       }
+    },
+    "google": {
+      "verificando": "Checking whether Google navigation follows this route…",
+      "fiel": "Google navigation will follow this route.",
+      "parecida": "Google accepted it, but takes a slightly different way ({{km}} km). Follow along on the app map.",
+      "semChave": "Navigation without the planned route: the Google key is missing in this build.",
+      "chaveSemRoutes": "Google rejected the route: the key does not have the \"Routes API\" enabled. Navigation will use Google's route.",
+      "semRota": "Google doesn't know part of this way (dirt: {{terra}} km). Navigation will use its own route; to follow it exactly, choose \"Paved only\" or follow on the app map.",
+      "semRede": "No internet to check with Google."
     }
   },
   "pilotando": {

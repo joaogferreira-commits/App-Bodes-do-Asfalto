@@ -26,8 +26,8 @@ PALETAS = {
         "opRodovia": 0.75, "opSecundaria": 0.6,
     },
     "sol": {
-        "chao": "#EFE9DC", "vegetacao": "#E1E8D2", "urbano": "#E7DFD0", "agua": "#BCD3E0", "rio": "#5B8DB0",
-        "limite": "#9C8B72", "asfalto": "#FFFFFF", "contorno": "#857259", "secundaria": "#FFFFFF",
+        "chao": "#EAE3D5", "vegetacao": "#DCE5CB", "urbano": "#E0D7C6", "agua": "#BCD3E0", "rio": "#5B8DB0",
+        "limite": "#9C8B72", "asfalto": "#FFFFFF", "contorno": "#6E5D46", "secundaria": "#FFFFFF",
         "viaLocal": "#857259", "terra": "#8A5A1E", "terraEscura": "#E3CBA6",
         "rotulo": "#1A1410", "rotuloSec": "#5A4632", "rotuloRio": "#2F5E86", "halo": "#FFFFFF",
         "opRodovia": 1, "opSecundaria": 1,
