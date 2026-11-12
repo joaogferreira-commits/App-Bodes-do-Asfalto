@@ -27,9 +27,9 @@ jobs:
           SEG=$(openssl rand -hex 32)
           echo "::add-mask::$SEG"
           echo "SEG=$SEG" >> "$GITHUB_ENV"
-          supabase secrets set --project-ref "$REF" NOTIFICAR_SEGREDO="$SEG"
+          supabase secrets set --project-ref "$REF" --yes NOTIFICAR_SEGREDO="$SEG"
       - name: Publicar a função
-        run: supabase functions deploy notificar --project-ref "$REF" --no-verify-jwt
+        run: supabase functions deploy notificar --project-ref "$REF" --no-verify-jwt --yes
       - name: Configurar o banco para chamar a função
         run: |
           CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
