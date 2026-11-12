@@ -1,12 +1,14 @@
-export { Avatar, corDoStatus, iniciais, type StatusIrmao } from './Avatar';
+export { Avatar, corDoStatus, coresDoStatus, iniciais, type StatusIrmao } from './Avatar';
 export { BarraAbas, abas, type Aba } from './BarraAbas';
 export { Botao, type VarianteBotao } from './Botao';
 export { BotaoIcone } from './BotaoIcone';
+export { BotaoSegurar } from './BotaoSegurar';
 export { Cartao } from './Cartao';
 export { Chip } from './Chip';
 export { Divisoria } from './Divisoria';
 export { EstadoVazio } from './EstadoVazio';
-export { PainelInferior } from './FolhaInferior';
 export { Icone, caminhosIcones, type NomeIcone } from './icones';
-export { Pino, pinos, type TipoPino } from './Pino';
+export { PainelInferior } from './FolhaInferior';
+export { Pino, corDoPino, pinos, type TipoPino } from './Pino';
+export { SeletorTema } from './SeletorTema';
 export { Texto, type VarianteTexto } from './Texto';

@@ -12,4 +12,6 @@ export type RotaPlanejada = {
   kmTerra: number;
   minutos: number;
   tipo: TipoEstrada;
+  /** "Só asfalto" pedido, mas não há caminho sem terra até o destino (R42). */
+  aviso?: 'semCaminhoSoAsfalto';
 };

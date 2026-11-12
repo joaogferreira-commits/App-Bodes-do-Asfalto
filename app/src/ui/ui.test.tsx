@@ -93,3 +93,97 @@ describe('ícones', () => {
     }
   });
 });
+
+describe('pesquisa de usabilidade (R15–R25)', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { ProvedorTema, paletaSol, paletaNoite } = require('@/theme') as typeof import('@/theme');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { SeletorTema, Texto } = require('.') as typeof import('.');
+
+  it('botão principal usa texto escuro sobre o laranja, nos dois temas (R15)', async () => {
+    await render(
+      <ProvedorTema inicial="sol">
+        <Botao titulo="Iniciar" onPress={jest.fn()} />
+      </ProvedorTema>,
+    );
+    const fundo = plano(screen.getByRole('button', { name: 'Iniciar' }).props.style).backgroundColor;
+    expect(fundo).toBe(paletaSol.acao);
+    expect(plano(screen.getByText('Iniciar').props.style).color).toBe(paletaSol.textoSobreAcao);
+  });
+
+  it('o seletor troca entre Automático, Noite e Sol e os componentes acompanham (R17)', async () => {
+    await render(
+      <ProvedorTema inicial="noite">
+        <SeletorTema />
+        <Texto>Olá</Texto>
+      </ProvedorTema>,
+    );
+    expect(plano(screen.getByText('Olá').props.style).color).toBe(paletaNoite.texto);
+    await fireEvent.press(screen.getByRole('radio', { name: 'Sol' }));
+    expect(plano(screen.getByText('Olá').props.style).color).toBe(paletaSol.texto);
+    expect(screen.getByRole('radio', { name: 'Sol' }).props.accessibilityState).toMatchObject({
+      checked: true,
+    });
+  });
+
+  it('rótulo em caixa alta usa Inter, não a condensada (R19); corpo com peso 500 (R16)', async () => {
+    await render(
+      <>
+        <Texto variante="rotulo">TIPO</Texto>
+        <Texto>corpo</Texto>
+      </>,
+    );
+    expect(plano(screen.getByText('TIPO').props.style).fontFamily).toMatch(/^Inter/);
+    expect(plano(screen.getByText('corpo').props.style).fontFamily).toBe('Inter_500Medium');
+  });
+
+  it('a fonte do sistema amplia o texto; a barra inferior limita a 1,3× (R21)', async () => {
+    await render(
+      <>
+        <Texto>livre</Texto>
+        <BarraAbas ativa="mapa" onTrocar={jest.fn()} />
+      </>,
+    );
+    expect(screen.getByText('livre').props.allowFontScaling).toBe(true);
+    expect(screen.getByText('livre').props.maxFontSizeMultiplier).toBeUndefined();
+    expect(screen.getByText('Feed').props.maxFontSizeMultiplier).toBe(1.3);
+  });
+
+  it('status do irmão não depende só da cor: traço e selo próprios (R23)', async () => {
+    await render(
+      <>
+        <Avatar nome="Edu Prado" status="estrada" />
+        <Avatar nome="Zé Ferreira" status="aberto" />
+      </>,
+    );
+    const [estrada, aberto] = screen.getAllByRole('image');
+    expect(plano(estrada!.props.style).borderStyle).toBe('dashed');
+    expect(plano(aberto!.props.style).borderStyle).toBe('solid');
+    expect(screen.getByTestId('selo-estrada')).toBeTruthy();
+  });
+
+  it('pinos com forma própria por tipo; sede e Ágape nunca agrupam (R23, R44)', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { pinos } = require('.') as typeof import('.');
+    const formas = new Set(Object.values(pinos).map((p) => p.forma));
+    expect(formas.size).toBeGreaterThanOrEqual(4);
+    expect(pinos.sede.agrupa).toBe(false);
+    expect(pinos.agape.agrupa).toBe(false);
+    await render(<Pino tipo="alerta" descricao="Alerta" />);
+    expect(screen.getByTestId('pino-losango')).toBeTruthy();
+  });
+
+  it('botão de ícone do mapa pode mostrar o rótulo embaixo (R22)', async () => {
+    await render(
+      <BotaoIcone
+        icone="camadas"
+        rotulo="Camadas do mapa"
+        legenda="Legenda"
+        legendaAbaixo
+        onPress={jest.fn()}
+      />,
+    );
+    expect(screen.getByText('Legenda')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Camadas do mapa' })).toBeTruthy();
+  });
+});

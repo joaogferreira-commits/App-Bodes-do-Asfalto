@@ -23,3 +23,15 @@ jobs:
       - run: npm test -- --ci
       - name: Empacotar o JavaScript (mesma etapa que roda no EAS)
         run: npx expo export --platform android --output-dir /tmp/export
+
+  ferramentas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow numpy
+      - name: Testes das ferramentas (conversor de imagens e gerador do estilo do mapa)
+        working-directory: tools
+        run: python -m unittest

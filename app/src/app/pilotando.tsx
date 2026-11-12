@@ -4,19 +4,22 @@ import {
   NavigationView,
   TaskRemovedBehavior,
   useNavigation,
+  useNavigationAuto,
 } from '@googlemaps/react-native-navigation-sdk';
+import * as Haptics from 'expo-haptics';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, StyleSheet, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useViagem } from '@/estado/viagem';
+import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
 import { posicaoDoDestino } from '@/navegacao/destinos';
 import { iniciarNavegacao, type ControladorNavegacao, type ResultadoNavegacao } from '@/navegacao/fluxo';
-import { cores, espaco, fontes, tema, toque } from '@/theme';
-import { Botao, Icone, Texto, type NomeIcone } from '@/ui';
+import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
+import { Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
 
 async function pedirPermissao() {
   const { granted } = await Location.requestForegroundPermissionsAsync();
@@ -64,23 +67,25 @@ const estiloCabecalho = {
   headerInstructionsTextColor: cores.fundo,
 };
 
-type BotaoGrande = {
-  chave: string;
-  icone?: NomeIcone;
-  corIcone?: string;
-  fundo: string;
-  corTexto: string;
-  aoTocar: () => void;
-};
+const DURACAO_SOS = 3000;
+const DURACAO_ENCERRAR = 1500;
+const LARGURA_GRADE_DEITADO = 3 * 130 + 2 * toque.pilotandoEspaco + 2 * espaco.sm;
 
 function Pilotando() {
   const { t } = useTranslation();
+  const c = useCores();
+  const { modo, preferencia } = useTema();
+  const janela = useWindowDimensions();
+  const deitado = janela.width > janela.height;
+  const grade = medidasGrade(deitado ? LARGURA_GRADE_DEITADO : janela.width, deitado);
   const { navigationController } = useNavigation();
   const viagem = useViagem();
   const { permissao, pedir } = usePermissaoLocalizacao();
   const [estado, setEstado] = useState<'preparando' | 'guiando' | 'erro'>('preparando');
   const [erro, setErro] = useState<Exclude<ResultadoNavegacao, 'ok' | 'okRotaRapida'> | null>(null);
   const [rotaRapida, setRotaRapida] = useState(false);
+  const [aviso, setAviso] = useState<string | null>(null);
+  const relogioAviso = useRef<ReturnType<typeof setTimeout> | null>(null);
   const iniciou = useRef(false);
 
   const iniciar = async () => {
@@ -109,6 +114,7 @@ function Pilotando() {
     iniciou.current = true;
     void iniciar();
     return () => {
+      if (relogioAviso.current) clearTimeout(relogioAviso.current);
       void navigationController.stopGuidance().catch(() => undefined);
       void navigationController.cleanup().catch(() => undefined);
     };
@@ -122,55 +128,87 @@ function Pilotando() {
     router.back();
   };
 
-  const emBreve = (chave: string) => () => Alert.alert(t('comum.emBreve'), t(chave));
-  const botoes: BotaoGrande[] = [
-    {
-      chave: 'alerta',
+  // Botão "Encerrar" da tela do carro (Android Auto) encerra a navegação aqui também.
+  const { setOnCustomNavigationAutoEvent } = useNavigationAuto();
+  const encerrarRef = useRef(encerrar);
+  useEffect(() => {
+    encerrarRef.current = encerrar;
+  });
+  useEffect(() => {
+    setOnCustomNavigationAutoEvent((evento) => {
+      if (evento.type === 'encerrar') void encerrarRef.current();
+    });
+    return () => setOnCustomNavigationAutoEvent(null);
+  }, [setOnCustomNavigationAutoEvent]);
+
+  /** Resposta de um toque (R2, R7): vibração + faixa curta, sem janela para fechar. */
+  const avisar = (chave: string) => {
+    void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+    setAviso(t(chave));
+    if (relogioAviso.current) clearTimeout(relogioAviso.current);
+    relogioAviso.current = setTimeout(() => setAviso(null), 4000);
+  };
+
+  const acoes: Record<
+    Exclude<Acao, 'sos' | 'encerrar'>,
+    { icone: NomeIcone; fundo: string; cor: string; corIcone: string; aviso: string }
+  > = {
+    alerta: {
       icone: 'alerta',
-      corIcone: cores.fundo,
-      fundo: cores.alerta,
-      corTexto: cores.fundo,
-      aoTocar: emBreve('pilotando.emBreveAlerta'),
+      fundo: c.alerta,
+      cor: c.textoSobreAlerta,
+      corIcone: c.textoSobreAlerta,
+      aviso: 'pilotando.emBreveAlerta',
     },
-    {
-      chave: 'reagrupar',
+    reagrupar: {
       icone: 'reagrupar',
-      fundo: cores.superficie3,
-      corTexto: cores.texto,
-      aoTocar: emBreve('pilotando.emBreveReagrupar'),
+      fundo: c.superficie3,
+      cor: c.texto,
+      corIcone: c.texto,
+      aviso: 'pilotando.emBreveReagrupar',
     },
-    {
-      chave: 'sos',
-      fundo: cores.sos,
-      corTexto: cores.textoSobreSos,
-      aoTocar: () => Alert.alert(t('pilotando.sos'), t('pilotando.sosTeste')),
-    },
-    {
-      chave: 'postoProximo',
+    postoProximo: {
       icone: 'posto',
-      corIcone: cores.verdePosto,
-      fundo: cores.superficie3,
-      corTexto: cores.texto,
-      aoTocar: emBreve('pilotando.emBrevePosto'),
+      fundo: c.superficie3,
+      cor: c.texto,
+      corIcone: c.verdePosto,
+      aviso: 'pilotando.emBrevePosto',
     },
-    {
-      chave: 'postoNaRota',
+    postoNaRota: {
       icone: 'postoRota',
-      corIcone: cores.verdePosto,
-      fundo: cores.superficie3,
-      corTexto: cores.texto,
-      aoTocar: emBreve('pilotando.emBrevePosto'),
+      fundo: c.superficie3,
+      cor: c.texto,
+      corIcone: c.verdePosto,
+      aviso: 'pilotando.emBrevePosto',
     },
-    { chave: 'encerrar', icone: 'encerrar', fundo: 'transparent', corTexto: cores.texto, aoTocar: encerrar },
-  ];
+  };
+
+  const faixa =
+    aviso ??
+    (estado === 'preparando'
+      ? t('pilotando.dicaEntrada')
+      : erro
+        ? t(`navegacao.erros.${erro}`)
+        : rotaRapida
+          ? t('pilotando.rotaRapida')
+          : null);
+
+  const modoNoturnoGoogle =
+    preferencia === 'auto'
+      ? NavigationNightMode.AUTO
+      : modo === 'sol'
+        ? NavigationNightMode.FORCE_DAY
+        : NavigationNightMode.FORCE_NIGHT;
+
+  const tamanhoBotao = { width: grade.largura, height: grade.altura };
 
   return (
-    <View style={estilos.tela}>
+    <View style={[estilos.tela, { backgroundColor: c.fundo, flexDirection: deitado ? 'row' : 'column' }]}>
       <View style={estilos.mapa}>
         {permissao === 'concedida' ? (
           <NavigationView
             style={StyleSheet.absoluteFill}
-            navigationNightMode={NavigationNightMode.FORCE_NIGHT}
+            navigationNightMode={modoNoturnoGoogle}
             androidStylingOptions={estiloCabecalho}
             myLocationEnabled
             speedometerEnabled
@@ -187,66 +225,116 @@ function Pilotando() {
         )}
       </View>
 
-      {(estado !== 'guiando' || rotaRapida) && (
-        <View style={estilos.faixa}>
-          <Icone nome="alerta" tamanho={18} cor={cores.alerta} />
-          <Texto style={{ color: cores.alerta, flex: 1, fontFamily: fontes.textoSemi, fontSize: 15 }}>
-            {estado === 'preparando'
-              ? t('pilotando.preparando')
-              : erro
-                ? t(`navegacao.erros.${erro}`)
-                : t('pilotando.rotaRapida')}
-          </Texto>
-          {estado === 'erro' && (
-            <Pressable accessibilityRole="button" onPress={iniciar} hitSlop={10}>
-              <Texto style={{ color: cores.acao, fontFamily: fontes.textoForte }}>
-                {t('rota.tentarDeNovo')}
-              </Texto>
-            </Pressable>
-          )}
-        </View>
-      )}
-
-      <SafeAreaView edges={['bottom']} style={estilos.grade}>
-        {botoes.map((b) => (
-          <Pressable
-            key={b.chave}
-            accessibilityRole="button"
-            accessibilityLabel={t(`pilotando.${b.chave}`)}
-            onPress={b.chave === 'sos' ? undefined : b.aoTocar}
-            onLongPress={b.chave === 'sos' ? b.aoTocar : undefined}
-            delayLongPress={2000}
-            style={({ pressed }) => [
-              estilos.botao,
-              { backgroundColor: b.fundo, opacity: pressed ? 0.85 : 1 },
-              b.chave === 'encerrar' && estilos.botaoContorno,
+      <SafeAreaView
+        edges={deitado ? ['right', 'bottom'] : ['bottom']}
+        style={deitado ? { width: LARGURA_GRADE_DEITADO } : undefined}
+      >
+        {faixa && (
+          <View
+            accessibilityLiveRegion="polite"
+            style={[
+              estilos.faixa,
+              { backgroundColor: c.superficie, borderColor: aviso ? c.verdePosto : c.alerta },
             ]}
           >
-            {b.chave === 'sos' ? (
-              <>
-                <Texto style={estilos.sos}>SOS</Texto>
-                <Texto style={{ color: cores.textoSobreSos, fontSize: 13, fontFamily: fontes.textoSemi }}>
-                  {t('pilotando.sosDica')}
+            <Icone nome={aviso ? 'socorro' : 'alerta'} tamanho={22} cor={aviso ? c.verdePosto : c.alerta} />
+            <Texto style={[estilos.textoFaixa, { color: c.texto }]} maxFontSizeMultiplier={1.3}>
+              {faixa}
+            </Texto>
+            {estado === 'erro' && !aviso && (
+              <Pressable accessibilityRole="button" onPress={iniciar} hitSlop={12} style={estilos.tentar}>
+                <Texto style={{ color: c.acao, fontFamily: fontes.textoForte }}>
+                  {t('rota.tentarDeNovo')}
                 </Texto>
-              </>
-            ) : (
-              <>
-                {b.icone && (
-                  <Icone nome={b.icone} tamanho={34} cor={b.corIcone ?? b.corTexto} espessura={2} />
-                )}
-                <Texto style={[estilos.textoBotao, { color: b.corTexto }]} numberOfLines={2}>
-                  {t(`pilotando.${b.chave}`)}
-                </Texto>
-              </>
+              </Pressable>
             )}
-          </Pressable>
-        ))}
+          </View>
+        )}
+
+        <View style={[estilos.grade, { gap: grade.vao, padding: grade.margem }]} testID="grade-pilotando">
+          {ordemAcoes.map((chave) => {
+            if (chave === 'sos') {
+              return (
+                <BotaoSegurar
+                  key={chave}
+                  duracao={DURACAO_SOS}
+                  rotulo={t('pilotando.sos')}
+                  dica={t('pilotando.sosDica')}
+                  corProgresso={c.sosPressionado}
+                  aoCompletar={() => Alert.alert(t('pilotando.sos'), t('pilotando.sosTeste'))}
+                  style={[
+                    estilos.botao,
+                    tamanhoBotao,
+                    { backgroundColor: c.sos, borderWidth: 3, borderColor: c.contornoSos },
+                  ]}
+                >
+                  <Texto style={[estilos.sos, { color: c.textoSobreSos }]} maxFontSizeMultiplier={1}>
+                    SOS
+                  </Texto>
+                  <Texto
+                    style={[estilos.textoBotao, { color: c.textoSobreSos }]}
+                    maxFontSizeMultiplier={escalaMaxima.pilotando}
+                  >
+                    {t('pilotando.sosDica')}
+                  </Texto>
+                </BotaoSegurar>
+              );
+            }
+            if (chave === 'encerrar') {
+              return (
+                <BotaoSegurar
+                  key={chave}
+                  duracao={DURACAO_ENCERRAR}
+                  rotulo={t('pilotando.encerrar')}
+                  dica={t('pilotando.encerrarDica')}
+                  corProgresso={c.superficie3}
+                  aoCompletar={() => void encerrar()}
+                  style={[estilos.botao, tamanhoBotao, { borderWidth: 2, borderColor: c.linhaForte }]}
+                >
+                  <Icone nome="encerrar" tamanho={40} cor={c.texto} />
+                  <Texto
+                    style={[estilos.textoBotao, { color: c.texto }]}
+                    maxFontSizeMultiplier={escalaMaxima.pilotando}
+                  >
+                    {t('pilotando.encerrarDica')}
+                  </Texto>
+                </BotaoSegurar>
+              );
+            }
+            const a = acoes[chave];
+            return (
+              <Pressable
+                key={chave}
+                accessibilityRole="button"
+                accessibilityLabel={t(`pilotando.${chave}`)}
+                onPress={() => avisar(a.aviso)}
+                style={({ pressed }) => [
+                  estilos.botao,
+                  tamanhoBotao,
+                  { backgroundColor: a.fundo, opacity: pressed ? 0.8 : 1 },
+                ]}
+              >
+                <Icone nome={a.icone} tamanho={40} cor={a.corIcone} />
+                <Texto
+                  style={[estilos.textoBotao, { color: a.cor }]}
+                  numberOfLines={2}
+                  maxFontSizeMultiplier={escalaMaxima.pilotando}
+                >
+                  {t(`pilotando.${chave}`)}
+                </Texto>
+              </Pressable>
+            );
+          })}
+        </View>
       </SafeAreaView>
     </View>
   );
 }
 
-/** Modo pilotando: navegação do Google + 6 botões grandes (Alerta, Reagrupar, SOS, Postos, Encerrar). */
+/**
+ * Modo pilotando (R1–R7): navegação do Google com o cartão de manobra em cima e 6 botões grandes
+ * embaixo. Um toque para Alerta, Reagrupar e Postos; segurar para SOS (3 s) e Encerrar (1,5 s).
+ */
 export default function TelaPilotando() {
   const { t } = useTranslation();
   return (
@@ -271,7 +359,7 @@ export default function TelaPilotando() {
 }
 
 const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.fundo },
+  tela: { flex: 1 },
   mapa: { flex: 1 },
   centro: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: espaco.md, padding: espaco.xl },
   faixa: {
@@ -281,28 +369,15 @@ const estilos = StyleSheet.create({
     marginHorizontal: espaco.sm,
     marginTop: espaco.xs,
     paddingHorizontal: espaco.sm,
-    minHeight: 44,
+    paddingVertical: espaco.xs,
+    minHeight: 52,
     borderRadius: 12,
-    backgroundColor: 'rgba(245,197,24,0.14)',
-    borderWidth: 1,
-    borderColor: 'rgba(245,197,24,0.5)',
+    borderWidth: 2,
   },
-  grade: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs, padding: espaco.sm },
-  botao: {
-    width: '31.9%',
-    height: toque.pilotando,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-  },
-  botaoContorno: { borderWidth: 1, borderColor: cores.linhaForte },
-  textoBotao: { fontSize: 16, fontFamily: fontes.textoForte, textAlign: 'center', lineHeight: 19 },
-  sos: {
-    fontFamily: fontes.titulo,
-    fontSize: 40,
-    lineHeight: 42,
-    color: cores.textoSobreSos,
-    letterSpacing: 1,
-  },
+  textoFaixa: { flex: 1, fontFamily: fontes.textoSemi, fontSize: 17, lineHeight: 22 },
+  tentar: { minHeight: 48, justifyContent: 'center' },
+  grade: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' },
+  botao: { borderRadius: 18, alignItems: 'center', justifyContent: 'center', gap: 6 },
+  sos: { fontFamily: fontes.textoForte, fontSize: 34, lineHeight: 38, letterSpacing: 1 },
+  textoBotao: { fontSize: 17, fontFamily: fontes.textoForte, textAlign: 'center', lineHeight: 21 },
 });

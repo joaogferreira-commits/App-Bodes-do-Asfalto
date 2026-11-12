@@ -13,7 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
 import { ProvedorViagem } from '@/estado/viagem';
-import { cores } from '@/theme';
+import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
 export default function Layout() {
   const [carregou] = useFonts({
@@ -24,11 +24,22 @@ export default function Layout() {
     Inter_600SemiBold,
     Inter_700Bold,
   });
-  if (!carregou) return <View style={{ flex: 1, backgroundColor: cores.fundo }} />;
+  if (!carregou) return <View style={{ flex: 1, backgroundColor: paletaNoite.fundo }} />;
   return (
-    <ProvedorViagem>
-      <StatusBar style="light" />
+    <ProvedorTema>
+      <ProvedorViagem>
+        <Telas />
+      </ProvedorViagem>
+    </ProvedorTema>
+  );
+}
+
+function Telas() {
+  const { modo, cores } = useTema();
+  return (
+    <>
+      <StatusBar style={modo === 'sol' ? 'dark' : 'light'} />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }} />
-    </ProvedorViagem>
+    </>
   );
 }

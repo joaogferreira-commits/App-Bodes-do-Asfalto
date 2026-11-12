@@ -1,11 +1,4 @@
-import {
-  Camera,
-  GeoJSONSource,
-  Layer,
-  Map,
-  type CameraRef,
-  type StyleSpecification,
-} from '@maplibre/maplibre-react-native';
+import { Camera, GeoJSONSource, Layer, Map, type CameraRef } from '@maplibre/maplibre-react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
@@ -15,7 +8,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useViagem } from '@/estado/viagem';
-import estilo from '@/map/estilo-bodes.json';
+import { camadasDaRota, useEstiloMapa } from '@/map/estilos';
 import { destinosDaProva, postoExemplo, posicaoDoDestino, type Coordenada } from '@/navegacao/destinos';
 import {
   formatarDuracao,
@@ -28,13 +21,13 @@ import {
 import { tokenDaRota } from '@/rotas/google';
 import type { TipoEstrada } from '@/rotas/tipos';
 import { amostrarPassagens, ErroRota, planejarRota } from '@/rotas/valhalla';
-import { cores, espaco, raios, sombra } from '@/theme';
+import { espaco, fontes, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
 import { Botao, Chip, Icone, PainelInferior, Texto, type NomeIcone } from '@/ui';
 
-const tipos: { chave: TipoEstrada; icone: NomeIcone; cor: string }[] = [
-  { chave: 'asfalto', icone: 'asfalto', cor: cores.asfalto },
-  { chave: 'misto', icone: 'misto', cor: cores.acao },
-  { chave: 'terra', icone: 'terra', cor: cores.terra },
+const tipos: { chave: TipoEstrada; icone: NomeIcone; cor: NomeCor }[] = [
+  { chave: 'asfalto', icone: 'asfalto', cor: 'texto' },
+  { chave: 'misto', icone: 'misto', cor: 'acao' },
+  { chave: 'terra', icone: 'terra', cor: 'terra' },
 ];
 
 type Estado =
@@ -44,6 +37,10 @@ type Estado =
 
 export default function Rota() {
   const { t } = useTranslation();
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
+  const estiloMapa = useEstiloMapa();
+  const pintura = camadasDaRota(cores);
   const camera = useRef<CameraRef>(null);
   const viagem = useViagem();
   const { destino, tipoEstrada, rota } = viagem;
@@ -106,7 +103,7 @@ export default function Rota() {
     <View style={estilos.tela}>
       <Map
         style={StyleSheet.absoluteFill}
-        mapStyle={estilo as unknown as StyleSpecification}
+        mapStyle={estiloMapa}
         logo={false}
         attribution
         attributionPosition={{ bottom: 480, left: 8 }}
@@ -118,20 +115,20 @@ export default function Rota() {
               type="line"
               id="rota-contorno"
               layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-              paint={{ 'line-color': cores.fundo, 'line-width': 12 }}
+              paint={pintura.contorno as never}
             />
             <Layer
               type="line"
               id="rota-linha"
               layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-              paint={{ 'line-color': cores.acao, 'line-width': 7 }}
+              paint={pintura.linha as never}
             />
             <Layer
               type="line"
               id="rota-terra"
               filter={['==', ['get', 'terra'], true]}
               layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-              paint={{ 'line-color': cores.rotaTerra, 'line-width': 2, 'line-dasharray': [2, 3] }}
+              paint={pintura.terra as never}
             />
           </GeoJSONSource>
         )}
@@ -213,6 +210,14 @@ export default function Rota() {
               <View style={{ flex: Math.max(100 - pct, 0.01), backgroundColor: cores.asfalto }} />
               <View style={{ flex: Math.max(pct, 0.01), backgroundColor: cores.terra }} />
             </View>
+            {rota.aviso === 'semCaminhoSoAsfalto' && (
+              <View style={estilos.avisoTerra} accessibilityLiveRegion="polite">
+                <Icone nome="alerta" tamanho={20} cor={cores.alerta} />
+                <Texto variante="secundario" style={{ flex: 1, color: cores.texto }}>
+                  {t('rota.semCaminhoSoAsfalto', { km: formatarKm(rota.kmTerra) })}
+                </Texto>
+              </View>
+            )}
           </>
         )}
 
@@ -229,7 +234,7 @@ export default function Rota() {
                 onPress={() => viagem.definirTipoEstrada(tp.chave)}
                 style={[estilos.tipo, ativo && estilos.tipoAtivo]}
               >
-                <Icone nome={tp.icone} tamanho={26} cor={ativo ? cores.acao : tp.cor} />
+                <Icone nome={tp.icone} tamanho={26} cor={ativo ? cores.acao : cores[tp.cor]} />
                 <Texto style={estilos.textoTipo}>{t(`rota.${tp.chave}`)}</Texto>
               </Pressable>
             );
@@ -254,57 +259,67 @@ export default function Rota() {
   );
 }
 
-const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.chao },
-  topo: { position: 'absolute', top: 0, left: 0, right: 0 },
-  cabecalho: {
-    marginHorizontal: espaco.md,
-    marginTop: espaco.xs,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: espaco.sm,
-    padding: espaco.sm,
-    backgroundColor: 'rgba(22,18,14,0.95)',
-    borderWidth: 1,
-    borderColor: cores.linha,
-    borderRadius: raios.cartao,
-    boxShadow: sombra.flutuante,
-  },
-  voltar: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
-  ponto: { flexDirection: 'row', alignItems: 'center', gap: espaco.xs },
-  bolinha: { width: 10, height: 10, borderRadius: 5 },
-  destinos: { gap: espaco.xs, paddingHorizontal: espaco.md, paddingVertical: espaco.sm },
-  painel: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    paddingHorizontal: espaco.lg,
-    paddingBottom: espaco.xl,
-    gap: espaco.sm,
-  },
-  resumo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
-  barra: {
-    flexDirection: 'row',
-    height: 8,
-    borderRadius: 8,
-    overflow: 'hidden',
-    gap: 2,
-    marginVertical: espaco.xs,
-  },
-  tipos: { flexDirection: 'row', gap: espaco.xs },
-  tipo: {
-    flex: 1,
-    height: 76,
-    borderRadius: raios.botao,
-    borderWidth: 1,
-    borderColor: cores.linha,
-    backgroundColor: cores.superficie2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-  },
-  tipoAtivo: { borderWidth: 2, borderColor: cores.acao, backgroundColor: 'rgba(232,105,42,0.12)' },
-  textoTipo: { fontSize: 15, fontFamily: 'Inter_600SemiBold', color: cores.texto },
-  acoes: { flexDirection: 'row', gap: 10, marginTop: espaco.xs },
-});
+const criarEstilos = (cores: Paleta) =>
+  StyleSheet.create({
+    tela: { flex: 1, backgroundColor: cores.chao },
+    topo: { position: 'absolute', top: 0, left: 0, right: 0 },
+    cabecalho: {
+      marginHorizontal: espaco.md,
+      marginTop: espaco.xs,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: espaco.sm,
+      padding: espaco.sm,
+      backgroundColor: cores.sobreMapa,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      borderRadius: raios.cartao,
+      boxShadow: sombra.flutuante,
+    },
+    voltar: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+    ponto: { flexDirection: 'row', alignItems: 'center', gap: espaco.xs },
+    bolinha: { width: 10, height: 10, borderRadius: 5 },
+    destinos: { gap: espaco.xs, paddingHorizontal: espaco.md, paddingVertical: espaco.sm },
+    painel: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      paddingHorizontal: espaco.lg,
+      paddingBottom: espaco.xl,
+      gap: espaco.sm,
+    },
+    resumo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
+    barra: {
+      flexDirection: 'row',
+      height: 8,
+      borderRadius: 8,
+      overflow: 'hidden',
+      gap: 2,
+      marginVertical: espaco.xs,
+    },
+    tipos: { flexDirection: 'row', gap: espaco.xs },
+    tipo: {
+      flex: 1,
+      height: 76,
+      borderRadius: raios.botao,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      backgroundColor: cores.superficie2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 6,
+    },
+    tipoAtivo: { borderWidth: 3, borderColor: cores.acao, backgroundColor: cores.superficie3 },
+    textoTipo: { fontSize: 15, fontFamily: fontes.textoSemi, color: cores.texto, textAlign: 'center' },
+    acoes: { flexDirection: 'row', gap: 10, marginTop: espaco.xs },
+    avisoTerra: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: espaco.xs,
+      padding: espaco.sm,
+      borderRadius: raios.botao,
+      borderWidth: 1,
+      borderColor: cores.alerta,
+    },
+  });

@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { Alert } from 'react-native';
 
 import { ProvedorViagem } from '@/estado/viagem';
 import TelaPilotando from '@/app/pilotando';
@@ -29,7 +30,8 @@ jest.mock('@googlemaps/react-native-navigation-sdk', () => {
     NavigationProvider: ({ children }: { children: React.ReactNode }) => children,
     NavigationView: () => <View testID="mapa-google" />,
     useNavigation: () => ({ navigationController: controlador }),
-    NavigationNightMode: { FORCE_NIGHT: 2 },
+    useNavigationAuto: () => ({ setOnCustomNavigationAutoEvent: jest.fn() }),
+    NavigationNightMode: { AUTO: 0, FORCE_DAY: 1, FORCE_NIGHT: 2 },
     TaskRemovedBehavior: { QUIT_SERVICE: 1 },
   };
 });
@@ -58,5 +60,43 @@ describe('modo pilotando', () => {
     for (const nome of ['Alerta', 'Reagrupar', 'SOS', 'Posto próximo', 'Posto na rota', 'Encerrar']) {
       expect(screen.getByRole('button', { name: nome })).toBeTruthy();
     }
+  });
+
+  it('SOS só dispara segurando 3 s; soltar antes cancela (R6)', async () => {
+    permissao.granted = true;
+    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    await render(tela());
+    const sos = await screen.findByRole('button', { name: 'SOS' });
+    jest.useFakeTimers();
+    try {
+      await fireEvent(sos, 'pressIn');
+      await act(async () => {
+        jest.advanceTimersByTime(2000);
+      });
+      await fireEvent(sos, 'pressOut');
+      await act(async () => {
+        jest.advanceTimersByTime(3000);
+      });
+      expect(alerta).not.toHaveBeenCalled();
+
+      await fireEvent(sos, 'pressIn');
+      await act(async () => {
+        jest.advanceTimersByTime(3000);
+      });
+      expect(alerta).toHaveBeenCalledWith('SOS', expect.stringContaining('193'));
+    } finally {
+      jest.useRealTimers();
+      alerta.mockRestore();
+    }
+  });
+
+  it('Alerta responde com um toque e uma faixa, sem janela para fechar (R2)', async () => {
+    permissao.granted = true;
+    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    await render(tela());
+    await fireEvent.press(await screen.findByRole('button', { name: 'Alerta' }));
+    expect(alerta).not.toHaveBeenCalled();
+    expect(await screen.findByText('Alerta: chega com os passeios.')).toBeTruthy();
+    alerta.mockRestore();
   });
 });

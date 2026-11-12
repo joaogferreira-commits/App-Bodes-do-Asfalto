@@ -3,13 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { cores, espaco } from '@/theme';
-import { Avatar, Cartao, Icone, Texto } from '@/ui';
+import { espaco, useCores, useEstilos, type Paleta } from '@/theme';
+import { Avatar, Cartao, Icone, SeletorTema, Texto } from '@/ui';
 
 export default function Perfil() {
   const { t } = useTranslation();
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
   return (
-    <SafeAreaView edges={['top']} style={estilos.tela}>
+    <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
       <ScrollView contentContainerStyle={estilos.conteudo}>
         <Texto variante="titulo">{t('perfil.titulo')}</Texto>
         <View style={estilos.cabecalho}>
@@ -18,6 +20,10 @@ export default function Perfil() {
             <Texto variante="destaque">{t('perfil.visitante')}</Texto>
             <Texto variante="secundario">{t('perfil.capitulo')}</Texto>
           </View>
+        </View>
+        <View style={{ gap: espaco.sm }}>
+          <Texto variante="rotulo">{t('tema.titulo')}</Texto>
+          <SeletorTema />
         </View>
         <Pressable accessibilityRole="button" onPress={() => router.push('/catalogo')}>
           <Cartao style={estilos.linha}>
@@ -39,9 +45,10 @@ export default function Perfil() {
   );
 }
 
-const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.fundo },
-  conteudo: { padding: espaco.lg, gap: espaco.xl },
-  cabecalho: { flexDirection: 'row', alignItems: 'center', gap: espaco.md },
-  linha: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
-});
+const criarEstilos = (cores: Paleta) =>
+  StyleSheet.create({
+    tela: { flex: 1, backgroundColor: cores.fundo },
+    conteudo: { padding: espaco.lg, gap: espaco.xl },
+    cabecalho: { flexDirection: 'row', alignItems: 'center', gap: espaco.md },
+    linha: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
+  });

@@ -100,3 +100,27 @@ describe('iniciarNavegacao', () => {
     await expect(iniciarNavegacao(base(c))).resolves.toBe('erro');
   });
 });
+
+describe('grade do modo pilotando (R4, R6)', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { medidasGrade, ordemAcoes } = require('./gradePilotando') as typeof import('./gradePilotando');
+
+  it.each([320, 360, 390, 412])('em pé com %i dp: botões com lado menor ≥ 113 dp e espaço ≥ 24 dp', (w) => {
+    const g = medidasGrade(w, false);
+    expect(g.colunas).toBe(2);
+    expect(Math.min(g.largura, g.altura)).toBeGreaterThanOrEqual(113);
+    expect(g.vao).toBeGreaterThanOrEqual(24);
+    // grade de 3 linhas cabe em ~60 % de uma tela de 800 dp
+    expect(3 * g.altura + 2 * g.vao + 2 * g.margem).toBeLessThanOrEqual(0.6 * 800);
+  });
+
+  it('deitado: 3 colunas', () => {
+    const g = medidasGrade(3 * 130 + 2 * 24 + 24, true);
+    expect(g.colunas).toBe(3);
+    expect(g.largura).toBeGreaterThanOrEqual(113);
+  });
+
+  it('SOS e Encerrar ficam juntos na última linha', () => {
+    expect(ordemAcoes.slice(-2)).toEqual(['sos', 'encerrar']);
+  });
+});

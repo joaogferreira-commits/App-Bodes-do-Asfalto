@@ -32,7 +32,8 @@ describe('tipo de estrada', () => {
   it('só asfalto exclui terra; prefiro terra puxa para trilhas', () => {
     expect(opcoesDeCusto('asfalto')).toMatchObject({ exclude_unpaved: true, use_trails: 0 });
     expect(opcoesDeCusto('terra').use_trails).toBe(1);
-    expect(opcoesDeCusto('misto').use_trails).toBe(0.5);
+    expect(opcoesDeCusto('misto').use_trails).toBe(0.4);
+    expect(opcoesDeCusto('asfalto', true)).toEqual({ use_trails: 0, use_highways: 1 });
   });
 
   it('separa trechos de terra e junta trechos vizinhos iguais', () => {
@@ -74,6 +75,29 @@ describe('planejarRota', () => {
     expect(corpo.costing_options.motorcycle.use_trails).toBe(1);
     expect(rota).toMatchObject({ km: 74.2, kmTerra: 31.2, minutos: 95, tipo: 'terra' });
     expect(rota.trechos.map((t) => t.terra)).toEqual([false, true]);
+  });
+
+  it('"Só asfalto" sem caminho sem terra: refaz evitando a terra e avisa (R42)', async () => {
+    const semRota = { ok: false, status: 400, json: async () => ({}) };
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce(semRota)
+      .mockResolvedValueOnce(respostaRota)
+      .mockResolvedValueOnce(respostaAtributos);
+    const rota = await planejarRota(cuiaba, chapada, 'asfalto', buscar);
+    expect(JSON.parse(buscar.mock.calls[0][1].body).costing_options.motorcycle.exclude_unpaved).toBe(true);
+    expect(
+      JSON.parse(buscar.mock.calls[1][1].body).costing_options.motorcycle.exclude_unpaved,
+    ).toBeUndefined();
+    expect(rota.aviso).toBe('semCaminhoSoAsfalto');
+    expect(rota.kmTerra).toBe(31.2);
+  });
+
+  it('"Só asfalto" com caminho asfaltado não traz aviso', async () => {
+    const buscar = jest.fn().mockResolvedValueOnce(respostaRota).mockResolvedValueOnce(respostaAtributos);
+    const rota = await planejarRota(cuiaba, chapada, 'asfalto', buscar);
+    expect(buscar).toHaveBeenCalledTimes(2);
+    expect(rota.aviso).toBeUndefined();
   });
 
   it('sem os atributos, a rota vem inteira como asfalto', async () => {

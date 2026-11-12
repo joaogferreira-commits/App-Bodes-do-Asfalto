@@ -1,10 +1,4 @@
-import {
-  Camera,
-  Map,
-  Marker,
-  type CameraRef,
-  type StyleSpecification,
-} from '@maplibre/maplibre-react-native';
+import { Camera, Map, Marker, type CameraRef, type MapRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
@@ -14,22 +8,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { filtrar, type Filtro } from '@/dados/exemplos';
 import { useViagem } from '@/estado/viagem';
-import estilo from '@/map/estilo-bodes.json';
+import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
-import { cores, espaco, raios, sombra } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Icone, PainelInferior, Pino, Texto } from '@/ui';
+import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
+import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, Pino, Texto } from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
-const filtros: { chave: Filtro; cor?: string }[] = [
+const filtros: { chave: Filtro; cor?: NomeCor }[] = [
   { chave: 'tudo' },
-  { chave: 'irmaos', cor: cores.acao },
-  { chave: 'postos', cor: cores.verdePosto },
-  { chave: 'sedes', cor: cores.ouro },
-  { chave: 'lojas', cor: cores.azulRio },
+  { chave: 'irmaos', cor: 'acao' },
+  { chave: 'postos', cor: 'verdePosto' },
+  { chave: 'sedes', cor: 'ouro' },
+  { chave: 'lojas', cor: 'azulRio' },
 ];
 
 function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean; texto: string }) {
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
   const cor = rota ? cores.acao : terra ? cores.terra : cores.asfalto;
   return (
     <View style={estilos.linhaLegenda}>
@@ -54,6 +50,10 @@ function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean;
 
 export default function Mapa() {
   const { t } = useTranslation();
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
+  const estiloMapa = useEstiloMapa();
+  const mapa = useRef<MapRef>(null);
   const camera = useRef<CameraRef>(null);
   const [filtro, setFiltro] = useState<Filtro>('tudo');
   const [legenda, setLegenda] = useState(false);
@@ -73,6 +73,12 @@ export default function Mapa() {
       camera.current?.flyTo({ center: [p.coords.longitude, p.coords.latitude], zoom: 13, duration: 900 });
   };
 
+  /** Zoom por botão (R24): todo gesto tem um botão equivalente. */
+  const zoom = async (delta: number) => {
+    const atual = await mapa.current?.getZoom().catch(() => null);
+    if (atual != null) camera.current?.zoomTo(atual + delta, { duration: 250 });
+  };
+
   const irAoPosto = () => {
     definirDestino(postoExemplo);
     router.push('/rota');
@@ -81,8 +87,9 @@ export default function Mapa() {
   return (
     <View style={estilos.tela}>
       <Map
+        ref={mapa}
         style={StyleSheet.absoluteFill}
-        mapStyle={estilo as unknown as StyleSpecification}
+        mapStyle={estiloMapa}
         logo={false}
         attribution
         attributionPosition={{ bottom: 330, left: 8 }}
@@ -122,10 +129,10 @@ export default function Mapa() {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={estilos.filtros}>
           {filtros.map((f) => (
-            <FiltroChip
+            <Chip
               key={f.chave}
               rotulo={t(`mapa.filtros.${f.chave}`)}
-              cor={f.cor}
+              corPonto={f.cor ? cores[f.cor] : undefined}
               ativo={filtro === f.chave}
               onPress={() => setFiltro(f.chave)}
             />
@@ -136,17 +143,31 @@ export default function Mapa() {
             icone="visivel"
             corIcone={cores.acao}
             legenda={t('mapa.aprox')}
+            legendaAbaixo
             rotulo={t('mapa.visibilidade')}
             flutuante
             onPress={() => Alert.alert(t('mapa.visibilidade'), t('mapa.visibilidadeTexto'))}
           />
           <BotaoIcone
             icone="camadas"
+            legenda={t('mapa.legendaCurta')}
+            legendaAbaixo
             rotulo={t('mapa.camadas')}
             flutuante
             onPress={() => setLegenda((v) => !v)}
           />
-          <BotaoIcone icone="localizacao" rotulo={t('mapa.minhaLocalizacao')} flutuante onPress={irParaMim} />
+          <BotaoIcone
+            icone="localizacao"
+            legenda={t('mapa.euCurto')}
+            legendaAbaixo
+            rotulo={t('mapa.minhaLocalizacao')}
+            flutuante
+            onPress={irParaMim}
+          />
+          <View style={estilos.zoom}>
+            <BotaoIcone icone="mais" rotulo={t('mapa.aproximar')} flutuante onPress={() => void zoom(1)} />
+            <BotaoIcone icone="menos" rotulo={t('mapa.afastar')} flutuante onPress={() => void zoom(-1)} />
+          </View>
         </View>
         {legenda && (
           <View style={estilos.legenda} accessibilityLabel={t('mapa.camadas')}>
@@ -213,107 +234,71 @@ export default function Mapa() {
   );
 }
 
-function FiltroChip({
-  rotulo,
-  cor,
-  ativo,
-  onPress,
-}: {
-  rotulo: string;
-  cor?: string;
-  ativo: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityState={{ selected: ativo }}
-      accessibilityLabel={rotulo}
-      onPress={onPress}
-      hitSlop={6}
-      style={[estilos.chip, ativo ? { backgroundColor: cores.texto } : estilos.chipInativo]}
-    >
-      {cor && !ativo && <View style={[estilos.ponto, { backgroundColor: cor }]} />}
-      <Texto
-        style={{ fontSize: 15, fontFamily: 'Inter_600SemiBold', color: ativo ? cores.fundo : cores.texto }}
-      >
-        {rotulo}
-      </Texto>
-    </Pressable>
-  );
-}
-
-const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.chao },
-  topo: { position: 'absolute', top: 0, left: 0, right: 0 },
-  linhaBusca: { flexDirection: 'row', gap: 10, paddingHorizontal: espaco.md, paddingTop: espaco.xs },
-  busca: {
-    flex: 1,
-    height: 48,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingHorizontal: espaco.md,
-    backgroundColor: 'rgba(22,18,14,0.94)',
-    borderWidth: 1,
-    borderColor: cores.linha,
-    borderRadius: raios.botao,
-    boxShadow: sombra.flutuante,
-  },
-  botaoPerfil: {
-    width: 48,
-    height: 48,
-    borderRadius: raios.botao,
-    borderWidth: 1,
-    borderColor: cores.linha,
-    backgroundColor: 'rgba(22,18,14,0.94)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  filtros: { gap: espaco.xs, paddingHorizontal: espaco.md, paddingVertical: espaco.sm },
-  chip: {
-    height: 36,
-    paddingHorizontal: 14,
-    borderRadius: raios.pilula,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  chipInativo: { backgroundColor: 'rgba(22,18,14,0.92)', borderWidth: 1, borderColor: cores.linhaForte },
-  ponto: { width: 8, height: 8, borderRadius: 4 },
-  lateral: { position: 'absolute', right: espaco.md, top: 128, gap: espaco.xs, alignItems: 'flex-end' },
-  legenda: {
-    alignSelf: 'flex-start',
-    marginLeft: espaco.md,
-    marginTop: espaco.xs,
-    backgroundColor: 'rgba(11,9,7,0.9)',
-    borderRadius: 12,
-    padding: espaco.sm,
-    gap: espaco.xs,
-  },
-  linhaLegenda: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  amostra: { width: 34, height: 7, borderRadius: 4, overflow: 'hidden', justifyContent: 'center' },
-  tracejado: { flexDirection: 'row', gap: 4, paddingHorizontal: 2 },
-  traco: { width: 5, height: 3, borderRadius: 2 },
-  painel: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: espaco.md, gap: 10 },
-  nestaArea: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' },
-  cartaoAgape: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: espaco.sm,
-    backgroundColor: cores.superficie2,
-    borderRadius: raios.cartao,
-    borderWidth: 1,
-    borderColor: cores.linha,
-    padding: 14,
-  },
-  iconeAgape: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: 'rgba(216,169,59,0.14)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  postos: { flexDirection: 'row', gap: 10 },
-});
+const criarEstilos = (cores: Paleta) =>
+  StyleSheet.create({
+    tela: { flex: 1, backgroundColor: cores.chao },
+    topo: { position: 'absolute', top: 0, left: 0, right: 0 },
+    linhaBusca: { flexDirection: 'row', gap: 10, paddingHorizontal: espaco.md, paddingTop: espaco.xs },
+    busca: {
+      flex: 1,
+      height: 48,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 10,
+      paddingHorizontal: espaco.md,
+      backgroundColor: cores.sobreMapa,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      borderRadius: raios.botao,
+      boxShadow: sombra.flutuante,
+    },
+    botaoPerfil: {
+      width: 48,
+      height: 48,
+      borderRadius: raios.botao,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      backgroundColor: cores.sobreMapa,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    filtros: { gap: espaco.xs, paddingHorizontal: espaco.md, paddingVertical: espaco.sm },
+    lateral: { position: 'absolute', right: espaco.md, top: 132, gap: espaco.xs, alignItems: 'flex-end' },
+    zoom: { gap: espaco.xxs, marginTop: espaco.xs, alignItems: 'center', width: 64 },
+    legenda: {
+      alignSelf: 'flex-start',
+      marginLeft: espaco.md,
+      marginTop: espaco.xs,
+      backgroundColor: cores.sobreMapa,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      borderRadius: 12,
+      padding: espaco.sm,
+      gap: espaco.xs,
+    },
+    linhaLegenda: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+    amostra: { width: 34, height: 7, borderRadius: 4, overflow: 'hidden', justifyContent: 'center' },
+    tracejado: { flexDirection: 'row', gap: 4, paddingHorizontal: 2 },
+    traco: { width: 5, height: 3, borderRadius: 2 },
+    painel: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: espaco.md, gap: 10 },
+    nestaArea: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' },
+    cartaoAgape: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: espaco.sm,
+      backgroundColor: cores.superficie2,
+      borderRadius: raios.cartao,
+      borderWidth: 1,
+      borderColor: cores.linha,
+      padding: 14,
+    },
+    iconeAgape: {
+      width: 48,
+      height: 48,
+      borderRadius: 12,
+      backgroundColor: cores.superficie3,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    postos: { flexDirection: 'row', gap: 10 },
+  });

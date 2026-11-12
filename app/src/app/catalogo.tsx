@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { cores, espaco } from '@/theme';
+import { espaco, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
 import {
   Avatar,
   BarraAbas,
@@ -16,23 +16,26 @@ import {
   Divisoria,
   Icone,
   Pino,
+  SeletorTema,
   Texto,
   type Aba,
   type NomeIcone,
 } from '@/ui';
 
 const filtros = ['tudo', 'irmaos', 'postos', 'sedes', 'lojas'] as const;
-const corFiltro: Record<(typeof filtros)[number], string | undefined> = {
+const corFiltro: Record<(typeof filtros)[number], NomeCor | undefined> = {
   tudo: undefined,
-  irmaos: cores.acao,
-  postos: cores.verdePosto,
-  sedes: cores.ouro,
-  lojas: cores.azulRio,
+  irmaos: 'acao',
+  postos: 'verdePosto',
+  sedes: 'ouro',
+  lojas: 'azulRio',
 };
 
 /** Catálogo de componentes (Interface v2): o dono revisa o visual aqui. */
 export default function Catalogo() {
   const { t } = useTranslation();
+  const cores = useCores();
+  const estilos = useEstilos(criarEstilos);
   const [filtro, setFiltro] = useState<(typeof filtros)[number]>('tudo');
   const [aba, setAba] = useState<Aba>('mapa');
   const nada = () => undefined;
@@ -44,6 +47,9 @@ export default function Catalogo() {
           <BotaoIcone icone="voltar" rotulo={t('comum.voltar')} onPress={() => router.back()} />
           <Texto variante="titulo">{t('catalogo.titulo')}</Texto>
         </View>
+
+        <Texto variante="rotulo">{t('tema.titulo')}</Texto>
+        <SeletorTema />
 
         <Texto variante="rotulo">{t('catalogo.botoes')}</Texto>
         <Botao titulo={t('catalogo.principal')} grande icone="navegar" onPress={nada} />
@@ -70,7 +76,7 @@ export default function Catalogo() {
             <Chip
               key={f}
               rotulo={t(`mapa.filtros.${f}`)}
-              corPonto={corFiltro[f]}
+              corPonto={corFiltro[f] ? cores[corFiltro[f]!] : undefined}
               ativo={filtro === f}
               onPress={() => setFiltro(f)}
             />
@@ -136,21 +142,22 @@ export default function Catalogo() {
   );
 }
 
-const estilos = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: cores.fundo },
-  conteudo: { padding: espaco.lg, gap: espaco.md, paddingBottom: espaco.xxxl },
-  topo: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
-  linha: { flexDirection: 'row', gap: espaco.sm },
-  quebra: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm, alignItems: 'center' },
-  icones: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs },
-  icone: {
-    width: 56,
-    height: 56,
-    borderRadius: 14,
-    backgroundColor: cores.superficie,
-    borderWidth: 1,
-    borderColor: cores.linhaSuave,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const criarEstilos = (cores: Paleta) =>
+  StyleSheet.create({
+    tela: { flex: 1, backgroundColor: cores.fundo },
+    conteudo: { padding: espaco.lg, gap: espaco.md, paddingBottom: espaco.xxxl },
+    topo: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
+    linha: { flexDirection: 'row', gap: espaco.sm },
+    quebra: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm, alignItems: 'center' },
+    icones: { flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs },
+    icone: {
+      width: 56,
+      height: 56,
+      borderRadius: 14,
+      backgroundColor: cores.superficie,
+      borderWidth: 1,
+      borderColor: cores.linhaSuave,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });

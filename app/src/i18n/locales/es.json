@@ -41,7 +41,11 @@
     "legendaTerra": "Camino de tierra",
     "legendaRota": "Tu ruta",
     "legendaRotaTerra": "Tu ruta en tierra",
-    "dadosExemplo": "Hermanos, sedes y gasolineras de este mapa son ejemplos hasta el registro real."
+    "dadosExemplo": "Hermanos, sedes y gasolineras de este mapa son ejemplos hasta el registro real.",
+    "aproximar": "Acercar",
+    "afastar": "Alejar",
+    "legendaCurta": "Leyenda",
+    "euCurto": "Yo"
   },
   "rota": {
     "titulo": "Planear ruta",
@@ -52,7 +56,7 @@
     "misto": "Mixto",
     "terra": "Prefiero tierra",
     "explicacao": {
-      "asfalto": "Evita cualquier tramo de tierra, aunque el viaje sea más largo.",
+      "asfalto": "Evita la tierra, aunque el viaje sea más largo. Si no hay otro camino, avisa cuántos km de tierra.",
       "misto": "El camino más corto, con o sin tierra.",
       "terra": "Busca caminos de tierra siempre que sea posible."
     },
@@ -69,22 +73,25 @@
       "semRota": "No encontramos un camino en moto hasta ese destino con ese tipo de camino.",
       "semLocalizacao": "Todavía sin tu ubicación. Activa la ubicación y ve a un lugar abierto."
     },
-    "aviso": "Los tramos de tierra vienen de OpenStreetMap y pueden estar incompletos en tu región."
+    "aviso": "Los tramos de tierra vienen de OpenStreetMap y pueden estar incompletos en tu región.",
+    "semCaminhoSoAsfalto": "No hay camino solo de asfalto hasta aquí. Esta ruta evita la tierra al máximo, pero tiene {{km}} km de tierra."
   },
   "pilotando": {
     "preparando": "Preparando la navegación…",
     "alerta": "Alerta",
     "reagrupar": "Reagrupar",
     "sos": "SOS",
-    "sosDica": "mantén 2 s",
+    "sosDica": "Mantén 3 s",
     "postoProximo": "Gasolinera cercana",
     "postoNaRota": "Gasolinera en ruta",
     "encerrar": "Terminar",
     "rotaRapida": "Google no aceptó la ruta planeada; siguiendo su ruta hasta el destino.",
-    "emBreveAlerta": "Las alertas de camino para el convoy llegan con los paseos.",
-    "emBreveReagrupar": "El reagrupamiento del convoy llega con los paseos.",
-    "emBrevePosto": "La búsqueda de gasolineras llega con los lugares.",
-    "sosTeste": "Versión de prueba: el SOS todavía no avisa a nadie. En emergencia, llama al 192 (SAMU) o 193 (Bomberos)."
+    "emBreveAlerta": "Alerta: llega con los paseos.",
+    "emBreveReagrupar": "Reagrupar: llega con los paseos.",
+    "emBrevePosto": "Gasolineras: llegan con los lugares.",
+    "sosTeste": "Versión de prueba: el SOS aún no avisa a nadie. Avisará al convoy y a tus contactos, pero no sustituye al 192 (SAMU) ni al 193 (Bomberos).",
+    "encerrarDica": "Mantén p/ terminar",
+    "dicaEntrada": "Configura la ruta detenido. En movimiento, escucha la voz y toca solo si es seguro."
   },
   "navegacao": {
     "termosTitulo": "Términos de la navegación",
@@ -142,5 +149,18 @@
     "pinos": "Pines del mapa",
     "icones": "Íconos",
     "barra": "Barra de pestañas"
+  },
+  "movimento": {
+    "titulo": "Moto en movimiento",
+    "texto": "El feed, los mensajes y los ajustes se bloquean mientras la moto anda. Detente para usarlos.",
+    "pilotando": "Abrir el modo pilotando",
+    "mapa": "Volver al mapa"
+  },
+  "tema": {
+    "titulo": "Apariencia",
+    "auto": "Automático",
+    "noite": "Noche",
+    "sol": "Sol",
+    "explica": "Automático: tema Sol de día (mejor bajo sol fuerte) y Noche después de las 18 h."
   }
 }

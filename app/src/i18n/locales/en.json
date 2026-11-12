@@ -41,7 +41,11 @@
     "legendaTerra": "Dirt road",
     "legendaRota": "Your route",
     "legendaRotaTerra": "Your route on dirt",
-    "dadosExemplo": "Brothers, clubhouses and gas stations on this map are samples until real data arrives."
+    "dadosExemplo": "Brothers, clubhouses and gas stations on this map are samples until real data arrives.",
+    "aproximar": "Zoom in",
+    "afastar": "Zoom out",
+    "legendaCurta": "Legend",
+    "euCurto": "Me"
   },
   "rota": {
     "titulo": "Plan route",
@@ -52,7 +56,7 @@
     "misto": "Mixed",
     "terra": "Prefer dirt",
     "explicacao": {
-      "asfalto": "Avoids any dirt section, even if the trip gets longer.",
+      "asfalto": "Avoids dirt, even if the trip gets longer. If there is no other way, it tells you how many km of dirt.",
       "misto": "The shortest way, with or without dirt.",
       "terra": "Looks for dirt roads whenever possible."
     },
@@ -69,22 +73,25 @@
       "semRota": "We could not find a motorcycle route to that place with this road type.",
       "semLocalizacao": "No location yet. Allow location and go somewhere open."
     },
-    "aviso": "Dirt sections come from OpenStreetMap and may be incomplete in your area."
+    "aviso": "Dirt sections come from OpenStreetMap and may be incomplete in your area.",
+    "semCaminhoSoAsfalto": "There is no paved-only way here. This route avoids dirt as much as possible, but has {{km}} km of dirt."
   },
   "pilotando": {
     "preparando": "Preparing navigation…",
     "alerta": "Alert",
     "reagrupar": "Regroup",
     "sos": "SOS",
-    "sosDica": "hold 2 s",
+    "sosDica": "Hold 3 s",
     "postoProximo": "Nearest gas",
     "postoNaRota": "Gas on route",
     "encerrar": "End",
     "rotaRapida": "Google did not accept the planned route; following its own route to the destination.",
-    "emBreveAlerta": "Road alerts for the group come with rides.",
-    "emBreveReagrupar": "Group regrouping comes with rides.",
-    "emBrevePosto": "Gas station search comes with places.",
-    "sosTeste": "Test version: SOS does not alert anyone yet. In an emergency, call 192 (SAMU) or 193 (Fire Department)."
+    "emBreveAlerta": "Alert: coming with rides.",
+    "emBreveReagrupar": "Regroup: coming with rides.",
+    "emBrevePosto": "Fuel: coming with places.",
+    "sosTeste": "Test version: SOS does not alert anyone yet. It will alert your group and contacts, but it does not replace 192 (ambulance) or 193 (fire brigade).",
+    "encerrarDica": "Hold to end",
+    "dicaEntrada": "Set the route while stopped. On the move, listen to the voice and only tap when safe."
   },
   "navegacao": {
     "termosTitulo": "Navigation terms",
@@ -142,5 +149,18 @@
     "pinos": "Map pins",
     "icones": "Icons",
     "barra": "Tab bar"
+  },
+  "movimento": {
+    "titulo": "Bike in motion",
+    "texto": "Feed, messages and settings are locked while the bike is moving. Stop to use them.",
+    "pilotando": "Open riding mode",
+    "mapa": "Back to map"
+  },
+  "tema": {
+    "titulo": "Appearance",
+    "auto": "Automatic",
+    "noite": "Night",
+    "sol": "Sun",
+    "explica": "Automatic: Sun theme by day (better in strong sunlight) and Night after 6 pm."
   }
 }

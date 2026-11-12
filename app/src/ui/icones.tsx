@@ -1,6 +1,6 @@
 import Svg, { Path } from 'react-native-svg';
 
-import { cores } from '@/theme';
+import { useCores } from '@/theme';
 
 /**
  * Conjunto de ícones da Interface v2: traço 1,8, grade 24, cantos redondos.
@@ -57,6 +57,14 @@ export const caminhosIcones = {
   sos: ['M12 3a9 9 0 110 18 9 9 0 010-18z', 'M12 8v5M12 16v.5'],
   voltar: ['M15 5l-7 7 7 7'],
   fechar: ['M6 6l12 12M18 6L6 18'],
+  mais: ['M12 5v14M5 12h14'],
+  menos: ['M5 12h14'],
+  sol: [
+    'M12 8a4 4 0 110 8 4 4 0 010-8z',
+    'M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+  ],
+  lua: ['M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z'],
+  auto: ['M12 3a9 9 0 110 18 9 9 0 010-18z', 'M12 3v18', 'M12 7a5 5 0 010 10'],
   salvar: ['M6 3h12v18l-6-4-6 4z'],
   encerrar: ['M8 6h8a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2z'],
   direita: ['M7 21V12a4 4 0 014-4h8', 'M15 4l4 4-4 4'],
@@ -74,7 +82,9 @@ export type NomeIcone = keyof typeof caminhosIcones;
 
 type Props = { nome: NomeIcone; tamanho?: number; cor?: string; espessura?: number };
 
-export function Icone({ nome, tamanho = 24, cor = cores.texto, espessura = 1.8 }: Props) {
+export function Icone({ nome, tamanho = 24, cor, espessura = 2 }: Props) {
+  const c = useCores();
+  const traco = cor ?? c.texto;
   const preenchido = nome === 'navegar';
   return (
     <Svg width={tamanho} height={tamanho} viewBox="0 0 24 24" accessible={false}>
@@ -82,11 +92,11 @@ export function Icone({ nome, tamanho = 24, cor = cores.texto, espessura = 1.8 }
         <Path
           key={d}
           d={d}
-          stroke={cor}
+          stroke={traco}
           strokeWidth={espessura}
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill={preenchido ? cor : 'none'}
+          fill={preenchido ? traco : 'none'}
         />
       ))}
     </Svg>

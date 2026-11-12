@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { cores, espaco, fontes, raios, tamanhoTexto, toque } from '@/theme';
+import { espaco, fontes, raios, tamanhoTexto, toque, useCores, useEstilos, type Paleta } from '@/theme';
 
 import { Icone, type NomeIcone } from './icones';
 import { Texto } from './Texto';
@@ -17,26 +17,28 @@ type Props = {
   corIcone?: string;
 };
 
-const fundo: Record<VarianteBotao, string> = {
-  principal: cores.acao,
-  secundario: cores.superficie2,
-  contorno: 'transparent',
-  sos: cores.sos,
-};
-const fundoPressionado: Record<VarianteBotao, string> = {
-  principal: cores.acaoPressionada,
-  secundario: cores.superficie3,
-  contorno: cores.superficie2,
-  sos: '#A1241B',
-};
-const corTexto: Record<VarianteBotao, string> = {
-  principal: cores.fundo,
-  secundario: cores.texto,
-  contorno: cores.texto,
-  sos: cores.textoSobreSos,
-};
+const coresDoBotao = (c: Paleta) => ({
+  fundo: { principal: c.acao, secundario: c.superficie2, contorno: 'transparent', sos: c.sos },
+  pressionado: {
+    principal: c.acaoPressionada,
+    secundario: c.superficie3,
+    contorno: c.superficie3,
+    sos: c.sosPressionado,
+  },
+  // Texto escuro sobre o laranja (R15): creme sobre laranja reprova no contraste.
+  texto: { principal: c.textoSobreAcao, secundario: c.texto, contorno: c.texto, sos: c.textoSobreSos },
+});
 
-/** Botão do app: 52 px (56 no grande), raio 14. SOS usa só o vermelho. */
+const criarEstilos = (c: Paleta) =>
+  StyleSheet.create({
+    base: { borderRadius: raios.botao, paddingHorizontal: espaco.lg, justifyContent: 'center' },
+    borda: { borderWidth: 1, borderColor: c.linha },
+    bordaForte: { borderWidth: 1, borderColor: c.linhaForte },
+    conteudo: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: espaco.xs },
+    texto: { fontFamily: fontes.textoForte, textAlign: 'center' },
+  });
+
+/** Botão do app: 52 dp (56 no grande), raio 14. SOS usa só o vermelho. O texto quebra linha, nunca corta. */
 export function Botao({
   titulo,
   onPress,
@@ -46,6 +48,9 @@ export function Botao({
   icone,
   corIcone,
 }: Props) {
+  const c = useCores();
+  const estilos = useEstilos(criarEstilos);
+  const paleta = useEstilos(coresDoBotao);
   return (
     <Pressable
       accessibilityRole="button"
@@ -57,21 +62,26 @@ export function Botao({
         estilos.base,
         {
           minHeight: grande ? toque.botaoGrande : toque.botao,
-          backgroundColor: pressed ? fundoPressionado[variante] : fundo[variante],
+          backgroundColor: pressed ? paleta.pressionado[variante] : paleta.fundo[variante],
         },
         variante === 'secundario' && estilos.borda,
         variante === 'contorno' && estilos.bordaForte,
+        variante === 'sos' && { borderWidth: 2, borderColor: c.contornoSos },
         desativado && { opacity: 0.5 },
       ]}
     >
       <View style={estilos.conteudo}>
-        {icone && <Icone nome={icone} tamanho={22} cor={corIcone ?? corTexto[variante]} />}
+        {icone && <Icone nome={icone} tamanho={22} cor={corIcone ?? paleta.texto[variante]} />}
         <Texto
           style={[
             estilos.texto,
-            { color: corTexto[variante], fontSize: grande ? tamanhoTexto.corpo : tamanhoTexto.pequeno + 1 },
+            {
+              color: paleta.texto[variante],
+              fontSize: grande ? tamanhoTexto.corpo : tamanhoTexto.pequeno + 1,
+            },
           ]}
-          numberOfLines={1}
+          numberOfLines={2}
+          maxFontSizeMultiplier={1.5}
         >
           {titulo}
         </Texto>
@@ -79,11 +89,3 @@ export function Botao({
     </Pressable>
   );
 }
-
-const estilos = StyleSheet.create({
-  base: { borderRadius: raios.botao, paddingHorizontal: espaco.lg, justifyContent: 'center' },
-  borda: { borderWidth: 1, borderColor: cores.linha },
-  bordaForte: { borderWidth: 1, borderColor: cores.linhaForte },
-  conteudo: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: espaco.xs },
-  texto: { fontFamily: fontes.textoForte },
-});

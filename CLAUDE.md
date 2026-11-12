@@ -18,6 +18,8 @@ Princípios, nesta ordem:
 
 O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Valhalla (sem Mapbox); navegação curva a curva no Premium com 7 dias grátis (SOS, alertas e comboio grátis); Apple em CPF e Google Play como empresa; CarPlay não segura o lançamento; teto de alerta R$ 500/mês com orçamento o mais apertado possível; avatar por IA 1 grátis por conta e 2/mês no Premium (avatar "montar" na Etapa 1, por IA na Etapa 8); revisão de segurança por um desenvolvedor (4 a 8 h) antes do envio às lojas; v1 sem anúncios e sem aviso de rastreamento (ATT); imagens pelo Caminho A (dono gera no ChatGPT); cores do DESIGN.md; modo pilotando com 6 botões.
 
+**12/11/2026 (pesquisa):** as decisões de interface seguem `reports/Usabilidade e interface Bodes do Asfalto.md` (resumo no topo do `docs/DESIGN.md`); itens marcados como decisão do dono aguardam o OK dele.
+
 **12/11/2026:** a interface é prioridade igual ao desenvolvimento e passa pelo dono antes de virar código (Interface v2 em `docs/telas/v2/`). Tipo de estrada no planejamento (Só asfalto / Misto / Prefiro terra) e terra sempre com cor/traço próprios. Pendências externas (licença da marca, empresa) ficam para depois do app pronto.
 
 **Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
@@ -89,7 +91,7 @@ As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML p
 
 - **Estilo:** robusto de estrada, com as cores de `docs/DESIGN.md` (fundo `noite`, cartões `sarja`, texto `creme`, secundário `caramelo`, `laranja` só para ações principais e destaques, `vermelho` só para SOS, `alerta` só para alertas).
 - **Tipografia:** Barlow Condensed (títulos, números grandes) e Inter (textos). Corpo 17 px, nunca menor que 13 px. Público majoritariamente de 40 a 60 anos: letras grandes, poucos itens por tela, frases curtas.
-- **Toque:** mínimo 48 px no app. Modo pilotando: 6 botões de ~100 px em grade 3×2 (Alerta, Reagrupar, SOS, Posto mais próximo, Posto na rota, Encerrar). Carro/painel da moto: 5 botões de 66 px (Alerta, Comboio, Posto mais próximo, Posto na rota, SOS). Alto contraste sempre.
+- **Toque:** mínimo 48 px no app. Modo pilotando: 6 botões (Alerta, Reagrupar, Posto mais próximo, Posto na rota, SOS, Encerrar) com lado menor ≥ 113 dp — em pé 2×3 (~150 × 120 dp), deitado 3×2; SOS segurando 3 s, Encerrar segurando 1,5 s (pesquisa de 12/11/2026; aguarda OK do dono). Carro: Android Auto aceita só 4 botões → SOS, Alerta, Postos, Encerrar (comboio por texto/alertas). Alto contraste sempre; tema Sol de dia.
 - **Tela inicial:** o Mapa. Mostra tudo o que está na área visível: irmãos (avatares com anel de status), capítulos/sedes, Lojas, postos (preço e nota ANP), monumentos, pontos turísticos, negócios de irmãos e Ágapes; contador "Nesta área"; filtros; botão de visibilidade; botões "Posto mais próximo" e "Posto na rota"; cartão do evento mais próximo.
 - **Kit visual (`docs/telas/Kit.dc.html`):** pinos do mapa por tipo (cor + ícone), avatares ilustrados padrão (até o irmão subir foto), mascote Bodinho (boas-vindas, estados vazios, conquistas — nunca no modo pilotando) e ilustrações de estado vazio. Converter para SVG/componentes React Native.
 - **Feed:** stories no topo, compositor com Foto, Vídeo, Rota, Enquete e Evento; cartão de viagem com imagem, recap 3D, km, tempo, irmãos, XP, selo, marcados, reação "TFA", comentários, compartilhar e "Usar rota"; cartão de passeio com Vou/Talvez.

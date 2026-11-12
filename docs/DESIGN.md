@@ -1,5 +1,19 @@
 # Sistema de design — Bodes do Asfalto (identidade "Patch de Colete")
 
+> **Atualização de 12/11/2026 (tarde) — Pesquisa de usabilidade (prevalece sobre tudo abaixo).**
+> Base: `reports/Usabilidade e interface Bodes do Asfalto.md` (59 recomendações R1–R59, com fontes).
+> Fonte única dos valores: `app/src/theme/tokens.ts` (paletas `paletaNoite` e `paletaSol`, mesmas chaves).
+> - **Noite (padrão):** fundo `#141110` (não preto puro, evita halação), superfícies `#1C1714`/`#241E19`/`#2C251E`, texto `#EFE3C8` (14,8:1), secundário `#C2B39B`, ação `#E8692A` **com texto escuro**, SOS `#C62D22` com anel claro, "na estrada" `#6F95B8`.
+> - **Sol (alto contraste para luz do dia):** fundo `#F6F1E7`, cartões brancos, texto `#1A1410`, ação `#A8441A` com texto branco, SOS `#9E1B14`, postos `#1E6B4A`, Lojas `#2F5E86`, terra `#8A5A1E`.
+> - Troca **automática** (Sol das 6h às 18h) e manual em Perfil → Aparência. Mapa e navegação do Google acompanham.
+> - Texto: corpo 17 (Inter 500), mínimo 15 para ação, 13 só para metadados. Barlow Condensed só em títulos ≥ 24 e números ≥ 32; rótulos em Inter. Fonte do sistema sempre amplia; limite 1,3× só na barra, chips e modo pilotando.
+> - Nada só por cor: pinos com forma própria (escudo, círculo, quadrado, losango); anéis de status com traço (contínuo/tracejado/pontilhado) e selo; aba ativa com traço em cima.
+> - Superfícies opacas sobre o mapa (nada translúcido). Ícones com rótulo visível; zoom +/− no mapa.
+> - **Modo pilotando:** 2 colunas × 3 linhas em pé (3 × 2 deitado), botões de ~150 × 120 dp com 24 dp de espaço; SOS **segurando 3 s** e Encerrar segurando 1,5 s, com faixa de progresso e vibração; demais ações com um toque e resposta em faixa (sem janela).
+> - **Trava em movimento:** acima de 8 km/h feed, passeios, conquistas e perfil ficam cobertos; libera após 5 s abaixo de 3 km/h.
+> - **Mapa:** gerado por `tools/gerar_estilo_mapa.py` (noite e sol). Terra = leito + tracejado ocre a 60 % `[2, 1.5]`, abaixo do asfalto; trilha com tracejado próprio; vias locais ≥ 3:1; rota 1,6× a rodovia com contorno de 2 px e pesponto `[1, 2]` na terra.
+> - **Carro (Android Auto):** máximo 4 botões → SOS · Alerta · Postos · Encerrar; comboio vira texto e alertas.
+
 > **Atualização de 12/11/2026 — Interface v2 (prevalece sobre as seções 1 e 2 abaixo).**
 > O dono reprovou o primeiro visual (desproporcional, infantil, sem ícones). Vale agora a Interface v2:
 > pranchas em `docs/telas/v2/` (Mapa, Planejar rota, Pilotando, Carro, Sistema) e tokens em `app/src/theme/tokens.ts`.

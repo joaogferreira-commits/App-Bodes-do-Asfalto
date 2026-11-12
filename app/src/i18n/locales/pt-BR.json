@@ -41,7 +41,11 @@
     "legendaTerra": "Estrada de terra",
     "legendaRota": "Sua rota",
     "legendaRotaTerra": "Sua rota na terra",
-    "dadosExemplo": "Irmãos, sedes e postos deste mapa são exemplos até o cadastro real."
+    "dadosExemplo": "Irmãos, sedes e postos deste mapa são exemplos até o cadastro real.",
+    "aproximar": "Aproximar",
+    "afastar": "Afastar",
+    "legendaCurta": "Legenda",
+    "euCurto": "Eu"
   },
   "rota": {
     "titulo": "Planejar rota",
@@ -52,7 +56,7 @@
     "misto": "Misto",
     "terra": "Prefiro terra",
     "explicacao": {
-      "asfalto": "Evita qualquer trecho de terra, mesmo que a viagem fique mais longa.",
+      "asfalto": "Evita a terra, mesmo que a viagem fique mais longa. Se não houver outro caminho, avisa quantos km de terra.",
       "misto": "O caminho mais curto, com ou sem terra.",
       "terra": "Procura estradas de terra sempre que possível."
     },
@@ -69,22 +73,25 @@
       "semRota": "Não achamos um caminho de moto até esse destino com esse tipo de estrada.",
       "semLocalizacao": "Ainda sem a sua localização. Libere a localização e vá para um lugar aberto."
     },
-    "aviso": "Trechos de terra vêm do OpenStreetMap e podem estar incompletos na sua região."
+    "aviso": "Trechos de terra vêm do OpenStreetMap e podem estar incompletos na sua região.",
+    "semCaminhoSoAsfalto": "Não há caminho só de asfalto até aqui. Esta rota evita a terra ao máximo, mas tem {{km}} km de terra."
   },
   "pilotando": {
     "preparando": "Preparando a navegação…",
     "alerta": "Alerta",
     "reagrupar": "Reagrupar",
     "sos": "SOS",
-    "sosDica": "segure 2 s",
+    "sosDica": "Segure 3 s",
     "postoProximo": "Posto próximo",
     "postoNaRota": "Posto na rota",
     "encerrar": "Encerrar",
     "rotaRapida": "O Google não aceitou a rota planejada; seguindo a rota dele até o destino.",
-    "emBreveAlerta": "Os alertas de estrada para o comboio chegam com os passeios.",
-    "emBreveReagrupar": "O reagrupamento do comboio chega com os passeios.",
-    "emBrevePosto": "A busca de postos chega com os lugares.",
-    "sosTeste": "Versão de teste: o SOS ainda não avisa ninguém. Em emergência, ligue 192 (SAMU) ou 193 (Bombeiros)."
+    "emBreveAlerta": "Alerta: chega com os passeios.",
+    "emBreveReagrupar": "Reagrupar: chega com os passeios.",
+    "emBrevePosto": "Postos: chegam com os lugares.",
+    "sosTeste": "Versão de teste: o SOS ainda não avisa ninguém. Ele vai avisar o comboio e seus contatos, mas não substitui o 192 (SAMU) ou o 193 (Bombeiros).",
+    "encerrarDica": "Segure p/ encerrar",
+    "dicaEntrada": "Configure a rota parado. Em movimento, ouça a voz e toque só se for seguro."
   },
   "navegacao": {
     "termosTitulo": "Termos da navegação",
@@ -142,5 +149,18 @@
     "pinos": "Pinos do mapa",
     "icones": "Ícones",
     "barra": "Barra de abas"
+  },
+  "movimento": {
+    "titulo": "Moto em movimento",
+    "texto": "Feed, mensagens e ajustes ficam travados enquanto a moto anda. Pare para usar.",
+    "pilotando": "Abrir o modo pilotando",
+    "mapa": "Voltar ao mapa"
+  },
+  "tema": {
+    "titulo": "Aparência",
+    "auto": "Automático",
+    "noite": "Noite",
+    "sol": "Sol",
+    "explica": "Automático: tema Sol de dia (melhor sob sol forte) e Noite depois das 18h."
   }
 }

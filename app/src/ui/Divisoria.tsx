@@ -1,11 +1,13 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
-import { cores, espaco } from '@/theme';
+import { espaco, useCores } from '@/theme';
 
 export function Divisoria() {
-  return <View accessible={false} style={estilos.linha} />;
+  const c = useCores();
+  return (
+    <View
+      accessible={false}
+      style={{ height: 1, backgroundColor: c.linhaSuave, marginVertical: espaco.sm }}
+    />
+  );
 }
-
-const estilos = StyleSheet.create({
-  linha: { height: 1, backgroundColor: cores.linhaSuave, marginVertical: espaco.sm },
-});

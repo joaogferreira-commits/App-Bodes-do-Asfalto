@@ -10,15 +10,23 @@ import type { RotaPlanejada, TipoEstrada, Trecho } from './tipos';
  */
 export const SERVIDOR_VALHALLA = 'https://valhalla1.openstreetmap.de';
 
-/** Preferências de moto por tipo de estrada (costing "motorcycle" do Valhalla). */
-export function opcoesDeCusto(tipo: TipoEstrada) {
+/**
+ * Preferências de moto por tipo de estrada (costing "motorcycle" do Valhalla), conforme R42:
+ * - Só asfalto: primeiro tenta sem nenhuma terra (exclude_unpaved); se não houver caminho
+ *   (sítio, fazenda), refaz com use_trails 0 — terra só onde não tem jeito — e avisa o irmão;
+ * - Misto: use_trails 0,4 (piso neutro: o caminho mais curto, com ou sem terra);
+ * - Prefiro terra: use_trails 1 e pouca rodovia.
+ */
+export function opcoesDeCusto(tipo: TipoEstrada, semCorteDeTerra = false) {
   switch (tipo) {
     case 'asfalto':
-      return { use_trails: 0, exclude_unpaved: true, use_highways: 1 };
+      return semCorteDeTerra
+        ? { use_trails: 0, use_highways: 1 }
+        : { use_trails: 0, exclude_unpaved: true, use_highways: 1 };
     case 'terra':
       return { use_trails: 1, use_highways: 0.2 };
     default:
-      return { use_trails: 0.5, use_highways: 0.7 };
+      return { use_trails: 0.4, use_highways: 0.7 };
   }
 }
 
@@ -64,15 +72,15 @@ export async function planejarRota(
   tipo: TipoEstrada,
   buscar: Buscar = fetch as unknown as Buscar,
 ): Promise<RotaPlanejada> {
-  const corpo = {
+  const corpo = (semCorteDeTerra: boolean) => ({
     locations: [
       { lat: origem.lat, lon: origem.lng },
       { lat: destino.lat, lon: destino.lng },
     ],
     costing: 'motorcycle',
-    costing_options: { motorcycle: opcoesDeCusto(tipo) },
+    costing_options: { motorcycle: opcoesDeCusto(tipo, semCorteDeTerra) },
     directions_options: { units: 'kilometers', language: 'pt-BR' },
-  };
+  });
   const pedir = async (caminho: string, dados: object) => {
     let resp;
     try {
@@ -88,7 +96,16 @@ export async function planejarRota(
     return resp.json();
   };
 
-  const rota = (await pedir('/route', corpo)) as RespostaRota;
+  let semCaminhoSoAsfalto = false;
+  let rota: RespostaRota;
+  try {
+    rota = (await pedir('/route', corpo(false))) as RespostaRota;
+  } catch (e) {
+    if (tipo !== 'asfalto' || !(e instanceof ErroRota) || e.motivo !== 'semRota') throw e;
+    // Não existe caminho só de asfalto: refaz evitando a terra ao máximo e avisa.
+    rota = (await pedir('/route', corpo(true))) as RespostaRota;
+    semCaminhoSoAsfalto = true;
+  }
   const perna = rota.trip?.legs?.[0];
   const resumo = rota.trip?.summary;
   if (!perna || !resumo) throw new ErroRota('semRota');
@@ -119,6 +136,7 @@ export async function planejarRota(
     kmTerra: Math.round(kmTerra * 10) / 10,
     minutos: Math.round(resumo.time / 60),
     tipo,
+    ...(semCaminhoSoAsfalto ? { aviso: 'semCaminhoSoAsfalto' as const } : {}),
   };
 }
 

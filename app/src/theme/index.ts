@@ -22,3 +22,13 @@ export const tema = {
 export type Tema = typeof tema;
 export * from './tokens';
 export { contraste } from './contraste';
+export {
+  ProvedorTema,
+  modoPelaHora,
+  resolverModo,
+  useCores,
+  useEstilos,
+  useTema,
+  type ModoTema,
+  type PreferenciaTema,
+} from './ProvedorTema';
