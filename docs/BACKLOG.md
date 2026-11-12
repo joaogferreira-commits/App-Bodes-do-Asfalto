@@ -18,10 +18,14 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 12. **Detecção de queda (experimental):** sensor de movimento + contagem regressiva de 30 s antes do SOS (decisão do dono pendente; Premium?).
 13. **Revisões das personas novas** (Rui, Sofia, Lia, Carlos, Otávio, Pedro) e corrigir os achados.
 
+14. **Imagens por IA:** a cada nova imagem gerada, ligar no app (feed, passeios, classificados, guia) no lugar das provisórias; acompanhar a fila em `docs/FILA_IMAGENS.md`.
+
 ## Aguardando o dono (uma tarefa por vez)
 - Ativar a **Routes API** no Google Cloud (faz a navegação seguir a rota planejada).
 - Criar o projeto grátis no **Supabase** e cadastrar a URL e a chave pública no EAS.
 - Login com Google e Apple: credenciais (depois do Supabase).
+- Contas grátis de imagem: Cloudflare (Account ID + token Workers AI) e Google AI Studio (chave Gemini) nos GitHub Secrets.
+- Fazer no ChatGPT as imagens "dono" de `docs/FILA_IMAGENS.md`, quando puder.
 
 ## Feito recentemente
 - Botões do pilotando menores (3×2), painel recolhível, pinos agrupados, tema Sol ajustado, rota conferida com o Google antes de sair.

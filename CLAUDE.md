@@ -106,7 +106,7 @@ As telas aprovadas ficam em `docs/telas/` (arquivos `.dc.html`, abra como HTML p
 - **Bibliotecas de acabamento:** `react-native-svg` (ícones vetoriais), `boxShadow` nativo (sombras), Lottie ou Rive (animações ≤ 100 KB), `expo-image` (cache de imagens). Skia saiu em 12/11/2026 (o visual v2 não precisa; volta só se um efeito exigir).
 - **Mapa:** estilo MapLibre próprio em `app/src/map/estilo-bodes.json`, conforme a seção 3 do DESIGN.md.
 - **Limite de peso:** seção 4 do DESIGN.md. Medir a cada build de teste.
-- **Imagens geradas:** Caminho A (dono gera no ChatGPT com `docs/PROMPTS_IMAGENS.md` e salva em `docs/assets-originais/`) ou Caminho B (agente gera pela API, só se o segredo de rede estiver configurado; limite de US$ 10 sem nova autorização; registrar no LOG). Antes de gerar ou converter, pergunte ao dono qual caminho está ativo.
+- **Imagens geradas (decisão do dono em 12/11/2026):** fila única em `tools/fila_imagens.json` (lista legível em `docs/FILA_IMAGENS.md`). Itens `dono` = as mais importantes, o dono faz no ChatGPT (Caminho A). Itens `auto` = o agente gera grátis pelo workflow `imagens-ia.yml` em cascata Cloudflare → Gemini → Pollinations, com limite por rodada (Pollinations só para imagens de exemplo). Chaves só em GitHub Secrets (`CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `GEMINI_API_KEY`). Nada pago sem autorização.
 - **Enquanto as imagens não existirem:** use as versões vetoriais das pranchetas `.dc.html` como provisórias; nada trava por falta de imagem.
 
 ## Recursos vindos da pesquisa de mercado (ver docs/ESPECIFICACAO.md)
@@ -194,7 +194,8 @@ O agente roda na assinatura Pro, com limite a cada 5 horas e semanal.
 
 - App: `cd app && npm run lint && npm run typecheck && npm test` (instalar pacotes com `EXPO_OFFLINE=1 npx expo install ...`; a rede do agente bloqueia api.expo.dev)
 - Imagens: `python3 tools/converter_imagens.py` (testes: `cd tools && python3 -m unittest`)
-- Build de teste a partir do agente: editar `.github/build-request.txt` (plataforma=, perfil=) e fazer push — o GitHub Actions dispara o EAS
+- Build de teste a partir do agente: editar `.github/build-request.txt` (plataforma=, perfil=) e fazer push — o GitHub Actions dispara o EAS. A cada versão de teste: subir `version` em `app/app.json` e registrar em `docs/VERSOES.md` (o teste confere)
+- Imagens por IA: acrescentar itens em `tools/fila_imagens.json` (ou editar `.github/imagens-request.txt`) e fazer push — o workflow gera e faz commit
 - Banco: `supabase start`, `supabase db reset`, `supabase test db`
 - E2E: `maestro test e2e/`
 - Build de teste: `eas build --profile preview --platform all`
