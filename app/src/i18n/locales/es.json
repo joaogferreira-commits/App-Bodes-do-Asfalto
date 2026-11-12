@@ -378,7 +378,8 @@
     "agora": "ahora",
     "compartilharTexto": "¡Mira lo que pasó en Bodes do Asfalto! Descarga la app del club.",
     "salvar": "Guardar publicación",
-    "salvo": "Publicación guardada (toca para quitar)"
+    "salvo": "Publicación guardada (toca para quitar)",
+    "verSeuStory": "Ver tu historia"
   },
   "passeios": {
     "exemplo": "Paseos de ejemplo hasta la agenda real de los capítulos.",
@@ -825,5 +826,12 @@
   "salvos": {
     "titulo": "Publicaciones guardadas",
     "vazio": "Aún no guardaste ninguna publicación. Toca el marcador de una para guardarla."
+  },
+  "story": {
+    "novo": "Nueva historia",
+    "explica": "Una foto de la ruta con una leyenda corta. Desaparece sola en 24 horas.",
+    "legenda": "Leyenda (hasta 80 letras)",
+    "publicar": "Publicar historia",
+    "outro": "Otra historia"
   }
 }

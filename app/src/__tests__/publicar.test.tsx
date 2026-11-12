@@ -79,4 +79,36 @@ describe('publicar e comentar', () => {
     });
     delete parametros.enquete;
   });
+
+  it('story some depois de 24 horas', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { storiesAtivos, DURACAO_STORY_MS } =
+      require('@/estado/meusPosts') as typeof import('@/estado/meusPosts');
+    const agora = 1_000_000_000_000;
+    const l = [
+      { id: 'novo', foto: 'a', legenda: '', criadoEm: agora - 1000 },
+      { id: 'velho', foto: 'b', legenda: '', criadoEm: agora - DURACAO_STORY_MS - 1 },
+    ];
+    expect(storiesAtivos(l, agora).map((x) => x.id)).toEqual(['novo']);
+  });
+
+  it('publica um story com foto da galeria', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const NovoStory = (require('@/app/story-novo') as { default: () => React.JSX.Element }).default;
+    function Conta() {
+      return <Text testID="stories">{useMeusPosts().stories.length}</Text>;
+    }
+    await render(
+      <ProvedorMeusPosts>
+        <NovoStory />
+        <Conta />
+      </ProvedorMeusPosts>,
+    );
+    expect(screen.getByRole('button', { name: 'Publicar story' })).toBeDisabled();
+    await fireEvent.press(screen.getByRole('button', { name: 'Da galeria' }));
+    await screen.findByRole('button', { name: 'Publicar story' });
+    await fireEvent.changeText(screen.getByLabelText('Legenda (até 80 letras)'), 'Estrada boa');
+    await fireEvent.press(screen.getByRole('button', { name: 'Publicar story' }));
+    expect(screen.getByTestId('stories').props.children).toBe(1);
+  });
 });

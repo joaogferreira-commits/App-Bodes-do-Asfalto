@@ -68,23 +68,39 @@ export default function Feed() {
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={estilos.stories}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={t('feed.seuStory')}
-          onPress={emBreve}
+          accessibilityLabel={meus.stories.length ? t('feed.verSeuStory') : t('feed.seuStory')}
+          onPress={() => router.push(meus.stories.length ? '/story?de=meu' : '/story-novo')}
           style={estilos.story}
         >
-          <View style={[estilos.anelStory, { borderColor: cores.linhaForte, borderStyle: 'dashed' }]}>
-            <Icone nome="mais" tamanho={28} cor={cores.acao} espessura={2.4} />
+          <View
+            style={[
+              estilos.anelStory,
+              meus.stories.length
+                ? { borderColor: cores.acao }
+                : { borderColor: cores.linhaForte, borderStyle: 'dashed' },
+            ]}
+          >
+            {meus.stories.length ? (
+              <Image
+                source={{ uri: meus.stories[0]!.foto }}
+                style={{ width: 58, height: 58, borderRadius: 29 }}
+                contentFit="cover"
+                accessible={false}
+              />
+            ) : (
+              <Icone nome="mais" tamanho={28} cor={cores.acao} espessura={2.4} />
+            )}
           </View>
           <Texto variante="pequeno" numberOfLines={1}>
             {t('feed.seuStory')}
           </Texto>
         </Pressable>
-        {stories.map((s) => (
+        {stories.map((s, i) => (
           <Pressable
             key={s.nome}
             accessibilityRole="button"
             accessibilityLabel={t('feed.storyDe', { nome: s.nome })}
-            onPress={emBreve}
+            onPress={() => router.push(`/story?de=${i}`)}
             style={estilos.story}
           >
             <View style={[estilos.anelStory, { borderColor: s.novo ? cores.acao : cores.linha }]}>

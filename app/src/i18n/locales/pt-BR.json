@@ -378,7 +378,8 @@
     "agora": "agora",
     "compartilharTexto": "Olha o que rolou no Bodes do Asfalto! Baixe o app do clube.",
     "salvar": "Salvar post",
-    "salvo": "Post salvo (tocar para tirar)"
+    "salvo": "Post salvo (tocar para tirar)",
+    "verSeuStory": "Ver seu story"
   },
   "passeios": {
     "exemplo": "Passeios de exemplo até a agenda real dos capítulos.",
@@ -825,5 +826,12 @@
   "salvos": {
     "titulo": "Posts salvos",
     "vazio": "Você ainda não salvou nenhum post. Toque no marcador de um post para guardar."
+  },
+  "story": {
+    "novo": "Novo story",
+    "explica": "Uma foto da estrada com uma legenda curta. Some sozinho em 24 horas.",
+    "legenda": "Legenda (até 80 letras)",
+    "publicar": "Publicar story",
+    "outro": "Outro story"
   }
 }

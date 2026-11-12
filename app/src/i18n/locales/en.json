@@ -378,7 +378,8 @@
     "agora": "now",
     "compartilharTexto": "Check out what happened at Bodes do Asfalto! Get the club app.",
     "salvar": "Save post",
-    "salvo": "Post saved (tap to remove)"
+    "salvo": "Post saved (tap to remove)",
+    "verSeuStory": "See your story"
   },
   "passeios": {
     "exemplo": "Sample rides until the chapters' real calendar.",
@@ -825,5 +826,12 @@
   "salvos": {
     "titulo": "Saved posts",
     "vazio": "You haven't saved any posts yet. Tap a post's bookmark to keep it."
+  },
+  "story": {
+    "novo": "New story",
+    "explica": "A road photo with a short caption. It disappears by itself after 24 hours.",
+    "legenda": "Caption (up to 80 letters)",
+    "publicar": "Post story",
+    "outro": "Another story"
   }
 }

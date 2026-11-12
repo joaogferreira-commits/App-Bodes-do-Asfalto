@@ -11,7 +11,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 6. ~~**Rota (Mateus):**~~ FEITO 12/11: até 3 caminhos para escolher, barra de trechos na ordem do percurso, "a terra começa no km X". Pendentes: "piso desconhecido" (o Valhalla não informa quando o piso não está etiquetado no OSM) e voz "Terra em 2 km" (etapa da navegação).
 7. **Peso do APK:** R8 + shrinkResources ligados em 12/11 com regras de proteção (navegação, Android Auto, MapLibre). FALTA: medir o APK e o dono testar a navegação e o Android Auto nessa versão; se quebrar, desligar.
 8. **Android Auto:** cartão de manobra (seta + distância) e zoom/recentrar (R26).
-9. **Feed:** ~~enquete~~ e ~~salvar post~~ FEITOS 12/11. Faltam: vídeo (até 60 s), stories de 24 h, menções (@).
+9. **Feed:** ~~enquete~~ e ~~salvar post~~ FEITOS 12/11. ~~Stories de 24 h~~ FEITO 12/11. Faltam: vídeo (até 60 s), menções (@).
 10. **Revisões de Dora e Quintino** em cada tela nova; corrigir achados.
 
 ## Aguardando o dono (uma tarefa por vez)

@@ -52,12 +52,48 @@ export type Post =
     }
   | { id: string; tipo: 'aviso'; autor: Autor; quando: string; titulo: string; texto: string };
 
-export const stories: { nome: string; status: StatusIrmao; novo: boolean }[] = [
-  { nome: 'Edu Prado', status: 'estrada', novo: true },
-  { nome: 'Zé Ferreira', status: 'cafe', novo: true },
-  { nome: 'Ivan Coruja', status: 'aberto', novo: true },
-  { nome: 'Marcos Ferrugem', status: 'aberto', novo: false },
-  { nome: 'Tião Garupa', status: 'nenhum', novo: false },
+export const stories: {
+  nome: string;
+  status: StatusIrmao;
+  novo: boolean;
+  imagem: number;
+  legenda: string;
+}[] = [
+  {
+    nome: 'Edu Prado',
+    status: 'estrada',
+    novo: true,
+    imagem: require('../../assets/exemplos/estrada-terra.webp'),
+    legenda: 'Saindo pra Chapada!',
+  },
+  {
+    nome: 'Zé Ferreira',
+    status: 'cafe',
+    novo: true,
+    imagem: require('../../assets/exemplos/por-do-sol.webp'),
+    legenda: 'Pôr do sol no trevo',
+  },
+  {
+    nome: 'Ivan Coruja',
+    status: 'aberto',
+    novo: true,
+    imagem: require('../../assets/exemplos/pantanal.webp'),
+    legenda: 'Transpantaneira hoje',
+  },
+  {
+    nome: 'Marcos Ferrugem',
+    status: 'aberto',
+    novo: false,
+    imagem: require('../../assets/exemplos/moto-trail.webp'),
+    legenda: 'Revisão em dia',
+  },
+  {
+    nome: 'Tião Garupa',
+    status: 'nenhum',
+    novo: false,
+    imagem: require('../../assets/exemplos/comboio.webp'),
+    legenda: 'Treino de comboio',
+  },
 ];
 
 const img = {

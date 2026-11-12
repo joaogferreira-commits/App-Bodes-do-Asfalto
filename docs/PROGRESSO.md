@@ -10,6 +10,8 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 
 ## Feito
 
+- 12/11/2026 (ciclo 5) — **Stories de 24 h:** criar (foto da câmera/galeria sem EXIF + legenda de até 80 letras), ver em tela cheia com barra de 5 s, apagar; os de exemplo usam as fotos de domínio público; somem sozinhos 24 h depois. 208 testes.
+
 - 12/11/2026 (ciclo 4) — **Feed:** criar enquete (pergunta + 2 a 4 opções, votar), salvar posts (marcador nos posts; tela `/salvos` e atalho no perfil). 206 testes.
 
 - 12/11/2026 (ciclo 4) — **Tamanho do APK:** R8 (`enableMinifyInReleaseBuilds`) e `enableShrinkResourcesInReleaseBuilds` ligados, com regras `-keep` para a ponte e o SDK de navegação do Google, a tela do Android Auto (`com.bodesdoasfalto.app.auto`), `androidx.car.app` e o MapLibre. Teste em `plugins/plugins.test.js`. Risco: a navegação ou o Android Auto falharem só nessa build — conferir no teste do dono.

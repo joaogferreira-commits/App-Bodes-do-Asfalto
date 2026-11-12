@@ -7,6 +7,12 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
  */
 export type VisibilidadePost = 'todos' | 'capitulo' | 'amigos';
 export type Comentario = { id: string; autor: string; texto: string; meu: boolean };
+/** Story do irmão: some sozinho 24 h depois. */
+export type MeuStory = { id: string; foto: string; legenda: string; criadoEm: number };
+export const DURACAO_STORY_MS = 24 * 60 * 60 * 1000;
+export const storiesAtivos = (l: MeuStory[], agora = Date.now()) =>
+  l.filter((x) => agora - x.criadoEm < DURACAO_STORY_MS);
+
 export type MeuPost = {
   id: string;
   texto: string;
@@ -28,6 +34,9 @@ type Valor = {
   apagarComentario: (postId: string, id: string) => void;
   salvos: string[];
   alternarSalvo: (postId: string) => void;
+  stories: MeuStory[];
+  publicarStory: (foto: string, legenda: string) => void;
+  apagarStory: (id: string) => void;
 };
 
 const Contexto = createContext<Valor | null>(null);
@@ -37,6 +46,7 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<MeuPost[]>([]);
   const [comentarios, setComentarios] = useState<Record<string, Comentario[]>>({});
   const [salvos, setSalvos] = useState<string[]>([]);
+  const [stories, setStories] = useState<MeuStory[]>([]);
   const [carregou, setCarregou] = useState(false);
 
   useEffect(() => {
@@ -47,10 +57,12 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
             posts: MeuPost[];
             comentarios: Record<string, Comentario[]>;
             salvos?: string[];
+            stories?: MeuStory[];
           };
           setPosts(d.posts ?? []);
           setComentarios(d.comentarios ?? {});
           setSalvos(d.salvos ?? []);
+          setStories(storiesAtivos(d.stories ?? []));
         }
       })
       .catch(() => undefined)
@@ -59,8 +71,10 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (carregou)
-      void AsyncStorage.setItem(CHAVE, JSON.stringify({ posts, comentarios, salvos })).catch(() => undefined);
-  }, [posts, comentarios, salvos, carregou]);
+      void AsyncStorage.setItem(CHAVE, JSON.stringify({ posts, comentarios, salvos, stories })).catch(
+        () => undefined,
+      );
+  }, [posts, comentarios, salvos, stories, carregou]);
 
   const valor = useMemo<Valor>(
     () => ({
@@ -79,8 +93,15 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
         setComentarios((c) => ({ ...c, [postId]: (c[postId] ?? []).filter((x) => x.id !== id) })),
       salvos,
       alternarSalvo: (id) => setSalvos((l) => (l.includes(id) ? l.filter((x) => x !== id) : [id, ...l])),
+      stories: storiesAtivos(stories),
+      publicarStory: (foto, legenda) =>
+        setStories((l) => [
+          { id: `story-${Date.now()}`, foto, legenda, criadoEm: Date.now() },
+          ...storiesAtivos(l),
+        ]),
+      apagarStory: (id) => setStories((l) => l.filter((x) => x.id !== id)),
     }),
-    [posts, comentarios, salvos],
+    [posts, comentarios, salvos, stories],
   );
   return <Contexto.Provider value={valor}>{children}</Contexto.Provider>;
 }
