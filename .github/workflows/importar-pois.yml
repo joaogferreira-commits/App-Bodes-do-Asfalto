@@ -1,0 +1,75 @@
+name: Importar pontos do OpenStreetMap (só com autorização do dono)
+
+# Coleta pontos de interesse no Overpass e grava em public.pontos_osm pela API REST.
+# NÃO aplica migrations: a tabela precisa existir (a aplicação do banco é outro passo, autorizado pelo dono).
+# Arquivo .github/pois-request.txt (linhas chave=valor, opcionais): ufs=MT,GO  tipos=posto,cachoeira  enviar=sim
+on:
+  push:
+    paths:
+      - .github/pois-request.txt
+  workflow_dispatch:
+    inputs:
+      ufs:
+        description: 'UFs separadas por vírgula (vazio = Mato Grosso)'
+        default: 'MT'
+      tipos:
+        description: 'Tipos separados por vírgula (vazio = todos)'
+        default: ''
+      enviar:
+        description: 'Enviar ao banco (sim/nao)'
+        default: 'sim'
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Ler os parâmetros
+        env:
+          IN_UFS: ${{ github.event.inputs.ufs }}
+          IN_TIPOS: ${{ github.event.inputs.tipos }}
+          IN_ENVIAR: ${{ github.event.inputs.enviar }}
+        run: |
+          UFS="$IN_UFS"; TIPOS="$IN_TIPOS"; ENVIAR="$IN_ENVIAR"
+          if [ -f .github/pois-request.txt ]; then
+            v() { grep -E "^$1=" .github/pois-request.txt | head -1 | cut -d= -f2- | tr -d ' \r'; }
+            [ -n "$(v ufs)" ] && UFS=$(v ufs)
+            [ -n "$(v tipos)" ] && TIPOS=$(v tipos)
+            [ -n "$(v enviar)" ] && ENVIAR=$(v enviar)
+          fi
+          # Só letras, vírgula e sublinhado (evita injeção de comando)
+          clean() { echo "$1" | tr -cd 'A-Za-z_,'; }
+          echo "UFS=$(clean "${UFS:-MT}")" >> "$GITHUB_ENV"
+          echo "TIPOS=$(clean "$TIPOS")" >> "$GITHUB_ENV"
+          echo "ENVIAR=$(clean "${ENVIAR:-sim}")" >> "$GITHUB_ENV"
+      - name: Testes do importador
+        run: cd tools && python3 -m unittest test_importar_pois_osm
+      - name: Coletar no Overpass
+        run: |
+          ARGS=(--coletar --ufs "$UFS")
+          [ -n "$TIPOS" ] && ARGS+=(--tipos "$TIPOS")
+          python3 tools/importar_pois_osm.py "${ARGS[@]}"
+      - uses: supabase/setup-cli@v1
+        if: env.ENVIAR == 'sim'
+        with:
+          version: latest
+      - name: Enviar ao banco (chave de serviço mascarada)
+        if: env.ENVIAR == 'sim'
+        run: |
+          CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
+          echo "::add-mask::$CHAVE"
+          export SUPABASE_SERVICE_ROLE_KEY="$CHAVE"
+          export SUPABASE_URL="https://$REF.supabase.co"
+          python3 tools/importar_pois_osm.py --enviar --ufs "$UFS"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pois-ndjson
+          path: tools/coleta/pois/
