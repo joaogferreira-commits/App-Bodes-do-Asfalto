@@ -19,6 +19,7 @@ import { ProvedorAvatar } from '@/estado/avatar';
 import { ProvedorClassificados } from '@/estado/classificados';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
 import { ProvedorPerfil } from '@/estado/perfil';
+import { ProvedorConversas } from '@/estado/conversas';
 import { ProvedorViagem } from '@/estado/viagem';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
@@ -44,7 +45,9 @@ export default function Layout() {
                 <ProvedorMeusPosts>
                   <ProvedorClassificados>
                     <ProvedorViagem>
-                      <Telas />
+                      <ProvedorConversas>
+                        <Telas />
+                      </ProvedorConversas>
                     </ProvedorViagem>
                   </ProvedorClassificados>
                 </ProvedorMeusPosts>

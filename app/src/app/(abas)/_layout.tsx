@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
 import { useAtalhosSOS } from '@/atalhos/useAtalhosSOS';
+import { useConversas } from '@/estado/conversas';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
@@ -14,6 +15,7 @@ import { BarraAbas, type Aba } from '@/ui';
 const rotaDaAba: Record<Aba, string> = {
   mapa: 'index',
   feed: 'feed',
+  conversas: 'conversas',
   passeios: 'passeios',
   ferramentas: 'ferramentas',
   perfil: 'perfil',
@@ -30,6 +32,7 @@ const abaDaRota = Object.fromEntries(Object.entries(rotaDaAba).map(([a, r]) => [
 export default function LayoutAbas() {
   const cores = useCores();
   useAtalhosSOS();
+  const { totalNaoLidas } = useConversas();
   const emMovimento = useBloqueioEmMovimento();
   const segmentos = useSegments() as string[];
   const { bottom } = useSafeAreaInsets();
@@ -47,6 +50,7 @@ export default function LayoutAbas() {
         screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: cores.fundo } }}
         tabBar={({ state, navigateToTab }) => (
           <BarraAbas
+            selos={{ conversas: totalNaoLidas }}
             ativa={
               state.routes[state.index]?.name === 'conquistas'
                 ? 'perfil'
@@ -61,6 +65,7 @@ export default function LayoutAbas() {
       >
         <Tabs.Screen name="index" />
         <Tabs.Screen name="feed" />
+        <Tabs.Screen name="conversas" />
         <Tabs.Screen name="passeios" />
         <Tabs.Screen name="ferramentas" />
         <Tabs.Screen name="conquistas" />

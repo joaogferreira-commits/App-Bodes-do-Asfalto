@@ -15,7 +15,8 @@
     "passeios": "Passeios",
     "conquistas": "Conquistas",
     "perfil": "Perfil",
-    "ferramentas": "Ferramentas"
+    "ferramentas": "Ferramentas",
+    "conversas": "Chat"
   },
   "mapa": {
     "busca": "Para onde vamos?",
@@ -1050,5 +1051,53 @@
     "naoSuportado": "Este celular não permite fixar atalhos. Segure o ícone do app para ver o SOS.",
     "widgetManual": "Segure um espaço vazio da tela inicial, toque em \"Widgets\" e procure \"SOS Bodes\".",
     "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá. No iPhone isso chega com a versão para iPhone."
+  },
+  "chat": {
+    "titulo": "Conversas",
+    "nova": "Nova conversa",
+    "novaTitulo": "Falar com um irmão",
+    "novaExplica": "A conversa começa com um aceno. Quando ele aceitar, o chat abre.",
+    "acenarPara": "Acenar para {{nome}}",
+    "modoLocal": "Versão de teste: as mensagens ficam só neste celular até o servidor do clube entrar.",
+    "filtros": {
+      "todas": "Todas",
+      "grupos": "Grupos",
+      "diretas": "Diretas"
+    },
+    "tipos": {
+      "avisos": "Avisos oficiais",
+      "capitulo": "Grupo do capítulo",
+      "passeio": "Grupo do passeio",
+      "comboio": "Grupo do comboio",
+      "agape": "Grupo do Ágape",
+      "direto": "Conversa direta"
+    },
+    "naoLidasN": "{{n}} não lidas",
+    "aguardandoAceno": "Aguardando ele aceitar o aceno",
+    "voce": "Você",
+    "temporario": "Fecha {{quando}}",
+    "participantes": "{{n}} irmãos",
+    "opcoes": "Opções da conversa",
+    "silenciar": "Silenciar",
+    "ativarSom": "Ativar avisos",
+    "bloquear": "Bloquear {{nome}}",
+    "bloquearCurto": "Bloquear",
+    "bloquearPergunta": "Bloquear {{nome}}?",
+    "bloquearExplica": "Ele não poderá mais falar com você nem acenar. Você pode desbloquear depois.",
+    "denunciar": "Denunciar",
+    "denunciada": "Denúncia enviada aos moderadores. Ela some da sua tela.",
+    "acenoEnviado": "Aceno enviado para {{nome}}. Quando ele aceitar, vocês conversam aqui.",
+    "avisosExplica": "Só a diretoria publica aqui. Toque numa mensagem para dar TFA.",
+    "soDiretoria": "Só a diretoria escreve nos avisos.",
+    "bloqueado": "Você bloqueou este irmão.",
+    "escreva": "Escreva uma mensagem",
+    "enviar": "Enviar",
+    "rapidas": {
+      "chegando10": "Chego em 10 min",
+      "abastecendo": "Parei para abastecer",
+      "tudoCerto": "Tudo certo por aqui",
+      "atrasado": "Vou atrasar um pouco",
+      "tfa": "TFA!"
+    }
   }
 }

@@ -120,3 +120,6 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - Rota Biker: 45 monumentos do mapa público do site oficial (KML do "Meus Mapas" baixado pelo workflow `coletar-pontos.yml`); só fatos (nº, nome, coordenada, link). Pino próprio provisório (`pino-rota-biker.webp`, recolorido) até o desenho do dono. Ficha: "Monumento Rota Biker nº X", aviso de carimbo, crédito e botão "Site oficial".
 - OpenStreetMap de MT: 180 pontos com nome (53 cachoeiras, 17 mirantes, 51 monumentos, 59 atrações), crédito © OpenStreetMap e link. Filtro novo "Passeio" no mapa.
 - Overpass de marcos de motociclistas no Brasil falhou (servidor cheio); nova tentativa com espera já está no coletor.
+
+### 12/11/2026 — Etapa A: chat (aba "Chat", 6ª aba por decisão do dono)
+- `dados/conversas.ts` (regras: avisos só diretoria, 1:1 só com aceno aceito, bloqueado não escreve, avisos no topo), `estado/conversas.tsx` (local: mensagens, lidas, silêncio, bloqueio, denúncia, TFA), telas `(abas)/conversas.tsx` e `conversa/[id].tsx` (respostas rápidas de estrada, opções, nova conversa por aceno). Contador de não lidas na aba. 5 testes novos (253). Sem servidor: mensagens não saem do celular (aviso na tela).

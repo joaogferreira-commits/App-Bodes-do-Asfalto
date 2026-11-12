@@ -15,7 +15,8 @@
     "passeios": "Paseos",
     "conquistas": "Logros",
     "perfil": "Perfil",
-    "ferramentas": "Herramientas"
+    "ferramentas": "Herramientas",
+    "conversas": "Chat"
   },
   "mapa": {
     "busca": "¿A dónde vamos?",
@@ -1050,5 +1051,53 @@
     "naoSuportado": "Este celular no permite fijar atajos. Mantén pulsado el ícono de la app para ver el SOS.",
     "widgetManual": "Mantén pulsado un espacio vacío de la pantalla de inicio, toca \"Widgets\" y busca \"SOS Bodes\".",
     "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí. En iPhone llegará con la versión para iPhone."
+  },
+  "chat": {
+    "titulo": "Conversaciones",
+    "nova": "Nueva conversación",
+    "novaTitulo": "Hablar con un hermano",
+    "novaExplica": "La conversación empieza con un saludo. Cuando él acepte, se abre el chat.",
+    "acenarPara": "Saludar a {{nome}}",
+    "modoLocal": "Versión de prueba: los mensajes quedan solo en este celular hasta que entre el servidor del club.",
+    "filtros": {
+      "todas": "Todas",
+      "grupos": "Grupos",
+      "diretas": "Directas"
+    },
+    "tipos": {
+      "avisos": "Avisos oficiales",
+      "capitulo": "Grupo del capítulo",
+      "passeio": "Grupo del paseo",
+      "comboio": "Grupo del convoy",
+      "agape": "Grupo del Ágape",
+      "direto": "Conversación directa"
+    },
+    "naoLidasN": "{{n}} sin leer",
+    "aguardandoAceno": "Esperando que acepte el saludo",
+    "voce": "Tú",
+    "temporario": "Cierra {{quando}}",
+    "participantes": "{{n}} hermanos",
+    "opcoes": "Opciones de la conversación",
+    "silenciar": "Silenciar",
+    "ativarSom": "Activar avisos",
+    "bloquear": "Bloquear a {{nome}}",
+    "bloquearCurto": "Bloquear",
+    "bloquearPergunta": "¿Bloquear a {{nome}}?",
+    "bloquearExplica": "Ya no podrá hablarte ni saludarte. Puedes desbloquear después.",
+    "denunciar": "Denunciar",
+    "denunciada": "Denuncia enviada a los moderadores. Desaparece de tu pantalla.",
+    "acenoEnviado": "Saludo enviado a {{nome}}. Cuando acepte, conversan aquí.",
+    "avisosExplica": "Solo la directiva publica aquí. Toca un mensaje para dar TFA.",
+    "soDiretoria": "Solo la directiva escribe en los avisos.",
+    "bloqueado": "Bloqueaste a este hermano.",
+    "escreva": "Escribe un mensaje",
+    "enviar": "Enviar",
+    "rapidas": {
+      "chegando10": "Llego en 10 min",
+      "abastecendo": "Paré a cargar combustible",
+      "tudoCerto": "Todo bien por aquí",
+      "atrasado": "Voy a llegar un poco tarde",
+      "tfa": "¡TFA!"
+    }
   }
 }

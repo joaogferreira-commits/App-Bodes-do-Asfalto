@@ -84,10 +84,11 @@ describe('Pino', () => {
 });
 
 describe('BarraAbas', () => {
-  it('mostra as 5 abas traduzidas e troca ao tocar', async () => {
+  it('mostra as 6 abas traduzidas (com Chat) e troca ao tocar', async () => {
     const onTrocar = jest.fn();
-    await render(<BarraAbas ativa="mapa" onTrocar={onTrocar} />);
-    expect(screen.getAllByRole('tab')).toHaveLength(5);
+    await render(<BarraAbas ativa="mapa" onTrocar={onTrocar} selos={{ conversas: 3 }} />);
+    expect(screen.getAllByRole('tab')).toHaveLength(6);
+    expect(screen.getByRole('tab', { name: 'Chat, 3 não lidas' })).toBeTruthy();
     expect(screen.getByRole('tab', { name: 'Mapa' })).toBeSelected();
     await fireEvent.press(screen.getByRole('tab', { name: 'Ferramentas' }));
     expect(onTrocar).toHaveBeenCalledWith('ferramentas');

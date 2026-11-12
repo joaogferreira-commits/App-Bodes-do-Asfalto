@@ -15,7 +15,8 @@
     "passeios": "Rides",
     "conquistas": "Badges",
     "perfil": "Profile",
-    "ferramentas": "Tools"
+    "ferramentas": "Tools",
+    "conversas": "Chat"
   },
   "mapa": {
     "busca": "Where to?",
@@ -1050,5 +1051,53 @@
     "naoSuportado": "This phone does not allow pinned shortcuts. Press and hold the app icon to see SOS.",
     "widgetManual": "Press and hold an empty spot on the home screen, tap \"Widgets\" and look for \"SOS Bodes\".",
     "bloqueio": "Lock screen: Android does not let apps add shortcuts there. On iPhone it comes with the iPhone version."
+  },
+  "chat": {
+    "titulo": "Chats",
+    "nova": "New chat",
+    "novaTitulo": "Talk to a brother",
+    "novaExplica": "A chat starts with a wave. When he accepts, the chat opens.",
+    "acenarPara": "Wave to {{nome}}",
+    "modoLocal": "Test version: messages stay on this phone until the club server is on.",
+    "filtros": {
+      "todas": "All",
+      "grupos": "Groups",
+      "diretas": "Direct"
+    },
+    "tipos": {
+      "avisos": "Official notices",
+      "capitulo": "Chapter group",
+      "passeio": "Ride group",
+      "comboio": "Convoy group",
+      "agape": "Ágape group",
+      "direto": "Direct chat"
+    },
+    "naoLidasN": "{{n}} unread",
+    "aguardandoAceno": "Waiting for him to accept the wave",
+    "voce": "You",
+    "temporario": "Closes {{quando}}",
+    "participantes": "{{n}} brothers",
+    "opcoes": "Chat options",
+    "silenciar": "Mute",
+    "ativarSom": "Unmute",
+    "bloquear": "Block {{nome}}",
+    "bloquearCurto": "Block",
+    "bloquearPergunta": "Block {{nome}}?",
+    "bloquearExplica": "He will no longer be able to talk to you or wave. You can unblock later.",
+    "denunciar": "Report",
+    "denunciada": "Report sent to moderators. It disappears from your screen.",
+    "acenoEnviado": "Wave sent to {{nome}}. When he accepts, you chat here.",
+    "avisosExplica": "Only the board posts here. Tap a message to give TFA.",
+    "soDiretoria": "Only the board writes in notices.",
+    "bloqueado": "You blocked this brother.",
+    "escreva": "Write a message",
+    "enviar": "Send",
+    "rapidas": {
+      "chegando10": "Arriving in 10 min",
+      "abastecendo": "Stopped for fuel",
+      "tudoCerto": "All good here",
+      "atrasado": "Running a bit late",
+      "tfa": "TFA!"
+    }
   }
 }
