@@ -65,7 +65,16 @@
       ],
       "./plugins/withNavegacaoGoogle",
       "./plugins/withAndroidAuto",
-      "expo-quick-actions"
+      "expo-quick-actions",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "O Bodes do Asfalto usa a câmera só quando você tira uma foto ou grava um vídeo para o story ou o feed.",
+          "microphonePermission": "O Bodes do Asfalto usa o microfone só enquanto você grava um vídeo para o story.",
+          "recordAudioAndroid": true
+        }
+      ],
+      "expo-video"
     ],
     "owner": "joaogferreira",
     "scheme": "bodesdoasfalto",

@@ -1,3 +1,4 @@
+import type { ConteudoStory } from '@/stories/estilos';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
@@ -8,7 +9,14 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 export type VisibilidadePost = 'todos' | 'capitulo' | 'amigos';
 export type Comentario = { id: string; autor: string; texto: string; meu: boolean };
 /** Story do irmão: some sozinho 24 h depois. */
-export type MeuStory = { id: string; foto: string; legenda: string; criadoEm: number };
+export type MeuStory = {
+  id: string;
+  foto: string;
+  legenda: string;
+  criadoEm: number;
+  /** stories v2: vídeo, filtro, textos e selos (os antigos só têm foto e legenda) */
+  conteudo?: ConteudoStory;
+};
 export const DURACAO_STORY_MS = 24 * 60 * 60 * 1000;
 export const storiesAtivos = (l: MeuStory[], agora = Date.now()) =>
   l.filter((x) => agora - x.criadoEm < DURACAO_STORY_MS);
@@ -35,7 +43,7 @@ type Valor = {
   salvos: string[];
   alternarSalvo: (postId: string) => void;
   stories: MeuStory[];
-  publicarStory: (foto: string, legenda: string) => void;
+  publicarStory: (conteudo: ConteudoStory) => void;
   apagarStory: (id: string) => void;
 };
 
@@ -94,9 +102,15 @@ export function ProvedorMeusPosts({ children }: { children: ReactNode }) {
       salvos,
       alternarSalvo: (id) => setSalvos((l) => (l.includes(id) ? l.filter((x) => x !== id) : [id, ...l])),
       stories: storiesAtivos(stories),
-      publicarStory: (foto, legenda) =>
+      publicarStory: (conteudo) =>
         setStories((l) => [
-          { id: `story-${Date.now()}`, foto, legenda, criadoEm: Date.now() },
+          {
+            id: `story-${Date.now()}`,
+            foto: conteudo.uri,
+            legenda: conteudo.textos[0]?.texto ?? '',
+            criadoEm: Date.now(),
+            conteudo,
+          },
           ...storiesAtivos(l),
         ]),
       apagarStory: (id) => setStories((l) => l.filter((x) => x.id !== id)),

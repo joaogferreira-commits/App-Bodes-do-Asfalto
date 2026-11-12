@@ -851,7 +851,70 @@
     "explica": "A road photo with a short caption. It disappears by itself after 24 hours.",
     "legenda": "Caption (up to 80 letters)",
     "publicar": "Post story",
-    "outro": "Another story"
+    "outro": "Another story",
+    "pedirCamera": "To record a story, allow the camera. It is only used while this screen is open.",
+    "liberarCamera": "Allow camera",
+    "galeria": "Gallery",
+    "semMicrofone": "To record video, allow the microphone in your phone settings.",
+    "flashLigado": "Flash on",
+    "flashDesligado": "Flash off",
+    "gravando": "Recording… release to stop (up to 60 s)",
+    "dicaCamera": "Tap for photo · hold for video",
+    "disparar": "Take photo or record",
+    "trocarCamera": "Switch camera",
+    "refazer": "Redo",
+    "apagarTexto": "Delete last text",
+    "escrevaTexto": "Type the text",
+    "adicionarTexto": "Add",
+    "abas": {
+      "filtros": "Filters",
+      "texto": "Text",
+      "selos": "Stickers"
+    },
+    "filtros": {
+      "nenhum": "Original",
+      "quente": "Warm",
+      "por-do-sol": "Sunset",
+      "estrada": "Road",
+      "noite": "Night",
+      "poeira": "Dust",
+      "vinheta": "Vignette"
+    },
+    "estilos": {
+      "classico": "Classic",
+      "forte": "Bold",
+      "condensado": "Condensed",
+      "estrada": "ROAD"
+    },
+    "tamanhos": {
+      "p": "Small",
+      "m": "Medium",
+      "g": "Large"
+    },
+    "fundos": {
+      "nenhum": "No background",
+      "faixa": "Band",
+      "caixa": "Box"
+    },
+    "posicoes": {
+      "topo": "Top",
+      "meio": "Middle",
+      "base": "Bottom"
+    },
+    "cor": "Color {{cor}}",
+    "selos": {
+      "local": "Place (e.g. Chapada dos Guimarães)",
+      "km": "Km of the day",
+      "localValor": "📍 {{local}}",
+      "kmValor": "{{km}} km"
+    },
+    "cores": {
+      "F3EADB": "cream",
+      "FFFFFF": "white",
+      "E8692A": "orange",
+      "F5C518": "yellow",
+      "0B0907": "black"
+    }
   },
   "classificados": {
     "titulo": "Classifieds",

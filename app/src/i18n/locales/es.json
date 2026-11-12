@@ -851,7 +851,70 @@
     "explica": "Una foto de la ruta con una leyenda corta. Desaparece sola en 24 horas.",
     "legenda": "Leyenda (hasta 80 letras)",
     "publicar": "Publicar historia",
-    "outro": "Otra historia"
+    "outro": "Otra historia",
+    "pedirCamera": "Para grabar el story, permite la cámara. Solo se usa mientras esta pantalla esté abierta.",
+    "liberarCamera": "Permitir cámara",
+    "galeria": "Galería",
+    "semMicrofone": "Para grabar video, permite el micrófono en los ajustes del celular.",
+    "flashLigado": "Flash encendido",
+    "flashDesligado": "Flash apagado",
+    "gravando": "Grabando… suelta para parar (hasta 60 s)",
+    "dicaCamera": "Toca para foto · mantén para video",
+    "disparar": "Tomar foto o grabar",
+    "trocarCamera": "Cambiar cámara",
+    "refazer": "Rehacer",
+    "apagarTexto": "Borrar el último texto",
+    "escrevaTexto": "Escribe el texto",
+    "adicionarTexto": "Poner",
+    "abas": {
+      "filtros": "Filtros",
+      "texto": "Texto",
+      "selos": "Sellos"
+    },
+    "filtros": {
+      "nenhum": "Original",
+      "quente": "Cálido",
+      "por-do-sol": "Atardecer",
+      "estrada": "Ruta",
+      "noite": "Noche",
+      "poeira": "Polvo",
+      "vinheta": "Viñeta"
+    },
+    "estilos": {
+      "classico": "Clásico",
+      "forte": "Fuerte",
+      "condensado": "Condensado",
+      "estrada": "RUTA"
+    },
+    "tamanhos": {
+      "p": "Pequeño",
+      "m": "Mediano",
+      "g": "Grande"
+    },
+    "fundos": {
+      "nenhum": "Sin fondo",
+      "faixa": "Franja",
+      "caixa": "Caja"
+    },
+    "posicoes": {
+      "topo": "Arriba",
+      "meio": "Al medio",
+      "base": "Abajo"
+    },
+    "cor": "Color {{cor}}",
+    "selos": {
+      "local": "Lugar (ej.: Chapada dos Guimarães)",
+      "km": "Km del día",
+      "localValor": "📍 {{local}}",
+      "kmValor": "{{km}} km"
+    },
+    "cores": {
+      "F3EADB": "crema",
+      "FFFFFF": "blanco",
+      "E8692A": "naranja",
+      "F5C518": "amarillo",
+      "0B0907": "negro"
+    }
   },
   "classificados": {
     "titulo": "Clasificados",

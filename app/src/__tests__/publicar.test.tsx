@@ -90,9 +90,10 @@ describe('publicar e comentar', () => {
     expect(storiesAtivos(l, agora).map((x) => x.id)).toEqual(['novo']);
   });
 
-  it('publica um story com foto da galeria', async () => {
+  it('story: toque tira foto, aplica filtro, texto com estilo e selo, e publica', async () => {
     function Conta() {
-      return <Text testID="stories">{useMeusPosts().stories.length}</Text>;
+      const { stories } = useMeusPosts();
+      return <Text testID="stories">{JSON.stringify(stories[0]?.conteudo ?? null)}</Text>;
     }
     await render(
       <ProvedorMeusPosts>
@@ -100,11 +101,34 @@ describe('publicar e comentar', () => {
         <Conta />
       </ProvedorMeusPosts>,
     );
-    expect(screen.getByRole('button', { name: 'Publicar story' })).toBeDisabled();
-    await fireEvent.press(screen.getByRole('button', { name: 'Da galeria' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Tirar foto ou gravar' }));
     await screen.findByRole('button', { name: 'Publicar story' });
-    await fireEvent.changeText(screen.getByLabelText('Legenda (até 80 letras)'), 'Estrada boa');
+    await fireEvent.press(screen.getByRole('button', { name: 'Noite' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Texto' }));
+    await fireEvent.changeText(screen.getByLabelText('Escreva o texto'), 'Estrada boa');
+    await fireEvent.press(screen.getByRole('button', { name: 'Condensado' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Pôr' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Selos' }));
+    await fireEvent.changeText(screen.getByLabelText('Km do dia'), '320');
     await fireEvent.press(screen.getByRole('button', { name: 'Publicar story' }));
-    expect(screen.getByTestId('stories').props.children).toBe(1);
+    const c = JSON.parse(String(screen.getByTestId('stories').props.children));
+    expect(c).toMatchObject({ tipo: 'foto', filtro: 'noite', selos: { km: 320 } });
+    expect(c.textos[0]).toMatchObject({ texto: 'Estrada boa', estilo: 'condensado' });
+  });
+
+  it('story: segurar grava vídeo', async () => {
+    function Conta() {
+      return <Text testID="tipo">{useMeusPosts().stories[0]?.conteudo?.tipo ?? '-'}</Text>;
+    }
+    await render(
+      <ProvedorMeusPosts>
+        <NovoStory />
+        <Conta />
+      </ProvedorMeusPosts>,
+    );
+    await fireEvent(screen.getByRole('button', { name: 'Tirar foto ou gravar' }), 'longPress');
+    await screen.findByRole('button', { name: 'Publicar story' });
+    await fireEvent.press(screen.getByRole('button', { name: 'Publicar story' }));
+    expect(screen.getByTestId('tipo').props.children).toBe('video');
   });
 });

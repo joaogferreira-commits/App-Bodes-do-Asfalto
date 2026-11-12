@@ -51,3 +51,26 @@ jest.mock('expo-quick-actions', () => ({
   isSupported: jest.fn(async () => true),
 }));
 jest.mock('expo-quick-actions/router', () => ({ useQuickActionRouting: jest.fn() }));
+
+jest.mock('expo-camera', () => {
+  const { createElement, forwardRef, useImperativeHandle } = jest.requireActual('react');
+  const { View } = jest.requireActual('react-native');
+  const CameraView = forwardRef((p: object, ref: unknown) => {
+    useImperativeHandle(ref, () => ({
+      takePictureAsync: jest.fn(async () => ({ uri: 'file:///camera.jpg' })),
+      recordAsync: jest.fn(async () => ({ uri: 'file:///video.mp4' })),
+      stopRecording: jest.fn(),
+    }));
+    return createElement(View, { testID: 'camera', ...p });
+  });
+  return {
+    CameraView,
+    useCameraPermissions: () => [{ granted: true }, jest.fn(async () => ({ granted: true }))],
+    useMicrophonePermissions: () => [{ granted: true }, jest.fn(async () => ({ granted: true }))],
+  };
+});
+jest.mock('expo-video', () => {
+  const { createElement } = jest.requireActual('react');
+  const { View } = jest.requireActual('react-native');
+  return { useVideoPlayer: () => ({ play: jest.fn() }), VideoView: (p: object) => createElement(View, p) };
+});

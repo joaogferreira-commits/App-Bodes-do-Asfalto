@@ -33,3 +33,26 @@ export async function escolherFoto(origem: 'galeria' | 'camera'): Promise<string
   const uri = r.canceled ? null : r.assets?.[0]?.uri;
   return uri ? prepararFoto(uri) : null;
 }
+
+/**
+ * Foto OU vídeo da galeria para o story. Foto é reprocessada (sai sem EXIF/GPS);
+ * vídeo é limitado a 60 s e exportado em qualidade média (o seletor do sistema comprime).
+ */
+export async function escolherMidia(): Promise<{ uri: string; tipo: 'foto' | 'video' } | null> {
+  const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  if (!permissao.granted) return null;
+  const r = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ['images', 'videos'],
+    quality: 1,
+    exif: false,
+    videoMaxDuration: 60,
+    videoQuality: ImagePicker.UIImagePickerControllerQualityType.Medium,
+  });
+  const a = r.canceled ? null : r.assets?.[0];
+  if (!a?.uri) return null;
+  if (a.type === 'video') {
+    if ((a.duration ?? 0) > 61000) return null;
+    return { uri: a.uri, tipo: 'video' };
+  }
+  return { uri: await prepararFoto(a.uri), tipo: 'foto' };
+}

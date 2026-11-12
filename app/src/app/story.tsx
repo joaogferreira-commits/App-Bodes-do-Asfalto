@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { StoryCena } from '@/componentes/StoryCena';
 import { stories as exemplos } from '@/dados/feed';
 import { useMeusPosts } from '@/estado/meusPosts';
 import { espaco, fontes } from '@/theme';
 import { Botao, BotaoIcone, Texto } from '@/ui';
 
 const DURACAO = 5000;
+const DURACAO_VIDEO = 60000;
 // Visualizador de foto em tela cheia: fundo preto e texto branco nos dois temas (como qualquer galeria).
 
 /** Ver um story: foto em tela cheia com barra de tempo de 5 s; tocar fecha. Os seus têm "apagar" e "outro". */
@@ -25,7 +27,7 @@ export default function Story() {
   useEffect(() => {
     const anim = Animated.timing(progresso, {
       toValue: 1,
-      duration: DURACAO,
+      duration: meu?.conteudo?.tipo === 'video' ? DURACAO_VIDEO : DURACAO,
       easing: Easing.linear,
       useNativeDriver: false,
     });
@@ -46,12 +48,18 @@ export default function Story() {
         onPress={() => router.back()}
         style={StyleSheet.absoluteFill}
       >
-        <Image
-          source={foto}
-          style={StyleSheet.absoluteFill}
-          contentFit="contain"
-          accessibilityLabel={legenda || nome}
-        />
+        {meu?.conteudo ? (
+          <View style={StyleSheet.absoluteFill} accessible accessibilityLabel={legenda || nome}>
+            <StoryCena c={meu.conteudo} />
+          </View>
+        ) : (
+          <Image
+            source={foto}
+            style={StyleSheet.absoluteFill}
+            contentFit="contain"
+            accessibilityLabel={legenda || nome}
+          />
+        )}
       </Pressable>
       <SafeAreaView edges={['top']} style={estilos.topo} pointerEvents="box-none">
         <View style={estilos.trilho}>
@@ -68,7 +76,7 @@ export default function Story() {
         </View>
       </SafeAreaView>
       <SafeAreaView edges={['bottom']} style={estilos.base} pointerEvents="box-none">
-        {!!legenda && <Texto style={estilos.legenda}>{legenda}</Texto>}
+        {!!legenda && !meu?.conteudo && <Texto style={estilos.legenda}>{legenda}</Texto>}
         {meu && (
           <View style={{ flexDirection: 'row', gap: espaco.xs }}>
             <View style={{ flex: 1 }}>

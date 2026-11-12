@@ -851,7 +851,70 @@
     "explica": "Uma foto da estrada com uma legenda curta. Some sozinho em 24 horas.",
     "legenda": "Legenda (até 80 letras)",
     "publicar": "Publicar story",
-    "outro": "Outro story"
+    "outro": "Outro story",
+    "pedirCamera": "Para gravar o story, libere a câmera. Ela só é usada enquanto esta tela estiver aberta.",
+    "liberarCamera": "Liberar câmera",
+    "galeria": "Galeria",
+    "semMicrofone": "Para gravar vídeo, libere o microfone nas configurações do celular.",
+    "flashLigado": "Flash ligado",
+    "flashDesligado": "Flash desligado",
+    "gravando": "Gravando… solte para parar (até 60 s)",
+    "dicaCamera": "Toque para foto · segure para vídeo",
+    "disparar": "Tirar foto ou gravar",
+    "trocarCamera": "Trocar câmera",
+    "refazer": "Refazer",
+    "apagarTexto": "Apagar o último texto",
+    "escrevaTexto": "Escreva o texto",
+    "adicionarTexto": "Pôr",
+    "abas": {
+      "filtros": "Filtros",
+      "texto": "Texto",
+      "selos": "Selos"
+    },
+    "filtros": {
+      "nenhum": "Original",
+      "quente": "Quente",
+      "por-do-sol": "Pôr do sol",
+      "estrada": "Estrada",
+      "noite": "Noite",
+      "poeira": "Poeira",
+      "vinheta": "Vinheta"
+    },
+    "estilos": {
+      "classico": "Clássico",
+      "forte": "Forte",
+      "condensado": "Condensado",
+      "estrada": "ESTRADA"
+    },
+    "tamanhos": {
+      "p": "Pequeno",
+      "m": "Médio",
+      "g": "Grande"
+    },
+    "fundos": {
+      "nenhum": "Sem fundo",
+      "faixa": "Faixa",
+      "caixa": "Caixa"
+    },
+    "posicoes": {
+      "topo": "Em cima",
+      "meio": "No meio",
+      "base": "Embaixo"
+    },
+    "cor": "Cor {{cor}}",
+    "selos": {
+      "local": "Local (ex.: Chapada dos Guimarães)",
+      "km": "Km do dia",
+      "localValor": "📍 {{local}}",
+      "kmValor": "{{km}} km"
+    },
+    "cores": {
+      "F3EADB": "creme",
+      "FFFFFF": "branco",
+      "E8692A": "laranja",
+      "F5C518": "amarelo",
+      "0B0907": "preto"
+    }
   },
   "classificados": {
     "titulo": "Classificados",
