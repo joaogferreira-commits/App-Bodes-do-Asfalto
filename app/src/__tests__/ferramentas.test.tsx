@@ -4,7 +4,7 @@ import { Linking, Text } from 'react-native';
 import Agape from '@/app/ferramentas/agape';
 import Checklist from '@/app/ferramentas/checklist';
 import Combustivel from '@/app/ferramentas/combustivel';
-import Ferramentas from '@/app/ferramentas';
+import Ferramentas from '@/app/(abas)/ferramentas';
 import Lista from '@/app/ferramentas/lista/[tipo]';
 import { ProvedorAgapes, useAgapes } from '@/estado/agapes';
 import { ProvedorViagem } from '@/estado/viagem';

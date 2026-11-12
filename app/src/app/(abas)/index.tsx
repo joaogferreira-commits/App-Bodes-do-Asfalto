@@ -73,12 +73,25 @@ export default function Mapa() {
     pontos: lugares.length,
   };
 
+  /**
+   * Botão "Eu": antes não dava retorno nenhum quando a permissão era negada ou o GPS demorava.
+   * Agora: usa na hora a última posição conhecida, depois refina com o GPS, e avisa se não der.
+   */
+  const [minhaPosicao, setMinhaPosicao] = useState<[number, number] | null>(null);
   const irParaMim = async () => {
     const { granted } = await Location.requestForegroundPermissionsAsync().catch(() => ({ granted: false }));
-    if (!granted) return;
-    const p = await Location.getCurrentPositionAsync({}).catch(() => null);
-    if (p)
-      camera.current?.flyTo({ center: [p.coords.longitude, p.coords.latitude], zoom: 13, duration: 900 });
+    if (!granted) return Alert.alert(t('mapa.semPermissaoTitulo'), t('mapa.semPermissaoTexto'));
+    const voar = (lat: number, lng: number) => {
+      setMinhaPosicao([lng, lat]);
+      camera.current?.flyTo({ center: [lng, lat], zoom: 14, duration: 900 });
+    };
+    const rapida = await Location.getLastKnownPositionAsync().catch(() => null);
+    if (rapida) voar(rapida.coords.latitude, rapida.coords.longitude);
+    const precisa = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }).catch(
+      () => null,
+    );
+    if (precisa) voar(precisa.coords.latitude, precisa.coords.longitude);
+    else if (!rapida) Alert.alert(t('mapa.semGpsTitulo'), t('mapa.semGpsTexto'));
   };
 
   /** Zoom por botão (R24): todo gesto tem um botão equivalente. */
@@ -143,6 +156,23 @@ export default function Mapa() {
             <MarcadorAgape comecaEm={ag.comecaEm} local={ag.local} onPress={() => verAgape(ag)} />
           </Marker>
         ))}
+        {minhaPosicao && (
+          <Marker id="eu" lngLat={minhaPosicao}>
+            <View
+              accessible
+              accessibilityLabel={t('mapa.voceEstaAqui')}
+              style={{
+                width: 22,
+                height: 22,
+                borderRadius: 11,
+                backgroundColor: cores.estrada,
+                borderWidth: 4,
+                borderColor: cores.texto,
+                boxShadow: '0px 0px 0px 8px rgba(111,149,184,0.3)',
+              }}
+            />
+          </Marker>
+        )}
         {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
           irmaos.map((i) => (
             <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
@@ -162,13 +192,6 @@ export default function Mapa() {
             <Icone nome="busca" tamanho={20} cor={cores.textoSec} />
             <Texto style={{ color: cores.textoSec, fontSize: 16 }}>{t('mapa.busca')}</Texto>
           </Pressable>
-          <BotaoIcone
-            icone="grade"
-            corIcone={cores.acao}
-            rotulo={t('mapa.ferramentas')}
-            flutuante
-            onPress={() => router.push('/ferramentas')}
-          />
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t('mapa.meuPerfil')}

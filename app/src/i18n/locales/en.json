@@ -14,7 +14,8 @@
     "feed": "Feed",
     "passeios": "Rides",
     "conquistas": "Badges",
-    "perfil": "Profile"
+    "perfil": "Profile",
+    "ferramentas": "Tools"
   },
   "mapa": {
     "busca": "Where to?",
@@ -52,7 +53,12 @@
     "agapeMarcador": "Flash Agape at {{local}}, starts in {{tempo}}",
     "agapeEtiqueta": "Agape · {{tempo}}",
     "ferramentas": "Tools",
-    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more"
+    "ferramentasDetalhe": "Weather, fuel, checklist, Agape and more",
+    "semPermissaoTitulo": "Location is off",
+    "semPermissaoTexto": "To see where you are, allow location for Bodes do Asfalto in your phone settings.",
+    "semGpsTitulo": "No GPS signal",
+    "semGpsTexto": "We could not find your position now. Go somewhere open and try again.",
+    "voceEstaAqui": "You are here"
   },
   "rota": {
     "titulo": "Plan route",
@@ -221,7 +227,8 @@
     "meusDadosDetalhe": "Consents, download data, delete account",
     "garagem": "Garage",
     "salvos": "Saved posts",
-    "salvosDetalhe": "What you kept to see later"
+    "salvosDetalhe": "What you kept to see later",
+    "conquistasCartao": "See my achievements"
   },
   "catalogo": {
     "titulo": "Catalog",

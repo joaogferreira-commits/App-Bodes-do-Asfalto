@@ -89,8 +89,8 @@ describe('BarraAbas', () => {
     await render(<BarraAbas ativa="mapa" onTrocar={onTrocar} />);
     expect(screen.getAllByRole('tab')).toHaveLength(5);
     expect(screen.getByRole('tab', { name: 'Mapa' })).toBeSelected();
-    await fireEvent.press(screen.getByRole('tab', { name: 'Conquistas' }));
-    expect(onTrocar).toHaveBeenCalledWith('conquistas');
+    await fireEvent.press(screen.getByRole('tab', { name: 'Ferramentas' }));
+    expect(onTrocar).toHaveBeenCalledWith('ferramentas');
   });
 });
 

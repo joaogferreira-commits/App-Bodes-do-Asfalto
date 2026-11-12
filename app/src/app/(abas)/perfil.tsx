@@ -155,12 +155,6 @@ export default function Perfil() {
             detalhe={t('perfil.salvosDetalhe')}
             onPress={() => router.push('/salvos')}
           />
-          <LinhaMenu
-            icone="grade"
-            titulo={t('perfil.ferramentas')}
-            detalhe={t('perfil.ferramentasDetalhe')}
-            onPress={() => router.push('/ferramentas')}
-          />
         </Cartao>
 
         {/* Nível e números */}
@@ -170,6 +164,9 @@ export default function Perfil() {
               <Texto variante="destaque" style={{ flex: 1 }}>
                 {t(`conquistas.niveis.${nivel.atual.chave}`)} ·{' '}
                 {t('conquistas.xp', { xp: exemploIrmao.xp.toLocaleString('pt-BR') })}
+              </Texto>
+              <Texto variante="pequeno" style={{ color: cores.ouro }}>
+                {t('perfil.conquistasCartao')}
               </Texto>
               <Icone nome="trofeu" tamanho={24} cor={cores.ouro} />
             </View>

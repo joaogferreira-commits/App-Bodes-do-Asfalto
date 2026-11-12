@@ -13,7 +13,7 @@ const rotaDaAba: Record<Aba, string> = {
   mapa: 'index',
   feed: 'feed',
   passeios: 'passeios',
-  conquistas: 'conquistas',
+  ferramentas: 'ferramentas',
   perfil: 'perfil',
 };
 const abaDaRota = Object.fromEntries(Object.entries(rotaDaAba).map(([a, r]) => [r, a])) as Record<
@@ -44,7 +44,11 @@ export default function LayoutAbas() {
         screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: cores.fundo } }}
         tabBar={({ state, navigateToTab }) => (
           <BarraAbas
-            ativa={abaDaRota[state.routes[state.index]?.name ?? 'index'] ?? 'mapa'}
+            ativa={
+              state.routes[state.index]?.name === 'conquistas'
+                ? 'perfil'
+                : (abaDaRota[state.routes[state.index]?.name ?? 'index'] ?? 'mapa')
+            }
             onTrocar={(destino) => {
               const rota = state.routes.find((r) => r.name === rotaDaAba[destino]);
               if (rota) navigateToTab(rota.key);
@@ -55,6 +59,7 @@ export default function LayoutAbas() {
         <Tabs.Screen name="index" />
         <Tabs.Screen name="feed" />
         <Tabs.Screen name="passeios" />
+        <Tabs.Screen name="ferramentas" />
         <Tabs.Screen name="conquistas" />
         <Tabs.Screen name="perfil" />
       </Tabs>

@@ -14,7 +14,8 @@
     "feed": "Feed",
     "passeios": "Paseos",
     "conquistas": "Logros",
-    "perfil": "Perfil"
+    "perfil": "Perfil",
+    "ferramentas": "Herramientas"
   },
   "mapa": {
     "busca": "¿A dónde vamos?",
@@ -52,7 +53,12 @@
     "agapeMarcador": "Ágape Relámpago en {{local}}, empieza en {{tempo}}",
     "agapeEtiqueta": "Ágape · {{tempo}}",
     "ferramentas": "Herramientas",
-    "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más"
+    "ferramentasDetalhe": "Clima, combustible, checklist, Ágape y más",
+    "semPermissaoTitulo": "Ubicación desactivada",
+    "semPermissaoTexto": "Para ver dónde estás, permite la ubicación para Bodes do Asfalto en los ajustes del celular.",
+    "semGpsTitulo": "Sin señal de GPS",
+    "semGpsTexto": "No pudimos encontrar tu posición ahora. Ve a un lugar abierto e inténtalo de nuevo.",
+    "voceEstaAqui": "Estás aquí"
   },
   "rota": {
     "titulo": "Planear ruta",
@@ -221,7 +227,8 @@
     "meusDadosDetalhe": "Consentimientos, descargar datos, eliminar cuenta",
     "garagem": "Garaje",
     "salvos": "Publicaciones guardadas",
-    "salvosDetalhe": "Lo que guardaste para ver después"
+    "salvosDetalhe": "Lo que guardaste para ver después",
+    "conquistasCartao": "Ver mis logros"
   },
   "catalogo": {
     "titulo": "Catálogo",

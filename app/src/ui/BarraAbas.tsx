@@ -7,7 +7,7 @@ import { escalaMaxima, fontes, toque, useCores, useEstilos, type Paleta } from '
 import { Icone } from './icones';
 import { Texto } from './Texto';
 
-export const abas = ['mapa', 'feed', 'passeios', 'conquistas', 'perfil'] as const;
+export const abas = ['mapa', 'feed', 'passeios', 'ferramentas', 'perfil'] as const;
 export type Aba = (typeof abas)[number];
 
 type Props = { ativa: Aba; onTrocar: (aba: Aba) => void };
@@ -51,7 +51,12 @@ export function BarraAbas({ ativa, onTrocar }: Props) {
             style={[estilos.aba, { minHeight: toque.minimo + 8 }]}
           >
             <View style={[estilos.indicador, { backgroundColor: selecionada ? c.acao : 'transparent' }]} />
-            <Icone nome={aba} cor={cor} espessura={selecionada ? 2.4 : 2} tamanho={26} />
+            <Icone
+              nome={aba === 'ferramentas' ? 'grade' : aba}
+              cor={cor}
+              espessura={selecionada ? 2.4 : 2}
+              tamanho={26}
+            />
             <Texto
               style={[
                 estilos.rotulo,

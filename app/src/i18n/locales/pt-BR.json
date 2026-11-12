@@ -14,7 +14,8 @@
     "feed": "Feed",
     "passeios": "Passeios",
     "conquistas": "Conquistas",
-    "perfil": "Perfil"
+    "perfil": "Perfil",
+    "ferramentas": "Ferramentas"
   },
   "mapa": {
     "busca": "Para onde vamos?",
@@ -52,7 +53,12 @@
     "agapeMarcador": "Ágape Relâmpago no {{local}}, começa em {{tempo}}",
     "agapeEtiqueta": "Ágape · {{tempo}}",
     "ferramentas": "Ferramentas",
-    "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais"
+    "ferramentasDetalhe": "Tempo, combustível, checklist, Ágape e mais",
+    "semPermissaoTitulo": "Localização desligada",
+    "semPermissaoTexto": "Para ver onde você está, permita a localização para o Bodes do Asfalto nas configurações do celular.",
+    "semGpsTitulo": "Sem sinal de GPS",
+    "semGpsTexto": "Não conseguimos achar sua posição agora. Vá para um lugar aberto e tente de novo.",
+    "voceEstaAqui": "Você está aqui"
   },
   "rota": {
     "titulo": "Planejar rota",
@@ -221,7 +227,8 @@
     "meusDadosDetalhe": "Consentimentos, baixar dados, excluir conta",
     "garagem": "Garagem",
     "salvos": "Posts salvos",
-    "salvosDetalhe": "O que você guardou para ver depois"
+    "salvosDetalhe": "O que você guardou para ver depois",
+    "conquistasCartao": "Ver minhas conquistas"
   },
   "catalogo": {
     "titulo": "Catálogo",
