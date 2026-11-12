@@ -56,7 +56,10 @@
         {
           "android": {
             "minSdkVersion": 26,
-            "kotlinVersion": "2.3.21"
+            "kotlinVersion": "2.3.21",
+            "enableMinifyInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "extraProguardRules": "# Google Navigation SDK e a ponte React Native (usam reflexão e JNI)\n-keep class com.google.android.react.navsdk.** { *; }\n-keep class com.google.android.libraries.navigation.** { *; }\n-keep class com.google.android.libraries.mapsplatform.** { *; }\n# Tela do Android Auto do app (declarada no manifesto e chamada pelo carro)\n-keep class com.bodesdoasfalto.app.auto.** { *; }\n-keep class androidx.car.app.** { *; }\n# MapLibre (JNI)\n-keep class org.maplibre.** { *; }\n-dontwarn com.google.android.libraries.**\n-dontwarn org.maplibre.**"
           },
           "ios": {
             "deploymentTarget": "17.0"

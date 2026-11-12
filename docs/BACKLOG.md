@@ -9,7 +9,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 4. ~~**Contatos de emergência (Mateus/Bia):**~~ FEITO 12/11 (local; banco já tem a tabela com RLS). até 3, usados pelo SOS; só o dono vê.
 5. ~~**Perfil editável (Mateus):**~~ FEITO 12/11. nome, apelido, cidade, foto (câmera/galeria), Loja/Oriente/Potência com visibilidade.
 6. ~~**Rota (Mateus):**~~ FEITO 12/11: até 3 caminhos para escolher, barra de trechos na ordem do percurso, "a terra começa no km X". Pendentes: "piso desconhecido" (o Valhalla não informa quando o piso não está etiquetado no OSM) e voz "Terra em 2 km" (etapa da navegação).
-7. **Peso do APK:** R8/shrink com teste da navegação (meta ~60 MB).
+7. **Peso do APK:** R8 + shrinkResources ligados em 12/11 com regras de proteção (navegação, Android Auto, MapLibre). FALTA: medir o APK e o dono testar a navegação e o Android Auto nessa versão; se quebrar, desligar.
 8. **Android Auto:** cartão de manobra (seta + distância) e zoom/recentrar (R26).
 9. **Feed:** enquete e vídeo de verdade; stories de 24 h; salvar post; menções.
 10. **Revisões de Dora e Quintino** em cada tela nova; corrigir achados.
