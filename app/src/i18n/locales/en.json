@@ -655,7 +655,13 @@
       "vencida": "Overdue by {{km}} km",
       "falta": "{{km}} km left (due at {{proximo}} km)",
       "ultimaTroca": "Km at last service (every {{intervalo}} km)",
-      "fizHoje": "Done today"
+      "fizHoje": "Done today",
+      "nome": "What it is",
+      "intervalo": "Change every",
+      "ultimoKm": "Km at last change",
+      "apagarPergunta": "Delete \"{{nome}}\"?",
+      "novo": "New maintenance item",
+      "novoNome": "New item"
     },
     "meta": {
       "meta": "My goal this year",
@@ -840,5 +846,55 @@
     "legenda": "Caption (up to 80 letters)",
     "publicar": "Post story",
     "outro": "Another story"
+  },
+  "classificados": {
+    "titulo": "Classifieds",
+    "anunciar": "Post an ad",
+    "buscar": "Search bike, part, city…",
+    "aviso": "Buying and selling among brothers. The app does not charge or handle payments.",
+    "vendido": "Sold",
+    "destaque": "Featured",
+    "foto": "Photo {{n}} of {{total}}",
+    "favoritar": "Save ad",
+    "desfavoritar": "Remove from saved",
+    "ano": "Year {{ano}}",
+    "kmRodados": "{{km}} km",
+    "aceitaTroca": "Open to trade",
+    "irmaoDe": "Brother from the {{capitulo}} chapter",
+    "reativar": "List again",
+    "marcarVendido": "Mark as sold",
+    "excluirPergunta": "Delete this ad?",
+    "chamar": "Message on WhatsApp",
+    "mensagem": "Hello, brother! I saw your ad \"{{titulo}}\" on Bodes do Asfalto.",
+    "seguranca": "Tip: meet in a public place or at the chapter house.",
+    "categorias": {
+      "todos": "All",
+      "motos": "Bikes",
+      "pecas": "Parts",
+      "equipamentos": "Gear",
+      "vestuario": "Clothing",
+      "servicos": "Services",
+      "favoritos": "Saved"
+    },
+    "estados": {
+      "novo": "New",
+      "seminovo": "Like new",
+      "usado": "Used"
+    },
+    "form": {
+      "explica": "Good photos sell more: daylight, clean bike, several angles.",
+      "fotos": "At least one photo",
+      "fotosTitulo": "Photos (up to {{max}})",
+      "tirarFoto": "Remove this photo",
+      "adicionarFoto": "Add photo",
+      "categoria": "Category",
+      "titulo": "Ad title",
+      "preco": "Price",
+      "estado": "Condition",
+      "descricao": "Description",
+      "whatsapp": "Contact WhatsApp",
+      "semPagamento": "Payment is arranged between you, outside the app.",
+      "publicar": "Publish ad"
+    }
   }
 }

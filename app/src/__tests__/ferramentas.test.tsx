@@ -81,3 +81,18 @@ describe('ferramentas', () => {
     expect(total).toBe(2);
   });
 });
+
+describe('manutenção editável', () => {
+  it('edita intervalo e km da última troca, cria e apaga itens', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Manutencao = (require('@/app/ferramentas/manutencao') as { default: () => React.JSX.Element })
+      .default;
+    await render(<Manutencao />);
+    const intervalos = screen.getAllByLabelText('Trocar a cada');
+    await fireEvent.changeText(intervalos[0]!, '5000');
+    expect(screen.getByText('Faltam 3.000 km (troca aos 28.000 km)')).toBeTruthy();
+    const antes = screen.getAllByLabelText('O que é').length;
+    await fireEvent.press(screen.getByRole('button', { name: 'Novo item de manutenção' }));
+    expect(screen.getAllByLabelText('O que é')).toHaveLength(antes + 1);
+  });
+});

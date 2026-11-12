@@ -16,6 +16,7 @@ import { View } from 'react-native';
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
+import { ProvedorClassificados } from '@/estado/classificados';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
 import { ProvedorPerfil } from '@/estado/perfil';
 import { ProvedorViagem } from '@/estado/viagem';
@@ -39,9 +40,11 @@ export default function Layout() {
             <ProvedorPerfil>
               <ProvedorAgapes>
                 <ProvedorMeusPosts>
-                  <ProvedorViagem>
-                    <Telas />
-                  </ProvedorViagem>
+                  <ProvedorClassificados>
+                    <ProvedorViagem>
+                      <Telas />
+                    </ProvedorViagem>
+                  </ProvedorClassificados>
                 </ProvedorMeusPosts>
               </ProvedorAgapes>
             </ProvedorPerfil>

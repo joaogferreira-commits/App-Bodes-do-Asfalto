@@ -655,7 +655,13 @@
       "vencida": "Vencida há {{km}} km",
       "falta": "Faltam {{km}} km (troca aos {{proximo}} km)",
       "ultimaTroca": "Km da última troca (a cada {{intervalo}} km)",
-      "fizHoje": "Troquei hoje"
+      "fizHoje": "Troquei hoje",
+      "nome": "O que é",
+      "intervalo": "Trocar a cada",
+      "ultimoKm": "Km da última troca",
+      "apagarPergunta": "Apagar \"{{nome}}\"?",
+      "novo": "Novo item de manutenção",
+      "novoNome": "Novo item"
     },
     "meta": {
       "meta": "Minha meta no ano",
@@ -840,5 +846,55 @@
     "legenda": "Legenda (até 80 letras)",
     "publicar": "Publicar story",
     "outro": "Outro story"
+  },
+  "classificados": {
+    "titulo": "Classificados",
+    "anunciar": "Anunciar",
+    "buscar": "Buscar moto, peça, cidade…",
+    "aviso": "Compra e venda entre irmãos. O app não cobra nem intermedeia pagamentos.",
+    "vendido": "Vendido",
+    "destaque": "Destaque",
+    "foto": "Foto {{n}} de {{total}}",
+    "favoritar": "Guardar anúncio",
+    "desfavoritar": "Tirar dos guardados",
+    "ano": "Ano {{ano}}",
+    "kmRodados": "{{km}} km",
+    "aceitaTroca": "Aceita troca",
+    "irmaoDe": "Irmão do capítulo {{capitulo}}",
+    "reativar": "Voltar a anunciar",
+    "marcarVendido": "Marcar como vendido",
+    "excluirPergunta": "Excluir este anúncio?",
+    "chamar": "Chamar no WhatsApp",
+    "mensagem": "Olá, irmão! Vi seu anúncio \"{{titulo}}\" no Bodes do Asfalto.",
+    "seguranca": "Dica: combine a entrega em local público ou na sede do capítulo.",
+    "categorias": {
+      "todos": "Tudo",
+      "motos": "Motos",
+      "pecas": "Peças",
+      "equipamentos": "Equipamentos",
+      "vestuario": "Roupas",
+      "servicos": "Serviços",
+      "favoritos": "Guardados"
+    },
+    "estados": {
+      "novo": "Novo",
+      "seminovo": "Seminovo",
+      "usado": "Usado"
+    },
+    "form": {
+      "explica": "Fotos boas vendem mais: luz do dia, moto limpa, vários ângulos.",
+      "fotos": "Pelo menos uma foto",
+      "fotosTitulo": "Fotos (até {{max}})",
+      "tirarFoto": "Remover esta foto",
+      "adicionarFoto": "Adicionar foto",
+      "categoria": "Categoria",
+      "titulo": "Título do anúncio",
+      "preco": "Preço",
+      "estado": "Estado",
+      "descricao": "Descrição",
+      "whatsapp": "WhatsApp para contato",
+      "semPagamento": "O pagamento é combinado entre vocês, fora do app.",
+      "publicar": "Publicar anúncio"
+    }
   }
 }
