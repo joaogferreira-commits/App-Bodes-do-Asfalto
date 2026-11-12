@@ -19,11 +19,15 @@ describe('telas simples', () => {
     expect(screen.getByRole('button', { name: 'Tudo' })).not.toBeSelected();
   });
 
-  it('perfil leva ao catálogo', async () => {
+  it('perfil mostra moto, capítulo, Loja opcional e leva a criar o avatar', async () => {
     const { router } = jest.requireMock('expo-router');
     await render(<Perfil />);
-    await fireEvent.press(screen.getByText('Catálogo de componentes'));
-    expect(router.push).toHaveBeenCalledWith('/catalogo');
+    expect(screen.getByText('Harley-Davidson Fat Boy 114')).toBeTruthy();
+    expect(screen.getByText('Bodes do Asfalto · Cuiabá')).toBeTruthy();
+    expect(screen.getByText('Minha Loja (opcional)')).toBeTruthy();
+    expect(screen.queryByText('Catálogo de componentes')).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: 'Criar avatar' }));
+    expect(router.push).toHaveBeenCalledWith('/avatar');
   });
 
   it('feed parece um feed: stories, compositor, viagem com números, passeio com Vou/Talvez e TFA', async () => {
@@ -35,7 +39,7 @@ describe('telas simples', () => {
     await fireEvent.press(tfa);
     expect(screen.getByRole('button', { name: 'Dar um TFA, 24 até agora' })).toBeSelected();
     await fireEvent.press(screen.getAllByRole('button', { name: 'Vou' })[0]!);
-    expect(screen.getByText('15 vão · 5 talvez')).toBeTruthy();
+    expect(screen.getByText('5 irmãos vão')).toBeTruthy();
     // todo post tem como denunciar/bloquear (exigência das lojas)
     expect(screen.getAllByRole('button', { name: 'Mais opções' }).length).toBeGreaterThanOrEqual(5);
   });

@@ -30,7 +30,7 @@
     "minhaLocalizacao": "My location",
     "nestaArea": "In this area",
     "contagem": "{{irmaos}} brothers · {{sedes}} clubhouses · {{pontos}} places",
-    "agapeRotulo": "Flash Ágape · ends in {{tempo}}",
+    "agapeRotulo": "Flash Agape · in {{tempo}}",
     "agapeTitulo": "Zé at Trevo Gas Station",
     "agapeTexto": "4 km · 3 brothers going",
     "vou": "Going",
@@ -46,7 +46,9 @@
     "aproximar": "Zoom in",
     "afastar": "Zoom out",
     "legendaCurta": "Legend",
-    "euCurto": "Me"
+    "euCurto": "Me",
+    "agapeMarcador": "Flash Agape at {{local}}, starts in {{tempo}}",
+    "agapeEtiqueta": "Agape · {{tempo}}"
   },
   "rota": {
     "titulo": "Plan route",
@@ -147,7 +149,55 @@
     "capitulo": "Cuiabá chapter",
     "catalogo": "Component catalog",
     "catalogoDesc": "Every visual element in the app",
-    "versao": "Test build · Stage 0"
+    "versao": "Test build · Stage 0",
+    "emBreveCadastro": "Profile editing arrives with member registration (Stage 1).",
+    "capituloCargo": "{{capitulo}} chapter · {{cargo}}",
+    "cargos": {
+      "membro": "Member",
+      "diretoria": "Board"
+    },
+    "desde": "Goat since {{ano}}",
+    "criarAvatar": "Create avatar",
+    "editarAvatar": "Edit avatar",
+    "editar": "Edit profile",
+    "numeros": {
+      "kmAno": "km this year",
+      "viagens": "trips",
+      "passeios": "rides",
+      "selos": "badges"
+    },
+    "minhaMoto": "My bike",
+    "trocar": "Change",
+    "motoDetalhe": "{{ano}} · “{{apelido}}” · {{km}} km in the app",
+    "meuCapitulo": "My chapter",
+    "capituloNome": "Bodes do Asfalto · {{capitulo}}",
+    "capituloInfo": "{{irmaos}} brothers · Director: {{diretor}} · since {{ano}}",
+    "maconaria": "My Lodge (optional)",
+    "macom": {
+      "loja": "Lodge",
+      "oriente": "Orient",
+      "potencia": "Grand Lodge"
+    },
+    "naoInformado": "Not provided",
+    "visibilidade": {
+      "ninguem": "Only me",
+      "amigos": "Friends",
+      "membros": "Members"
+    },
+    "maconariaAviso": "Optional. You choose who sees each field and can delete it anytime. We never ask for degree.",
+    "privacidade": "Privacy and safety",
+    "noMapa": "How I appear on the map",
+    "mapaModos": {
+      "aproximado": "Approximate (~5 km)"
+    },
+    "contatos": "Emergency contacts",
+    "contatosN": "{{n}} contacts receive the SOS",
+    "notificacoes": "Notifications",
+    "notificacoesDetalhe": "Choose what you receive",
+    "ajuda": "Help",
+    "ajudaDetalhe": "Contact support by text or WhatsApp",
+    "termos": "Privacy and terms",
+    "sair": "Sign out"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -291,6 +341,51 @@
     "confirmados": "{{vou}} going · {{talvez}} maybe",
     "talvez": "Maybe",
     "votos": "{{n}} votes",
-    "aviso": "Board notice"
+    "aviso": "Board notice",
+    "agapeEm": "Agape at {{local}}",
+    "agapeHora": "At {{hora}} · open to all brothers",
+    "vaoN": "{{n}} brothers going",
+    "verNoMapa": "See on map",
+    "subiuNivel": "{{nome}} reached {{nivel}}!",
+    "chegou": "{{nome}} arrived in {{cidade}}",
+    "irmaosPerto": "{{n}} brothers nearby. Send a wave?",
+    "acenar": "Wave"
+  },
+  "passeios": {
+    "exemplo": "Sample rides until the chapters' real calendar.",
+    "criar": "Create ride",
+    "criarEmBreve": "Creating rides arrives with the chapter calendar (Stage 2).",
+    "filtros": {
+      "proximos": "Upcoming",
+      "oficiais": "Official",
+      "passados": "Past"
+    },
+    "oficial": "Official · {{capitulo}} chapter",
+    "deIrmao": "Organized by {{nome}}",
+    "trajeto": "{{saida}} → {{destino}}",
+    "distancia": "{{km}} km · {{duracao}} · {{estrada}}",
+    "foram": "{{n}} brothers went"
+  },
+  "avatar": {
+    "titulo": "Create avatar",
+    "fundo": "Background",
+    "pele": "Skin tone",
+    "capacete": "Helmet",
+    "barba": "Beard",
+    "oculos": "Glasses",
+    "opcao": "Option {{n}}",
+    "barbas": {
+      "nenhuma": "No beard",
+      "curta": "Short",
+      "cheia": "Full",
+      "grisalha": "Grey"
+    },
+    "oculosTipos": {
+      "nenhum": "No glasses",
+      "escuro": "Dark",
+      "aviador": "Aviator"
+    },
+    "ia": "Coming soon: AI-made avatar from your photo (1 free per account).",
+    "salvar": "Save avatar"
   }
 }

@@ -12,6 +12,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
+import { ProvedorAvatar } from '@/estado/avatar';
 import { ProvedorViagem } from '@/estado/viagem';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
@@ -27,9 +28,11 @@ export default function Layout() {
   if (!carregou) return <View style={{ flex: 1, backgroundColor: paletaNoite.fundo }} />;
   return (
     <ProvedorTema>
-      <ProvedorViagem>
-        <Telas />
-      </ProvedorViagem>
+      <ProvedorAvatar>
+        <ProvedorViagem>
+          <Telas />
+        </ProvedorViagem>
+      </ProvedorAvatar>
     </ProvedorTema>
   );
 }

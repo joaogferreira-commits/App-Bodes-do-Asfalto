@@ -30,7 +30,7 @@
     "minhaLocalizacao": "Minha localização",
     "nestaArea": "Nesta área",
     "contagem": "{{irmaos}} irmãos · {{sedes}} sedes · {{pontos}} pontos",
-    "agapeRotulo": "Ágape relâmpago · termina em {{tempo}}",
+    "agapeRotulo": "Ágape Relâmpago · em {{tempo}}",
     "agapeTitulo": "Zé no Posto Trevo",
     "agapeTexto": "4 km · 3 irmãos confirmados",
     "vou": "Vou",
@@ -46,7 +46,9 @@
     "aproximar": "Aproximar",
     "afastar": "Afastar",
     "legendaCurta": "Legenda",
-    "euCurto": "Eu"
+    "euCurto": "Eu",
+    "agapeMarcador": "Ágape Relâmpago no {{local}}, começa em {{tempo}}",
+    "agapeEtiqueta": "Ágape · {{tempo}}"
   },
   "rota": {
     "titulo": "Planejar rota",
@@ -147,7 +149,55 @@
     "capitulo": "Capítulo Cuiabá",
     "catalogo": "Catálogo de componentes",
     "catalogoDesc": "Todos os elementos visuais do app",
-    "versao": "Versão de teste · Etapa 0"
+    "versao": "Versão de teste · Etapa 0",
+    "emBreveCadastro": "A edição do perfil chega com o cadastro dos irmãos (Etapa 1).",
+    "capituloCargo": "Capítulo {{capitulo}} · {{cargo}}",
+    "cargos": {
+      "membro": "Membro",
+      "diretoria": "Diretoria"
+    },
+    "desde": "Bode desde {{ano}}",
+    "criarAvatar": "Criar avatar",
+    "editarAvatar": "Editar avatar",
+    "editar": "Editar perfil",
+    "numeros": {
+      "kmAno": "km no ano",
+      "viagens": "viagens",
+      "passeios": "passeios",
+      "selos": "selos"
+    },
+    "minhaMoto": "Minha moto",
+    "trocar": "Trocar",
+    "motoDetalhe": "{{ano}} · “{{apelido}}” · {{km}} km no app",
+    "meuCapitulo": "Meu capítulo",
+    "capituloNome": "Bodes do Asfalto · {{capitulo}}",
+    "capituloInfo": "{{irmaos}} irmãos · Diretor: {{diretor}} · desde {{ano}}",
+    "maconaria": "Minha Loja (opcional)",
+    "macom": {
+      "loja": "Loja",
+      "oriente": "Oriente",
+      "potencia": "Potência"
+    },
+    "naoInformado": "Não informado",
+    "visibilidade": {
+      "ninguem": "Só eu",
+      "amigos": "Amigos",
+      "membros": "Membros"
+    },
+    "maconariaAviso": "Opcional. Você escolhe quem vê cada campo e pode apagar quando quiser. Nunca pedimos grau.",
+    "privacidade": "Privacidade e segurança",
+    "noMapa": "Como apareço no mapa",
+    "mapaModos": {
+      "aproximado": "Aproximado (~5 km)"
+    },
+    "contatos": "Contatos de emergência",
+    "contatosN": "{{n}} contatos recebem o SOS",
+    "notificacoes": "Notificações",
+    "notificacoesDetalhe": "Escolha o que quer receber",
+    "ajuda": "Ajuda",
+    "ajudaDetalhe": "Fale com o suporte por texto ou WhatsApp",
+    "termos": "Privacidade e termos",
+    "sair": "Sair da conta"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -291,6 +341,51 @@
     "confirmados": "{{vou}} vão · {{talvez}} talvez",
     "talvez": "Talvez",
     "votos": "{{n}} votos",
-    "aviso": "Aviso da diretoria"
+    "aviso": "Aviso da diretoria",
+    "agapeEm": "Ágape no {{local}}",
+    "agapeHora": "Às {{hora}} · aberto a todos os irmãos",
+    "vaoN": "{{n}} irmãos vão",
+    "verNoMapa": "Ver no mapa",
+    "subiuNivel": "{{nome}} subiu para {{nivel}}!",
+    "chegou": "{{nome}} chegou em {{cidade}}",
+    "irmaosPerto": "{{n}} irmãos por perto. Que tal um aceno?",
+    "acenar": "Acenar"
+  },
+  "passeios": {
+    "exemplo": "Passeios de exemplo até a agenda real dos capítulos.",
+    "criar": "Criar passeio",
+    "criarEmBreve": "Criar passeios chega com a agenda dos capítulos (Etapa 2).",
+    "filtros": {
+      "proximos": "Próximos",
+      "oficiais": "Oficiais",
+      "passados": "Já foram"
+    },
+    "oficial": "Oficial · Capítulo {{capitulo}}",
+    "deIrmao": "Organizado por {{nome}}",
+    "trajeto": "{{saida}} → {{destino}}",
+    "distancia": "{{km}} km · {{duracao}} · {{estrada}}",
+    "foram": "{{n}} irmãos foram"
+  },
+  "avatar": {
+    "titulo": "Criar avatar",
+    "fundo": "Cor do fundo",
+    "pele": "Tom de pele",
+    "capacete": "Capacete",
+    "barba": "Barba",
+    "oculos": "Óculos",
+    "opcao": "Opção {{n}}",
+    "barbas": {
+      "nenhuma": "Sem barba",
+      "curta": "Curta",
+      "cheia": "Cheia",
+      "grisalha": "Grisalha"
+    },
+    "oculosTipos": {
+      "nenhum": "Sem óculos",
+      "escuro": "Escuro",
+      "aviador": "Aviador"
+    },
+    "ia": "Em breve: avatar feito por inteligência artificial a partir da sua foto (1 grátis por conta).",
+    "salvar": "Salvar avatar"
   }
 }

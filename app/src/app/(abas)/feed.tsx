@@ -5,10 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Alert, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { selos } from '@/dados/conquistas';
+import { CartaoPasseio } from '@/componentes/CartaoPasseio';
+import { agapeExemplo } from '@/dados/agape';
+import { niveis, selos } from '@/dados/conquistas';
 import { postsExemplo, stories, type Post } from '@/dados/feed';
+import { passeiosExemplo } from '@/dados/passeios';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
-import { Avatar, Botao, Cartao, Icone, Texto, type NomeIcone } from '@/ui';
+import { Avatar, Botao, Cartao, Icone, pinos, Texto, type NomeIcone } from '@/ui';
 
 const ferramentas: { chave: string; icone: NomeIcone }[] = [
   { chave: 'foto', icone: 'camera' },
@@ -261,55 +264,121 @@ function CartaoPost({ post }: { post: Post }) {
   }
 
   if (post.tipo === 'passeio') {
+    const passeio = passeiosExemplo.find((x) => x.id === post.passeioId);
+    if (!passeio) return null;
     return (
       <View style={estilos.post}>
         <CabecalhoPost post={post} />
-        <Cartao destaque semPadding style={{ marginHorizontal: espaco.md, overflow: 'hidden' }}>
-          <Image
-            source={post.imagem}
-            style={{ width: '100%', aspectRatio: 2.2 }}
-            contentFit="cover"
-            accessible={false}
-          />
-          <View style={{ padding: espaco.md, gap: espaco.xs }}>
-            <Texto variante="rotulo" style={{ color: cores.acao }}>
-              {t('feed.passeio')}
-            </Texto>
-            <Texto variante="subtitulo">{post.titulo}</Texto>
-            <View style={estilos.linha}>
-              <Icone nome="calendario" tamanho={20} cor={cores.textoSec} />
-              <Texto variante="secundario">{post.data}</Texto>
-            </View>
-            <View style={estilos.linha}>
-              <Icone nome="sede" tamanho={20} cor={cores.textoSec} />
-              <Texto variante="secundario">{t('feed.saida', { lugar: post.saida, km: post.km })}</Texto>
-            </View>
-            <Texto variante="secundario">
-              {t('feed.confirmados', {
-                vou: post.vou + (presenca === 'vou' ? 1 : 0),
-                talvez: post.talvez + (presenca === 'talvez' ? 1 : 0),
-              })}
-            </Texto>
-            <View style={[estilos.linha, { marginTop: espaco.xs }]}>
-              <View style={{ flex: 1 }}>
-                <Botao
-                  titulo={t('mapa.vou')}
-                  variante={presenca === 'vou' ? 'principal' : 'secundario'}
-                  icone={presenca === 'vou' ? 'check' : undefined}
-                  grande
-                  onPress={() => setPresenca((p) => (p === 'vou' ? null : 'vou'))}
-                />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Botao
-                  titulo={t('feed.talvez')}
-                  variante={presenca === 'talvez' ? 'principal' : 'contorno'}
-                  grande
-                  onPress={() => setPresenca((p) => (p === 'talvez' ? null : 'talvez'))}
-                />
-              </View>
+        <View style={{ paddingHorizontal: espaco.md }}>
+          <CartaoPasseio passeio={passeio} />
+        </View>
+      </View>
+    );
+  }
+
+  if (post.tipo === 'agape') {
+    const ag = agapeExemplo;
+    return (
+      <View style={estilos.post}>
+        <CabecalhoPost post={post} />
+        <Cartao
+          style={{ marginHorizontal: espaco.md, borderColor: cores.ouro, borderWidth: 2, gap: espaco.sm }}
+        >
+          <View style={estilos.linha}>
+            <Image
+              source={pinos.agape.imagem}
+              style={{ width: 52, height: 64 }}
+              contentFit="contain"
+              accessible={false}
+            />
+            <View style={{ flex: 1 }}>
+              <Texto variante="rotulo" style={{ color: cores.ouro }}>
+                {t('mapa.agapeRotulo', { tempo: ag.comecaEm })}
+              </Texto>
+              <Texto variante="subtitulo">{t('feed.agapeEm', { local: ag.local })}</Texto>
+              <Texto variante="secundario">{t('feed.agapeHora', { hora: ag.horario })}</Texto>
             </View>
           </View>
+          <Texto>{ag.texto}</Texto>
+          <View style={estilos.linha}>
+            <View style={{ flexDirection: 'row' }}>
+              {ag.vao.map((n, i) => (
+                <View key={n} style={{ marginLeft: i === 0 ? 0 : -10 }}>
+                  <Avatar nome={n} tamanho={34} />
+                </View>
+              ))}
+            </View>
+            <Texto variante="secundario">
+              {t('feed.vaoN', { n: ag.vao.length + (presenca === 'vou' ? 1 : 0) })}
+            </Texto>
+          </View>
+          <View style={estilos.linha}>
+            <View style={{ flex: 1 }}>
+              <Botao
+                titulo={t('mapa.vou')}
+                variante={presenca === 'vou' ? 'principal' : 'secundario'}
+                icone={presenca === 'vou' ? 'check' : 'agape'}
+                grande
+                onPress={() => setPresenca((v) => (v === 'vou' ? null : 'vou'))}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Botao
+                titulo={t('feed.verNoMapa')}
+                variante="contorno"
+                icone="mapa"
+                grande
+                onPress={() => router.navigate('/')}
+              />
+            </View>
+          </View>
+        </Cartao>
+      </View>
+    );
+  }
+
+  if (post.tipo === 'conquista') {
+    const nivel = niveis.find((n) => n.chave === post.nivel)!;
+    return (
+      <View style={estilos.post}>
+        <CabecalhoPost post={post} />
+        <View style={{ alignItems: 'center', gap: espaco.xs, paddingHorizontal: espaco.md }}>
+          <Image
+            source={nivel.imagem}
+            style={{ width: 140, height: 156 }}
+            contentFit="contain"
+            accessible={false}
+          />
+          <Texto variante="subtitulo" style={{ textAlign: 'center' }}>
+            {t('feed.subiuNivel', {
+              nome: post.autor.nome.split(' ')[0],
+              nivel: t(`conquistas.niveis.${post.nivel}`),
+            })}
+          </Texto>
+        </View>
+        <Acoes tfa={12} comentarios={6} />
+      </View>
+    );
+  }
+
+  if (post.tipo === 'chegada') {
+    return (
+      <View style={estilos.post}>
+        <CabecalhoPost post={post} />
+        <Cartao style={{ marginHorizontal: espaco.md, gap: espaco.sm }}>
+          <View style={estilos.linha}>
+            <Icone nome="localizacao" tamanho={28} cor={cores.estrada} />
+            <Texto variante="destaque" style={{ flex: 1 }}>
+              {t('feed.chegou', { nome: post.autor.nome.split(' ')[0], cidade: post.cidade })}
+            </Texto>
+          </View>
+          <Texto variante="secundario">{t('feed.irmaosPerto', { n: post.irmaosPerto })}</Texto>
+          <Botao
+            titulo={t('feed.acenar')}
+            icone="aceno"
+            variante="secundario"
+            onPress={() => Alert.alert(t('comum.emBreve'), t('feed.emBreve'))}
+          />
         </Cartao>
       </View>
     );

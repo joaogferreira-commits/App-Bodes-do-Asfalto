@@ -1,4 +1,5 @@
 import { Camera, Map, Marker, type CameraRef, type MapRef } from '@maplibre/maplibre-react-native';
+import { Image } from 'expo-image';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
@@ -6,12 +7,14 @@ import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { MarcadorAgape } from '@/componentes/MarcadorAgape';
+import { agapeExemplo } from '@/dados/agape';
 import { filtrar, type Filtro } from '@/dados/exemplos';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
 import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, Pino, Texto } from '@/ui';
+import { Avatar, Botao, BotaoIcone, Chip, Icone, PainelInferior, Pino, pinos, Texto } from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
@@ -79,6 +82,14 @@ export default function Mapa() {
     if (atual != null) camera.current?.zoomTo(atual + delta, { duration: 250 });
   };
 
+  const verAgape = () => {
+    camera.current?.flyTo({ center: [agapeExemplo.lng, agapeExemplo.lat], zoom: 14, duration: 800 });
+    Alert.alert(
+      t('feed.agapeEm', { local: agapeExemplo.local }),
+      `${agapeExemplo.texto}\n\n${t('feed.agapeHora', { hora: agapeExemplo.horario })}\n${t('feed.vaoN', { n: agapeExemplo.vao.length })}`,
+    );
+  };
+
   const irAoPosto = () => {
     definirDestino(postoExemplo);
     router.push('/rota');
@@ -95,11 +106,21 @@ export default function Mapa() {
         attributionPosition={{ bottom: 330, left: 8 }}
       >
         <Camera ref={camera} initialViewState={{ center: CUIABA, zoom: 11 }} />
-        {lugares.map((l) => (
-          <Marker key={l.id} id={l.id} lngLat={[l.lng, l.lat]} anchor="bottom">
-            <Pino tipo={l.tipo} rotulo={l.rotulo} descricao={`${l.nome}${l.rotulo ? `, ${l.rotulo}` : ''}`} />
-          </Marker>
-        ))}
+        {lugares
+          .filter((l) => l.tipo !== 'agape')
+          .map((l) => (
+            <Marker key={l.id} id={l.id} lngLat={[l.lng, l.lat]} anchor="bottom">
+              <Pino
+                tipo={l.tipo}
+                rotulo={l.rotulo}
+                descricao={`${l.nome}${l.rotulo ? `, ${l.rotulo}` : ''}`}
+              />
+            </Marker>
+          ))}
+        {/* Ágape Relâmpago: sempre visível, por cima dos outros, flutuando */}
+        <Marker id="agape-ativo" lngLat={[agapeExemplo.lng, agapeExemplo.lat]} anchor="bottom">
+          <MarcadorAgape comecaEm={agapeExemplo.comecaEm} local={agapeExemplo.local} onPress={verAgape} />
+        </Marker>
         {irmaos.map((i) => (
           <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
             <Avatar nome={i.nome} status={i.status} tamanho={44} />
@@ -188,21 +209,34 @@ export default function Mapa() {
           <Texto variante="secundario">{t('mapa.contagem', contagem)}</Texto>
         </View>
 
-        <View style={estilos.cartaoAgape}>
-          <View style={estilos.iconeAgape}>
-            <Icone nome="agape" tamanho={26} cor={cores.ouro} />
-          </View>
-          <View style={{ flex: 1, minWidth: 0 }}>
-            <Texto variante="rotulo" style={{ color: cores.ouro, fontSize: 13 }} numberOfLines={1}>
-              {t('mapa.agapeRotulo', { tempo: '1h20' })}
-            </Texto>
-            <Texto variante="corpoForte" numberOfLines={1}>
-              {t('mapa.agapeTitulo')}
-            </Texto>
-            <Texto variante="secundario" numberOfLines={1}>
-              {t('mapa.agapeTexto')}
-            </Texto>
-          </View>
+        <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t('mapa.agapeMarcador', {
+              local: agapeExemplo.local,
+              tempo: agapeExemplo.comecaEm,
+            })}
+            onPress={verAgape}
+            style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
+          >
+            <Image
+              source={pinos.agape.imagem}
+              style={{ width: 40, height: 50 }}
+              contentFit="contain"
+              accessible={false}
+            />
+            <View style={{ flex: 1, minWidth: 0 }}>
+              <Texto variante="rotulo" style={{ color: cores.ouro }} numberOfLines={1}>
+                {t('mapa.agapeRotulo', { tempo: agapeExemplo.comecaEm })}
+              </Texto>
+              <Texto variante="corpoForte" numberOfLines={1}>
+                {t('feed.agapeEm', { local: agapeExemplo.local })}
+              </Texto>
+              <Texto variante="secundario" numberOfLines={1}>
+                {t('feed.vaoN', { n: agapeExemplo.vao.length })}
+              </Texto>
+            </View>
+          </Pressable>
           <Botao
             titulo={t('mapa.vou')}
             onPress={() => Alert.alert(t('comum.emBreve'), t('mapa.agapeTextoAviso'))}
