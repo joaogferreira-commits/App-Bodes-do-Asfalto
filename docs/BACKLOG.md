@@ -3,6 +3,22 @@
 Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer", entrega com testes, marca como feito e registra no `docs/PROGRESSO.md`. Itens que dependem do dono ficam em "Aguardando o dono".
 
 ## A fazer
+## MISSÃO PUBLICAÇÃO (decisão do dono 12/11: "nenhum botão dizendo que entra depois e nada sem função efetiva")
+Ordem obrigatória; cada ciclo pega o primeiro não feito. Regra: o que não ficar pronto até o envio à loja é ESCONDIDO (nunca "em breve").
+- P1. Login real (link mágico por e-mail e Google) + estado do membro vindo do banco; consentimentos no banco; sair/excluir conta no servidor. Aplicar a migration 20261112190000 (fotos da solicitação + primeiro admin) — dono já autorizou aplicar o banco.
+- P2. Solicitação de entrada real (fotos no bucket privado) + tela de APROVAÇÃO dentro do app para diretoria/moderador/admin (fila, aprovar, recusar com motivo). Tirar "simular aprovação". Dono vira admin pela função tornar_admin_por_email.
+- P3. Perfil, garagem e contatos de emergência no banco; perfil de outro irmão ("Ver perfil") real.
+- P4. Feed real: posts, fotos/vídeos no Storage, curtir (TFA), comentar, denunciar, bloquear; stories 24 h no servidor. Tirar todos os posts de exemplo.
+- P5. Chat em tempo real (Supabase Realtime): grupos do capítulo/passeio/comboio/Ágape automáticos, avisos da diretoria, 1:1 por aceno aceito; denúncia vai para a fila de moderação.
+- P6. Notificações push (Expo + Firebase do dono): mensagem, aceno, aprovação, SOS. Preferências por tipo (tirar "Notificações — em breve" do Perfil).
+- P7. Mapa ao vivo: irmãos reais (aproximado no servidor, zonas privadas, apagado em 7 dias), aceno real, "Falar com o contato" da Loja via aceno.
+- P8. Passeios reais: criar passeio (diretoria), "Vou/Talvez", grupo automático; Ágape real.
+- P9. Modo pilotando: Alerta (tipos de alerta para o comboio), Reagrupar, Posto mais próximo e Posto na rota funcionando; mesmos botões no Android Auto.
+- P10. SOS real: avisa o grupo do passeio e os contatos que usam o app (push) + posição exata durante o SOS.
+- P11. Desafios, conquistas e XP no servidor (aprovação real por diretoria/moderador); ranking.
+- P12. Ajuda/suporte (texto, print e dados do aparelho chegam ao admin) e "Meus dados" baixando do servidor.
+- P13. Varredura final: remover dados de exemplo, "modo local", avisos de versão de teste; conta de demonstração para revisores; política de privacidade e termos publicados.
+
 0. ~~**Câmera v3**~~ FEITO 12/11 (falta: zoom de pinça e gravação em partes, que precisa juntar vídeos no aparelho). Pedido original ("tudo que tem no Instagram e TikTok"): zoom (pinça + barra), temporizador 3/10 s, grade, flash auto/ligado/desligado, modo mãos livres (toque inicia/para), anel de progresso com tempo, gravação em partes (pausar e continuar), velocidade 0,5×/2× na reprodução, textos e selos arrastáveis e redimensionáveis, desenho com o dedo, 12+ filtros, enquete/pergunta/contagem regressiva como selos, espelhar câmera frontal. FORA (motivo): efeitos de rosto/AR (dado biométrico, LGPD art. 5º II), biblioteca de músicas (direitos autorais/licença paga).
 1. ~~**Etapa 1 — banco (Bia):**~~ FEITO em 12/11 (migration + 20 testes pgTAP no CI). `supabase/` com migrations de capítulos, perfis, papéis, solicitações de entrada, consentimentos LGPD, garagem, contatos de emergência e perfil maçônico (criptografado, visibilidade por campo); RLS em tudo; testes pgTAP rodando com `supabase start` (Docker disponível no agente).
 2. ~~**Etapa 1 — app (Mateus):**~~ FEITO em 12/11 no modo local (falta ligar ao Supabase quando houver chaves). camada de dados com interface única (local agora, Supabase quando houver chaves); telas de entrada: boas-vindas com o Bodinho, login (link mágico, Google, Apple), formulário de solicitação (foto do colete, carteirinha, quem indica), tela de espera; consentimentos separados; "Meus dados" (ver, baixar, revogar); excluir conta.
