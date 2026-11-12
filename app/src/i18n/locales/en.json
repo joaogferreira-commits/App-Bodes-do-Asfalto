@@ -774,7 +774,8 @@
       "indicadoPor": "Club brother who vouches for you",
       "quemAprova": "The brother you name gets a confirmation request. Once your chapter has a board in the app, the board approves.",
       "enviar": "Send request",
-      "falta": "Still missing"
+      "falta": "Still missing",
+      "erroEnvio": "Could not send the request. Check your internet and try again."
     },
     "espera": {
       "titulo": "Request sent",

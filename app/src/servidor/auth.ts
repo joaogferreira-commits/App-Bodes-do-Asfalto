@@ -95,3 +95,53 @@ export async function excluirContaNoServidor() {
   if (error) throw error;
   await sairDoServidor();
 }
+
+/** Sobe uma foto para o bucket privado "entrada" na pasta do próprio irmão. */
+async function subirFoto(uid: string, nome: string, uri: string) {
+  const sb = exigir();
+  const corpo = await (await fetch(uri)).arrayBuffer();
+  const caminho = `${uid}/${nome}-${Date.now()}.jpg`;
+  const { error } = await sb.storage.from('entrada').upload(caminho, corpo, { contentType: 'image/jpeg' });
+  if (error) throw error;
+  return caminho;
+}
+
+/** Pedido de entrada no servidor: fotos no bucket privado + linha em solicitacoes_entrada. */
+export async function enviarSolicitacaoServidor(s: {
+  nome: string;
+  apelido: string;
+  capitulo: string;
+  cidade: string;
+  telefone: string;
+  fotoColete?: string;
+  fotoCarteirinha?: string;
+  indicadoPor: string;
+}) {
+  const sb = exigir();
+  const { data } = await sb.auth.getUser();
+  const uid = data.user?.id;
+  if (!uid) throw new Error('sem sessão');
+  if (!s.fotoColete || !s.fotoCarteirinha) throw new Error('faltam fotos');
+  const { data: cap, error: erroCap } = await sb
+    .from('capitulos')
+    .select('id')
+    .eq('nome', s.capitulo)
+    .maybeSingle();
+  if (erroCap || !cap) throw erroCap ?? new Error('capítulo não encontrado');
+  const [colete, carteirinha] = await Promise.all([
+    subirFoto(uid, 'colete', s.fotoColete),
+    subirFoto(uid, 'carteirinha', s.fotoCarteirinha),
+  ]);
+  const { error } = await sb.from('solicitacoes_entrada').insert({
+    usuario_id: uid,
+    nome: s.nome,
+    apelido: s.apelido || null,
+    capitulo_id: cap.id,
+    cidade: s.cidade,
+    telefone: s.telefone,
+    foto_colete_path: colete,
+    foto_carteirinha_path: carteirinha,
+    indicado_por_nome: s.indicadoPor || null,
+  });
+  if (error) throw error;
+}

@@ -774,7 +774,8 @@
       "indicadoPor": "Irmão do clube que te indica",
       "quemAprova": "O irmão indicado recebe um pedido de confirmação. Quando o seu capítulo tiver diretoria no app, é ela quem aprova.",
       "enviar": "Enviar pedido",
-      "falta": "Falta preencher"
+      "falta": "Falta preencher",
+      "erroEnvio": "Não foi possível enviar o pedido. Confira a internet e tente de novo."
     },
     "espera": {
       "titulo": "Pedido enviado",

@@ -40,3 +40,7 @@ begin
   perform set_config('bodes.mudanca_autorizada', '', true);
 end $$;
 revoke all on function public.tornar_admin_por_email(text) from public, anon, authenticated;
+
+-- O candidato ainda não vê a lista de membros: informa quem indicou pelo nome/apelido;
+-- quem aprova liga ao perfil (indicado_por) na hora de decidir.
+alter table public.solicitacoes_entrada add column indicado_por_nome text check (char_length(indicado_por_nome) <= 80);

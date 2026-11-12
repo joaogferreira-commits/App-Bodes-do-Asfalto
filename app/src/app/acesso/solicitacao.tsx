@@ -81,8 +81,10 @@ export default function Solicitacao() {
 
   const enviar = () => {
     if (faltando.length) return Alert.alert(t('acesso.form.falta'), faltando.join('\n'));
-    acesso.enviarSolicitacao({ ...f, fotoColete, fotoCarteirinha });
-    router.replace('/acesso/espera');
+    void acesso
+      .enviarSolicitacao({ ...f, fotoColete, fotoCarteirinha })
+      .then(() => router.replace('/acesso/espera'))
+      .catch(() => Alert.alert(t('acesso.form.erroEnvio')));
   };
 
   return (

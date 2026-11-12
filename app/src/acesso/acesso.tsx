@@ -46,7 +46,7 @@ type Valor = {
   modo: 'local' | 'supabase';
   entrar: (metodo: 'email' | 'google' | 'apple', email?: string) => Promise<void>;
   entrarDemonstracao: () => void;
-  enviarSolicitacao: (s: Omit<Solicitacao, 'enviadaEm'>) => void;
+  enviarSolicitacao: (s: Omit<Solicitacao, 'enviadaEm'>) => Promise<void>;
   /** Só no modo local, para testar: simula a diretoria aprovando. */
   simularAprovacao: () => void;
   consentir: (f: Finalidade) => void;
@@ -141,8 +141,10 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
         mudar((a) => ({ ...a, metodo, email, estado: a.solicitacao ? 'pendente' : 'semSolicitacao' }));
       },
       entrarDemonstracao: () => mudar((a) => ({ ...a, metodo: 'demonstracao', estado: 'membro' })),
-      enviarSolicitacao: (s) =>
-        mudar((a) => ({ ...a, estado: 'pendente', solicitacao: { ...s, enviadaEm: Date.now() } })),
+      enviarSolicitacao: async (s) => {
+        if (usarServidor) await servidor.enviarSolicitacaoServidor(s);
+        mudar((a) => ({ ...a, estado: 'pendente', solicitacao: { ...s, enviadaEm: Date.now() } }));
+      },
       simularAprovacao: () => mudar((a) => ({ ...a, estado: 'membro' })),
       consentir: (f) => {
         if (usarServidor && !ativo(f))
