@@ -108,7 +108,7 @@
     },
     "google": {
       "verificando": "Comprobando si la navegación de Google sigue esta ruta…",
-      "fiel": "La navegación de Google seguirá esta ruta.",
+      "fiel": "Google calculó esta ruta. La confirmación final es al salir.",
       "parecida": "Google la aceptó, pero va por un camino un poco distinto ({{km}} km). Síguela en el mapa de la app.",
       "semChave": "Navegación sin la ruta planificada: falta la clave de Google en esta versión.",
       "chaveSemRoutes": "Google rechazó la ruta: la clave no tiene activada la \"Routes API\". La navegación irá por la ruta de Google.",
@@ -129,7 +129,7 @@
     "postoProximo": "Gasolinera cercana",
     "postoNaRota": "Gasolinera en ruta",
     "encerrar": "Terminar",
-    "rotaRapida": "Google no aceptó la ruta planeada; siguiendo su ruta hasta el destino.",
+    "rotaRapida": "Google no aceptó la ruta planificada (motivo: {{motivo}}); siguiendo su ruta hasta el destino.",
     "emBreveAlerta": "Alerta: llega con los paseos.",
     "emBreveReagrupar": "Reagrupar: llega con los paseos.",
     "emBrevePosto": "Gasolineras: llegan con los lugares.",

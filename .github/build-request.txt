@@ -1,4 +1,4 @@
 # O agente altera este arquivo para pedir uma versão de teste ao EAS.
 plataforma=android
 perfil=preview
-pedido=16 (0.10.0: aba Ferramentas, SOS, km automático, classificados, manutenção editável)
+pedido=17 (0.11.1: rota do Google pedida na partida, motivo da recusa, partida mais rápida; Guia de Negócios)

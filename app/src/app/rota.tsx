@@ -55,7 +55,6 @@ export default function Rota() {
   const { height: alturaTela } = useWindowDimensions();
   const [origem, setOrigem] = useState<Coordenada | null>(null);
   const [estado, setEstado] = useState<Estado>({ fase: 'calculando' });
-  const [iniciando, setIniciando] = useState(false);
   const [recolhido, setRecolhido] = useState(false);
   const [opcoes, setOpcoes] = useState<RotaPlanejada[]>([]);
   const [escolhida, setEscolhida] = useState(0);
@@ -117,11 +116,8 @@ export default function Rota() {
 
   const iniciar = async () => {
     if (!rota || !origem) return;
-    setIniciando(true);
-    const r =
-      google && google !== 'verificando' ? google : await rotaNoGoogle(chaveGoogle, rota.forma, rota.km);
-    viagem.definirRota(rota, r.aceita ? r.token : null);
-    setIniciando(false);
+    // Não espera o Google aqui: a tela de pilotagem pede um token novo saindo de onde o irmão está.
+    viagem.definirRota(rota, google && google !== 'verificando' && google.aceita ? google.token : null);
     router.push('/pilotando');
   };
 
@@ -407,7 +403,7 @@ export default function Rota() {
                 titulo={t('rota.iniciar')}
                 grande
                 icone="navegar"
-                desativado={estado.fase !== 'pronta' || iniciando}
+                desativado={estado.fase !== 'pronta'}
                 onPress={iniciar}
               />
             </View>

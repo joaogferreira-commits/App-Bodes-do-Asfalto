@@ -1,5 +1,11 @@
 import { destinosDaProva, distanciaKm, pontoADistancia, posicaoDoDestino } from './destinos';
-import { iniciarNavegacao, MODO_MOTO, VOZ_COMPLETA_BLUETOOTH, type ControladorNavegacao } from './fluxo';
+import {
+  iniciarNavegacao,
+  LIMITE_ROTA_MS,
+  MODO_MOTO,
+  VOZ_COMPLETA_BLUETOOTH,
+  type ControladorNavegacao,
+} from './fluxo';
 
 const cuiaba = { lat: -15.601, lng: -56.0974 };
 
@@ -93,6 +99,53 @@ describe('iniciarNavegacao', () => {
     await expect(iniciarNavegacao({ ...base(c), tokenRota: 'tok' })).resolves.toBe('okRotaRapida');
     expect(c.setDestinations).toHaveBeenCalledTimes(2);
     expect(c.startGuidance).toHaveBeenCalled();
+  });
+
+  it('pede um token novo saindo da posição atual e usa ele no lugar do antigo', async () => {
+    const c = controladorFalso();
+    const tokenNaHora = jest.fn().mockResolvedValue('novo');
+    await expect(iniciarNavegacao({ ...base(c), tokenRota: 'velho', tokenNaHora })).resolves.toBe('ok');
+    expect(tokenNaHora).toHaveBeenCalledWith(cuiaba);
+    expect(c.setDestinations.mock.calls[0]![1]).toEqual({
+      routeTokenOptions: { routeToken: 'novo', travelMode: MODO_MOTO },
+    });
+  });
+
+  it('se o token novo falhar, tenta o antigo; recusa avisa o motivo', async () => {
+    const c = controladorFalso({
+      setDestinations: jest
+        .fn()
+        .mockRejectedValueOnce({ code: 'routeTokenMalformed' })
+        .mockResolvedValueOnce('OK'),
+    });
+    const aoRecusarRota = jest.fn();
+    const r = await iniciarNavegacao({
+      ...base(c),
+      tokenRota: 'velho',
+      tokenNaHora: async () => null,
+      aoRecusarRota,
+    });
+    expect(r).toBe('okRotaRapida');
+    expect(c.setDestinations.mock.calls[0]![1]).toEqual({
+      routeTokenOptions: { routeToken: 'velho', travelMode: MODO_MOTO },
+    });
+    expect(aoRecusarRota).toHaveBeenCalledWith('routeTokenMalformed');
+  });
+
+  it('Google calado na rota planejada não trava a partida', async () => {
+    jest.useFakeTimers();
+    const c = controladorFalso({
+      setDestinations: jest
+        .fn()
+        .mockReturnValueOnce(new Promise(() => undefined))
+        .mockResolvedValueOnce('OK'),
+    });
+    const aoRecusarRota = jest.fn();
+    const p = iniciarNavegacao({ ...base(c), tokenRota: 'tok', aoRecusarRota });
+    await jest.advanceTimersByTimeAsync(LIMITE_ROTA_MS + 10);
+    await expect(p).resolves.toBe('okRotaRapida');
+    expect(aoRecusarRota).toHaveBeenCalledWith('DEMOROU');
+    jest.useRealTimers();
   });
 
   it('erro inesperado vira "erro"', async () => {

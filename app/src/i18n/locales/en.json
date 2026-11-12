@@ -108,7 +108,7 @@
     },
     "google": {
       "verificando": "Checking whether Google navigation follows this route…",
-      "fiel": "Google navigation will follow this route.",
+      "fiel": "Google calculated this route. Final confirmation happens at departure.",
       "parecida": "Google accepted it, but takes a slightly different way ({{km}} km). Follow along on the app map.",
       "semChave": "Navigation without the planned route: the Google key is missing in this build.",
       "chaveSemRoutes": "Google rejected the route: the key does not have the \"Routes API\" enabled. Navigation will use Google's route.",
@@ -129,7 +129,7 @@
     "postoProximo": "Nearest gas",
     "postoNaRota": "Gas on route",
     "encerrar": "End",
-    "rotaRapida": "Google did not accept the planned route; following its own route to the destination.",
+    "rotaRapida": "Google did not accept the planned route (reason: {{motivo}}); following its route to the destination.",
     "emBreveAlerta": "Alert: coming with rides.",
     "emBreveReagrupar": "Regroup: coming with rides.",
     "emBrevePosto": "Fuel: coming with places.",

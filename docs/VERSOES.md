@@ -4,6 +4,14 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.11.1 — 12/11/2026
+
+- Navegação: na partida o app pede ao Google uma rota NOVA saindo de onde o irmão está (o token feito na tela de rota partia do ponto do planejamento e podia ter vencido — era o "aceita e depois recusa").
+- Se o Google recusar, o aviso mostra o motivo (código), para corrigirmos na próxima.
+- Partida mais rápida: o botão Iniciar não espera mais a conferência do Google; posição e rota correm junto com a abertura da navegação; limites de tempo (Google 8 s por tentativa, 12 s para aceitar a rota, servidor de rotas 20 s).
+- Texto da tela de rota ficou honesto: "O Google calculou esta rota. A confirmação final é na partida."
+- Guia de Negócios da 0.11.0 entra nesta versão de teste.
+
 ## 0.11.0 — 12/11/2026
 
 - Guia de Negócios novo: parceiros pagos aparecem primeiro com selo dourado "Parceiro"; plano vencido perde o destaque sozinho.

@@ -108,7 +108,7 @@
     },
     "google": {
       "verificando": "Conferindo se a navegação do Google segue esta rota…",
-      "fiel": "A navegação do Google vai seguir esta rota.",
+      "fiel": "O Google calculou esta rota. A confirmação final é na partida.",
       "parecida": "O Google aceitou, mas vai por um caminho um pouco diferente ({{km}} km). Acompanhe pelo mapa do app.",
       "semChave": "Navegação sem a rota planejada: falta a chave do Google nesta versão.",
       "chaveSemRoutes": "O Google recusou a rota: a chave não tem a \"Routes API\" ligada. A navegação vai pela rota do Google (aviso ao dono).",
@@ -129,7 +129,7 @@
     "postoProximo": "Posto próximo",
     "postoNaRota": "Posto na rota",
     "encerrar": "Encerrar",
-    "rotaRapida": "O Google não aceitou a rota planejada; seguindo a rota dele até o destino.",
+    "rotaRapida": "O Google não aceitou a rota planejada (motivo: {{motivo}}); seguindo a rota dele até o destino.",
     "emBreveAlerta": "Alerta: chega com os passeios.",
     "emBreveReagrupar": "Reagrupar: chega com os passeios.",
     "emBrevePosto": "Postos: chegam com os lugares.",

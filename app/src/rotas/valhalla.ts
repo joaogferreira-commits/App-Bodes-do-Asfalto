@@ -32,7 +32,7 @@ export function opcoesDeCusto(tipo: TipoEstrada, semCorteDeTerra = false) {
 
 type Buscar = (
   url: string,
-  init: { method: string; headers: Record<string, string>; body: string },
+  init: { method: string; headers: Record<string, string>; body: string; signal?: AbortSignal },
 ) => Promise<{
   ok: boolean;
   status: number;
@@ -70,6 +70,9 @@ export function separarTrechos(forma: Coordenada[], arestas: RespostaAtributos['
   return trechos.length ? trechos : [{ pontos: forma, terra: false }];
 }
 
+/** Tempo máximo esperando o servidor de rotas. */
+export const LIMITE_VALHALLA_MS = 20000;
+
 export async function planejarRota(
   origem: Coordenada,
   destino: Coordenada,
@@ -95,14 +98,20 @@ export async function planejarRota(
   });
   const pedir = async (caminho: string, dados: object) => {
     let resp;
+    // O servidor público às vezes demora; desistir cedo e avisar é melhor que a tela parada.
+    const corte = new AbortController();
+    const relogio = setTimeout(() => corte.abort(), LIMITE_VALHALLA_MS);
     try {
       resp = await buscar(`${SERVIDOR_VALHALLA}${caminho}`, {
+        signal: corte.signal,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados),
       });
     } catch {
       throw new ErroRota('semRede');
+    } finally {
+      clearTimeout(relogio);
     }
     if (!resp.ok) throw new ErroRota(resp.status >= 500 ? 'semRede' : 'semRota');
     return resp.json();

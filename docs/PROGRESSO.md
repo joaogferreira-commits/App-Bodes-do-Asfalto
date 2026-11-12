@@ -102,3 +102,9 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 ### 12/11/2026 — ciclo 6: Comercial (v0.11.0)
 - Feito: Guia de Negócios (`/negocios`), vitrine (`/negocios/[id]`), carteirinha `/sou-membro`, regras `planoVigente`/`ordenarGuia`, contadores anônimos (`app/src/comercial/contadores.ts`). Traduções nos 3 idiomas; 5 testes novos (229 no total).
 - Falta: pino de parceiro no mapa, enviar contadores ao Supabase, painel de resultados para o anunciante.
+
+### 12/11/2026 — ciclo 7: navegação recusando a rota (vídeo do dono) — v0.11.1
+- Problema: tela de rota dizia "o Google vai seguir" e, na partida, "o Google não aceitou". Causa provável: o token da Routes API era gerado no planejamento (origem = ponto do planejamento) e usado depois; o SDK recusa token velho/de outra origem. O erro real era engolido.
+- Correção: token novo pedido na partida a partir da posição atual (em paralelo com a abertura do SDK), token antigo como reserva, motivo da recusa mostrado na faixa, limites de tempo em Google/Valhalla, botão Iniciar não espera mais a conferência. 3 testes novos (232).
+- Próximo: se a 0.11.1 ainda recusar, o código do motivo na faixa diz o porquê.
+- Android Auto (item 8 do backlog) adiado para o próximo ciclo; leitura do SDK feita: NavInfoReceivingService.getNavInfoLiveData() + valores do enum Maneuver (0..) mapeáveis para o cartão de manobra.

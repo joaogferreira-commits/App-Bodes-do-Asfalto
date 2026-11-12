@@ -19,7 +19,7 @@ export const URL_ROUTES = 'https://routes.googleapis.com/directions/v2:computeRo
 
 type Buscar = (
   url: string,
-  init: { method: string; headers: Record<string, string>; body: string },
+  init: { method: string; headers: Record<string, string>; body: string; signal?: AbortSignal },
 ) => Promise<{
   ok: boolean;
   status?: number;
@@ -33,6 +33,9 @@ export type ResultadoGoogle =
   | { aceita: false; motivo: MotivoGoogle };
 
 const ponto = (c: Coordenada) => ({ location: { latLng: { latitude: c.lat, longitude: c.lng } } });
+
+/** Cada pergunta ao Google desiste depois deste tempo (antes travava a tela por muito tempo). */
+export const LIMITE_GOOGLE_MS = 8000;
 
 /** Tentativas, da mais fiel à mais solta. */
 export const TENTATIVAS_PASSAGENS = [10, 5, 2];
@@ -53,8 +56,11 @@ export async function rotaNoGoogle(
   for (const n of TENTATIVAS_PASSAGENS) {
     const passagens = amostrarPassagens(forma, n);
     let resp;
+    const corte = new AbortController();
+    const relogio = setTimeout(() => corte.abort(), LIMITE_GOOGLE_MS);
     try {
       resp = await buscar(URL_ROUTES, {
+        signal: corte.signal,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,6 +77,8 @@ export async function rotaNoGoogle(
       });
     } catch {
       return { aceita: false, motivo: 'semRede' };
+    } finally {
+      clearTimeout(relogio);
     }
     if (resp.status === 403 || resp.status === 401) return { aceita: false, motivo: 'chaveSemRoutes' };
     if (!resp.ok) {
