@@ -801,7 +801,13 @@
     "revogarMacomTitulo": "Apagar Loja, Oriente e Potência?",
     "revogarMacomTexto": "Revogar esta autorização apaga esses dados do seu perfil.",
     "revogarConfirmar": "Revogar e apagar",
-    "termosTravados": "Para deixar de aceitar os termos, use \"Excluir minha conta\" abaixo."
+    "termosTravados": "Para deixar de aceitar os termos, use \"Excluir minha conta\" abaixo.",
+    "retornoFalhou": "Não deu para entrar com este link",
+    "retornoFalhouExplica": "O link vale uma vez e só no celular em que foi pedido. Peça um novo na tela de entrada.",
+    "voltarEntrada": "Voltar para a entrada",
+    "entrando": "Entrando…",
+    "erroLink": "Não foi possível enviar o link. Confira o e-mail e a internet e tente de novo.",
+    "erroGoogle": "Não foi possível entrar com o Google. Tente de novo ou use o e-mail."
   },
   "garagem": {
     "titulo": "Minha garagem",

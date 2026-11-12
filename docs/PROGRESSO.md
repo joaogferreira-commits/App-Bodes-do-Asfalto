@@ -132,3 +132,4 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - Banco criado no projeto Supabase do dono (autorização escrita do dono): migration `20261112080000_etapa1_fundacao.sql` aplicada (RLS em tudo, chave dos dados maçônicos no Vault) e seed dos capítulos. Workflow `aplicar-banco.yml` (`--linked`), disparado por `.github/banco-request.txt` só com autorização do dono.
 - App: `src/servidor/supabase.ts` (cliente com chave pública do EAS; sem variáveis = modo local).
 - Próximo: login real por e-mail (link mágico) e Google, perfis/aprovações no banco, chat em tempo real.
+- P1 (login real): `servidor/auth.ts` (link mágico e Google com PKCE, retorno em `acesso/retorno`, situação do membro pelo banco, consentimentos, sair, excluir conta) e `ProvedorAcesso` em modo "supabase" quando as variáveis do EAS existem. Teste com servidor simulado. Migration 20261112190000 (bucket privado "entrada" + `tornar_admin_por_email`) passou no CI.

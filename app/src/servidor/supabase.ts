@@ -15,6 +15,12 @@ export const servidorConfigurado = /^https:\/\/[a-z0-9]+\.supabase\.co\/?$/.test
 
 export const supabase: SupabaseClient | null = servidorConfigurado
   ? createClient(url, chave, {
-      auth: { storage: AsyncStorage, autoRefreshToken: true, persistSession: true, detectSessionInUrl: false },
+      auth: {
+        storage: AsyncStorage,
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: false,
+        flowType: 'pkce',
+      },
     })
   : null;

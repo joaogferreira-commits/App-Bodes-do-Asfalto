@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
@@ -46,7 +46,11 @@ export default function Entrada() {
             <Botao
               titulo={t('acesso.jaCliquei')}
               grande
-              onPress={() => void acesso.entrar('email', email.trim()).then(depoisDeEntrar)}
+              onPress={() =>
+                acesso.modo === 'supabase'
+                  ? void acesso.atualizar().then(depoisDeEntrar)
+                  : void acesso.entrar('email', email.trim()).then(depoisDeEntrar)
+              }
             />
             <Botao titulo={t('acesso.outroEmail')} variante="contorno" onPress={() => setEnviado(false)} />
           </View>
@@ -57,14 +61,26 @@ export default function Entrada() {
               titulo={t('acesso.receberLink')}
               grande
               desativado={!emailValido}
-              onPress={() => setEnviado(true)}
+              onPress={() =>
+                acesso.modo === 'supabase'
+                  ? void acesso
+                      .entrar('email', email.trim())
+                      .then(() => setEnviado(true))
+                      .catch(() => Alert.alert(t('acesso.erroLink')))
+                  : setEnviado(true)
+              }
             />
             <Divisoria />
             <Botao
               titulo={t('acesso.google')}
               variante="secundario"
               grande
-              onPress={() => void acesso.entrar('google').then(depoisDeEntrar)}
+              onPress={() =>
+                void acesso
+                  .entrar('google')
+                  .then(depoisDeEntrar)
+                  .catch(() => Alert.alert(t('acesso.erroGoogle')))
+              }
             />
             {Platform.OS === 'ios' && (
               <Botao

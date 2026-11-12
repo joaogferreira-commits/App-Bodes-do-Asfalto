@@ -1,5 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+
+import * as servidor from '@/servidor/auth';
+import { servidorConfigurado, supabase } from '@/servidor/supabase';
 
 /**
  * Acesso ao app (Etapa 1). Interface única: hoje funciona só no aparelho ("local"); quando o dono
@@ -55,6 +58,10 @@ type Valor = {
   excluirConta: () => Promise<void>;
   /** Muda a cada saída/exclusão: a árvore de telas é remontada sem dados da pessoa anterior. */
   sessao: number;
+  /** Relê a situação no servidor (depois do link mágico, do Google ou da aprovação). */
+  atualizar: () => Promise<void>;
+  /** Erro do último login no servidor (para mostrar ao irmão). */
+  erro?: string;
 };
 
 const CHAVE = 'bodes.acesso';
@@ -72,6 +79,28 @@ const Contexto = createContext<Valor | null>(null);
 export function ProvedorAcesso({ children, comecar }: { children: ReactNode; comecar?: Partial<Dados> }) {
   const [dados, setDados] = useState<Dados | null>(comecar ? { ...inicial, ...comecar } : null);
   const [sessao, setSessao] = useState(0);
+  const [erro, setErro] = useState<string>();
+  const usarServidor = servidorConfigurado && !comecar;
+
+  /** Com o Supabase, quem manda no estado é o servidor (o aparelho guarda só o rascunho do pedido). */
+  const atualizar = useCallback(async () => {
+    if (!usarServidor) return;
+    try {
+      const s = await servidor.situacao();
+      const estado = s.estado === 'desativado' ? 'deslogado' : s.estado;
+      if (s.estado === 'desativado') await servidor.sairDoServidor();
+      setDados((a) => ({ ...(a ?? inicial), estado, email: s.email ?? a?.email }));
+    } catch {
+      setDados((a) => a ?? inicial);
+    }
+  }, [usarServidor]);
+
+  useEffect(() => {
+    if (!usarServidor || !supabase) return;
+    // O Supabase avisa logo ao assinar (INITIAL_SESSION) e depois a cada entrada/saída.
+    const { data } = supabase.auth.onAuthStateChange(() => void atualizar());
+    return () => data.subscription.unsubscribe();
+  }, [usarServidor, atualizar]);
 
   useEffect(() => {
     if (comecar) return;
@@ -94,15 +123,30 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
       metodo: d.metodo,
       solicitacao: d.solicitacao,
       consentimentos: d.consentimentos,
-      modo: 'local',
+      modo: usarServidor ? 'supabase' : 'local',
       entrar: async (metodo, email) => {
+        if (usarServidor) {
+          setErro(undefined);
+          try {
+            if (metodo === 'email' && email) await servidor.pedirLinkPorEmail(email);
+            if (metodo === 'google') await servidor.entrarComGoogle();
+            mudar((a) => ({ ...a, metodo, email: email ?? a.email }));
+            await atualizar();
+          } catch (e) {
+            setErro(e instanceof Error ? e.message : String(e));
+            throw e;
+          }
+          return;
+        }
         mudar((a) => ({ ...a, metodo, email, estado: a.solicitacao ? 'pendente' : 'semSolicitacao' }));
       },
       entrarDemonstracao: () => mudar((a) => ({ ...a, metodo: 'demonstracao', estado: 'membro' })),
       enviarSolicitacao: (s) =>
         mudar((a) => ({ ...a, estado: 'pendente', solicitacao: { ...s, enviadaEm: Date.now() } })),
       simularAprovacao: () => mudar((a) => ({ ...a, estado: 'membro' })),
-      consentir: (f) =>
+      consentir: (f) => {
+        if (usarServidor && !ativo(f))
+          void servidor.registrarConsentimento(f, VERSAO_TERMOS).catch(() => undefined);
         mudar((a) =>
           a.consentimentos.some((c) => c.finalidade === f && !c.revogadoEm)
             ? a
@@ -113,31 +157,38 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
                   { finalidade: f, versao: VERSAO_TERMOS, aceitoEm: Date.now() },
                 ],
               },
-        ),
-      revogar: (f) =>
+        );
+      },
+      revogar: (f) => {
+        if (usarServidor) void servidor.revogarConsentimento(f).catch(() => undefined);
         mudar((a) => ({
           ...a,
           consentimentos: a.consentimentos.map((c) =>
             c.finalidade === f && !c.revogadoEm ? { ...c, revogadoEm: Date.now() } : c,
           ),
-        })),
+        }));
+      },
       temConsentimento: ativo,
       corrigirSolicitacao: () => mudar((a) => ({ ...a, estado: 'semSolicitacao' })),
       // Sair e excluir apagam os dados pessoais do aparelho e remontam as telas (ninguém herda nada).
       sair: async () => {
+        if (usarServidor) await servidor.sairDoServidor();
         await apagarDadosPessoais();
         setDados(inicial);
         setSessao((n) => n + 1);
       },
       excluirConta: async () => {
-        // No Supabase: excluir_minha_conta() apaga também no servidor.
+        // No Supabase: excluir_minha_conta() apaga também no servidor (em cascata).
+        if (usarServidor) await servidor.excluirContaNoServidor();
         await apagarDadosPessoais();
         setDados(inicial);
         setSessao((n) => n + 1);
       },
       sessao,
+      atualizar,
+      erro,
     };
-  }, [dados, sessao]);
+  }, [dados, sessao, usarServidor, atualizar, erro]);
 
   return <Contexto.Provider value={valor}>{children}</Contexto.Provider>;
 }

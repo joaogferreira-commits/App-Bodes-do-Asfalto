@@ -801,7 +801,13 @@
     "revogarMacomTitulo": "¿Borrar Logia, Oriente y Potencia?",
     "revogarMacomTexto": "Revocar esta autorización borra esos datos de tu perfil.",
     "revogarConfirmar": "Revocar y borrar",
-    "termosTravados": "Para dejar de aceptar los términos, usa \"Eliminar mi cuenta\" abajo."
+    "termosTravados": "Para dejar de aceptar los términos, usa \"Eliminar mi cuenta\" abajo.",
+    "retornoFalhou": "No se pudo entrar con este enlace",
+    "retornoFalhouExplica": "El enlace vale una vez y solo en el celular donde se pidió. Pide uno nuevo en la pantalla de entrada.",
+    "voltarEntrada": "Volver a la entrada",
+    "entrando": "Entrando…",
+    "erroLink": "No se pudo enviar el enlace. Revisa el correo y la internet e intenta de nuevo.",
+    "erroGoogle": "No se pudo entrar con Google. Intenta de nuevo o usa el correo."
   },
   "garagem": {
     "titulo": "Mi garaje",

@@ -801,7 +801,13 @@
     "revogarMacomTitulo": "Delete Lodge, Orient and Grand Lodge?",
     "revogarMacomTexto": "Revoking this permission deletes that data from your profile.",
     "revogarConfirmar": "Revoke and delete",
-    "termosTravados": "To stop accepting the terms, use \"Delete my account\" below."
+    "termosTravados": "To stop accepting the terms, use \"Delete my account\" below.",
+    "retornoFalhou": "Could not sign in with this link",
+    "retornoFalhouExplica": "The link works once and only on the phone where it was requested. Ask for a new one on the sign-in screen.",
+    "voltarEntrada": "Back to sign-in",
+    "entrando": "Signing in…",
+    "erroLink": "Could not send the link. Check the e-mail and your internet and try again.",
+    "erroGoogle": "Could not sign in with Google. Try again or use e-mail."
   },
   "garagem": {
     "titulo": "My garage",
