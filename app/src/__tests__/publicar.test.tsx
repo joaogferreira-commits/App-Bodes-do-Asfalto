@@ -131,4 +131,33 @@ describe('publicar e comentar', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Publicar story' }));
     expect(screen.getByTestId('tipo').props.children).toBe('video');
   });
+
+  it('story: mãos livres grava com toque; enquete entra no story', async () => {
+    function Conta() {
+      const c = useMeusPosts().stories[0]?.conteudo;
+      return <Text testID="c">{JSON.stringify(c ?? null)}</Text>;
+    }
+    await render(
+      <ProvedorMeusPosts>
+        <NovoStory />
+        <Conta />
+      </ProvedorMeusPosts>,
+    );
+    await fireEvent.press(screen.getByRole('button', { name: 'Mãos livres' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Tirar foto ou gravar' }));
+    await screen.findByRole('button', { name: 'Publicar story' });
+    await fireEvent.press(screen.getByRole('button', { name: 'Enquete' }));
+    await fireEvent.changeText(screen.getByLabelText('Pergunta da enquete'), 'Chapada ou Nobres?');
+    await fireEvent.changeText(screen.getByLabelText('Opção 1'), 'Chapada');
+    await fireEvent.changeText(screen.getByLabelText('Opção 2'), 'Nobres');
+    await fireEvent.press(screen.getByRole('button', { name: 'Pôr enquete' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Publicar story' }));
+    const c = JSON.parse(String(screen.getByTestId('c').props.children));
+    expect(c.tipo).toBe('video');
+    expect(c.interativos[0]).toEqual({
+      tipo: 'enquete',
+      pergunta: 'Chapada ou Nobres?',
+      opcoes: ['Chapada', 'Nobres'],
+    });
+  });
 });

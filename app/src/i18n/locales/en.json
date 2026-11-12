@@ -869,7 +869,9 @@
     "abas": {
       "filtros": "Filters",
       "texto": "Text",
-      "selos": "Stickers"
+      "selos": "Stickers",
+      "desenho": "Draw",
+      "interativos": "Poll"
     },
     "filtros": {
       "nenhum": "Original",
@@ -878,7 +880,13 @@
       "estrada": "Road",
       "noite": "Night",
       "poeira": "Dust",
-      "vinheta": "Vignette"
+      "vinheta": "Vignette",
+      "frio": "Cool",
+      "cinema": "Cinema",
+      "retro": "Retro",
+      "verao": "Summer",
+      "chuva": "Rain",
+      "ouro": "Gold"
     },
     "estilos": {
       "classico": "Classic",
@@ -914,6 +922,35 @@
       "E8692A": "orange",
       "F5C518": "yellow",
       "0B0907": "black"
+    },
+    "flash": {
+      "off": "Flash: off",
+      "on": "Flash: on",
+      "auto": "Flash: auto"
+    },
+    "temporizador": "Timer: off",
+    "temporizadorN": "Timer: {{n}} s",
+    "grade": "Grid",
+    "maosLivres": "Hands-free",
+    "gravandoTempo": "Recording {{s}} s of {{max}} s",
+    "dicaMaosLivres": "Tap to start and tap again to stop",
+    "velocidade": "{{v}}×",
+    "desenheExplica": "Draw with your finger on the image. Pick color and thickness.",
+    "desfazer": "Undo",
+    "interativos": {
+      "enquete": "Poll",
+      "perguntaEnquete": "Poll question",
+      "opcaoA": "Option 1",
+      "opcaoB": "Option 2",
+      "porEnquete": "Add poll",
+      "pergunta": "Question box",
+      "perguntaTexto": "E.g.: Best road in MT?",
+      "contagem": "Countdown",
+      "contagemTitulo": "E.g.: Chapada meetup",
+      "emDias": "In {{n}} days",
+      "remover": "Remove last",
+      "respondaNoChat": "Reply in chat",
+      "faltamDias": "{{n}} days"
     }
   },
   "classificados": {

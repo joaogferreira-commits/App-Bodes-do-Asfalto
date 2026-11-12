@@ -869,7 +869,9 @@
     "abas": {
       "filtros": "Filtros",
       "texto": "Texto",
-      "selos": "Sellos"
+      "selos": "Sellos",
+      "desenho": "Dibujo",
+      "interativos": "Encuesta"
     },
     "filtros": {
       "nenhum": "Original",
@@ -878,7 +880,13 @@
       "estrada": "Ruta",
       "noite": "Noche",
       "poeira": "Polvo",
-      "vinheta": "Viñeta"
+      "vinheta": "Viñeta",
+      "frio": "Frío",
+      "cinema": "Cine",
+      "retro": "Retro",
+      "verao": "Verano",
+      "chuva": "Lluvia",
+      "ouro": "Oro"
     },
     "estilos": {
       "classico": "Clásico",
@@ -914,6 +922,35 @@
       "E8692A": "naranja",
       "F5C518": "amarillo",
       "0B0907": "negro"
+    },
+    "flash": {
+      "off": "Flash: no",
+      "on": "Flash: sí",
+      "auto": "Flash: auto"
+    },
+    "temporizador": "Tiempo: no",
+    "temporizadorN": "Tiempo: {{n}} s",
+    "grade": "Cuadrícula",
+    "maosLivres": "Manos libres",
+    "gravandoTempo": "Grabando {{s}} s de {{max}} s",
+    "dicaMaosLivres": "Toca para empezar y toca de nuevo para parar",
+    "velocidade": "{{v}}×",
+    "desenheExplica": "Dibuja con el dedo en la imagen. Elige color y grosor.",
+    "desfazer": "Deshacer",
+    "interativos": {
+      "enquete": "Encuesta",
+      "perguntaEnquete": "Pregunta de la encuesta",
+      "opcaoA": "Opción 1",
+      "opcaoB": "Opción 2",
+      "porEnquete": "Poner encuesta",
+      "pergunta": "Caja de pregunta",
+      "perguntaTexto": "Ej.: ¿La mejor ruta de MT?",
+      "contagem": "Cuenta regresiva",
+      "contagemTitulo": "Ej.: Encuentro de Chapada",
+      "emDias": "En {{n}} días",
+      "remover": "Quitar el último",
+      "respondaNoChat": "Responde en el chat",
+      "faltamDias": "{{n}} días"
     }
   },
   "classificados": {

@@ -50,7 +50,7 @@ export default function Story() {
       >
         {meu?.conteudo ? (
           <View style={StyleSheet.absoluteFill} accessible accessibilityLabel={legenda || nome}>
-            <StoryCena c={meu.conteudo} />
+            <StoryCena c={meu.conteudo} votavel />
           </View>
         ) : (
           <Image

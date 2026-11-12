@@ -869,7 +869,9 @@
     "abas": {
       "filtros": "Filtros",
       "texto": "Texto",
-      "selos": "Selos"
+      "selos": "Selos",
+      "desenho": "Desenho",
+      "interativos": "Enquete"
     },
     "filtros": {
       "nenhum": "Original",
@@ -878,7 +880,13 @@
       "estrada": "Estrada",
       "noite": "Noite",
       "poeira": "Poeira",
-      "vinheta": "Vinheta"
+      "vinheta": "Vinheta",
+      "frio": "Frio",
+      "cinema": "Cinema",
+      "retro": "Retrô",
+      "verao": "Verão",
+      "chuva": "Chuva",
+      "ouro": "Ouro"
     },
     "estilos": {
       "classico": "Clássico",
@@ -914,6 +922,35 @@
       "E8692A": "laranja",
       "F5C518": "amarelo",
       "0B0907": "preto"
+    },
+    "flash": {
+      "off": "Flash: não",
+      "on": "Flash: sim",
+      "auto": "Flash: auto"
+    },
+    "temporizador": "Tempo: não",
+    "temporizadorN": "Tempo: {{n}} s",
+    "grade": "Grade",
+    "maosLivres": "Mãos livres",
+    "gravandoTempo": "Gravando {{s}} s de {{max}} s",
+    "dicaMaosLivres": "Toque para começar e toque de novo para parar",
+    "velocidade": "{{v}}×",
+    "desenheExplica": "Desenhe com o dedo na imagem. Escolha a cor e a grossura.",
+    "desfazer": "Desfazer",
+    "interativos": {
+      "enquete": "Enquete",
+      "perguntaEnquete": "Pergunta da enquete",
+      "opcaoA": "Opção 1",
+      "opcaoB": "Opção 2",
+      "porEnquete": "Pôr enquete",
+      "pergunta": "Caixa de pergunta",
+      "perguntaTexto": "Ex.: Qual a melhor estrada de MT?",
+      "contagem": "Contagem regressiva",
+      "contagemTitulo": "Ex.: Encontro de Chapada",
+      "emDias": "Em {{n}} dias",
+      "remover": "Tirar o último",
+      "respondaNoChat": "Responda no chat",
+      "faltamDias": "{{n}} dias"
     }
   },
   "classificados": {
