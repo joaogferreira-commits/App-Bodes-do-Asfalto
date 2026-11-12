@@ -46,6 +46,12 @@ export function useOdometro(aoTerminar?: (km: number) => void) {
           return AsyncStorage.setItem('bodes.motoKm', JSON.stringify(String(atual + km)));
         })
         .catch(() => undefined);
+      // km medidos pelo GPS do app (base dos desafios; nunca o odômetro digitado à mão)
+      void AsyncStorage.getItem('bodes.kmGps')
+        .then((v) =>
+          AsyncStorage.setItem('bodes.kmGps', JSON.stringify((v ? Number(JSON.parse(v)) || 0 : 0) + km)),
+        )
+        .catch(() => undefined);
       aoTerminar?.(km);
     };
     // inicia uma vez por sessão de pilotagem

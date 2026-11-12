@@ -1099,5 +1099,66 @@
       "atrasado": "Voy a llegar un poco tarde",
       "tfa": "¡TFA!"
     }
+  },
+  "desafios": {
+    "titulo": "Desafíos",
+    "explica": "Desafíos de hermanos, de las directivas y entre capítulos. Cúmplelos y gana sello y XP.",
+    "criar": "Crear desafío",
+    "criarExplica": "Tu desafío va a la directiva del capítulo o a un moderador para aprobar.",
+    "verTodos": "Ver todos los desafíos",
+    "origem": {
+      "irmao": "Desafío de hermano",
+      "diretoria": "Desafío de la directiva",
+      "capitulos": "Entre capítulos"
+    },
+    "meta": {
+      "km": "Meta: {{n}} km",
+      "sedes": "Meta: {{n}} sedes",
+      "lojas": "Meta: {{n}} Logias",
+      "passeios": "Meta: {{n}} paseos",
+      "agape": "Meta: {{n}} Ágapes",
+      "rotaBiker": "Meta: {{n}} hitos Rota Biker",
+      "socorro": "Meta: {{n}} ayudas confirmadas"
+    },
+    "tipos": {
+      "km": "Rodar km",
+      "sedes": "Visitar sedes",
+      "lojas": "Visitar Logias",
+      "passeios": "Ir a paseos",
+      "agape": "Ágapes",
+      "rotaBiker": "Rota Biker",
+      "socorro": "Socorro Fraterno"
+    },
+    "faltam": "faltan {{n}} días",
+    "participantes": "{{n}} hermanos",
+    "mediaKm": "{{n}} km por hermano",
+    "mediaExplica": "Vale el promedio por hermano activo, no el total: un capítulo pequeño también puede ganar.",
+    "progresso": "{{atual}} de {{meta}} km (medidos por el GPS de la app)",
+    "participar": "Participar",
+    "participando": "Participando",
+    "aguardando": "Esperando aprobación",
+    "aguardandoExplica": "La directiva del capítulo o un moderador aprueba antes de que aparezca para todos.",
+    "aprovarTeste": "Aprobar (versión de prueba)",
+    "tabelaTitulo": "Tabla de XP de los desafíos de hermanos",
+    "ate": "Hasta {{n}} km",
+    "acimaDe": "Más de {{n}} km",
+    "tabelaExplica": "Los desafíos que no son de km cuentan como km equivalente (1 sede, Logia, paseo o hito = 100 km; Ágape = 50 km). Los desafíos de la directiva y entre capítulos valen 50% más.",
+    "regras": "Reglas: nada de velocidad ni tiempo de recorrido; km solo por el GPS de la app; plazo máximo de 90 días; 1 desafío creado por hermano por mes; hasta 3 desafíos de hermanos activos por capítulo.",
+    "campoTitulo": "Nombre del desafío",
+    "campoTipo": "Tipo",
+    "campoMetaKm": "Meta en km",
+    "campoMetaQtd": "Cantidad",
+    "campoPrazo": "Plazo",
+    "dias": "{{n}} días",
+    "valeXp": "Este desafío vale",
+    "enviarAprovacao": "Enviar para aprobación",
+    "enviado": "¡Desafío enviado!",
+    "erros": {
+      "titulo": "Ponle un nombre al desafío (mínimo 4 letras).",
+      "meta": "Informa una meta válida.",
+      "prazo": "El plazo va de 1 a 90 días.",
+      "umPorMes": "Ya creaste un desafío este mes. Intenta el próximo.",
+      "limiteCapitulo": "El capítulo ya tiene 3 desafíos de hermanos activos. Espera que termine uno."
+    }
   }
 }

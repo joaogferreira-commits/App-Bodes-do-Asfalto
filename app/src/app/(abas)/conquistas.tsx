@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -174,6 +175,12 @@ export default function Conquistas() {
           <Texto variante="secundario">
             {t('conquistas.desafioProgresso', { atual: eu.desafio.atual, meta: eu.desafio.meta })}
           </Texto>
+          <Botao
+            titulo={t('desafios.verTodos')}
+            icone="trofeu"
+            variante="secundario"
+            onPress={() => router.push('/desafios')}
+          />
         </Cartao>
 
         {/* Ranking do mês (posição relativa, sem velocidade) */}

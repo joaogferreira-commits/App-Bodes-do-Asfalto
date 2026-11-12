@@ -1099,5 +1099,66 @@
       "atrasado": "Running a bit late",
       "tfa": "TFA!"
     }
+  },
+  "desafios": {
+    "titulo": "Challenges",
+    "explica": "Challenges from brothers, boards and between chapters. Complete them and earn badges and XP.",
+    "criar": "Create challenge",
+    "criarExplica": "Your challenge goes to the chapter board or a moderator for approval.",
+    "verTodos": "See all challenges",
+    "origem": {
+      "irmao": "Brother challenge",
+      "diretoria": "Board challenge",
+      "capitulos": "Between chapters"
+    },
+    "meta": {
+      "km": "Goal: {{n}} km",
+      "sedes": "Goal: {{n}} chapter houses",
+      "lojas": "Goal: {{n}} Lodges",
+      "passeios": "Goal: {{n}} rides",
+      "agape": "Goal: {{n}} Ágapes",
+      "rotaBiker": "Goal: {{n}} Rota Biker landmarks",
+      "socorro": "Goal: {{n}} confirmed helps"
+    },
+    "tipos": {
+      "km": "Ride km",
+      "sedes": "Visit chapter houses",
+      "lojas": "Visit Lodges",
+      "passeios": "Join rides",
+      "agape": "Ágapes",
+      "rotaBiker": "Rota Biker",
+      "socorro": "Brotherly Help"
+    },
+    "faltam": "{{n}} days left",
+    "participantes": "{{n}} brothers",
+    "mediaKm": "{{n}} km per brother",
+    "mediaExplica": "Average per active brother counts, not the total: small chapters can win too.",
+    "progresso": "{{atual}} of {{meta}} km (measured by the app GPS)",
+    "participar": "Join",
+    "participando": "Joined",
+    "aguardando": "Awaiting approval",
+    "aguardandoExplica": "The chapter board or a moderator approves it before it shows to everyone.",
+    "aprovarTeste": "Approve (test version)",
+    "tabelaTitulo": "XP table for brother challenges",
+    "ate": "Up to {{n}} km",
+    "acimaDe": "Over {{n}} km",
+    "tabelaExplica": "Non-km challenges count as equivalent km (1 chapter house, Lodge, ride or landmark = 100 km; Ágape = 50 km). Board and inter-chapter challenges are worth 50% more.",
+    "regras": "Rules: no speed or travel time; km only from the app GPS; 90-day maximum; 1 challenge created per brother per month; up to 3 active brother challenges per chapter.",
+    "campoTitulo": "Challenge name",
+    "campoTipo": "Type",
+    "campoMetaKm": "Goal in km",
+    "campoMetaQtd": "Quantity",
+    "campoPrazo": "Deadline",
+    "dias": "{{n}} days",
+    "valeXp": "This challenge is worth",
+    "enviarAprovacao": "Send for approval",
+    "enviado": "Challenge sent!",
+    "erros": {
+      "titulo": "Give the challenge a name (at least 4 letters).",
+      "meta": "Enter a valid goal.",
+      "prazo": "Deadline is 1 to 90 days.",
+      "umPorMes": "You already created a challenge this month. Try next month.",
+      "limiteCapitulo": "The chapter already has 3 active brother challenges. Wait for one to end."
+    }
   }
 }
