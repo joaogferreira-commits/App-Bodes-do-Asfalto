@@ -4,6 +4,12 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.14.0 — 12/11/2026 (feed e chat de verdade)
+
+- Feed no servidor: posts com fotos, TFA, comentários, salvos, stories, denunciar e bloquear; sem posts de exemplo.
+- Chat no servidor: mensagens em tempo real, acenos (aceitar/recusar), grupo do capítulo, avisos só da diretoria, denunciar e bloquear.
+- Papéis dos irmãos funcionando (função aplicada no banco).
+
 ## 0.13.1 — 12/11/2026 (primeira versão ligada ao servidor)
 
 - Login de verdade: link mágico por e-mail e Google; a situação do irmão (pedido, aprovado) vem do banco.
