@@ -7,8 +7,8 @@ insert into auth.users (id, email) values
   ('a0000000-0000-0000-0000-0000000000a1', 'a@teste'),
   ('a0000000-0000-0000-0000-0000000000a2', 'b@teste');
 insert into public.perfis (id, nome, papel) values
-  ('a0000000-0000-0000-0000-0000000000a1', 'A', 'membro'),
-  ('a0000000-0000-0000-0000-0000000000a2', 'B', 'membro');
+  ('a0000000-0000-0000-0000-0000000000a1', 'Irmão A', 'membro'),
+  ('a0000000-0000-0000-0000-0000000000a2', 'Irmão B', 'membro');
 
 set local role authenticated;
 select set_config('request.jwt.claim.sub', 'a0000000-0000-0000-0000-0000000000a1', true);
