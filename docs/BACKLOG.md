@@ -21,7 +21,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 14. **Imagens por IA:** a cada nova imagem gerada, ligar no app (feed, passeios, classificados, guia) no lugar das provisórias; acompanhar a fila em `docs/FILA_IMAGENS.md`.
 
 ## Aguardando o dono (uma tarefa por vez)
-- Ativar a **Routes API** no Google Cloud (faz a navegação seguir a rota planejada).
+- ~~Ativar a **Routes API**~~ FEITO (o vídeo de 12/11 mostra o Google devolvendo a rota planejada).
 - Criar o projeto grátis no **Supabase** e cadastrar a URL e a chave pública no EAS.
 - Login com Google e Apple: credenciais (depois do Supabase).
 - Contas grátis de imagem: Cloudflare (Account ID + token Workers AI) e Google AI Studio (chave Gemini) nos GitHub Secrets.

@@ -959,5 +959,70 @@
       "ferramentas": "Tools",
       "guincho": "Tow truck"
     }
+  },
+  "ficha": {
+    "abrirIrmao": "{{nome}}: open card",
+    "texto": "{{texto}}",
+    "agapeHora": "At {{hora}} · called by {{quem}}",
+    "agapeVao": "{{n}} brothers going",
+    "precoExemplo": "Gasoline R$ {{preco}} (example)",
+    "precoIrmao": "Gasoline R$ {{preco}} · reported by a brother on {{dia}}",
+    "semPreco": "No price reported yet.",
+    "anpSemDados": "ANP quality score: no data for this station yet.",
+    "sedeEncontro": "Chapter meeting on Wednesdays, 7:30 pm (example).",
+    "sedeAberta": "Brothers passing through are welcome.",
+    "lojaSessoes": "Meetings on Mondays, 8 pm (example).",
+    "lojaVisita": "Visits follow the Lodge's procedure. The app only brings brothers together.",
+    "beneficioIrmaos": "A brother's business, with a benefit for club members.",
+    "fonteOsm": "Data © OpenStreetMap.",
+    "posicaoAproximada": "Approximate position (about 5 km), for privacy.",
+    "precoPergunta": "How much is regular gasoline? (R$ per liter)",
+    "precoInvalido": "Check the value: use something like 6.29.",
+    "precoEnviar": "Send price",
+    "limiteAcenos": "You used today's waves. They reset tomorrow.",
+    "acenoEnviado": "Wave sent to {{nome}}",
+    "acenoExplica": "If he accepts, the chat opens. While riding, you only get a voice notice.",
+    "tipos": {
+      "posto": "Gas station",
+      "sede": "Chapter house",
+      "loja": "Masonic Lodge",
+      "oficina": "Brother's workshop",
+      "restaurante": "Brother's restaurant",
+      "monumento": "Monument",
+      "turistico": "Tourist spot",
+      "agape": "Flash Ágape",
+      "outro": "Place"
+    },
+    "status": {
+      "aberto": "Open to meet",
+      "estrada": "On the road",
+      "cafe": "Coffee stop",
+      "naoPerturbe": "Do not disturb",
+      "nenhum": "Club member"
+    },
+    "acoes": {
+      "rota": "Route here",
+      "acenar": "Wave",
+      "perfil": "View profile",
+      "informarPreco": "Report price",
+      "vitrine": "View storefront",
+      "salvar": "Save",
+      "vou": "I'm going",
+      "falarContato": "Talk to contact"
+    },
+    "acoesFeitas": {
+      "rota": "Route here",
+      "acenar": "Wave sent",
+      "perfil": "View profile",
+      "informarPreco": "Price sent",
+      "vitrine": "View storefront",
+      "salvar": "Saved",
+      "vou": "Confirmed",
+      "falarContato": "Talk to contact"
+    },
+    "emBreve": {
+      "perfil": "Full brother profiles arrive with the club server.",
+      "falarContato": "Contact with the Lodge brother arrives with the club server, always starting with a wave."
+    }
   }
 }

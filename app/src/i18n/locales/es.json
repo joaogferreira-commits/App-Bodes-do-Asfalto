@@ -959,5 +959,70 @@
       "ferramentas": "Herramientas",
       "guincho": "Grúa"
     }
+  },
+  "ficha": {
+    "abrirIrmao": "{{nome}}: abrir ficha",
+    "texto": "{{texto}}",
+    "agapeHora": "A las {{hora}} · lo convoca {{quem}}",
+    "agapeVao": "Van {{n}} hermanos",
+    "precoExemplo": "Gasolina R$ {{preco}} (ejemplo)",
+    "precoIrmao": "Gasolina R$ {{preco}} · informado por un hermano el {{dia}}",
+    "semPreco": "Aún sin precio informado.",
+    "anpSemDados": "Nota de calidad de la ANP: aún sin datos para esta gasolinera.",
+    "sedeEncontro": "Encuentro del capítulo los miércoles, 19:30 (ejemplo).",
+    "sedeAberta": "Los hermanos de paso son bienvenidos.",
+    "lojaSessoes": "Sesiones los lunes, 20:00 (ejemplo).",
+    "lojaVisita": "La visita sigue el procedimiento de la Logia. La app solo acerca a los hermanos.",
+    "beneficioIrmaos": "Negocio de un hermano, con beneficio para quien es del club.",
+    "fonteOsm": "Datos © OpenStreetMap.",
+    "posicaoAproximada": "Posición aproximada (unos 5 km), por privacidad.",
+    "precoPergunta": "¿Cuánto está la gasolina común? (R$ por litro)",
+    "precoInvalido": "Revisa el valor: usa algo como 6,29.",
+    "precoEnviar": "Enviar precio",
+    "limiteAcenos": "Ya usaste los saludos de hoy. Mañana se liberan de nuevo.",
+    "acenoEnviado": "Saludo enviado a {{nome}}",
+    "acenoExplica": "Si acepta, se abre el chat. Conduciendo, recibes el aviso solo por voz.",
+    "tipos": {
+      "posto": "Gasolinera",
+      "sede": "Sede de capítulo",
+      "loja": "Logia masónica",
+      "oficina": "Taller de un hermano",
+      "restaurante": "Restaurante de un hermano",
+      "monumento": "Monumento",
+      "turistico": "Punto turístico",
+      "agape": "Ágape Relámpago",
+      "outro": "Lugar"
+    },
+    "status": {
+      "aberto": "Abierto a encuentro",
+      "estrada": "En la ruta",
+      "cafe": "Parado para café",
+      "naoPerturbe": "No molestar",
+      "nenhum": "Miembro del club"
+    },
+    "acoes": {
+      "rota": "Ruta hasta aquí",
+      "acenar": "Saludar",
+      "perfil": "Ver perfil",
+      "informarPreco": "Informar precio",
+      "vitrine": "Ver vitrina",
+      "salvar": "Guardar",
+      "vou": "Voy",
+      "falarContato": "Hablar con el contacto"
+    },
+    "acoesFeitas": {
+      "rota": "Ruta hasta aquí",
+      "acenar": "Saludo enviado",
+      "perfil": "Ver perfil",
+      "informarPreco": "Precio enviado",
+      "vitrine": "Ver vitrina",
+      "salvar": "Guardado",
+      "vou": "Confirmado",
+      "falarContato": "Hablar con el contacto"
+    },
+    "emBreve": {
+      "perfil": "El perfil completo de los hermanos llega con el servidor del club.",
+      "falarContato": "El contacto con el hermano de la Logia llega con el servidor del club, siempre empezando por un saludo."
+    }
   }
 }

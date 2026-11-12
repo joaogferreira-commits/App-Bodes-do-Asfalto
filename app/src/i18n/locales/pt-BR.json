@@ -959,5 +959,70 @@
       "ferramentas": "Ferramentas",
       "guincho": "Guincho"
     }
+  },
+  "ficha": {
+    "abrirIrmao": "{{nome}}: abrir ficha",
+    "texto": "{{texto}}",
+    "agapeHora": "Às {{hora}} · chamado por {{quem}}",
+    "agapeVao": "{{n}} irmãos vão",
+    "precoExemplo": "Gasolina R$ {{preco}} (exemplo)",
+    "precoIrmao": "Gasolina R$ {{preco}} · informado por irmão em {{dia}}",
+    "semPreco": "Sem preço informado ainda.",
+    "anpSemDados": "Nota de qualidade da ANP: ainda sem dados para este posto.",
+    "sedeEncontro": "Encontro do capítulo às quartas, 19h30 (exemplo).",
+    "sedeAberta": "Irmãos de passagem são bem-vindos.",
+    "lojaSessoes": "Sessões às segundas, 20h (exemplo).",
+    "lojaVisita": "A visita segue o procedimento da Loja. O app só aproxima os irmãos.",
+    "beneficioIrmaos": "Negócio de irmão, com benefício para quem é do clube.",
+    "fonteOsm": "Dados © OpenStreetMap.",
+    "posicaoAproximada": "Posição aproximada (cerca de 5 km), por privacidade.",
+    "precoPergunta": "Quanto está a gasolina comum? (R$ por litro)",
+    "precoInvalido": "Confira o valor: use algo como 6,29.",
+    "precoEnviar": "Enviar preço",
+    "limiteAcenos": "Você já usou os acenos de hoje. Amanhã libera de novo.",
+    "acenoEnviado": "Aceno enviado para {{nome}}",
+    "acenoExplica": "Se ele aceitar, o chat abre. Pilotando, você recebe o aviso só por voz.",
+    "tipos": {
+      "posto": "Posto de combustível",
+      "sede": "Sede de capítulo",
+      "loja": "Loja maçônica",
+      "oficina": "Oficina de irmão",
+      "restaurante": "Restaurante de irmão",
+      "monumento": "Monumento",
+      "turistico": "Ponto turístico",
+      "agape": "Ágape Relâmpago",
+      "outro": "Lugar"
+    },
+    "status": {
+      "aberto": "Aberto a encontro",
+      "estrada": "Na estrada",
+      "cafe": "Parado para café",
+      "naoPerturbe": "Não perturbe",
+      "nenhum": "Membro do clube"
+    },
+    "acoes": {
+      "rota": "Rota até aqui",
+      "acenar": "Acenar",
+      "perfil": "Ver perfil",
+      "informarPreco": "Informar preço",
+      "vitrine": "Ver vitrine",
+      "salvar": "Salvar",
+      "vou": "Eu vou",
+      "falarContato": "Falar com o contato"
+    },
+    "acoesFeitas": {
+      "rota": "Rota até aqui",
+      "acenar": "Aceno enviado",
+      "perfil": "Ver perfil",
+      "informarPreco": "Preço enviado",
+      "vitrine": "Ver vitrine",
+      "salvar": "Salvo",
+      "vou": "Confirmado",
+      "falarContato": "Falar com o contato"
+    },
+    "emBreve": {
+      "perfil": "O perfil completo dos irmãos chega com o servidor do clube.",
+      "falarContato": "O contato com o irmão da Loja chega com o servidor do clube, sempre começando por aceno."
+    }
   }
 }

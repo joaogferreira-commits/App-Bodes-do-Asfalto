@@ -10,8 +10,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
 import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
-import { filtrar, lugaresExemplo, type Filtro } from '@/dados/exemplos';
+import { filtrar, irmaosExemplo, lugaresExemplo, type Filtro } from '@/dados/exemplos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
+import { FichaMapa } from '@/componentes/FichaMapa';
+import { useGuardado } from '@/estado/guardado';
+import {
+  acenar,
+  fichaDoAgape,
+  fichaDoIrmao,
+  fichaDoLugar,
+  type AcaoFicha,
+  type Ficha,
+  type RegistroAcenos,
+} from '@/map/fichas';
 import { ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
@@ -101,29 +112,78 @@ export default function Mapa() {
   };
 
   const { agapes } = useAgapes();
-  const verAgape = (ag: Agape = agapeExemplo) => {
-    camera.current?.flyTo({ center: [ag.lng, ag.lat], zoom: 14, duration: 800 });
-    Alert.alert(
-      t('feed.agapeEm', { local: ag.local }),
-      `${ag.texto}\n\n${t('feed.agapeHora', { hora: ag.horario })}\n${t('feed.vaoN', { n: ag.vao.length })}`,
-    );
-  };
+  // Ficha que sobe de baixo ao tocar em qualquer ícone (irmão, posto, sede, Loja, negócio, Ágape…).
+  const [ficha, setFicha] = useState<Ficha | null>(null);
+  const [precos, setPrecos] = useGuardado<Record<string, { valor: string; dia: string }>>('precosPostos', {});
+  const [acenos, setAcenos] = useGuardado<RegistroAcenos>('acenos', { dia: '', para: [] });
+  const [salvosMapa, setSalvosMapa] = useGuardado<string[]>('lugaresSalvos', []);
+  const [vouAgape, setVouAgape] = useGuardado<string[]>('agapesVou', []);
+  const hoje = new Date().toISOString().slice(0, 10);
 
-  /** Toque num emblema: nome e opção de traçar rota até ele. */
+  const abrir = (f: Ficha) => {
+    camera.current?.flyTo({ center: [f.posicao.lng, f.posicao.lat], duration: 600 });
+    setFicha(f);
+  };
+  const verAgape = (ag: Agape = agapeExemplo) => abrir(fichaDoAgape(ag));
   const tocarLugar = (id: string) => {
     const l = lugaresExemplo.find((x) => x.id === id);
-    if (!l) return;
-    Alert.alert(l.nome, l.rotulo ?? undefined, [
-      { text: t('comum.cancelar'), style: 'cancel' },
-      {
-        text: t('ferramentas.rotaAte', { lugar: l.nome }),
-        onPress: () => {
-          definirBateVolta(null);
-          definirDestino({ chave: 'busca', nome: l.nome, posicao: { lat: l.lat, lng: l.lng } });
-          router.push('/rota');
-        },
-      },
-    ]);
+    if (l) abrir(fichaDoLugar(l, precos[l.id]));
+  };
+  const tocarIrmao = (id: string) => {
+    const i = irmaosExemplo.find((x) => x.id === id);
+    if (i) abrir(fichaDoIrmao(i));
+  };
+
+  const feitas: AcaoFicha[] = !ficha
+    ? []
+    : [
+        ...(acenos.dia === hoje && acenos.para.includes(ficha.id) ? (['acenar'] as const) : []),
+        ...(salvosMapa.includes(ficha.id) ? (['salvar'] as const) : []),
+        ...(vouAgape.includes(ficha.id) ? (['vou'] as const) : []),
+      ];
+
+  const agir = (acao: AcaoFicha, extra?: string) => {
+    if (!ficha) return;
+    switch (acao) {
+      case 'rota':
+        setFicha(null);
+        definirBateVolta(null);
+        definirDestino({ chave: 'busca', nome: ficha.titulo, posicao: ficha.posicao });
+        router.push('/rota');
+        return;
+      case 'acenar': {
+        const novo = acenar(acenos, ficha.id, hoje);
+        if (!novo) {
+          if (!acenos.para.includes(ficha.id)) Alert.alert(t('ficha.limiteAcenos'));
+          return;
+        }
+        setAcenos(novo);
+        Alert.alert(t('ficha.acenoEnviado', { nome: ficha.titulo }), t('ficha.acenoExplica'));
+        return;
+      }
+      case 'perfil':
+      case 'falarContato':
+        Alert.alert(t('comum.emBreve'), t(`ficha.emBreve.${acao}`));
+        return;
+      case 'informarPreco':
+        if (extra) {
+          const dia = new Date().toLocaleDateString('pt-BR');
+          setPrecos((p) => ({ ...p, [ficha.id]: { valor: extra, dia } }));
+          const l = lugaresExemplo.find((x) => x.id === ficha.id);
+          if (l) setFicha(fichaDoLugar(l, { valor: extra, dia }));
+        }
+        return;
+      case 'vitrine':
+        setFicha(null);
+        router.push(ficha.negocio ? `/negocios/${ficha.negocio}` : '/negocios');
+        return;
+      case 'salvar':
+        setSalvosMapa((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
+        return;
+      case 'vou':
+        setVouAgape((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
+        return;
+    }
   };
 
   const irAoPosto = () => {
@@ -181,7 +241,14 @@ export default function Mapa() {
         {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
           irmaos.map((i) => (
             <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
-              <Avatar nome={i.nome} status={i.status} tamanho={44} />
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={t('ficha.abrirIrmao', { nome: i.nome })}
+                hitSlop={8}
+                onPress={() => tocarIrmao(i.id)}
+              >
+                <Avatar nome={i.nome} status={i.status} tamanho={44} />
+              </Pressable>
             </Marker>
           ))}
       </Map>
@@ -327,6 +394,13 @@ export default function Mapa() {
           </View>
         </View>
       </PainelInferior>
+      <FichaMapa
+        ficha={ficha}
+        status={irmaosExemplo.find((i) => i.id === ficha?.id)?.status}
+        feitas={feitas}
+        aoFechar={() => setFicha(null)}
+        aoAgir={agir}
+      />
     </View>
   );
 }
