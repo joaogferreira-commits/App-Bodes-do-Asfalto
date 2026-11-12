@@ -7,7 +7,7 @@ Roda no GitHub Actions (a rede do agente bloqueia esses serviços):
 Ordem dos serviços (cada um com limite por rodada, para não estourar as cotas grátis):
   1. Cloudflare Workers AI (FLUX.1 schnell, licença Apache-2.0) — precisa de CLOUDFLARE_ACCOUNT_ID e CLOUDFLARE_API_TOKEN
   2. Google Gemini (modelo em GEMINI_MODELO) — precisa de GEMINI_API_KEY
-  3. Pollinations (sem chave) — só para imagens de EXEMPLO (termos de uso pouco claros; trocar antes do lançamento)
+  3. Pollinations — precisa de POLLINATIONS_TOKEN (sem conta: 1 imagem com marca d'água e depois 402); só imagens de EXEMPLO
 Se um serviço falhar ou não tiver chave, passa para o próximo. Itens "dono" nunca são gerados aqui:
 viram a lista de pedidos para o ChatGPT em docs/FILA_IMAGENS.md.
 """
@@ -86,9 +86,14 @@ def gemini(prompt: str, largura: int, altura: int) -> bytes:
 
 
 def pollinations(prompt: str, largura: int, altura: int) -> bytes:
+    # Teste de 12/11/2026: sem conta, o Pollinations entrega 1 imagem, com marca d'água, e depois
+    # responde "402 Payment Required". Só usamos se houver POLLINATIONS_TOKEN (conta grátis deles).
+    token = os.environ.get("POLLINATIONS_TOKEN")
+    if not token:
+        raise RuntimeError("sem chave do Pollinations")
     q = urllib.parse.quote(prompt)
     url = f"https://image.pollinations.ai/prompt/{q}?width={largura}&height={altura}&nologo=true&model=flux"
-    return _pedir(url, tempo=180)
+    return _pedir(url, None, {"Authorization": f"Bearer {token}"}, tempo=180)
 
 
 SERVICOS = {"cloudflare": cloudflare, "gemini": gemini, "pollinations": pollinations}
@@ -119,7 +124,8 @@ def gerar_pendentes(fila: list[dict], servicos=SERVICOS, limites=None, salvar=No
                 bruto = gerar(montar_prompt(item), item.get("largura", 1024), item.get("altura", 768))
             except Exception as e:  # noqa: BLE001
                 print(f"  {nome} falhou em {item['id']}: {e}", file=sys.stderr)
-                limites[nome] = 0 if "sem chave" in str(e) else limites[nome] - 1
+                parar = "sem chave" in str(e) or "402" in str(e) or "429" in str(e)
+                limites[nome] = 0 if parar else limites[nome] - 1
                 continue
             limites[nome] -= 1
             (salvar or salvar_webp)(item, bruto)

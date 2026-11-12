@@ -2,7 +2,7 @@
   {
     "id": "feed-chapada",
     "quem": "auto",
-    "status": "feito",
+    "status": "pendente",
     "prioridade": 1,
     "tipo": "foto",
     "exemplo": true,
@@ -10,9 +10,7 @@
     "destino": "app/assets/ia/feed/chapada.webp",
     "largura": 1024,
     "altura": 768,
-    "prompt": "Estrada de asfalto sinuosa subindo a Chapada dos Guimarães ao entardecer, paredões de arenito avermelhado, três motos custom estacionadas no acostamento vistas de longe.",
-    "fonte": "pollinations",
-    "data": "2026-11-12"
+    "prompt": "Rodovia de asfalto sinuosa subindo entre paredões de arenito vermelho-alaranjado da Chapada dos Guimarães, ao entardecer; três motocicletas custom (motos de duas rodas, não carros) estacionadas no acostamento, vistas de longe."
   },
   {
     "id": "feed-transpantaneira",
