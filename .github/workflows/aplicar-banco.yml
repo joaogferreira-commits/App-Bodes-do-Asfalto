@@ -34,12 +34,12 @@ jobs:
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
         run: |
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.com_capitulos }}" = "true" ]; then
-            supabase db push --include-seed --yes
+            supabase db push --linked --include-seed --yes
           else
-            supabase db push --yes
+            supabase db push --linked --yes
           fi
       - name: Conferir
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-        run: supabase migration list
+        run: supabase migration list --linked
