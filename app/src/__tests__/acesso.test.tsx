@@ -1,9 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
-import { Text } from 'react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert, Share, Text } from 'react-native';
 
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import Consentimentos from '@/app/acesso/consentimentos';
 import Entrada from '@/app/acesso/entrada';
+import MeusDados from '@/app/acesso/meus-dados';
 import Solicitacao from '@/app/acesso/solicitacao';
 
 jest.mock('expo-router', () => ({ router: { replace: jest.fn(), push: jest.fn(), back: jest.fn() } }));
@@ -21,7 +23,7 @@ function Estado() {
 const estado = () => screen.getByTestId('estado').props.children as string;
 
 describe('acesso (Etapa 1)', () => {
-  it('modo demonstração entra direto como membro, com os termos aceitos', async () => {
+  it('modo demonstração (só na versão de teste) entra como membro e ainda passa pelos consentimentos', async () => {
     await render(
       <ProvedorAcesso comecar={{ estado: 'deslogado' }}>
         <Entrada />
@@ -29,7 +31,8 @@ describe('acesso (Etapa 1)', () => {
       </ProvedorAcesso>,
     );
     await fireEvent.press(screen.getByRole('button', { name: 'Ver o app em modo demonstração' }));
-    expect(estado()).toBe('membro|true|false');
+    expect(estado()).toBe('membro|false|false');
+    expect(jest.requireMock('expo-router').router.replace).toHaveBeenCalledWith('/acesso/consentimentos');
   });
 
   it('o link mágico só é pedido com e-mail válido', async () => {
@@ -54,8 +57,14 @@ describe('acesso (Etapa 1)', () => {
     await fireEvent.press(screen.getByRole('switch', { name: 'Termos de uso e privacidade' }));
     await fireEvent.press(screen.getByRole('switch', { name: 'Dados maçônicos (opcional)' }));
     expect(estado()).toBe('semSolicitacao|true|true');
+    // revogar dados maçônicos pede confirmação antes de apagar
+    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('switch', { name: 'Dados maçônicos (opcional)' }));
+    expect(estado()).toBe('semSolicitacao|true|true');
+    const botoes = alerta.mock.calls[0]![2]!;
+    await act(async () => botoes.find((b) => b.style === 'destructive')!.onPress!());
     expect(estado()).toBe('semSolicitacao|true|false');
+    alerta.mockRestore();
     expect(screen.getByRole('button', { name: 'Continuar' })).toBeEnabled();
   });
 
@@ -79,5 +88,43 @@ describe('acesso (Etapa 1)', () => {
     await screen.findAllByLabelText('Foto sua com o colete do clube');
     await fireEvent.press(screen.getByRole('button', { name: 'Enviar pedido' }));
     expect(estado().startsWith('pendente')).toBe(true);
+  });
+
+  it('sair apaga os dados pessoais do aparelho (fica só o tema) e muda a sessão', async () => {
+    await AsyncStorage.setItem('bodes.perfil', '{"x":1}');
+    await AsyncStorage.setItem('bodes.tema', 'sol');
+    let sessao = -1;
+    let sair: () => Promise<void> = async () => undefined;
+    function Pega() {
+      const a = useAcesso();
+      sessao = a.sessao;
+      sair = a.sair;
+      return null;
+    }
+    await render(
+      <ProvedorAcesso comecar={{ estado: 'membro' }}>
+        <Pega />
+      </ProvedorAcesso>,
+    );
+    const antes = sessao;
+    await act(async () => sair());
+    expect(sessao).toBe(antes + 1);
+    expect(await AsyncStorage.getItem('bodes.perfil')).toBeNull();
+    expect(await AsyncStorage.getItem('bodes.tema')).toBe('sol');
+  });
+
+  it('baixar meus dados funciona mesmo com valores gravados como texto (tema)', async () => {
+    await AsyncStorage.setItem('bodes.tema', 'sol');
+    const compartilhar = jest.spyOn(Share, 'share').mockResolvedValue({ action: 'sharedAction' });
+    await render(
+      <ProvedorAcesso comecar={{ estado: 'membro' }}>
+        <MeusDados />
+      </ProvedorAcesso>,
+    );
+    await fireEvent.press(screen.getByRole('button', { name: 'Baixar uma cópia dos meus dados' }));
+    await act(async () => undefined);
+    expect(compartilhar).toHaveBeenCalled();
+    expect(compartilhar.mock.calls[0]![0].message).toContain('"bodes.tema": "sol"');
+    compartilhar.mockRestore();
   });
 });

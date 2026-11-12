@@ -748,7 +748,8 @@
       "texto": "Tu pedido para el capítulo {{capitulo}} está con la directiva. Recibirás un aviso cuando sea aprobado.",
       "resumo": "Capítulo {{capitulo}} · recomendado por {{indicado}}",
       "aviso": "Hasta la aprobación, solo esta pantalla está disponible.",
-      "simular": "Simular aprobación (versión de prueba)"
+      "simular": "Simular aprobación (versión de prueba)",
+      "corrigir": "Corregir mi pedido"
     },
     "meusDados": {
       "titulo": "Mis datos",
@@ -761,8 +762,13 @@
       "excluirTexto": "Tus datos, publicaciones, motos y contactos serán borrados. No se puede deshacer.",
       "excluirConfirmar": "Eliminar todo",
       "excluida": "Cuenta eliminada. Hasta la próxima ruta, hermano.",
-      "encarregado": "Encargado de datos (LGPD): el responsable de la app. Contacto por el botón Ayuda."
-    }
+      "encarregado": "Encargado de datos (LGPD): el responsable de la app. Contacto por el botón Ayuda.",
+      "erroBaixar": "No se pudo generar la copia. Inténtalo de nuevo."
+    },
+    "revogarMacomTitulo": "¿Borrar Logia, Oriente y Potencia?",
+    "revogarMacomTexto": "Revocar esta autorización borra esos datos de tu perfil.",
+    "revogarConfirmar": "Revocar y borrar",
+    "termosTravados": "Para dejar de aceptar los términos, usa \"Eliminar mi cuenta\" abajo."
   },
   "garagem": {
     "titulo": "Mi garaje",
@@ -781,7 +787,8 @@
     "foto": "Agregar foto",
     "trocarFoto": "Cambiar foto",
     "adicionar": "Agregar moto",
-    "falta": "Indica al menos la marca y el modelo."
+    "falta": "Indica al menos la marca y el modelo.",
+    "apelidoTexto": "“{{apelido}}”"
   },
   "contatos": {
     "titulo": "Contactos de emergencia",
@@ -792,7 +799,8 @@
     "adicionar": "Agregar contacto",
     "falta": "Indica el nombre y un teléfono con código de área.",
     "limite": "Ya tienes {{n}} contactos, el máximo.",
-    "sosAviso": "El SOS avisa al convoy y a estos contactos. No sustituye al 192/193."
+    "sosAviso": "El SOS avisa al convoy y a estos contactos. No sustituye al 192/193.",
+    "apagarPergunta": "¿Borrar el contacto {{nome}}?"
   },
   "perfilEditar": {
     "foto": "Tu foto",

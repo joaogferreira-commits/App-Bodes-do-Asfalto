@@ -9,7 +9,7 @@ type Props = { rotulo: string; ativo?: boolean; onPress: () => void; corPonto?: 
 const criarEstilos = (c: Paleta) =>
   StyleSheet.create({
     base: {
-      minHeight: 40,
+      minHeight: toque.minimo,
       paddingHorizontal: 14,
       borderRadius: raios.pilula,
       flexDirection: 'row',
@@ -22,7 +22,7 @@ const criarEstilos = (c: Paleta) =>
     texto: { fontFamily: fontes.textoSemi, fontSize: 15 },
   });
 
-/** Filtro em pílula (40 dp, área de toque 48). Ativo: invertido; inativo: opaco com contorno. */
+/** Filtro em pílula (48 dp de altura, achado do QA em 12/11). Ativo: invertido; inativo: opaco com contorno. */
 export function Chip({ rotulo, ativo = false, onPress, corPonto }: Props) {
   const c = useCores();
   const estilos = useEstilos(criarEstilos);
@@ -32,7 +32,7 @@ export function Chip({ rotulo, ativo = false, onPress, corPonto }: Props) {
       accessibilityState={{ selected: ativo }}
       accessibilityLabel={rotulo}
       onPress={onPress}
-      hitSlop={(toque.minimo - 40) / 2}
+      hitSlop={4}
       style={[estilos.base, ativo ? estilos.ativo : estilos.inativo]}
     >
       {corPonto && !ativo && <View style={[estilos.ponto, { backgroundColor: corPonto }]} />}

@@ -302,8 +302,7 @@ export default function Perfil() {
           titulo={t('perfil.sair')}
           variante="contorno"
           onPress={() => {
-            sair();
-            router.replace('/acesso/entrada');
+            void sair().then(() => router.replace('/acesso/entrada'));
           }}
         />
 

@@ -80,18 +80,21 @@ export default function Entrada() {
         <Texto variante="secundario" style={estilos.centro}>
           {t('acesso.soMembros')}
         </Texto>
-        <Botao
-          titulo={t('acesso.demonstracao')}
-          variante="contorno"
-          onPress={() => {
-            acesso.entrarDemonstracao();
-            router.replace('/');
-          }}
-        />
+        {/* Só na versão de teste (sem servidor). Com o Supabase, os revisores usam uma conta de demonstração real. */}
         {acesso.modo === 'local' && (
-          <Texto variante="pequeno" style={estilos.centro}>
-            {t('acesso.modoLocal')}
-          </Texto>
+          <>
+            <Botao
+              titulo={t('acesso.demonstracao')}
+              variante="contorno"
+              onPress={() => {
+                acesso.entrarDemonstracao();
+                router.replace('/acesso/consentimentos');
+              }}
+            />
+            <Texto variante="pequeno" style={estilos.centro}>
+              {t('acesso.modoLocal')}
+            </Texto>
+          </>
         )}
       </ScrollView>
     </SafeAreaView>

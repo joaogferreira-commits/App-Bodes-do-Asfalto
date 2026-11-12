@@ -748,7 +748,8 @@
       "texto": "Your request for the {{capitulo}} chapter is with the board. You'll be notified when it's approved.",
       "resumo": "{{capitulo}} chapter · vouched by {{indicado}}",
       "aviso": "Until approval, only this screen is available.",
-      "simular": "Simulate approval (test version)"
+      "simular": "Simulate approval (test version)",
+      "corrigir": "Fix my request"
     },
     "meusDados": {
       "titulo": "My data",
@@ -761,8 +762,13 @@
       "excluirTexto": "Your data, posts, bikes and contacts will be deleted. This cannot be undone.",
       "excluirConfirmar": "Delete everything",
       "excluida": "Account deleted. See you on the next ride, brother.",
-      "encarregado": "Data officer (LGPD): the app owner. Contact via the Help button."
-    }
+      "encarregado": "Data officer (LGPD): the app owner. Contact via the Help button.",
+      "erroBaixar": "Could not create the copy. Try again."
+    },
+    "revogarMacomTitulo": "Delete Lodge, Orient and Grand Lodge?",
+    "revogarMacomTexto": "Revoking this permission deletes that data from your profile.",
+    "revogarConfirmar": "Revoke and delete",
+    "termosTravados": "To stop accepting the terms, use \"Delete my account\" below."
   },
   "garagem": {
     "titulo": "My garage",
@@ -781,7 +787,8 @@
     "foto": "Add photo",
     "trocarFoto": "Change photo",
     "adicionar": "Add bike",
-    "falta": "Enter at least the brand and model."
+    "falta": "Enter at least the brand and model.",
+    "apelidoTexto": "“{{apelido}}”"
   },
   "contatos": {
     "titulo": "Emergency contacts",
@@ -792,7 +799,8 @@
     "adicionar": "Add contact",
     "falta": "Enter the name and a phone with area code.",
     "limite": "You already have {{n}} contacts, the maximum.",
-    "sosAviso": "The SOS alerts the convoy and these contacts. It does not replace 192/193."
+    "sosAviso": "The SOS alerts the convoy and these contacts. It does not replace 192/193.",
+    "apagarPergunta": "Delete the contact {{nome}}?"
   },
   "perfilEditar": {
     "foto": "Your photo",

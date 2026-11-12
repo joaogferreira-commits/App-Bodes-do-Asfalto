@@ -748,7 +748,8 @@
       "texto": "Seu pedido para o capítulo {{capitulo}} está com a diretoria. Você recebe um aviso quando for aprovado.",
       "resumo": "Capítulo {{capitulo}} · indicado por {{indicado}}",
       "aviso": "Até a aprovação, só esta tela fica disponível.",
-      "simular": "Simular aprovação (versão de teste)"
+      "simular": "Simular aprovação (versão de teste)",
+      "corrigir": "Corrigir meu pedido"
     },
     "meusDados": {
       "titulo": "Meus dados",
@@ -761,8 +762,13 @@
       "excluirTexto": "Seus dados, posts, motos e contatos serão apagados. Não dá para desfazer.",
       "excluirConfirmar": "Excluir tudo",
       "excluida": "Conta excluída. Até a próxima estrada, irmão.",
-      "encarregado": "Encarregado de dados (LGPD): o responsável pelo app. Contato pelo botão Ajuda."
-    }
+      "encarregado": "Encarregado de dados (LGPD): o responsável pelo app. Contato pelo botão Ajuda.",
+      "erroBaixar": "Não foi possível gerar a cópia. Tente de novo."
+    },
+    "revogarMacomTitulo": "Apagar Loja, Oriente e Potência?",
+    "revogarMacomTexto": "Revogar esta autorização apaga esses dados do seu perfil.",
+    "revogarConfirmar": "Revogar e apagar",
+    "termosTravados": "Para deixar de aceitar os termos, use \"Excluir minha conta\" abaixo."
   },
   "garagem": {
     "titulo": "Minha garagem",
@@ -781,7 +787,8 @@
     "foto": "Adicionar foto",
     "trocarFoto": "Trocar foto",
     "adicionar": "Adicionar moto",
-    "falta": "Informe pelo menos a marca e o modelo."
+    "falta": "Informe pelo menos a marca e o modelo.",
+    "apelidoTexto": "“{{apelido}}”"
   },
   "contatos": {
     "titulo": "Contatos de emergência",
@@ -792,7 +799,8 @@
     "adicionar": "Adicionar contato",
     "falta": "Informe o nome e um telefone com DDD.",
     "limite": "Você já tem {{n}} contatos, o máximo.",
-    "sosAviso": "O SOS avisa o comboio e estes contatos. Não substitui o 192/193."
+    "sosAviso": "O SOS avisa o comboio e estes contatos. Não substitui o 192/193.",
+    "apagarPergunta": "Apagar o contato {{nome}}?"
   },
   "perfilEditar": {
     "foto": "Sua foto",

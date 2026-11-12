@@ -8,11 +8,12 @@ import {
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Redirect, Stack, useSegments } from 'expo-router';
+import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
-import { ProvedorAcesso } from '@/acesso/acesso';
+import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
 import { ProvedorAvatar } from '@/estado/avatar';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
@@ -33,20 +34,51 @@ export default function Layout() {
   return (
     <ProvedorTema>
       <ProvedorAcesso>
-        <ProvedorAvatar>
-          <ProvedorPerfil>
-            <ProvedorAgapes>
-              <ProvedorMeusPosts>
-                <ProvedorViagem>
-                  <Telas />
-                </ProvedorViagem>
-              </ProvedorMeusPosts>
-            </ProvedorAgapes>
-          </ProvedorPerfil>
-        </ProvedorAvatar>
+        <ArvoreDaSessao>
+          <ProvedorAvatar>
+            <ProvedorPerfil>
+              <ProvedorAgapes>
+                <ProvedorMeusPosts>
+                  <ProvedorViagem>
+                    <Telas />
+                  </ProvedorViagem>
+                </ProvedorMeusPosts>
+              </ProvedorAgapes>
+            </ProvedorPerfil>
+          </ProvedorAvatar>
+        </ArvoreDaSessao>
       </ProvedorAcesso>
     </ProvedorTema>
   );
+}
+
+/** Remonta os dados da pessoa a cada sessão (sair/excluir não deixa nada na memória). */
+function ArvoreDaSessao({ children }: { children: React.ReactNode }) {
+  const { sessao } = useAcesso();
+  return <Fragment key={sessao}>{children}</Fragment>;
+}
+
+/**
+ * Guarda de acesso para TODAS as telas: quem não é membro aprovado só fica em "acesso/*";
+ * o membro que cai numa tela de entrada volta para o mapa.
+ */
+function GuardaDeAcesso() {
+  const { estado } = useAcesso();
+  const segmentos = useSegments() as string[];
+  const naEntrada = segmentos[0] === 'acesso';
+  const telaLivreParaMembro = segmentos[1] === 'meus-dados' || segmentos[1] === 'consentimentos';
+  if (estado === 'carregando') return null;
+  if (estado !== 'membro' && !naEntrada) {
+    const destino =
+      estado === 'deslogado'
+        ? '/acesso/entrada'
+        : estado === 'pendente'
+          ? '/acesso/espera'
+          : '/acesso/consentimentos';
+    return <Redirect href={destino} />;
+  }
+  if (estado === 'membro' && naEntrada && !telaLivreParaMembro) return <Redirect href="/" />;
+  return null;
 }
 
 function Telas() {
@@ -55,6 +87,7 @@ function Telas() {
     <>
       <StatusBar style={modo === 'sol' ? 'dark' : 'light'} />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }} />
+      <GuardaDeAcesso />
     </>
   );
 }

@@ -57,7 +57,11 @@ export default function Garagem() {
               {m.marca} {m.modelo}
             </Texto>
             <Texto variante="secundario">
-              {[m.ano, m.apelido && `“${m.apelido}”`, m.km && t('garagem.kmTexto', { km: m.km })]
+              {[
+                m.ano,
+                m.apelido && t('garagem.apelidoTexto', { apelido: m.apelido }),
+                m.km && t('garagem.kmTexto', { km: m.km }),
+              ]
                 .filter(Boolean)
                 .join(' · ')}
             </Texto>
@@ -92,11 +96,11 @@ export default function Garagem() {
       {rascunho ? (
         <Cartao style={{ gap: espaco.sm }}>
           <Texto variante="destaque">{rascunho.id ? t('garagem.editar') : t('garagem.nova')}</Texto>
-          <View style={{ flexDirection: 'row', gap: espaco.sm }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
             <Campo rotulo={t('garagem.marca')} valor={rascunho.marca} aoMudar={muda('marca')} />
             <Campo rotulo={t('garagem.modelo')} valor={rascunho.modelo} aoMudar={muda('modelo')} />
           </View>
-          <View style={{ flexDirection: 'row', gap: espaco.sm }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
             <Campo rotulo={t('garagem.ano')} valor={rascunho.ano} aoMudar={muda('ano')} teclado="numeric" />
             <Campo
               rotulo={t('garagem.km')}

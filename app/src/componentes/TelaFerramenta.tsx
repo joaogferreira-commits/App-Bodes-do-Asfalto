@@ -53,7 +53,7 @@ export function Campo({
 }) {
   const cores = useCores();
   return (
-    <View style={{ gap: 4, flex: 1 }}>
+    <View style={{ gap: 4, flex: 1, minWidth: 140 }}>
       <Texto variante="pequeno">{rotulo}</Texto>
       <View style={[estilos.campo, { borderColor: cores.linhaForte, backgroundColor: cores.superficie }]}>
         <TextInput

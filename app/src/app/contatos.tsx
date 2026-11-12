@@ -39,7 +39,16 @@ export default function Contatos() {
             <Texto variante="corpoForte">{c.nome}</Texto>
             <Texto variante="secundario">{c.telefone}</Texto>
           </View>
-          <Botao titulo={t('comentarios.apagar')} variante="contorno" onPress={() => apagarContato(c.id)} />
+          <Botao
+            titulo={t('comentarios.apagar')}
+            variante="contorno"
+            onPress={() =>
+              Alert.alert(t('contatos.apagarPergunta', { nome: c.nome }), undefined, [
+                { text: t('comum.cancelar'), style: 'cancel' },
+                { text: t('comentarios.apagar'), style: 'destructive', onPress: () => apagarContato(c.id) },
+              ])
+            }
+          />
         </Cartao>
       ))}
       {cheio ? (

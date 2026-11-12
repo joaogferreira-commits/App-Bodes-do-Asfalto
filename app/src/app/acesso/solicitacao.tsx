@@ -5,12 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
 
 import { useAcesso } from '@/acesso/acesso';
+import { nomesCapitulos } from '@/dados/capitulos';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { escolherFoto } from '@/feed/foto';
 import { espaco, raios } from '@/theme';
 import { Botao, Chip, Texto } from '@/ui';
-
-const capitulos = ['Cuiabá', 'Várzea Grande', 'Tangará da Serra', 'Rondonópolis', 'Sinop'];
 
 function FotoObrigatoria({
   rotulo,
@@ -92,7 +91,7 @@ export default function Solicitacao() {
       <Campo rotulo={t('acesso.form.apelido')} valor={f.apelido} aoMudar={muda('apelido')} />
       <Texto variante="pequeno">{t('acesso.form.capitulo')}</Texto>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs }}>
-        {capitulos.map((c) => (
+        {nomesCapitulos.map((c) => (
           <Chip key={c} rotulo={c} ativo={f.capitulo === c} onPress={() => muda('capitulo')(c)} />
         ))}
       </View>

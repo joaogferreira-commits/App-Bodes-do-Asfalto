@@ -38,6 +38,14 @@ export default function Espera() {
         <Texto variante="secundario" style={estilos.centro}>
           {t('acesso.espera.aviso')}
         </Texto>
+        <Botao
+          titulo={t('acesso.espera.corrigir')}
+          variante="secundario"
+          onPress={() => {
+            acesso.corrigirSolicitacao();
+            router.replace('/acesso/solicitacao');
+          }}
+        />
         {acesso.modo === 'local' && (
           <Botao
             titulo={t('acesso.espera.simular')}
@@ -52,8 +60,7 @@ export default function Espera() {
           titulo={t('perfil.sair')}
           variante="contorno"
           onPress={() => {
-            acesso.sair();
-            router.replace('/acesso/entrada');
+            void acesso.sair().then(() => router.replace('/acesso/entrada'));
           }}
         />
       </ScrollView>

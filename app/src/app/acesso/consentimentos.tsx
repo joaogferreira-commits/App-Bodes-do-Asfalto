@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { Alert, Pressable, View } from 'react-native';
 
 import { useAcesso, type Finalidade } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
@@ -18,7 +18,7 @@ const itens: { f: Finalidade; obrigatorio: boolean }[] = [
  * Consentimentos LGPD separados (R50): cada um com o porquê, base legal e se é obrigatório.
  * Dados maçônicos são dado sensível (art. 5º, II): consentimento específico e destacado, revogável.
  */
-export function ListaConsentimentos() {
+export function ListaConsentimentos({ termosTravados }: { termosTravados?: boolean }) {
   const { t } = useTranslation();
   const cores = useCores();
   const acesso = useAcesso();
@@ -33,11 +33,24 @@ export function ListaConsentimentos() {
             accessibilityRole="switch"
             accessibilityState={{ checked: ok }}
             accessibilityLabel={t(`acesso.consentimentos.${f}.titulo`)}
+            disabled={termosTravados && f === 'termos'}
             onPress={() => {
               if (!ok) return acesso.consentir(f);
+              if (f === 'dados_macons') {
+                // Revogar apaga Loja, Oriente e Potência (igual ao banco): pede confirmação.
+                return Alert.alert(t('acesso.revogarMacomTitulo'), t('acesso.revogarMacomTexto'), [
+                  { text: t('comum.cancelar'), style: 'cancel' },
+                  {
+                    text: t('acesso.revogarConfirmar'),
+                    style: 'destructive',
+                    onPress: () => {
+                      acesso.revogar(f);
+                      perfil?.apagarMacom();
+                    },
+                  },
+                ]);
+              }
               acesso.revogar(f);
-              // Revogar dados maçônicos apaga Loja, Oriente e Potência (igual ao banco).
-              if (f === 'dados_macons') perfil?.apagarMacom();
             }}
             style={{
               gap: 6,
@@ -72,6 +85,9 @@ export function ListaConsentimentos() {
             </View>
             <Texto variante="secundario">{t(`acesso.consentimentos.${f}.texto`)}</Texto>
             <Texto variante="pequeno">{t(`acesso.consentimentos.${f}.base`)}</Texto>
+            {termosTravados && f === 'termos' && (
+              <Texto variante="pequeno">{t('acesso.termosTravados')}</Texto>
+            )}
           </Pressable>
         );
       })}

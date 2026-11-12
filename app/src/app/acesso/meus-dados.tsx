@@ -19,8 +19,18 @@ export default function MeusDados() {
       k.startsWith('bodes.'),
     );
     const pares = await AsyncStorage.multiGet(chaves).catch(() => []);
-    const dados = Object.fromEntries(pares.map(([k, v]) => [k, v ? (JSON.parse(v) as unknown) : null]));
-    await Share.share({ message: JSON.stringify({ geradoEm: new Date().toISOString(), dados }, null, 2) });
+    const ler = (v: string | null): unknown => {
+      if (v == null) return null;
+      try {
+        return JSON.parse(v);
+      } catch {
+        return v; // valores gravados como texto simples (ex.: tema)
+      }
+    };
+    const dados = Object.fromEntries(pares.map(([k, v]) => [k, ler(v)]));
+    await Share.share({
+      message: JSON.stringify({ geradoEm: new Date().toISOString(), dados }, null, 2),
+    }).catch(() => Alert.alert(t('acesso.meusDados.erroBaixar')));
   };
 
   const excluir = () =>
@@ -40,7 +50,7 @@ export default function MeusDados() {
   return (
     <TelaFerramenta titulo={t('acesso.meusDados.titulo')} explicacao={t('acesso.meusDados.explica')}>
       <Texto variante="rotulo">{t('acesso.meusDados.consentimentos')}</Texto>
-      <ListaConsentimentos />
+      <ListaConsentimentos termosTravados />
       <Texto variante="pequeno">{t('acesso.meusDados.revogarAviso')}</Texto>
       <Botao
         titulo={t('acesso.meusDados.baixar')}
@@ -53,8 +63,7 @@ export default function MeusDados() {
         titulo={t('perfil.sair')}
         variante="contorno"
         onPress={() => {
-          acesso.sair();
-          router.replace('/acesso/entrada');
+          void acesso.sair().then(() => router.replace('/acesso/entrada'));
         }}
       />
       <Botao titulo={t('acesso.meusDados.excluir')} variante="sos" onPress={excluir} />
