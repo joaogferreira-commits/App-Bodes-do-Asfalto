@@ -4,6 +4,15 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.12.0 — 12/11/2026
+
+- SOS sempre à mão: botão vermelho no Mapa e em todas as abas; "Pedir ajuda (SOS)" ao segurar o ícone do app; pergunta no primeiro uso se quer o atalho de SOS na tela inicial; no Perfil, "Colocar atalho na tela inicial" e "Colocar widget de SOS" (Android).
+- Mapa: todo ícone abre uma ficha (irmão, posto, sede, Loja, negócio, lugar turístico, Ágape); 45 monumentos da Rota Biker com ícone próprio; 180 cachoeiras, mirantes, monumentos e atrações de MT (OpenStreetMap); filtro "Passeio"; irmãos viram pontos coloridos de longe.
+- Android Auto: cartão de manobra (seta, distância, rua), chegada prevista e botões de zoom/recentrar.
+- Garagem: editar moto direto do perfil; moto de exemplo identificada.
+- Guia de Negócios, vitrine e carteirinha "Sou membro".
+- Feed sem o título "Feed".
+
 ## 0.11.1 — 12/11/2026
 
 - Navegação: na partida o app pede ao Google uma rota NOVA saindo de onde o irmão está (o token feito na tela de rota partia do ponto do planejamento e podia ter vencido — era o "aceita e depois recusa").

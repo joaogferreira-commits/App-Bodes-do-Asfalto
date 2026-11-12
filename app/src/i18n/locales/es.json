@@ -1035,5 +1035,20 @@
     },
     "rotaBikerCarimbo": "Punto de sello del pasaporte Rota Biker. Revisa el horario antes de ir.",
     "fonteRotaBiker": "Fuente: Rota Biker (monumentobikers.com.br)."
+  },
+  "atalhos": {
+    "secao": "Atajo de SOS",
+    "perguntaTitulo": "¿SOS en la pantalla de inicio?",
+    "perguntaTexto": "¿Quieres un botón de SOS directo en la pantalla de inicio? Un toque abre el pedido de ayuda a los hermanos.",
+    "agoraNao": "Ahora no",
+    "colocar": "Poner",
+    "nomeAtalho": "SOS Bodes",
+    "iphoneTexto": "En iPhone: mantén pulsado el ícono de la app y toca \"Pedir ayuda (SOS)\".",
+    "explica": "Pon el SOS en la pantalla de inicio. También funciona manteniendo pulsado el ícono de la app.",
+    "colocarAtalho": "Poner atajo en la pantalla de inicio",
+    "colocarWidget": "Poner widget de SOS",
+    "naoSuportado": "Este celular no permite fijar atajos. Mantén pulsado el ícono de la app para ver el SOS.",
+    "widgetManual": "Mantén pulsado un espacio vacío de la pantalla de inicio, toca \"Widgets\" y busca \"SOS Bodes\".",
+    "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí. En iPhone llegará con la versión para iPhone."
   }
 }

@@ -1,9 +1,10 @@
+import { atalhos } from '@/atalhos/atalhos';
 import Constants from 'expo-constants';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
@@ -309,6 +310,39 @@ export default function Perfil() {
               detalhe={t('perfil.notificacoesDetalhe')}
               onPress={emBreve}
             />
+          </Cartao>
+        </Secao>
+
+        <Secao titulo={t('atalhos.secao')}>
+          <Cartao style={{ gap: espaco.sm }}>
+            <Texto variante="secundario">
+              {Platform.OS === 'ios' ? t('atalhos.iphoneTexto') : t('atalhos.explica')}
+            </Texto>
+            {Platform.OS === 'android' && (
+              <>
+                <Botao
+                  titulo={t('atalhos.colocarAtalho')}
+                  icone="mais"
+                  variante="secundario"
+                  onPress={() =>
+                    void atalhos.fixarAtalhoSOS(t('atalhos.nomeAtalho')).then((ok) => {
+                      if (!ok) Alert.alert(t('atalhos.naoSuportado'));
+                    })
+                  }
+                />
+                <Botao
+                  titulo={t('atalhos.colocarWidget')}
+                  icone="grade"
+                  variante="secundario"
+                  onPress={() =>
+                    void atalhos.fixarWidgetSOS().then((ok) => {
+                      if (!ok) Alert.alert(t('atalhos.widgetManual'));
+                    })
+                  }
+                />
+              </>
+            )}
+            <Texto variante="pequeno">{t('atalhos.bloqueio')}</Texto>
           </Cartao>
         </Secao>
 

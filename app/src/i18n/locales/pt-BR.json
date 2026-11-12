@@ -1035,5 +1035,20 @@
     },
     "rotaBikerCarimbo": "Ponto de carimbo do passaporte Rota Biker. Confira horário antes de ir.",
     "fonteRotaBiker": "Fonte: Rota Biker (monumentobikers.com.br)."
+  },
+  "atalhos": {
+    "secao": "Atalho de SOS",
+    "perguntaTitulo": "SOS na tela inicial?",
+    "perguntaTexto": "Quer um botão de SOS direto na tela inicial do celular? Um toque abre o pedido de ajuda aos irmãos.",
+    "agoraNao": "Agora não",
+    "colocar": "Colocar",
+    "nomeAtalho": "SOS Bodes",
+    "iphoneTexto": "No iPhone: segure o ícone do app e toque em \"Pedir ajuda (SOS)\".",
+    "explica": "Coloque o SOS na tela inicial do celular. Também funciona segurando o ícone do app.",
+    "colocarAtalho": "Colocar atalho na tela inicial",
+    "colocarWidget": "Colocar widget de SOS",
+    "naoSuportado": "Este celular não permite fixar atalhos. Segure o ícone do app para ver o SOS.",
+    "widgetManual": "Segure um espaço vazio da tela inicial, toque em \"Widgets\" e procure \"SOS Bodes\".",
+    "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá. No iPhone isso chega com a versão para iPhone."
   }
 }

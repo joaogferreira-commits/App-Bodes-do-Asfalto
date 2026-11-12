@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
+import { useAtalhosSOS } from '@/atalhos/useAtalhosSOS';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
@@ -28,6 +29,7 @@ const abaDaRota = Object.fromEntries(Object.entries(rotaDaAba).map(([a, r]) => [
  */
 export default function LayoutAbas() {
   const cores = useCores();
+  useAtalhosSOS();
   const emMovimento = useBloqueioEmMovimento();
   const segmentos = useSegments() as string[];
   const { bottom } = useSafeAreaInsets();

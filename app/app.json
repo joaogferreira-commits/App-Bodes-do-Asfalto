@@ -2,7 +2,7 @@
   "expo": {
     "name": "Bodes do Asfalto",
     "slug": "bodes-do-asfalto",
-    "version": "0.11.1",
+    "version": "0.12.0",
     "orientation": "portrait",
     "icon": "./assets/icone/icone.png",
     "userInterfaceStyle": "dark",
@@ -64,7 +64,8 @@
         }
       ],
       "./plugins/withNavegacaoGoogle",
-      "./plugins/withAndroidAuto"
+      "./plugins/withAndroidAuto",
+      "expo-quick-actions"
     ],
     "owner": "joaogferreira",
     "scheme": "bodesdoasfalto",

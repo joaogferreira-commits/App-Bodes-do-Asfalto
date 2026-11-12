@@ -1035,5 +1035,20 @@
     },
     "rotaBikerCarimbo": "Rota Biker passport stamp point. Check opening hours before going.",
     "fonteRotaBiker": "Source: Rota Biker (monumentobikers.com.br)."
+  },
+  "atalhos": {
+    "secao": "SOS shortcut",
+    "perguntaTitulo": "SOS on your home screen?",
+    "perguntaTexto": "Want an SOS button right on your phone home screen? One tap opens the request for help to the brothers.",
+    "agoraNao": "Not now",
+    "colocar": "Add",
+    "nomeAtalho": "SOS Bodes",
+    "iphoneTexto": "On iPhone: press and hold the app icon and tap \"Ask for help (SOS)\".",
+    "explica": "Put SOS on your home screen. It also works by pressing and holding the app icon.",
+    "colocarAtalho": "Add shortcut to home screen",
+    "colocarWidget": "Add SOS widget",
+    "naoSuportado": "This phone does not allow pinned shortcuts. Press and hold the app icon to see SOS.",
+    "widgetManual": "Press and hold an empty spot on the home screen, tap \"Widgets\" and look for \"SOS Bodes\".",
+    "bloqueio": "Lock screen: Android does not let apps add shortcuts there. On iPhone it comes with the iPhone version."
   }
 }
