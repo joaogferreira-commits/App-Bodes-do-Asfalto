@@ -208,3 +208,6 @@ export function useAcesso(): Valor {
   if (!v) throw new Error('useAcesso precisa do ProvedorAcesso');
   return v;
 }
+
+/** Versão que não exige o provedor (provedores de dados que também rodam em testes isolados). */
+export const useAcessoOpcional = () => useContext(Contexto);

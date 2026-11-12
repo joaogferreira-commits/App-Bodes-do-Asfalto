@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
+import { useAcessoOpcional } from '@/acesso/acesso';
 import type { Visibilidade } from '@/dados/perfil';
+import { carregarPerfil, novoId, sincronizarPerfil, UUID } from '@/servidor/perfil';
+import { servidorConfigurado } from '@/servidor/supabase';
 
 /**
  * Perfil, garagem e contatos de emergência do irmão (Etapa 1), guardados no aparelho até o Supabase
@@ -57,6 +60,15 @@ type Valor = Dados & {
 const CHAVE = 'bodes.perfil';
 const Contexto = createContext<Valor | null>(null);
 
+/** Registros antigos (ids do aparelho) ganham id no formato do servidor. */
+function comIdsDoServidor(d: Dados): Dados {
+  return {
+    ...d,
+    motos: d.motos.map((m) => (UUID.test(m.id) ? m : { ...m, id: novoId() })),
+    contatos: d.contatos.map((c) => (UUID.test(c.id) ? c : { ...c, id: novoId() })),
+  };
+}
+
 /** Só uma moto principal; a primeira cadastrada vira principal. */
 export function normalizarPrincipal(motos: Moto[]): Moto[] {
   if (!motos.length) return motos;
@@ -70,18 +82,65 @@ export function normalizarPrincipal(motos: Moto[]): Moto[] {
 export function ProvedorPerfil({ children, inicial }: { children: ReactNode; inicial?: Partial<Dados> }) {
   const [d, setD] = useState<Dados>({ perfil: perfilVazio, motos: [], contatos: [], ...inicial });
   const [carregou, setCarregou] = useState(!!inicial);
+  const [doServidor, setDoServidor] = useState(false);
+  const acesso = useAcessoOpcional();
+  const membro = acesso?.estado === 'membro' && acesso.modo === 'supabase';
+  const consenteMacom = !!acesso?.temConsentimento('dados_macons');
 
   useEffect(() => {
     if (inicial) return;
     AsyncStorage.getItem(CHAVE)
-      .then((v) => v && setD((a) => ({ ...a, ...(JSON.parse(v) as Dados) })))
+      .then((v) => v && setD((a) => comIdsDoServidor({ ...a, ...(JSON.parse(v) as Dados) })))
       .catch(() => undefined)
       .finally(() => setCarregou(true));
   }, [inicial]);
 
+  // Servidor ligado e irmão aprovado: o que está no banco prevalece (fotos ficam as do aparelho).
+  useEffect(() => {
+    if (!servidorConfigurado || inicial || !carregou || !membro) return;
+    let vivo = true;
+    void carregarPerfil()
+      .then((s) => {
+        if (!vivo) return;
+        if (s)
+          setD((a) => ({
+            perfil: {
+              ...a.perfil,
+              ...s.perfil,
+              macom: s.macom
+                ? {
+                    loja: { ...a.perfil.macom.loja, valor: s.macom.loja },
+                    oriente: { ...a.perfil.macom.oriente, valor: s.macom.oriente },
+                    potencia: { ...a.perfil.macom.potencia, valor: s.macom.potencia },
+                  }
+                : a.perfil.macom,
+            },
+            motos: s.motos.length
+              ? s.motos.map((m) => ({ ...m, foto: a.motos.find((x) => x.id === m.id)?.foto }))
+              : a.motos,
+            contatos: s.contatos.length ? s.contatos : a.contatos,
+          }));
+        setDoServidor(true);
+      })
+      .catch(() => undefined);
+    return () => {
+      vivo = false;
+    };
+  }, [carregou, inicial, membro]);
+
   useEffect(() => {
     if (carregou && !inicial) void AsyncStorage.setItem(CHAVE, JSON.stringify(d)).catch(() => undefined);
   }, [d, carregou, inicial]);
+
+  // Cada mudança vai para o servidor (com uma pequena espera para juntar várias edições).
+  useEffect(() => {
+    if (!doServidor || !membro) return;
+    const id = setTimeout(
+      () => void sincronizarPerfil({ ...d, temConsentimentoMacom: consenteMacom }).catch(() => undefined),
+      1500,
+    );
+    return () => clearTimeout(id);
+  }, [d, doServidor, membro, consenteMacom]);
 
   const valor = useMemo<Valor>(
     () => ({
@@ -94,7 +153,7 @@ export function ProvedorPerfil({ children, inicial }: { children: ReactNode; ini
           const existe = m.id && a.motos.some((x) => x.id === m.id);
           const motos = existe
             ? a.motos.map((x) => (x.id === m.id ? { ...x, ...m, id: x.id } : x))
-            : [...a.motos, { ...m, id: `moto-${Date.now()}`, principal: a.motos.length === 0 }];
+            : [...a.motos, { ...m, id: novoId(), principal: a.motos.length === 0 }];
           return { ...a, motos: normalizarPrincipal(motos) };
         }),
       apagarMoto: (id) =>
@@ -107,7 +166,7 @@ export function ProvedorPerfil({ children, inicial }: { children: ReactNode; ini
           ...a,
           contatos: c.id
             ? a.contatos.map((x) => (x.id === c.id ? { ...x, ...c, id: x.id } : x))
-            : [...a.contatos, { ...c, id: `contato-${Date.now()}` }],
+            : [...a.contatos, { ...c, id: novoId() }],
         }));
         return true;
       },

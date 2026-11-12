@@ -7,7 +7,7 @@ Mantido por Paulo (Produto). Cada ciclo do agente pega o primeiro item "a fazer"
 Ordem obrigatória; cada ciclo pega o primeiro não feito. Regra: o que não ficar pronto até o envio à loja é ESCONDIDO (nunca "em breve").
 - ~~P1~~ FEITO 12/11 (falta testar no celular). Login real (link mágico por e-mail e Google) + estado do membro vindo do banco; consentimentos no banco; sair/excluir conta no servidor. Aplicar a migration 20261112190000 (fotos da solicitação + primeiro admin) — dono já autorizou aplicar o banco.
 - ~~P2~~ FEITO 12/11 (falta testar no celular). Solicitação de entrada real (fotos no bucket privado) + tela de APROVAÇÃO dentro do app para diretoria/moderador/admin (fila, aprovar, recusar com motivo). Tirar "simular aprovação". Dono vira admin pela função tornar_admin_por_email.
-- P3. Perfil, garagem e contatos de emergência no banco; perfil de outro irmão ("Ver perfil") real.
+- ~~P3~~ FEITO em parte 12/11 (perfil, garagem, contatos e dados maçônicos sincronizam; falta foto no servidor e 'Ver perfil' de outro irmão). Perfil, garagem e contatos de emergência no banco; perfil de outro irmão ("Ver perfil") real.
 - P4. Feed real: posts, fotos/vídeos no Storage, curtir (TFA), comentar, denunciar, bloquear; stories 24 h no servidor. Tirar todos os posts de exemplo.
 - P5. Chat em tempo real (Supabase Realtime): grupos do capítulo/passeio/comboio/Ágape automáticos, avisos da diretoria, 1:1 por aceno aceito; denúncia vai para a fila de moderação.
 - P6. Notificações push (Expo + Firebase do dono): mensagem, aceno, aprovação, SOS. Preferências por tipo (tirar "Notificações — em breve" do Perfil).
