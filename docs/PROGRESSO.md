@@ -11,6 +11,7 @@ O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa 
 ## Feito
 
 - 12/11/2026 — Interface v2 no código: tema novo (cores com função única, testes de contraste), 30+ ícones próprios, componentes (Botão, BotãoÍcone, Chip, Cartão, Avatar com status, Pino, Painel, Estado vazio, Barra de abas). App com 5 abas (Mapa como início; Feed/Passeios/Conquistas com estados vazios ilustrados; Perfil), tela Planejar rota (Só asfalto / Misto / Prefiro terra, km de terra, barra asfalto×terra, rota no mapa com pesponto na terra), Modo pilotando (navegação Google com cabeçalho laranja + 6 botões de 112 px), Catálogo refeito. Mapa: terra em tracejado ocre sobre marrom (campo `surface`), asfalto creme. 78 testes.
+- 12/11/2026 — Ícone do app e tela de abertura com o Bodinho (`app/assets/icone/`, ícone adaptativo com versão monocromática). Tela do carro com a identidade v2: cartão na cor superfície 2 e 4 botões com ícones vetoriais próprios (Alerta, Comboio, Postos, SOS) e avisos nos 3 idiomas; testes garantem ícones/textos/limite de 4 botões. Cartão de manobra no carro (RoutingInfo a partir do NavInfo) fica para a etapa do Android Auto — não dá para compilar o código do carro no ambiente do agente (Google Maven bloqueado).
 
 - 11/11/2026 — `.claude/settings.json` criado; especificação renomeada para `docs/ESPECIFICACAO.md`; `settings.json` da raiz removido (movido para `.claude/`).
 - 11/11/2026 — Imagens recebidas (Caminho A), lotes 1 a 26a, em `docs/assets-originais/` (detalhes no LEIAME de lá). Portão "Lotes 1 a 8 e 22 a 25" da Etapa 0 cumprido.

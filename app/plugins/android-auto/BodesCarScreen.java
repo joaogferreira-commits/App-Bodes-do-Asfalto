@@ -5,16 +5,23 @@ import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
+import androidx.car.app.model.CarColor;
+import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.NavigationTemplate;
+import androidx.core.graphics.drawable.IconCompat;
 import com.google.android.react.navsdk.AndroidAutoBaseScreen;
 import __PACOTE__.R;
 
 /**
- * Tela do carro (prova da Etapa 0): espelha a navegação do Google e mostra os botões Alerta e SOS.
- * Os demais botões (Comboio, Posto mais próximo, Posto na rota) entram na Etapa 9.
+ * Tela do carro com a identidade do app (Interface v2): cartão escuro quente e
+ * 4 botões com os nossos ícones — Alerta, Comboio, Postos e SOS.
+ * O cartão de manobra (seta + distância) entra na etapa do Android Auto.
  */
 public final class BodesCarScreen extends AndroidAutoBaseScreen {
+  /** Cor do cartão (superfície 2 da Interface v2), igual no modo dia e noite. */
+  private static final CarColor COR_CARTAO = CarColor.createCustom(0xFF201A15, 0xFF201A15);
+
   /** Preferência de modo noite pedida pelo app (o próprio Android Auto decide dia/noite na tela do carro). */
   private int modoNoite = 0;
 
@@ -28,9 +35,14 @@ public final class BodesCarScreen extends AndroidAutoBaseScreen {
     modoNoite = nightMode;
   }
 
-  private Action botao(int texto, String evento) {
+  private CarIcon icone(int recurso) {
+    return new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), recurso)).build();
+  }
+
+  private Action botao(int texto, int recurso, String evento, int aviso) {
     return new Action.Builder()
         .setTitle(getCarContext().getString(texto))
+        .setIcon(icone(recurso))
         .setOnClickListener(
             () -> {
               try {
@@ -38,7 +50,7 @@ public final class BodesCarScreen extends AndroidAutoBaseScreen {
               } catch (IllegalStateException appFechado) {
                 // O app no celular ainda não abriu o React Native; o aviso local abaixo basta.
               }
-              CarToast.makeText(getCarContext(), texto, CarToast.LENGTH_SHORT).show();
+              CarToast.makeText(getCarContext(), aviso, CarToast.LENGTH_LONG).show();
             })
         .build();
   }
@@ -48,10 +60,13 @@ public final class BodesCarScreen extends AndroidAutoBaseScreen {
   public Template onGetTemplate() {
     ActionStrip botoes =
         new ActionStrip.Builder()
-            .addAction(botao(R.string.auto_alerta, "alerta"))
-            .addAction(botao(R.string.auto_sos, "sos"))
+            .addAction(botao(R.string.auto_alerta, R.drawable.auto_ic_alerta, "alerta", R.string.auto_aviso_em_breve))
+            .addAction(botao(R.string.auto_comboio, R.drawable.auto_ic_comboio, "comboio", R.string.auto_aviso_em_breve))
+            .addAction(botao(R.string.auto_postos, R.drawable.auto_ic_posto, "postos", R.string.auto_aviso_em_breve))
+            .addAction(botao(R.string.auto_sos, R.drawable.auto_ic_sos, "sos", R.string.auto_aviso_sos))
             .build();
     return new NavigationTemplate.Builder()
+        .setBackgroundColor(COR_CARTAO)
         .setActionStrip(botoes)
         .setMapActionStrip(new ActionStrip.Builder().addAction(Action.PAN).build())
         .build();

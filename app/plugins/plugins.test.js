@@ -60,3 +60,41 @@ describe('withAndroidAuto', () => {
     expect(m.manifest['uses-permission']).toHaveLength(2);
   });
 });
+
+describe('tela do carro: recursos', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const tela = fs.readFileSync(path.join(__dirname, 'android-auto', 'BodesCarScreen.java'), 'utf8');
+  const desenhos = fs.readdirSync(path.join(__dirname, 'android-auto', 'drawable')).map((f) => f.replace('.xml', ''));
+  const plugin = fs.readFileSync(path.join(__dirname, 'withAndroidAuto.js'), 'utf8');
+
+  it('todo ícone usado pela tela existe como desenho vetorial', () => {
+    const usados = [...tela.matchAll(/R\.drawable\.(\w+)/g)].map((m) => m[1]);
+    expect(usados.length).toBe(4);
+    for (const u of usados) expect(desenhos).toContain(u);
+  });
+
+  it('todo texto usado pela tela existe nos três idiomas', () => {
+    const usados = [...new Set([...tela.matchAll(/R\.string\.(\w+)/g)].map((m) => m[1]))];
+    for (const u of usados) expect(plugin.match(new RegExp(`${u}:`, 'g'))).toHaveLength(3);
+  });
+
+  it('no máximo 4 botões na faixa de ações (regra do Android Auto)', () => {
+    expect(tela.match(/\.addAction\(botao\(/g)).toHaveLength(4);
+  });
+});
+
+describe('desenhos vetoriais do carro', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const pasta = path.join(__dirname, 'android-auto', 'drawable');
+  it('arcos com bandeiras separadas por espaço (o Android não lê a forma compacta)', () => {
+    for (const f of fs.readdirSync(pasta)) {
+      const xml = fs.readFileSync(path.join(pasta, f), 'utf8');
+      for (const [, d] of xml.matchAll(/pathData="([^"]+)"/g)) {
+        expect(d).not.toMatch(/[aA][\d.]+ [\d.]+ [-\d.]+ [01][01]/);
+        expect(d).not.toMatch(/ 0 ?[01][01][-\d]/);
+      }
+    }
+  });
+});

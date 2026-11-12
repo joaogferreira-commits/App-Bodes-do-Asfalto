@@ -12,9 +12,30 @@ const {
 const CAR_APP = "implementation 'androidx.car.app:app:1.4.0'";
 
 const TEXTOS = {
-  values: { auto_alerta: 'Alerta', auto_sos: 'SOS' },
-  'values-es': { auto_alerta: 'Alerta', auto_sos: 'SOS' },
-  'values-en': { auto_alerta: 'Alert', auto_sos: 'SOS' },
+  values: {
+    auto_alerta: 'Alerta',
+    auto_comboio: 'Comboio',
+    auto_postos: 'Postos',
+    auto_sos: 'SOS',
+    auto_aviso_em_breve: 'Disponível em breve',
+    auto_aviso_sos: 'Teste: o SOS ainda não avisa ninguém. Emergência: 192 ou 193',
+  },
+  'values-es': {
+    auto_alerta: 'Alerta',
+    auto_comboio: 'Convoy',
+    auto_postos: 'Gasolineras',
+    auto_sos: 'SOS',
+    auto_aviso_em_breve: 'Disponible pronto',
+    auto_aviso_sos: 'Prueba: el SOS todavía no avisa a nadie. Emergencia: 192 o 193',
+  },
+  'values-en': {
+    auto_alerta: 'Alert',
+    auto_comboio: 'Convoy',
+    auto_postos: 'Gas',
+    auto_sos: 'SOS',
+    auto_aviso_em_breve: 'Coming soon',
+    auto_aviso_sos: 'Test: SOS does not alert anyone yet. Emergency: 192 or 193',
+  },
 };
 
 function xmlDeTextos(textos) {
@@ -74,6 +95,11 @@ const withAndroidAuto = (config) => {
         if (!arquivo.endsWith('.java')) continue;
         const fonte = fs.readFileSync(path.join(__dirname, 'android-auto', arquivo), 'utf8');
         fs.writeFileSync(path.join(destinoJava, arquivo), fonte.replaceAll('__PACOTE__', pacote));
+      }
+      const origemDesenhos = path.join(__dirname, 'android-auto', 'drawable');
+      fs.mkdirSync(path.join(raiz, 'res', 'drawable'), { recursive: true });
+      for (const arquivo of fs.readdirSync(origemDesenhos)) {
+        fs.copyFileSync(path.join(origemDesenhos, arquivo), path.join(raiz, 'res', 'drawable', arquivo));
       }
       fs.mkdirSync(path.join(raiz, 'res', 'xml'), { recursive: true });
       fs.writeFileSync(

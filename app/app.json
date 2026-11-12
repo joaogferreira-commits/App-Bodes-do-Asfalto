@@ -4,7 +4,7 @@
     "slug": "bodes-do-asfalto",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icone/icone.png",
     "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": false,
@@ -13,15 +13,23 @@
     "android": {
       "package": "com.bodesdoasfalto.app",
       "adaptiveIcon": {
-        "backgroundColor": "#0C0A08",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/icone/adaptativo-frente.png",
+        "backgroundColor": "#0B0907",
+        "monochromeImage": "./assets/icone/adaptativo-mono.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icone/abertura.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#0B0907"
+        }
+      ],
       "expo-dev-client",
       "expo-font",
       "expo-image",
