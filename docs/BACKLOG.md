@@ -10,7 +10,7 @@ Ordem obrigatória; cada ciclo pega o primeiro não feito. Regra: o que não fic
 - ~~P3~~ FEITO em parte 12/11 (perfil, garagem, contatos e dados maçônicos sincronizam; falta foto no servidor e 'Ver perfil' de outro irmão). Perfil, garagem e contatos de emergência no banco; perfil de outro irmão ("Ver perfil") real.
 - ~~P4~~ FEITO 12/11 (falta: editar post, votar enquete, vídeo no post, desfazer bloqueio, vários stories por irmão, escolher motivo da denúncia). Feed real: posts, fotos/vídeos no Storage, curtir (TFA), comentar, denunciar, bloquear; stories 24 h no servidor. Tirar todos os posts de exemplo.
 - ~~P5~~ FEITO 12/11 (falta: TFA em mensagem no servidor, acenos recebidos em tempo real, lista sem N+1). Chat em tempo real (Supabase Realtime): grupos do capítulo/passeio/comboio/Ágape automáticos, avisos da diretoria, 1:1 por aceno aceito; denúncia vai para a fila de moderação.
-- P6. Notificações push (Expo + Firebase do dono): mensagem, aceno, aprovação, SOS. Preferências por tipo (tirar "Notificações — em breve" do Perfil).
+- ~~P6~~ FEITO no app 12/11 (servidor aguarda autorização: workflow publicar-notificacoes.yml; falta avisar candidato antes de aprovado). Notificações push (Expo + Firebase do dono): mensagem, aceno, aprovação, SOS. Preferências por tipo (tirar "Notificações — em breve" do Perfil).
 - P7. Mapa ao vivo: irmãos reais (aproximado no servidor, zonas privadas, apagado em 7 dias), aceno real, "Falar com o contato" da Loja via aceno.
 - P8. Passeios reais: criar passeio (diretoria), "Vou/Talvez", grupo automático; Ágape real.
 - P9. Modo pilotando: Alerta (tipos de alerta para o comboio), Reagrupar, Posto mais próximo e Posto na rota funcionando; mesmos botões no Android Auto.
