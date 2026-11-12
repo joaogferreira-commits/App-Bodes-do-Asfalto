@@ -25,7 +25,7 @@ export default function Entrada() {
     <SafeAreaView style={{ flex: 1, backgroundColor: cores.fundo }}>
       <ScrollView contentContainerStyle={estilos.conteudo} keyboardShouldPersistTaps="handled">
         <Image
-          source={require('../../../assets/gerados/mascote/mascote-bodinho.webp')}
+          source={require('../../../assets/marca/logo-plana.png')}
           style={estilos.mascote}
           contentFit="contain"
           accessible={false}
@@ -103,6 +103,6 @@ export default function Entrada() {
 
 const estilos = StyleSheet.create({
   conteudo: { padding: espaco.xl, gap: espaco.md, paddingBottom: espaco.xxxl },
-  mascote: { width: 180, height: 180, alignSelf: 'center' },
+  mascote: { width: 150, height: 186, alignSelf: 'center' },
   centro: { textAlign: 'center' },
 });

@@ -8,6 +8,8 @@ import {
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
+
+import { AberturaAnimada } from '@/componentes/AberturaAnimada';
 import { Redirect, router, Stack, useSegments } from 'expo-router';
 import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
@@ -56,6 +58,7 @@ export default function Layout() {
           </ProvedorAvatar>
         </ArvoreDaSessao>
       </ProvedorAcesso>
+      <AberturaAnimada />
     </ProvedorTema>
   );
 }
