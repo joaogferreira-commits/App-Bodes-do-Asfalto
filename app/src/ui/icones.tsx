@@ -95,6 +95,33 @@ export const caminhosIcones = {
     'M5.5 13a3.5 3.5 0 110 7 3.5 3.5 0 010-7zM18.5 13a3.5 3.5 0 110 7 3.5 3.5 0 010-7z',
     'M5.5 16.5L9 10h5l4.5 6.5M14 10l-2-3h-2M14 10h3l1.5 2',
   ],
+  // Pontos do mapa (tipos de public.pontos_osm): um desenho próprio por tipo.
+  telefone: ['M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z'],
+  restaurante: ['M7 3v7a2 2 0 002 2v9M11 3v7a2 2 0 01-2 2M9 3v9', 'M17 21V3c-2 2-3 5-3 8h3'],
+  porca: ['M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z', 'M12 9a3 3 0 110 6 3 3 0 010-6z'],
+  pneu: [
+    'M12 3a9 9 0 110 18 9 9 0 010-18z',
+    'M12 8.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7z',
+    'M12 3v5M12 16v5M3 12h5M16 12h5',
+  ],
+  cachoeira: ['M4 4h16', 'M8 4v9M12 4v12M16 4v9', 'M4 20c2-2 3.5 2 5.5 0s3.5 2 5.5 0 3.5 2 5 0'],
+  mirante: ['M2.5 19l6.5-11 4 6.5 2.5-3.5 6 8z', 'M9 8l1.5 2.5'],
+  museu: ['M4 5h16v14H4z', 'M8 15l3-4 2.5 3 2-2 2.5 3', 'M8.5 8.5h.01'],
+  monumento: ['M12 3l3 4-1 10h-4L9 7z', 'M7 21h10M8 17h8v4H8z'],
+  praia: [
+    'M12 4a3 3 0 110 6 3 3 0 010-6z',
+    'M3 15c2-2 4 2 6 0s4 2 6 0 4 2 6 0',
+    'M3 20c2-2 4 2 6 0s4 2 6 0 4 2 6 0',
+  ],
+  parque: ['M12 3l5 7h-3l4 6H6l4-6H7z', 'M12 16v5'],
+  igreja: ['M12 2v4M10 4h4', 'M12 6l5 4v10H7V10z', 'M10 20v-4a2 2 0 014 0v4'],
+  cama: ['M3 18V7', 'M3 14h18v4', 'M21 14v-2a3 3 0 00-3-3h-7v5', 'M6.5 10.5h.01'],
+  barraca: ['M12 4L3 19h18z', 'M10 19l2-5 2 5'],
+  hospital: ['M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z', 'M12 8v8M8 12h8'],
+  policia: [
+    'M12 3l8 3v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6z',
+    'M12 8l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.4-2.5 1.4.6-2.8L8 10.9l2.8-.3z',
+  ],
 } as const;
 
 export type NomeIcone = keyof typeof caminhosIcones;

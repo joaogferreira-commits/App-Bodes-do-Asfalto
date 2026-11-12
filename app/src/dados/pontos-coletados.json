@@ -586,7 +586,7 @@
   },
   {
     "id": "osm-n2832883339",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Escadaria do Cristo - Nível Superior",
     "lat": -15.872302,
     "lng": -52.259925,
@@ -595,7 +595,7 @@
   },
   {
     "id": "osm-n2832883701",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Discoporto",
     "lat": -15.854211,
     "lng": -52.269368,
@@ -604,7 +604,7 @@
   },
   {
     "id": "osm-n2832889719",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira Cristal",
     "lat": -15.719105,
     "lng": -52.613633,
@@ -613,7 +613,7 @@
   },
   {
     "id": "osm-n2832905998",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira Bateia RPPN ECOMETA 2",
     "lat": -15.722057,
     "lng": -52.526213,
@@ -622,7 +622,7 @@
   },
   {
     "id": "osm-n2832919423",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Gruta do Pezinho",
     "lat": -15.841347,
     "lng": -52.280603,
@@ -694,7 +694,7 @@
   },
   {
     "id": "osm-n3899572173",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Nascente do Rio Paraguai",
     "lat": -14.626991,
     "lng": -56.501646,
@@ -703,7 +703,7 @@
   },
   {
     "id": "osm-n3900795351",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Gruta da Lagoa Azul",
     "lat": -14.588,
     "lng": -55.96675,
@@ -883,7 +883,7 @@
   },
   {
     "id": "osm-n5054452871",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Poço das Antas",
     "lat": -15.313819,
     "lng": -55.852695,
@@ -892,7 +892,7 @@
   },
   {
     "id": "osm-n5054452898",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Poço da Esmeralda",
     "lat": -15.317097,
     "lng": -55.86457,
@@ -901,7 +901,7 @@
   },
   {
     "id": "osm-n5061366859",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira do Marouni",
     "lat": -14.837331,
     "lng": -52.598754,
@@ -991,7 +991,7 @@
   },
   {
     "id": "osm-n5302646607",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Escadaria do Cristo - Nível Inferior",
     "lat": -15.875355,
     "lng": -52.260709,
@@ -1018,7 +1018,7 @@
   },
   {
     "id": "osm-n5365922953",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Sitio Aequeologico de Santa Elina",
     "lat": -15.385429,
     "lng": -56.799295,
@@ -1027,7 +1027,7 @@
   },
   {
     "id": "osm-n5366044597",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Sitio Arqueologico da Pedra Preta",
     "lat": -9.566109,
     "lng": -56.635535,
@@ -1036,7 +1036,7 @@
   },
   {
     "id": "osm-n5366154966",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Esfinge",
     "lat": -15.355079,
     "lng": -52.230916,
@@ -1045,7 +1045,7 @@
   },
   {
     "id": "osm-n5366233338",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Dolina Água Milagrosa",
     "lat": -16.0433,
     "lng": -57.527618,
@@ -1054,7 +1054,7 @@
   },
   {
     "id": "osm-n5368236960",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Pedra Dedo de Deus",
     "lat": -15.309761,
     "lng": -52.173808,
@@ -1063,7 +1063,7 @@
   },
   {
     "id": "osm-n5370985281",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Sitio Arqueologico Abrigo da Serra da Estrela Azul",
     "lat": -15.872237,
     "lng": -52.256996,
@@ -1072,7 +1072,7 @@
   },
   {
     "id": "osm-n5370985282",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Sitio Arqueologico Gruta do Moretti",
     "lat": -15.383929,
     "lng": -52.214542,
@@ -1099,7 +1099,7 @@
   },
   {
     "id": "osm-n5850032585",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Jacarés",
     "lat": -16.425653,
     "lng": -56.670148,
@@ -1117,7 +1117,7 @@
   },
   {
     "id": "osm-n5902351806",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Ponte Dos Desejos",
     "lat": -15.889507,
     "lng": -52.257243,
@@ -1126,7 +1126,7 @@
   },
   {
     "id": "osm-n5902351808",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "FONTE",
     "lat": -15.889418,
     "lng": -52.256985,
@@ -1171,7 +1171,7 @@
   },
   {
     "id": "osm-n5969447187",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Jardim",
     "lat": -10.880525,
     "lng": -51.636291,
@@ -1216,7 +1216,7 @@
   },
   {
     "id": "osm-n6370794786",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira do Degrau",
     "lat": -15.416191,
     "lng": -55.842645,
@@ -1225,7 +1225,7 @@
   },
   {
     "id": "osm-n6370794886",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira do Pulo",
     "lat": -15.416551,
     "lng": -55.841246,
@@ -1234,7 +1234,7 @@
   },
   {
     "id": "osm-n6370794985",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira 7 de Setembro",
     "lat": -15.418808,
     "lng": -55.839694,
@@ -1279,7 +1279,7 @@
   },
   {
     "id": "osm-n6594845592",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Entrada Parque",
     "lat": -14.625576,
     "lng": -57.493154,
@@ -1396,7 +1396,7 @@
   },
   {
     "id": "osm-n7216141485",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Flutuação no Rio Triste",
     "lat": -14.591867,
     "lng": -55.75616,
@@ -1450,7 +1450,7 @@
   },
   {
     "id": "osm-n7565965735",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Morro da Mesa",
     "lat": -15.859244,
     "lng": -54.38727,
@@ -1459,7 +1459,7 @@
   },
   {
     "id": "osm-n7644781161",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Praia do Cortado",
     "lat": -11.75029,
     "lng": -55.707608,
@@ -1477,7 +1477,7 @@
   },
   {
     "id": "osm-n7830627037",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Cidade das Pedras",
     "lat": -16.206278,
     "lng": -54.946798,
@@ -1513,7 +1513,7 @@
   },
   {
     "id": "osm-n9309631332",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira Do Ipê",
     "lat": -14.654905,
     "lng": -52.591881,
@@ -1522,7 +1522,7 @@
   },
   {
     "id": "osm-n9309631334",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Entrada da Cachoeira da Saudade",
     "lat": -14.748908,
     "lng": -52.567457,
@@ -1531,7 +1531,7 @@
   },
   {
     "id": "osm-n9309631335",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Casa Abonizia",
     "lat": -14.755151,
     "lng": -52.561736,
@@ -1540,7 +1540,7 @@
   },
   {
     "id": "osm-n9309695986",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira da Usina",
     "lat": -14.888486,
     "lng": -52.50221,
@@ -1549,7 +1549,7 @@
   },
   {
     "id": "osm-n9309710215",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Rancho Ponte de Pedra",
     "lat": -14.794889,
     "lng": -52.623097,
@@ -1567,7 +1567,7 @@
   },
   {
     "id": "osm-n9309764673",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Piscinas naturais Abonizia",
     "lat": -14.759923,
     "lng": -52.556602,
@@ -1585,7 +1585,7 @@
   },
   {
     "id": "osm-n9309764683",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira Buriti",
     "lat": -14.764234,
     "lng": -52.574615,
@@ -1594,7 +1594,7 @@
   },
   {
     "id": "osm-n9309764684",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira Bailarina",
     "lat": -14.763522,
     "lng": -52.574891,
@@ -1603,7 +1603,7 @@
   },
   {
     "id": "osm-n9309764685",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira da Nascente",
     "lat": -14.763282,
     "lng": -52.575344,
@@ -1675,7 +1675,7 @@
   },
   {
     "id": "osm-n9922140217",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Toca das onças pintadas",
     "lat": -17.275637,
     "lng": -56.690219,
@@ -1747,7 +1747,7 @@
   },
   {
     "id": "osm-n11400881369",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Santuário do Roncador",
     "lat": -14.204704,
     "lng": -51.685839,
@@ -1774,7 +1774,7 @@
   },
   {
     "id": "osm-n12749174579",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Memorial Rondon",
     "lat": -16.27247,
     "lng": -55.800858,
@@ -1801,7 +1801,7 @@
   },
   {
     "id": "osm-n13796339835",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Balneário Moreninha",
     "lat": -16.368302,
     "lng": -53.796632,
@@ -1873,7 +1873,7 @@
   },
   {
     "id": "osm-w178238403",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Praça do Morro da Caixa D'Água Velha",
     "lat": -15.599087,
     "lng": -56.101664,
@@ -1882,7 +1882,7 @@
   },
   {
     "id": "osm-w180348605",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Casa Barão de Melgaço",
     "lat": -15.594318,
     "lng": -56.095684,
@@ -1900,7 +1900,7 @@
   },
   {
     "id": "osm-w278131103",
-    "tipo": "turistico",
+    "tipo": "mirante",
     "nome": "Mirante do Cristo Redentor",
     "lat": -15.871864,
     "lng": -52.259868,
@@ -1909,7 +1909,7 @@
   },
   {
     "id": "osm-w458185673",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Arquivo Público de Mato Grosso",
     "lat": -15.596021,
     "lng": -56.098035,
@@ -1918,7 +1918,7 @@
   },
   {
     "id": "osm-w462607258",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "recepção Cachoeira Serra Azul",
     "lat": -14.48941,
     "lng": -55.705634,
@@ -1927,7 +1927,7 @@
   },
   {
     "id": "osm-w491041126",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Padaria do Moinho",
     "lat": -15.585538,
     "lng": -56.077922,
@@ -1936,7 +1936,7 @@
   },
   {
     "id": "osm-w491340706",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Ponte de Ferro do Coxipó",
     "lat": -15.625643,
     "lng": -56.059972,
@@ -1945,7 +1945,7 @@
   },
   {
     "id": "osm-w532398476",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Passeio Duto do Quebó",
     "lat": -14.442381,
     "lng": -56.015065,
@@ -1963,7 +1963,7 @@
   },
   {
     "id": "osm-w724199225",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Vila Cuiabana",
     "lat": -15.617329,
     "lng": -56.111189,
@@ -1972,7 +1972,7 @@
   },
   {
     "id": "osm-w1009005202",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Cachoeira da Usina",
     "lat": -14.888599,
     "lng": -52.502038,
@@ -1981,7 +1981,7 @@
   },
   {
     "id": "osm-w1113515910",
-    "tipo": "turistico",
+    "tipo": "cachoeira",
     "nome": "Arcos da Cascata",
     "lat": -15.599098,
     "lng": -56.101601,
@@ -2008,7 +2008,7 @@
   },
   {
     "id": "osm-w1199228885",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Mercado do Porto",
     "lat": -15.61396,
     "lng": -56.110423,
@@ -2017,7 +2017,7 @@
   },
   {
     "id": "osm-w1204077829",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Casa do Artesão - Dona Doquinha",
     "lat": -15.864597,
     "lng": -56.074191,
@@ -2044,7 +2044,7 @@
   },
   {
     "id": "osm-w1376978619",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Memorial Rondon",
     "lat": -16.272695,
     "lng": -55.801514,
@@ -2053,7 +2053,7 @@
   },
   {
     "id": "osm-r18254137",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "SESC Salgadeira",
     "lat": -15.356894,
     "lng": -55.82926,
@@ -2062,7 +2062,7 @@
   },
   {
     "id": "osm-r18850738",
-    "tipo": "turistico",
+    "tipo": "atracao",
     "nome": "Parque Estadual Gruta da Lagoa Azul",
     "lat": -14.504691,
     "lng": -55.946126,

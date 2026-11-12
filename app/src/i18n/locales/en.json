@@ -27,7 +27,12 @@
       "postos": "Gas",
       "sedes": "Clubhouses",
       "lojas": "Lodges",
-      "passeio": "Ride"
+      "passeio": "Ride",
+      "clube": "Club",
+      "natureza": "Nature",
+      "cultura": "Culture",
+      "apoio": "Support",
+      "postosOficinas": "Fuel and repair"
     },
     "visibilidade": "How I appear on the map",
     "aprox": "Approx.",
@@ -97,6 +102,13 @@
         "aberto": "Open to meet",
         "naoPerturbe": "Do not disturb"
       }
+    },
+    "legendaPontos": {
+      "titulo": "Point types",
+      "postos": "Fuel and repair",
+      "natureza": "Nature",
+      "cultura": "Culture",
+      "apoio": "Lodging and emergency"
     }
   },
   "rota": {
@@ -1135,7 +1147,7 @@
     "lojaSessoes": "Meetings on Mondays, 8 pm (example).",
     "lojaVisita": "Visits follow the Lodge's procedure. The app only brings brothers together.",
     "beneficioIrmaos": "A brother's business, with a benefit for club members.",
-    "fonteOsm": "Data © OpenStreetMap.",
+    "fonteOsm": "Source: OpenStreetMap.",
     "posicaoAproximada": "Approximate position (about 5 km), for privacy.",
     "precoPergunta": "How much is regular gasoline? (R$ per liter)",
     "precoInvalido": "Check the value: use something like 6.29.",
@@ -1150,13 +1162,23 @@
       "oficina": "Brother's workshop",
       "restaurante": "Brother's restaurant",
       "monumento": "Monument",
-      "turistico": "Tourist spot",
       "agape": "Flash Ágape",
       "outro": "Place",
       "rotaBiker": "Rota Biker monument",
       "rotaBikerN": "Rota Biker monument #{{n}}",
       "cachoeira": "Waterfall",
-      "mirante": "Viewpoint"
+      "mirante": "Viewpoint",
+      "oficina_moto": "Motorcycle workshop",
+      "borracharia": "Tire shop",
+      "museu": "Museum",
+      "atracao": "Tourist attraction",
+      "praia": "Beach",
+      "parque": "Park",
+      "igreja_historica": "Historic church",
+      "hospedagem": "Lodging",
+      "camping": "Campsite",
+      "hospital": "Hospital",
+      "policia_rodoviaria": "Highway police"
     },
     "status": {
       "aberto": "Open to meet",
@@ -1174,7 +1196,8 @@
       "salvar": "Save",
       "vou": "I'm going",
       "falarContato": "Talk to contact",
-      "site": "Official site"
+      "site": "Official site",
+      "telefone": "Call"
     },
     "acoesFeitas": {
       "rota": "Route here",
@@ -1185,7 +1208,8 @@
       "salvar": "Saved",
       "vou": "Confirmed",
       "falarContato": "Talk to contact",
-      "site": "Official site"
+      "site": "Official site",
+      "telefone": "Call"
     },
     "emBreve": {
       "perfil": "Full brother profiles arrive with the club server.",

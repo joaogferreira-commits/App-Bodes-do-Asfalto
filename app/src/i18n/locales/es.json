@@ -27,7 +27,12 @@
       "postos": "Gasolineras",
       "sedes": "Sedes",
       "lojas": "Logias",
-      "passeio": "Paseo"
+      "passeio": "Paseo",
+      "clube": "Club",
+      "natureza": "Naturaleza",
+      "cultura": "Cultura",
+      "apoio": "Apoyo",
+      "postosOficinas": "Gasolineras y talleres"
     },
     "visibilidade": "Cómo aparezco en el mapa",
     "aprox": "Aprox.",
@@ -97,6 +102,13 @@
         "aberto": "Abierto a encuentro",
         "naoPerturbe": "No molestar"
       }
+    },
+    "legendaPontos": {
+      "titulo": "Tipos de punto",
+      "postos": "Gasolineras y talleres",
+      "natureza": "Naturaleza",
+      "cultura": "Cultura",
+      "apoio": "Alojamiento y emergencia"
     }
   },
   "rota": {
@@ -1135,7 +1147,7 @@
     "lojaSessoes": "Sesiones los lunes, 20:00 (ejemplo).",
     "lojaVisita": "La visita sigue el procedimiento de la Logia. La app solo acerca a los hermanos.",
     "beneficioIrmaos": "Negocio de un hermano, con beneficio para quien es del club.",
-    "fonteOsm": "Datos © OpenStreetMap.",
+    "fonteOsm": "Fuente: OpenStreetMap.",
     "posicaoAproximada": "Posición aproximada (unos 5 km), por privacidad.",
     "precoPergunta": "¿Cuánto está la gasolina común? (R$ por litro)",
     "precoInvalido": "Revisa el valor: usa algo como 6,29.",
@@ -1150,13 +1162,23 @@
       "oficina": "Taller de un hermano",
       "restaurante": "Restaurante de un hermano",
       "monumento": "Monumento",
-      "turistico": "Punto turístico",
       "agape": "Ágape Relámpago",
       "outro": "Lugar",
       "rotaBiker": "Monumento Rota Biker",
       "rotaBikerN": "Monumento Rota Biker nº {{n}}",
       "cachoeira": "Cascada",
-      "mirante": "Mirador"
+      "mirante": "Mirador",
+      "oficina_moto": "Taller de motos",
+      "borracharia": "Gomería",
+      "museu": "Museo",
+      "atracao": "Atracción turística",
+      "praia": "Playa",
+      "parque": "Parque",
+      "igreja_historica": "Iglesia histórica",
+      "hospedagem": "Alojamiento",
+      "camping": "Camping",
+      "hospital": "Hospital",
+      "policia_rodoviaria": "Policía de carreteras"
     },
     "status": {
       "aberto": "Abierto a encuentro",
@@ -1174,7 +1196,8 @@
       "salvar": "Guardar",
       "vou": "Voy",
       "falarContato": "Hablar con el contacto",
-      "site": "Sitio oficial"
+      "site": "Sitio oficial",
+      "telefone": "Llamar"
     },
     "acoesFeitas": {
       "rota": "Ruta hasta aquí",
@@ -1185,7 +1208,8 @@
       "salvar": "Guardado",
       "vou": "Confirmado",
       "falarContato": "Hablar con el contacto",
-      "site": "Sitio oficial"
+      "site": "Sitio oficial",
+      "telefone": "Llamar"
     },
     "emBreve": {
       "perfil": "El perfil completo de los hermanos llega con el servidor del club.",

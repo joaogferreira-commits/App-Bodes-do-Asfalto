@@ -12,17 +12,18 @@ export type LugarExemplo = {
   rotulo?: string;
   lng: number;
   lat: number;
-  /** cachoeira/mirante usam o pino de ponto turístico, mas a ficha diz o que são */
-  subtipo?: 'cachoeira' | 'mirante';
   /** de onde veio o ponto (crédito na ficha) */
   fonte?: 'osm' | 'rotaBiker';
   link?: string;
+  /** pontos vindos do banco (public.pontos_osm): contatos opcionais do OpenStreetMap */
+  site?: string;
+  telefone?: string;
   numero?: number | null;
 };
 
 type PontoColetado = {
   id: string;
-  tipo: 'cachoeira' | 'mirante' | 'monumento' | 'turistico' | 'rotaBiker';
+  tipo: 'cachoeira' | 'mirante' | 'monumento' | 'atracao' | 'rotaBiker';
   nome: string;
   lat: number;
   lng: number;
@@ -37,8 +38,7 @@ type PontoColetado = {
  */
 export const pontosColetados: LugarExemplo[] = (coletados as PontoColetado[]).map((p) => ({
   id: p.id,
-  tipo: p.tipo === 'cachoeira' || p.tipo === 'mirante' ? 'turistico' : p.tipo,
-  subtipo: p.tipo === 'cachoeira' || p.tipo === 'mirante' ? p.tipo : undefined,
+  tipo: p.tipo,
   nome: p.nome.replace(/^\d+\s*-\s*/, ''),
   lat: p.lat,
   lng: p.lng,
@@ -62,8 +62,8 @@ export const lugaresExemplo: LugarExemplo[] = [
     lng: -56.0967,
     lat: -15.5989,
   },
-  { id: 'veu-de-noiva', tipo: 'turistico', nome: 'Cachoeira Véu de Noiva', lng: -55.8339, lat: -15.4142 },
-  { id: 'mirante-chapada', tipo: 'turistico', nome: 'Mirante da Chapada', lng: -55.7497, lat: -15.4604 },
+  { id: 'veu-de-noiva', tipo: 'cachoeira', nome: 'Cachoeira Véu de Noiva', lng: -55.8339, lat: -15.4142 },
+  { id: 'mirante-chapada', tipo: 'mirante', nome: 'Mirante da Chapada', lng: -55.7497, lat: -15.4604 },
   {
     id: 'restaurante-irmao',
     tipo: 'restaurante',
@@ -79,28 +79,38 @@ export const irmaosExemplo: IrmaoExemplo[] = [
   { id: 'ivan', nome: 'Ivan Coruja', status: 'aberto', lng: -56.11, lat: -15.59 },
 ];
 
-export type Filtro = 'tudo' | 'irmaos' | 'postos' | 'sedes' | 'lojas' | 'passeio';
+/** Grupos do filtro do mapa (poucos chips: público de 40 a 60 anos). */
+export type Filtro = 'tudo' | 'irmaos' | 'clube' | 'postos' | 'natureza' | 'cultura' | 'apoio';
 
-/** Lugares do clube (exemplo) + pontos coletados. */
-export const todosOsLugares = (): LugarExemplo[] => [...lugaresExemplo, ...pontosColetados];
+/** Chaves dos grupos, na ordem dos chips. */
+export const filtros: Filtro[] = ['tudo', 'irmaos', 'clube', 'postos', 'natureza', 'cultura', 'apoio'];
 
-export function filtrar(filtro: Filtro) {
-  const tipos: Record<Filtro, TipoPino[] | 'todos' | 'nenhum'> = {
-    tudo: 'todos',
-    irmaos: 'nenhum',
-    postos: ['posto'],
-    sedes: ['sede'],
-    lojas: ['loja'],
-    passeio: ['turistico', 'monumento', 'rotaBiker'],
-  };
-  const t = tipos[filtro];
+export const tiposDoFiltro: Record<Filtro, TipoPino[] | 'todos' | 'nenhum'> = {
+  tudo: 'todos',
+  irmaos: 'nenhum',
+  clube: ['sede', 'loja', 'oficina', 'restaurante'],
+  postos: ['posto', 'oficina_moto', 'borracharia'],
+  natureza: ['cachoeira', 'mirante', 'praia', 'parque', 'camping'],
+  cultura: ['museu', 'monumento', 'atracao', 'igreja_historica', 'rotaBiker'],
+  apoio: ['hospedagem', 'hospital', 'policia_rodoviaria'],
+};
+
+/** Lugares do clube (exemplo) + pontos coletados (+ pontos do banco, quando houver). */
+export const todosOsLugares = (extras: LugarExemplo[] = []): LugarExemplo[] => [
+  ...lugaresExemplo,
+  ...pontosColetados,
+  ...extras,
+];
+
+/** Aplica o grupo do filtro a uma lista de lugares. */
+export function filtrarLugares(lugares: LugarExemplo[], filtro: Filtro) {
+  const t = tiposDoFiltro[filtro];
+  return t === 'todos' ? lugares : t === 'nenhum' ? [] : lugares.filter((l) => t.includes(l.tipo));
+}
+
+export function filtrar(filtro: Filtro, extras: LugarExemplo[] = []) {
   return {
-    lugares:
-      t === 'todos'
-        ? todosOsLugares()
-        : t === 'nenhum'
-          ? []
-          : todosOsLugares().filter((l) => t.includes(l.tipo)),
+    lugares: filtrarLugares(todosOsLugares(extras), filtro),
     irmaos: filtro === 'tudo' || filtro === 'irmaos' ? irmaosExemplo : [],
   };
 }

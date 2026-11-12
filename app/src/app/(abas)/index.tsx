@@ -18,7 +18,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
 import { agapeExemplo } from '@/dados/agape';
 import { useAgapes, type Agape } from '@/estado/agapes';
-import { filtrar, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } from '@/dados/exemplos';
+import { filtrarLugares, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } from '@/dados/exemplos';
+import { mesclarPontos } from '@/map/pontos';
+import { usePontosDoBanco } from '@/map/usePontosDoBanco';
+import type { Area } from '@/servidor/pontos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { FichaMapa } from '@/componentes/FichaMapa';
@@ -42,18 +45,40 @@ import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { postoExemplo } from '@/navegacao/destinos';
 import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
-import { Avatar, Botao, BotaoIcone, Chip, coresDoStatus, Icone, PainelInferior, pinos, Texto } from '@/ui';
+import {
+  Avatar,
+  Botao,
+  BotaoIcone,
+  Chip,
+  coresDoStatus,
+  Icone,
+  PainelInferior,
+  pinos,
+  Texto,
+  type TipoPino,
+} from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
 const filtros: { chave: Filtro; cor?: NomeCor }[] = [
   { chave: 'tudo' },
   { chave: 'irmaos', cor: 'acao' },
+  { chave: 'clube', cor: 'ouro' },
   { chave: 'postos', cor: 'verdePosto' },
-  { chave: 'sedes', cor: 'ouro' },
-  { chave: 'lojas', cor: 'azulRio' },
-  { chave: 'passeio', cor: 'acao' },
+  { chave: 'natureza', cor: 'azulRio' },
+  { chave: 'cultura', cor: 'textoSec' },
+  { chave: 'apoio', cor: 'estrada' },
 ];
+
+/** Legenda dos pinos por grupo: um ícone de traço de cada tipo, na cor do pino. */
+const legendaPontos: { chave: 'postos' | 'natureza' | 'cultura' | 'apoio'; tipos: TipoPino[] }[] = [
+  { chave: 'postos', tipos: ['posto', 'oficina_moto', 'borracharia'] },
+  { chave: 'natureza', tipos: ['cachoeira', 'mirante', 'praia', 'parque', 'camping'] },
+  { chave: 'cultura', tipos: ['museu', 'monumento', 'atracao', 'igreja_historica'] },
+  { chave: 'apoio', tipos: ['hospedagem', 'hospital', 'policia_rodoviaria'] },
+];
+
+const AREA_INICIAL: Area = { minLon: -56.24, minLat: -15.75, maxLon: -55.94, maxLat: -15.45 };
 
 function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean; texto: string }) {
   const cores = useCores();
@@ -101,13 +126,6 @@ export default function Mapa() {
   const [recolhido, setRecolhido] = useState(false);
   const [zoomAtual, setZoomAtual] = useState(11);
   const { definirDestino, definirBateVolta } = useViagem();
-  const { lugares, irmaos } = useMemo(() => filtrar(filtro), [filtro]);
-  const contagem = {
-    irmaos: irmaos.length,
-    sedes: lugares.filter((l) => l.tipo === 'sede').length,
-    pontos: lugares.length,
-  };
-
   /**
    * Botão "Eu": antes não dava retorno nenhum quando a permissão era negada ou o GPS demorava.
    * Agora: usa na hora a última posição conhecida, depois refina com o GPS, e avisa se não der.
@@ -152,13 +170,25 @@ export default function Mapa() {
   const acesso = useAcessoOpcional();
   const chatNoServidor = servidorConfigurado && acesso?.modo === 'supabase' && acesso.estado === 'membro';
 
+  // Pontos do banco (OpenStreetMap) para a área visível, juntos com os que já vêm no app.
+  const [area, setArea] = useState<Area>(AREA_INICIAL);
+  const doBanco = usePontosDoBanco(chatNoServidor, area, zoomAtual);
+  const todos = useMemo(() => mesclarPontos(todosOsLugares(), doBanco), [doBanco]);
+  const lugares = useMemo(() => filtrarLugares(todos, filtro), [todos, filtro]);
+  const irmaos = filtro === 'tudo' || filtro === 'irmaos' ? irmaosExemplo : [];
+  const contagem = {
+    irmaos: irmaos.length,
+    sedes: lugares.filter((l) => l.tipo === 'sede').length,
+    pontos: lugares.length,
+  };
+
   const abrir = (f: Ficha) => {
     camera.current?.flyTo({ center: [f.posicao.lng, f.posicao.lat], duration: 600 });
     setFicha(f);
   };
   const verAgape = (ag: Agape = agapeExemplo) => abrir(fichaDoAgape(ag));
   const tocarLugar = (id: string) => {
-    const l = todosOsLugares().find((x) => x.id === id);
+    const l = todos.find((x) => x.id === id);
     if (l) abrir(fichaDoLugar(l, precos[l.id]));
   };
   const tocarIrmao = (id: string) => {
@@ -220,6 +250,9 @@ export default function Mapa() {
       case 'site':
         if (ficha.link) void Linking.openURL(ficha.link);
         return;
+      case 'telefone':
+        if (ficha.telefone) void Linking.openURL(`tel:${ficha.telefone.replace(/[^\d+]/g, '')}`);
+        return;
       case 'salvar':
         setSalvosMapa((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
         return;
@@ -240,7 +273,12 @@ export default function Mapa() {
         ref={mapa}
         style={StyleSheet.absoluteFill}
         mapStyle={estiloMapa}
-        onRegionDidChange={(e) => setZoomAtual(e.nativeEvent.zoom)}
+        onRegionDidChange={(e) => {
+          setZoomAtual(e.nativeEvent.zoom);
+          const [minLon, minLat, maxLon, maxLat] = e.nativeEvent.bounds ?? [];
+          if (minLon != null && minLat != null && maxLon != null && maxLat != null)
+            setArea({ minLon, minLat, maxLon, maxLat });
+        }}
         logo={false}
         attribution
         attributionPosition={{ bottom: recolhido ? 90 : 330, left: 8 }}
@@ -402,7 +440,7 @@ export default function Mapa() {
           {filtros.map((f) => (
             <Chip
               key={f.chave}
-              rotulo={t(`mapa.filtros.${f.chave}`)}
+              rotulo={t(`mapa.filtros.${f.chave === 'postos' ? 'postosOficinas' : f.chave}`)}
               corPonto={f.cor ? cores[f.cor] : undefined}
               ativo={filtro === f.chave}
               onPress={() => setFiltro(f.chave)}
@@ -447,6 +485,19 @@ export default function Mapa() {
             <LinhaLegenda terra texto={t('mapa.legendaTerra')} />
             <LinhaLegenda rota texto={t('mapa.legendaRota')} />
             <LinhaLegenda rota terra texto={t('mapa.legendaRotaTerra')} />
+            <Texto variante="rotulo">{t('mapa.legendaPontos.titulo')}</Texto>
+            {legendaPontos.map((g) => (
+              <View key={g.chave} style={estilos.linhaLegenda} testID={`legenda-${g.chave}`}>
+                <View style={estilos.iconesLegenda}>
+                  {g.tipos.map((tp) => (
+                    <Icone key={tp} nome={pinos[tp].icone} tamanho={22} cor={cores[pinos[tp].cor]} />
+                  ))}
+                </View>
+                <Texto variante="pequeno" style={{ color: cores.texto, flexShrink: 1 }}>
+                  {t(`mapa.legendaPontos.${g.chave}`)}
+                </Texto>
+              </View>
+            ))}
             <Texto variante="pequeno" style={{ maxWidth: 210 }}>
               {t('mapa.dadosExemplo')}
             </Texto>
@@ -596,6 +647,7 @@ const criarEstilos = (cores: Paleta) =>
       padding: espaco.sm,
       gap: espaco.xs,
     },
+    iconesLegenda: { flexDirection: 'row', gap: 4 },
     linhaLegenda: { flexDirection: 'row', alignItems: 'center', gap: 10 },
     amostra: { width: 34, height: 7, borderRadius: 4, overflow: 'hidden', justifyContent: 'center' },
     tracejado: { flexDirection: 'row', gap: 4, paddingHorizontal: 2 },

@@ -15,10 +15,22 @@ export type TipoPino =
   | 'socorro'
   | 'alerta'
   | 'monumento'
-  | 'turistico'
   | 'restaurante'
   | 'sos'
-  | 'rotaBiker';
+  | 'rotaBiker'
+  | 'oficina_moto'
+  | 'borracharia'
+  | 'cachoeira'
+  | 'mirante'
+  | 'museu'
+  | 'atracao'
+  | 'praia'
+  | 'parque'
+  | 'igreja_historica'
+  | 'hospedagem'
+  | 'camping'
+  | 'hospital'
+  | 'policia_rodoviaria';
 
 /**
  * Pinos do mapa = emblemas bordados do kit (docs/assets-originais, convertidos em assets/gerados/pinos).
@@ -87,14 +99,14 @@ export const pinos: Record<
   },
   restaurante: {
     imagem: require('../../assets/gerados/pinos/pino-restaurante.webp'),
-    icone: 'agape',
+    icone: 'restaurante',
     cor: 'acao',
     agrupa: true,
     prioridade: 8,
   },
   monumento: {
     imagem: require('../../assets/gerados/pinos/pino-monumento.webp'),
-    icone: 'sede',
+    icone: 'monumento',
     cor: 'textoSec',
     agrupa: true,
     prioridade: 9,
@@ -107,12 +119,96 @@ export const pinos: Record<
     agrupa: true,
     prioridade: 8,
   },
-  turistico: {
-    imagem: require('../../assets/gerados/pinos/pino-ponto-turistico.webp'),
-    icone: 'camadas',
+  oficina_moto: {
+    imagem: require('../../assets/gerados/pinos/pino-oficina_moto.webp'),
+    icone: 'porca',
+    cor: 'textoSec',
+    agrupa: true,
+    prioridade: 7,
+  },
+  borracharia: {
+    imagem: require('../../assets/gerados/pinos/pino-borracharia.webp'),
+    icone: 'pneu',
+    cor: 'terra',
+    agrupa: true,
+    prioridade: 7,
+  },
+  cachoeira: {
+    imagem: require('../../assets/gerados/pinos/pino-cachoeira.webp'),
+    icone: 'cachoeira',
     cor: 'azulRio',
     agrupa: true,
     prioridade: 10,
+  },
+  mirante: {
+    imagem: require('../../assets/gerados/pinos/pino-mirante.webp'),
+    icone: 'mirante',
+    cor: 'terra',
+    agrupa: true,
+    prioridade: 10,
+  },
+  museu: {
+    imagem: require('../../assets/gerados/pinos/pino-museu.webp'),
+    icone: 'museu',
+    cor: 'textoSec',
+    agrupa: true,
+    prioridade: 9,
+  },
+  atracao: {
+    imagem: require('../../assets/gerados/pinos/pino-atracao.webp'),
+    icone: 'camera',
+    cor: 'acao',
+    agrupa: true,
+    prioridade: 10,
+  },
+  praia: {
+    imagem: require('../../assets/gerados/pinos/pino-praia.webp'),
+    icone: 'praia',
+    cor: 'estrada',
+    agrupa: true,
+    prioridade: 10,
+  },
+  parque: {
+    imagem: require('../../assets/gerados/pinos/pino-parque.webp'),
+    icone: 'parque',
+    cor: 'verdePosto',
+    agrupa: true,
+    prioridade: 10,
+  },
+  igreja_historica: {
+    imagem: require('../../assets/gerados/pinos/pino-igreja_historica.webp'),
+    icone: 'igreja',
+    cor: 'textoSec',
+    agrupa: true,
+    prioridade: 9,
+  },
+  hospedagem: {
+    imagem: require('../../assets/gerados/pinos/pino-hospedagem.webp'),
+    icone: 'cama',
+    cor: 'estrada',
+    agrupa: true,
+    prioridade: 8,
+  },
+  camping: {
+    imagem: require('../../assets/gerados/pinos/pino-camping.webp'),
+    icone: 'barraca',
+    cor: 'terra',
+    agrupa: true,
+    prioridade: 10,
+  },
+  hospital: {
+    imagem: require('../../assets/gerados/pinos/pino-hospital.webp'),
+    icone: 'hospital',
+    cor: 'acao',
+    agrupa: true,
+    prioridade: 5,
+  },
+  policia_rodoviaria: {
+    imagem: require('../../assets/gerados/pinos/pino-policia_rodoviaria.webp'),
+    icone: 'policia',
+    cor: 'estrada',
+    agrupa: true,
+    prioridade: 5,
   },
 };
 

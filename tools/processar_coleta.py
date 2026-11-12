@@ -2,7 +2,7 @@
 Transforma a coleta bruta (tools/coleta/) em app/src/dados/pontos-coletados.json.
 
 Guarda só FATOS: tipo, nome, coordenada, fonte e link. Nada de textos ou fotos de terceiros.
-- OpenStreetMap (ODbL): cachoeiras, mirantes, monumentos/memoriais e atrações de MT com nome.
+- OpenStreetMap (ODbL): cachoeiras, mirantes, monumentos/memoriais e atrações (tipo 'atracao') de MT com nome.
 - Rota Biker: monumentos do mapa público do site oficial (decisão do dono, 12/11/2026),
   com número, nome, cidade e link para monumentobikers.com.br/monumentos/.
 """
@@ -26,7 +26,14 @@ def tipo_osm(t):
     if t.get('historic') in ('monument', 'memorial'):
         return 'monumento'
     if t.get('tourism') == 'attraction':
-        return 'turistico'
+        # Atração genérica do OSM: só vira cachoeira/mirante se o NOME disser (nunca por padrão), para uma
+        # atração urbana não ganhar ícone de cachoeira (queixa do dono, 12/11/2026).
+        nome = (t.get('name') or '').lower()
+        if re.search(r'\b(cachoeira|cascata|salto|queda d.?[aá]gua)\b', nome):
+            return 'cachoeira'
+        if re.search(r'\bmirante\b', nome):
+            return 'mirante'
+        return 'atracao'
     return None
 
 
@@ -102,7 +109,7 @@ def ids_unicos(pontos):
 
 if __name__ == '__main__':
     pontos = ids_unicos(rota_biker() + osm())
-    SAIDA.write_text(json.dumps(pontos, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+    SAIDA.write_text(json.dumps(pontos, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     from collections import Counter
 
     print(len(pontos), Counter(p['tipo'] for p in pontos))

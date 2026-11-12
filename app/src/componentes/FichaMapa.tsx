@@ -18,6 +18,7 @@ const iconeDaAcao: Record<AcaoFicha, NomeIcone> = {
   vou: 'check',
   falarContato: 'comentario',
   site: 'compartilhar',
+  telefone: 'telefone',
 };
 
 type Props = {

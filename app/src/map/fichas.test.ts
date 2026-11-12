@@ -55,10 +55,32 @@ describe('pontos coletados', () => {
 
   it('cachoeiras e mirantes do OpenStreetMap trazem o crédito e o tipo certo', () => {
     const { pontosColetados } = jest.requireActual('@/dados/exemplos') as typeof import('@/dados/exemplos');
-    const c = pontosColetados.find((p) => p.subtipo === 'cachoeira')!;
+    const c = pontosColetados.find((p) => p.tipo === 'cachoeira')!;
     const f = fichaDoLugar(c);
     expect(f.subtitulo).toBe('ficha.tipos.cachoeira');
     expect(f.linhas[0]!.chave).toBe('ficha.fonteOsm');
     expect(new Set(pontosColetados.map((p) => p.id)).size).toBe(pontosColetados.length);
+  });
+});
+
+describe('pontos do banco (OpenStreetMap)', () => {
+  const base = {
+    id: 'node/1',
+    tipo: 'museu' as const,
+    nome: 'Museu do Morro',
+    lng: -56,
+    lat: -15.6,
+    fonte: 'osm' as const,
+  };
+
+  it('ficha mostra tipo, fonte e só oferece Ligar e Site quando existem', () => {
+    const sem = fichaDoLugar(base);
+    expect(sem.subtitulo).toBe('ficha.tipos.museu');
+    expect(sem.linhas[0]!.chave).toBe('ficha.fonteOsm');
+    expect(sem.acoes).toEqual(['rota', 'salvar']);
+    const com = fichaDoLugar({ ...base, site: 'https://museu.example', telefone: '+55 65 3000-0000' });
+    expect(com.acoes).toEqual(['rota', 'telefone', 'site', 'salvar']);
+    expect(com.link).toBe('https://museu.example');
+    expect(com.telefone).toBe('+55 65 3000-0000');
   });
 });

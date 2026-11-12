@@ -27,7 +27,12 @@
       "postos": "Postos",
       "sedes": "Sedes",
       "lojas": "Lojas",
-      "passeio": "Passeio"
+      "passeio": "Passeio",
+      "clube": "Clube",
+      "natureza": "Natureza",
+      "cultura": "Cultura",
+      "apoio": "Apoio",
+      "postosOficinas": "Postos e oficinas"
     },
     "visibilidade": "Como apareço no mapa",
     "aprox": "Aprox.",
@@ -97,6 +102,13 @@
         "aberto": "Aberto a encontro",
         "naoPerturbe": "Não perturbe"
       }
+    },
+    "legendaPontos": {
+      "titulo": "Tipos de ponto",
+      "postos": "Postos e oficinas",
+      "natureza": "Natureza",
+      "cultura": "Cultura",
+      "apoio": "Hospedagem e emergência"
     }
   },
   "rota": {
@@ -1135,7 +1147,7 @@
     "lojaSessoes": "Sessões às segundas, 20h (exemplo).",
     "lojaVisita": "A visita segue o procedimento da Loja. O app só aproxima os irmãos.",
     "beneficioIrmaos": "Negócio de irmão, com benefício para quem é do clube.",
-    "fonteOsm": "Dados © OpenStreetMap.",
+    "fonteOsm": "Fonte: OpenStreetMap.",
     "posicaoAproximada": "Posição aproximada (cerca de 5 km), por privacidade.",
     "precoPergunta": "Quanto está a gasolina comum? (R$ por litro)",
     "precoInvalido": "Confira o valor: use algo como 6,29.",
@@ -1150,13 +1162,23 @@
       "oficina": "Oficina de irmão",
       "restaurante": "Restaurante de irmão",
       "monumento": "Monumento",
-      "turistico": "Ponto turístico",
       "agape": "Ágape Relâmpago",
       "outro": "Lugar",
       "rotaBiker": "Monumento Rota Biker",
       "rotaBikerN": "Monumento Rota Biker nº {{n}}",
       "cachoeira": "Cachoeira",
-      "mirante": "Mirante"
+      "mirante": "Mirante",
+      "oficina_moto": "Oficina de motos",
+      "borracharia": "Borracharia",
+      "museu": "Museu",
+      "atracao": "Atração turística",
+      "praia": "Praia",
+      "parque": "Parque",
+      "igreja_historica": "Igreja histórica",
+      "hospedagem": "Hospedagem",
+      "camping": "Camping",
+      "hospital": "Hospital",
+      "policia_rodoviaria": "Polícia rodoviária"
     },
     "status": {
       "aberto": "Aberto a encontro",
@@ -1174,7 +1196,8 @@
       "salvar": "Salvar",
       "vou": "Eu vou",
       "falarContato": "Falar com o contato",
-      "site": "Site oficial"
+      "site": "Site oficial",
+      "telefone": "Ligar"
     },
     "acoesFeitas": {
       "rota": "Rota até aqui",
@@ -1185,7 +1208,8 @@
       "salvar": "Salvo",
       "vou": "Confirmado",
       "falarContato": "Falar com o contato",
-      "site": "Site oficial"
+      "site": "Site oficial",
+      "telefone": "Ligar"
     },
     "emBreve": {
       "perfil": "O perfil completo dos irmãos chega com o servidor do clube.",

@@ -8,7 +8,16 @@ import type { NomeIcone } from '@/ui';
  * começa por aceno. Dados de exemplo até o cadastro real no painel.
  */
 export type AcaoFicha =
-  'rota' | 'acenar' | 'perfil' | 'informarPreco' | 'vitrine' | 'salvar' | 'vou' | 'falarContato' | 'site';
+  | 'rota'
+  | 'acenar'
+  | 'perfil'
+  | 'informarPreco'
+  | 'vitrine'
+  | 'salvar'
+  | 'vou'
+  | 'falarContato'
+  | 'site'
+  | 'telefone';
 
 export type LinhaFicha = { icone: NomeIcone; chave: string; valores?: Record<string, string | number> };
 
@@ -26,6 +35,8 @@ export type Ficha = {
   negocio?: string;
   /** página oficial da fonte (Rota Biker, OpenStreetMap) */
   link?: string;
+  /** telefone do ponto (OpenStreetMap), para a ação "Ligar" */
+  telefone?: string;
 };
 
 /** Negócio do Guia ligado a cada tipo de pino de exemplo. */
@@ -96,17 +107,28 @@ export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; 
         acoes: ['rota', 'site'],
         link: l.link,
       };
-    case 'monumento':
-    case 'turistico':
+    case 'sos':
+    case 'socorro':
+    case 'alerta':
+    case 'agape':
+      return { ...base, subtitulo: 'ficha.tipos.outro', linhas: [], acoes: ['rota'] };
+    default: {
+      // Pontos do OpenStreetMap (bundle ou banco): monumento, atração, cachoeira, hospital...
+      const site = l.site;
       return {
         ...base,
-        subtitulo: `ficha.tipos.${l.subtipo ?? l.tipo}`,
+        subtitulo: `ficha.tipos.${l.tipo}`,
         linhas: [{ icone: 'mapa', chave: 'ficha.fonteOsm' }],
-        acoes: ['rota', 'salvar'],
-        link: l.link,
+        acoes: [
+          'rota',
+          ...(l.telefone ? (['telefone'] as const) : []),
+          ...(site ? (['site'] as const) : []),
+          'salvar',
+        ],
+        link: site ?? l.link,
+        telefone: l.telefone,
       };
-    default:
-      return { ...base, subtitulo: `ficha.tipos.outro`, linhas: [], acoes: ['rota'] };
+    }
   }
 }
 
