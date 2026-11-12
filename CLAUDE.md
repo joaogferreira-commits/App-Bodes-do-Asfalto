@@ -20,6 +20,8 @@ O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Val
 
 **12/11/2026 (pesquisa):** as decisões de interface seguem `reports/Usabilidade e interface Bodes do Asfalto.md` (resumo no topo do `docs/DESIGN.md`); itens marcados como decisão do dono aguardam o OK dele.
 
+**12/11/2026 (publicação):** Google Play em conta **pessoal no CPF** já (US$ 25), para mandar link da loja aos irmãos pelo teste interno; migrar para a conta da empresa depois. Só Android por enquanto (Apple depois).
+
 **12/11/2026:** a interface é prioridade igual ao desenvolvimento e passa pelo dono antes de virar código (Interface v2 em `docs/telas/v2/`). Tipo de estrada no planejamento (Só asfalto / Misto / Prefiro terra) e terra sempre com cor/traço próprios. Pendências externas (licença da marca, empresa) ficam para depois do app pronto.
 
 **Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
