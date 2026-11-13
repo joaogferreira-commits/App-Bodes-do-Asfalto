@@ -6,7 +6,7 @@
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY já existem dentro da função (nunca vão para o app).
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const TIPOS = ['mensagem', 'aceno', 'aprovacao', 'passeio', 'confraternizacao', 'sos'];
+const TIPOS = ['mensagem', 'aceno', 'aprovacao', 'passeio', 'confraternizacao', 'sos', 'suporte'];
 const URL_EXPO = 'https://exp.host/--/api/v2/push/send';
 const LOTE = 100;
 // LGPD: a prévia de mensagem nunca leva o conteúdo.

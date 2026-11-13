@@ -1478,7 +1478,8 @@
     "desafioPor": "Creado por {{nome}}",
     "motivoDesafio": "Motivo (obligatorio para rechazar)",
     "aprovarDesafio": "Aprobar desafío",
-    "recusarDesafio": "Rechazar desafío"
+    "recusarDesafio": "Rechazar desafío",
+    "abaSuporte": "Soporte"
   },
   "papeis": {
     "titulo": "Roles de los hermanos",
@@ -1531,7 +1532,8 @@
     "comentario": "¿Qué estabas haciendo? (opcional)",
     "enviar": "Enviar detalles",
     "voltar": "Volver al inicio",
-    "enviado": "¡Gracias! Recibimos los detalles."
+    "enviado": "¡Gracias! Recibimos los detalles.",
+    "pedirAjuda": "Pedir ayuda"
   },
   "sosAtivo": {
     "faixa": "SOS activo",
@@ -1557,5 +1559,51 @@
       "voltar": "Volver",
       "mapa": "Mapa con la posición del hermano"
     }
+  },
+  "ajuda": {
+    "titulo": "Ayuda",
+    "explica": "Cuenta qué pasó o haz una pregunta. La respuesta aparece aquí mismo, en Mis solicitudes.",
+    "email": "Correo del soporte",
+    "assunto": "Ayuda - Bodes do Asfalto",
+    "whatsapp": "WhatsApp del soporte",
+    "mensagemWhats": "Hola, necesito ayuda con la app Bodes do Asfalto.",
+    "categoria": "¿Sobre qué?",
+    "categorias": {
+      "duvida": "Duda",
+      "problema": "Problema",
+      "sugestao": "Sugerencia",
+      "denuncia_outro": "Denuncia / otro"
+    },
+    "texto": "Describe en pocas palabras",
+    "textoFalta": "Escribe lo que necesitas antes de enviar.",
+    "anexarPrint": "Adjuntar captura",
+    "removerPrint": "Quitar captura",
+    "printAnexado": "Captura adjunta",
+    "semPermissao": "Sin permiso para abrir tus fotos. Actívalo en los ajustes del teléfono.",
+    "dadosAparelho": "Enviar datos del dispositivo",
+    "dadosAparelhoLista": "Se envía: versión de la app {{app}}, sistema {{so}}, modelo {{modelo}}, idioma {{idioma}}. Nunca enviamos tu ubicación.",
+    "incluirErros": "Incluir errores recientes",
+    "enviar": "Enviar solicitud",
+    "enviando": "Enviando…",
+    "enviado": "Solicitud enviada. Te avisamos cuando haya respuesta.",
+    "erroEnviar": "No se pudo enviar. Revisa internet e inténtalo de nuevo.",
+    "meusPedidos": "Mis solicitudes",
+    "nenhumPedido": "Todavía no enviaste ninguna solicitud.",
+    "status": {
+      "aberto": "En espera",
+      "respondido": "Respondida",
+      "fechado": "Cerrada"
+    },
+    "resposta": "Respuesta: {{texto}}"
+  },
+  "suporteAdmin": {
+    "vazio": "Ninguna solicitud de soporte abierta.",
+    "erroCarregar": "No se pudieron cargar las solicitudes de soporte.",
+    "print": "Captura enviada por el hermano",
+    "resposta": "Tu respuesta al hermano",
+    "respostaFalta": "Escribe la respuesta antes de enviar.",
+    "responder": "Responder",
+    "fechar": "Cerrar",
+    "erroResponder": "No se pudo registrar la respuesta. Inténtalo de nuevo."
   }
 }

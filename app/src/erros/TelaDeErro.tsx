@@ -24,7 +24,15 @@ const criarEstilos = (c: Paleta) =>
     },
   });
 
-function TelaDeErro({ idErro, aoVoltar }: { idErro?: string; aoVoltar: () => void }) {
+function TelaDeErro({
+  idErro,
+  aoVoltar,
+  aoPedirAjuda,
+}: {
+  idErro?: string;
+  aoVoltar: () => void;
+  aoPedirAjuda: () => void;
+}) {
   const { t } = useTranslation();
   const e = useEstilos(criarEstilos);
   const cores = useCores();
@@ -58,6 +66,7 @@ function TelaDeErro({ idErro, aoVoltar }: { idErro?: string; aoVoltar: () => voi
           }}
         />
       )}
+      <Botao titulo={t('erros.pedirAjuda')} variante="contorno" onPress={aoPedirAjuda} />
       <Botao titulo={t('erros.voltar')} grande onPress={aoVoltar} />
     </View>
   );
@@ -82,6 +91,10 @@ export class LimiteDeErro extends Component<{ children: ReactNode }, Estado> {
         aoVoltar={() => {
           this.setState({ erro: undefined, idErro: undefined });
           router.replace('/');
+        }}
+        aoPedirAjuda={() => {
+          this.setState({ erro: undefined, idErro: undefined });
+          router.replace('/ajuda');
         }}
       />
     );

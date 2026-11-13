@@ -103,6 +103,22 @@ describe('limite de erro', () => {
     expect(mockReplace).toHaveBeenCalledWith('/');
   });
 
+  it('"Pedir ajuda" leva à tela de ajuda', async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    const Quebra = () => {
+      throw new Error('boom');
+    };
+    await render(
+      <ProvedorTema>
+        <LimiteDeErro>
+          <Quebra />
+        </LimiteDeErro>
+      </ProvedorTema>,
+    );
+    await fireEvent.press(screen.getByText('Pedir ajuda'));
+    expect(mockReplace).toHaveBeenCalledWith('/ajuda');
+  });
+
   it('renderiza os filhos quando não há erro', async () => {
     await render(
       <ProvedorTema>

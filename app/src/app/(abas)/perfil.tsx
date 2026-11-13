@@ -384,7 +384,7 @@ export default function Perfil() {
             icone="comentario"
             titulo={t('perfil.ajuda')}
             detalhe={t('perfil.ajudaDetalhe')}
-            onPress={emBreve}
+            onPress={() => router.push('/ajuda')}
           />
           <LinhaMenu
             icone="cadeado"

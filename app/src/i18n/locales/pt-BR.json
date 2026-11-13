@@ -1478,7 +1478,8 @@
     "desafioPor": "Criado por {{nome}}",
     "motivoDesafio": "Motivo (obrigatório para recusar)",
     "aprovarDesafio": "Aprovar desafio",
-    "recusarDesafio": "Recusar desafio"
+    "recusarDesafio": "Recusar desafio",
+    "abaSuporte": "Suporte"
   },
   "papeis": {
     "titulo": "Papéis dos irmãos",
@@ -1531,7 +1532,8 @@
     "comentario": "O que você estava fazendo? (opcional)",
     "enviar": "Enviar detalhes",
     "voltar": "Voltar ao início",
-    "enviado": "Obrigado! Recebemos os detalhes."
+    "enviado": "Obrigado! Recebemos os detalhes.",
+    "pedirAjuda": "Pedir ajuda"
   },
   "sosAtivo": {
     "faixa": "SOS ativo",
@@ -1557,5 +1559,51 @@
       "voltar": "Voltar",
       "mapa": "Mapa com a posição do irmão"
     }
+  },
+  "ajuda": {
+    "titulo": "Ajuda",
+    "explica": "Conte o que aconteceu ou tire uma dúvida. A resposta aparece aqui mesmo, em Meus pedidos.",
+    "email": "E-mail do suporte",
+    "assunto": "Ajuda - Bodes do Asfalto",
+    "whatsapp": "WhatsApp do suporte",
+    "mensagemWhats": "Olá, preciso de ajuda com o app Bodes do Asfalto.",
+    "categoria": "Sobre o quê?",
+    "categorias": {
+      "duvida": "Dúvida",
+      "problema": "Problema",
+      "sugestao": "Sugestão",
+      "denuncia_outro": "Denúncia / outro"
+    },
+    "texto": "Descreva em poucas palavras",
+    "textoFalta": "Escreva o que você precisa antes de enviar.",
+    "anexarPrint": "Anexar print",
+    "removerPrint": "Remover print",
+    "printAnexado": "Print anexado",
+    "semPermissao": "Sem permissão para abrir suas fotos. Libere nas configurações do celular.",
+    "dadosAparelho": "Enviar dados do aparelho",
+    "dadosAparelhoLista": "Vai junto: versão do app {{app}}, sistema {{so}}, modelo {{modelo}}, idioma {{idioma}}. Nunca enviamos sua localização.",
+    "incluirErros": "Incluir erros recentes",
+    "enviar": "Enviar pedido",
+    "enviando": "Enviando…",
+    "enviado": "Pedido enviado. Avisamos quando houver resposta.",
+    "erroEnviar": "Não foi possível enviar. Confira a internet e tente de novo.",
+    "meusPedidos": "Meus pedidos",
+    "nenhumPedido": "Você ainda não enviou nenhum pedido.",
+    "status": {
+      "aberto": "Aguardando",
+      "respondido": "Respondido",
+      "fechado": "Encerrado"
+    },
+    "resposta": "Resposta: {{texto}}"
+  },
+  "suporteAdmin": {
+    "vazio": "Nenhum pedido de suporte aberto.",
+    "erroCarregar": "Não foi possível carregar os pedidos de suporte.",
+    "print": "Print enviado pelo irmão",
+    "resposta": "Sua resposta ao irmão",
+    "respostaFalta": "Escreva a resposta antes de enviar.",
+    "responder": "Responder",
+    "fechar": "Encerrar",
+    "erroResponder": "Não foi possível registrar a resposta. Tente de novo."
   }
 }

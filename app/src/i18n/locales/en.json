@@ -1478,7 +1478,8 @@
     "desafioPor": "Created by {{nome}}",
     "motivoDesafio": "Reason (required to reject)",
     "aprovarDesafio": "Approve challenge",
-    "recusarDesafio": "Reject challenge"
+    "recusarDesafio": "Reject challenge",
+    "abaSuporte": "Support"
   },
   "papeis": {
     "titulo": "Brothers' roles",
@@ -1531,7 +1532,8 @@
     "comentario": "What were you doing? (optional)",
     "enviar": "Send details",
     "voltar": "Back to start",
-    "enviado": "Thanks! We got the details."
+    "enviado": "Thanks! We got the details.",
+    "pedirAjuda": "Ask for help"
   },
   "sosAtivo": {
     "faixa": "SOS active",
@@ -1557,5 +1559,51 @@
       "voltar": "Back",
       "mapa": "Map with the brother position"
     }
+  },
+  "ajuda": {
+    "titulo": "Help",
+    "explica": "Tell us what happened or ask a question. The answer shows up right here, under My requests.",
+    "email": "Support email",
+    "assunto": "Help - Bodes do Asfalto",
+    "whatsapp": "Support WhatsApp",
+    "mensagemWhats": "Hello, I need help with the Bodes do Asfalto app.",
+    "categoria": "About what?",
+    "categorias": {
+      "duvida": "Question",
+      "problema": "Problem",
+      "sugestao": "Suggestion",
+      "denuncia_outro": "Report / other"
+    },
+    "texto": "Describe it in a few words",
+    "textoFalta": "Write what you need before sending.",
+    "anexarPrint": "Attach screenshot",
+    "removerPrint": "Remove screenshot",
+    "printAnexado": "Attached screenshot",
+    "semPermissao": "No permission to open your photos. Allow it in the phone settings.",
+    "dadosAparelho": "Send device data",
+    "dadosAparelhoLista": "Sent along: app version {{app}}, system {{so}}, model {{modelo}}, language {{idioma}}. We never send your location.",
+    "incluirErros": "Include recent errors",
+    "enviar": "Send request",
+    "enviando": "Sending…",
+    "enviado": "Request sent. We will let you know when there is an answer.",
+    "erroEnviar": "Could not send. Check your connection and try again.",
+    "meusPedidos": "My requests",
+    "nenhumPedido": "You have not sent any request yet.",
+    "status": {
+      "aberto": "Waiting",
+      "respondido": "Answered",
+      "fechado": "Closed"
+    },
+    "resposta": "Answer: {{texto}}"
+  },
+  "suporteAdmin": {
+    "vazio": "No open support requests.",
+    "erroCarregar": "Could not load the support requests.",
+    "print": "Screenshot sent by the brother",
+    "resposta": "Your answer to the brother",
+    "respostaFalta": "Write the answer before sending.",
+    "responder": "Answer",
+    "fechar": "Close",
+    "erroResponder": "Could not save the answer. Try again."
   }
 }

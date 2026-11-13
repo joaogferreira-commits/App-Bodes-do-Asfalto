@@ -5,6 +5,7 @@ import { Share } from 'react-native';
 
 import { useAcesso } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
+import { exportarMeusDadosServidor } from '@/servidor/meusDados';
 import { Botao, Texto } from '@/ui';
 
 import { ListaConsentimentos } from './consentimentos';
@@ -29,8 +30,20 @@ export default function MeusDados() {
       }
     };
     const dados = Object.fromEntries(pares.map(([k, v]) => [k, ler(v)]));
+    let servidor: Record<string, unknown> | null = null;
+    if (acesso.modo === 'supabase') {
+      try {
+        servidor = await exportarMeusDadosServidor();
+      } catch {
+        return avisar(t('acesso.meusDados.erroBaixar'));
+      }
+    }
     await Share.share({
-      message: JSON.stringify({ geradoEm: new Date().toISOString(), dados }, null, 2),
+      message: JSON.stringify(
+        { geradoEm: new Date().toISOString(), ...(servidor ? { servidor } : {}), dados },
+        null,
+        2,
+      ),
     }).catch(() => avisar(t('acesso.meusDados.erroBaixar')));
   };
 
