@@ -2,6 +2,11 @@
 
 O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa lendo-o.
 
+## 13/11/2026 (fim da tarde) — BLOQUEIO
+- GitHub Actions parou de iniciar máquinas às 17:00 UTC (jobs falham em ~4 s sem passos): quase certamente acabaram os 2.000 minutos grátis do mês (repositório privado). Aguardando o dono: orçamento de Actions (rec. US$ 10/mês), esperar a renovação ou tornar público.
+- CI agora roda só a parte que mudou, cancela verificação antiga e encerra o Jest preso (economia grande).
+- Pendente quando voltar: CI + aplicar precos_colaborativos; recarga OSM de 12 estados (pois-request precisa de conteúdo novo para disparar) e depois os 14 restantes; ANP do Centro-Oeste/Norte e depois o resto; versão 0.20.1 com posição ao vivo no mapa e preço colaborativo; segredo GOOGLE_SERVICES_JSON (dono) para notificações.
+
 ## 13/11/2026 (tarde)
 - 0.19.1 confirmada pelo dono: servidor ligado (status OK 258 ms, admin). Causa das versões offline: endereço com espaço/quebra de linha recusado pela regra estrita; agora o app normaliza e a montagem confere com a mesma regra.
 - Postos: tabela postos_anp + RPC postos_proximos (até 100 km, índice espacial). ANP: 107 postos de MT com preço (pesquisa semanal LPC 2026); OSM: 614 postos em MT. Cadastro completo da ANP não encontrado (dados.gov.br pede chave).
