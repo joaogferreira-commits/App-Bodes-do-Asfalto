@@ -28,6 +28,8 @@ O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Val
 
 **13/11/2026 (banco):** o dono deu **autorização expressa permanente** para aplicar no banco de produção as mudanças necessárias (migrations), dispensando o pedido caso a caso: "Dou autorização expressa para fazer qualquer modificação necessária no banco que originalmente precise de autorização expressa". Condições que continuam valendo: só pelo workflow do GitHub, só depois do CI verde (pgTAP), RLS em tudo, nada destrutivo de dados dos irmãos sem avisar antes, e avisar o dono do que foi aplicado.
 
+**13/11/2026 (navegação):** a folha "Camadas e opções" da navegação (trânsito, satélite, visão, voz, evitar pedágio/rodovia/balsa, evitar/preferir terra) fica disponível **também com a moto em movimento**, sem exigir "Sou garupa" (decisão do dono); por isso usa botões grandes de um toque.
+
 **Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
 
 ## Decisões fechadas (não mude sem perguntar)
