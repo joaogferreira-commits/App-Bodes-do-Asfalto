@@ -42,4 +42,25 @@ describe('tela do Android Auto', () => {
     expect(tabela).toContain('google >= 43 && google <= 62');
     expect(tabela).toContain('google >= 21 && google <= 42');
   });
+
+  it('todo texto usado nas telas do carro existe nos 3 idiomas e a lista de alertas tem os 6 tipos', () => {
+    const pasta = path.join(__dirname, 'android-auto');
+    const java = fs
+      .readdirSync(pasta)
+      .filter((a) => a.endsWith('.java'))
+      .map((a) => fs.readFileSync(path.join(pasta, a), 'utf8'))
+      .join('\n');
+    const plugin = fs.readFileSync(path.join(__dirname, 'withAndroidAuto.js'), 'utf8');
+    const usados = new Set([...java.matchAll(/R\.string\.(\w+)/g)].map((m) => m[1]));
+    for (const chave of usados) {
+      expect(plugin.match(new RegExp(`\\b${chave}:`, 'g'))?.length ?? 0).toBeGreaterThanOrEqual(3);
+    }
+    const alertas = fs.readFileSync(path.join(pasta, 'AlertasCarScreen.java'), 'utf8');
+    for (const tipo of ['buraco', 'policia', 'obra', 'animal', 'acidente', 'oleo']) {
+      expect(alertas).toContain(`"${tipo}"`);
+    }
+    // o botão Alerta e o botão Postos do carro chegam ao app como eventos que o modo pilotando trata
+    expect(tela).toContain('"alerta:" + tipo');
+    expect(tela).toContain('"postos"');
+  });
 });

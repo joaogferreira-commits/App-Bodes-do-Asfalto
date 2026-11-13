@@ -1,6 +1,7 @@
 import { destinosDaProva, distanciaKm, pontoADistancia, posicaoDoDestino } from './destinos';
 import {
   iniciarNavegacao,
+  irParaDestino,
   LIMITE_ROTA_MS,
   LIMITE_TOKEN_MS,
   MODO_CARRO,
@@ -211,5 +212,25 @@ describe('grade do modo pilotando (decisão do dono: botões menores, mais mapa)
   it('SOS fica no canto de cima à direita e Encerrar embaixo à direita', () => {
     expect(ordemAcoes[2]).toBe('sos');
     expect(ordemAcoes[5]).toBe('encerrar');
+  });
+});
+
+describe('irParaDestino (posto escolhido no modo pilotando)', () => {
+  const destino = { title: 'Posto', position: { lat: -15.6, lng: -56.1 } };
+
+  it('troca o destino e volta a guiar', async () => {
+    const setDestinations = jest.fn(async () => 'OK');
+    const startGuidance = jest.fn(async () => undefined);
+    expect(await irParaDestino({ setDestinations, startGuidance }, destino)).toBe(true);
+    expect(setDestinations).toHaveBeenCalledWith([destino], expect.anything());
+    expect(startGuidance).toHaveBeenCalled();
+  });
+
+  it('devolve false se o Google recusar, sem guiar', async () => {
+    const startGuidance = jest.fn(async () => undefined);
+    expect(
+      await irParaDestino({ setDestinations: async () => 'NO_ROUTE_FOUND', startGuidance }, destino),
+    ).toBe(false);
+    expect(startGuidance).not.toHaveBeenCalled();
   });
 });

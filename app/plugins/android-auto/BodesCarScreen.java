@@ -68,6 +68,34 @@ public final class BodesCarScreen extends AndroidAutoBaseScreen {
     return new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), recurso)).build();
   }
 
+  /** Manda um evento ao app no celular (React Native). Se o app ainda não abriu, ignora: o aviso local basta. */
+  private void avisarApp(String evento) {
+    try {
+      sendCustomEvent(evento, null);
+    } catch (IllegalStateException appFechado) {
+      // O app no celular ainda não abriu o React Native.
+    }
+  }
+
+  /** Alerta: abre a lista dos 6 tipos; o escolhido segue ao app como "alerta:tipo". */
+  private Action botaoAlerta() {
+    return new Action.Builder()
+        .setTitle(getCarContext().getString(R.string.auto_alerta))
+        .setIcon(icone(R.drawable.auto_ic_alerta))
+        .setOnClickListener(
+            () ->
+                getScreenManager()
+                    .push(
+                        new AlertasCarScreen(
+                            getCarContext(),
+                            tipo -> {
+                              avisarApp("alerta:" + tipo);
+                              CarToast.makeText(getCarContext(), R.string.auto_aviso_alerta, CarToast.LENGTH_LONG)
+                                  .show();
+                            })))
+        .build();
+  }
+
   private Action botao(int texto, int recurso, String evento, int aviso) {
     return new Action.Builder()
         .setTitle(getCarContext().getString(texto))
@@ -142,8 +170,8 @@ public final class BodesCarScreen extends AndroidAutoBaseScreen {
     ActionStrip botoes =
         new ActionStrip.Builder()
             .addAction(botao(R.string.auto_sos, R.drawable.auto_ic_sos, "sos", R.string.auto_aviso_sos))
-            .addAction(botao(R.string.auto_alerta, R.drawable.auto_ic_alerta, "alerta", R.string.auto_aviso_em_breve))
-            .addAction(botao(R.string.auto_postos, R.drawable.auto_ic_posto, "postos", R.string.auto_aviso_em_breve))
+            .addAction(botaoAlerta())
+            .addAction(botao(R.string.auto_postos, R.drawable.auto_ic_posto, "postos", R.string.auto_aviso_postos))
             .addAction(botao(R.string.auto_encerrar, R.drawable.auto_ic_encerrar, "encerrar", R.string.auto_aviso_encerrar))
             .build();
     ActionStrip mapa =

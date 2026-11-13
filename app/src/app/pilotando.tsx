@@ -21,9 +21,19 @@ import { useOdometro } from '@/seguranca/useOdometro';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
 import { tokenParaSair } from '@/rotas/google';
 import { nomeDoDestino, posicaoDoDestino } from '@/navegacao/destinos';
-import { iniciarNavegacao, type ControladorNavegacao, type ResultadoNavegacao } from '@/navegacao/fluxo';
+import { escolherPosto } from '@/navegacao/acoesPilotando';
+import { TIPOS_ALERTA, type TipoAlerta } from '@/navegacao/avisosEstrada';
+import {
+  irParaDestino,
+  iniciarNavegacao,
+  type ControladorNavegacao,
+  type ResultadoNavegacao,
+} from '@/navegacao/fluxo';
+import { falar } from '@/seguranca/voz';
+import { conversaDoComboio, enviarAlerta, enviarReagrupar, ouvirAvisos } from '@/servidor/avisosEstrada';
+import { carregarPontosDaArea } from '@/servidor/pontos';
 import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
-import { Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
+import { avisar as abrirAviso, Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
 
 async function pedirPermissao() {
   const { granted } = await Location.requestForegroundPermissionsAsync();
@@ -72,6 +82,15 @@ const estiloCabecalho = {
 };
 
 const DURACAO_SOS = 3000;
+const TEMPO_ALERTAS_MS = 10000;
+const iconesAlerta: Record<TipoAlerta, NomeIcone> = {
+  buraco: 'alerta',
+  policia: 'policia',
+  obra: 'oficina',
+  animal: 'alerta',
+  acidente: 'sos',
+  oleo: 'pneu',
+};
 const DURACAO_ENCERRAR = 1500;
 const LARGURA_GRADE_DEITADO = 3 * 110 + 2 * toque.pilotandoEspaco + 2 * espaco.sm;
 
@@ -157,56 +176,162 @@ function Pilotando() {
   useEffect(() => {
     encerrarRef.current = encerrar;
   });
-  useEffect(() => {
-    setOnCustomNavigationAutoEvent((evento) => {
-      if (evento.type === 'encerrar') void encerrarRef.current();
-    });
-    return () => setOnCustomNavigationAutoEvent(null);
-  }, [setOnCustomNavigationAutoEvent]);
 
   /** Resposta de um toque (R2, R7): vibração + faixa curta, sem janela para fechar. */
-  const avisar = (chave: string) => {
-    void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
-    setAviso(t(chave));
+  const avisarTexto = (texto: string, vibrar = true) => {
+    if (vibrar)
+      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+    setAviso(texto);
     if (relogioAviso.current) clearTimeout(relogioAviso.current);
     relogioAviso.current = setTimeout(() => setAviso(null), 4000);
   };
 
+  const [alertasAbertos, setAlertasAbertos] = useState(false);
+  const relogioAlertas = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const grupo = useRef<string | null>(null);
+  const grupoPronto = useRef<Promise<string | null> | null>(null);
+  const qualGrupo = () => (grupoPronto.current ??= conversaDoComboio().then((id) => (grupo.current = id)));
+
+  // Avisos dos outros irmãos chegam só por voz (e pela faixa), sem tela para ler.
+  useEffect(() => {
+    let cancelar: (() => void) | undefined;
+    let ativo = true;
+    void qualGrupo().then((id) => {
+      if (!id || !ativo) return;
+      cancelar = ouvirAvisos(id, (a) => {
+        const texto =
+          a.tipo === 'alerta'
+            ? t('pilotando.alertaRecebido', { tipo: t(`pilotando.alertas.${a.alerta}`) })
+            : t('pilotando.reagruparRecebido');
+        falar(texto);
+        avisarTexto(texto, false);
+      });
+    });
+    return () => {
+      ativo = false;
+      cancelar?.();
+    };
+    // escuta uma vez ao abrir a tela
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fecharAlertas = () => {
+    if (relogioAlertas.current) clearTimeout(relogioAlertas.current);
+    setAlertasAbertos(false);
+  };
+  const abrirAlertas = () => {
+    setAlertasAbertos(true);
+    if (relogioAlertas.current) clearTimeout(relogioAlertas.current);
+    relogioAlertas.current = setTimeout(() => setAlertasAbertos(false), TEMPO_ALERTAS_MS);
+  };
+  useEffect(
+    () => () => {
+      if (relogioAlertas.current) clearTimeout(relogioAlertas.current);
+    },
+    [],
+  );
+
+  const enviarUmAlerta = async (tipo: TipoAlerta) => {
+    fecharAlertas();
+    const nome = t(`pilotando.alertas.${tipo}`);
+    const id = await qualGrupo();
+    if (!id) return avisarTexto(t('pilotando.alertaSemGrupo'));
+    const pos = await posicaoAtual();
+    const ok = await enviarAlerta(id, tipo, pos);
+    const texto = ok ? t('pilotando.alertaEnviado', { tipo: nome }) : t('pilotando.alertaFalhou');
+    if (ok) falar(texto);
+    avisarTexto(texto, ok);
+  };
+
+  const reagrupar = async () => {
+    const id = await qualGrupo();
+    if (!id) return avisarTexto(t('pilotando.reagruparSemGrupo'));
+    const ok = await enviarReagrupar(id, await posicaoAtual());
+    const texto = ok ? t('pilotando.reagruparEnviado') : t('pilotando.reagruparFalhou');
+    if (ok) falar(texto);
+    avisarTexto(texto, ok);
+  };
+
+  const procurarPosto = async (modo: 'proximo' | 'rota', direto = false) => {
+    avisarTexto(t('pilotando.postoBuscando'));
+    const atual = await posicaoAtual();
+    if (!atual) return avisarTexto(t('pilotando.postoSemPosicao'), false);
+    const achado = await escolherPosto(modo, atual, viagem.rota?.forma, carregarPontosDaArea);
+    if (!achado) return avisarTexto(t('pilotando.postoNenhum'), false);
+    const km = achado.km.toFixed(1).replace('.', ',');
+    const nome = achado.posto.nome || t('pilotando.postoSemNome');
+    const ir = () => {
+      void irParaDestino(navigationController as unknown as ControladorNavegacao, {
+        title: nome,
+        position: { lat: achado.posto.lat, lng: achado.posto.lng },
+      }).then((ok) => {
+        const texto = ok ? t('pilotando.postoIndo', { km }) : t('pilotando.postoFalhou');
+        if (ok) falar(texto);
+        avisarTexto(texto, ok);
+      });
+    };
+    // No carro não há janela para confirmar: vai direto (o irmão ouve o destino).
+    if (direto) return ir();
+    abrirAviso(t('pilotando.postoTitulo'), t('pilotando.postoMensagem', { nome, km }), [
+      { text: t('pilotando.alertaFechar'), style: 'cancel' },
+      { text: t('pilotando.postoIr', { km }), onPress: ir },
+    ]);
+  };
+
+  // Botões "Alerta" e "Postos" da tela do carro chamam as mesmas funções do celular.
+  const acoesCarro = useRef({ abrirAlertas, enviarUmAlerta, procurarPosto });
+  useEffect(() => {
+    acoesCarro.current = { abrirAlertas, enviarUmAlerta, procurarPosto };
+  });
+
+  useEffect(() => {
+    setOnCustomNavigationAutoEvent((evento) => {
+      if (evento.type === 'encerrar') void encerrarRef.current();
+      else if (evento.type === 'postos') void acoesCarro.current.procurarPosto('proximo', true);
+      else if (evento.type.startsWith('alerta:')) {
+        const tipo = evento.type.slice('alerta:'.length) as TipoAlerta;
+        if (TIPOS_ALERTA.includes(tipo)) void acoesCarro.current.enviarUmAlerta(tipo);
+      }
+    });
+    return () => setOnCustomNavigationAutoEvent(null);
+  }, [setOnCustomNavigationAutoEvent]);
+
   const acoes: Record<
     Exclude<Acao, 'sos' | 'encerrar'>,
-    { icone: NomeIcone; fundo: string; cor: string; corIcone: string; aviso: string }
+    { icone: NomeIcone; fundo: string; cor: string; corIcone: string; aoTocar: () => void }
   > = {
     alerta: {
       icone: 'alerta',
       fundo: c.alerta,
       cor: c.textoSobreAlerta,
       corIcone: c.textoSobreAlerta,
-      aviso: 'pilotando.emBreveAlerta',
+      aoTocar: abrirAlertas,
     },
     reagrupar: {
       icone: 'reagrupar',
       fundo: c.superficie3,
       cor: c.texto,
       corIcone: c.texto,
-      aviso: 'pilotando.emBreveReagrupar',
+      aoTocar: () => void reagrupar(),
     },
     postoProximo: {
       icone: 'posto',
       fundo: c.superficie3,
       cor: c.texto,
       corIcone: c.verdePosto,
-      aviso: 'pilotando.emBrevePosto',
+      aoTocar: () => void procurarPosto('proximo'),
     },
     postoNaRota: {
       icone: 'postoRota',
       fundo: c.superficie3,
       cor: c.texto,
       corIcone: c.verdePosto,
-      aviso: 'pilotando.emBrevePosto',
+      aoTocar: () => void procurarPosto('rota'),
     },
   };
 
   const faixa =
+    (alertasAbertos ? t('pilotando.alertaTitulo') : null) ??
     aviso ??
     (estado === 'preparando'
       ? t('pilotando.dicaEntrada')
@@ -264,7 +389,20 @@ function Pilotando() {
             <Texto style={[estilos.textoFaixa, { color: c.texto }]} maxFontSizeMultiplier={1.3}>
               {faixa}
             </Texto>
-            {estado === 'erro' && !aviso && (
+            {alertasAbertos && (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={t('pilotando.alertaFechar')}
+                onPress={fecharAlertas}
+                hitSlop={12}
+                style={estilos.tentar}
+              >
+                <Texto style={{ color: c.acao, fontFamily: fontes.textoForte }}>
+                  {t('pilotando.alertaFechar')}
+                </Texto>
+              </Pressable>
+            )}
+            {estado === 'erro' && !aviso && !alertasAbertos && (
               <Pressable accessibilityRole="button" onPress={iniciar} hitSlop={12} style={estilos.tentar}>
                 <Texto style={{ color: c.acao, fontFamily: fontes.textoForte }}>
                   {t('rota.tentarDeNovo')}
@@ -275,79 +413,102 @@ function Pilotando() {
         )}
 
         <View style={[estilos.grade, { gap: grade.vao, padding: grade.margem }]} testID="grade-pilotando">
-          {ordemAcoes.map((chave) => {
-            if (chave === 'sos') {
-              return (
-                <BotaoSegurar
-                  key={chave}
-                  duracao={DURACAO_SOS}
-                  rotulo={t('pilotando.sos')}
-                  dica={t('pilotando.sosDica')}
-                  corProgresso={c.sosPressionado}
-                  aoCompletar={() => router.push('/sos')}
-                  style={[
+          {alertasAbertos
+            ? TIPOS_ALERTA.map((tipo) => (
+                <Pressable
+                  key={tipo}
+                  accessibilityRole="button"
+                  accessibilityLabel={t(`pilotando.alertas.${tipo}`)}
+                  onPress={() => void enviarUmAlerta(tipo)}
+                  style={({ pressed }) => [
                     estilos.botao,
                     tamanhoBotao,
-                    { backgroundColor: c.sos, borderWidth: 3, borderColor: c.contornoSos },
+                    { backgroundColor: c.alerta, opacity: pressed ? 0.8 : 1 },
                   ]}
                 >
-                  <Texto style={[estilos.sos, { color: c.textoSobreSos }]} maxFontSizeMultiplier={1}>
-                    SOS
-                  </Texto>
+                  <Icone nome={iconesAlerta[tipo]} tamanho={32} cor={c.textoSobreAlerta} />
                   <Texto
-                    style={[estilos.textoBotao, { color: c.textoSobreSos }]}
+                    style={[estilos.textoBotao, { color: c.textoSobreAlerta }]}
+                    numberOfLines={2}
                     maxFontSizeMultiplier={escalaMaxima.pilotando}
                   >
-                    {t('pilotando.sosDica')}
+                    {t(`pilotando.alertas.${tipo}`)}
                   </Texto>
-                </BotaoSegurar>
-              );
-            }
-            if (chave === 'encerrar') {
-              return (
-                <BotaoSegurar
-                  key={chave}
-                  duracao={DURACAO_ENCERRAR}
-                  rotulo={t('pilotando.encerrar')}
-                  dica={t('pilotando.encerrarDica')}
-                  corProgresso={c.superficie3}
-                  aoCompletar={() => void encerrar()}
-                  style={[estilos.botao, tamanhoBotao, { borderWidth: 2, borderColor: c.linhaForte }]}
-                >
-                  <Icone nome="encerrar" tamanho={30} cor={c.texto} />
-                  <Texto
-                    style={[estilos.textoBotao, { color: c.texto }]}
-                    maxFontSizeMultiplier={escalaMaxima.pilotando}
+                </Pressable>
+              ))
+            : ordemAcoes.map((chave) => {
+                if (chave === 'sos') {
+                  return (
+                    <BotaoSegurar
+                      key={chave}
+                      duracao={DURACAO_SOS}
+                      rotulo={t('pilotando.sos')}
+                      dica={t('pilotando.sosDica')}
+                      corProgresso={c.sosPressionado}
+                      aoCompletar={() => router.push('/sos')}
+                      style={[
+                        estilos.botao,
+                        tamanhoBotao,
+                        { backgroundColor: c.sos, borderWidth: 3, borderColor: c.contornoSos },
+                      ]}
+                    >
+                      <Texto style={[estilos.sos, { color: c.textoSobreSos }]} maxFontSizeMultiplier={1}>
+                        SOS
+                      </Texto>
+                      <Texto
+                        style={[estilos.textoBotao, { color: c.textoSobreSos }]}
+                        maxFontSizeMultiplier={escalaMaxima.pilotando}
+                      >
+                        {t('pilotando.sosDica')}
+                      </Texto>
+                    </BotaoSegurar>
+                  );
+                }
+                if (chave === 'encerrar') {
+                  return (
+                    <BotaoSegurar
+                      key={chave}
+                      duracao={DURACAO_ENCERRAR}
+                      rotulo={t('pilotando.encerrar')}
+                      dica={t('pilotando.encerrarDica')}
+                      corProgresso={c.superficie3}
+                      aoCompletar={() => void encerrar()}
+                      style={[estilos.botao, tamanhoBotao, { borderWidth: 2, borderColor: c.linhaForte }]}
+                    >
+                      <Icone nome="encerrar" tamanho={30} cor={c.texto} />
+                      <Texto
+                        style={[estilos.textoBotao, { color: c.texto }]}
+                        maxFontSizeMultiplier={escalaMaxima.pilotando}
+                      >
+                        {t('pilotando.encerrarDica')}
+                      </Texto>
+                    </BotaoSegurar>
+                  );
+                }
+                const a = acoes[chave];
+                return (
+                  <Pressable
+                    key={chave}
+                    accessibilityRole="button"
+                    accessibilityLabel={t(`pilotando.${chave}`)}
+                    onPress={a.aoTocar}
+                    style={({ pressed }) => [
+                      estilos.botao,
+                      tamanhoBotao,
+                      { backgroundColor: a.fundo, opacity: pressed ? 0.8 : 1 },
+                    ]}
                   >
-                    {t('pilotando.encerrarDica')}
-                  </Texto>
-                </BotaoSegurar>
-              );
-            }
-            const a = acoes[chave];
-            return (
-              <Pressable
-                key={chave}
-                accessibilityRole="button"
-                accessibilityLabel={t(`pilotando.${chave}`)}
-                onPress={() => avisar(a.aviso)}
-                style={({ pressed }) => [
-                  estilos.botao,
-                  tamanhoBotao,
-                  { backgroundColor: a.fundo, opacity: pressed ? 0.8 : 1 },
-                ]}
-              >
-                <Icone nome={a.icone} tamanho={32} cor={a.corIcone} />
-                <Texto
-                  style={[estilos.textoBotao, { color: a.cor }]}
-                  numberOfLines={2}
-                  maxFontSizeMultiplier={escalaMaxima.pilotando}
-                >
-                  {t(`pilotando.${chave}`)}
-                </Texto>
-              </Pressable>
-            );
-          })}
+                    <Icone nome={a.icone} tamanho={32} cor={a.corIcone} />
+                    <Texto
+                      style={[estilos.textoBotao, { color: a.cor }]}
+                      numberOfLines={2}
+                      maxFontSizeMultiplier={escalaMaxima.pilotando}
+                    >
+                      {t(`pilotando.${chave}`)}
+                    </Texto>
+                  </Pressable>
+                );
+              })}
         </View>
       </SafeAreaView>
     </View>

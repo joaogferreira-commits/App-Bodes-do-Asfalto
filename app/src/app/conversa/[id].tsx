@@ -17,6 +17,7 @@ import { useRascunho } from '@/estado/rascunho';
 import { useAcessoOpcional } from '@/acesso/acesso';
 import { podeEscrever, respostasRapidas, type Mensagem } from '@/dados/conversas';
 import { useConversas } from '@/estado/conversas';
+import { textoDoAviso } from '@/navegacao/avisosEstrada';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { BotaoIcone, Botao, Chip, Icone, Texto } from '@/ui';
 import { abrirMenu, avisar } from '@/ui/dialogo';
@@ -170,7 +171,7 @@ export default function Conversa() {
               onLongPress={() => tocarMensagem(m)}
               onPress={() => tocarMensagem(m)}
               accessibilityRole="text"
-              accessibilityLabel={`${m.minha ? t('chat.voce') : m.autor}: ${m.texto}`}
+              accessibilityLabel={`${m.minha ? t('chat.voce') : m.autor}: ${textoDoAviso(m.texto, t)}`}
               style={[estilos.bolha, m.minha ? estilos.minha : estilos.dele]}
             >
               {!m.minha && c.tipo !== 'direto' && (
@@ -178,7 +179,9 @@ export default function Conversa() {
                   {m.autor}
                 </Texto>
               )}
-              <Texto style={m.minha ? { color: cores.textoSobreAcao } : undefined}>{m.texto}</Texto>
+              <Texto style={m.minha ? { color: cores.textoSobreAcao } : undefined}>
+                {textoDoAviso(m.texto, t)}
+              </Texto>
               <View style={{ flexDirection: 'row', gap: 8, alignSelf: 'flex-end', alignItems: 'center' }}>
                 {(m.tfa ?? 0) + (chat.meusTfa.includes(m.id) ? 1 : 0) > 0 && (
                   <Texto variante="pequeno" style={{ color: m.minha ? cores.textoSobreAcao : cores.ouro }}>

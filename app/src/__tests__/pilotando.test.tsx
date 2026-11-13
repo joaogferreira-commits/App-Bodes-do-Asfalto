@@ -1,10 +1,25 @@
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import * as dialogo from '@/ui/dialogo';
 
 import { ProvedorViagem } from '@/estado/viagem';
 import TelaPilotando from '@/app/pilotando';
+import * as avisos from '@/servidor/avisosEstrada';
+import { falar } from '@/seguranca/voz';
 
 const permissao = { granted: false };
+
+jest.mock('@/servidor/avisosEstrada', () => ({
+  conversaDoComboio: jest.fn(async () => 'grupo-1'),
+  enviarAlerta: jest.fn(async () => true),
+  enviarReagrupar: jest.fn(async () => true),
+  ouvirAvisos: jest.fn(() => () => undefined),
+}));
+jest.mock('@/servidor/pontos', () => ({
+  carregarPontosDaArea: jest.fn(async () => [
+    { id: 'node/1', tipo: 'posto', nome: 'Posto Central', lat: -15.61, lng: -56.1 },
+  ]),
+}));
+jest.mock('@/seguranca/voz', () => ({ falar: jest.fn() }));
 
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
 jest.mock('expo-location', () => ({
@@ -45,6 +60,7 @@ const tela = () => (
 
 describe('modo pilotando', () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     permissao.granted = false;
   });
 
@@ -92,13 +108,92 @@ describe('modo pilotando', () => {
     }
   });
 
-  it('Alerta responde com um toque e uma faixa, sem janela para fechar (R2)', async () => {
+  it('Alerta abre a grade de 6 tipos e envia o escolhido ao grupo, com voz (R2)', async () => {
     permissao.granted = true;
-    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
+    const janela = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await render(tela());
     await fireEvent.press(await screen.findByRole('button', { name: 'Alerta' }));
-    expect(alerta).not.toHaveBeenCalled();
-    expect(await screen.findByText('Alerta: chega com os passeios.')).toBeTruthy();
-    alerta.mockRestore();
+    for (const nome of [
+      'Buraco',
+      'Polícia',
+      'Obra',
+      'Animal na pista',
+      'Acidente à frente',
+      'Óleo ou areia',
+    ]) {
+      expect(screen.getByRole('button', { name: nome })).toBeTruthy();
+    }
+    await fireEvent.press(screen.getByRole('button', { name: 'Buraco' }));
+    expect(await screen.findByText('Alerta enviado: Buraco')).toBeTruthy();
+    expect(avisos.enviarAlerta).toHaveBeenCalledWith('grupo-1', 'buraco', { lat: -15.6, lng: -56.1 });
+    expect(falar).toHaveBeenCalledWith('Alerta enviado: Buraco');
+    expect(janela).not.toHaveBeenCalled();
+    janela.mockRestore();
+  });
+
+  it('sem comboio ou passeio ativo, o alerta não é enviado e avisa', async () => {
+    permissao.granted = true;
+    (avisos.conversaDoComboio as jest.Mock).mockResolvedValueOnce(null);
+    await render(tela());
+    await fireEvent.press(await screen.findByRole('button', { name: 'Alerta' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Obra' }));
+    expect(await screen.findByText('Sem comboio ou passeio ativo. Alerta não enviado.')).toBeTruthy();
+    expect(avisos.enviarAlerta).not.toHaveBeenCalled();
+  });
+
+  it('Reagrupar manda o aviso ao grupo e fala', async () => {
+    permissao.granted = true;
+    await render(tela());
+    await fireEvent.press(await screen.findByRole('button', { name: 'Reagrupar' }));
+    expect(await screen.findByText('Reagrupar enviado ao grupo.')).toBeTruthy();
+    expect(avisos.enviarReagrupar).toHaveBeenCalledWith('grupo-1', { lat: -15.6, lng: -56.1 });
+    expect(falar).toHaveBeenCalledWith('Reagrupar enviado ao grupo.');
+  });
+
+  it('Posto próximo busca no banco e pede confirmação para ir; confirmar troca o destino', async () => {
+    permissao.granted = true;
+    const janela = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
+    await render(tela());
+    await fireEvent.press(await screen.findByRole('button', { name: 'Posto próximo' }));
+    await waitFor(() => expect(janela).toHaveBeenCalled());
+    const [titulo, mensagem, botoes] = janela.mock.calls[0]!;
+    expect(titulo).toBe('Ir ao posto');
+    expect(mensagem).toContain('Posto Central');
+    const ir = botoes!.find((b) => b.text.startsWith('Ir ao posto ('))!;
+    await act(async () => ir.onPress?.());
+    const { navigationController } = jest
+      .requireMock('@googlemaps/react-native-navigation-sdk')
+      .useNavigation();
+    await waitFor(() =>
+      expect(navigationController.setDestinations).toHaveBeenCalledWith(
+        [{ title: 'Posto Central', position: { lat: -15.61, lng: -56.1 } }],
+        expect.anything(),
+      ),
+    );
+    janela.mockRestore();
+  });
+
+  it('Posto na rota sem rota ativa age como o mais próximo', async () => {
+    permissao.granted = true;
+    const janela = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
+    await render(tela());
+    await fireEvent.press(await screen.findByRole('button', { name: 'Posto na rota' }));
+    await waitFor(() => expect(janela).toHaveBeenCalled());
+    expect(janela.mock.calls[0]![1]).toContain('Posto Central');
+    janela.mockRestore();
+  });
+
+  it('alerta de outro irmão chega só por voz', async () => {
+    permissao.granted = true;
+    let entrega: (a: unknown, autor: string) => void = () => undefined;
+    (avisos.ouvirAvisos as jest.Mock).mockImplementationOnce((_id: string, f: typeof entrega) => {
+      entrega = f;
+      return () => undefined;
+    });
+    await render(tela());
+    await screen.findByTestId('mapa-google');
+    await waitFor(() => expect(avisos.ouvirAvisos).toHaveBeenCalled());
+    await act(async () => entrega({ tipo: 'alerta', alerta: 'policia', posicao: null }, 'Zé'));
+    expect(falar).toHaveBeenCalledWith('Atenção, Polícia à frente.');
   });
 });

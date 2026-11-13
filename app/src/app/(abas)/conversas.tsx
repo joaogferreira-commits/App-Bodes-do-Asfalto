@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ordenarConversas, type Conversa, type TipoConversa } from '@/dados/conversas';
 import { diretorios } from '@/dados/diretorios';
 import { avisarResultadoAceno } from '@/estado/avisoAceno';
+import { textoDoAviso } from '@/navegacao/avisosEstrada';
 import { useConversas } from '@/estado/conversas';
 import { listarMembros, type MembroChat } from '@/servidor/chat';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
@@ -157,7 +158,7 @@ export default function Conversas() {
                   {c.aguardandoAceno
                     ? t('chat.aguardandoAceno')
                     : u
-                      ? `${u.minha ? t('chat.voce') : u.autor}: ${u.texto}`
+                      ? `${u.minha ? t('chat.voce') : u.autor}: ${textoDoAviso(u.texto, t)}`
                       : t(`chat.tipos.${c.tipo}`)}
                 </Texto>
                 {c.terminaEm && (

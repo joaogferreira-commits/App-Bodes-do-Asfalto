@@ -146,3 +146,31 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     return 'erro';
   }
 }
+
+/**
+ * Troca o destino da navegação em andamento (ex.: posto escolhido no modo pilotando) e volta a guiar.
+ * A rota planejada é substituída pela do Google até o novo destino. Devolve false se o Google recusar.
+ */
+export async function irParaDestino(
+  controlador: Pick<ControladorNavegacao, 'setDestinations' | 'startGuidance'>,
+  destino: { title: string; position: Coordenada },
+): Promise<boolean> {
+  try {
+    let rota: string;
+    try {
+      rota = await controlador.setDestinations([destino], {
+        routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
+      });
+    } catch (e) {
+      if (!/unsupported travel mode/i.test(String((e as Error)?.message ?? e))) throw e;
+      rota = await controlador.setDestinations([destino], {
+        routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+      });
+    }
+    if (rota !== 'OK') return false;
+    await controlador.startGuidance();
+    return true;
+  } catch {
+    return false;
+  }
+}

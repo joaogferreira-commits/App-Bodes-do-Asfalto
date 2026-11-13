@@ -15,7 +15,7 @@ Ordem obrigatória; cada ciclo pega o primeiro não feito. Regra: o que não fic
 - P6c. Visual do mapa aprovado (13/11, opção A): itens 1–9 de docs/MAPA_VISUAL_PROPOSTA.md. Trava em movimento com 'Sou garupa / passageiro'.
 - ~~P7~~ FEITO 13/11. Mapa ao vivo: irmãos reais (aproximado no servidor, zonas privadas, apagado em 7 dias), aceno real, "Falar com o contato" da Loja via aceno.
 - ~~P8~~ FEITO 13/11 no app (Ágape real aguarda autorização da migration 20261113100000_agapes). Passeios reais: criar passeio (diretoria), "Vou/Talvez", grupo automático; Ágape real.
-- P9. Modo pilotando: Alerta (tipos de alerta para o comboio), Reagrupar, Posto mais próximo e Posto na rota funcionando; mesmos botões no Android Auto.
+- ~~P9~~ FEITO 13/11 (voz com expo-speech; aviso só com a tela de pilotando aberta). Modo pilotando: Alerta (tipos de alerta para o comboio), Reagrupar, Posto mais próximo e Posto na rota funcionando; mesmos botões no Android Auto.
 - P10. SOS real: avisa o grupo do passeio e os contatos que usam o app (push) + posição exata durante o SOS.
 - P11. Desafios, conquistas e XP no servidor (aprovação real por diretoria/moderador); ranking.
 - P12. Ajuda/suporte (texto, print e dados do aparelho chegam ao admin) e "Meus dados" baixando do servidor.

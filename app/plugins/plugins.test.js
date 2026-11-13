@@ -93,7 +93,7 @@ describe('tela do carro: recursos', () => {
   });
 
   it('no máximo 4 botões na faixa de ações (regra do Android Auto)', () => {
-    expect(tela.match(/\.addAction\(botao\(/g)).toHaveLength(4);
+    expect(tela.match(/\.addAction\(botao(?:Alerta)?\(/g)).toHaveLength(4);
   });
 });
 
