@@ -299,3 +299,20 @@ class Descoberta(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class TestTituloERecentes(unittest.TestCase):
+    def test_pula_linhas_de_titulo(self):
+        from importar_anp import pular_titulo, colunas_presentes
+        txt = 'AGÊNCIA NACIONAL DO PETRÓLEO;;;\nLevantamento semanal;;;\n\nCNPJ DA REVENDA;PRODUTO;VALOR DE VENDA;DATA DA COLETA;ESTADO - SIGLA\n1;GASOLINA;6,29;01/11/2026;MT'
+        saida = pular_titulo(txt)
+        self.assertTrue(saida.startswith('CNPJ DA REVENDA'))
+        self.assertGreaterEqual(len(colunas_presentes(saida)), 3)
+
+    def test_mais_recentes_primeiro(self):
+        from importar_anp import ordenar_recentes
+        urls = ['x/2023/revendas_lpc_2023-05-07_2023-05-13.xlsx', 'x/2026/revendas_lpc_2026-10-26_2026-11-01.xlsx',
+                'x/2026/resumo_semanal_lpc_2026-10-26_2026-11-01.xlsx']
+        r = ordenar_recentes(urls)
+        self.assertEqual(r[0], 'x/2026/revendas_lpc_2026-10-26_2026-11-01.xlsx')
+        self.assertEqual(r[-1], 'x/2023/revendas_lpc_2023-05-07_2023-05-13.xlsx')

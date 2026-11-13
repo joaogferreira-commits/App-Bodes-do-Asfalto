@@ -170,6 +170,8 @@ def descobrir(sessao, log=print, hoje=None):
                 vistos.add(u)
                 unicos.append(u)
         achados[k] = unicos
+    achados['lpc'] = ordenar_recentes(achados['lpc'])
+    achados['cadastro'] = ordenar_recentes(achados['cadastro'])
     return achados
 
 
@@ -242,6 +244,24 @@ def linhas_csv(texto):
         if not linha or not any(c.strip() for c in linha):
             continue
         yield {k: (linha[i].strip() if i < len(linha) else '') for k, i in indice.items()}
+
+
+def pular_titulo(texto, max_linhas=40):
+    """Planilhas da ANP têm linhas de título antes da tabela: começa na primeira linha que parece cabeçalho."""
+    linhas = texto.split('\n')
+    for k in range(min(max_linhas, len(linhas))):
+        if len(colunas_presentes(linhas[k])) >= 3:
+            return '\n'.join(linhas[k:])
+    return texto
+
+
+def ordenar_recentes(urls):
+    """Arquivos mais novos primeiro (pelo ano e pelas datas no nome); por semana as revendas antes do resumo."""
+    def chave(u):
+        anos = [int(a) for a in re.findall(r'20\d\d', u)] or [0]
+        datas = re.findall(r'\d{4}-\d{2}-\d{2}', u)
+        return (max(anos), max(datas) if datas else '', 'revenda' in u.lower(), u)
+    return sorted(dict.fromkeys(urls), key=chave, reverse=True)
 
 
 def colunas_presentes(texto):
@@ -696,7 +716,7 @@ def ler_arquivo(caminho):
 
 def xlsx_para_csv(caminho):
     import openpyxl
-    wb = openpyxl.load_workbook(caminho, read_only=True, data_only=True)
+    wb = openpyxl.load_workbook(caminho, read_only=True, data_only=True, keep_links=False)
     out = io.StringIO()
     w = csv.writer(out, delimiter=';')
     for linha in wb.worksheets[0].iter_rows(values_only=True):
@@ -747,12 +767,16 @@ def carregar_tabelas(sessao, achados, ufs, usar_cadastro=True, log=print):
     lpc, cadastro = {}, {}
     baixados = 0
     for i, url in enumerate(achados['lpc']):
-        if baixados >= 2:
+        if baixados >= 2 or i >= 40:
             break
         destino = str(SAIDA / f'lpc_{i}{Path(url.split("?")[0]).suffix or ".csv"}')
         if not baixar(sessao, url, destino, log):
             continue
-        texto = ler_arquivo(destino)
+        try:
+            texto = pular_titulo(ler_arquivo(destino))
+        except Exception as e:  # planilha com vínculo externo, corrompida etc.: pula e segue
+            log(f'  não consegui ler {url}: {type(e).__name__}: {str(e)[:120]}; ignorado')
+            continue
         cols = colunas_presentes(texto)
         (SAIDA / f'amostra_lpc_{i}.txt').write_text('\n'.join(texto.split('\n')[:6]), encoding='utf-8')
         log(f'LPC {url}: colunas reconhecidas {cols}')
@@ -771,7 +795,11 @@ def carregar_tabelas(sessao, achados, ufs, usar_cadastro=True, log=print):
         destino = str(SAIDA / f'cadastro_{i}{Path(url.split("?")[0]).suffix or ".csv"}')
         if not baixar(sessao, url, destino, log):
             continue
-        texto = ler_arquivo(destino)
+        try:
+            texto = pular_titulo(ler_arquivo(destino))
+        except Exception as e:  # planilha com vínculo externo, corrompida etc.: pula e segue
+            log(f'  não consegui ler {url}: {type(e).__name__}: {str(e)[:120]}; ignorado')
+            continue
         cols = colunas_presentes(texto)
         (SAIDA / f'amostra_cadastro_{i}.txt').write_text('\n'.join(texto.split('\n')[:6]), encoding='utf-8')
         log(f'Cadastro {url}: colunas reconhecidas {cols}')
