@@ -1,5 +1,6 @@
 import { act, fireEvent, render, renderHook, screen } from '@testing-library/react-native';
 
+import { LIBERACAO_MAX_MS, LIBERACAO_PARADO_MS, reiniciarLiberacaoGarupa } from './liberacaoGarupa';
 import { TelaEmMovimento } from './TelaEmMovimento';
 import { useBloqueioEmMovimento } from './useBloqueioEmMovimento';
 
@@ -40,12 +41,70 @@ describe('useBloqueioEmMovimento', () => {
 });
 
 describe('TelaEmMovimento', () => {
-  it('oferece só o modo pilotando e o mapa', async () => {
+  it('oferece modo pilotando, mapa e liberação de garupa', async () => {
     const aoIrAoMapa = jest.fn();
     await render(<TelaEmMovimento aoIrAoMapa={aoIrAoMapa} />);
     expect(screen.getByText('Moto em movimento')).toBeTruthy();
     await fireEvent.press(screen.getByRole('button', { name: 'Voltar ao mapa' }));
     expect(aoIrAoMapa).toHaveBeenCalled();
-    expect(screen.getAllByRole('button')).toHaveLength(2);
+    expect(screen.getAllByRole('button')).toHaveLength(3);
+    expect(screen.getByText(/garupa ou está de carona/)).toBeTruthy();
+  });
+});
+
+describe('liberação Sou garupa / passageiro', () => {
+  let agora = 1_000_000;
+  beforeEach(() => {
+    ouvintes.length = 0;
+    permissao.granted = true;
+    reiniciarLiberacaoGarupa();
+    agora = 1_000_000;
+    jest.useFakeTimers();
+    jest.spyOn(Date, 'now').mockImplementation(() => agora);
+  });
+  afterEach(() => {
+    jest.useRealTimers();
+    jest.restoreAllMocks();
+  });
+  const andar = async (ms: number, speed: number) => {
+    agora += ms;
+    await act(async () => {
+      ouvintes[0]!({ coords: { speed } });
+    });
+  };
+
+  async function montar() {
+    const hook = await renderHook(() => useBloqueioEmMovimento());
+    await act(async () => {});
+    await andar(0, 10);
+    expect(hook.result.current).toBe(true);
+    await render(<TelaEmMovimento aoIrAoMapa={jest.fn()} />);
+    await fireEvent.press(screen.getByRole('button', { name: 'Sou garupa / passageiro' }));
+    return hook;
+  }
+
+  it('destrava enquanto em movimento', async () => {
+    const { result } = await montar();
+    expect(result.current).toBe(false);
+    await andar(60_000, 20);
+    expect(result.current).toBe(false);
+  });
+
+  it('trava de novo após 5 min parado', async () => {
+    const { result } = await montar();
+    await andar(1000, 0);
+    await andar(LIBERACAO_PARADO_MS - 1000, 0);
+    expect(result.current).toBe(false);
+    await andar(2000, 0); // passou 5 min parado
+    await andar(1000, 10);
+    expect(result.current).toBe(true);
+  });
+
+  it('trava de novo após 3 h', async () => {
+    const { result } = await montar();
+    await andar(LIBERACAO_MAX_MS - 1000, 20);
+    expect(result.current).toBe(false);
+    await andar(2000, 20);
+    expect(result.current).toBe(true);
   });
 });

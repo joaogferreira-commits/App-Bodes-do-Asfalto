@@ -309,7 +309,9 @@
     "titulo": "Moto em movimento",
     "texto": "Feed, mensagens e ajustes ficam travados enquanto a moto anda. Pare para usar.",
     "pilotando": "Abrir o modo pilotando",
-    "mapa": "Voltar ao mapa"
+    "mapa": "Voltar ao mapa",
+    "garupa": "Sou garupa / passageiro",
+    "garupaAviso": "Pilotando? Use só o mapa. Se você é garupa ou está de carona, pode liberar."
   },
   "tema": {
     "titulo": "Aparência",
@@ -1149,6 +1151,11 @@
     "beneficioIrmaos": "Negócio de irmão, com benefício para quem é do clube.",
     "fonteOsm": "Fonte: OpenStreetMap.",
     "posicaoAproximada": "Posição aproximada (cerca de 5 km), por privacidade.",
+    "apelidoDe": "Apelido: {{nome}}",
+    "nomeDe": "Nome: {{nome}}",
+    "capituloDe": "Capítulo: {{nome}}",
+    "posicaoCidade": "Posição da cidade do capítulo, por privacidade.",
+    "posicaoExata": "Posição exata, que ele escolheu mostrar a você.",
     "precoPergunta": "Quanto está a gasolina comum? (R$ por litro)",
     "precoInvalido": "Confira o valor: use algo como 6,29.",
     "precoEnviar": "Enviar preço",

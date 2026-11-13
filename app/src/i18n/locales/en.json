@@ -309,7 +309,9 @@
     "titulo": "Bike in motion",
     "texto": "Feed, messages and settings are locked while the bike is moving. Stop to use them.",
     "pilotando": "Open riding mode",
-    "mapa": "Back to map"
+    "mapa": "Back to map",
+    "garupa": "I'm a passenger",
+    "garupaAviso": "Riding? Use only the map. If you are a pillion or a car passenger, you can unlock."
   },
   "tema": {
     "titulo": "Appearance",
@@ -1149,6 +1151,11 @@
     "beneficioIrmaos": "A brother's business, with a benefit for club members.",
     "fonteOsm": "Source: OpenStreetMap.",
     "posicaoAproximada": "Approximate position (about 5 km), for privacy.",
+    "apelidoDe": "Nickname: {{nome}}",
+    "nomeDe": "Name: {{nome}}",
+    "capituloDe": "Chapter: {{nome}}",
+    "posicaoCidade": "Chapter city position, for privacy.",
+    "posicaoExata": "Exact position, which he chose to show you.",
     "precoPergunta": "How much is regular gasoline? (R$ per liter)",
     "precoInvalido": "Check the value: use something like 6.29.",
     "precoEnviar": "Send price",

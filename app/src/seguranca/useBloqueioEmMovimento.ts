@@ -1,6 +1,7 @@
 import * as Location from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
 
+import { avaliarLiberacaoGarupa, useLiberadoGarupa } from './liberacaoGarupa';
 import { estadoInicialMovimento, msParaKmh, proximoEstadoMovimento } from './movimento';
 
 /**
@@ -9,6 +10,7 @@ import { estadoInicialMovimento, msParaKmh, proximoEstadoMovimento } from './mov
  */
 export function useBloqueioEmMovimento(): boolean {
   const [travado, setTravado] = useState(false);
+  const liberado = useLiberadoGarupa();
   const estado = useRef(estadoInicialMovimento);
 
   useEffect(() => {
@@ -19,6 +21,7 @@ export function useBloqueioEmMovimento(): boolean {
 
     const aplicar = (kmh: number | null) => {
       estado.current = proximoEstadoMovimento(estado.current, kmh, Date.now());
+      avaliarLiberacaoGarupa(kmh, Date.now());
       if (ativo) setTravado(estado.current.travado);
     };
 
@@ -43,5 +46,5 @@ export function useBloqueioEmMovimento(): boolean {
     };
   }, []);
 
-  return travado;
+  return travado && !liberado;
 }

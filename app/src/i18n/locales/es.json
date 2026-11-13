@@ -309,7 +309,9 @@
     "titulo": "Moto en movimiento",
     "texto": "El feed, los mensajes y los ajustes se bloquean mientras la moto anda. Detente para usarlos.",
     "pilotando": "Abrir el modo pilotando",
-    "mapa": "Volver al mapa"
+    "mapa": "Volver al mapa",
+    "garupa": "Soy acompañante / pasajero",
+    "garupaAviso": "¿Pilotando? Usa solo el mapa. Si vas de acompañante o de pasajero, puedes liberar."
   },
   "tema": {
     "titulo": "Apariencia",
@@ -1149,6 +1151,11 @@
     "beneficioIrmaos": "Negocio de un hermano, con beneficio para quien es del club.",
     "fonteOsm": "Fuente: OpenStreetMap.",
     "posicaoAproximada": "Posición aproximada (unos 5 km), por privacidad.",
+    "apelidoDe": "Apodo: {{nome}}",
+    "nomeDe": "Nombre: {{nome}}",
+    "capituloDe": "Capítulo: {{nome}}",
+    "posicaoCidade": "Posición de la ciudad del capítulo, por privacidad.",
+    "posicaoExata": "Posición exacta, que él eligió mostrarte.",
     "precoPergunta": "¿Cuánto está la gasolina común? (R$ por litro)",
     "precoInvalido": "Revisa el valor: usa algo como 6,29.",
     "precoEnviar": "Enviar precio",
