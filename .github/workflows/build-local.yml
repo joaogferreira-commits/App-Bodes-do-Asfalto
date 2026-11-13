@@ -19,7 +19,13 @@ jobs:
     steps:
       - name: Liberar espaço em disco
         working-directory: /
-        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost "$AGENT_TOOLSDIRECTORY/CodeQL" || true
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost "$AGENT_TOOLSDIRECTORY/CodeQL" \
+            /usr/local/.ghcup /usr/share/swift /usr/local/share/powershell /usr/local/share/chromium \
+            /opt/microsoft /opt/google /usr/local/lib/android/sdk/ndk/2[0-6]* || true
+          docker system prune -af >/dev/null 2>&1 || true
+          sudo mkdir -p /mnt/trabalho && sudo chown -R "$USER" /mnt/trabalho
+          df -h / /mnt
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -71,6 +77,8 @@ jobs:
         env:
           GRADLE_OPTS: -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.compiler.execution.strategy=in-process
           ORG_GRADLE_PROJECT_reactNativeArchitectures: arm64-v8a
+          EAS_LOCAL_BUILD_WORKINGDIR: /mnt/trabalho/eas
+          GRADLE_USER_HOME: /mnt/trabalho/gradle
           EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           EXPO_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
