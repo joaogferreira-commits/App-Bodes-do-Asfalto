@@ -66,9 +66,11 @@ select ok((select expira_em from public.classificados where titulo = 'Anuncio E'
 
 select set_config('request.jwt.claims', '{"sub":"f1000000-0000-0000-0000-0000000000a2"}', true);
 select is((select count(*) from public.classificados), 5::bigint, 'outro irmão lê só os ativos (o vendido some)');
-select is((with u as (update public.classificados set titulo = 'Invadido' returning 1) select count(*) from u), 0::bigint,
+update public.classificados set titulo = 'Invadido';
+select is((select count(*) from public.classificados where titulo = 'Invadido'), 0::bigint,
   'outro irmão não edita anúncio alheio');
-select is((with d as (delete from public.classificados returning 1) select count(*) from d), 0::bigint,
+delete from public.classificados;
+select is((select count(*) from public.classificados), 5::bigint,
   'nem apaga');
 select lives_ok(
   $$ insert into public.denuncias (alvo_tipo, alvo_id, motivo)
@@ -150,7 +152,8 @@ set local role authenticated;
 
 select set_config('request.jwt.claims', '{"sub":"f1000000-0000-0000-0000-0000000000a2"}', true);
 select is((select titulo from public.eventos), 'Sessão magna', 'só aparece o aprovado em andamento (o passado e o recusado não)');
-select is((with u as (update public.eventos set titulo = 'Invadido' returning 1) select count(*) from u), 0::bigint,
+update public.eventos set titulo = 'Invadido';
+select is((select count(*) from public.eventos where titulo = 'Invadido'), 0::bigint,
   'outro irmão não edita evento alheio');
 
 select set_config('request.jwt.claims', '{"sub":"f1000000-0000-0000-0000-0000000000a1"}', true);
