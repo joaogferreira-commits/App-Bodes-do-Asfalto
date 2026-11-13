@@ -2,7 +2,6 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Alert,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -19,6 +18,7 @@ import { podeEscrever, respostasRapidas, type Mensagem } from '@/dados/conversas
 import { useConversas } from '@/estado/conversas';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { BotaoIcone, Botao, Chip, Icone, Texto } from '@/ui';
+import { abrirMenu, avisar } from '@/ui/dialogo';
 
 /** Uma conversa (1:1 ou grupo). Pilotando, a tela fica travada pela trava global (só voz). */
 export default function Conversa() {
@@ -62,48 +62,62 @@ export default function Conversa() {
   };
 
   const opcoes = () =>
-    Alert.alert(c.titulo, undefined, [
-      {
-        text: silenciada ? t('chat.ativarSom') : t('chat.silenciar'),
-        onPress: () => chat.alternarSilencio(c.id),
-      },
-      ...(c.tipo === 'direto' && c.com
-        ? [
-            {
-              text: t('chat.bloquear', { nome: c.com }),
-              style: 'destructive' as const,
-              onPress: () =>
-                Alert.alert(t('chat.bloquearPergunta', { nome: c.com }), t('chat.bloquearExplica'), [
-                  { text: t('comum.cancelar'), style: 'cancel' },
-                  {
-                    text: t('chat.bloquearCurto'),
-                    style: 'destructive',
-                    onPress: () => chat.bloquear(c.com!, c.comId),
-                  },
-                ]),
-            },
-          ]
-        : []),
-      { text: t('comum.cancelar'), style: 'cancel' },
-    ]);
+    abrirMenu({
+      titulo: c.titulo,
+      opcoes: [
+        {
+          rotulo: silenciada ? t('chat.ativarSom') : t('chat.silenciar'),
+          icone: 'voz',
+          onPress: () => chat.alternarSilencio(c.id),
+        },
+        ...(c.tipo === 'direto' && c.com
+          ? [
+              {
+                rotulo: t('chat.bloquear', { nome: c.com }),
+                icone: 'bloquear',
+                destrutivo: true,
+                onPress: () =>
+                  avisar(t('chat.bloquearPergunta', { nome: c.com }), t('chat.bloquearExplica'), [
+                    { text: t('comum.cancelar'), style: 'cancel' },
+                    {
+                      text: t('chat.bloquearCurto'),
+                      style: 'destructive',
+                      onPress: () => chat.bloquear(c.com!, c.comId),
+                    },
+                  ]),
+              },
+            ]
+          : []),
+      ],
+    });
 
   const tocarMensagem = (m: Mensagem) => {
     if (m.minha) return;
-    Alert.alert(m.autor, m.texto, [
-      { text: 'TFA', onPress: () => chat.tfa(m.id) },
-      {
-        text: t('chat.denunciar'),
-        style: 'destructive',
-        onPress: () => {
-          chat.denunciar(m.id);
-          Alert.alert(t('chat.denunciada'));
+    abrirMenu({
+      titulo: m.autor,
+      mensagem: m.texto,
+      opcoes: [
+        { rotulo: 'TFA', icone: 'aceno', onPress: () => chat.tfa(m.id) },
+        {
+          rotulo: t('chat.denunciar'),
+          icone: 'bandeira',
+          destrutivo: true,
+          onPress: () => {
+            chat.denunciar(m.id);
+            avisar(t('chat.denunciada'));
+          },
         },
-      },
-      ...(c.tipo !== 'avisos'
-        ? [{ text: t('chat.bloquear', { nome: m.autor }), onPress: () => chat.bloquear(m.autor, m.autorId) }]
-        : []),
-      { text: t('comum.cancelar'), style: 'cancel' as const },
-    ]);
+        ...(c.tipo !== 'avisos'
+          ? [
+              {
+                rotulo: t('chat.bloquear', { nome: m.autor }),
+                icone: 'bloquear',
+                onPress: () => chat.bloquear(m.autor, m.autorId),
+              },
+            ]
+          : []),
+      ],
+    });
   };
 
   return (

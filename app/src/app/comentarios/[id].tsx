@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useMeusPosts } from '@/estado/meusPosts';
@@ -9,6 +9,7 @@ import { useModeracao } from '@/feed/moderacao';
 import * as feed from '@/servidor/feed';
 import { espaco } from '@/theme';
 import { Avatar, Botao, Cartao, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Comentários de EXEMPLO (até a etapa social) + os do irmão, que ele pode apagar. */
 const exemplos = [
@@ -34,7 +35,7 @@ export default function Comentarios() {
     try {
       setDoServidor(await feed.listarComentarios(id));
     } catch {
-      Alert.alert(t('feed.erroAcao'));
+      avisar(t('feed.erroAcao'));
     }
   }, [servidor, id, t]);
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function Comentarios() {
     feed
       .apagarComentario(cid)
       .then(recarregar)
-      .catch(() => Alert.alert(t('feed.erroAcao')));
+      .catch(() => avisar(t('feed.erroAcao')));
   };
   const enviar = () => {
     const limpo = texto.trim();
@@ -61,7 +62,7 @@ export default function Comentarios() {
         setTexto('');
         return recarregar();
       })
-      .catch(() => Alert.alert(t('feed.erroAcao')));
+      .catch(() => avisar(t('feed.erroAcao')));
   };
 
   return (
@@ -78,7 +79,7 @@ export default function Comentarios() {
               accessibilityRole="button"
               accessibilityLabel={t('comentarios.apagar')}
               onPress={() =>
-                Alert.alert(t('comentarios.apagar'), undefined, [
+                avisar(t('comentarios.apagar'), undefined, [
                   { text: t('comum.cancelar'), style: 'cancel' },
                   {
                     text: t('comentarios.apagar'),
@@ -98,7 +99,7 @@ export default function Comentarios() {
               onPress={() =>
                 servidor
                   ? confirmarDenuncia('comentario', c.id)
-                  : Alert.alert(t('feed.denunciar'), t('feed.denunciaRecebida'))
+                  : avisar(t('feed.denunciar'), t('feed.denunciaRecebida'))
               }
               hitSlop={10}
             >

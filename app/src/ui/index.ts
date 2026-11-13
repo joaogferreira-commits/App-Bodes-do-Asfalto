@@ -12,3 +12,5 @@ export { PainelInferior } from './FolhaInferior';
 export { Pino, corDoPino, pinos, type TipoPino } from './Pino';
 export { SeletorTema } from './SeletorTema';
 export { Texto, type VarianteTexto } from './Texto';
+export { DialogoHost } from './Dialogo';
+export { abrirMenu, avisar, type BotaoAviso, type OpcaoMenu } from './dialogo';

@@ -234,7 +234,13 @@ export default function Conquistas() {
       </ScrollView>
 
       {/* Detalhe do selo */}
-      <Modal visible={!!seloAberto} transparent animationType="slide" onRequestClose={() => setAberto(null)}>
+      <Modal
+        visible={!!seloAberto}
+        transparent
+        statusBarTranslucent
+        animationType="slide"
+        onRequestClose={() => setAberto(null)}
+      >
         <Pressable
           style={estilos.fundoModal}
           onPress={() => setAberto(null)}

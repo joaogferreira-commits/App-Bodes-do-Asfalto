@@ -35,7 +35,7 @@ export function SeletorVisibilidade({
   const estilos = useEstilos(criarEstilos);
   const temporario = temporarioAtivo(estado);
   return (
-    <Modal transparent visible={aberto} animationType="slide" onRequestClose={aoFechar}>
+    <Modal transparent statusBarTranslucent visible={aberto} animationType="slide" onRequestClose={aoFechar}>
       <Pressable
         style={estilos.fundo}
         accessibilityRole="button"

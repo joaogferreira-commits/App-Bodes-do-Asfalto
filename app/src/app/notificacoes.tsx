@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
 
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@/servidor/notificacoes';
 import { espaco, useCores } from '@/theme';
 import { Cartao, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Liga/desliga por tipo de aviso. O SOS fica sempre ligado. A prévia nunca mostra o texto das mensagens. */
 export default function Notificacoes() {
@@ -28,7 +29,7 @@ export default function Notificacoes() {
         setPrefs(
           Object.fromEntries(TIPOS_NOTIFICACAO.map((k) => [k, true])) as Record<TipoNotificacao, boolean>,
         );
-        Alert.alert(t('notificacoes.erroCarregar'));
+        avisar(t('notificacoes.erroCarregar'));
       });
     return () => {
       vivo = false;
@@ -43,7 +44,7 @@ export default function Notificacoes() {
         await salvarPreferencia(tipo, ligado);
       } catch {
         setPrefs((p) => (p ? { ...p, [tipo]: !ligado } : p));
-        Alert.alert(t('notificacoes.erroSalvar'));
+        avisar(t('notificacoes.erroSalvar'));
       }
     },
     [t],

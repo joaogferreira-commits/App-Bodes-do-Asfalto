@@ -2,13 +2,14 @@ import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { usePerfil, type Moto } from '@/estado/perfil';
 import { escolherFoto } from '@/feed/foto';
 import { espaco, raios, useCores } from '@/theme';
 import { Botao, Cartao, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 type Rascunho = Omit<Moto, 'id' | 'principal'> & { id?: string };
 const vazio: Rascunho = { marca: '', modelo: '', ano: '', apelido: '', km: '' };
@@ -28,7 +29,7 @@ export default function Garagem() {
 
   const salvar = () => {
     if (!rascunho) return;
-    if (!rascunho.marca.trim() || !rascunho.modelo.trim()) return Alert.alert(t('garagem.falta'));
+    if (!rascunho.marca.trim() || !rascunho.modelo.trim()) return avisar(t('garagem.falta'));
     salvarMoto({ ...rascunho, marca: rascunho.marca.trim(), modelo: rascunho.modelo.trim() });
     setRascunho(null);
   };
@@ -133,7 +134,7 @@ export default function Garagem() {
                   titulo={t('publicar.excluir')}
                   variante="contorno"
                   onPress={() =>
-                    Alert.alert(t('garagem.excluirPergunta'), undefined, [
+                    avisar(t('garagem.excluirPergunta'), undefined, [
                       { text: t('comum.cancelar'), style: 'cancel' },
                       { text: t('publicar.excluir'), style: 'destructive', onPress: () => apagarMoto(m.id) },
                     ])

@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Feed from '@/app/(abas)/feed';
 import Publicar from '@/app/publicar';
@@ -50,6 +50,10 @@ const doIrmao: PostServidor = {
 };
 
 const listarPosts = feed.listarPosts as jest.Mock;
+const opcaoDoMenu = (espiao: jest.SpyInstance, rotulo: string) => {
+  const opcoes = espiao.mock.lastCall![0].opcoes as { rotulo: string; onPress: () => void }[];
+  return opcoes.find((o) => o.rotulo === rotulo)!;
+};
 const botaoDoAlerta = (espiao: jest.SpyInstance, texto: string) => {
   const botoes = espiao.mock.lastCall![2] as { text: string; onPress?: () => void }[];
   return botoes.find((b) => b.text === texto)!;
@@ -88,7 +92,8 @@ describe('feed real (servidor)', () => {
 
   it('denunciar um post pede confirmação e envia a denúncia', async () => {
     listarPosts.mockResolvedValueOnce([doIrmao]);
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
+    const menu = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
     await render(
       <ProvedorMeusPosts>
         <Feed />
@@ -96,16 +101,18 @@ describe('feed real (servidor)', () => {
     );
     await screen.findByText('Estrada boa hoje');
     await fireEvent.press(screen.getByRole('button', { name: 'Mais opções' }));
-    await act(async () => botaoDoAlerta(alerta, 'Denunciar post').onPress!());
+    await act(async () => opcaoDoMenu(menu, 'Denunciar post').onPress());
     expect(feed.denunciar).not.toHaveBeenCalled(); // ainda só perguntou
     await act(async () => botaoDoAlerta(alerta, 'Denunciar').onPress!());
     expect(feed.denunciar).toHaveBeenCalledWith('post', 'p1', expect.any(String));
     alerta.mockRestore();
+    menu.mockRestore();
   });
 
   it('bloquear um irmão confirma e o post some', async () => {
     listarPosts.mockResolvedValueOnce([doIrmao]);
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
+    const menu = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
     await render(
       <ProvedorMeusPosts>
         <Feed />
@@ -113,11 +120,13 @@ describe('feed real (servidor)', () => {
     );
     await screen.findByText('Estrada boa hoje');
     await fireEvent.press(screen.getByRole('button', { name: 'Mais opções' }));
-    await act(async () => botaoDoAlerta(alerta, 'Bloquear Zé Ferreira').onPress!());
+    expect(opcaoDoMenu(menu, 'Bloquear Zé Ferreira')).toMatchObject({ destrutivo: true });
+    await act(async () => opcaoDoMenu(menu, 'Bloquear Zé Ferreira').onPress());
     await act(async () => botaoDoAlerta(alerta, 'Bloquear').onPress!());
     expect(feed.bloquear).toHaveBeenCalledWith('u2');
     expect(screen.queryByText('Estrada boa hoje')).toBeNull();
     alerta.mockRestore();
+    menu.mockRestore();
   });
 
   it('publicar envia texto, visibilidade e enquete ao servidor', async () => {

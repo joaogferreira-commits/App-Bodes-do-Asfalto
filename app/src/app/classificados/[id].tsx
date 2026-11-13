@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Linking, ScrollView, Share, useWindowDimensions, View } from 'react-native';
+import { Linking, ScrollView, Share, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { formatarPreco } from '@/dados/classificados';
@@ -10,6 +10,7 @@ import { useClassificados } from '@/estado/classificados';
 import { linkWhatsApp } from '@/ferramentas/calculos';
 import { espaco, raios, useCores } from '@/theme';
 import { Avatar, Botao, BotaoIcone, Cartao, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Detalhe do anúncio: fotos deslizáveis, preço, ficha, vendedor e contato pelo WhatsApp. */
 export default function Anuncio() {
@@ -146,7 +147,7 @@ export default function Anuncio() {
                 titulo={t('publicar.excluir')}
                 variante="contorno"
                 onPress={() =>
-                  Alert.alert(t('classificados.excluirPergunta'), undefined, [
+                  avisar(t('classificados.excluirPergunta'), undefined, [
                     { text: t('comum.cancelar'), style: 'cancel' },
                     {
                       text: t('publicar.excluir'),
@@ -190,7 +191,7 @@ export default function Anuncio() {
                 <Botao
                   titulo={t('comentarios.denunciar')}
                   variante="contorno"
-                  onPress={() => Alert.alert(t('feed.denunciar'), t('feed.denunciaRecebida'))}
+                  onPress={() => avisar(t('feed.denunciar'), t('feed.denunciaRecebida'))}
                 />
               </View>
             )}

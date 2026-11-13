@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Platform } from 'react-native';
+import { Platform } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { atalhos } from './atalhos';
+import { avisar } from '@/ui/dialogo';
 
 /**
  * Atalhos do SOS (pedido do dono em 12/11/2026):
@@ -26,12 +27,12 @@ export function useAtalhosSOS() {
       if ((await AsyncStorage.getItem(chave).catch(() => '1')) != null) return;
       await AsyncStorage.setItem(chave, '1').catch(() => undefined);
       if (Platform.OS === 'android' && (await atalhos.podeFixarAtalho())) {
-        Alert.alert(t('atalhos.perguntaTitulo'), t('atalhos.perguntaTexto'), [
+        avisar(t('atalhos.perguntaTitulo'), t('atalhos.perguntaTexto'), [
           { text: t('atalhos.agoraNao'), style: 'cancel' },
           { text: t('atalhos.colocar'), onPress: () => void atalhos.fixarAtalhoSOS(t('atalhos.nomeAtalho')) },
         ]);
       } else if (Platform.OS === 'ios') {
-        Alert.alert(t('atalhos.perguntaTitulo'), t('atalhos.iphoneTexto'));
+        avisar(t('atalhos.perguntaTitulo'), t('atalhos.iphoneTexto'));
       }
     })();
     // pergunta uma vez só, no primeiro uso

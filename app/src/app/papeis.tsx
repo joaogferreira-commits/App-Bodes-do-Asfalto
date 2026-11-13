@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { definirPapel, irmaosComPapel, type IrmaoComPapel } from '@/servidor/auth';
 import { espaco, useCores } from '@/theme';
 import { Avatar, Cartao, Icone, Texto } from '@/ui';
+import { abrirMenu, avisar } from '@/ui/dialogo';
 
 const papeis = ['membro', 'diretoria_capitulo', 'diretoria_geral', 'moderador', 'admin'] as const;
 
@@ -21,7 +22,7 @@ export default function Papeis() {
       .then(setLista)
       .catch(() => {
         setLista([]);
-        Alert.alert(t('papeis.erroCarregar'));
+        avisar(t('papeis.erroCarregar'));
       });
 
   useEffect(() => {
@@ -35,18 +36,20 @@ export default function Papeis() {
   }, []);
 
   const escolher = (i: IrmaoComPapel) =>
-    Alert.alert(t('papeis.escolher', { nome: i.nome }), t('papeis.explicaPapeis'), [
-      ...papeis
+    abrirMenu({
+      titulo: t('papeis.escolher', { nome: i.nome }),
+      mensagem: t('papeis.explicaPapeis'),
+      opcoes: papeis
         .filter((p) => p !== 'admin' && p !== i.papel)
         .map((p) => ({
-          text: t(`papeis.nomes.${p}`),
+          rotulo: t(`papeis.nomes.${p}`),
+          icone: 'perfil',
           onPress: () =>
             void definirPapel(i.id, p)
               .then(recarregar)
-              .catch(() => Alert.alert(t('papeis.erroMudar'))),
+              .catch(() => avisar(t('papeis.erroMudar'))),
         })),
-      { text: t('comum.cancelar'), style: 'cancel' as const },
-    ]);
+    });
 
   const filtrada = (lista ?? []).filter((i) =>
     `${i.nome} ${i.apelido ?? ''} ${i.capitulo}`.toLowerCase().includes(busca.trim().toLowerCase()),

@@ -2,13 +2,14 @@ import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useMeusPosts, type VisibilidadePost } from '@/estado/meusPosts';
 import { escolherFoto } from '@/feed/foto';
 import { espaco, raios, useCores } from '@/theme';
 import { Botao, Chip, Icone, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const visibilidades: VisibilidadePost[] = ['todos', 'capitulo', 'amigos'];
 
@@ -49,9 +50,8 @@ export default function Publicar() {
   }, []);
 
   const enviar = async () => {
-    if (ehEnquete && (!texto.trim() || opcoesValidas.length < 2))
-      return Alert.alert(t('publicar.enqueteFalta'));
-    if (!texto.trim() && !foto) return Alert.alert(t('publicar.vazio'));
+    if (ehEnquete && (!texto.trim() || opcoesValidas.length < 2)) return avisar(t('publicar.enqueteFalta'));
+    if (!texto.trim() && !foto) return avisar(t('publicar.vazio'));
     const enquete = ehEnquete ? opcoesValidas : undefined;
     if (existente) editar(existente.id, { texto: texto.trim(), foto, visibilidade: vis, enquete });
     else {
@@ -60,7 +60,7 @@ export default function Publicar() {
         await publicar({ texto: texto.trim(), foto, visibilidade: vis, enquete });
       } catch {
         setCarregando(false);
-        return Alert.alert(t('feed.erroAcao'));
+        return avisar(t('feed.erroAcao'));
       }
     }
     router.back();

@@ -2,12 +2,13 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useAgapes } from '@/estado/agapes';
 import { espaco } from '@/theme';
 import { Botao, Chip, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const horarios = ['30 min', '1 h', '2 h', '19h', '20h'];
 
@@ -21,12 +22,12 @@ export default function CriarAgape() {
   const [salvando, setSalvando] = useState(false);
 
   const publicar = async () => {
-    if (!local.trim()) return Alert.alert(t('ferramentas.agape.faltaLocal'));
+    if (!local.trim()) return avisar(t('ferramentas.agape.faltaLocal'));
     setSalvando(true);
     const { granted } = await Location.requestForegroundPermissionsAsync().catch(() => ({ granted: false }));
     const p = granted ? await Location.getCurrentPositionAsync({}).catch(() => null) : null;
     setSalvando(false);
-    if (!p) return Alert.alert(t('rota.erros.semLocalizacao'));
+    if (!p) return avisar(t('rota.erros.semLocalizacao'));
     criar({
       local: local.trim(),
       texto: texto.trim() || t('ferramentas.agape.textoPadrao'),
@@ -35,7 +36,7 @@ export default function CriarAgape() {
       lat: p.coords.latitude,
       lng: p.coords.longitude,
     });
-    Alert.alert(t('ferramentas.agape.publicado'), t('ferramentas.agape.publicadoTexto'));
+    avisar(t('ferramentas.agape.publicado'), t('ferramentas.agape.publicadoTexto'));
     router.navigate('/');
   };
 

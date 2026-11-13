@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Papeis from '@/app/papeis';
 import * as servidor from '@/servidor/auth';
@@ -17,11 +17,11 @@ it('admin nomeia moderador; o próprio admin não aparece para trocar', async ()
   await render(<Papeis />);
   const ze = await screen.findByRole('button', { name: 'Zé Ferreira, Membro' });
   expect(screen.getByRole('button', { name: 'Dono, Administrador' })).toBeDisabled();
-  const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+  const alerta = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
   await fireEvent.press(ze);
-  const opcoes = alerta.mock.calls[0]![2]!;
-  expect(opcoes.map((o) => o.text)).not.toContain('Administrador');
-  await act(async () => opcoes.find((o) => o.text === 'Moderador')!.onPress!());
+  const opcoes = alerta.mock.calls[0]![0].opcoes;
+  expect(opcoes.map((o) => o.rotulo)).not.toContain('Administrador');
+  await act(async () => opcoes.find((o) => o.rotulo === 'Moderador')!.onPress());
   expect(servidor.definirPapel).toHaveBeenCalledWith('z1', 'moderador');
   alerta.mockRestore();
 });

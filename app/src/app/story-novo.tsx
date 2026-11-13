@@ -2,7 +2,7 @@ import { CameraView, useCameraPermissions, useMicrophonePermissions } from 'expo
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { QuadroDesenho } from '@/componentes/QuadroDesenho';
@@ -27,6 +27,7 @@ import {
 } from '@/stories/estilos';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, BotaoIcone, Chip, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 type Aba = 'filtros' | 'texto' | 'desenho' | 'selos' | 'interativos';
 
@@ -92,7 +93,7 @@ export default function NovoStory() {
       setConteudo({ uri: await prepararFoto(r.uri), tipo: 'foto', filtro: 'nenhum', textos: [], selos: {} });
   };
   const comecarVideo = async () => {
-    if (!permMic?.granted && !(await pedirMic()).granted) return Alert.alert(t('story.semMicrofone'));
+    if (!permMic?.granted && !(await pedirMic()).granted) return avisar(t('story.semMicrofone'));
     setModo('video');
     setGravando(true);
     setSegundos(0);
@@ -670,7 +671,7 @@ export default function NovoStory() {
               .then(() => router.back())
               .catch(() => {
                 setEnviando(false);
-                Alert.alert(t('feed.erroAcao'));
+                avisar(t('feed.erroAcao'));
               });
           }}
         />

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Desafios from '@/app/desafios';
 import NovoDesafio from '@/app/desafios/novo';
@@ -18,7 +18,7 @@ describe('telas de desafios', () => {
   });
 
   it('criar desafio mostra o XP da tabela e vai para aprovação', async () => {
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await render(<NovoDesafio />);
     await fireEvent.changeText(screen.getByLabelText('Nome do desafio'), 'Rodar 500 km');
     await fireEvent.changeText(screen.getByLabelText('Meta em km'), '500');

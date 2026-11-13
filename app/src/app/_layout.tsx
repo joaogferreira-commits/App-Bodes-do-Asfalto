@@ -26,6 +26,7 @@ import { ProvedorConversas } from '@/estado/conversas';
 import { ProvedorViagem } from '@/estado/viagem';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
+import { DialogoHost } from '@/ui/Dialogo';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
 export default function Layout() {
@@ -60,6 +61,7 @@ export default function Layout() {
         </ArvoreDaSessao>
       </ProvedorAcesso>
       <AberturaAnimada />
+      <DialogoHost />
     </ProvedorTema>
   );
 }

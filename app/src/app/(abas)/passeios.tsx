@@ -1,13 +1,14 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CartaoPasseio } from '@/componentes/CartaoPasseio';
 import { passeiosExemplo } from '@/dados/passeios';
 import { espaco, useCores, useEstilos, type Paleta } from '@/theme';
 import { Botao, Chip, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 type Filtro = 'proximos' | 'oficiais' | 'passados';
 
@@ -40,7 +41,7 @@ export default function Passeios() {
                 <Botao
                   titulo={t('passeios.criar')}
                   icone="mais"
-                  onPress={() => Alert.alert(t('comum.emBreve'), t('passeios.criarEmBreve'))}
+                  onPress={() => avisar(t('comum.emBreve'), t('passeios.criarEmBreve'))}
                 />
               </View>
               <View style={{ flex: 1 }}>

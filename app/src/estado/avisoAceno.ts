@@ -1,14 +1,14 @@
 import type { TFunction } from 'i18next';
-import { Alert } from 'react-native';
 
 import { acenar, type MotivoErroAceno } from '@/servidor/chat';
+import { avisar } from '@/ui/dialogo';
 
 /** Mostra o resultado de um aceno enviado ao servidor (limite do dia, repetido, falha ou sucesso). */
 export function avisarResultadoAceno(resultado: 'ok' | MotivoErroAceno, nome: string, t: TFunction) {
-  if (resultado === 'ok') Alert.alert(t('ficha.acenoEnviado', { nome }), t('ficha.acenoExplica'));
-  else if (resultado === 'limite') Alert.alert(t('ficha.limiteAcenos'));
-  else if (resultado === 'repetido') Alert.alert(t('chat.jaAcenou', { nome }));
-  else Alert.alert(t('chat.acenoFalhou'));
+  if (resultado === 'ok') avisar(t('ficha.acenoEnviado', { nome }), t('ficha.acenoExplica'));
+  else if (resultado === 'limite') avisar(t('ficha.limiteAcenos'));
+  else if (resultado === 'repetido') avisar(t('chat.jaAcenou', { nome }));
+  else avisar(t('chat.acenoFalhou'));
 }
 
 /** Envia o aceno ao servidor e devolve 'ok' ou o motivo da falha. */

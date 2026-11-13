@@ -42,4 +42,8 @@ const assinar = (o: () => void) => {
   return () => void ouvintes.delete(o);
 };
 export const useLiberadoGarupa = () =>
-  useSyncExternalStore(assinar, () => atual != null, () => false);
+  useSyncExternalStore(
+    assinar,
+    () => atual != null,
+    () => false,
+  );

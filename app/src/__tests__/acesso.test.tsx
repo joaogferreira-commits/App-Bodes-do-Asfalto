@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Alert, Share, Text } from 'react-native';
+import { Share, Text } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import Consentimentos from '@/app/acesso/consentimentos';
@@ -58,7 +59,7 @@ describe('acesso (Etapa 1)', () => {
     await fireEvent.press(screen.getByRole('switch', { name: 'Dados maçônicos (opcional)' }));
     expect(estado()).toBe('semSolicitacao|true|true');
     // revogar dados maçônicos pede confirmação antes de apagar
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('switch', { name: 'Dados maçônicos (opcional)' }));
     expect(estado()).toBe('semSolicitacao|true|true');
     const botoes = alerta.mock.calls[0]![2]!;

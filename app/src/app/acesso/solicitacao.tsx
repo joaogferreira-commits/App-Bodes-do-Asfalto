@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useAcesso } from '@/acesso/acesso';
 import { nomesCapitulos } from '@/dados/capitulos';
@@ -10,6 +10,7 @@ import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { escolherFoto } from '@/feed/foto';
 import { espaco, raios } from '@/theme';
 import { Botao, Chip, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 function FotoObrigatoria({
   rotulo,
@@ -80,11 +81,11 @@ export default function Solicitacao() {
   ].filter(Boolean) as string[];
 
   const enviar = () => {
-    if (faltando.length) return Alert.alert(t('acesso.form.falta'), faltando.join('\n'));
+    if (faltando.length) return avisar(t('acesso.form.falta'), faltando.join('\n'));
     void acesso
       .enviarSolicitacao({ ...f, fotoColete, fotoCarteirinha })
       .then(() => router.replace('/acesso/espera'))
-      .catch(() => Alert.alert(t('acesso.form.erroEnvio')));
+      .catch(() => avisar(t('acesso.form.erroEnvio')));
   };
 
   return (

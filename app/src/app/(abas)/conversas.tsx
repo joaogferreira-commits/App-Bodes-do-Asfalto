@@ -186,8 +186,14 @@ export default function Conversas() {
         }}
       />
 
-      <Modal visible={nova} transparent animationType="slide" onRequestClose={() => setNova(false)}>
-        <Pressable style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.35)' }} onPress={() => setNova(false)} />
+      <Modal
+        visible={nova}
+        transparent
+        statusBarTranslucent
+        animationType="slide"
+        onRequestClose={() => setNova(false)}
+      >
+        <Pressable style={{ flex: 1, backgroundColor: 'rgba(10,8,6,0.72)' }} onPress={() => setNova(false)} />
         <View style={estilos.folha}>
           <Texto variante="subtitulo">{t('chat.novaTitulo')}</Texto>
           <Texto variante="secundario">{t('chat.novaExplica')}</Texto>

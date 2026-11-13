@@ -36,7 +36,12 @@ export function TelaEmMovimento({ aoIrAoMapa }: { aoIrAoMapa: () => void }) {
           onPress={() => router.push('/rota')}
         />
         <Botao titulo={t('movimento.mapa')} grande variante="secundario" icone="mapa" onPress={aoIrAoMapa} />
-        <Botao titulo={t('movimento.garupa')} variante="secundario" icone="perfil" onPress={() => liberarGarupa()} />
+        <Botao
+          titulo={t('movimento.garupa')}
+          variante="secundario"
+          icone="perfil"
+          onPress={() => liberarGarupa()}
+        />
       </View>
     </View>
   );

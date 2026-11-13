@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Campo, numero, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useGuardado } from '@/estado/guardado';
 import { proximaManutencao } from '@/ferramentas/calculos';
 import { espaco, useCores } from '@/theme';
 import { Botao, Cartao, Icone, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 export type ItemManutencao = { id: string; nome: string; intervalo: string; ultimo: string };
 
@@ -97,7 +98,7 @@ export default function Manutencao() {
                   titulo={t('comentarios.apagar')}
                   variante="contorno"
                   onPress={() =>
-                    Alert.alert(t('ferramentas.manutencao.apagarPergunta', { nome: nomeDe(s) }), undefined, [
+                    avisar(t('ferramentas.manutencao.apagarPergunta', { nome: nomeDe(s) }), undefined, [
                       { text: t('comum.cancelar'), style: 'cancel' },
                       {
                         text: t('comentarios.apagar'),

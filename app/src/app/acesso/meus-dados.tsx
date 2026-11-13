@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Alert, Share } from 'react-native';
+import { Share } from 'react-native';
 
 import { useAcesso } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { Botao, Texto } from '@/ui';
 
 import { ListaConsentimentos } from './consentimentos';
+import { avisar } from '@/ui/dialogo';
 
 /** "Meus dados" (LGPD): rever e revogar consentimentos, baixar uma cópia dos dados e excluir a conta. */
 export default function MeusDados() {
@@ -30,18 +31,18 @@ export default function MeusDados() {
     const dados = Object.fromEntries(pares.map(([k, v]) => [k, ler(v)]));
     await Share.share({
       message: JSON.stringify({ geradoEm: new Date().toISOString(), dados }, null, 2),
-    }).catch(() => Alert.alert(t('acesso.meusDados.erroBaixar')));
+    }).catch(() => avisar(t('acesso.meusDados.erroBaixar')));
   };
 
   const excluir = () =>
-    Alert.alert(t('acesso.meusDados.excluirTitulo'), t('acesso.meusDados.excluirTexto'), [
+    avisar(t('acesso.meusDados.excluirTitulo'), t('acesso.meusDados.excluirTexto'), [
       { text: t('comum.cancelar'), style: 'cancel' },
       {
         text: t('acesso.meusDados.excluirConfirmar'),
         style: 'destructive',
         onPress: () =>
           void acesso.excluirConta().then(() => {
-            Alert.alert(t('acesso.meusDados.excluida'));
+            avisar(t('acesso.meusDados.excluida'));
             router.replace('/acesso/entrada');
           }),
       },

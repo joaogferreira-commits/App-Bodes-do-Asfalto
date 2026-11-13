@@ -1,12 +1,13 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { useAcesso, type Finalidade } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { usePerfilOpcional } from '@/estado/perfil';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, Icone, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const itens: { f: Finalidade; obrigatorio: boolean }[] = [
   { f: 'termos', obrigatorio: true },
@@ -38,7 +39,7 @@ export function ListaConsentimentos({ termosTravados }: { termosTravados?: boole
               if (!ok) return acesso.consentir(f);
               if (f === 'dados_macons') {
                 // Revogar apaga Loja, Oriente e Potência (igual ao banco): pede confirmação.
-                return Alert.alert(t('acesso.revogarMacomTitulo'), t('acesso.revogarMacomTexto'), [
+                return avisar(t('acesso.revogarMacomTitulo'), t('acesso.revogarMacomTexto'), [
                   { text: t('comum.cancelar'), style: 'cancel' },
                   {
                     text: t('acesso.revogarConfirmar'),

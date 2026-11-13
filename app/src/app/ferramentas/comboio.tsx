@@ -1,11 +1,12 @@
 import * as Location from 'expo-location';
 import { useTranslation } from 'react-i18next';
-import { Alert, Linking, Pressable, View } from 'react-native';
+import { Linking, Pressable, View } from 'react-native';
 
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { linkMapa, linkWhatsApp } from '@/ferramentas/calculos';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, Icone, Texto, type NomeIcone } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const avisos: { chave: string; icone: NomeIcone }[] = [
   { chave: 'pausa', icone: 'agape' },
@@ -31,9 +32,9 @@ export default function Comboio() {
   const cores = useCores();
   const enviar = async (texto: string, comLocal = true) => {
     const p = comLocal ? await minhaPosicao() : null;
-    if (comLocal && !p) return Alert.alert(t('rota.erros.semLocalizacao'));
+    if (comLocal && !p) return avisar(t('rota.erros.semLocalizacao'));
     const msg = p ? `${texto}\n${linkMapa(p.lat, p.lng)}` : texto;
-    await Linking.openURL(linkWhatsApp(msg)).catch(() => Alert.alert(t('ferramentas.semWhatsApp')));
+    await Linking.openURL(linkWhatsApp(msg)).catch(() => avisar(t('ferramentas.semWhatsApp')));
   };
   return (
     <TelaFerramenta

@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { perfilExemplo } from '@/dados/perfil';
@@ -9,6 +9,7 @@ import { tiposDesafio, validarDesafio, xpDoDesafio, type TipoDesafio } from '@/d
 import { useDesafios } from '@/estado/useDesafios';
 import { espaco, fontes, useCores } from '@/theme';
 import { Botao, Cartao, Chip, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const prazos = [7, 30, 60, 90] as const;
 
@@ -40,9 +41,9 @@ export default function NovoDesafio() {
       participantes: 0,
     };
     const erro = validarDesafio(novo, ds.todos);
-    if (erro) return Alert.alert(t(`desafios.erros.${erro}`));
+    if (erro) return avisar(t(`desafios.erros.${erro}`));
     ds.criar(novo);
-    Alert.alert(t('desafios.enviado'), t('desafios.aguardandoExplica'));
+    avisar(t('desafios.enviado'), t('desafios.aguardandoExplica'));
     router.back();
   };
 

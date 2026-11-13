@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import {
@@ -17,6 +17,7 @@ import { usePerfilOpcional } from '@/estado/perfil';
 import { escolherFoto } from '@/feed/foto';
 import { espaco, raios, useCores } from '@/theme';
 import { Botao, Chip, Icone, Texto } from '@/ui';
+import { abrirMenu, avisar } from '@/ui/dialogo';
 
 const MAX_FOTOS = 6;
 const estados: EstadoItem[] = ['novo', 'seminovo', 'usado'];
@@ -50,7 +51,7 @@ export default function NovoAnuncio() {
       !f.cidade.trim() && t('acesso.form.cidade'),
       f.whatsapp.replace(/\D/g, '').length < 10 && t('classificados.form.whatsapp'),
     ].filter(Boolean);
-    if (falta.length) return Alert.alert(t('acesso.form.falta'), falta.join('\n'));
+    if (falta.length) return avisar(t('acesso.form.falta'), falta.join('\n'));
     anunciar({
       categoria,
       estado,
@@ -79,7 +80,7 @@ export default function NovoAnuncio() {
             accessibilityRole="button"
             accessibilityLabel={t('classificados.form.tirarFoto')}
             onPress={() =>
-              Alert.alert(t('classificados.form.tirarFoto'), undefined, [
+              avisar(t('classificados.form.tirarFoto'), undefined, [
                 { text: t('comum.cancelar'), style: 'cancel' },
                 {
                   text: t('comentarios.apagar'),
@@ -113,17 +114,21 @@ export default function NovoAnuncio() {
             accessibilityRole="button"
             accessibilityLabel={t('classificados.form.adicionarFoto')}
             onPress={() =>
-              Alert.alert(t('classificados.form.adicionarFoto'), undefined, [
-                {
-                  text: t('publicar.camera'),
-                  onPress: () => void escolherFoto('camera').then((u) => u && setFotos((l) => [...l, u])),
-                },
-                {
-                  text: t('publicar.galeria'),
-                  onPress: () => void escolherFoto('galeria').then((u) => u && setFotos((l) => [...l, u])),
-                },
-                { text: t('comum.cancelar'), style: 'cancel' },
-              ])
+              abrirMenu({
+                titulo: t('classificados.form.adicionarFoto'),
+                opcoes: [
+                  {
+                    rotulo: t('publicar.camera'),
+                    icone: 'camera',
+                    onPress: () => void escolherFoto('camera').then((u) => u && setFotos((l) => [...l, u])),
+                  },
+                  {
+                    rotulo: t('publicar.galeria'),
+                    icone: 'feed',
+                    onPress: () => void escolherFoto('galeria').then((u) => u && setFotos((l) => [...l, u])),
+                  },
+                ],
+              })
             }
             style={{
               width: 96,

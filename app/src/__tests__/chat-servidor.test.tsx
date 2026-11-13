@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Conversas from '@/app/(abas)/conversas';
 import Conversa from '@/app/conversa/[id]';
@@ -106,7 +106,7 @@ describe('chat real (servidor)', () => {
     m(chat.listarMembros).mockResolvedValue([
       { id: 'u2', nome: 'Zé Ferreira', apelido: null, capitulo: 'Cuiabá' },
     ]);
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     m(chat.acenar).mockResolvedValueOnce(undefined).mockRejectedValueOnce({ motivo: 'limite' });
     await render(
       <ProvedorConversas>
@@ -170,17 +170,17 @@ describe('chat real (servidor)', () => {
   it('denunciar e bloquear usam o servidor com os ids', async () => {
     pronto([base({})], [msgDele]);
     m(chat.mensagens).mockResolvedValue([msgDele]);
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
     await render(
       <ProvedorConversas>
         <Conversa />
       </ProvedorConversas>,
     );
     await fireEvent.press(await screen.findByText('Bom dia, irmãos'));
-    const botoes = alerta.mock.calls[0]![2]!;
-    await act(async () => botoes.find((b) => b.text === 'Denunciar')!.onPress!());
+    const botoes = alerta.mock.calls[0]![0].opcoes;
+    await act(async () => botoes.find((b) => b.rotulo === 'Denunciar')!.onPress());
     expect(chat.denunciarMensagem).toHaveBeenCalledWith('m1', expect.any(String));
-    await act(async () => botoes.find((b) => b.text === 'Bloquear Ivan Coruja')!.onPress!());
+    await act(async () => botoes.find((b) => b.rotulo === 'Bloquear Ivan Coruja')!.onPress());
     expect(chat.bloquear).toHaveBeenCalledWith('u2');
     alerta.mockRestore();
   });

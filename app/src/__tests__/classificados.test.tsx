@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Classificados from '@/app/classificados';
 import NovoAnuncio from '@/app/classificados/novo';
@@ -44,9 +44,9 @@ describe('classificados', () => {
     await fireEvent.changeText(screen.getByLabelText('Preço'), '400');
     await fireEvent.changeText(screen.getByLabelText('Cidade'), 'Cuiabá');
     await fireEvent.changeText(screen.getByLabelText('WhatsApp para contato'), '65 99999-0000');
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('button', { name: 'Adicionar foto' }));
-    await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.text === 'Da galeria')!.onPress!());
+    await act(async () => alerta.mock.calls[0]![0].opcoes.find((o) => o.rotulo === 'Da galeria')!.onPress());
     alerta.mockRestore();
     await screen.findByRole('button', { name: 'Remover esta foto' });
     await fireEvent.press(screen.getByRole('button', { name: 'Publicar anúncio' }));

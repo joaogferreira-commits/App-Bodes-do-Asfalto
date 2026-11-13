@@ -2,13 +2,14 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
 import { Campo } from '@/componentes/TelaFerramenta';
 import { espaco, tema, useCores } from '@/theme';
 import { Botao, Divisoria, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Boas-vindas e login: e-mail com link mágico, Google e Apple (sem SMS). */
 export default function Entrada() {
@@ -66,7 +67,7 @@ export default function Entrada() {
                   ? void acesso
                       .entrar('email', email.trim())
                       .then(() => setEnviado(true))
-                      .catch(() => Alert.alert(t('acesso.erroLink')))
+                      .catch(() => avisar(t('acesso.erroLink')))
                   : setEnviado(true)
               }
             />
@@ -79,7 +80,7 @@ export default function Entrada() {
                 void acesso
                   .entrar('google')
                   .then(depoisDeEntrar)
-                  .catch(() => Alert.alert(t('acesso.erroGoogle')))
+                  .catch(() => avisar(t('acesso.erroGoogle')))
               }
             />
             {Platform.OS === 'ios' && (

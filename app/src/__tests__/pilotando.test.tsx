@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import { ProvedorViagem } from '@/estado/viagem';
 import TelaPilotando from '@/app/pilotando';
@@ -65,7 +65,7 @@ describe('modo pilotando', () => {
 
   it('SOS só dispara segurando 3 s; soltar antes cancela (R6)', async () => {
     permissao.granted = true;
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await render(tela());
     const sos = await screen.findByRole('button', { name: 'SOS' });
     jest.useFakeTimers();
@@ -94,7 +94,7 @@ describe('modo pilotando', () => {
 
   it('Alerta responde com um toque e uma faixa, sem janela para fechar (R2)', async () => {
     permissao.granted = true;
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await render(tela());
     await fireEvent.press(await screen.findByRole('button', { name: 'Alerta' }));
     expect(alerta).not.toHaveBeenCalled();

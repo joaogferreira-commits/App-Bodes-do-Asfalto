@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Aprovacoes from '@/app/aprovacoes';
 import * as servidor from '@/servidor/auth';
@@ -34,7 +34,7 @@ describe('aprovar irmãos', () => {
     expect(screen.getByText('Indicado por: Zé Ferreira')).toBeTruthy();
     expect(screen.getByLabelText('Foto com o colete')).toBeTruthy();
 
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('button', { name: 'Recusar' }));
     expect(alerta).toHaveBeenCalledWith('Escreva o motivo da recusa. Ele chega ao irmão.');
     expect(servidor.decidirPedido).not.toHaveBeenCalled();

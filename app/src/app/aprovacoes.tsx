@@ -1,12 +1,13 @@
 import { Image } from 'expo-image';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Linking, TextInput, View } from 'react-native';
+import { Linking, TextInput, View } from 'react-native';
 
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { decidirPedido, pedidosParaAprovar, type PedidoParaAprovar } from '@/servidor/auth';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, Cartao, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /**
  * Fila de pedidos de entrada para diretoria do capítulo, moderadores e admin (a RLS do banco
@@ -24,7 +25,7 @@ export default function Aprovacoes() {
       setPedidos(await pedidosParaAprovar());
     } catch {
       setPedidos([]);
-      Alert.alert(t('aprovacoes.erroCarregar'));
+      avisar(t('aprovacoes.erroCarregar'));
     }
   }, [t]);
 
@@ -39,13 +40,13 @@ export default function Aprovacoes() {
   }, []);
 
   const decidir = async (p: PedidoParaAprovar, aprovar: boolean) => {
-    if (!aprovar && !(motivo[p.id] ?? '').trim()) return Alert.alert(t('aprovacoes.motivoFalta'));
+    if (!aprovar && !(motivo[p.id] ?? '').trim()) return avisar(t('aprovacoes.motivoFalta'));
     setOcupado(p.id);
     try {
       await decidirPedido(p.id, aprovar, aprovar ? undefined : motivo[p.id]!.trim());
       await carregar();
     } catch {
-      Alert.alert(t('aprovacoes.erroDecidir'));
+      avisar(t('aprovacoes.erroDecidir'));
     } finally {
       setOcupado(null);
     }

@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import Conversas from '@/app/(abas)/conversas';
 import Conversa from '@/app/conversa/[id]';
@@ -55,9 +55,9 @@ describe('telas do chat', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Enviar' }));
     expect(screen.getByText('Sábado 7h no Trevo')).toBeTruthy();
 
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'abrirMenu').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByText('Irmão, aceitei seu aceno. Bora rodar sábado?'));
-    await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.text === 'Denunciar')!.onPress!());
+    await act(async () => alerta.mock.calls[0]![0].opcoes.find((o) => o.rotulo === 'Denunciar')!.onPress());
     alerta.mockRestore();
     expect(screen.queryByText('Irmão, aceitei seu aceno. Bora rodar sábado?')).toBeNull();
   });

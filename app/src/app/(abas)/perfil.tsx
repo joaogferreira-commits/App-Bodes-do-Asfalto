@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
@@ -16,6 +16,7 @@ import { useAvatar } from '@/estado/avatar';
 import { useVisibilidadeMapa } from '@/estado/visibilidadeMapa';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, Icone, pinos, SeletorTema, Texto, type NomeIcone } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 const iconeVisibilidade: Record<Visibilidade, NomeIcone> = {
   ninguem: 'cadeado',
@@ -77,7 +78,7 @@ export default function Perfil() {
   const acesso = useAcesso();
   const { sair } = acesso;
   const nivel = nivelDoXp(exemploIrmao.xp);
-  const emBreve = () => Alert.alert(t('comum.emBreve'), t('perfil.emBreveCadastro'));
+  const emBreve = () => avisar(t('comum.emBreve'), t('perfil.emBreveCadastro'));
   // O que o irmão cadastrou substitui o exemplo.
   const meu = usePerfilOpcional();
   const nome = meu?.perfil.nome || eu.nome;
@@ -345,7 +346,7 @@ export default function Perfil() {
                   variante="secundario"
                   onPress={() =>
                     void atalhos.fixarAtalhoSOS(t('atalhos.nomeAtalho')).then((ok) => {
-                      if (!ok) Alert.alert(t('atalhos.naoSuportado'));
+                      if (!ok) avisar(t('atalhos.naoSuportado'));
                     })
                   }
                 />
@@ -355,7 +356,7 @@ export default function Perfil() {
                   variante="secundario"
                   onPress={() =>
                     void atalhos.fixarWidgetSOS().then((ok) => {
-                      if (!ok) Alert.alert(t('atalhos.widgetManual'));
+                      if (!ok) avisar(t('atalhos.widgetManual'));
                     })
                   }
                 />

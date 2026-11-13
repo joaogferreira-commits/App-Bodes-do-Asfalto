@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { Alert, Text } from 'react-native';
+import { Text } from 'react-native';
+import * as dialogo from '@/ui/dialogo';
 
 import { ProvedorAcesso } from '@/acesso/acesso';
 import Consentimentos from '@/app/acesso/consentimentos';
@@ -67,7 +68,7 @@ describe('garagem, contatos e perfil (Etapa 1)', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Salvar alterações' }));
     expect(dados().motos).toHaveLength(1);
     expect(dados().motos[0]).toMatchObject({ id: 'm1', modelo: 'CB 650R' });
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('button', { name: 'Excluir' }));
     await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.style === 'destructive')!.onPress!());
     alerta.mockRestore();
@@ -121,7 +122,7 @@ describe('garagem, contatos e perfil (Etapa 1)', () => {
     await fireEvent.press(screen.getAllByRole('button', { name: 'Membros' })[0]!);
     await fireEvent.press(screen.getByRole('button', { name: 'Salvar alterações' }));
     expect(dados().perfil.macom.loja).toEqual({ valor: 'Loja Exemplo', visibilidade: 'membros' });
-    const alerta = jest.spyOn(Alert, 'alert').mockImplementation(() => undefined);
+    const alerta = jest.spyOn(dialogo, 'avisar').mockImplementation(() => undefined);
     await fireEvent.press(screen.getByRole('switch', { name: 'Dados maçônicos (opcional)' }));
     expect(dados().perfil.macom.loja.valor).toBe('Loja Exemplo'); // ainda não confirmou
     await act(async () => alerta.mock.calls[0]![2]!.find((b) => b.style === 'destructive')!.onPress!());

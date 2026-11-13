@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, FlatList, Pressable, ScrollView, Share, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, Share, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CartaoPasseio } from '@/componentes/CartaoPasseio';
@@ -16,6 +16,7 @@ import { useModeracao } from '@/feed/moderacao';
 import type { PostServidor } from '@/servidor/feed';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, EstadoVazio, Icone, pinos, Texto, type NomeIcone } from '@/ui';
+import { abrirMenu, avisar } from '@/ui/dialogo';
 
 const ferramentas: { chave: string; icone: NomeIcone }[] = [
   { chave: 'foto', icone: 'camera' },
@@ -30,7 +31,7 @@ export default function Feed() {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
-  const emBreve = () => Alert.alert(t('comum.emBreve'), t('feed.emBreve'));
+  const emBreve = () => avisar(t('comum.emBreve'), t('feed.emBreve'));
   const { agapes } = useAgapes();
   const meus = useMeusPosts();
   const usarFerramenta = (chave: string) => {
@@ -228,27 +229,37 @@ function CartaoServidor({ post }: { post: PostServidor }) {
   const { confirmarDenuncia, confirmarBloqueio } = useModeracao();
   const opcoes = () =>
     post.meu
-      ? Alert.alert(t('feed.opcoes'), undefined, [
-          {
-            text: t('publicar.excluir'),
-            style: 'destructive',
-            onPress: () =>
-              Alert.alert(t('publicar.excluirPergunta'), undefined, [
-                { text: t('comum.cancelar'), style: 'cancel' },
-                { text: t('publicar.excluir'), style: 'destructive', onPress: () => loja.excluir(post.id) },
-              ]),
-          },
-          { text: t('comum.cancelar'), style: 'cancel' },
-        ])
-      : Alert.alert(t('feed.opcoes'), undefined, [
-          { text: t('feed.denunciar'), onPress: () => confirmarDenuncia('post', post.id) },
-          {
-            text: t('feed.bloquear', { nome: post.autorNome }),
-            style: 'destructive',
-            onPress: () => confirmarBloqueio(post.autorId, post.autorNome),
-          },
-          { text: t('comum.cancelar'), style: 'cancel' },
-        ]);
+      ? abrirMenu({
+          titulo: t('feed.opcoes'),
+          opcoes: [
+            {
+              rotulo: t('publicar.excluir'),
+              icone: 'lixeira',
+              destrutivo: true,
+              onPress: () =>
+                avisar(t('publicar.excluirPergunta'), undefined, [
+                  { text: t('comum.cancelar'), style: 'cancel' },
+                  { text: t('publicar.excluir'), style: 'destructive', onPress: () => loja.excluir(post.id) },
+                ]),
+            },
+          ],
+        })
+      : abrirMenu({
+          titulo: t('feed.opcoes'),
+          opcoes: [
+            {
+              rotulo: t('feed.denunciar'),
+              icone: 'bandeira',
+              onPress: () => confirmarDenuncia('post', post.id),
+            },
+            {
+              rotulo: t('feed.bloquear', { nome: post.autorNome }),
+              icone: 'bloquear',
+              destrutivo: true,
+              onPress: () => confirmarBloqueio(post.autorId, post.autorNome),
+            },
+          ],
+        });
   return (
     <View style={estilos.post}>
       <View style={[estilos.linha, { paddingHorizontal: espaco.md }]}>
@@ -310,7 +321,7 @@ function CartaoServidor({ post }: { post: PostServidor }) {
           accessibilityRole="button"
           accessibilityState={{ selected: post.euDeiTfa }}
           accessibilityLabel={t('feed.tfaRotulo', { n: post.tfa })}
-          onPress={() => void loja.alternarTfa(post.id).catch(() => Alert.alert(t('feed.erroAcao')))}
+          onPress={() => void loja.alternarTfa(post.id).catch(() => avisar(t('feed.erroAcao')))}
           style={[
             estilos.acao,
             post.euDeiTfa && { backgroundColor: cores.superficie3, borderColor: cores.acao },
@@ -359,27 +370,42 @@ function CabecalhoPost({ post }: { post: Post }) {
   const { excluir } = useMeusPosts();
   const opcoes = () =>
     post.tipo === 'meu'
-      ? Alert.alert(t('feed.opcoes'), undefined, [
-          { text: t('publicar.editar'), onPress: () => router.push(`/publicar?id=${post.id}`) },
-          {
-            text: t('publicar.excluir'),
-            style: 'destructive',
-            onPress: () =>
-              Alert.alert(t('publicar.excluirPergunta'), undefined, [
-                { text: t('comum.cancelar'), style: 'cancel' },
-                { text: t('publicar.excluir'), style: 'destructive', onPress: () => excluir(post.id) },
-              ]),
-          },
-          { text: t('comum.cancelar'), style: 'cancel' },
-        ])
-      : Alert.alert(t('feed.opcoes'), undefined, [
-          {
-            text: t('feed.denunciar'),
-            onPress: () => Alert.alert(t('feed.denunciar'), t('feed.denunciaRecebida')),
-          },
-          { text: t('feed.bloquear', { nome: post.autor.nome }), style: 'destructive' },
-          { text: t('comum.cancelar'), style: 'cancel' },
-        ]);
+      ? abrirMenu({
+          titulo: t('feed.opcoes'),
+          opcoes: [
+            {
+              rotulo: t('publicar.editar'),
+              icone: 'editar',
+              onPress: () => router.push(`/publicar?id=${post.id}`),
+            },
+            {
+              rotulo: t('publicar.excluir'),
+              icone: 'lixeira',
+              destrutivo: true,
+              onPress: () =>
+                avisar(t('publicar.excluirPergunta'), undefined, [
+                  { text: t('comum.cancelar'), style: 'cancel' },
+                  { text: t('publicar.excluir'), style: 'destructive', onPress: () => excluir(post.id) },
+                ]),
+            },
+          ],
+        })
+      : abrirMenu({
+          titulo: t('feed.opcoes'),
+          opcoes: [
+            {
+              rotulo: t('feed.denunciar'),
+              icone: 'bandeira',
+              onPress: () => avisar(t('feed.denunciar'), t('feed.denunciaRecebida')),
+            },
+            {
+              rotulo: t('feed.bloquear', { nome: post.autor.nome }),
+              icone: 'bloquear',
+              destrutivo: true,
+              onPress: () => undefined,
+            },
+          ],
+        });
   return (
     <View style={[estilos.linha, { paddingHorizontal: espaco.md }]}>
       <Avatar nome={post.autor.nome} status={post.autor.status ?? 'nenhum'} tamanho={44} />
@@ -655,7 +681,7 @@ function CartaoPost({ post }: { post: Post }) {
             titulo={t('feed.acenar')}
             icone="aceno"
             variante="secundario"
-            onPress={() => Alert.alert(t('comum.emBreve'), t('feed.emBreve'))}
+            onPress={() => avisar(t('comum.emBreve'), t('feed.emBreve'))}
           />
         </Cartao>
       </View>

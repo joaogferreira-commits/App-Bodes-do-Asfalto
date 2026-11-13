@@ -3,11 +3,11 @@ import * as Notifications from 'expo-notifications';
 import { router, type Href } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
 
 import { useAcesso } from '@/acesso/acesso';
 import { servidorConfigurado } from '@/servidor/supabase';
 import { permissaoConcedida, registrarToken, rotaDaNotificacao } from '@/servidor/notificacoes';
+import { avisar } from '@/ui/dialogo';
 
 const CHAVE_EXPLICOU = 'notificacoes:explicou';
 
@@ -38,15 +38,10 @@ export function RegistroNotificacoes() {
         if (!jaConcedida && !(await AsyncStorage.getItem(CHAVE_EXPLICOU))) {
           await AsyncStorage.setItem(CHAVE_EXPLICOU, '1');
           pedir = await new Promise<boolean>((resolve) =>
-            Alert.alert(
-              t('notificacoes.permissaoTitulo'),
-              t('notificacoes.permissaoTexto'),
-              [
-                { text: t('notificacoes.agoraNao'), style: 'cancel', onPress: () => resolve(false) },
-                { text: t('notificacoes.permitir'), onPress: () => resolve(true) },
-              ],
-              { cancelable: false },
-            ),
+            avisar(t('notificacoes.permissaoTitulo'), t('notificacoes.permissaoTexto'), [
+              { text: t('notificacoes.agoraNao'), style: 'cancel', onPress: () => resolve(false) },
+              { text: t('notificacoes.permitir'), onPress: () => resolve(true) },
+            ]),
           );
         }
         if (vivo) await registrarToken({ pedirPermissao: pedir });

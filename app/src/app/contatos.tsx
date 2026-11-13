@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { MAX_CONTATOS, usePerfil } from '@/estado/perfil';
 import { espaco, useCores } from '@/theme';
 import { Botao, Cartao, Icone, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Contatos de emergência: até 3, recebem o SOS. Só você vê (nem a diretoria nem a moderação). */
 export default function Contatos() {
@@ -17,7 +18,7 @@ export default function Contatos() {
   const cheio = contatos.length >= MAX_CONTATOS;
 
   const adicionar = () => {
-    if (!nome.trim() || telefone.replace(/\D/g, '').length < 10) return Alert.alert(t('contatos.falta'));
+    if (!nome.trim() || telefone.replace(/\D/g, '').length < 10) return avisar(t('contatos.falta'));
     if (salvarContato({ nome: nome.trim(), telefone: telefone.trim() })) {
       setNome('');
       setTelefone('');
@@ -43,7 +44,7 @@ export default function Contatos() {
             titulo={t('comentarios.apagar')}
             variante="contorno"
             onPress={() =>
-              Alert.alert(t('contatos.apagarPergunta', { nome: c.nome }), undefined, [
+              avisar(t('contatos.apagarPergunta', { nome: c.nome }), undefined, [
                 { text: t('comum.cancelar'), style: 'cancel' },
                 { text: t('comentarios.apagar'), style: 'destructive', onPress: () => apagarContato(c.id) },
               ])
