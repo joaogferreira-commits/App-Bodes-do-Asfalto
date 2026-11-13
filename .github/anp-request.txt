@@ -1,6 +1,5 @@
-# Carga dos postos da ANP (cadastro + preços). Tentativa 5 (13/11): planilhas mais novas (datas com _).
-# Linhas opcionais: ufs=MT,GO  modo=completo|precos  max_geocodes=1500  enviar=sim
-ufs=MT
+# Carga dos postos da ANP (cadastro + preços). Centro-Oeste e Norte (13/11).
+ufs=MT,GO,MS,DF,RO,TO
 modo=completo
-max_geocodes=1500
+max_geocodes=4000
 enviar=sim
