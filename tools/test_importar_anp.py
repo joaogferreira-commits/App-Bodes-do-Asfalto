@@ -316,3 +316,11 @@ class TestTituloERecentes(unittest.TestCase):
         r = ordenar_recentes(urls)
         self.assertEqual(r[0], 'x/2026/revendas_lpc_2026-10-26_2026-11-01.xlsx')
         self.assertEqual(r[-1], 'x/2023/revendas_lpc_2023-05-07_2023-05-13.xlsx')
+
+
+class TestColunaPreco(unittest.TestCase):
+    def test_nomes_variados_do_preco(self):
+        from importar_anp import chave_coluna
+        for nome in ['PREÇO DE REVENDA', 'Preço de Venda (R$/l)', 'VALOR DE VENDA', 'Preço Revenda']:
+            self.assertEqual(chave_coluna(nome), 'PRECODEVENDA', nome)
+        self.assertNotEqual(chave_coluna('PREÇO DE COMPRA'), 'PRECODEVENDA')

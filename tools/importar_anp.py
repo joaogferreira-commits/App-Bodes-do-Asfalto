@@ -182,7 +182,11 @@ def sem_acento(s):
 
 
 def chave_coluna(nome):
-    return re.sub(r'[^A-Z0-9]', '', sem_acento(nome).upper())
+    k = re.sub(r'[^A-Z0-9]', '', sem_acento(nome).upper())
+    # Preço de venda aparece com vários nomes ("PREÇO DE REVENDA", "PREÇO DE VENDA (R$/l)", "VALOR DE VENDA R$"...)
+    if 'COMPRA' not in k and (k.startswith('PRECO') or k.startswith('VALORDEVENDA') or k.startswith('VALORVENDA')):
+        return 'PRECODEVENDA'
+    return k
 
 
 ALIASES = {
