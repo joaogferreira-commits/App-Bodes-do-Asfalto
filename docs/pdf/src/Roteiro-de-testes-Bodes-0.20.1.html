@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<title>Roteiro de testes - Bodes do Asfalto 0.20.1</title>
+<style>@page { size: A4; margin: 18mm; }
+:root { --texto:#1A1612; --laranja:#E8692A; --cinza:#6b625a; --linha:#d9d2ca; --fundo-caixa:#faf6f1; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: Arial, 'Liberation Sans', Inter, 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.45; color: var(--texto); background: #fff; margin: 0; }
+h1, h2, h3, h4 { font-family: 'Arial Narrow', 'Liberation Sans Narrow', 'Arial', sans-serif; font-weight: 700; color: var(--texto); line-height: 1.15; }
+h1 { font-size: 30pt; margin: 0 0 6pt; }
+h2 { font-size: 20pt; margin: 0 0 10pt; padding-bottom: 4pt; border-bottom: 3pt solid var(--laranja); break-after: avoid; }
+h3 { font-size: 14.5pt; margin: 16pt 0 6pt; padding-bottom: 2pt; border-bottom: 1pt solid var(--laranja); break-after: avoid; }
+h4 { font-size: 12.5pt; margin: 12pt 0 4pt; break-after: avoid; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 8pt; padding-left: 20pt; }
+li { margin-bottom: 3pt; }
+b, strong { font-weight: 700; }
+.secao { break-before: page; }
+.capa { text-align: left; padding-top: 38mm; }
+.capa .marca { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; letter-spacing: 2pt; font-size: 13pt; border-bottom: 3pt solid var(--laranja); display:inline-block; padding-bottom: 4pt; margin-bottom: 18pt; }
+.capa h1 { font-size: 40pt; }
+.capa .sub { font-size: 16pt; margin: 8pt 0 26pt; }
+.capa .meta { color: var(--cinza); font-size: 11pt; }
+.caixa { border: 1pt solid var(--linha); border-left: 4pt solid var(--laranja); background: var(--fundo-caixa); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.caixa p:last-child, .caixa ol:last-child, .caixa ul:last-child { margin-bottom: 0; }
+.caixa .tit { font-weight: 700; margin-bottom: 3pt; }
+.aviso { border: 1.5pt solid var(--texto); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.sumario { list-style: none; padding: 0; margin: 0; }
+.sumario li { display: flex; align-items: baseline; margin: 0 0 3pt; }
+.sumario li a { color: var(--texto); text-decoration: none; }
+.sumario li .pt { flex: 1; border-bottom: 1pt dotted #b9b0a6; margin: 0 4pt; }
+.sumario .grupo { font-weight: 700; margin-top: 6pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 11pt; break-inside: auto; }
+th, td { border: 1pt solid var(--linha); padding: 4pt 6pt; text-align: left; vertical-align: top; }
+th { background: var(--fundo-caixa); font-weight: 700; }
+tr { break-inside: avoid; }
+/* testes */
+.teste { border: 1pt solid var(--linha); padding: 8pt 10pt 7pt; margin: 0 0 10pt; break-inside: avoid; }
+.teste .cab { display: flex; align-items: baseline; gap: 8pt; margin-bottom: 4pt; }
+.teste .num { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 16pt; color: #fff; background: var(--texto); min-width: 30pt; text-align: center; padding: 1pt 5pt; }
+.teste .tt { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 14pt; }
+.teste .rot { font-weight: 700; font-size: 10.5pt; text-transform: uppercase; letter-spacing: .4pt; color: var(--cinza); margin-top: 4pt; }
+.teste p { margin: 1pt 0 3pt; }
+.teste ol { margin: 1pt 0 4pt; padding-left: 18pt; }
+.teste .esp { background: var(--fundo-caixa); border-left: 3pt solid var(--laranja); padding: 3pt 7pt; margin-top: 2pt; }
+.teste .ok { margin-top: 7pt; padding-top: 5pt; border-top: 1pt dashed var(--linha); font-size: 12pt; }
+.quad { display: inline-block; width: 11pt; height: 11pt; border: 1.5pt solid var(--texto); vertical-align: -1.5pt; margin-right: 3pt; }
+.anot { display:inline-block; border-bottom: 1pt solid var(--texto); width: 190pt; height: 11pt; vertical-align: bottom; }
+.grupo-cab { break-before: page; }
+.grupo-cab:first-of-type { break-before: auto; }
+.grupo-desc { color: var(--cinza); margin-bottom: 10pt; }
+.mini { font-size: 10.5pt; color: var(--cinza); }
+.btn { font-weight: 700; }
+.linha-resp { border-bottom: 1pt solid var(--texto); height: 20pt; margin-bottom: 4pt; }
+</style></head><body>
+
+<section class="capa">
+<div class="marca">BODES DO ASFALTO</div>
+<h1>Roteiro de testes no celular</h1>
+<div class="sub">Versão 0.20.1 &middot; 13/11/2026</div>
+<p>88 testes, em 16 grupos (A a P). Cada teste diz o que fazer, onde tocar e o que deve aparecer.</p>
+<p class="meta">(2) = o teste precisa de uma segunda conta, de preferência em outro celular.</p>
+</section>
+
+<section class="secao"><h2>Sumário</h2>
+<ul class="sumario"><li><a>Antes de começar: instalar, relatar, segunda conta</a><span class="pt"></span><span>3</span></li><li><a>A. Preparação (testes 1 a 3)</a><span class="pt"></span><span>5</span></li><li><a>B. Entrada e conta (testes 4 a 10)</a><span class="pt"></span><span>7</span></li><li><a>C. Perfil (testes 11 a 20)</a><span class="pt"></span><span>11</span></li><li><a>D. Mapa (testes 21 a 32)</a><span class="pt"></span><span>16</span></li><li><a>E. Rota e navegação (testes 33 a 39)</a><span class="pt"></span><span>22</span></li><li><a>F. Modo pilotando (testes 40 a 48)</a><span class="pt"></span><span>26</span></li><li><a>G. Feed e stories (testes 49 a 56)</a><span class="pt"></span><span>31</span></li><li><a>H. Chat (testes 57 a 60)</a><span class="pt"></span><span>35</span></li><li><a>I. Passeios e Ágape (testes 61 a 65)</a><span class="pt"></span><span>37</span></li><li><a>J. SOS e pedido de ajuda (testes 66 a 70)</a><span class="pt"></span><span>40</span></li><li><a>K. Ferramentas do clube (testes 71 a 77)</a><span class="pt"></span><span>43</span></li><li><a>L. Desafios e conquistas (testes 78 a 79)</a><span class="pt"></span><span>47</span></li><li><a>M. Ajuda e suporte (testes 80 a 81)</a><span class="pt"></span><span>48</span></li><li><a>N. Comportamentos gerais (testes 82 a 84)</a><span class="pt"></span><span>49</span></li><li><a>O. Notificações (testes 85 a 87)</a><span class="pt"></span><span>51</span></li><li><a>P. Erros (testes 88 a 88)</a><span class="pt"></span><span>53</span></li><li><a>Como me mandar o resultado</a><span class="pt"></span><span>54</span></li></ul>
+</section>
+
+<section class="secao" id="antes"><h2>Antes de começar</h2>
+
+<h3>1. Como instalar a versão de teste (arquivo .apk)</h3>
+<p>Você vai baixar o app direto do GitHub, pelo celular Android. Leva uns 5 minutos.</p>
+<ol>
+<li>No celular, abra o navegador e entre no GitHub do projeto, na aba <b>Actions</b>.</li>
+<li>Toque na execução mais recente que tenha um visto verde. O nome costuma ser o da montagem da versão de teste.</li>
+<li>Role até o final da página, até a parte <b>Artifacts</b>.</li>
+<li>Toque em <b>bodes-do-asfalto-preview</b>. O celular baixa um arquivo <b>.zip</b>.</li>
+<li>Abra o arquivo .zip (no app <b>Arquivos</b> do celular, toque nele e escolha <b>Extrair</b>). Dentro tem um arquivo <b>.apk</b>.</li>
+<li>Toque no arquivo <b>.apk</b>. Se o celular perguntar, toque em <b>Configurações</b> e ligue <b>Permitir desta fonte</b> para o app que você usou (navegador ou Arquivos). Volte e toque em <b>Instalar</b>.</li>
+<li>Quando terminar, toque em <b>Abrir</b>.</li>
+</ol>
+<div class="caixa"><div class="tit">Se a versão antiga estiver instalada</div><p>Instale por cima, sem apagar. Seus dados ficam guardados na sua conta. Depois da instalação, confira em <b>Perfil</b>, no final da tela, que aparece <b>0.20.1</b>.</p></div>
+
+<h3>2. Como relatar o resultado</h3>
+<p>Para cada teste, mande três coisas:</p>
+<ol>
+<li>O <b>número</b> do teste (por exemplo, 28).</li>
+<li><b>OK</b> se funcionou como descrito, ou <b>Falhou</b> se não funcionou.</li>
+<li>Se falhou, um <b>print da tela</b> (aperte os botões de ligar e baixar volume ao mesmo tempo) e uma frase dizendo o que você viu.</li>
+</ol>
+<p>Exemplo: <i>"28 Falhou. Toquei em Posto mais próximo e apareceu 'Nenhum posto por perto'. Estou em Várzea Grande. Print em anexo."</i></p>
+<p>Você pode usar a linha <b>[ ] OK &nbsp; [ ] Falhou &mdash; anotar:</b> de cada teste, se imprimir este roteiro, ou só mandar as mensagens. Tudo bem pular um teste que você não consegue fazer: avise o número.</p>
+
+<h3>3. Como ter uma segunda conta</h3>
+<p>Os testes marcados com <b>(2)</b> precisam de duas pessoas ou de dois celulares.</p>
+<ol>
+<li>Pegue outro celular (de um amigo ou da família) e instale o mesmo arquivo .apk.</li>
+<li>Use <u>outro e-mail</u>, que nunca tenha entrado no app. Pode ser um e-mail novo e gratuito.</li>
+<li>No celular 2, toque em <b>Receber link de acesso</b>, abra o e-mail e toque no link (é o teste 6).</li>
+<li>No seu celular (conta administradora), aprove o pedido em <b>Perfil → Aprovar irmãos</b> (teste 7).</li>
+</ol>
+<p>Chame o seu celular de <b>celular 1</b> e o outro de <b>celular 2</b>. Os testes dizem em qual deles tocar.</p>
+
+<h3>4. Regras de segurança dos testes</h3>
+<div class="aviso"><b>Nunca teste pilotando.</b> Os testes do grupo F (modo pilotando) devem ser feitos com o veículo parado, ou com você de garupa ou de passageiro. O SOS de teste não liga para ninguém sozinho, mas <b>não ligue de verdade para o 192 ou o 193</b> só para testar.</div>
+
+<h3>5. Dica</h3>
+<p>Faça os testes na ordem dos grupos: A e B primeiro (instalar e entrar), depois os outros. Os testes 32 e 70 dependem de outros (o 32 depois do grupo K; o 70 depois do 68).</p>
+</section>
+
+<section class="grupo-cab"><h2>A. Preparação</h2><p class="grupo-desc">Instalar a versão e conferir que o app está ligado ao servidor.</p><div class="teste">
+<div class="cab"><span class="num">1</span><span class="tt">Instalar a versão 0.20.1</span></div>
+<div class="rot">Para que serve</div><p>Ter certeza de que você está testando a versão certa.</p>
+<div class="rot">Antes</div><p>Ter baixado o arquivo .apk (veja "Como instalar" no começo).</p>
+<div class="rot">Passos</div><ol><li>Instale o arquivo .apk e abra o app Bodes do Asfalto.</li><li>Se pedir, permita o que o celular perguntar (localização, câmera).</li><li>Toque em <b>Perfil</b> (barra de baixo).</li><li>Role a tela até o final e leia o número da versão.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O rodapé mostra <b>0.20.1</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">2</span><span class="tt">Status do servidor</span></div>
+<div class="rot">Para que serve</div><p>Ver se o app está falando com o servidor do clube.</p>
+<div class="rot">Antes</div><p>Estar logado no app.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b>.</li><li>Toque em <b>Status do servidor</b> ("Confira se o app está falando com o servidor").</li><li>Leia as linhas: endereço, formato, chave, modo e conexão.</li><li>Se quiser, toque em <b>Testar de novo</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp"><b>Endereço do servidor no app: Sim</b>; <b>Endereço no formato certo: Sim</b>; <b>Chave pública: Sim</b>; <b>Modo do app: Servidor</b>; <b>Conexão agora: OK, respondeu em … ms</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">3</span><span class="tt">Editar perfil com nome e apelido</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o perfil é salvo.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b>.</li><li>Toque em <b>Editar perfil</b>.</li><li>Coloque seu nome e seu apelido verdadeiros.</li><li>Salve e volte ao <b>Perfil</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Seu nome e seu apelido aparecem no topo do Perfil.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>B. Entrada e conta</h2><p class="grupo-desc">Login, pedido de entrada, aprovação e papéis.</p><div class="teste">
+<div class="cab"><span class="num">4</span><span class="tt">Entrar com Google</span></div>
+<div class="rot">Para que serve</div><p>Conferir o login pela conta Google.</p>
+<div class="rot">Antes</div><p>Ter uma conta Google no celular.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> e depois em <b>Sair da conta</b> (no final da tela).</li><li>Na tela de entrada, toque em <b>Entrar com Google</b>.</li><li>Escolha sua conta na janela do Google.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A janela do Google abre, e você volta ao app já logado (como administrador, se for a conta do dono).</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">5</span><span class="tt">Entrar com e-mail (link)</span></div>
+<div class="rot">Para que serve</div><p>Conferir o login sem senha, por link no e-mail.</p>
+<div class="rot">Antes</div><p>Ter acesso ao e-mail neste mesmo celular.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> e depois em <b>Sair da conta</b>.</li><li>Na tela de entrada, escreva seu e-mail em <b>Seu e-mail</b>.</li><li>Toque em <b>Receber link de acesso</b>.</li><li>Abra o aplicativo de e-mail <u>neste celular</u> e toque no link.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Enviamos um link para …". O e-mail chega. Ao tocar no link, o app abre já logado.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">6</span><span class="tt">Segunda conta: pedido de entrada</span></div>
+<div class="rot">Para que serve</div><p>Conferir o formulário de quem quer entrar no clube.</p>
+<div class="rot">Antes</div><p>(2) Um e-mail novo que nunca entrou no app, de preferência em outro celular.</p>
+<div class="rot">Passos</div><ol><li>No celular 2, toque em <b>Receber link de acesso</b> com o e-mail novo (ou use outra conta Google) e entre.</li><li>Na tela <b>Sua privacidade</b>, marque o que aceita e toque em <b>Continuar</b>.</li><li>Na tela <b>Pedir entrada</b>, preencha nome, apelido, capítulo, cidade, telefone e o irmão que indica.</li><li>Tire a <b>Foto sua com o colete do clube</b> e a <b>Foto da carteirinha do clube</b>.</li><li>Toque em <b>Enviar pedido</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece <b>Pedido enviado</b> e o celular 2 fica na tela de espera ("Até a aprovação, só esta tela fica disponível").</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">7</span><span class="tt">Aprovar um pedido de entrada</span></div>
+<div class="rot">Para que serve</div><p>Conferir que quem aprova vê as fotos e libera o irmão.</p>
+<div class="rot">Antes</div><p>(2) Teste 6 feito. Use o seu celular (conta administradora).</p>
+<div class="rot">Passos</div><ol><li>No seu celular, toque em <b>Perfil</b>.</li><li>Toque em <b>Aprovar irmãos</b>.</li><li>Na aba <b>Irmãos</b>, ache o pedido da segunda conta e confira a <b>Foto com o colete</b> e a <b>Foto da carteirinha</b>.</li><li>Toque em <b>Aprovar</b>.</li><li>No celular 2, espere um pouco ou feche e abra o app.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O pedido aparece com as duas fotos. Depois de aprovar, o celular 2 sai da espera e entra no Mapa.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">8</span><span class="tt">Recusar um pedido com motivo</span></div>
+<div class="rot">Para que serve</div><p>Conferir que a recusa exige motivo e chega ao irmão.</p>
+<div class="rot">Antes</div><p>(2) Um novo pedido de entrada pendente (repita o teste 6 com outro e-mail).</p>
+<div class="rot">Passos</div><ol><li>No seu celular: <b>Perfil</b> → <b>Aprovar irmãos</b>.</li><li>No pedido, deixe o campo <b>Motivo (obrigatório para recusar)</b> vazio e toque em <b>Recusar</b>.</li><li>Agora escreva um motivo e toque em <b>Recusar</b> de novo.</li><li>No celular 2, abra o app.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Sem motivo, o app avisa "Escreva o motivo da recusa". Com motivo, o pedido sai da lista e o celular 2 vê a recusa e o motivo (pode corrigir com <b>Corrigir meu pedido</b>).</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">9</span><span class="tt">Mudar o papel de um irmão</span></div>
+<div class="rot">Para que serve</div><p>Conferir a nomeação de moderadores.</p>
+<div class="rot">Antes</div><p>(2) Segunda conta já aprovada. Você precisa ser administrador.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b>.</li><li>Toque em <b>Papéis dos irmãos</b>.</li><li>Em <b>Buscar irmão ou capítulo</b>, escreva o nome da segunda conta e toque nela.</li><li>Escolha <b>Moderador</b>.</li><li>Volte e repita escolhendo <b>Membro</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O papel muda a cada escolha e a lista mostra o novo papel. O celular 2 passa a ver (ou deixa de ver) <b>Aprovar irmãos</b> no Perfil.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">10</span><span class="tt">Formulário de entrada guarda o que foi digitado</span></div>
+<div class="rot">Para que serve</div><p>Conferir que ninguém perde o que escreveu.</p>
+<div class="rot">Antes</div><p>(2) Uma conta nova que ainda não enviou o pedido.</p>
+<div class="rot">Passos</div><ol><li>Na tela <b>Pedir entrada</b>, escreva o nome, o apelido e tire uma foto.</li><li>Volte (seta ou botão voltar do celular) e saia do app.</li><li>Abra o app de novo e vá outra vez a <b>Pedir entrada</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Os textos e as fotos continuam lá, sem precisar digitar de novo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>C. Perfil</h2><p class="grupo-desc">Foto, dados maçônicos, garagem, contatos, aparência, Meus dados, atalhos e ranking.</p><div class="teste">
+<div class="cab"><span class="num">11</span><span class="tt">Trocar a foto do perfil</span></div>
+<div class="rot">Para que serve</div><p>Conferir foto pela câmera e pela galeria.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Editar perfil</b>.</li><li>Em <b>Sua foto</b>, escolha tirar uma foto com a câmera.</li><li>Salve. Repita escolhendo uma foto da galeria.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A foto nova aparece no Perfil nas duas vezes.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">12</span><span class="tt">Loja, Oriente e Potência com visibilidade</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o irmão escolhe quem vê cada dado.</p>
+<div class="rot">Antes</div><p>Ter autorizado "Dados maçônicos" em Meus dados (se pedir, toque em <b>Abrir Meus dados</b>).</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Editar perfil</b>.</li><li>Preencha <b>Loja</b>, <b>Oriente</b> e <b>Potência</b>.</li><li>Em cada campo, em <b>Quem pode ver este campo</b>, troque entre <b>Só eu</b>, <b>Amigos</b> e <b>Membros</b>.</li><li>Salve e volte ao Perfil.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Em "Minha Loja (opcional)" aparecem os valores e, ao lado, a visibilidade escolhida. O app nunca pede grau.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">13</span><span class="tt">Garagem: cadastrar, editar e excluir moto</span></div>
+<div class="rot">Para que serve</div><p>Conferir o cadastro de motos.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Cadastrar minha moto</b>.</li><li>Preencha marca e modelo (ano, km e apelido se quiser) e toque em <b>Adicionar moto</b>.</li><li>Volte ao Perfil, toque em <b>Editar moto</b> e mude o apelido.</li><li>Na Garagem, apague a moto (o app pergunta "Excluir esta moto?" e você confirma).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A moto aparece em "Minha moto", a mudança de apelido aparece, e depois de excluir o cartão da moto some.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">14</span><span class="tt">Contatos de emergência</span></div>
+<div class="rot">Para que serve</div><p>Conferir o cadastro de quem recebe o SOS.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Contatos de emergência</b>.</li><li>Escreva <b>Nome</b> e <b>Telefone com DDD</b> e toque em <b>Adicionar contato</b>.</li><li>Toque no contato e mude o nome ou o telefone.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O contato aparece na lista, a mudança é salva e o Perfil mostra "1 contatos recebem o SOS".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">15</span><span class="tt">Aparência: Automático, Noite e Sol</span></div>
+<div class="rot">Para que serve</div><p>Conferir os temas de cor.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> e role até <b>Aparência</b>.</li><li>Toque em <b>Noite</b>.</li><li>Toque em <b>Sol</b>.</li><li>Toque em <b>Automático</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp"><b>Noite</b> deixa o app escuro; <b>Sol</b> deixa claro e de alto contraste; <b>Automático</b> usa Sol de dia e Noite depois das 18 h.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">16</span><span class="tt">Meus dados: baixar uma cópia</span></div>
+<div class="rot">Para que serve</div><p>Conferir o direito de levar seus dados (LGPD).</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Meus dados</b>.</li><li>Leia o que você autorizou em <b>O que você autorizou</b>.</li><li>Toque em <b>Baixar uma cópia dos meus dados</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Abre a janela de compartilhar do celular com um arquivo. (Não toque em "Excluir minha conta" neste teste.)</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">17</span><span class="tt">Atalho de SOS na tela inicial</span></div>
+<div class="rot">Para que serve</div><p>Conferir o atalho que abre o SOS com um toque.</p>
+<div class="rot">Antes</div><p>Estar no Android.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> e role até <b>Atalho de SOS</b>.</li><li>Toque em <b>Colocar atalho na tela inicial</b>.</li><li>Se o celular bloquear (comum em Xiaomi, Redmi e Poco), leia a janela e toque em <b>Abrir configurações</b>.</li><li>Ligue a permissão <b>Atalhos na tela inicial</b> (em "Outras permissões"), volte ao app e toque de novo em <b>Colocar atalho na tela inicial</b>.</li><li>Vá à tela inicial do celular e toque no atalho <b>SOS Bodes</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Se bloquear, a janela "O celular bloqueou o atalho" explica e <b>Abrir configurações</b> funciona. Depois de liberar, o atalho aparece e abre a tela do SOS.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">18</span><span class="tt">Widget de SOS</span></div>
+<div class="rot">Para que serve</div><p>Conferir o botão de SOS grande na tela inicial.</p>
+<div class="rot">Antes</div><p>Estar no Android.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Colocar widget de SOS</b>.</li><li>Se o celular não colocar sozinho, leia a janela "Colocar o widget à mão".</li><li>Siga: volte à tela inicial, segure o dedo num espaço vazio, toque em <b>Widgets</b>, procure <b>Bodes do Asfalto</b> e arraste <b>SOS Bodes</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O widget aparece na tela inicial, ou os passos manuais funcionam. Tocar nele abre o SOS.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">19</span><span class="tt">Segurar o ícone do app</span></div>
+<div class="rot">Para que serve</div><p>Conferir o atalho "Pedir ajuda (SOS)".</p>
+<div class="rot">Antes</div><p>Estar no Android.</p>
+<div class="rot">Passos</div><ol><li>Na tela inicial do celular, segure o dedo no ícone do app Bodes do Asfalto.</li><li>Veja o menu que abre.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece a opção <b>SOS</b> (Pedir ajuda). Tocar nela abre a tela do SOS.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">20</span><span class="tt">Sair do ranking</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o irmão pode sair da lista sem perder XP.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil</b> → <b>Ver minhas conquistas</b>.</li><li>Role até o ranking e ligue <b>Sair do ranking</b>.</li><li>Confira o ranking (<b>Geral</b> e <b>Meu capítulo</b>) e seu XP.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Você saiu do ranking. Só você vê seu XP". Seu nome some da lista, mas o XP e os selos continuam. Desligar volta ao ranking.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>D. Mapa</h2><p class="grupo-desc">Visual, filtros, fichas, postos, visibilidade, irmãos e busca.</p><div class="teste">
+<div class="cab"><span class="num">21</span><span class="tt">Mapa claro de dia, escuro à noite</span></div>
+<div class="rot">Para que serve</div><p>Conferir o tema do mapa.</p>
+<div class="rot">Antes</div><p>Estar no Mapa.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Mapa</b>.</li><li>Em <b>Perfil → Aparência</b>, escolha <b>Sol</b> e volte ao Mapa.</li><li>Escolha <b>Noite</b> e volte ao Mapa.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Com Sol o mapa é claro. Com Noite o mapa é escuro. Os dois são legíveis.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">22</span><span class="tt">Rodovias e estradas de terra no mapa</span></div>
+<div class="rot">Para que serve</div><p>Conferir a leitura das estradas.</p>
+<div class="rot">Antes</div><p>Mapa aberto em uma região com rodovias.</p>
+<div class="rot">Passos</div><ol><li>Aproxime o mapa de uma rodovia (por exemplo, perto de Cuiabá).</li><li>Procure o número da rodovia (BR, MT).</li><li>Procure uma estrada de terra.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Rodovias aparecem em amarelo-âmbar com BR e MT legíveis. Estradas de terra aparecem tracejadas.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">23</span><span class="tt">Zoom: pontinhos e emblemas</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o mapa fica limpo de longe.</p>
+<div class="rot">Antes</div><p>Mapa aberto numa região com pontos.</p>
+<div class="rot">Passos</div><ol><li>Afaste o mapa com dois dedos (ou o botão <b>Afastar</b>).</li><li>Aproxime de novo (ou toque em <b>Aproximar</b>).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">De longe os pinos viram pontinhos ou números. De perto aparecem os emblemas de cada tipo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">24</span><span class="tt">Filtros e o botão Mais</span></div>
+<div class="rot">Para que serve</div><p>Conferir os filtros do mapa.</p>
+<div class="rot">Antes</div><p>Mapa aberto.</p>
+<div class="rot">Passos</div><ol><li>Toque, um de cada vez, em <b>Tudo</b>, <b>Irmãos</b> e <b>Postos</b>.</li><li>Toque em <b>Mais</b>.</li><li>Escolha um grupo, por exemplo <b>Natureza</b> ou <b>Cultura</b>.</li><li>Olhe o chip de filtro no mapa.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O mapa mostra só o grupo escolhido, e o chip troca para o nome do grupo (por exemplo, "Natureza").</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">25</span><span class="tt">Legenda: o que significa cada ícone</span></div>
+<div class="rot">Para que serve</div><p>Conferir a legenda do mapa.</p>
+<div class="rot">Antes</div><p>Mapa aberto.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Mais</b>.</li><li>Toque em <b>O que significa cada ícone</b>.</li><li>Depois toque fora da janela ou em <b>Fechar legenda</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A legenda abre com "Tipos de ponto" (Postos e oficinas, Natureza, Cultura, Hospedagem e emergência) e fecha ao tocar fora.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">26</span><span class="tt">Folha de baixo com 3 alturas</span></div>
+<div class="rot">Para que serve</div><p>Conferir o painel que desliza na parte de baixo do mapa.</p>
+<div class="rot">Antes</div><p>Mapa aberto.</p>
+<div class="rot">Passos</div><ol><li>Segure a barrinha do painel de baixo ("Abrir o painel" / "Recolher o painel").</li><li>Arraste para cima até o topo.</li><li>Arraste para baixo até o meio e depois até o mínimo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O painel para em 3 alturas e o mapa continua usável. Mostra o contador "Nesta área".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">27</span><span class="tt">Ficha de posto, monumento e cachoeira</span></div>
+<div class="rot">Para que serve</div><p>Conferir que todo ponto abre uma ficha com a fonte da informação.</p>
+<div class="rot">Antes</div><p>Mapa aberto perto de pontos (postos, monumentos, cachoeiras).</p>
+<div class="rot">Passos</div><ol><li>Toque num pino de posto.</li><li>Leia a ficha e feche. Toque num monumento. Toque numa cachoeira (afaste o mapa se preciso).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Cada toque abre uma ficha com o nome e o tipo. O posto da ANP mostra o preço com a data e "Fonte: ANP, coleta …". Pontos do OpenStreetMap mostram "Fonte: OpenStreetMap".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">28</span><span class="tt">Posto mais próximo</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o botão acha um posto de verdade perto de você.</p>
+<div class="rot">Antes</div><p>Localização do celular ligada e permitida para o app.</p>
+<div class="rot">Passos</div><ol><li>No Mapa, toque em <b>Posto mais próximo</b>.</li><li>Mova o mapa para mostrar outra cidade e toque de novo em <b>Posto mais próximo</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O app indica um posto real perto da <u>sua posição</u> (até 100 km), com distância, e leva a ele, mesmo com o mapa mostrando outra cidade. Se não houver posto, aparece "Nenhum posto por perto".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">29</span><span class="tt">Visibilidade (botão Aprox.)</span></div>
+<div class="rot">Para que serve</div><p>Conferir quem vê você no mapa.</p>
+<div class="rot">Antes</div><p>Mapa aberto.</p>
+<div class="rot">Passos</div><ol><li>Toque no botão <b>Aprox.</b> ("Como apareço no mapa").</li><li>Escolha um de cada vez: <b>Invisível</b>, <b>Só a cidade</b>, <b>Aproximado (~5 km)</b>, <b>Preciso para amigos</b>, <b>Preciso no comboio</b>.</li><li>Ligue <b>Só por 2 horas</b>.</li><li>Em <b>Seu status</b>, escolha por exemplo <b>Parado para café</b>. Toque em <b>Pronto</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O botão no mapa troca de nome a cada escolha (Invisível, Cidade, Aprox., Amigos, Comboio). Com o modo de 2 horas, o app avisa que volta sozinho à escolha anterior.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">30</span><span class="tt">Ver outro irmão no mapa e acenar</span></div>
+<div class="rot">Para que serve</div><p>Conferir o mapa ao vivo e a ficha do irmão.</p>
+<div class="rot">Antes</div><p>(2) A conta 2 em <b>Aproximado</b> e com o app aberto, perto de você.</p>
+<div class="rot">Passos</div><ol><li>No seu celular, abra o <b>Mapa</b> e toque em <b>Irmãos</b>.</li><li>Procure o avatar da conta 2 e toque nele.</li><li>Na ficha, leia a posição e toque em <b>Acenar</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O avatar aparece. A ficha mostra "Posição aproximada (cerca de 5 km), por privacidade" e o botão <b>Acenar</b>. Aparece "Aceno enviado para …".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">31</span><span class="tt">Busca "Para onde vamos?"</span></div>
+<div class="rot">Para que serve</div><p>Conferir a busca de lugares.</p>
+<div class="rot">Antes</div><p>Internet ligada.</p>
+<div class="rot">Passos</div><ol><li>No Mapa, toque em <b>Para onde vamos?</b>.</li><li>Digite o nome de uma cidade ou lugar.</li><li>Toque num resultado.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A lista mostra "Do clube" e "Endereços e lugares". Tocar leva ao lugar no mapa ou ao planejamento da rota.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">32</span><span class="tt">Lojas e negócios aprovados no mapa</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o que foi aprovado vira pino.</p>
+<div class="rot">Antes</div><p>Fazer depois dos testes do grupo K (Loja e negócio aprovados).</p>
+<div class="rot">Passos</div><ol><li>Abra o <b>Mapa</b>.</li><li>Vá até o lugar da Loja e do negócio de teste.</li><li>Toque nos pinos.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A Loja e o negócio aprovados aparecem como pinos. A ficha do negócio mostra o benefício para irmãos.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>E. Rota e navegação</h2><p class="grupo-desc">Planejar rota, tipo de estrada, iniciar e Camadas e opções.</p><div class="teste">
+<div class="cab"><span class="num">33</span><span class="tt">Planejar uma rota</span></div>
+<div class="rot">Para que serve</div><p>Conferir o cálculo da rota.</p>
+<div class="rot">Antes</div><p>Localização ligada e internet.</p>
+<div class="rot">Passos</div><ol><li>No Mapa, escolha um destino (busca ou ficha) e toque em <b>Rota até aqui</b>.</li><li>Veja a tela <b>Planejar rota</b>.</li><li>Se demorar, toque em <b>Cancelar</b> e tente de novo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Calculando a rota…" com o botão <b>Cancelar</b>. A rota sai em tempo razoável, com km, tempo e hora de chegada.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">34</span><span class="tt">Tipo de estrada</span></div>
+<div class="rot">Para que serve</div><p>Conferir Só asfalto, Misto e Prefiro terra.</p>
+<div class="rot">Antes</div><p>Rota planejada para um destino que tenha opção de terra (por exemplo, Mirante da Chapada).</p>
+<div class="rot">Passos</div><ol><li>Em <b>Planejar rota</b>, em <b>Tipo de estrada</b>, toque em <b>Só asfalto</b>.</li><li>Toque em <b>Misto</b>.</li><li>Toque em <b>Prefiro terra</b>.</li><li>Compare km, tempo e "% asfalto, % terra".</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A rota muda quando há terra no caminho. A terra aparece com cor e traço próprios. Em "Só asfalto" sem alternativa, o app avisa quantos km de terra restam.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">35</span><span class="tt">Iniciar a navegação</span></div>
+<div class="rot">Para que serve</div><p>Conferir que a navegação começa rápido e sem erro.</p>
+<div class="rot">Antes</div><p>Rota planejada. Teste com o celular parado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Iniciar</b>.</li><li>Se pedir, toque em <b>Permitir localização</b> e aceite os termos da navegação.</li><li>Espere a navegação abrir.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A navegação começa em poucos segundos. <b>Não</b> aparece a mensagem "Unsupported travel mode".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">36</span><span class="tt">Camadas e opções: mapa, visão e voz</span></div>
+<div class="rot">Para que serve</div><p>Conferir as opções da navegação.</p>
+<div class="rot">Antes</div><p>Navegação iniciada (teste 35).</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Camadas e opções</b>.</li><li>Ligue e desligue <b>Trânsito</b>.</li><li>Em <b>Tipo de mapa</b>, toque em <b>Satélite</b>, depois <b>Híbrido</b>, depois <b>Normal</b>.</li><li>Em <b>Visão</b>, toque em <b>Norte para cima</b> e depois <b>Seguir de frente</b>.</li><li>Em <b>Voz</b>, toque em <b>Mudo</b>, <b>Só alertas</b> e <b>Completa</b>.</li><li>Toque em <b>Fechar</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Cada toque muda o mapa ou a voz na hora. Em "Mudo" o app para de falar.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">37</span><span class="tt">Camadas e opções: evitar terra</span></div>
+<div class="rot">Para que serve</div><p>Conferir o recálculo ao evitar terra.</p>
+<div class="rot">Antes</div><p>Navegação iniciada.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Camadas e opções</b>.</li><li>Em <b>Estrada de chão</b>, toque em <b>Evitar terra</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Recalculando…" e depois "Rota recalculada.". Se não achar outro caminho, aparece "Mantendo a rota atual".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">38</span><span class="tt">Camadas e opções: evitar pedágios</span></div>
+<div class="rot">Para que serve</div><p>Conferir o recálculo ao evitar pedágios.</p>
+<div class="rot">Antes</div><p>Navegação iniciada.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Camadas e opções</b>.</li><li>Em <b>Evitar (na próxima rota)</b>, toque em <b>Pedágios</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A navegação recalcula ("Recalculando…") e mostra a nova rota ou mantém a atual.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">39</span><span class="tt">Botão de opções não cobre a manobra</span></div>
+<div class="rot">Para que serve</div><p>Conferir que a tela de navegação está limpa.</p>
+<div class="rot">Antes</div><p>Navegação iniciada.</p>
+<div class="rot">Passos</div><ol><li>Olhe o cartão de manobra do Google (seta, distância e rua) no alto.</li><li>Olhe onde está o botão <b>Camadas e opções</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O botão de opções não cobre o cartão de manobra do Google.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>F. Modo pilotando</h2><p class="grupo-desc">Trava em movimento, 6 botões, alertas, postos, SOS e Android Auto. Faça parado, de garupa ou com o veículo ligado e seguro.</p><div class="teste">
+<div class="cab"><span class="num">40</span><span class="tt">Trava em movimento e "Sou garupa / passageiro"</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o app trava com a moto andando e que o garupa pode liberar.</p>
+<div class="rot">Antes</div><p>Alguém dirige. Você vai de garupa ou de passageiro. Nunca teste pilotando.</p>
+<div class="rot">Passos</div><ol><li>Com o veículo andando (8 km/h ou mais), abra uma aba que não seja o Mapa (por exemplo <b>Feed</b>).</li><li>Leia a tela <b>Moto em movimento</b>.</li><li>Toque em <b>Sou garupa / passageiro</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A tela "Moto em movimento" cobre a aba, com os botões <b>Abrir o modo pilotando</b>, <b>Voltar ao mapa</b> e <b>Sou garupa / passageiro</b>. Ao tocar no último, o app é liberado até parar.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">41</span><span class="tt">Alerta com 6 tipos</span></div>
+<div class="rot">Para que serve</div><p>Conferir o botão de alerta do modo pilotando.</p>
+<div class="rot">Antes</div><p>Navegação iniciada e em passeio/comboio (para o alerta ir ao grupo). Veículo parado.</p>
+<div class="rot">Passos</div><ol><li>No modo pilotando, toque em <b>Alerta</b>.</li><li>Veja os 6 tipos: <b>Buraco</b>, <b>Polícia</b>, <b>Obra</b>, <b>Animal na pista</b>, <b>Acidente à frente</b>, <b>Óleo ou areia</b>.</li><li>Toque num deles.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Os 6 botões são grandes. Depois de escolher, você ouve a voz confirmando e aparece "Alerta enviado: …". Sem passeio ativo: "Sem comboio ou passeio ativo. Alerta não enviado."</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">42</span><span class="tt">Outro irmão ouve o alerta</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o alerta chega ao grupo por voz.</p>
+<div class="rot">Antes</div><p>(2) Conta 2 no mesmo passeio, com o app no modo pilotando.</p>
+<div class="rot">Passos</div><ol><li>No celular 1, toque em <b>Alerta</b> e escolha <b>Buraco</b>.</li><li>No celular 2, escute.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular 2 fala em voz alta: "Atenção, Buraco à frente."</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">43</span><span class="tt">Reagrupar</span></div>
+<div class="rot">Para que serve</div><p>Conferir o aviso de reagrupar.</p>
+<div class="rot">Antes</div><p>(2) Conta 2 no mesmo passeio, no modo pilotando.</p>
+<div class="rot">Passos</div><ol><li>No celular 1, toque em <b>Reagrupar</b>.</li><li>No celular 2, escute.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular 1 mostra "Reagrupar enviado ao grupo" e fala. O celular 2 fala "Reagrupar no próximo posto ou parada".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">44</span><span class="tt">Posto próximo</span></div>
+<div class="rot">Para que serve</div><p>Conferir o botão que leva ao posto mais perto.</p>
+<div class="rot">Antes</div><p>Localização ligada. Veículo parado.</p>
+<div class="rot">Passos</div><ol><li>No modo pilotando, toque em <b>Posto próximo</b>.</li><li>Quando aparecer o posto, toque em <b>Ir ao posto (X km)</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Procurando posto…" e depois o nome do posto e a distância. A navegação troca para o posto ("Indo ao posto").</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">45</span><span class="tt">Posto na rota</span></div>
+<div class="rot">Para que serve</div><p>Conferir o posto à frente no trajeto.</p>
+<div class="rot">Antes</div><p>Navegação iniciada. Veículo parado.</p>
+<div class="rot">Passos</div><ol><li>No modo pilotando, toque em <b>Posto na rota</b>.</li><li>Toque em <b>Ir ao posto</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O app escolhe um posto à frente no seu trajeto, com a distância, e leva até ele.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">46</span><span class="tt">SOS segurando 3 segundos</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o SOS não dispara sem querer.</p>
+<div class="rot">Antes</div><p>Modo pilotando aberto. Veículo parado.</p>
+<div class="rot">Passos</div><ol><li>Toque rápido em <b>SOS</b> ("Segure 3 s").</li><li>Agora segure o botão <b>SOS</b> por 3 segundos.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O toque rápido não faz nada. Segurando 3 segundos abre o pedido de ajuda (tela do SOS).</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">47</span><span class="tt">Encerrar segurando 1,5 segundo</span></div>
+<div class="rot">Para que serve</div><p>Conferir que sair do modo pilotando exige segurar.</p>
+<div class="rot">Antes</div><p>Modo pilotando aberto.</p>
+<div class="rot">Passos</div><ol><li>Toque rápido em <b>Encerrar</b> ("Segure p/ encerrar").</li><li>Segure o botão <b>Encerrar</b> por 1,5 segundo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O toque rápido não encerra. Segurando 1,5 segundo o modo pilotando fecha e você volta ao app.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">48</span><span class="tt">Android Auto (carro ou DHU no PC)</span></div>
+<div class="rot">Para que serve</div><p>Conferir os 4 botões grandes na tela do carro.</p>
+<div class="rot">Antes</div><p>Celular ligado ao carro com Android Auto, ou ao simulador DHU no PC. Veículo parado.</p>
+<div class="rot">Passos</div><ol><li>Ligue o celular ao Android Auto.</li><li>Abra o app Bodes do Asfalto na tela do carro.</li><li>Veja os botões. Toque em <b>Alerta</b>.</li><li>Volte e toque em <b>Postos</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparecem 4 botões: <b>SOS</b>, <b>Alerta</b>, <b>Postos</b> e <b>Encerrar</b>. Alerta abre a lista de alertas. Postos leva ao posto.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>G. Feed e stories</h2><p class="grupo-desc">Publicar, enquetes, comentários, denúncias e stories.</p><div class="teste">
+<div class="cab"><span class="num">49</span><span class="tt">Publicar post com foto e texto</span></div>
+<div class="rot">Para que serve</div><p>Conferir a publicação no feed.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Feed</b>.</li><li>Toque em <b>Conte sua viagem, irmão…</b> (ou em <b>Foto</b>).</li><li>Escreva um texto e escolha uma foto (<b>Da galeria</b> ou <b>Tirar foto</b>).</li><li>Em <b>Quem pode ver</b>, deixe <b>Todos os membros</b> e toque em <b>Publicar</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O post aparece no topo do Feed. A tela avisa que a localização gravada na foto é apagada antes de publicar.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">50</span><span class="tt">Enquete</span></div>
+<div class="rot">Para que serve</div><p>Conferir enquete e voto.</p>
+<div class="rot">Antes</div><p>Estar no Feed.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Enquete</b> no compositor.</li><li>Escreva a <b>Pergunta</b> e pelo menos 2 opções (<b>Mais uma opção</b> para outras).</li><li>Publique. No post, toque numa opção para votar.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A enquete aparece no Feed e o voto é contado ("N votos").</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">51</span><span class="tt">Comentar, TFA e salvar</span></div>
+<div class="rot">Para que serve</div><p>Conferir as reações e o salvar.</p>
+<div class="rot">Antes</div><p>Existir um post no Feed.</p>
+<div class="rot">Passos</div><ol><li>Num post, toque em <b>TFA</b>.</li><li>Toque em comentários, escreva e toque em <b>Comentar</b>.</li><li>Toque no marcador <b>Salvar post</b>.</li><li>Vá em <b>Perfil → Posts salvos</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O TFA soma 1; o comentário aparece; o post salvo aparece em <b>Posts salvos</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">52</span><span class="tt">Três pontinhos do post</span></div>
+<div class="rot">Para que serve</div><p>Conferir que a janela de opções abre e fecha direito.</p>
+<div class="rot">Antes</div><p>Existir um post no Feed.</p>
+<div class="rot">Passos</div><ol><li>Toque nos três pontinhos (<b>Mais opções</b>) de um post.</li><li>Feche tocando fora da janela.</li><li>Abra de novo e feche com o botão voltar do celular.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A folha de baixo abre com as opções e fecha das duas maneiras.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">53</span><span class="tt">Excluir o próprio post</span></div>
+<div class="rot">Para que serve</div><p>Conferir a exclusão.</p>
+<div class="rot">Antes</div><p>Ter um post seu.</p>
+<div class="rot">Passos</div><ol><li>Nos três pontinhos do seu post, toque em <b>Excluir</b>.</li><li>Na pergunta "Excluir esta publicação?", confirme.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O post some do Feed.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">54</span><span class="tt">Denunciar e bloquear (post de outro irmão)</span></div>
+<div class="rot">Para que serve</div><p>Conferir moderação e bloqueio.</p>
+<div class="rot">Antes</div><p>(2) Um post da conta 2 no Feed. Faça no celular 1.</p>
+<div class="rot">Passos</div><ol><li>Nos três pontinhos do post da conta 2, toque em <b>Denunciar post</b> e confirme em <b>Denunciar</b>.</li><li>Abra os pontinhos de novo e toque em <b>Bloquear …</b>, depois confirme em <b>Bloquear</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Obrigado. A moderação vai analisar.". Depois de bloquear, os posts dele somem do seu Feed.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">55</span><span class="tt">Story com foto e vídeo</span></div>
+<div class="rot">Para que serve</div><p>Conferir a câmera de stories e os enfeites.</p>
+<div class="rot">Antes</div><p>Permitir câmera e microfone.</p>
+<div class="rot">Passos</div><ol><li>No Feed, toque em <b>Seu story</b>.</li><li>Toque rápido no botão do disparo para uma foto. Depois refaça segurando para um vídeo ("Toque para foto · segure para vídeo").</li><li>Teste <b>Filtros</b>, <b>Texto</b> (arraste o texto), <b>Desenho</b> e <b>Enquete</b>.</li><li>Toque em <b>Publicar story</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A foto e o vídeo (até 60 s) funcionam, o texto arrasta, e o story aparece no topo do Feed. Some sozinho em 24 horas.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">56</span><span class="tt">Assistir stories em sequência</span></div>
+<div class="rot">Para que serve</div><p>Conferir os gestos dos stories.</p>
+<div class="rot">Antes</div><p>Existir stories de 2 ou mais irmãos (se só houver o seu, teste os gestos nele).</p>
+<div class="rot">Passos</div><ol><li>No topo do Feed, toque num story.</li><li>Toque no lado direito para avançar e no esquerdo para voltar.</li><li>Segure o dedo na tela.</li><li>Arraste para baixo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Passa de um irmão para o outro; direita avança e esquerda volta; segurar pausa; arrastar para baixo fecha.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>H. Chat</h2><p class="grupo-desc">Acenos, conversas e grupos.</p><div class="teste">
+<div class="cab"><span class="num">57</span><span class="tt">Acenar e abrir conversa 1:1</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o chat só abre se o outro aceitar.</p>
+<div class="rot">Antes</div><p>(2) Conta 2 aprovada. Veja o teste 30.</p>
+<div class="rot">Passos</div><ol><li>No celular 1, acene para a conta 2 (Mapa → ficha do irmão → <b>Acenar</b>, ou <b>Chat → +</b>).</li><li>No celular 2, abra <b>Chat</b>: em <b>Acenos recebidos</b> aparece o aceno.</li><li>No celular 2, toque em <b>Aceitar</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular 1 mostra "Aguardando ele aceitar o aceno". Depois de aceitar, a conversa 1:1 abre nos dois.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">58</span><span class="tt">Mensagens em tempo real</span></div>
+<div class="rot">Para que serve</div><p>Conferir que as mensagens chegam na hora.</p>
+<div class="rot">Antes</div><p>(2) Conversa 1:1 aberta (teste 57).</p>
+<div class="rot">Passos</div><ol><li>No celular 1, escreva em <b>Escreva uma mensagem</b> e toque em <b>Enviar</b>.</li><li>No celular 2, responda.</li><li>Teste uma resposta rápida (por exemplo <b>TFA!</b>).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">As mensagens aparecem na hora nos dois lados, sem fechar a conversa.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">59</span><span class="tt">Grupo do capítulo</span></div>
+<div class="rot">Para que serve</div><p>Conferir o grupo do capítulo.</p>
+<div class="rot">Antes</div><p>Pertencer a um capítulo.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Chat</b>.</li><li>Abra <b>Grupo do capítulo</b>.</li><li>Escreva e envie uma mensagem.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O grupo aparece na lista (filtro <b>Grupos</b>) e aceita a mensagem.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">60</span><span class="tt">Menu da conversa</span></div>
+<div class="rot">Para que serve</div><p>Conferir silenciar e bloquear.</p>
+<div class="rot">Antes</div><p>Uma conversa 1:1 aberta.</p>
+<div class="rot">Passos</div><ol><li>Na conversa, toque em <b>Opções da conversa</b>.</li><li>Veja <b>Silenciar</b> e <b>Bloquear</b>. Feche tocando fora e com o voltar.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O menu abre como folha de baixo com Silenciar e Bloquear, e fecha das duas maneiras. (Só bloqueie se for a conta de teste.)</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>I. Passeios e Ágape</h2><p class="grupo-desc">Criar passeio, presença e Ágape Relâmpago.</p><div class="teste">
+<div class="cab"><span class="num">61</span><span class="tt">Criar passeio</span></div>
+<div class="rot">Para que serve</div><p>Conferir a criação de passeios pela diretoria ou administrador.</p>
+<div class="rot">Antes</div><p>Ser administrador ou diretoria do capítulo.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Passeios</b> → <b>Criar passeio</b>.</li><li>Preencha <b>Nome do passeio</b>, <b>Dia (dd/mm/aaaa)</b>, <b>Hora</b>, <b>Ponto de saída</b> e <b>Destino</b>.</li><li>Toque em <b>Publicar passeio</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Passeio criado". O passeio entra na lista de Passeios (filtro <b>Próximos</b>) e no Feed.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">62</span><span class="tt">Vou e Talvez</span></div>
+<div class="rot">Para que serve</div><p>Conferir a entrada e a saída do grupo do passeio.</p>
+<div class="rot">Antes</div><p>Existir um passeio (teste 61).</p>
+<div class="rot">Passos</div><ol><li>Em <b>Passeios</b>, toque em <b>Vou</b> no passeio.</li><li>Abra <b>Chat</b> e procure <b>Grupo do passeio</b>.</li><li>Volte ao passeio e toque em <b>Talvez</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Com <b>Vou</b> você entra no grupo do passeio (aba Chat). Com <b>Talvez</b> você sai do grupo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">63</span><span class="tt">Criar Ágape Relâmpago</span></div>
+<div class="rot">Para que serve</div><p>Conferir o encontro rápido no mapa.</p>
+<div class="rot">Antes</div><p>Localização ligada.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Criar Ágape Relâmpago</b>.</li><li>Em <b>Onde</b>, escreva o lugar. Em <b>Começa em</b>, escolha o tempo.</li><li>Toque em <b>Publicar Ágape</b>.</li><li>Abra o <b>Mapa</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Ágape publicado". O Ágape surge no mapa (pino "Ágape · tempo") e no banner.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">64</span><span class="tt">Banner do Ágape: Vou, Não vou e X</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o banner some e não volta.</p>
+<div class="rot">Antes</div><p>Um Ágape ativo (teste 63, visto por outra conta ou por você).</p>
+<div class="rot">Passos</div><ol><li>No Mapa, veja o banner do Ágape.</li><li>Toque em <b>Vou</b>. Em outro Ágape (ou outra conta), toque em <b>Não vou</b>. Em outro, toque no <b>X</b> (Fechar aviso do Ágape).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Nas três escolhas o banner some e não volta de novo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">65</span><span class="tt">Outra conta entra no Ágape</span></div>
+<div class="rot">Para que serve</div><p>Conferir o grupo temporário.</p>
+<div class="rot">Antes</div><p>(2) Ágape ativo criado pela conta 1.</p>
+<div class="rot">Passos</div><ol><li>No celular 2, abra o <b>Mapa</b> e toque em <b>Vou</b> no banner do Ágape.</li><li>Abra <b>Chat</b> e procure <b>Grupo do Ágape</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular 2 entra no grupo temporário do Ágape (mostra "Fecha …"). O grupo encerra ao fim do Ágape.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>J. SOS e pedido de ajuda</h2><p class="grupo-desc">Tipos de ajuda, mensagem pronta, faixa SOS ativo e aviso ao grupo.</p><div class="teste">
+<div class="cab"><span class="num">66</span><span class="tt">Pedido de ajuda: 8 tipos</span></div>
+<div class="rot">Para que serve</div><p>Conferir os tipos e os telefones 192/193.</p>
+<div class="rot">Antes</div><p>Teste com o celular parado. Não ligue de verdade para o 192/193 neste teste.</p>
+<div class="rot">Passos</div><ol><li>Toque no botão vermelho <b>SOS</b> do Mapa (ou <b>Pedir ajuda (SOS)</b>).</li><li>Em <b>O que está acontecendo?</b>, veja os tipos: <b>Sofri acidente</b>, <b>Mal-estar / saúde</b>, <b>Pane mecânica</b>, <b>Pneu furado</b>, <b>Sem combustível</b>, <b>Estou perdido</b>, <b>Bateria / elétrica</b> e <b>Outro</b>.</li><li>Toque em <b>Sofri acidente</b> e depois em <b>Mal-estar / saúde</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">São 8 tipos. Acidente e Mal-estar mostram os botões <b>Ligar 192 (SAMU)</b> e <b>Ligar 193 (Bombeiros)</b> e a frase "Situação grave: ligue já…".</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">67</span><span class="tt">Mensagem pronta do WhatsApp</span></div>
+<div class="rot">Para que serve</div><p>Conferir o texto que vai ao WhatsApp.</p>
+<div class="rot">Antes</div><p>Ter um contato de emergência cadastrado (teste 14).</p>
+<div class="rot">Passos</div><ol><li>No SOS, escolha um tipo (por exemplo <b>Pneu furado</b>).</li><li>Leia a <b>Mensagem que será enviada</b>.</li><li>Toque em <b>WhatsApp para</b> seu contato (não precisa enviar; volte).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A mensagem tem "PEDIDO DE AJUDA — Bodes do Asfalto", Quem (nome e apelido), O que houve, Onde (link do mapa) e "Enviado às HH:mm de dd/mm". O WhatsApp abre com o texto pronto.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">68</span><span class="tt">Avisar o grupo e a diretoria pelo app</span></div>
+<div class="rot">Para que serve</div><p>Conferir o aviso pelo app e a faixa vermelha.</p>
+<div class="rot">Antes</div><p>Estar logado e (se possível) em um passeio.</p>
+<div class="rot">Passos</div><ol><li>No SOS, toque em <b>Avisar o grupo e a diretoria pelo app</b>.</li><li>Depois volte às outras telas (Mapa, Feed, Perfil).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Aviso enviado. Eles veem sua posição exata até você encerrar.". Uma faixa vermelha <b>SOS ativo</b> ("Sua posição exata está com o grupo") fica em todas as telas.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">69</span><span class="tt">Encerrar o SOS</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o SOS encerra segurando.</p>
+<div class="rot">Antes</div><p>SOS ativo (teste 68).</p>
+<div class="rot">Passos</div><ol><li>Na faixa vermelha, segure <b>Segure p/ encerrar</b> por 1,5 segundo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A faixa some e sua posição volta à visibilidade que você tinha.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">70</span><span class="tt">Outra conta recebe o SOS</span></div>
+<div class="rot">Para que serve</div><p>Conferir a tela de quem recebe o pedido de ajuda.</p>
+<div class="rot">Antes</div><p>(2) Conta 2 moderadora ou no mesmo passeio. Notificações funcionando (versão 0.20.1).</p>
+<div class="rot">Passos</div><ol><li>No celular 1, faça o teste 68 (avisar pelo app).</li><li>No celular 2, toque na notificação (ou abra o app).</li><li>Veja a tela "Pedido de ajuda de …".</li><li>Toque em <b>Ligar</b> (cancele antes de discar) e em <b>Rota até ele</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular 2 recebe um aviso. A tela mostra o que houve, "Posição exata, atualizada às …", o botão <b>Ligar</b> e <b>Rota até ele</b>, e o mapa com a posição do irmão.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>K. Ferramentas do clube</h2><p class="grupo-desc">Lojas, Guia de Negócios, carteirinha, Classificados, Eventos, Membros.</p><div class="teste">
+<div class="cab"><span class="num">71</span><span class="tt">Cadastrar e aprovar uma Loja</span></div>
+<div class="rot">Para que serve</div><p>Conferir o cadastro de Lojas e a aprovação.</p>
+<div class="rot">Antes</div><p>Ser irmão da Loja de teste. Ser administrador ou moderador para aprovar.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Visitação de Lojas</b> → <b>Cadastrar minha Loja</b>.</li><li>Preencha <b>Nome da Loja</b>, <b>Oriente</b>, <b>Potência</b>, <b>Dias de sessão</b>, endereço e cidade. Marque que é membro da Loja e toque em <b>Enviar para revisão</b>.</li><li>Depois: <b>Perfil → Aprovar irmãos → aba Lojas</b> → <b>Aprovar</b>.</li><li>Volte a <b>Visitação de Lojas</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A Loja mostra "Em revisão" até ser aprovada. Depois aparece na lista com Oriente, sessões e o botão <b>Acenar ao contato</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">72</span><span class="tt">Guia de Negócios e Destaque</span></div>
+<div class="rot">Para que serve</div><p>Conferir o cadastro do negócio e o selo de destaque.</p>
+<div class="rot">Antes</div><p>Administrador para aprovar e dar Destaque.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Guia de Negócios</b> → <b>Cadastrar meu negócio</b>.</li><li>Preencha nome, tipo, cidade e o <b>Benefício para irmãos (obrigatório)</b>, adicione fotos e toque em <b>Enviar para revisão</b>.</li><li><b>Perfil → Aprovar irmãos → aba Negócios</b> → <b>Aprovar</b>.</li><li>Abra o negócio no Guia. Em <b>Destaque (só administração)</b> escreva a data (AAAA-MM-DD) e toque em <b>Definir destaque</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O negócio aparece depois de aprovado, com benefício e fotos. Com o Destaque, ganha o selo <b>Destaque</b> e passa a aparecer primeiro.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">73</span><span class="tt">Carteirinha "Sou membro"</span></div>
+<div class="rot">Para que serve</div><p>Conferir a carteirinha para mostrar no balcão.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Guia de Negócios</b>.</li><li>Toque em <b>Sou membro (mostrar no balcão)</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A carteirinha mostra seu capítulo real, "Membro ativo" e a hora andando (prova que não é print). Nada maçônico aparece.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">74</span><span class="tt">Classificados</span></div>
+<div class="rot">Para que serve</div><p>Conferir anúncio, vendido e aceno ao vendedor.</p>
+<div class="rot">Antes</div><p>(2) Para o aceno, a conta 2 vê o anúncio.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Classificados</b> → <b>Anunciar</b>.</li><li>Adicione pelo menos uma foto, categoria, título, preço e toque em <b>Publicar anúncio</b>.</li><li>Abra o anúncio e toque em <b>Marcar como vendido</b>.</li><li>No celular 2, abra o anúncio e toque em <b>Acenar ao vendedor</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O anúncio aparece. Marcado como vendido, mostra "Vendido". O aceno é enviado ao vendedor.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">75</span><span class="tt">Divulgar evento e aprovar</span></div>
+<div class="rot">Para que serve</div><p>Conferir o fluxo de eventos.</p>
+<div class="rot">Antes</div><p>Administrador ou moderador para aprovar.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Eventos</b> → <b>Divulgar um evento</b>.</li><li>Preencha nome, tipo, dia, hora, local e cidade e toque em <b>Enviar para revisão</b>.</li><li><b>Perfil → Aprovar irmãos → aba Eventos</b>: aprove um e recuse outro escrevendo o motivo.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O evento aprovado aparece em Eventos. O recusado sai da fila e o autor vê o motivo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">76</span><span class="tt">Membros e Aniversários</span></div>
+<div class="rot">Para que serve</div><p>Conferir a lista de membros e o aniversário.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Ferramentas</b> → <b>Membros</b> e veja a lista.</li><li>Volte e toque em <b>Aniversariantes</b>.</li><li>Em <b>Meu aniversário</b>, escolha <b>Dia</b> e <b>Mês</b>, ligue <b>Mostrar meu aniversário aos membros</b> e toque em <b>Salvar</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">A lista mostra nome, apelido e capítulo ("N irmãos no clube"). O aniversário é salvo e só aparece para os outros se você mostrar.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">77</span><span class="tt">Nada de "em breve", "exemplo" ou "simular"</span></div>
+<div class="rot">Para que serve</div><p>Conferir a regra de que nenhuma tela fica pela metade.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Passe por <b>Mapa</b>, <b>Feed</b>, <b>Chat</b>, <b>Passeios</b>, <b>Ferramentas</b> e <b>Perfil</b>.</li><li>Abra algumas ferramentas.</li><li>Procure as palavras "em breve", "exemplo", "versão de teste" e "simular".</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Nenhuma dessas palavras aparece em nenhuma tela. Se achar, anote a tela e mande um print.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>L. Desafios e conquistas</h2><p class="grupo-desc">Criar e aprovar desafios, XP e ranking.</p><div class="teste">
+<div class="cab"><span class="num">78</span><span class="tt">Criar e aprovar um desafio</span></div>
+<div class="rot">Para que serve</div><p>Conferir o fluxo de desafios.</p>
+<div class="rot">Antes</div><p>Administrador, moderador ou diretoria para aprovar.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil → Ver minhas conquistas → Ver todos os desafios</b>.</li><li>Toque em <b>Criar desafio</b>. Preencha nome, tipo, meta e prazo e toque em <b>Enviar para aprovação</b>.</li><li><b>Perfil → Aprovar irmãos → aba Desafios</b> → <b>Aprovar desafio</b>.</li><li>Volte a <b>Conquistas</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O desafio mostra "Aguardando aprovação" e depois da aprovação aparece em Conquistas, com o botão <b>Participar</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">79</span><span class="tt">Ranking geral e do capítulo</span></div>
+<div class="rot">Para que serve</div><p>Conferir as listas de ranking.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil → Ver minhas conquistas</b>.</li><li>Em <b>Ranking por XP</b>, toque em <b>Geral</b> e depois em <b>Meu capítulo</b>.</li><li>Toque em <b>Este mês</b> e depois em <b>Sempre</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">As listas mudam a cada toque. Se ninguém pontuou, aparece "Ainda ninguém pontuou nesta lista". Seu nível aparece (Cabrito, Bode, Bode Velho ou Bode Lendário).</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>M. Ajuda e suporte</h2><p class="grupo-desc">Pedido de ajuda ao suporte e resposta.</p><div class="teste">
+<div class="cab"><span class="num">80</span><span class="tt">Enviar um pedido ao suporte</span></div>
+<div class="rot">Para que serve</div><p>Conferir o envio de pedido com print.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil → Ajuda</b>.</li><li>Em <b>Sobre o quê?</b>, escolha uma categoria (<b>Dúvida</b>, <b>Problema</b>, <b>Sugestão</b> ou <b>Denúncia / outro</b>).</li><li>Escreva em <b>Descreva em poucas palavras</b>.</li><li>Toque em <b>Anexar print</b> e escolha uma imagem. Ligue <b>Enviar dados do aparelho</b>.</li><li>Toque em <b>Enviar pedido</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Pedido enviado. Avisamos quando houver resposta." e o pedido entra em <b>Meus pedidos</b> com a situação <b>Aguardando</b>.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">81</span><span class="tt">Responder um pedido de suporte</span></div>
+<div class="rot">Para que serve</div><p>Conferir a resposta do suporte.</p>
+<div class="rot">Antes</div><p>Administrador ou moderador. Pedido do teste 80.</p>
+<div class="rot">Passos</div><ol><li><b>Perfil → Aprovar irmãos → aba Suporte</b>.</li><li>Abra o pedido e escreva em <b>Sua resposta ao irmão</b>.</li><li>Toque em <b>Responder</b>.</li><li>Quem enviou: <b>Perfil → Ajuda → Meus pedidos</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O pedido passa a <b>Respondido</b> e a resposta aparece em Meus pedidos ("Resposta: …").</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>N. Comportamentos gerais</h2><p class="grupo-desc">Rascunhos, janelas e idiomas.</p><div class="teste">
+<div class="cab"><span class="num">82</span><span class="tt">Rascunhos</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o texto não se perde.</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Comece um post (Feed → <b>Conte sua viagem, irmão…</b>) e escreva um texto sem publicar.</li><li>Troque de aba e depois saia do app e volte.</li><li>Repita com um anúncio em Classificados.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O texto continua lá quando você volta.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">83</span><span class="tt">Janelas fecham com o voltar e tocando fora</span></div>
+<div class="rot">Para que serve</div><p>Conferir as janelas novas (avisos e menus).</p>
+<div class="rot">Antes</div><p>Estar logado.</p>
+<div class="rot">Passos</div><ol><li>Abra uma janela (por exemplo, a legenda do mapa, o menu do post, as opções da conversa).</li><li>Feche tocando fora.</li><li>Abra de novo e feche com o botão voltar do celular.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Todas as janelas fecham das duas maneiras.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">84</span><span class="tt">Idioma do celular</span></div>
+<div class="rot">Para que serve</div><p>Conferir Español e English.</p>
+<div class="rot">Antes</div><p>Poder mudar o idioma do celular.</p>
+<div class="rot">Passos</div><ol><li>Nas configurações do celular, troque o idioma para <b>Español</b>.</li><li>Abra o app e olhe as abas.</li><li>Repita com <b>English</b>. No final, volte para <b>Português (Brasil)</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Os textos do app mudam para o idioma escolhido. Em outros idiomas o app usa o português.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>O. Notificações</h2><p class="grupo-desc">Funcionam a partir da versão 0.20.1 (antes, o arquivo do Firebase não ia dentro do app).</p><div class="aviso"><b>Importante sobre o grupo O.</b> As notificações funcionam <b>a partir da versão 0.20.1</b>. Nas versões 0.20.0 e anteriores o arquivo do Firebase (que o Google exige para os avisos) não ia dentro do app, e os avisos não chegavam. Na 0.20.1 ele vem junto. Para estes testes, use a 0.20.1 e, quando o app perguntar "Receber avisos?", toque em <b>Permitir</b>.</div><div class="teste">
+<div class="cab"><span class="num">85</span><span class="tt">Notificações no Status do servidor</span></div>
+<div class="rot">Para que serve</div><p>Conferir que o aparelho está registrado para receber avisos.</p>
+<div class="rot">Antes</div><p>Versão 0.20.1 instalada. Ter permitido notificações ("Receber avisos? → Permitir").</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil → Status do servidor</b>.</li><li>Olhe a linha <b>Notificações</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">Aparece "Este aparelho está registrado". Se aparecer "não está registrado", anote e mande um print.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">86</span><span class="tt">Chegam avisos de aceno, mensagem, aprovação, SOS e suporte</span></div>
+<div class="rot">Para que serve</div><p>Conferir que cada tipo de aviso chega no celular.</p>
+<div class="rot">Antes</div><p>(2) Duas contas, cada uma com o app fechado (em segundo plano) no outro celular.</p>
+<div class="rot">Passos</div><ol><li>Com o celular 2 com o app fechado, no celular 1 envie um aceno para a conta 2.</li><li>Depois envie uma mensagem numa conversa aceita.</li><li>Aprove (ou recuse) um pedido de entrada de uma conta nova.</li><li>Faça o teste 68 (SOS pelo app) e o teste 81 (resposta do suporte).</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O celular que recebe mostra uma notificação em cada caso. A notificação nunca mostra o texto da mensagem, só que chegou algo novo.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div><div class="teste">
+<div class="cab"><span class="num">87</span><span class="tt">Preferências de notificação</span></div>
+<div class="rot">Para que serve</div><p>Conferir que cada tipo pode ser desligado, menos o SOS.</p>
+<div class="rot">Antes</div><p>Versão 0.20.1.</p>
+<div class="rot">Passos</div><ol><li>Toque em <b>Perfil → Notificações</b>.</li><li>Desligue <b>Acenos</b>.</li><li>No outro celular, envie um aceno.</li><li>Veja a linha do <b>SOS</b>.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O aviso de aceno para de chegar. O <b>SOS</b> aparece como "Sempre ligado, por segurança" e não desliga.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section><section class="grupo-cab"><h2>P. Erros</h2><p class="grupo-desc">O que fazer se o app fechar sozinho.</p><div class="teste">
+<div class="cab"><span class="num">88</span><span class="tt">O app fechou sozinho</span></div>
+<div class="rot">Para que serve</div><p>Ajudar a achar e corrigir falhas.</p>
+<div class="rot">Antes</div><p>Só se acontecer. Não precisa provocar.</p>
+<div class="rot">Passos</div><ol><li>Anote a <b>hora</b> em que o app fechou.</li><li>Anote em que <b>tela</b> você estava e o que tinha acabado de tocar.</li><li>Abra o app de novo. Se aparecer "Algo deu errado", escreva o que estava fazendo e toque em <b>Enviar detalhes</b>.</li><li>Mande esses dados no relatório.</li></ol>
+<div class="rot">O que deve acontecer</div><div class="esp">O relatório da falha chega sozinho ao Sentry (o sistema de erros). Sua anotação de hora e tela ajuda a achar o problema.</div>
+<div class="ok"><span class="quad"></span> OK &nbsp;&nbsp;&nbsp; <span class="quad"></span> Falhou &mdash; anotar: <span class="anot"></span></div>
+</div></section>
+
+<section class="secao" id="final"><h2>Como me mandar o resultado</h2>
+<p>Quando terminar (ou quando cansar: pode mandar em partes), mande uma mensagem com esta lista preenchida.</p>
+<ol>
+<li>Escreva seu nome e o modelo do celular (por exemplo, "Redmi Note 12").</li>
+<li>Escreva a versão que você testou (deve ser <b>0.20.1</b>).</li>
+<li>Para cada teste, escreva o número e <b>OK</b> ou <b>Falhou</b>. Exemplo: "1 OK, 2 OK, 3 OK, 4 Falhou".</li>
+<li>Para cada <b>Falhou</b>, mande um print e uma frase: o que você tocou, o que esperava e o que apareceu.</li>
+<li>Se o app fechou sozinho, anote a <b>hora</b> e a <b>tela</b> (teste 88).</li>
+<li>Mande tudo na mesma conversa com o desenvolvedor. Pode ser texto e prints, sem pressa.</li>
+</ol>
+<div class="caixa"><div class="tit">Modelo para copiar</div>
+<p>Nome: ______________________ &nbsp; Celular: ______________________ &nbsp; Versão: 0.20.1</p>
+<p>Testes OK: ______________________________________________________________</p>
+<p>Testes que falharam (número e o que aconteceu):</p>
+<div class="linha-resp"></div><div class="linha-resp"></div><div class="linha-resp"></div><div class="linha-resp"></div>
+<p>Testes que não consegui fazer: _________________________________________</p>
+</div>
+<p>Obrigado, irmão. Cada teste ajuda a deixar o app mais seguro e mais fácil de usar para todos. TFA!</p>
+</section>
+</body></html>

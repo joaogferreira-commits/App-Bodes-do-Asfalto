@@ -1,0 +1,51 @@
+@page { size: A4; margin: 18mm; }
+:root { --texto:#1A1612; --laranja:#E8692A; --cinza:#6b625a; --linha:#d9d2ca; --fundo-caixa:#faf6f1; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: Arial, 'Liberation Sans', Inter, 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.45; color: var(--texto); background: #fff; margin: 0; }
+h1, h2, h3, h4 { font-family: 'Arial Narrow', 'Liberation Sans Narrow', 'Arial', sans-serif; font-weight: 700; color: var(--texto); line-height: 1.15; }
+h1 { font-size: 30pt; margin: 0 0 6pt; }
+h2 { font-size: 20pt; margin: 0 0 10pt; padding-bottom: 4pt; border-bottom: 3pt solid var(--laranja); break-after: avoid; }
+h3 { font-size: 14.5pt; margin: 16pt 0 6pt; padding-bottom: 2pt; border-bottom: 1pt solid var(--laranja); break-after: avoid; }
+h4 { font-size: 12.5pt; margin: 12pt 0 4pt; break-after: avoid; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 8pt; padding-left: 20pt; }
+li { margin-bottom: 3pt; }
+b, strong { font-weight: 700; }
+.secao { break-before: page; }
+.capa { text-align: left; padding-top: 38mm; }
+.capa .marca { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; letter-spacing: 2pt; font-size: 13pt; border-bottom: 3pt solid var(--laranja); display:inline-block; padding-bottom: 4pt; margin-bottom: 18pt; }
+.capa h1 { font-size: 40pt; }
+.capa .sub { font-size: 16pt; margin: 8pt 0 26pt; }
+.capa .meta { color: var(--cinza); font-size: 11pt; }
+.caixa { border: 1pt solid var(--linha); border-left: 4pt solid var(--laranja); background: var(--fundo-caixa); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.caixa p:last-child, .caixa ol:last-child, .caixa ul:last-child { margin-bottom: 0; }
+.caixa .tit { font-weight: 700; margin-bottom: 3pt; }
+.aviso { border: 1.5pt solid var(--texto); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.sumario { list-style: none; padding: 0; margin: 0; }
+.sumario li { display: flex; align-items: baseline; margin: 0 0 3pt; }
+.sumario li a { color: var(--texto); text-decoration: none; }
+.sumario li .pt { flex: 1; border-bottom: 1pt dotted #b9b0a6; margin: 0 4pt; }
+.sumario .grupo { font-weight: 700; margin-top: 6pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 11pt; break-inside: auto; }
+th, td { border: 1pt solid var(--linha); padding: 4pt 6pt; text-align: left; vertical-align: top; }
+th { background: var(--fundo-caixa); font-weight: 700; }
+tr { break-inside: avoid; }
+/* testes */
+.teste { border: 1pt solid var(--linha); padding: 8pt 10pt 7pt; margin: 0 0 10pt; break-inside: avoid; }
+.teste .cab { display: flex; align-items: baseline; gap: 8pt; margin-bottom: 4pt; }
+.teste .num { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 16pt; color: #fff; background: var(--texto); min-width: 30pt; text-align: center; padding: 1pt 5pt; }
+.teste .tt { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 14pt; }
+.teste .rot { font-weight: 700; font-size: 10.5pt; text-transform: uppercase; letter-spacing: .4pt; color: var(--cinza); margin-top: 4pt; }
+.teste p { margin: 1pt 0 3pt; }
+.teste ol { margin: 1pt 0 4pt; padding-left: 18pt; }
+.teste .esp { background: var(--fundo-caixa); border-left: 3pt solid var(--laranja); padding: 3pt 7pt; margin-top: 2pt; }
+.teste .ok { margin-top: 7pt; padding-top: 5pt; border-top: 1pt dashed var(--linha); font-size: 12pt; }
+.quad { display: inline-block; width: 11pt; height: 11pt; border: 1.5pt solid var(--texto); vertical-align: -1.5pt; margin-right: 3pt; }
+.anot { display:inline-block; border-bottom: 1pt solid var(--texto); width: 190pt; height: 11pt; vertical-align: bottom; }
+.grupo-cab { break-before: page; }
+.grupo-cab:first-of-type { break-before: auto; }
+.grupo-desc { color: var(--cinza); margin-bottom: 10pt; }
+.mini { font-size: 10.5pt; color: var(--cinza); }
+.btn { font-weight: 700; }
+.linha-resp { border-bottom: 1pt solid var(--texto); height: 20pt; margin-bottom: 4pt; }

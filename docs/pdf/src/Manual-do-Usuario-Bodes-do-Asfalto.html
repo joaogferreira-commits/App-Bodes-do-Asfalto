@@ -1,0 +1,745 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<title>Manual do usuário - Bodes do Asfalto</title><style>@page { size: A4; margin: 18mm; }
+:root { --texto:#1A1612; --laranja:#E8692A; --cinza:#6b625a; --linha:#d9d2ca; --fundo-caixa:#faf6f1; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: Arial, 'Liberation Sans', Inter, 'DejaVu Sans', sans-serif; font-size: 12pt; line-height: 1.45; color: var(--texto); background: #fff; margin: 0; }
+h1, h2, h3, h4 { font-family: 'Arial Narrow', 'Liberation Sans Narrow', 'Arial', sans-serif; font-weight: 700; color: var(--texto); line-height: 1.15; }
+h1 { font-size: 30pt; margin: 0 0 6pt; }
+h2 { font-size: 20pt; margin: 0 0 10pt; padding-bottom: 4pt; border-bottom: 3pt solid var(--laranja); break-after: avoid; }
+h3 { font-size: 14.5pt; margin: 16pt 0 6pt; padding-bottom: 2pt; border-bottom: 1pt solid var(--laranja); break-after: avoid; }
+h4 { font-size: 12.5pt; margin: 12pt 0 4pt; break-after: avoid; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 8pt; padding-left: 20pt; }
+li { margin-bottom: 3pt; }
+b, strong { font-weight: 700; }
+.secao { break-before: page; }
+.capa { text-align: left; padding-top: 38mm; }
+.capa .marca { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; letter-spacing: 2pt; font-size: 13pt; border-bottom: 3pt solid var(--laranja); display:inline-block; padding-bottom: 4pt; margin-bottom: 18pt; }
+.capa h1 { font-size: 40pt; }
+.capa .sub { font-size: 16pt; margin: 8pt 0 26pt; }
+.capa .meta { color: var(--cinza); font-size: 11pt; }
+.caixa { border: 1pt solid var(--linha); border-left: 4pt solid var(--laranja); background: var(--fundo-caixa); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.caixa p:last-child, .caixa ol:last-child, .caixa ul:last-child { margin-bottom: 0; }
+.caixa .tit { font-weight: 700; margin-bottom: 3pt; }
+.aviso { border: 1.5pt solid var(--texto); padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.sumario { list-style: none; padding: 0; margin: 0; }
+.sumario li { display: flex; align-items: baseline; margin: 0 0 3pt; }
+.sumario li a { color: var(--texto); text-decoration: none; }
+.sumario li .pt { flex: 1; border-bottom: 1pt dotted #b9b0a6; margin: 0 4pt; }
+.sumario .grupo { font-weight: 700; margin-top: 6pt; }
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt; font-size: 11pt; break-inside: auto; }
+th, td { border: 1pt solid var(--linha); padding: 4pt 6pt; text-align: left; vertical-align: top; }
+th { background: var(--fundo-caixa); font-weight: 700; }
+tr { break-inside: avoid; }
+/* testes */
+.teste { border: 1pt solid var(--linha); padding: 8pt 10pt 7pt; margin: 0 0 10pt; break-inside: avoid; }
+.teste .cab { display: flex; align-items: baseline; gap: 8pt; margin-bottom: 4pt; }
+.teste .num { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 16pt; color: #fff; background: var(--texto); min-width: 30pt; text-align: center; padding: 1pt 5pt; }
+.teste .tt { font-family: 'Arial Narrow','Liberation Sans Narrow',Arial,sans-serif; font-weight:700; font-size: 14pt; }
+.teste .rot { font-weight: 700; font-size: 10.5pt; text-transform: uppercase; letter-spacing: .4pt; color: var(--cinza); margin-top: 4pt; }
+.teste p { margin: 1pt 0 3pt; }
+.teste ol { margin: 1pt 0 4pt; padding-left: 18pt; }
+.teste .esp { background: var(--fundo-caixa); border-left: 3pt solid var(--laranja); padding: 3pt 7pt; margin-top: 2pt; }
+.teste .ok { margin-top: 7pt; padding-top: 5pt; border-top: 1pt dashed var(--linha); font-size: 12pt; }
+.quad { display: inline-block; width: 11pt; height: 11pt; border: 1.5pt solid var(--texto); vertical-align: -1.5pt; margin-right: 3pt; }
+.anot { display:inline-block; border-bottom: 1pt solid var(--texto); width: 190pt; height: 11pt; vertical-align: bottom; }
+.grupo-cab { break-before: page; }
+.grupo-cab:first-of-type { break-before: auto; }
+.grupo-desc { color: var(--cinza); margin-bottom: 10pt; }
+.mini { font-size: 10.5pt; color: var(--cinza); }
+.btn { font-weight: 700; }
+.linha-resp { border-bottom: 1pt solid var(--texto); height: 20pt; margin-bottom: 4pt; }
+</style></head><body>
+<section class="capa"><div class="marca">BODES DO ASFALTO</div>
+<h1>Manual do usuário</h1>
+<div class="sub">O app dos irmãos: estrada, comboio e confraternização</div>
+<p class="meta">Versão do app descrita: 0.20.1 &middot; novembro de 2026</p>
+<p style="margin-top:30pt">Escrito em linguagem simples, com os nomes das telas e dos botões do app, para você achar tudo com facilidade.</p></section>
+<section class="secao"><h2>Sumário</h2><ul class="sumario"><li><a>1. Boas-vindas</a><span class="pt"></span><span>3</span></li><li><a>2. Como entrar</a><span class="pt"></span><span>4</span></li><li><a>3. Privacidade</a><span class="pt"></span><span>6</span></li><li><a>4. Mapa</a><span class="pt"></span><span>9</span></li><li><a>5. Rotas e navegação</a><span class="pt"></span><span>11</span></li><li><a>6. Modo pilotando</a><span class="pt"></span><span>13</span></li><li><a>7. Android Auto</a><span class="pt"></span><span>15</span></li><li><a>8. SOS e pedido de ajuda</a><span class="pt"></span><span>16</span></li><li><a>9. Feed e stories</a><span class="pt"></span><span>18</span></li><li><a>10. Chat e acenos</a><span class="pt"></span><span>20</span></li><li><a>11. Passeios e Ágape Relâmpago</a><span class="pt"></span><span>22</span></li><li><a>12. Desafios, XP, níveis, selos e ranking</a><span class="pt"></span><span>23</span></li><li><a>13. Ferramentas do clube</a><span class="pt"></span><span>25</span></li><li><a>14. Notificações e preferências</a><span class="pt"></span><span>28</span></li><li><a>15. Atalho e widget de SOS</a><span class="pt"></span><span>29</span></li><li><a>16. Ajuda e suporte</a><span class="pt"></span><span>30</span></li><li><a>17. Para diretoria, moderadores e administrador</a><span class="pt"></span><span>31</span></li><li><a>18. Dúvidas frequentes</a><span class="pt"></span><span>33</span></li><li><a>19. Segurança na estrada</a><span class="pt"></span><span>35</span></li></ul></section>
+<section class="secao"><h2>1. Boas-vindas</h2>
+<p>Irmão, este é o app dos <b>Bodes do Asfalto</b>: estrada, comboio e confraternização. Ele ajuda você a achar o caminho, avisar os irmãos quando algo acontece, pedir socorro e se encontrar com o clube pela estrada.</p>
+<p>Este manual explica, passo a passo, o que o app faz hoje. Está escrito com as mesmas palavras que aparecem nas telas do app, para você achar tudo fácil. A versão descrita é a <b>0.20.1</b>.</p>
+<div class="caixa"><div class="tit">Quatro ideias para guardar</div>
+<ol>
+<li><b>Segurança primeiro.</b> Com a moto em movimento, o app só mostra rota, alertas, voz e botões grandes. Nenhum ponto é dado por velocidade.</li>
+<li><b>Discrição.</b> O app é só para membros do clube. Você escolhe quem vê onde você está e quem vê seus dados.</li>
+<li><b>Confraternização.</b> O app aproxima os irmãos. Encontros, Lojas e socorro entre irmãos são o centro dele.</li>
+<li><b>Identidade do clube.</b> Capítulos, sedes e o jeito do clube estão em todo o app.</li>
+</ol></div>
+<h3>As seis abas</h3>
+<p>Na barra de baixo do app há seis abas. Toque numa delas para mudar de tela.</p>
+<table>
+<tr><th style="width:26%">Aba</th><th>Para que serve</th></tr>
+<tr><td><b>Mapa</b></td><td>A tela inicial. Mostra irmãos, postos, lugares, Lojas e Ágapes na região. Daqui você planeja rotas e pede ajuda.</td></tr>
+<tr><td><b>Feed</b></td><td>Posts, fotos e stories dos irmãos.</td></tr>
+<tr><td><b>Chat</b></td><td>Conversas com irmãos, grupos do capítulo, do passeio e do Ágape.</td></tr>
+<tr><td><b>Passeios</b></td><td>A agenda de passeios do seu capítulo e dos passeios gerais.</td></tr>
+<tr><td><b>Ferramentas</b></td><td>Tempo, combustível, checklist, Ágape, Lojas, Guia de Negócios, Classificados e mais.</td></tr>
+<tr><td><b>Perfil</b></td><td>Seus dados, moto, contatos de emergência, notificações, atalho de SOS, ajuda e privacidade. Daqui você abre também as <b>Conquistas</b> (botão <b>Ver minhas conquistas</b>).</td></tr>
+</table>
+<div class="aviso"><b>O app não substitui o socorro oficial.</b> Em caso grave, ligue <b>192 (SAMU)</b> ou <b>193 (Bombeiros)</b>.</div>
+<p class="mini">O app tem o botão vermelho <b>SOS</b> sempre à mão: no Mapa e em todas as abas.</p>
+</section><section class="secao"><h2>2. Como entrar</h2>
+<p>O app é <b>somente para membros do Bodes do Asfalto</b>. Depois de entrar, a diretoria do seu capítulo (ou a moderação do clube) confirma o seu acesso. Até lá você só vê a tela de espera.</p>
+<h3>Passo 1: escolher como entrar</h3>
+<p>Na tela de entrada há duas maneiras. Escolha a que for mais fácil para você.</p>
+<h4>Entrar com Google</h4>
+<ol>
+<li>Toque em <b>Entrar com Google</b>.</li>
+<li>Na janela do Google, escolha a sua conta.</li>
+<li>Você volta ao app já com a conta aberta.</li>
+</ol>
+<h4>Entrar com e-mail (link, sem senha)</h4>
+<ol>
+<li>Escreva o seu e-mail em <b>Seu e-mail</b>.</li>
+<li>Toque em <b>Receber link de acesso</b>. Aparece "Enviamos um link para …".</li>
+<li>Abra o aplicativo de e-mail <b>neste mesmo celular</b> e toque no link. Não precisa de senha.</li>
+<li>O app abre já logado. Se ainda estiver na tela do link, toque em <b>Já toquei no link</b>.</li>
+</ol>
+<div class="caixa"><div class="tit">Se o link não funcionar</div><p>O link vale uma vez e só no celular em que foi pedido. Toque em <b>Voltar para a entrada</b> e peça um novo. Se errou o e-mail, toque em <b>Usar outro e-mail</b>.</p></div>
+
+<h3>Passo 2: escolher o que você autoriza</h3>
+<p>Na tela <b>Sua privacidade</b>, o app explica três autorizações. Você pode mudar quando quiser em <b>Perfil → Meus dados</b>.</p>
+<ul>
+<li><b>Termos de uso e privacidade</b> (obrigatório): nome, apelido, capítulo e foto, para os irmãos te reconhecerem.</li>
+<li><b>Localização</b>: para rota, navegação, SOS e o mapa ao vivo. Por padrão os irmãos veem só a sua região (cerca de 5 km). Casa e trabalho nunca aparecem.</li>
+<li><b>Dados maçônicos</b> (opcional): Loja, Oriente e Potência, só se você quiser informar. O app nunca pede grau.</li>
+</ul>
+<p>Toque em <b>Continuar</b>.</p>
+
+<h3>Passo 3: pedir entrada</h3>
+<p>Na tela <b>Pedir entrada</b>, preencha:</p>
+<ol>
+<li><b>Nome completo</b></li>
+<li><b>Apelido de estrada</b></li>
+<li><b>Seu capítulo</b> e <b>Cidade</b></li>
+<li><b>Telefone com DDD</b></li>
+<li><b>Foto sua com o colete do clube</b>: toque e tire a foto.</li>
+<li><b>Foto da carteirinha do clube</b>: toque e tire a foto.</li>
+<li><b>Irmão do clube que te indica</b>: escolha um irmão que já está no app. Ele recebe um pedido de confirmação.</li>
+<li>Toque em <b>Enviar pedido</b>.</li>
+</ol>
+<p>Se faltar alguma coisa, o app mostra "Falta preencher". Se você sair no meio, o que escreveu e as fotos ficam guardados.</p>
+
+<h3>Passo 4: esperar a aprovação</h3>
+<p>Aparece <b>Pedido enviado</b>: "Seu pedido para o capítulo … está com a diretoria. Você recebe um aviso quando for aprovado."</p>
+<ul>
+<li>Até a aprovação, <b>só esta tela fica disponível</b>.</li>
+<li>Se a diretoria pedir uma correção, toque em <b>Corrigir meu pedido</b>.</li>
+<li>Se o pedido for recusado, você vê o motivo na tela.</li>
+<li>Quando for aprovado, o app abre no <b>Mapa</b>.</li>
+</ul>
+<p>Quem decide: se o seu capítulo já tem diretoria no app, é ela que aprova. Se ainda não tem, quem aprova é a moderação do clube.</p>
+</section><section class="secao"><h2>3. Privacidade</h2>
+<p>Ser usuário deste app mostra que você é do clube, e isso é um <b>dado pessoal sensível</b> pela lei (LGPD). Por isso o app guarda o mínimo, pede sua autorização e deixa as escolhas na sua mão.</p>
+<h3>O que o app guarda</h3>
+<table>
+<tr><th style="width:34%">Dado</th><th>Para que serve e quem vê</th></tr>
+<tr><td>Nome, apelido, capítulo, foto</td><td>Para os irmãos te reconhecerem. A lista de membros (nome, apelido, capítulo) é vista por todos os membros.</td></tr>
+<tr><td>Telefone e fotos do pedido de entrada</td><td>Só quem aprova entradas vê. Ficam em cofre privado.</td></tr>
+<tr><td>Contatos de emergência</td><td>Só você vê. Nem a diretoria nem a moderação têm acesso. Recebem o seu SOS.</td></tr>
+<tr><td>Ficha de emergência (sangue, alergias, remédios)</td><td>Fica <b>só no seu celular</b>. Não vai para o servidor.</td></tr>
+<tr><td>Localização ao vivo</td><td>Só aparece como você escolheu (veja "Mapa ao vivo"). O histórico de posições é apagado sozinho depois de 7 dias.</td></tr>
+<tr><td>Posts, stories, viagens</td><td>Posts: você escolhe quem vê. Stories somem em 24 horas.</td></tr>
+<tr><td>Loja, Oriente e Potência</td><td>Opcionais, guardados cifrados, e você escolhe quem vê cada campo.</td></tr>
+</table>
+<div class="caixa"><div class="tit">O que o app nunca pede</div><p>Grau, ritual, sinais, palavras ou qualquer conteúdo reservado da Ordem. Também não mostra anúncios nesta versão.</p></div>
+
+<h3>Loja, Oriente e Potência (opcionais)</h3>
+<ol>
+<li>Toque em <b>Perfil</b> e depois em <b>Editar perfil</b>.</li>
+<li>Se o app disser que precisa de autorização, toque em <b>Abrir Meus dados</b> e autorize os <b>dados maçônicos</b>.</li>
+<li>Preencha <b>Loja</b>, <b>Oriente</b> e <b>Potência</b> (só o que quiser).</li>
+<li>Em cada campo, em <b>Quem pode ver este campo</b>, escolha:
+<ul><li><b>Só eu</b>: ninguém mais vê.</li><li><b>Amigos</b></li><li><b>Membros</b>: todos os membros do clube.</li></ul></li>
+<li>Salve.</li>
+</ol>
+<p>Você pode apagar quando quiser. Se revogar a autorização de dados maçônicos, o app apaga Loja, Oriente e Potência do seu perfil.</p>
+
+<h3>Mapa ao vivo: quem vê onde você está</h3>
+<p>No Mapa, toque no botão que mostra a sua visibilidade (por padrão, <b>Aprox.</b>). Escolha:</p>
+<table>
+<tr><th style="width:36%">Modo</th><th>O que acontece</th></tr>
+<tr><td><b>Invisível</b></td><td>Ninguém vê você no mapa.</td></tr>
+<tr><td><b>Só a cidade</b></td><td>Mostra só a cidade onde você está.</td></tr>
+<tr><td><b>Aproximado (~5 km)</b></td><td>Mostra uma área de cerca de 5 km. <b>É o padrão.</b> O app dos outros nunca recebe o seu ponto exato.</td></tr>
+<tr><td><b>Preciso para amigos</b></td><td>Seus amigos veem o ponto exato.</td></tr>
+<tr><td><b>Preciso no comboio</b></td><td>Só o grupo do passeio vê o ponto exato.</td></tr>
+</table>
+<p>Ainda nessa janela:</p>
+<ul>
+<li><b>Só por 2 horas</b>: depois de 2 horas, volta sozinho para a escolha anterior. Bom para uma viagem.</li>
+<li><b>Seu status</b>: <b>Na estrada</b>, <b>Parado para café</b>, <b>Aberto a encontro</b> ou <b>Não perturbe</b>.</li>
+</ul>
+<p>Toque em <b>Pronto</b> para guardar.</p>
+<div class="aviso"><b>Durante um SOS</b>, quem está em Aproximado ou Invisível passa a mostrar a posição <b>exata</b> ao grupo e aos contatos, para o socorro chegar. Ao encerrar o SOS, tudo volta ao normal.</div>
+
+<h3>Zonas privadas</h3>
+<p>Casa e trabalho são <b>zonas privadas</b>: nunca aparecem no mapa dos outros. Nas trilhas e rotas publicadas, o app corta o começo e o fim perto de casa. As fotos que você publica têm a localização apagada antes de subir.</p>
+
+<h3>Meus dados</h3>
+<p>Toque em <b>Perfil → Meus dados</b> ("Consentimentos, baixar dados, excluir conta"). Aqui você pode:</p>
+<ol>
+<li>Ver e mudar <b>O que você autorizou</b>.</li>
+<li>Tocar em <b>Baixar uma cópia dos meus dados</b>: abre a janela de compartilhar com um arquivo.</li>
+<li>Tocar em <b>Excluir minha conta</b>.</li>
+</ol>
+<div class="aviso"><b>Excluir a conta apaga tudo e não dá para desfazer.</b> O app pergunta "Excluir a conta?". Seus dados, posts, motos e contatos serão apagados. Para confirmar, toque em <b>Excluir tudo</b>. Para deixar de aceitar os termos, é preciso excluir a conta.</div>
+<p>O encarregado de dados (LGPD) é o responsável pelo app. Fale com ele pelo botão <b>Ajuda</b>.</p>
+</section><section class="secao"><h2>4. Mapa</h2>
+<p>O <b>Mapa</b> é a tela inicial. Ele mostra tudo o que está na área que você está vendo: irmãos, sedes, Lojas, postos, monumentos, cachoeiras, mirantes, negócios de irmãos e Ágapes. O painel de baixo mostra o contador <b>Nesta área</b>.</p>
+<h3>Filtros</h3>
+<p>No alto do mapa há os filtros: <b>Tudo</b>, <b>Irmãos</b>, <b>Postos</b> e <b>Mais</b>.</p>
+<ol>
+<li>Toque em <b>Tudo</b> para ver tudo, em <b>Irmãos</b> para ver só irmãos, em <b>Postos</b> para ver só postos.</li>
+<li>Toque em <b>Mais</b> para ver outros grupos (<b>Natureza</b>, <b>Cultura</b>, <b>Apoio</b>, <b>Passeio</b>, <b>Clube</b> e outros). Ao escolher um, o botão mostra o nome do grupo.</li>
+<li>Em <b>Mais</b>, toque em <b>O que significa cada ícone</b> para abrir a legenda ("Tipos de ponto"). Toque fora para fechar.</li>
+</ol>
+<p>De longe, os pinos viram pontinhos coloridos. De perto, aparecem os emblemas. Rodovias aparecem em amarelo-âmbar (com BR e MT legíveis) e estradas de terra aparecem tracejadas.</p>
+<h3>O painel de baixo</h3>
+<p>Arraste a barrinha do painel para cima ou para baixo: ele tem 3 alturas. Quando fechado, o mapa fica livre.</p>
+
+<h3>Fichas dos pontos</h3>
+<p>Toque em qualquer pino e abre uma <b>ficha</b> com o nome, o tipo e botões, como <b>Rota até aqui</b>. Quase toda ficha mostra a <b>fonte</b> da informação (por exemplo, "Fonte: OpenStreetMap").</p>
+<h3>Postos de combustível</h3>
+<p>A ficha do posto mostra:</p>
+<ul>
+<li>O <b>preço da ANP</b>, com a data: "Gasolina comum R$ … · coleta dd/mm" (também etanol e diesel S10, quando houver). Embaixo vem "Fonte: ANP, coleta …". É preço de pesquisa e pode ter mudado.</li>
+<li>O <b>preço informado por irmãos</b>: "Gasolina R$ … · informado por um irmão em …".</li>
+<li>Se não houver preço: "Sem preço informado ainda."</li>
+</ul>
+<h4>Informar o preço de um posto</h4>
+<ol>
+<li>Toque no posto e depois em <b>Informar preço</b>.</li>
+<li>Escolha o combustível (<b>Gasolina</b>, <b>Etanol</b> ou <b>Diesel S10</b>).</li>
+<li>Escreva o preço do litro, por exemplo 6,29.</li>
+<li>Toque em <b>Enviar preço</b>. Aparece "Obrigado! Preço enviado."</li>
+</ol>
+<h3>Posto mais próximo</h3>
+<p>Toque em <b>Posto mais próximo</b>. O app procura o posto mais perto da <b>sua posição</b> (não do lugar que o mapa está mostrando), num raio de até <b>100 km</b>, e mostra a distância. Se não achar, aparece "Nenhum posto por perto": afaste o mapa ou procure pelo nome na busca.</p>
+<h3>Seguir a sua posição</h3>
+<p>O ponto azul acompanha o GPS. Toque no botão <b>Eu</b> para o mapa seguir você. Ele continua seguindo até você arrastar o mapa. Se faltar permissão ou GPS, o app avisa "Localização desligada" ou "Sem sinal de GPS" e explica o que fazer.</p>
+<h3>Buscar um lugar</h3>
+<p>Toque em <b>Para onde vamos?</b> e digite o nome de uma sede, posto, cidade, rua ou estrada. A lista mostra <b>Do clube</b> e <b>Endereços e lugares</b>.</p>
+<h3>Ágape no mapa</h3>
+<p>Um <b>Ágape Relâmpago</b> (encontro rápido marcado por um irmão) aparece no mapa com a etiqueta "Ágape · tempo" e um aviso no alto. O aviso tem três escolhas: <b>Vou</b>, <b>Não vou</b> e <b>X</b> (fechar). Qualquer uma faz o aviso sumir. Com <b>Vou</b>, você entra no grupo temporário do Ágape.</p>
+<h3>Irmãos no mapa e aceno</h3>
+<ol>
+<li>Os irmãos aparecem como avatares com um anel que mostra o status.</li>
+<li>Toque num avatar para abrir a ficha. Ela mostra o apelido, o capítulo e a posição: aproximada ("cerca de 5 km, por privacidade") ou exata, só se o irmão escolheu mostrar a você.</li>
+<li>Toque em <b>Acenar</b>. O chat só abre <b>se o irmão aceitar</b>.</li>
+</ol>
+<p>Há um limite de acenos por dia. Se passar dele, o app avisa "Você já usou os acenos de hoje. Amanhã libera de novo."</p>
+</section><section class="secao"><h2>5. Rotas e navegação</h2>
+<h3>Planejar uma rota</h3>
+<ol>
+<li>No Mapa, escolha o destino pela busca <b>Para onde vamos?</b> ou toque num ponto e em <b>Rota até aqui</b>.</li>
+<li>Abre <b>Planejar rota</b>, com <b>Minha localização</b> como saída e o destino em <b>Para onde</b>.</li>
+<li>Escolha o <b>Tipo de estrada</b> (veja abaixo).</li>
+<li>Espere o "Calculando a rota…". Se demorar, toque em <b>Cancelar</b> e tente de novo.</li>
+<li>Veja os km, o tempo, a hora de chegada e a composição ("% asfalto, % terra"). Se houver mais de um caminho, a lista <b>Caminhos</b> mostra as opções.</li>
+<li>Toque em <b>Iniciar</b>.</li>
+</ol>
+<h3>Tipo de estrada</h3>
+<table>
+<tr><th style="width:28%">Escolha</th><th>O que faz</th></tr>
+<tr><td><b>Só asfalto</b></td><td>Evita a terra, mesmo que a viagem fique mais longa. Se não houver outro caminho, avisa quantos km de terra.</td></tr>
+<tr><td><b>Misto</b></td><td>O caminho mais curto, com ou sem terra.</td></tr>
+<tr><td><b>Prefiro terra</b></td><td>Procura estradas de terra sempre que possível.</td></tr>
+</table>
+<p>A terra aparece sempre com cor e traço próprios. Os trechos de terra vêm do OpenStreetMap e podem estar incompletos na sua região. O app diz onde a terra começa ("A terra começa no km …").</p>
+<h3>Bate-volta</h3>
+<p>Em <b>Ferramentas → Bate-volta</b> (ou no chip <b>Bate-volta</b> da tela de rota) o app monta uma rota de ida e volta:</p>
+<ol>
+<li>Escolha <b>Quanto quer rodar (ida e volta)</b>.</li>
+<li>Escolha <b>Para que lado</b> (Norte, Nordeste, Leste e assim por diante).</li>
+<li>Ligue <b>Mais curvas</b> se quiser um caminho mais curvilíneo.</li>
+<li>Toque em <b>Outra opção</b> para ver outra rota.</li>
+</ol>
+<h3>Iniciar a navegação</h3>
+<p>Na primeira vez, o app pede <b>Permitir localização</b> e mostra os <b>Termos da navegação</b> do Google; é preciso aceitar para navegar. A navegação é do Google e fala as manobras. <b>Use parado ou na garupa. Não mexa no celular pilotando.</b></p>
+<h3>Camadas e opções</h3>
+<p>Durante a navegação, toque em <b>Camadas e opções</b>. Os botões são grandes, de um toque, e funcionam <b>também com a moto em movimento</b>.</p>
+<table>
+<tr><th style="width:28%">Opção</th><th>Escolhas</th></tr>
+<tr><td><b>Trânsito</b></td><td>Ligado ou Desligado.</td></tr>
+<tr><td><b>Tipo de mapa</b></td><td>Normal, Satélite ou Híbrido.</td></tr>
+<tr><td><b>Visão</b></td><td>Seguir de frente ou Norte para cima.</td></tr>
+<tr><td><b>Voz</b></td><td>Completa, Só alertas ou Mudo.</td></tr>
+<tr><td><b>Evitar (na próxima rota)</b></td><td>Pedágios, Rodovias e Balsas.</td></tr>
+<tr><td><b>Estrada de chão</b></td><td>Evitar terra, Misto ou Prefiro terra.</td></tr>
+</table>
+<p>Ao mudar o que afeta a rota (evitar pedágios, terra etc.), o app mostra "Recalculando…" e depois "Rota recalculada." Se não conseguir, avisa "Mantendo a rota atual". Toque em <b>Fechar</b> para voltar.</p>
+<div class="caixa"><div class="tit">Rota sem internet</div><p>A rota e os mapas do trajeto podem ficar guardados no aparelho. Mesmo assim, a navegação do Google precisa de conexão: sem internet o app avisa "Sem internet. A navegação do Google precisa de conexão."</p></div>
+</section><section class="secao"><h2>6. Modo pilotando</h2>
+<p>O modo pilotando é a tela para usar com a moto andando. Tem <b>6 botões grandes</b> e nada mais. Configure a rota <b>parado</b>. Em movimento, ouça a voz e toque só se for seguro.</p>
+<h3>Os 6 botões</h3>
+<table>
+<tr><th style="width:26%">Botão</th><th>O que faz</th></tr>
+<tr><td><b>Alerta</b></td><td>Abre os 6 tipos de alerta: <b>Buraco</b>, <b>Polícia</b>, <b>Obra</b>, <b>Animal na pista</b>, <b>Acidente à frente</b>, <b>Óleo ou areia</b>. Toque em um e ele vai ao grupo do passeio.</td></tr>
+<tr><td><b>Reagrupar</b></td><td>Manda ao grupo o recado "Reagrupar no próximo posto ou parada".</td></tr>
+<tr><td><b>Posto próximo</b></td><td>Procura o posto mais perto. Toque em <b>Ir ao posto (X km)</b> e a navegação troca para o posto.</td></tr>
+<tr><td><b>Posto na rota</b></td><td>Escolhe um posto à frente no seu trajeto, com pouco desvio.</td></tr>
+<tr><td><b>SOS</b></td><td><b>Segure 3 segundos.</b> Abre o pedido de ajuda. O toque rápido não faz nada, para não disparar sem querer.</td></tr>
+<tr><td><b>Encerrar</b></td><td><b>Segure 1,5 segundo</b> ("Segure p/ encerrar") para sair do modo pilotando.</td></tr>
+</table>
+<p>No Alerta, depois de escolher o tipo, o app <b>fala</b> confirmando e mostra "Alerta enviado". Para o alerta ir ao grupo, é preciso estar em um passeio ou comboio ativo; senão o app avisa "Sem comboio ou passeio ativo. Alerta não enviado." Os outros irmãos do grupo <b>ouvem</b> o aviso: "Atenção, buraco à frente."</p>
+<h3>Trava em movimento</h3>
+<p>Com a moto andando (a partir de 8 km/h), todas as telas fora do Mapa ficam cobertas pela tela <b>Moto em movimento</b>: "Feed, mensagens e ajustes ficam travados enquanto a moto anda. Pare para usar." Você tem três botões:</p>
+<ul>
+<li><b>Abrir o modo pilotando</b></li>
+<li><b>Voltar ao mapa</b></li>
+<li><b>Sou garupa / passageiro</b></li>
+</ul>
+<div class="caixa"><div class="tit">Sou garupa / passageiro</div><p>Se você vai de garupa, ou de carona em um carro, toque em <b>Sou garupa / passageiro</b>. O app fica liberado até o veículo parar. Quem pilota deve usar só o mapa e o modo pilotando.</p></div>
+<h3>Voz e intercomunicador</h3>
+<p>Alertas e avisos do grupo são <b>falados</b> em voz alta. Se o seu celular está ligado por Bluetooth ao intercomunicador do capacete, a voz sai por ele. Na navegação, em <b>Camadas e opções → Voz</b>, você escolhe <b>Completa</b>, <b>Só alertas</b> ou <b>Mudo</b>.</p>
+</section><section class="secao"><h2>7. Android Auto</h2>
+<p>No carro com Android Auto, o app mostra <b>4 botões grandes</b>, porque a tela do carro aceita só 4:</p>
+<table>
+<tr><th style="width:26%">Botão</th><th>O que faz</th></tr>
+<tr><td><b>SOS</b></td><td>Pedido de ajuda.</td></tr>
+<tr><td><b>Alerta</b></td><td>Abre a lista de alertas. Toque num alerta para avisar o grupo.</td></tr>
+<tr><td><b>Postos</b></td><td>Leva ao posto mais próximo.</td></tr>
+<tr><td><b>Encerrar</b></td><td>Encerra.</td></tr>
+</table>
+<p>A tela do carro também mostra o cartão da manobra (seta, distância e rua), a chegada prevista e botões de zoom e recentrar. O SOS, os alertas e o comboio são sempre grátis, também no carro.</p>
+<h3>Como usar</h3>
+<ol>
+<li>Ligue o celular ao carro (cabo ou sem fio) e abra o Android Auto.</li>
+<li>Na tela do carro, abra o app <b>Bodes do Asfalto</b>.</li>
+<li>Planeje a rota no celular, <b>parado</b>, e inicie a navegação.</li>
+<li>No carro, use os 4 botões.</li>
+</ol>
+<div class="aviso"><b>Segurança:</b> mexa na tela do carro só com o carro parado ou se for passageiro.</div>
+</section><section class="secao"><h2>8. SOS e pedido de ajuda</h2>
+<div class="aviso"><b>O SOS avisa o grupo e seus contatos, mas não substitui o 192 (SAMU) ou o 193 (Bombeiros).</b> Em situação grave, ligue primeiro.</div>
+<h3>Como abrir</h3>
+<ul>
+<li>Toque no botão vermelho <b>SOS</b> (no Mapa e em todas as abas); ou</li>
+<li>Segure o ícone do app na tela inicial e toque em <b>Pedir ajuda (SOS)</b>; ou</li>
+<li>Use o atalho ou o widget (veja "Atalho e widget de SOS"); ou</li>
+<li>No modo pilotando, segure <b>SOS</b> por 3 segundos.</li>
+</ul>
+<h3>Passo a passo</h3>
+<ol>
+<li>A tela <b>SOS</b> pega a sua localização ("Pegando sua localização…").</li>
+<li>Em <b>O que está acontecendo?</b>, toque no tipo de ajuda. Em movimento, <b>um toque</b> no tipo já envia o aviso.
+<ul>
+<li><b>Sofri acidente</b> e <b>Mal-estar / saúde</b> (mostram <b>Ligar 192 (SAMU)</b> e <b>Ligar 193 (Bombeiros)</b>)</li>
+<li><b>Pane mecânica</b>, <b>Pneu furado</b>, <b>Sem combustível</b>, <b>Estou perdido</b>, <b>Bateria / elétrica</b>, <b>Outro</b></li>
+</ul></li>
+<li>Se quiser, em <b>Quer acrescentar algo? (opcional)</b>, escreva um recado.</li>
+<li>Leia a <b>Mensagem que será enviada</b>. Ela tem: "PEDIDO DE AJUDA — Bodes do Asfalto", <b>Quem</b> (nome e apelido), <b>O que houve</b>, <b>Onde</b> (link do mapa) e "Enviado às HH:mm de dd/mm".</li>
+<li>Escolha quem avisar:
+<ul>
+<li><b>WhatsApp para</b> cada contato de emergência: abre o WhatsApp com a mensagem pronta. Você só toca em enviar.</li>
+<li><b>Mandar no grupo do comboio</b>: manda para o grupo.</li>
+<li><b>Avisar o grupo e a diretoria pelo app</b>: manda uma notificação e mostra sua posição exata a eles até você encerrar.</li>
+</ul></li>
+</ol>
+<p>Você precisa cadastrar os contatos antes: <b>Perfil → Contatos de emergência</b> (até 3 pessoas). Sem contatos, o SOS mostra "Você ainda não cadastrou contatos de emergência."</p>
+<h3>A faixa SOS ativo</h3>
+<p>Depois de avisar pelo app, uma <b>faixa vermelha “SOS ativo”</b> ("Sua posição exata está com o grupo") aparece em todas as telas. Para encerrar, <b>segure “Segure p/ encerrar” por 1,5 segundo</b>. Se está tudo bem, também pode tocar em <b>Estou bem, fechar</b> na tela do SOS.</p>
+<h3>Quando um irmão pede ajuda</h3>
+<p>Se você está no mesmo passeio, é moderador ou diretoria, recebe um aviso. Ao tocar nele abre "Pedido de ajuda de …", com:</p>
+<ul>
+<li><b>O que houve</b></li>
+<li>"Posição exata, atualizada às …" e o mapa com a posição do irmão</li>
+<li><b>Ligar</b> e <b>Rota até ele</b></li>
+</ul>
+<p>Se o SOS já acabou, o app mostra "Este SOS já foi encerrado."</p>
+<h3>Telefones úteis</h3>
+<p>Em <b>Ferramentas → Telefones de emergência</b> há SAMU, Bombeiros e PRF, para ligar com um toque. O app não liga sozinho: você confirma no celular.</p>
+</section><section class="secao"><h2>9. Feed e stories</h2>
+<h3>Publicar um post</h3>
+<ol>
+<li>Toque em <b>Feed</b>.</li>
+<li>Toque em <b>Conte sua viagem, irmão…</b> e escreva.</li>
+<li>Escolha uma foto (<b>Da galeria</b> ou <b>Tirar foto</b>). Se mudar de ideia, toque em <b>Remover a foto</b>.</li>
+<li>Em <b>Quem pode ver</b>, escolha <b>Todos os membros</b>, <b>Só meu capítulo</b> ou <b>Só amigos</b>.</li>
+<li>Toque em <b>Publicar</b>.</li>
+</ol>
+<p>A localização que a foto traz é apagada antes de publicar.</p>
+<h3>Enquete</h3>
+<p>No compositor, toque em <b>Enquete</b>. Escreva a <b>Pergunta</b> e pelo menos 2 opções (<b>Mais uma opção</b> para outras) e publique. Os irmãos votam tocando numa opção.</p>
+<h3>Reagir, comentar e guardar</h3>
+<ul>
+<li><b>TFA</b>: o seu agradecimento ao post. Toque para dar e toque de novo para tirar.</li>
+<li><b>Comentários</b>: toque, escreva e toque em <b>Comentar</b>.</li>
+<li><b>Salvar post</b>: toque no marcador. Os posts guardados ficam em <b>Perfil → Posts salvos</b>.</li>
+</ul>
+<h3>Os três pontinhos</h3>
+<p>Nos três pontinhos (<b>Mais opções</b>) de um post você tem, conforme de quem for:</p>
+<ul>
+<li>Seu post: <b>Editar</b> e <b>Excluir</b> (o app pergunta "Excluir esta publicação?").</li>
+<li>Post de outro irmão: <b>Denunciar post</b> ("A moderação vai analisar") e <b>Bloquear</b>. Bloquear faz vocês deixarem de ver o que o outro publica. Dá para desfazer depois.</li>
+</ul>
+<h3>Stories de 24 horas</h3>
+<ol>
+<li>No topo do Feed, toque em <b>Seu story</b>.</li>
+<li>Se pedir, toque em <b>Liberar câmera</b> (e libere o microfone para vídeo).</li>
+<li><b>Toque</b> no botão para uma foto, ou <b>segure</b> para gravar um vídeo de até 60 segundos. Você também pode escolher da <b>Galeria</b>.</li>
+<li>Enfeite se quiser: <b>Filtros</b> (Original, Quente, Pôr do sol, Estrada, Noite e outros), <b>Texto</b> (arraste para onde quiser), <b>Selos</b> (local e km do dia), <b>Desenho</b> e <b>Enquete</b> (enquete, caixa de pergunta, contagem regressiva).</li>
+<li>Toque em <b>Publicar story</b>. O story some sozinho em 24 horas.</li>
+</ol>
+<h4>Ver stories</h4>
+<ul>
+<li>Toque no lado <b>direito</b> da tela para avançar e no <b>esquerdo</b> para voltar.</li>
+<li><b>Segure</b> para pausar.</li>
+<li><b>Arraste para baixo</b> para fechar.</li>
+</ul>
+</section><section class="secao"><h2>10. Chat e acenos</h2>
+<h3>Acenar para um irmão</h3>
+<p>A conversa começa com um <b>aceno</b>, e o chat só abre se o outro aceitar.</p>
+<ol>
+<li>Pelo Mapa: toque no avatar do irmão e depois em <b>Acenar</b>. Ou, na aba <b>Chat</b>, toque no <b>+</b> (<b>Nova conversa</b>), busque o irmão pelo nome e toque em <b>Acenar para …</b></li>
+<li>Você vê "Aguardando ele aceitar o aceno".</li>
+<li>O outro irmão vê o aceno em <b>Acenos recebidos</b> ("… acenou para você") e toca em <b>Aceitar</b> ou <b>Recusar</b>.</li>
+<li>Se aceitar, a conversa abre para os dois.</li>
+</ol>
+<p>Se o irmão estiver pilotando, ele recebe o aviso só por voz.</p>
+<h3>Conversas e grupos</h3>
+<p>A aba <b>Chat</b> tem os filtros <b>Todas</b>, <b>Grupos</b> e <b>Diretas</b>. Os tipos de conversa:</p>
+<table>
+<tr><th style="width:30%">Tipo</th><th>O que é</th></tr>
+<tr><td><b>Conversa direta</b></td><td>Entre dois irmãos, depois do aceno aceito.</td></tr>
+<tr><td><b>Grupo do capítulo</b></td><td>Todos os irmãos do seu capítulo.</td></tr>
+<tr><td><b>Grupo do passeio</b></td><td>Criado sozinho. Entra quem toca em <b>Vou</b> no passeio.</td></tr>
+<tr><td><b>Grupo do Ágape</b></td><td>Temporário. Fecha ao fim do Ágape.</td></tr>
+<tr><td><b>Avisos oficiais</b></td><td>Só a diretoria escreve. Os irmãos podem dar TFA.</td></tr>
+</table>
+<h3>Mandar mensagens</h3>
+<ol>
+<li>Abra a conversa.</li>
+<li>Escreva em <b>Escreva uma mensagem</b> e toque em <b>Enviar</b>.</li>
+<li>Para responder rápido, use os recados prontos: <b>Chego em 10 min</b>, <b>Parei para abastecer</b>, <b>Tudo certo por aqui</b>, <b>Vou atrasar um pouco</b>, <b>TFA!</b></li>
+</ol>
+<p>As mensagens chegam na hora. Para ver as mais antigas, toque em <b>Ver mensagens anteriores</b>.</p>
+<h3>Opções da conversa</h3>
+<p>Toque em <b>Opções da conversa</b> para:</p>
+<ul>
+<li><b>Silenciar</b> (e depois <b>Ativar avisos</b>);</li>
+<li><b>Bloquear</b>: ele não poderá mais falar com você nem acenar. Dá para desbloquear depois;</li>
+<li><b>Denunciar</b>: a denúncia vai aos moderadores e a mensagem some da sua tela.</li>
+</ul>
+</section><section class="secao"><h2>11. Passeios e Ágape Relâmpago</h2>
+<h3>Passeios</h3>
+<p>A aba <b>Passeios</b> mostra a "Agenda do seu capítulo e dos passeios gerais". Use os filtros <b>Próximos</b>, <b>Oficiais</b> e <b>Já foram</b>. Cada passeio mostra o nome, o trajeto (saída → destino), a distância e quem organiza.</p>
+<h4>Entrar num passeio</h4>
+<ol>
+<li>Toque em <b>Passeios</b>.</li>
+<li>No passeio que quiser, toque em <b>Vou</b> ou <b>Talvez</b>.</li>
+<li>Com <b>Vou</b>, você entra no <b>Grupo do passeio</b>, na aba <b>Chat</b>. Com <b>Talvez</b>, você sai do grupo.</li>
+</ol>
+<p>Se o app não registrar a sua presença, ele avisa e você tenta de novo.</p>
+<p>Quem cria passeios é a diretoria do capítulo (veja "Para diretoria, moderadores e administrador").</p>
+
+<h3>Ágape Relâmpago</h3>
+<p>É um <b>encontro rápido</b> que um irmão marca no lugar onde está, por exemplo num posto, para quem estiver perto encostar. Aparece na hora no mapa para os irmãos.</p>
+<h4>Criar um Ágape</h4>
+<ol>
+<li>Toque em <b>Ferramentas</b> e depois em <b>Criar Ágape Relâmpago</b>.</li>
+<li>Em <b>Onde (ex.: Posto Trevo, km 40)</b>, diga o lugar.</li>
+<li>Em <b>Começa em</b>, escolha daqui a quanto tempo.</li>
+<li>Se quiser, escreva um <b>Recado (opcional)</b>.</li>
+<li>Toque em <b>Publicar Ágape</b>. Aparece "Ágape publicado".</li>
+</ol>
+<p>O Ágape usa a sua posição atual e fica visível para os irmãos. Se aparecer "Diga onde vai ser o Ágape", falta escrever o lugar.</p>
+<h4>Responder a um Ágape</h4>
+<p>No Mapa aparece o aviso do Ágape. Toque em <b>Vou</b> para confirmar e entrar no grupo temporário. Toque em <b>Não vou</b> ou no <b>X</b> para fechar o aviso. Ele não volta.</p>
+<div class="caixa"><div class="tit">Álcool e estrada</div><p>Ágape com bebida só depois de estacionar de vez. Álcool e estrada não combinam.</p></div>
+</section><section class="secao"><h2>12. Desafios, XP, níveis, selos e ranking</h2>
+<p>Para ver tudo isto, toque em <b>Perfil</b> e depois em <b>Ver minhas conquistas</b>. Aqui o que vale é rodar junto e conhecer lugares. <b>Nenhum ponto é dado por velocidade ou tempo de percurso.</b></p>
+<h3>XP e níveis</h3>
+<p>Você ganha <b>XP</b> (pontos de experiência) fazendo coisas do clube. Em <b>Como ganhar XP</b> o app mostra a tabela. Exemplos: km rodados com rota gravada, passeio oficial do clube, check-in em sede ou em monumento e post com foto.</p>
+<p>O XP sobe o seu <b>nível</b>:</p>
+<ol>
+<li><b>Cabrito</b></li>
+<li><b>Bode</b></li>
+<li><b>Bode Velho</b></li>
+<li><b>Bode Lendário</b></li>
+</ol>
+<p>O app mostra "Faltam … XP para …" para o próximo nível.</p>
+<h3>Selos (Passaporte do Bode)</h3>
+<p>Selos são conquistas. Toque num selo para ver "como ganhar" e o seu progresso.</p>
+<ul>
+<li><b>Ágape</b>: participe de um Ágape Relâmpago.</li>
+<li><b>Irmão na Rota</b>: encontre um irmão na mesma estrada (aceno aceito e encontro confirmado).</li>
+<li><b>Sedes do MT</b>: check-in em 5 sedes do clube em Mato Grosso.</li>
+<li><b>Pantanal</b>: visite 3 pontos do Pantanal.</li>
+<li><b>Visita a Lojas</b>: visite 3 Lojas de outros Orientes.</li>
+<li><b>Socorro Fraterno</b>: ajude um irmão parado na estrada (pedido atendido e confirmado).</li>
+</ul>
+<h3>Desafios</h3>
+<ol>
+<li>Em Conquistas, toque em <b>Ver todos os desafios</b>.</li>
+<li>Para entrar em um desafio, toque em <b>Participar</b>.</li>
+<li>Para criar o seu, toque em <b>Criar desafio</b>, preencha o <b>Nome do desafio</b>, o <b>Tipo</b>, a meta e o <b>Prazo</b> e toque em <b>Enviar para aprovação</b>.</li>
+</ol>
+<p>O desafio mostra "Aguardando aprovação" até a diretoria do capítulo ou um moderador aprovar. As regras: prazo de 1 a 90 dias; km só pelo GPS do app; 1 desafio criado por irmão por mês; até 3 desafios de irmãos ativos por capítulo. A tabela de XP dos desafios aparece na própria tela.</p>
+<h3>Ranking</h3>
+<p>Em <b>Ranking por XP</b> escolha <b>Geral</b> ou <b>Meu capítulo</b>, e <b>Este mês</b> ou <b>Sempre</b>.</p>
+<div class="caixa"><div class="tit">Sair do ranking</div><p>Se não quer aparecer na lista, ligue <b>Sair do ranking</b>. Você continua com seu XP e seus selos, mas não aparece na lista. O app mostra "Você saiu do ranking. Só você vê seu XP." Para voltar, desligue.</p></div>
+</section><section class="secao"><h2>13. Ferramentas do clube</h2>
+<p>Toque em <b>Ferramentas</b>. A tela é dividida em grupos. Use sempre com a moto parada.</p>
+<table>
+<tr><th style="width:30%">Ferramenta</th><th>Para que serve</th></tr>
+<tr><td colspan="2"><b>Estrada</b></td></tr>
+<tr><td>Tempo e sol</td><td>Chuva, vento e pôr do sol onde você está.</td></tr>
+<tr><td>Combustível</td><td>Quantas paradas, quantos litros e quanto vai gastar.</td></tr>
+<tr><td>Bate-volta</td><td>Rota de ida e volta por km.</td></tr>
+<tr><td>Viagem longa</td><td>Divide uma viagem grande em dias, com pausas.</td></tr>
+<tr><td>Checklist de saída</td><td>Moto e bagagem prontas. Fica guardado até você zerar.</td></tr>
+<tr><td>Avisos do comboio</td><td>Manda sua localização e recados prontos ao grupo do WhatsApp.</td></tr>
+<tr><td colspan="2"><b>Segurança</b></td></tr>
+<tr><td>Telefones de emergência</td><td>SAMU, Bombeiros, PRF.</td></tr>
+<tr><td>Ficha de emergência</td><td>Sangue, alergias, remédios. Fica só no seu celular.</td></tr>
+<tr><td colspan="2"><b>Irmãos</b></td></tr>
+<tr><td>Criar Ágape Relâmpago</td><td>Encontro rápido (veja "Passeios e Ágape Relâmpago").</td></tr>
+<tr><td>Membros</td><td>Lista do clube e indicar um irmão.</td></tr>
+<tr><td>Aniversariantes</td><td>Aniversários dos irmãos que escolheram mostrar.</td></tr>
+<tr><td>Guia de Negócios</td><td>Negócios de irmãos com benefício para o clube.</td></tr>
+<tr><td>Classificados</td><td>Compra e venda entre irmãos.</td></tr>
+<tr><td colspan="2"><b>Clube e Lojas</b></td></tr>
+<tr><td>Visitação de Lojas</td><td>Lojas e dias de sessão.</td></tr>
+<tr><td>Eventos</td><td>Clube, motoclubes e Lojas.</td></tr>
+<tr><td>Sobre o clube</td><td>História e código da estrada.</td></tr>
+<tr><td colspan="2"><b>Minha moto</b></td></tr>
+<tr><td>Manutenção da moto</td><td>Anote o km de cada troca (óleo, pneus, relação). O app avisa o que vai vencer.</td></tr>
+</table>
+<h3>Visitação de Lojas</h3>
+<p>Lojas cadastradas por irmãos, com dias de sessão e contato. <b>O app só aproxima os irmãos. A entrada segue o procedimento de cada Loja.</b></p>
+<ol>
+<li>Toque em <b>Visitação de Lojas</b> para ver a lista.</li>
+<li>Para falar com o irmão de contato, toque em <b>Acenar ao contato</b>. O telefone dele não aparece.</li>
+<li>Toque em <b>Rota</b> para ir até a Loja.</li>
+</ol>
+<h4>Cadastrar a sua Loja</h4>
+<ol>
+<li>Toque em <b>Cadastrar minha Loja</b>.</li>
+<li>Preencha <b>Nome da Loja</b>, <b>Oriente</b>, <b>Potência</b>, <b>Dias de sessão</b>, <b>Endereço</b> e <b>Cidade</b>. Digite só informações públicas da Loja.</li>
+<li>Se quiser, toque em <b>Marcar no mapa com minha posição atual</b> (a posição fica aproximada, cerca de 1 km).</li>
+<li>Marque que você é membro da Loja e aceita ser o irmão de contato.</li>
+<li>Toque em <b>Enviar para revisão</b>. A Loja mostra "Em revisão" até a moderação aprovar.</li>
+</ol>
+<p>Só um irmão da própria Loja pode cadastrá-la.</p>
+<h3>Guia de Negócios e "Sou membro"</h3>
+<p>Negócios de irmãos, <b>sempre com um benefício para quem é do clube</b>. Há categorias: Oficinas, Comida, Pouso, Peças e Serviços. Parceiros aparecem primeiro, com o selo <b>Parceiro</b> ou <b>Destaque</b>.</p>
+<ol>
+<li>Toque num negócio para abrir a vitrine: fotos, <b>Benefício para irmãos</b>, horário e botões <b>Rota</b>, <b>WhatsApp</b> e <b>Ligar</b>.</li>
+<li>Toque em <b>Recomendo</b> se gostou.</li>
+</ol>
+<p>O negócio recebe só números somados (quantas vezes foi visto). Nunca recebe quem foi.</p>
+<h4>Sou membro (mostrar no balcão)</h4>
+<ol>
+<li>No Guia de Negócios, toque em <b>Sou membro (mostrar no balcão)</b>.</li>
+<li>Mostre a tela ao comerciante. Ela traz o seu capítulo, "Membro ativo" e a hora andando.</li>
+</ol>
+<p>O relógio andando mostra que não é uma foto da tela. Nada maçônico aparece na carteirinha.</p>
+<h4>Cadastrar o seu negócio</h4>
+<ol>
+<li>Toque em <b>Cadastrar meu negócio</b>.</li>
+<li>Preencha nome, tipo, descrição, cidade, <b>Benefício para irmãos (obrigatório)</b>, telefone, WhatsApp e fotos.</li>
+<li>Toque em <b>Enviar para revisão</b>. O cadastro é grátis e a moderação confere antes de aparecer.</li>
+</ol>
+<h3>Classificados</h3>
+<p>Compra e venda entre irmãos. O app não cobra nem intermedeia pagamentos: o pagamento é combinado entre vocês, fora do app.</p>
+<ol>
+<li>Para <b>anunciar</b>: toque em <b>Anunciar</b>, adicione pelo menos uma foto, escolha a categoria, escreva título, preço, estado e descrição e toque em <b>Publicar anúncio</b>. O anúncio fica no ar por 60 dias. Cada irmão pode ter até 5 anúncios ativos.</li>
+<li>Para <b>comprar</b>: toque no anúncio e em <b>Acenar ao vendedor</b>. O WhatsApp é opcional e só aparece para membros.</li>
+<li>Para guardar um anúncio, toque em <b>Guardar</b>.</li>
+<li>Quando vender, toque em <b>Marcar como vendido</b>.</li>
+</ol>
+<p><b>Dica:</b> combine a entrega em local público ou na sede do capítulo.</p>
+<h3>Eventos</h3>
+<p>A agenda de eventos do clube, de motoclubes amigos e de Lojas. Para divulgar um evento:</p>
+<ol>
+<li>Toque em <b>Divulgar um evento</b>.</li>
+<li>Preencha nome, tipo, dia (dd/mm/aaaa), hora, local, cidade e detalhes.</li>
+<li>Toque em <b>Enviar para revisão</b>. A moderação confere antes de aparecer.</li>
+</ol>
+<p>A divulgação é gratuita. O app não vende ingresso nem recebe pagamento.</p>
+<h3>Membros e Aniversários</h3>
+<ul>
+<li><b>Membros</b>: a lista com nome, apelido e capítulo ("N irmãos no clube"). Toque em <b>Indicar um irmão do clube</b> para convidar alguém.</li>
+<li><b>Aniversariantes</b>: em <b>Meu aniversário</b>, escolha <b>Dia</b> e <b>Mês</b> e toque em <b>Salvar</b>. Fica escondido de todos, <b>a não ser que você ligue “Mostrar meu aniversário aos membros”</b>. Para apagar, toque em <b>Apagar meu aniversário</b>.</li>
+</ul>
+<h3>Outras ferramentas</h3>
+<ul>
+<li><b>Garagem</b> (Perfil → Cadastrar minha moto): cadastre suas motos. A principal aparece no Perfil.</li>
+<li><b>Manutenção da moto</b>: o km é somado sozinho quando você roda no modo pilotando.</li>
+</ul>
+</section><section class="secao"><h2>14. Notificações e preferências</h2>
+<p>O app avisa quando chega uma mensagem, um aceno ou uma resposta ao seu pedido.</p>
+<h3>Permitir os avisos</h3>
+<ol>
+<li>Na primeira vez, o app pergunta <b>Receber avisos?</b>. Toque em <b>Permitir</b>.</li>
+<li>Se tocou em <b>Agora não</b>, você pode mudar depois em <b>Perfil → Notificações</b> e nas configurações do celular.</li>
+</ol>
+<h3>Escolher o que receber</h3>
+<ol>
+<li>Toque em <b>Perfil</b> e depois em <b>Notificações</b> ("Escolha o que quer receber").</li>
+<li>Ligue ou desligue cada tipo:
+<ul>
+<li><b>Mensagens</b>: aviso de nova mensagem nas conversas.</li>
+<li><b>Acenos</b>: quando um irmão acena para você.</li>
+<li><b>Aprovações</b>: pedidos de entrada e a resposta ao seu pedido.</li>
+<li><b>Passeios</b>: convites e mudanças nos passeios.</li>
+<li><b>Confraternização</b>: Ágapes, Visitação de Lojas e Irmão na Rota.</li>
+<li><b>SOS</b>: <b>sempre ligado, por segurança</b>. Não dá para desligar.</li>
+</ul></li>
+</ol>
+<div class="caixa"><div class="tit">Privacidade do aviso</div><p>O aviso nunca mostra o texto da mensagem, só que chegou algo novo.</p></div>
+<p>Toda notificação de confraternização é opcional: só chega se você deixar ligada.</p>
+</section><section class="secao"><h2>15. Atalho e widget de SOS</h2>
+<p>Para pedir ajuda mais rápido, você pode colocar um botão de SOS na tela inicial do celular (Android).</p>
+<h3>Atalho na tela inicial</h3>
+<ol>
+<li>Toque em <b>Perfil</b> e role até <b>Atalho de SOS</b>.</li>
+<li>Toque em <b>Colocar atalho na tela inicial</b>.</li>
+<li>Se o celular perguntar, confirme. O atalho <b>SOS Bodes</b> aparece na tela inicial.</li>
+<li>Um toque nele abre o pedido de ajuda aos irmãos.</li>
+</ol>
+<div class="caixa"><div class="tit">Se o celular bloquear (Xiaomi, Redmi, Poco)</div>
+<p>Em alguns celulares é preciso liberar antes. O app mostra a janela "O celular bloqueou o atalho". Siga:</p>
+<ol>
+<li>Toque em <b>Abrir configurações</b>.</li>
+<li>Toque em <b>Outras permissões</b> (ou <b>Permissões</b>).</li>
+<li>Ligue <b>Atalhos na tela inicial</b>.</li>
+<li>Volte ao app e toque de novo em <b>Colocar atalho na tela inicial</b>.</li>
+</ol></div>
+<h3>Widget de SOS</h3>
+<ol>
+<li>Em <b>Perfil → Atalho de SOS</b>, toque em <b>Colocar widget de SOS</b>.</li>
+<li>Se o celular não colocar sozinho, o app mostra "Colocar o widget à mão":
+<ol type="a">
+<li>Volte à tela inicial do celular.</li>
+<li>Segure o dedo num espaço vazio.</li>
+<li>Toque em <b>Widgets</b>.</li>
+<li>Procure <b>Bodes do Asfalto</b> e arraste o <b>SOS Bodes</b> para a tela.</li>
+</ol></li>
+</ol>
+<h3>Segurando o ícone do app</h3>
+<p>Na tela inicial, <b>segure o ícone do app</b> e toque em <b>Pedir ajuda (SOS)</b>.</p>
+<p class="mini">Na tela de bloqueio, o Android não deixa apps colocarem atalhos.</p>
+</section><section class="secao"><h2>16. Ajuda e suporte</h2>
+<h3>Enviar um pedido de ajuda ao suporte</h3>
+<ol>
+<li>Toque em <b>Perfil</b> e depois em <b>Ajuda</b> ("Fale com o suporte por texto ou WhatsApp").</li>
+<li>Em <b>Sobre o quê?</b>, escolha: <b>Dúvida</b>, <b>Problema</b>, <b>Sugestão</b> ou <b>Denúncia / outro</b>.</li>
+<li>Em <b>Descreva em poucas palavras</b>, escreva o que aconteceu.</li>
+<li>Se quiser, toque em <b>Anexar print</b> e escolha uma imagem. (O app precisa de permissão para abrir suas fotos.)</li>
+<li>Você pode ligar <b>Enviar dados do aparelho</b>: vão junto a versão do app, o sistema, o modelo e o idioma. <b>Nunca enviamos a sua localização.</b></li>
+<li>Toque em <b>Enviar pedido</b>. Aparece "Pedido enviado. Avisamos quando houver resposta."</li>
+</ol>
+<h3>Ver a resposta</h3>
+<p>Na própria tela <b>Ajuda</b>, em <b>Meus pedidos</b>, cada pedido mostra a situação: <b>Aguardando</b>, <b>Respondido</b> ou <b>Encerrado</b>, e a resposta ("Resposta: …").</p>
+<h3>Outros caminhos</h3>
+<ul>
+<li>Botão <b>E-mail do suporte</b>: abre o seu e-mail com o assunto pronto.</li>
+<li>Botão <b>WhatsApp do suporte</b>: abre o WhatsApp com a mensagem pronta.</li>
+</ul>
+<h3>Se o app fechar sozinho</h3>
+<p>O app mostra a tela "Algo deu errado". Se quiser, conte o que você estava fazendo e toque em <b>Enviar detalhes</b>. Isso ajuda a corrigir. Toque em <b>Pedir ajuda</b> se precisar falar com o suporte.</p>
+<h3>Status do servidor</h3>
+<p>Em <b>Perfil → Status do servidor</b> você confere se o app está ligado ao servidor do clube: se o endereço e a chave estão certos, o modo (<b>Servidor</b>), a conexão agora e se o aparelho está registrado para notificações. Nenhuma chave ou e-mail aparece ali. O suporte pode pedir um print dessa tela. O botão <b>Copiar diagnóstico</b> copia o resumo para você colar numa mensagem.</p>
+</section><section class="secao"><h2>17. Para diretoria, moderadores e administrador</h2>
+<p>Esta parte é para quem tem um papel no clube. As telas só aparecem para quem tem permissão.</p>
+<h3>Papéis</h3>
+<table>
+<tr><th style="width:30%">Papel</th><th>O que pode</th></tr>
+<tr><td><b>Aguardando aprovação</b></td><td>Só vê a tela de espera.</td></tr>
+<tr><td><b>Membro</b></td><td>Usa o app todo.</td></tr>
+<tr><td><b>Diretoria do capítulo</b></td><td>Aprova os irmãos do próprio capítulo e cria passeios dele.</td></tr>
+<tr><td><b>Diretoria geral</b></td><td>O mesmo, em todos os capítulos.</td></tr>
+<tr><td><b>Moderador</b></td><td>Modera conteúdo e aprova capítulos que ainda não têm diretoria no app.</td></tr>
+<tr><td><b>Administrador</b></td><td>Tudo.</td></tr>
+</table>
+<h3>Aprovar irmãos (tela de Aprovações)</h3>
+<p>Toque em <b>Perfil → Aprovar irmãos</b> ("Pedidos de entrada do seu capítulo"). A tela tem abas: <b>Irmãos</b>, <b>Desafios</b>, <b>Suporte</b>, <b>Lojas</b>, <b>Negócios</b> e <b>Eventos</b>.</p>
+<h4>Aba Irmãos</h4>
+<ol>
+<li>Cada pedido mostra capítulo, cidade, quem indicou, a <b>Foto com o colete</b> e a <b>Foto da carteirinha</b>.</li>
+<li>Confira as fotos. Na dúvida, toque em <b>Ligar para …</b> e fale com o irmão antes de decidir.</li>
+<li>Toque em <b>Aprovar</b>, ou escreva o <b>Motivo (obrigatório para recusar)</b> e toque em <b>Recusar</b>. O motivo chega ao irmão.</li>
+</ol>
+<h4>Aba Desafios</h4>
+<p>Cada desafio mostra quem criou. Toque em <b>Aprovar desafio</b> ou escreva o motivo e toque em <b>Recusar desafio</b>.</p>
+<h4>Aba Lojas, Negócios e Eventos</h4>
+<p>Cada item mostra quem cadastrou. Confira os dados, depois <b>Aprovar</b>, ou escreva o <b>Motivo (obrigatório para recusar)</b> e <b>Recusar</b>. Só depois de aprovado o item aparece para os irmãos.</p>
+<h4>Aba Suporte</h4>
+<ol>
+<li>Abra o pedido e veja o texto e o print enviado pelo irmão.</li>
+<li>Escreva em <b>Sua resposta ao irmão</b> e toque em <b>Responder</b>.</li>
+<li>Quando terminar, toque em <b>Encerrar</b>.</li>
+</ol>
+<h3>Papéis dos irmãos (só administrador)</h3>
+<ol>
+<li>Toque em <b>Perfil → Papéis dos irmãos</b> ("Nomear moderadores e diretorias").</li>
+<li>Em <b>Buscar irmão ou capítulo</b>, escreva o nome.</li>
+<li>Toque no irmão e escolha o papel.</li>
+</ol>
+<h3>Criar passeio (diretoria e administrador)</h3>
+<ol>
+<li>Toque em <b>Passeios</b> e depois em <b>Criar passeio</b>.</li>
+<li>Preencha <b>Nome do passeio</b>, <b>Dia (dd/mm/aaaa)</b>, <b>Hora (ex.: 6:30)</b>, <b>Ponto de saída</b>, <b>Destino</b> e, se quiser, <b>Detalhes (opcional)</b>.</li>
+<li>Toque em <b>Publicar passeio</b>. Aparece "Passeio criado".</li>
+</ol>
+<p>Todos os irmãos veem o passeio. O grupo do passeio é criado sozinho, e quem confirma <b>Vou</b> entra nele.</p>
+<h3>Destaque do Guia de Negócios (administrador)</h3>
+<p>O pagamento do destaque é combinado <b>fora do app</b>, direto com o responsável. Depois de combinado:</p>
+<ol>
+<li>Abra o negócio no <b>Guia de Negócios</b>.</li>
+<li>Em <b>Destaque (só administração)</b>, escreva a data final em <b>Vale até (AAAA-MM-DD)</b>.</li>
+<li>Toque em <b>Definir destaque</b>. Aparece "Destaque definido." e o selo <b>Destaque</b>.</li>
+<li>Para tirar antes, toque em <b>Tirar destaque</b>.</li>
+</ol>
+<p>Quando a data passa, o destaque some sozinho. Nenhum link de pagamento fica dentro do app.</p>
+</section><section class="secao"><h2>18. Dúvidas frequentes</h2>
+<h4>Não consigo entrar. O que faço?</h4>
+<p>Se usou o e-mail, abra o link neste mesmo celular. Ele vale uma vez só. Se não funcionou, volte à entrada e peça um novo. Se o problema continuar, tente <b>Entrar com Google</b>.</p>
+<h4>Meu pedido de entrada está "Pedido enviado" há dias.</h4>
+<p>Quem aprova é a diretoria do seu capítulo ou a moderação do clube. Ligue para o irmão que te indicou e peça para ele avisar. Você também pode falar com o WhatsApp do suporte.</p>
+<h4>O app diz que não achou posto por perto.</h4>
+<p>O app procura num raio de 100 km a partir da <b>sua</b> posição. Confira se a localização está ligada e se há sinal de GPS. Vá para um lugar aberto e tente de novo.</p>
+<h4>Quem vê onde eu estou?</h4>
+<p>Só quem você escolheu. O padrão é <b>Aproximado (~5 km)</b>. Mude no botão de visibilidade do Mapa. Casa e trabalho nunca aparecem.</p>
+<h4>Quero sumir do mapa por um tempo.</h4>
+<p>No botão de visibilidade escolha <b>Invisível</b>, ou use <b>Só por 2 horas</b> para um modo que volta sozinho.</p>
+<h4>O SOS liga para o SAMU?</h4>
+<p>Não. O SOS avisa o grupo e seus contatos. Em caso grave, ligue você mesmo para o <b>192</b> ou <b>193</b>. Os botões estão na tela do SOS.</p>
+<h4>Por que o app trava quando estou andando?</h4>
+<p>Por segurança. Com a moto andando, só o Mapa e o modo pilotando ficam livres. Se você é garupa ou passageiro, toque em <b>Sou garupa / passageiro</b>.</p>
+<h4>O atalho de SOS não aparece na tela inicial.</h4>
+<p>Em celulares Xiaomi, Redmi e Poco, libere <b>Atalhos na tela inicial</b> nas permissões do app. Veja o capítulo "Atalho e widget de SOS".</p>
+<h4>Não chegam notificações.</h4>
+<p>Confira em <b>Perfil → Notificações</b> se o tipo está ligado, e nas configurações do celular se o app pode enviar avisos. Em <b>Perfil → Status do servidor</b>, a linha <b>Notificações</b> deve dizer "Este aparelho está registrado".</p>
+<h4>Como apago minha conta?</h4>
+<p><b>Perfil → Meus dados → Excluir minha conta → Excluir tudo.</b> Não dá para desfazer.</p>
+<h4>Posso sair do ranking?</h4>
+<p>Pode. Em Conquistas, ligue <b>Sair do ranking</b>. Você continua com XP e selos.</p>
+<h4>O app cobra alguma coisa?</h4>
+<p>Nesta versão, não há compras nem anúncios dentro do app. O destaque do Guia de Negócios é combinado fora do app.</p>
+<h4>Posso usar o app em outro idioma?</h4>
+<p>O app fala português, espanhol e inglês, conforme o idioma do celular.</p>
+</section><section class="secao"><h2>19. Segurança na estrada</h2>
+<div class="aviso"><b>A moto não é lugar de celular.</b> O app foi feito para você usar <b>parado</b>, de <b>garupa</b> ou por <b>voz e botões grandes</b>. Nenhuma tela é mais importante do que a estrada.</div>
+<ol>
+<li><b>Planeje parado.</b> Escolha a rota, o tipo de estrada e confira o tempo antes de sair (<b>Ferramentas → Tempo e sol</b>, <b>Checklist de saída</b>).</li>
+<li><b>Use o modo pilotando</b> com a moto andando. Ouça a voz. Toque só se for seguro.</li>
+<li><b>Nada vale por velocidade.</b> O app não dá ponto por correr nem por tempo de percurso.</li>
+<li><b>Formação escalonada.</b> O líder define o ritmo e o fechador não ultrapassa.</li>
+<li><b>Dois segundos de distância</b> da moto da frente.</li>
+<li><b>Repita os sinais de mão</b> para quem vem atrás.</li>
+<li><b>Saia de tanque cheio</b> e abasteça nas paradas combinadas. Use <b>Posto mais próximo</b> ou <b>Posto na rota</b> com a moto parada.</li>
+<li><b>Ninguém fica para trás.</b> Se um parar, o comboio espera. Use <b>Reagrupar</b>.</li>
+<li><b>Álcool e estrada não combinam.</b> Ágape com bebida só depois de estacionar de vez.</li>
+<li><b>Chegue antes de escurecer.</b> Evite pilotar mais de 8 horas por dia e faça uma pausa de 15 minutos a cada 2 horas.</li>
+<li><b>Em emergência</b>, ligue <b>192 (SAMU)</b> ou <b>193 (Bombeiros)</b> e depois avise os irmãos pelo SOS. O app não substitui o socorro oficial.</li>
+<li><b>Avise alguém do seu roteiro</b> antes de sair.</li>
+</ol>
+<p>Irmãos na estrada, irmãos na vida. Boa estrada!</p>
+</section>
+</body></html>
