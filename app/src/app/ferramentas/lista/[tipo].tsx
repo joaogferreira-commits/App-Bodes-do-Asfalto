@@ -3,16 +3,32 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, Pressable, Share, StyleSheet, TextInput, View } from 'react-native';
 
+import { ListaAniversarios } from '@/componentes/ListaAniversarios';
+import { ListaLojas } from '@/componentes/ListaLojas';
+import { ListaMembros } from '@/componentes/ListaMembros';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { normalizar } from '@/busca/buscar';
 import { diretorios, type TipoDiretorio } from '@/dados/diretorios';
 import { useViagem } from '@/estado/viagem';
 import { linkWhatsApp } from '@/ferramentas/calculos';
+import { useClubeNoServidor } from '@/servidor/useClube';
 import { espaco, fontes, raios, toque, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Cartao, Icone, Pino, Texto, type StatusIrmao } from '@/ui';
 
-/** Lista das ferramentas de diretório (negócios, Bode Amigo, Lojas, eventos, classificados, etc.). */
+/**
+ * Lista das ferramentas de diretório. Com o servidor ligado, Lojas, Membros e Aniversários vêm do banco;
+ * as demais listas seguem com os dados do app (telefones) ou ficam escondidas (ver ferramentas/catalogo.ts).
+ */
 export default function Lista() {
+  const servidor = useClubeNoServidor();
+  const { tipo } = useLocalSearchParams<{ tipo: TipoDiretorio }>();
+  if (servidor && tipo === 'lojas') return <ListaLojas />;
+  if (servidor && tipo === 'membros') return <ListaMembros />;
+  if (servidor && tipo === 'aniversarios') return <ListaAniversarios />;
+  return <ListaLocal />;
+}
+
+function ListaLocal() {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);

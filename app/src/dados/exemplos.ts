@@ -19,6 +19,10 @@ export type LugarExemplo = {
   site?: string;
   telefone?: string;
   numero?: number | null;
+  /** Lojas e negócios do servidor: id da linha e texto curto da ficha */
+  lojaId?: string;
+  negocioId?: string;
+  detalhe?: string;
 };
 
 type PontoColetado = {

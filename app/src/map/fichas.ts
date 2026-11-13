@@ -17,6 +17,7 @@ export type AcaoFicha =
   | 'salvar'
   | 'vou'
   | 'falarContato'
+  | 'verLoja'
   | 'site'
   | 'telefone';
 
@@ -48,6 +49,17 @@ const negocioDoTipo: Partial<Record<LugarExemplo['tipo'], string>> = {
 
 export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; dia: string }): Ficha {
   const base = { id: l.id, tipo: l.tipo, titulo: l.nome, posicao: { lat: l.lat, lng: l.lng } };
+  // Negócio de irmão do servidor: benefício para irmãos e vitrine do Guia.
+  if (l.negocioId)
+    return {
+      ...base,
+      subtitulo: `ficha.tipos.${l.tipo}`,
+      linhas: [
+        { icone: 'trofeu', chave: 'ficha.beneficioDoNegocio', valores: { beneficio: l.detalhe ?? '' } },
+      ],
+      acoes: ['rota', 'vitrine'],
+      negocio: l.negocioId,
+    };
   switch (l.tipo) {
     case 'posto': {
       const preco = precoInformado?.valor ?? l.rotulo?.replace('R$', '').trim();
@@ -78,6 +90,18 @@ export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; 
         acoes: ['rota', 'salvar'],
       };
     case 'loja':
+      if (l.lojaId)
+        return {
+          ...base,
+          subtitulo: 'ficha.tipos.loja',
+          linhas: [
+            ...(l.detalhe
+              ? [{ icone: 'calendario' as const, chave: 'ficha.lojaDias', valores: { dias: l.detalhe } }]
+              : []),
+            { icone: 'cadeado', chave: 'ficha.lojaVisita' },
+          ],
+          acoes: ['rota', 'verLoja'],
+        };
       return {
         ...base,
         subtitulo: 'ficha.tipos.loja',

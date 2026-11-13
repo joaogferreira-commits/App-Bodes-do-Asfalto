@@ -46,3 +46,9 @@ O teste `app/src/__tests__/sem-em-breve-servidor.test.tsx` confere que nenhuma a
 - Texto de "Sobre o clube" e de "Código de conduta" (é provisório).
 - Quando Guia de Negócios, Classificados, Lojas, Eventos e Bode Amigo tiverem tabela no servidor, voltam à lista em `app/src/ferramentas/catalogo.ts` (lista `soExemplo`).
 - Chaves de tradução antigas ainda existem nos 3 idiomas mas sem uso (por exemplo `comum.emBreve` ainda é usado só no modo local).
+
+## Atualização (13/11/2026): voltaram com dados reais do servidor
+
+Lojas (Visitação), Guia de Negócios (com o cartão "Sou membro"), Lista de membros e Aniversários saíram da lista `soExemplo`.
+Migration em `supabase/pendentes/20261113160000_lojas_negocios_membros.sql` (com teste pgTAP ao lado); só vale no app depois de aplicada pelo workflow.
+Aniversário (só dia e mês) fica em tabela própria, escondido por padrão; a lista só o mostra se o irmão marcou.

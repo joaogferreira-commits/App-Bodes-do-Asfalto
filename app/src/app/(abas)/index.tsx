@@ -55,6 +55,7 @@ import {
 } from '@/map/fichas';
 import { tamanhoAvatarNoMapa, ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { agapeRelevante, centroDaArea, distanciaKm } from '@/map/areaMapa';
+import { useLugaresDoClube } from '@/servidor/useClube';
 import { usePasseios } from '@/servidor/usePasseios';
 import { responderAgape as responderAgapeNoServidor } from '@/servidor/agapes';
 import { useViagem } from '@/estado/viagem';
@@ -165,9 +166,11 @@ export default function Mapa() {
   // Pontos do banco (OpenStreetMap) para a área visível, juntos com os que já vêm no app.
   const [area, setArea] = useState<Area>(AREA_INICIAL);
   const doBanco = usePontosDoBanco(chatNoServidor, area, zoomAtual);
+  // Lojas e negócios de irmãos aprovados (com posição) viram pinos 'loja' e de negócio.
+  const doClube = useLugaresDoClube();
   const todos = useMemo(
-    () => mesclarPontos(todosOsLugares([], chatNoServidor), doBanco),
-    [doBanco, chatNoServidor],
+    () => mesclarPontos(todosOsLugares(doClube, chatNoServidor), doBanco),
+    [doBanco, chatNoServidor, doClube],
   );
   const lugares = useMemo(() => filtrarLugares(todos, filtro), [todos, filtro]);
   // Servidor + membro aprovado: irmãos de verdade (o servidor decide o que cada um mostra). Exemplos só no modo local.
@@ -257,6 +260,10 @@ export default function Mapa() {
           const l = lugaresExemplo.find((x) => x.id === ficha.id);
           if (l) setFicha(fichaDoLugar(l, { valor: extra, dia }));
         }
+        return;
+      case 'verLoja':
+        setFicha(null);
+        router.push('/ferramentas/lista/lojas');
         return;
       case 'vitrine':
         setFicha(null);

@@ -17,9 +17,10 @@ export type Negocio = {
   dono: string;
   beneficio: string;
   descricao: string;
-  horario: string;
+  horario?: string;
   comodidades: ('cobertura' | 'garagem' | 'cafeCedo' | 'ferramentas' | 'guincho')[];
-  fotos: number[];
+  /** imagens do app (require) ou do servidor ({ uri }) */
+  fotos: (number | { uri: string })[];
   whatsapp?: string;
   telefone?: string;
   posicao?: { lat: number; lng: number };
@@ -27,6 +28,14 @@ export type Negocio = {
   /** AAAA-MM-DD; depois disso o destaque some sozinho. */
   validade?: string;
   recomendacoes: number;
+  /** vindo do servidor (Guia real) */
+  servidor?: boolean;
+  /** o irmão logado é o dono */
+  meu?: boolean;
+  status?: 'pendente' | 'aprovado' | 'recusado';
+  motivoRecusa?: string | null;
+  destaqueAte?: string | null;
+  site?: string;
 };
 
 export const categoriasNegocio: CategoriaNegocio[] = ['oficina', 'comida', 'pouso', 'pecas', 'servicos'];

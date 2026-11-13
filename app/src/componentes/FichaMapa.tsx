@@ -17,6 +17,7 @@ const iconeDaAcao: Record<AcaoFicha, NomeIcone> = {
   salvar: 'salvar',
   vou: 'check',
   falarContato: 'comentario',
+  verLoja: 'loja',
   site: 'compartilhar',
   telefone: 'telefone',
 };

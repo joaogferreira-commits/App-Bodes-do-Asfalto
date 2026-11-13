@@ -7,6 +7,11 @@ import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { perfilExemplo } from '@/dados/perfil';
 import { useAvatar } from '@/estado/avatar';
 import { usePerfilOpcional } from '@/estado/perfil';
+import { useQuery } from '@tanstack/react-query';
+
+import { clienteConsultas } from '@/servidor/consulta';
+import { meuCapitulo } from '@/servidor/membros';
+import { useClubeNoServidor } from '@/servidor/useClube';
 import { espaco, fontes, raios, tema, useCores } from '@/theme';
 import { Avatar, Icone, Texto } from '@/ui';
 
@@ -19,7 +24,14 @@ export default function SouMembro() {
   const cores = useCores();
   const { avatar } = useAvatar();
   const meu = usePerfilOpcional();
-  const nome = meu?.perfil.nome || perfilExemplo.nome;
+  const servidor = useClubeNoServidor();
+  const capServidor = useQuery(
+    { queryKey: ['meuCapitulo'], queryFn: meuCapitulo, enabled: servidor, staleTime: 10 * 60 * 1000 },
+    clienteConsultas,
+  );
+  // Com o servidor, só dados reais do irmão (nada de exemplo na carteirinha).
+  const nome = meu?.perfil.nome || (servidor ? '' : perfilExemplo.nome);
+  const capitulo = servidor ? capServidor.data : perfilExemplo.capitulo;
   const [agora, setAgora] = useState(() => new Date());
   useEffect(() => {
     const id = setInterval(() => setAgora(new Date()), 1000);
@@ -47,7 +59,7 @@ export default function SouMembro() {
         <Texto variante="titulo" style={{ textAlign: 'center' }}>
           {nome}
         </Texto>
-        <Texto variante="destaque">{t('negocios.capitulo', { capitulo: perfilExemplo.capitulo })}</Texto>
+        {!!capitulo && <Texto variante="destaque">{t('negocios.capitulo', { capitulo })}</Texto>}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <Icone nome="check" tamanho={22} cor={cores.verdePosto} espessura={3} />
           <Texto style={{ fontFamily: fontes.textoForte, color: cores.verdePosto, fontSize: 20 }}>

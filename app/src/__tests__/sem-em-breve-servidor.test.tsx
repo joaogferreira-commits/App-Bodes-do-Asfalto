@@ -141,6 +141,11 @@ describe('versão com servidor: nada de "em breve", exemplo ou teste nas abas', 
     const chaves = ferramentasVisiveis(true).flatMap((g) => g.itens.map((i) => i.chave));
     for (const c of soExemplo) expect(chaves).not.toContain(c);
     expect(chaves).toContain('telefones');
+    // Voltaram com dados reais do servidor (Lojas, Guia de Negócios, Membros, Aniversários).
+    for (const c of ['lojas', 'negocios', 'membros', 'aniversarios']) {
+      expect(soExemplo).not.toContain(c);
+      expect(chaves).toContain(c);
+    }
     expect(gruposFerramentas.flatMap((g) => g.itens).length).toBe(20);
   });
 

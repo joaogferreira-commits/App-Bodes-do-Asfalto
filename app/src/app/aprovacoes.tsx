@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Linking, TextInput, View } from 'react-native';
 
 import { useAcessoOpcional } from '@/acesso/acesso';
+import { AprovarLojas, AprovarNegocios } from '@/componentes/AprovarClube';
 import { AprovarDesafios } from '@/componentes/AprovarDesafios';
 import { AprovarSuporte } from '@/componentes/AprovarSuporte';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
@@ -24,7 +25,7 @@ export default function Aprovacoes() {
   const [ocupado, setOcupado] = useState<string | null>(null);
   const papel = useAcessoOpcional()?.papel;
   const moderacao = papel === 'moderador' || papel === 'admin';
-  const [aba, setAba] = useState<'irmaos' | 'desafios' | 'suporte'>('irmaos');
+  const [aba, setAba] = useState<'irmaos' | 'desafios' | 'suporte' | 'lojas' | 'negocios'>('irmaos');
 
   const carregar = useCallback(async () => {
     try {
@@ -60,13 +61,23 @@ export default function Aprovacoes() {
 
   return (
     <TelaFerramenta titulo={t('aprovacoes.titulo')} explicacao={t('aprovacoes.explica')}>
-      <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs }}>
         <Chip rotulo={t('aprovacoes.abaIrmaos')} ativo={aba === 'irmaos'} onPress={() => setAba('irmaos')} />
         <Chip
           rotulo={t('aprovacoes.abaDesafios')}
           ativo={aba === 'desafios'}
           onPress={() => setAba('desafios')}
         />
+        {moderacao && (
+          <Chip rotulo={t('aprovacoes.abaLojas')} ativo={aba === 'lojas'} onPress={() => setAba('lojas')} />
+        )}
+        {moderacao && (
+          <Chip
+            rotulo={t('aprovacoes.abaNegocios')}
+            ativo={aba === 'negocios'}
+            onPress={() => setAba('negocios')}
+          />
+        )}
         {moderacao && (
           <Chip
             rotulo={t('aprovacoes.abaSuporte')}
@@ -77,6 +88,8 @@ export default function Aprovacoes() {
       </View>
       {aba === 'desafios' && <AprovarDesafios />}
       {aba === 'suporte' && moderacao && <AprovarSuporte />}
+      {aba === 'lojas' && moderacao && <AprovarLojas />}
+      {aba === 'negocios' && moderacao && <AprovarNegocios />}
       {aba === 'irmaos' && pedidos === null && (
         <Texto variante="secundario">{t('aprovacoes.carregando')}</Texto>
       )}
