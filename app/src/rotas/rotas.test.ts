@@ -1,4 +1,11 @@
-import { tokenDaRota, URL_ROUTES } from './google';
+import {
+  limparPrefetchGoogle,
+  LIMITE_GOOGLE_MS,
+  prefetchGoogle,
+  tokenDaRota,
+  tokenParaSair,
+  URL_ROUTES,
+} from './google';
 import { codificarPolyline, decodificarPolyline } from './polyline';
 import { distanciaKm } from '@/navegacao/destinos';
 
@@ -150,7 +157,7 @@ describe('passagens para o Google', () => {
     const [url, init] = buscar.mock.calls[0];
     expect(url).toBe(URL_ROUTES);
     const corpo = JSON.parse(init.body);
-    expect(corpo.travelMode).toBe('TWO_WHEELER');
+    expect(corpo.travelMode).toBe('DRIVE');
     expect(corpo.intermediates.every((p: { via: boolean }) => p.via)).toBe(true);
   });
 
@@ -231,10 +238,10 @@ describe('rota no Google (por que recusa e como suavizar)', () => {
       aceita: false,
       motivo: 'chaveSemRoutes',
     });
-    expect(buscar).toHaveBeenCalledTimes(1);
+    expect(buscar).toHaveBeenCalledTimes(3); // em paralelo
   });
 
-  it('se recusar com 10 pontos, tenta com 5 e depois 2', async () => {
+  it('se recusar com 10 e 5 pontos, usa a de 2', async () => {
     const buscar = jest
       .fn()
       .mockResolvedValueOnce(semRota)
@@ -244,6 +251,67 @@ describe('rota no Google (por que recusa e como suavizar)', () => {
     expect(r).toMatchObject({ aceita: true, passagens: 2, kmGoogle: 52, fiel: true });
     const vias = buscar.mock.calls.map((c) => JSON.parse(c[1].body).intermediates.length);
     expect(vias).toEqual([10, 5, 2]);
+  });
+
+  it('tentativas em paralelo: as 3 saem antes de qualquer resposta, e vale a mais detalhada aceita', async () => {
+    const pendentes: ((v: unknown) => void)[] = [];
+    const buscar = jest.fn().mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          pendentes.push(resolve);
+        }),
+    );
+    const p = rotaNoGoogle('k', longa, 50, buscar);
+    expect(buscar).toHaveBeenCalledTimes(3);
+    // a de 2 pontos responde primeiro, depois a de 10
+    pendentes[2]!({ ok: true, status: 200, json: async () => ({ routes: [{ routeToken: 'dois' }] }) });
+    pendentes[1]!(semRota);
+    pendentes[0]!({ ok: true, status: 200, json: async () => ({ routes: [{ routeToken: 'dez' }] }) });
+    await expect(p).resolves.toMatchObject({ aceita: true, token: 'dez', passagens: 10 });
+  });
+
+  it('teto de ~6 s: Google calado vira semRede e cancela os pedidos', async () => {
+    jest.useFakeTimers();
+    const buscar = jest.fn().mockImplementation(
+      (_u: string, init: { signal: AbortSignal }) =>
+        new Promise((_ok, falha) => {
+          init.signal.addEventListener('abort', () => falha(new Error('abort')));
+        }),
+    );
+    const p = rotaNoGoogle('k', longa, 50, buscar);
+    await jest.advanceTimersByTimeAsync(LIMITE_GOOGLE_MS + 10);
+    await expect(p).resolves.toEqual({ aceita: false, motivo: 'semRede' });
+    expect(LIMITE_GOOGLE_MS).toBeLessThanOrEqual(6000);
+    jest.useRealTimers();
+  });
+
+  it('prefetch: o "Iniciar" reaproveita o token pedido ao escolher a rota (sem nova chamada)', async () => {
+    limparPrefetchGoogle();
+    const buscar = jest.fn().mockResolvedValue(ok(50));
+    const antes = prefetchGoogle('k', longa, 50, buscar);
+    expect(prefetchGoogle('k', longa, 50, buscar)).toBe(antes); // mesma rota, mesmo pedido
+    await antes;
+    expect(buscar).toHaveBeenCalledTimes(3);
+    await expect(tokenParaSair('k', longa, 50, longa[0]!, buscar)).resolves.toBe('T');
+    expect(buscar).toHaveBeenCalledTimes(3);
+  });
+
+  it('prefetch não serve se o irmão já saiu longe do início: pede token novo', async () => {
+    limparPrefetchGoogle();
+    const buscar = jest.fn().mockResolvedValue(ok(50));
+    await prefetchGoogle('k', longa, 50, buscar);
+    const longe = { lat: longa[0]!.lat + 1, lng: longa[0]!.lng };
+    await tokenParaSair('k', longa, 50, longe, buscar);
+    expect(buscar).toHaveBeenCalledTimes(6);
+  });
+
+  it('prefetch que falhou não fica guardado', async () => {
+    limparPrefetchGoogle();
+    const buscar = jest.fn().mockResolvedValue(semRota);
+    await prefetchGoogle('k', longa, 50, buscar);
+    await Promise.resolve();
+    await prefetchGoogle('k', longa, 50, buscar);
+    expect(buscar).toHaveBeenCalledTimes(6);
   });
 
   it('avisa quando o Google vai por outro caminho (distância > 10 % diferente)', async () => {
@@ -304,6 +372,43 @@ describe('alternativas e terra (R43)', () => {
     expect(r).toMatchObject({ km: 50, kmTerra: 20, kmAteTerra: 30 });
     expect(r.alternativas).toHaveLength(1);
     expect(r.alternativas![0]).toMatchObject({ km: 58, kmTerra: 0 });
+  });
+
+  it('viagem longa (> 300 km) não pede alternativas', async () => {
+    const longe = { lat: a.lat + 3, lng: a.lng };
+    const buscar = jest
+      .fn()
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ trip: trip(330) }) })
+      .mockResolvedValueOnce(attrs(false));
+    await v.planejarRota(a, longe, 'misto', buscar);
+    expect(JSON.parse(buscar.mock.calls[0][1].body).alternates).toBeUndefined();
+  });
+
+  it('servidor demorou com alternativas: uma segunda chance rápida, sem alternativas', async () => {
+    const buscar = jest
+      .fn()
+      .mockRejectedValueOnce(new Error('abort'))
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ trip: trip(50) }) })
+      .mockResolvedValueOnce(attrs(false));
+    const r = await v.planejarRota(a, b, 'misto', buscar);
+    expect(JSON.parse(buscar.mock.calls[0][1].body).alternates).toBe(2);
+    expect(JSON.parse(buscar.mock.calls[1][1].body).alternates).toBeUndefined();
+    expect(r.km).toBe(50);
+  });
+
+  it('tempos do Valhalla: 12 s e retentativa de 8 s', () => {
+    expect(v.LIMITE_VALHALLA_MS).toBe(12000);
+    expect(v.LIMITE_VALHALLA_RETENTATIVA_MS).toBeLessThan(v.LIMITE_VALHALLA_MS);
+  });
+
+  it('cancelar (sinal) interrompe sem segunda chance', async () => {
+    const corte = new AbortController();
+    corte.abort();
+    const buscar = jest.fn().mockRejectedValue(new Error('abort'));
+    await expect(v.planejarRota(a, b, 'misto', buscar, { sinal: corte.signal })).rejects.toBeInstanceOf(
+      ErroRota,
+    );
+    expect(buscar).toHaveBeenCalledTimes(1);
   });
 
   it('com pontos de passagem (bate-volta) não pede alternativas', async () => {

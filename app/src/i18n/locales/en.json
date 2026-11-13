@@ -134,6 +134,7 @@
       "terra": "Looks for dirt roads whenever possible."
     },
     "calculando": "Calculating route…",
+    "quaseLa": "Almost there…",
     "km": "{{km}} km",
     "duracao": "{{tempo}} · arrive {{hora}}",
     "terraKm": "{{km}} km",
@@ -189,7 +190,7 @@
     "postoProximo": "Nearest gas",
     "postoNaRota": "Gas on route",
     "encerrar": "End",
-    "rotaRapida": "Google did not accept the planned route (reason: {{motivo}}); following its route to the destination.",
+    "rotaRapida": "Following the Google route to the destination.",
     "emBreveAlerta": "Alert: coming with rides.",
     "emBreveReagrupar": "Regroup: coming with rides.",
     "emBrevePosto": "Fuel: coming with places.",
@@ -927,6 +928,7 @@
     "vazio": "You haven't saved any posts yet. Tap a post's bookmark to keep it."
   },
   "story": {
+    "passar": "Tap right to go forward, left to go back. Hold to pause.",
     "novo": "New story",
     "explica": "A road photo with a short caption. It disappears by itself after 24 hours.",
     "legenda": "Caption (up to 80 letters)",
@@ -1103,7 +1105,25 @@
     "whatsPara": "WhatsApp {{nome}}",
     "grupo": "Send to the convoy group",
     "previa": "Message to be sent:",
-    "mensagemTitulo": "SOS Bodes do Asfalto",
+    "mensagemTitulo": "HELP REQUEST — Bodes do Asfalto",
+    "quem": "Who",
+    "oQueHouve": "What happened",
+    "onde": "Where",
+    "enviadoAs": "Sent at {{hora}} on {{data}}",
+    "tipoTitulo": "What is happening?",
+    "acrescentar": "Want to add something? (optional)",
+    "umToque": "Moving: one tap on the help type already sends the alert.",
+    "urgente": "Serious situation: call 192 (ambulance) or 193 (fire dept.) right now.",
+    "tipos": {
+      "acidente": "I had an accident",
+      "saude": "Feeling unwell / health",
+      "pane": "Breakdown",
+      "pneu": "Flat tire",
+      "combustivel": "Out of fuel",
+      "perdido": "I am lost",
+      "bateria": "Battery / electrical",
+      "outro": "Other"
+    },
     "rodape": "Sent from the Bodes do Asfalto app. Call 192/193 if serious.",
     "limite": "In this test version, the automatic push alert to the convoy does not exist yet (needs the server). WhatsApp asks for one tap to send.",
     "estouBem": "I am fine, close",
@@ -1437,5 +1457,13 @@
     "permissaoTexto": "We notify you when a message, a wave or an answer to your request arrives. The alert never shows the message content. You can change this later in Profile.",
     "permitir": "Allow",
     "agoraNao": "Not now"
+  },
+  "erros": {
+    "titulo": "Something went wrong",
+    "texto": "The app ran into a problem. If you like, tell us what you were doing: it helps us fix it.",
+    "comentario": "What were you doing? (optional)",
+    "enviar": "Send details",
+    "voltar": "Back to start",
+    "enviado": "Thanks! We got the details."
   }
 }

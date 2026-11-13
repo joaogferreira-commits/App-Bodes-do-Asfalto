@@ -1,4 +1,4 @@
-import { pontoADistancia, type Coordenada } from '@/navegacao/destinos';
+import { distanciaKm, pontoADistancia, type Coordenada } from '@/navegacao/destinos';
 
 import { codificarPolyline, decodificarPolyline } from './polyline';
 import type { RotaPlanejada, TipoEstrada, Trecho } from './tipos';
@@ -71,17 +71,22 @@ export function separarTrechos(forma: Coordenada[], arestas: RespostaAtributos['
 }
 
 /** Tempo máximo esperando o servidor de rotas. */
-export const LIMITE_VALHALLA_MS = 20000;
+export const LIMITE_VALHALLA_MS = 12000;
+/** Segunda chance (sem alternativas), mais curta. */
+export const LIMITE_VALHALLA_RETENTATIVA_MS = 8000;
+/** Acima disso (estimado: linha reta x 1,3) não pedimos alternativas: o servidor demora demais. */
+export const LIMITE_KM_ALTERNATIVAS = 300;
 
 export async function planejarRota(
   origem: Coordenada,
   destino: Coordenada,
   tipo: TipoEstrada,
   buscar: Buscar = fetch as unknown as Buscar,
-  extras: { passagens?: Coordenada[]; curvas?: boolean } = {},
+  extras: { passagens?: Coordenada[]; curvas?: boolean; sinal?: AbortSignal } = {},
 ): Promise<RotaPlanejada> {
   const pontos = [origem, ...(extras.passagens ?? []), destino];
-  const corpo = (semCorteDeTerra: boolean) => ({
+  const viagemCurta = distanciaKm(origem, destino) * 1.3 < LIMITE_KM_ALTERNATIVAS;
+  const corpo = (semCorteDeTerra: boolean, alternativas = true) => ({
     locations: pontos.map((p, i) => ({
       lat: p.lat,
       lon: p.lng,
@@ -94,13 +99,16 @@ export async function planejarRota(
     },
     directions_options: { units: 'kilometers', language: 'pt-BR' },
     // Até 2 caminhos alternativos (R43); o Valhalla só calcula alternativas entre 2 pontos.
-    ...(pontos.length === 2 ? { alternates: 2 } : {}),
+    ...(pontos.length === 2 && viagemCurta && alternativas ? { alternates: 2 } : {}),
   });
-  const pedir = async (caminho: string, dados: object) => {
+  const pedir = async (caminho: string, dados: object, limite = LIMITE_VALHALLA_MS) => {
     let resp;
     // O servidor público às vezes demora; desistir cedo e avisar é melhor que a tela parada.
     const corte = new AbortController();
-    const relogio = setTimeout(() => corte.abort(), LIMITE_VALHALLA_MS);
+    const relogio = setTimeout(() => corte.abort(), limite);
+    const cancelar = () => corte.abort();
+    if (extras.sinal?.aborted) corte.abort();
+    extras.sinal?.addEventListener('abort', cancelar);
     try {
       resp = await buscar(`${SERVIDOR_VALHALLA}${caminho}`, {
         signal: corte.signal,
@@ -112,6 +120,7 @@ export async function planejarRota(
       throw new ErroRota('semRede');
     } finally {
       clearTimeout(relogio);
+      extras.sinal?.removeEventListener('abort', cancelar);
     }
     if (!resp.ok) throw new ErroRota(resp.status >= 500 ? 'semRede' : 'semRota');
     return resp.json();
@@ -119,12 +128,23 @@ export async function planejarRota(
 
   let semCaminhoSoAsfalto = false;
   let rota: RespostaRota;
+  const pediuAlternativas = pontos.length === 2 && viagemCurta;
+  const rotaRapida = async (semCorte: boolean) => {
+    try {
+      return (await pedir('/route', corpo(semCorte))) as RespostaRota;
+    } catch (e) {
+      // Servidor lento ou fora com alternativas: uma segunda chance, mais curta e sem alternativas.
+      if (!pediuAlternativas || !(e instanceof ErroRota) || e.motivo !== 'semRede' || extras.sinal?.aborted)
+        throw e;
+      return (await pedir('/route', corpo(semCorte, false), LIMITE_VALHALLA_RETENTATIVA_MS)) as RespostaRota;
+    }
+  };
   try {
-    rota = (await pedir('/route', corpo(false))) as RespostaRota;
+    rota = await rotaRapida(false);
   } catch (e) {
     if (tipo !== 'asfalto' || !(e instanceof ErroRota) || e.motivo !== 'semRota') throw e;
     // Não existe caminho só de asfalto: refaz evitando a terra ao máximo e avisa.
-    rota = (await pedir('/route', corpo(true))) as RespostaRota;
+    rota = await rotaRapida(true);
     semCaminhoSoAsfalto = true;
   }
   const montar = async (viagem: Viagem | undefined): Promise<RotaPlanejada> => {
@@ -228,7 +248,8 @@ export function planejarBateVolta(
   origem: Coordenada,
   opcoes: { km: number; rumo: Rumo; tipo: TipoEstrada; curvas: boolean; variacao?: number },
   buscar: Buscar = fetch as unknown as Buscar,
+  sinal?: AbortSignal,
 ) {
   const passagens = pontosBateVolta(origem, opcoes.km, rumos[opcoes.rumo], opcoes.variacao ?? 0);
-  return planejarRota(origem, origem, opcoes.tipo, buscar, { passagens, curvas: opcoes.curvas });
+  return planejarRota(origem, origem, opcoes.tipo, buscar, { passagens, curvas: opcoes.curvas, sinal });
 }

@@ -19,7 +19,7 @@ import { usePerfilOpcional } from '@/estado/perfil';
 import { useViagem } from '@/estado/viagem';
 import { useOdometro } from '@/seguranca/useOdometro';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
-import { rotaNoGoogle } from '@/rotas/google';
+import { tokenParaSair } from '@/rotas/google';
 import { nomeDoDestino, posicaoDoDestino } from '@/navegacao/destinos';
 import { iniciarNavegacao, type ControladorNavegacao, type ResultadoNavegacao } from '@/navegacao/fluxo';
 import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
@@ -88,7 +88,6 @@ function Pilotando() {
   const [estado, setEstado] = useState<'preparando' | 'guiando' | 'erro'>('preparando');
   const [erro, setErro] = useState<Exclude<ResultadoNavegacao, 'ok' | 'okRotaRapida'> | null>(null);
   const [rotaRapida, setRotaRapida] = useState(false);
-  const [motivoRecusa, setMotivoRecusa] = useState<string | null>(null);
   const chaveGoogle =
     (Constants.expoConfig?.extra as { chaveGoogle?: string } | undefined)?.chaveGoogle ?? '';
   const [aviso, setAviso] = useState<string | null>(null);
@@ -115,16 +114,9 @@ function Pilotando() {
         : nomeDoDestino(viagem.destino, t),
       tokenRota: viagem.tokenRota,
       tokenNaHora: viagem.rota
-        ? async (atual) => {
-            const r = await rotaNoGoogle(
-              chaveGoogle,
-              [atual, ...viagem.rota!.forma.slice(1)],
-              viagem.rota!.km,
-            );
-            return r.aceita ? r.token : null;
-          }
+        ? // reaproveita o token pedido em segundo plano na tela de rota (instantâneo)
+          (atual) => tokenParaSair(chaveGoogle, viagem.rota!.forma, viagem.rota!.km, atual)
         : undefined,
-      aoRecusarRota: setMotivoRecusa,
     });
     if (resultado === 'ok' || resultado === 'okRotaRapida') {
       setRotaRapida(resultado === 'okRotaRapida');
@@ -221,7 +213,7 @@ function Pilotando() {
       : erro
         ? t(`navegacao.erros.${erro}`)
         : rotaRapida
-          ? t('pilotando.rotaRapida', { motivo: motivoRecusa ?? '?' })
+          ? t('pilotando.rotaRapida')
           : null);
 
   const modoNoturnoGoogle =

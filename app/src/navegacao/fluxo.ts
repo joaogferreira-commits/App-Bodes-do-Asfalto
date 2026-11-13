@@ -31,6 +31,8 @@ export type ResultadoNavegacao =
 
 /** Valores dos enums do SDK (TravelMode.TWO_WHEELER e AudioGuidance). */
 export const MODO_MOTO = 3;
+/** A ponte do SDK só aceita DRIVING (0) com token de rota; o token também é pedido como DRIVE. */
+export const MODO_CARRO = 0;
 export const VOZ_COMPLETA_BLUETOOTH = 4 | 8;
 
 type Dependencias = {
@@ -51,7 +53,10 @@ type Dependencias = {
 };
 
 /** Tempo máximo esperando o Google aceitar a rota planejada antes de seguir pela rota dele. */
-export const LIMITE_ROTA_MS = 12000;
+export const LIMITE_ROTA_MS = 8000;
+
+/** Espera máxima pelo token novo (ele corre junto com a abertura do SDK). */
+export const LIMITE_TOKEN_MS = 6500;
 
 function comLimite<T>(p: Promise<T>, ms: number, seEsgotar: T): Promise<T> {
   return new Promise((ok) => {
@@ -84,7 +89,7 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     // Posição e token novo correm junto com a abertura da navegação (economiza segundos na partida).
     const posicao = dep.posicaoAtual().catch(() => null);
     const tokenNovo = posicao.then((a) =>
-      a && dep.tokenNaHora ? comLimite(dep.tokenNaHora(a), LIMITE_ROTA_MS, null) : null,
+      a && dep.tokenNaHora ? comLimite(dep.tokenNaHora(a), LIMITE_TOKEN_MS, null) : null,
     );
 
     const sessao = await dep.controlador.init();
@@ -104,7 +109,7 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     if (token) {
       rota = await comLimite(
         dep.controlador
-          .setDestinations(destino, { routeTokenOptions: { routeToken: token, travelMode: MODO_MOTO } })
+          .setDestinations(destino, { routeTokenOptions: { routeToken: token, travelMode: MODO_CARRO } })
           .catch((e: { code?: string; message?: string }) => e?.code ?? e?.message ?? 'ERRO'),
         LIMITE_ROTA_MS,
         'DEMOROU',
@@ -113,9 +118,17 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
       if (!seguiuPlanejada) dep.aoRecusarRota?.(rota);
     }
     if (!seguiuPlanejada) {
-      rota = await dep.controlador.setDestinations(destino, {
-        routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
-      });
+      try {
+        rota = await dep.controlador.setDestinations(destino, {
+          routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
+        });
+      } catch (e) {
+        // Algumas versões da ponte não aceitam moto: tenta de novo como carro.
+        if (!/unsupported travel mode/i.test(String((e as Error)?.message ?? e))) throw e;
+        rota = await dep.controlador.setDestinations(destino, {
+          routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+        });
+      }
     }
     if (rota === 'LOCATION_DISABLED' || rota === 'LOCATION_UNKNOWN') return 'semLocalizacao';
     if (rota === 'NETWORK_ERROR') return 'semRede';

@@ -24,7 +24,7 @@ import {
   percentualTerra,
   trechosGeoJSON,
 } from '@/rotas/formato';
-import { rotaNoGoogle, type ResultadoGoogle } from '@/rotas/google';
+import { prefetchGoogle, type ResultadoGoogle } from '@/rotas/google';
 import type { RotaPlanejada, TipoEstrada } from '@/rotas/tipos';
 import { ErroRota, planejarBateVolta, planejarRota, rumos, type Rumo } from '@/rotas/valhalla';
 import { espaco, fontes, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
@@ -60,7 +60,28 @@ export default function Rota() {
   const [escolhida, setEscolhida] = useState(0);
   const destinos = [...(destino.chave === 'busca' ? [destino] : []), ...destinosDaProva, postoExemplo];
 
+  const corte = useRef<AbortController | null>(null);
+  const [demorando, setDemorando] = useState(false);
+  useEffect(() => {
+    if (estado.fase !== 'calculando') {
+      void Promise.resolve().then(() => setDemorando(false));
+      return;
+    }
+    const relogio = setTimeout(() => setDemorando(true), 6000);
+    return () => clearTimeout(relogio);
+  }, [estado.fase]);
+
+  useEffect(() => () => corte.current?.abort(), []);
+
+  const cancelar = () => {
+    corte.current?.abort();
+    router.back();
+  };
+
   const calcular = useCallback(async () => {
+    corte.current?.abort();
+    const controle = new AbortController();
+    corte.current = controle;
     setEstado({ fase: 'calculando' });
     let atual = origem;
     if (!atual) {
@@ -74,8 +95,11 @@ export default function Rota() {
     }
     try {
       const nova = bateVolta
-        ? await planejarBateVolta(atual, { ...bateVolta, tipo: tipoEstrada })
-        : await planejarRota(atual, posicaoDoDestino(destino, atual), tipoEstrada);
+        ? await planejarBateVolta(atual, { ...bateVolta, tipo: tipoEstrada }, undefined, controle.signal)
+        : await planejarRota(atual, posicaoDoDestino(destino, atual), tipoEstrada, undefined, {
+            sinal: controle.signal,
+          });
+      if (controle.signal.aborted) return;
       const { alternativas, ...principal } = nova;
       setOpcoes([principal, ...(alternativas ?? [])]);
       setEscolhida(0);
@@ -86,6 +110,7 @@ export default function Rota() {
         duration: 700,
       });
     } catch (e) {
+      if (controle.signal.aborted) return;
       viagem.definirRota(null, null);
       setEstado({ fase: 'erro', motivo: e instanceof ErroRota ? e.motivo : 'semRede' });
     }
@@ -98,7 +123,8 @@ export default function Rota() {
     void Promise.resolve().then(calcular);
   }, [calcular]);
 
-  // Confere ANTES de sair se a navegação do Google vai seguir esta rota (e guarda o token).
+  // Assim que a rota é escolhida, o token do Google é pedido em segundo plano (cache por rota):
+  // o "Iniciar" reaproveita sem esperar. Também confere se a navegação vai seguir esta rota.
   const [google, setGoogle] = useState<ResultadoGoogle | 'verificando' | null>(null);
   const chaveGoogle =
     (Constants.expoConfig?.extra as { chaveGoogle?: string } | undefined)?.chaveGoogle ?? '';
@@ -107,7 +133,7 @@ export default function Rota() {
     let ativo = true;
     void Promise.resolve()
       .then(() => ativo && setGoogle('verificando'))
-      .then(() => rotaNoGoogle(chaveGoogle, rota.forma, rota.km))
+      .then(() => prefetchGoogle(chaveGoogle, rota.forma, rota.km))
       .then((r) => ativo && setGoogle(r));
     return () => {
       ativo = false;
@@ -239,7 +265,12 @@ export default function Rota() {
           contentContainerStyle={{ gap: espaco.sm }}
           showsVerticalScrollIndicator={false}
         >
-          {estado.fase === 'calculando' && <Texto variante="secundario">{t('rota.calculando')}</Texto>}
+          {estado.fase === 'calculando' && (
+            <View style={{ gap: espaco.sm }} accessibilityLiveRegion="polite">
+              <Texto variante="secundario">{demorando ? t('rota.quaseLa') : t('rota.calculando')}</Texto>
+              <Botao titulo={t('comum.cancelar')} variante="secundario" onPress={cancelar} />
+            </View>
+          )}
           {estado.fase === 'erro' && (
             <View style={{ gap: espaco.sm }}>
               <Texto style={{ color: cores.alerta }}>{t(`rota.erros.${estado.motivo}`)}</Texto>

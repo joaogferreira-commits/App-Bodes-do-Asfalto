@@ -2,6 +2,8 @@ import { destinosDaProva, distanciaKm, pontoADistancia, posicaoDoDestino } from 
 import {
   iniciarNavegacao,
   LIMITE_ROTA_MS,
+  LIMITE_TOKEN_MS,
+  MODO_CARRO,
   MODO_MOTO,
   VOZ_COMPLETA_BLUETOOTH,
   type ControladorNavegacao,
@@ -95,7 +97,7 @@ describe('iniciarNavegacao', () => {
     await expect(iniciarNavegacao({ ...base(c), tokenRota: 'tok' })).resolves.toBe('ok');
     expect(c.setDestinations).toHaveBeenCalledTimes(1);
     expect(c.setDestinations.mock.calls[0]![1]).toEqual({
-      routeTokenOptions: { routeToken: 'tok', travelMode: MODO_MOTO },
+      routeTokenOptions: { routeToken: 'tok', travelMode: MODO_CARRO },
     });
   });
 
@@ -114,7 +116,7 @@ describe('iniciarNavegacao', () => {
     await expect(iniciarNavegacao({ ...base(c), tokenRota: 'velho', tokenNaHora })).resolves.toBe('ok');
     expect(tokenNaHora).toHaveBeenCalledWith(cuiaba);
     expect(c.setDestinations.mock.calls[0]![1]).toEqual({
-      routeTokenOptions: { routeToken: 'novo', travelMode: MODO_MOTO },
+      routeTokenOptions: { routeToken: 'novo', travelMode: MODO_CARRO },
     });
   });
 
@@ -134,7 +136,7 @@ describe('iniciarNavegacao', () => {
     });
     expect(r).toBe('okRotaRapida');
     expect(c.setDestinations.mock.calls[0]![1]).toEqual({
-      routeTokenOptions: { routeToken: 'velho', travelMode: MODO_MOTO },
+      routeTokenOptions: { routeToken: 'velho', travelMode: MODO_CARRO },
     });
     expect(aoRecusarRota).toHaveBeenCalledWith('routeTokenMalformed');
   });
@@ -152,6 +154,40 @@ describe('iniciarNavegacao', () => {
     await jest.advanceTimersByTimeAsync(LIMITE_ROTA_MS + 10);
     await expect(p).resolves.toBe('okRotaRapida');
     expect(aoRecusarRota).toHaveBeenCalledWith('DEMOROU');
+    jest.useRealTimers();
+  });
+
+  it('o token é seguido em modo DRIVING (0): a ponte do Google recusa moto (3) com token', () => {
+    expect(MODO_CARRO).toBe(0);
+    expect(MODO_MOTO).toBe(3);
+  });
+
+  it('moto recusada pela ponte ("Unsupported travel mode") tenta de novo como carro', async () => {
+    const c = controladorFalso({
+      setDestinations: jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Exception in HostFunction: Unsupported travel mode: 3'))
+        .mockResolvedValueOnce('OK'),
+    });
+    await expect(iniciarNavegacao(base(c))).resolves.toBe('ok');
+    expect(c.setDestinations.mock.calls[1]![1]).toEqual({
+      routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+    });
+  });
+
+  it('token novo lento (>6,5 s) não segura a partida: usa o token que já tinha', async () => {
+    jest.useFakeTimers();
+    const c = controladorFalso();
+    const p = iniciarNavegacao({
+      ...base(c),
+      tokenRota: 'velho',
+      tokenNaHora: () => new Promise(() => undefined),
+    });
+    await jest.advanceTimersByTimeAsync(LIMITE_TOKEN_MS + 10);
+    await expect(p).resolves.toBe('ok');
+    expect(c.setDestinations.mock.calls[0]![1]).toEqual({
+      routeTokenOptions: { routeToken: 'velho', travelMode: MODO_CARRO },
+    });
     jest.useRealTimers();
   });
 

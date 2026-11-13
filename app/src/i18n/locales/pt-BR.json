@@ -134,6 +134,7 @@
       "terra": "Procura estradas de terra sempre que possível."
     },
     "calculando": "Calculando a rota…",
+    "quaseLa": "Quase lá…",
     "km": "{{km}} km",
     "duracao": "{{tempo}} · chegada {{hora}}",
     "terraKm": "{{km}} km",
@@ -189,7 +190,7 @@
     "postoProximo": "Posto próximo",
     "postoNaRota": "Posto na rota",
     "encerrar": "Encerrar",
-    "rotaRapida": "O Google não aceitou a rota planejada (motivo: {{motivo}}); seguindo a rota dele até o destino.",
+    "rotaRapida": "Seguindo a rota do Google até o destino.",
     "emBreveAlerta": "Alerta: chega com os passeios.",
     "emBreveReagrupar": "Reagrupar: chega com os passeios.",
     "emBrevePosto": "Postos: chegam com os lugares.",
@@ -927,6 +928,7 @@
     "vazio": "Você ainda não salvou nenhum post. Toque no marcador de um post para guardar."
   },
   "story": {
+    "passar": "Toque na direita para avançar, na esquerda para voltar. Segure para pausar.",
     "novo": "Novo story",
     "explica": "Uma foto da estrada com uma legenda curta. Some sozinho em 24 horas.",
     "legenda": "Legenda (até 80 letras)",
@@ -1103,7 +1105,25 @@
     "whatsPara": "WhatsApp para {{nome}}",
     "grupo": "Mandar no grupo do comboio",
     "previa": "Mensagem que será enviada:",
-    "mensagemTitulo": "SOS Bodes do Asfalto",
+    "mensagemTitulo": "PEDIDO DE AJUDA — Bodes do Asfalto",
+    "quem": "Quem",
+    "oQueHouve": "O que houve",
+    "onde": "Onde",
+    "enviadoAs": "Enviado às {{hora}} de {{data}}",
+    "tipoTitulo": "O que está acontecendo?",
+    "acrescentar": "Quer acrescentar algo? (opcional)",
+    "umToque": "Em movimento: um toque no tipo de ajuda já envia o aviso.",
+    "urgente": "Situação grave: ligue já para o 192 (SAMU) ou 193 (Bombeiros).",
+    "tipos": {
+      "acidente": "Sofri acidente",
+      "saude": "Mal-estar / saúde",
+      "pane": "Pane mecânica",
+      "pneu": "Pneu furado",
+      "combustivel": "Sem combustível",
+      "perdido": "Estou perdido",
+      "bateria": "Bateria / elétrica",
+      "outro": "Outro"
+    },
     "rodape": "Enviado pelo app Bodes do Asfalto. Ligue 192/193 se for grave.",
     "limite": "Nesta versão de teste, o aviso automático por notificação ao comboio ainda não existe (depende do servidor). O WhatsApp pede um toque para enviar.",
     "estouBem": "Estou bem, fechar",
@@ -1437,5 +1457,13 @@
     "permissaoTexto": "Avisamos quando chega uma mensagem, um aceno ou uma resposta ao seu pedido. O aviso nunca mostra o conteúdo da mensagem. Você pode mudar isso depois em Perfil.",
     "permitir": "Permitir",
     "agoraNao": "Agora não"
+  },
+  "erros": {
+    "titulo": "Algo deu errado",
+    "texto": "O app encontrou um problema. Se quiser, conte o que você estava fazendo: isso ajuda a corrigir.",
+    "comentario": "O que você estava fazendo? (opcional)",
+    "enviar": "Enviar detalhes",
+    "voltar": "Voltar ao início",
+    "enviado": "Obrigado! Recebemos os detalhes."
   }
 }
