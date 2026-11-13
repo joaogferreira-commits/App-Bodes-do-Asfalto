@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { useAcessoOpcional } from '@/acesso/acesso';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
@@ -7,15 +8,22 @@ import { placarEntreCapitulos, placarExemplo, tabelaXpKm, xpDoDesafio, type Desa
 import { useDesafios } from '@/estado/useDesafios';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Botao, Cartao, Icone, Texto } from '@/ui';
+import { avisar } from '@/ui/dialogo';
 
 /** Desafios do clube: ativos, os que aguardam aprovação e a tabela de XP. Nada de velocidade. */
 export default function Desafios() {
   const { t } = useTranslation();
   const cores = useCores();
   const ds = useDesafios();
+  const acesso = useAcessoOpcional();
   const ativos = ds.todos.filter((d) => d.situacao === 'ativo');
   const aguardando = ds.criados.filter((d) => d.situacao === 'aguardando');
   const diasAte = (fim: string) => Math.max(0, Math.ceil((Date.parse(fim) - Date.now()) / 86400000));
+
+  const alternar = async (id: string, dentro: boolean) => {
+    const r = await (dentro ? ds.sair(id) : ds.participar(id));
+    if (r && typeof r === 'object' && !r.ok) avisar(t('desafios.erros.servidor'));
+  };
 
   const Cartaozinho = ({ d }: { d: Desafio }) => {
     const dentro = d.id in ds.entrei;
@@ -28,15 +36,18 @@ export default function Desafios() {
             {t(`desafios.origem.${d.origem}`)}
           </Texto>
           <Texto style={{ fontFamily: fontes.titulo, fontSize: 22, color: cores.ouro }}>
-            +{xpDoDesafio(d)} XP
+            +{d.xpServidor ?? xpDoDesafio(d)} XP
           </Texto>
         </View>
         <Texto variante="destaque">{d.titulo}</Texto>
         <Texto variante="secundario">
           {t(`desafios.meta.${d.tipo}`, { n: d.meta })} · {t('desafios.faltam', { n: diasAte(d.fim) })} ·{' '}
-          {t('desafios.participantes', { n: d.participantes + (dentro ? 1 : 0) })}
+          {t('desafios.participantes', { n: d.participantes + (dentro && !ds.servidor ? 1 : 0) })}
         </Texto>
-        {d.origem === 'capitulos' && (
+        {d.origem === 'capitulos' && ds.servidor && d.capitulos.length > 0 && (
+          <Texto variante="secundario">{d.capitulos.join(' × ')}</Texto>
+        )}
+        {d.origem === 'capitulos' && !ds.servidor && (
           <View style={{ gap: 4, marginTop: 4 }}>
             {placarEntreCapitulos(placarExemplo).map((p, i) => (
               <Texto key={p.capitulo} variante={i === 0 ? 'corpoForte' : undefined}>
@@ -66,7 +77,7 @@ export default function Desafios() {
           titulo={dentro ? t('desafios.participando') : t('desafios.participar')}
           icone={dentro ? 'check' : 'mais'}
           variante={dentro ? 'secundario' : 'principal'}
-          onPress={() => (dentro ? ds.sair(d.id) : ds.participar(d.id))}
+          onPress={() => void alternar(d.id, dentro)}
         />
       </Cartao>
     );
@@ -78,6 +89,14 @@ export default function Desafios() {
       {ativos.map((d) => (
         <Cartaozinho key={d.id} d={d} />
       ))}
+      {ds.servidor && acesso?.aprova && (
+        <Botao
+          titulo={t('desafios.aprovarFila')}
+          icone="check"
+          variante="secundario"
+          onPress={() => router.push('/aprovacoes')}
+        />
+      )}
       {aguardando.length > 0 && (
         <View style={{ gap: espaco.sm }}>
           <Texto variante="rotulo">{t('desafios.aguardando')}</Texto>
@@ -85,11 +104,13 @@ export default function Desafios() {
             <Cartao key={d.id} style={{ gap: espaco.xs }}>
               <Texto variante="destaque">{d.titulo}</Texto>
               <Texto variante="secundario">{t('desafios.aguardandoExplica')}</Texto>
-              <Botao
-                titulo={t('desafios.aprovarTeste')}
-                variante="contorno"
-                onPress={() => ds.aprovarTeste(d.id)}
-              />
+              {ds.aprovarTeste && (
+                <Botao
+                  titulo={t('desafios.aprovarTeste')}
+                  variante="contorno"
+                  onPress={() => ds.aprovarTeste?.(d.id)}
+                />
+              )}
             </Cartao>
           ))}
         </View>

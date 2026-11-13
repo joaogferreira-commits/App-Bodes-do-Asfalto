@@ -3,10 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, TextInput, View } from 'react-native';
 
+import { AprovarDesafios } from '@/componentes/AprovarDesafios';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { decidirPedido, pedidosParaAprovar, type PedidoParaAprovar } from '@/servidor/auth';
 import { espaco, fontes, raios, useCores } from '@/theme';
-import { Botao, Cartao, Texto } from '@/ui';
+import { Botao, Cartao, Chip, Texto } from '@/ui';
 import { avisar } from '@/ui/dialogo';
 
 /**
@@ -19,6 +20,7 @@ export default function Aprovacoes() {
   const [pedidos, setPedidos] = useState<PedidoParaAprovar[] | null>(null);
   const [motivo, setMotivo] = useState<Record<string, string>>({});
   const [ocupado, setOcupado] = useState<string | null>(null);
+  const [aba, setAba] = useState<'irmaos' | 'desafios'>('irmaos');
 
   const carregar = useCallback(async () => {
     try {
@@ -54,83 +56,97 @@ export default function Aprovacoes() {
 
   return (
     <TelaFerramenta titulo={t('aprovacoes.titulo')} explicacao={t('aprovacoes.explica')}>
-      {pedidos === null && <Texto variante="secundario">{t('aprovacoes.carregando')}</Texto>}
-      {pedidos?.length === 0 && (
+      <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+        <Chip rotulo={t('aprovacoes.abaIrmaos')} ativo={aba === 'irmaos'} onPress={() => setAba('irmaos')} />
+        <Chip
+          rotulo={t('aprovacoes.abaDesafios')}
+          ativo={aba === 'desafios'}
+          onPress={() => setAba('desafios')}
+        />
+      </View>
+      {aba === 'desafios' && <AprovarDesafios />}
+      {aba === 'irmaos' && pedidos === null && (
+        <Texto variante="secundario">{t('aprovacoes.carregando')}</Texto>
+      )}
+      {aba === 'irmaos' && pedidos?.length === 0 && (
         <Cartao>
           <Texto>{t('aprovacoes.vazio')}</Texto>
         </Cartao>
       )}
-      {pedidos?.map((p) => (
-        <Cartao key={p.id} style={{ gap: espaco.sm }}>
-          <Texto variante="destaque">
-            {p.nome}
-            {p.apelido ? ` “${p.apelido}”` : ''}
-          </Texto>
-          <Texto variante="secundario">
-            {t('aprovacoes.linha', { capitulo: p.capitulo, cidade: p.cidade })}
-          </Texto>
-          {!!p.indicadoPorNome && <Texto>{t('aprovacoes.indicadoPor', { nome: p.indicadoPorNome })}</Texto>}
-          <View style={{ flexDirection: 'row', gap: espaco.xs }}>
-            {[p.fotoColete, p.fotoCarteirinha].map((u, i) =>
-              u ? (
-                <Image
-                  key={i}
-                  source={{ uri: u }}
-                  style={{
-                    flex: 1,
-                    aspectRatio: 1,
-                    borderRadius: raios.cartao,
-                    backgroundColor: cores.superficie3,
-                  }}
-                  contentFit="cover"
-                  accessibilityLabel={i === 0 ? t('aprovacoes.fotoColete') : t('aprovacoes.fotoCarteirinha')}
+      {aba === 'irmaos' &&
+        pedidos?.map((p) => (
+          <Cartao key={p.id} style={{ gap: espaco.sm }}>
+            <Texto variante="destaque">
+              {p.nome}
+              {p.apelido ? ` “${p.apelido}”` : ''}
+            </Texto>
+            <Texto variante="secundario">
+              {t('aprovacoes.linha', { capitulo: p.capitulo, cidade: p.cidade })}
+            </Texto>
+            {!!p.indicadoPorNome && <Texto>{t('aprovacoes.indicadoPor', { nome: p.indicadoPorNome })}</Texto>}
+            <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+              {[p.fotoColete, p.fotoCarteirinha].map((u, i) =>
+                u ? (
+                  <Image
+                    key={i}
+                    source={{ uri: u }}
+                    style={{
+                      flex: 1,
+                      aspectRatio: 1,
+                      borderRadius: raios.cartao,
+                      backgroundColor: cores.superficie3,
+                    }}
+                    contentFit="cover"
+                    accessibilityLabel={
+                      i === 0 ? t('aprovacoes.fotoColete') : t('aprovacoes.fotoCarteirinha')
+                    }
+                  />
+                ) : null,
+              )}
+            </View>
+            <Botao
+              titulo={t('aprovacoes.ligar', { telefone: p.telefone })}
+              variante="secundario"
+              icone="socorro"
+              onPress={() => void Linking.openURL(`tel:${p.telefone.replace(/\D/g, '')}`)}
+            />
+            <TextInput
+              value={motivo[p.id] ?? ''}
+              onChangeText={(v) => setMotivo((m) => ({ ...m, [p.id]: v.slice(0, 200) }))}
+              placeholder={t('aprovacoes.motivo')}
+              placeholderTextColor={cores.textoSec}
+              accessibilityLabel={t('aprovacoes.motivo')}
+              style={{
+                minHeight: 52,
+                borderWidth: 1,
+                borderColor: cores.linha,
+                borderRadius: raios.botao,
+                paddingHorizontal: espaco.md,
+                color: cores.texto,
+                fontFamily: fontes.texto,
+                fontSize: 17,
+              }}
+            />
+            <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+              <View style={{ flex: 1 }}>
+                <Botao
+                  titulo={t('aprovacoes.aprovar')}
+                  icone="check"
+                  desativado={ocupado === p.id}
+                  onPress={() => void decidir(p, true)}
                 />
-              ) : null,
-            )}
-          </View>
-          <Botao
-            titulo={t('aprovacoes.ligar', { telefone: p.telefone })}
-            variante="secundario"
-            icone="socorro"
-            onPress={() => void Linking.openURL(`tel:${p.telefone.replace(/\D/g, '')}`)}
-          />
-          <TextInput
-            value={motivo[p.id] ?? ''}
-            onChangeText={(v) => setMotivo((m) => ({ ...m, [p.id]: v.slice(0, 200) }))}
-            placeholder={t('aprovacoes.motivo')}
-            placeholderTextColor={cores.textoSec}
-            accessibilityLabel={t('aprovacoes.motivo')}
-            style={{
-              minHeight: 52,
-              borderWidth: 1,
-              borderColor: cores.linha,
-              borderRadius: raios.botao,
-              paddingHorizontal: espaco.md,
-              color: cores.texto,
-              fontFamily: fontes.texto,
-              fontSize: 17,
-            }}
-          />
-          <View style={{ flexDirection: 'row', gap: espaco.xs }}>
-            <View style={{ flex: 1 }}>
-              <Botao
-                titulo={t('aprovacoes.aprovar')}
-                icone="check"
-                desativado={ocupado === p.id}
-                onPress={() => void decidir(p, true)}
-              />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Botao
+                  titulo={t('aprovacoes.recusar')}
+                  variante="contorno"
+                  desativado={ocupado === p.id}
+                  onPress={() => void decidir(p, false)}
+                />
+              </View>
             </View>
-            <View style={{ flex: 1 }}>
-              <Botao
-                titulo={t('aprovacoes.recusar')}
-                variante="contorno"
-                desativado={ocupado === p.id}
-                onPress={() => void decidir(p, false)}
-              />
-            </View>
-          </View>
-        </Cartao>
-      ))}
+          </Cartao>
+        ))}
     </TelaFerramenta>
   );
 }

@@ -9,6 +9,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
 import { AvatarMontado } from '@/componentes/AvatarMontado';
+import { SairDoRanking } from '@/componentes/SairDoRanking';
+import { useMeuProgresso } from '@/servidor/useGamificacao';
 import { usePerfilOpcional } from '@/estado/perfil';
 import { exemploIrmao, nivelDoXp } from '@/dados/conquistas';
 import { perfilExemplo as eu, type Visibilidade } from '@/dados/perfil';
@@ -77,7 +79,9 @@ export default function Perfil() {
   const visibilidadeMapa = useVisibilidadeMapa();
   const acesso = useAcesso();
   const { sair } = acesso;
-  const nivel = nivelDoXp(exemploIrmao.xp);
+  const progressoServidor = useMeuProgresso();
+  const xpMostrado = progressoServidor.servidor ? (progressoServidor.dados?.xp ?? 0) : exemploIrmao.xp;
+  const nivel = nivelDoXp(xpMostrado);
   const emBreve = () => avisar(t('comum.emBreve'), t('perfil.emBreveCadastro'));
   // O que o irmão cadastrou substitui o exemplo.
   const meu = usePerfilOpcional();
@@ -169,7 +173,7 @@ export default function Perfil() {
             <View style={estilos.linha}>
               <Texto variante="destaque" style={{ flex: 1 }}>
                 {t(`conquistas.niveis.${nivel.atual.chave}`)} ·{' '}
-                {t('conquistas.xp', { xp: exemploIrmao.xp.toLocaleString('pt-BR') })}
+                {t('conquistas.xp', { xp: xpMostrado.toLocaleString('pt-BR') })}
               </Texto>
               <Texto variante="pequeno" style={{ color: cores.ouro }}>
                 {t('perfil.conquistasCartao')}
@@ -330,6 +334,7 @@ export default function Perfil() {
               detalhe={t('perfil.notificacoesDetalhe')}
               onPress={() => router.push('/notificacoes')}
             />
+            <SairDoRanking />
           </Cartao>
         </Secao>
 

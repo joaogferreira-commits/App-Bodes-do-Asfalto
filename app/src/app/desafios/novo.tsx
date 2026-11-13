@@ -12,6 +12,14 @@ import { Botao, Cartao, Chip, Texto } from '@/ui';
 import { avisar } from '@/ui/dialogo';
 
 const prazos = [7, 30, 60, 90] as const;
+/** Código devolvido pelo banco → chave de tradução. */
+const erroDoServidor: Record<string, string> = {
+  titulo: 'titulo',
+  meta: 'meta',
+  prazo: 'prazo',
+  um_por_mes: 'umPorMes',
+  limite_capitulo: 'limiteCapitulo',
+};
 
 /** Criar desafio de irmão: vai para aprovação da diretoria do capítulo ou de um moderador. */
 export default function NovoDesafio() {
@@ -24,7 +32,7 @@ export default function NovoDesafio() {
   const [dias, setDias, limpaDias] = useRascunho<(typeof prazos)[number]>('desafio.dias', 30);
   const metaN = Number(meta.replace(/\D/g, '')) || 0;
 
-  const enviar = () => {
+  const enviar = async () => {
     const inicio = new Date().toISOString().slice(0, 10);
     const fim = new Date(Date.now() + dias * 86400000).toISOString().slice(0, 10);
     const novo = {
@@ -40,9 +48,12 @@ export default function NovoDesafio() {
       situacao: 'aguardando' as const,
       participantes: 0,
     };
-    const erro = validarDesafio(novo, ds.todos);
+    const erro = validarDesafio(novo, ds.servidor ? [] : ds.todos);
     if (erro) return avisar(t(`desafios.erros.${erro}`));
-    ds.criar(novo);
+    if (ds.servidor) {
+      const r = await ds.criar({ titulo: novo.titulo, modalidade: tipo, meta: metaN, dias });
+      if (!r.ok) return avisar(t(`desafios.erros.${erroDoServidor[r.erro] ?? 'servidor'}`));
+    } else ds.criar(novo);
     limpaTitulo();
     limpaTipo();
     limpaMeta();
@@ -82,7 +93,7 @@ export default function NovoDesafio() {
         </Cartao>
       )}
       <Texto variante="pequeno">{t('desafios.regras')}</Texto>
-      <Botao titulo={t('desafios.enviarAprovacao')} icone="check" grande onPress={enviar} />
+      <Botao titulo={t('desafios.enviarAprovacao')} icone="check" grande onPress={() => void enviar()} />
     </TelaFerramenta>
   );
 }

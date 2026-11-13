@@ -34,6 +34,12 @@ export type Desafio = {
   situacao: SituacaoDesafio;
   aprovadoPor?: 'diretoria' | 'moderador';
   participantes: number;
+  /** Só no modo servidor: XP calculado pelo banco, km já registrados e se o irmão participa. */
+  criadorId?: string;
+  xpServidor?: number;
+  kmFeitos?: number;
+  participo?: boolean;
+  concluido?: boolean;
 };
 
 /** Tabela de XP fixa por km total (desafios de irmãos). Faixas fechadas no limite superior. */

@@ -427,7 +427,17 @@
       "alerta": "Alerta da estrada confirmado por irmãos"
     },
     "semVelocidade": "Nenhum ponto por velocidade ou tempo de percurso. Aqui vale rodar junto e conhecer lugares.",
-    "capitulosTitulo": "Capítulos do mês"
+    "capitulosTitulo": "Capítulos do mês",
+    "sairRanking": "Sair do ranking",
+    "sairRankingDetalhe": "Você continua com seu XP e seus selos, mas não aparece na lista.",
+    "sairRankingErro": "Não foi possível mudar agora. Tente de novo.",
+    "rankingXp": "Ranking por XP",
+    "rankingGeral": "Geral",
+    "rankingCapitulo": "Meu capítulo",
+    "rankingMes": "Este mês",
+    "rankingSempre": "Sempre",
+    "rankingVazio": "Ainda ninguém pontuou nesta lista.",
+    "foraDoRanking": "Você saiu do ranking. Só você vê seu XP."
   },
   "feed": {
     "exemplo": "Posts de exemplo até a etapa social.",
@@ -1440,8 +1450,10 @@
       "meta": "Informe uma meta válida.",
       "prazo": "O prazo vai de 1 a 90 dias.",
       "umPorMes": "Você já criou um desafio este mês. Tente no próximo.",
-      "limiteCapitulo": "O capítulo já tem 3 desafios de irmãos ativos. Espere um terminar."
-    }
+      "limiteCapitulo": "O capítulo já tem 3 desafios de irmãos ativos. Espere um terminar.",
+      "servidor": "Não foi possível agora. Confira a internet e tente de novo."
+    },
+    "aprovarFila": "Aprovar desafios e irmãos"
   },
   "aprovacoes": {
     "titulo": "Aprovar irmãos",
@@ -1459,7 +1471,14 @@
     "recusar": "Recusar",
     "motivoFalta": "Escreva o motivo da recusa. Ele chega ao irmão.",
     "erroCarregar": "Não foi possível carregar os pedidos. Confira a internet.",
-    "erroDecidir": "Não foi possível registrar a decisão. Tente de novo."
+    "erroDecidir": "Não foi possível registrar a decisão. Tente de novo.",
+    "abaIrmaos": "Irmãos",
+    "abaDesafios": "Desafios",
+    "desafiosVazio": "Nenhum desafio esperando decisão.",
+    "desafioPor": "Criado por {{nome}}",
+    "motivoDesafio": "Motivo (obrigatório para recusar)",
+    "aprovarDesafio": "Aprovar desafio",
+    "recusarDesafio": "Recusar desafio"
   },
   "papeis": {
     "titulo": "Papéis dos irmãos",

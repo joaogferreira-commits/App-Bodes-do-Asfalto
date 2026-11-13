@@ -15,6 +15,8 @@ import {
   selos,
   type ChaveSelo,
 } from '@/dados/conquistas';
+import { RankingServidor } from '@/componentes/RankingServidor';
+import { useMeuProgresso } from '@/servidor/useGamificacao';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Botao, Cartao, Icone, Texto } from '@/ui';
 
@@ -39,7 +41,18 @@ export default function Conquistas() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const [aberto, setAberto] = useState<ChaveSelo | null>(null);
-  const eu = exemploIrmao;
+  const gam = useMeuProgresso();
+  const servidor = gam.servidor;
+  // No servidor: XP e selos do banco (selo ganho = meta cumprida). Sem servidor: números de exemplo.
+  const eu = servidor
+    ? {
+        ...exemploIrmao,
+        xp: gam.dados?.xp ?? 0,
+        progresso: Object.fromEntries(
+          selos.map((s) => [s.chave, gam.dados?.selos.includes(s.chave) ? s.meta : 0]),
+        ) as Record<ChaveSelo, number>,
+      }
+    : exemploIrmao;
   const nivel = nivelDoXp(eu.xp);
   const feitos = selos.filter((s) => conquistou(s.chave, eu.progresso)).length;
   const seloAberto = selos.find((s) => s.chave === aberto);
@@ -48,7 +61,7 @@ export default function Conquistas() {
     <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
       <ScrollView contentContainerStyle={estilos.conteudo}>
         <Texto variante="titulo">{t('abas.conquistas')}</Texto>
-        <Texto variante="pequeno">{t('conquistas.exemplo')}</Texto>
+        {!servidor && <Texto variante="pequeno">{t('conquistas.exemplo')}</Texto>}
 
         {/* Nível atual */}
         <Cartao style={estilos.nivel}>
@@ -162,60 +175,76 @@ export default function Conquistas() {
           })}
         </View>
 
-        {/* Desafio do mês */}
-        <Cartao destaque style={{ gap: espaco.xs }}>
-          <View style={estilos.linha}>
-            <Icone nome="trofeu" tamanho={26} cor={cores.ouro} />
-            <Texto variante="rotulo" style={{ color: cores.ouro }}>
-              {t('conquistas.desafioMes')}
-            </Texto>
-          </View>
-          <Texto variante="destaque">{t(`conquistas.desafios.${eu.desafio.chave}`)}</Texto>
-          <Barra fracao={eu.desafio.atual / eu.desafio.meta} cor={cores.ouro} />
-          <Texto variante="secundario">
-            {t('conquistas.desafioProgresso', { atual: eu.desafio.atual, meta: eu.desafio.meta })}
-          </Texto>
-          <Botao
-            titulo={t('desafios.verTodos')}
-            icone="trofeu"
-            variante="secundario"
-            onPress={() => router.push('/desafios')}
-          />
-        </Cartao>
-
-        {/* Ranking do mês (posição relativa, sem velocidade) */}
-        <Cartao style={estilos.linha}>
-          <Texto variante="numero" style={{ fontSize: 40, lineHeight: 44, color: cores.acao }}>
-            {t('conquistas.posicao', { n: eu.posicaoCapitulo })}
-          </Texto>
-          <View style={{ flex: 1 }}>
-            <Texto variante="corpoForte">{t('conquistas.rankingTitulo')}</Texto>
-            <Texto variante="secundario">{t('conquistas.rankingTexto', { km: eu.kmMes })}</Texto>
-          </View>
-        </Cartao>
-
-        {/* Ranking entre capítulos (km do mês somados) */}
-        <Texto variante="subtitulo">{t('conquistas.capitulosTitulo')}</Texto>
-        <Cartao semPadding>
-          {rankingCapitulos.map((c, i) => (
-            <View
-              key={c.nome}
-              style={[
-                estilos.xpLinha,
-                i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave },
-                c.meu && { backgroundColor: cores.superficie3 },
-              ]}
-            >
-              <Texto variante="subtitulo" style={{ width: 36, color: i === 0 ? cores.ouro : cores.textoSec }}>
-                {i + 1}
+        {servidor ? (
+          <>
+            <Botao
+              titulo={t('desafios.verTodos')}
+              icone="trofeu"
+              variante="secundario"
+              onPress={() => router.push('/desafios')}
+            />
+            <RankingServidor />
+          </>
+        ) : (
+          <>
+            <Cartao destaque style={{ gap: espaco.xs }}>
+              <View style={estilos.linha}>
+                <Icone nome="trofeu" tamanho={26} cor={cores.ouro} />
+                <Texto variante="rotulo" style={{ color: cores.ouro }}>
+                  {t('conquistas.desafioMes')}
+                </Texto>
+              </View>
+              <Texto variante="destaque">{t(`conquistas.desafios.${eu.desafio.chave}`)}</Texto>
+              <Barra fracao={eu.desafio.atual / eu.desafio.meta} cor={cores.ouro} />
+              <Texto variante="secundario">
+                {t('conquistas.desafioProgresso', { atual: eu.desafio.atual, meta: eu.desafio.meta })}
               </Texto>
-              <Texto style={{ flex: 1, fontFamily: c.meu ? fontes.textoForte : fontes.textoMedio }}>
-                {c.nome}
+              <Botao
+                titulo={t('desafios.verTodos')}
+                icone="trofeu"
+                variante="secundario"
+                onPress={() => router.push('/desafios')}
+              />
+            </Cartao>
+
+            {/* Ranking do mês (posição relativa, sem velocidade) */}
+            <Cartao style={estilos.linha}>
+              <Texto variante="numero" style={{ fontSize: 40, lineHeight: 44, color: cores.acao }}>
+                {t('conquistas.posicao', { n: eu.posicaoCapitulo })}
               </Texto>
-              <Texto variante="corpoForte">{t('rota.km', { km: c.km.toLocaleString('pt-BR') })}</Texto>
-            </View>
-          ))}
-        </Cartao>
+              <View style={{ flex: 1 }}>
+                <Texto variante="corpoForte">{t('conquistas.rankingTitulo')}</Texto>
+                <Texto variante="secundario">{t('conquistas.rankingTexto', { km: eu.kmMes })}</Texto>
+              </View>
+            </Cartao>
+
+            {/* Ranking entre capítulos (km do mês somados) */}
+            <Texto variante="subtitulo">{t('conquistas.capitulosTitulo')}</Texto>
+            <Cartao semPadding>
+              {rankingCapitulos.map((c, i) => (
+                <View
+                  key={c.nome}
+                  style={[
+                    estilos.xpLinha,
+                    i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave },
+                    c.meu && { backgroundColor: cores.superficie3 },
+                  ]}
+                >
+                  <Texto
+                    variante="subtitulo"
+                    style={{ width: 36, color: i === 0 ? cores.ouro : cores.textoSec }}
+                  >
+                    {i + 1}
+                  </Texto>
+                  <Texto style={{ flex: 1, fontFamily: c.meu ? fontes.textoForte : fontes.textoMedio }}>
+                    {c.nome}
+                  </Texto>
+                  <Texto variante="corpoForte">{t('rota.km', { km: c.km.toLocaleString('pt-BR') })}</Texto>
+                </View>
+              ))}
+            </Cartao>
+          </>
+        )}
 
         {/* Como ganhar XP */}
         <Texto variante="subtitulo">{t('conquistas.comoGanhar')}</Texto>

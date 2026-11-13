@@ -427,7 +427,17 @@
       "alerta": "Road alert confirmed by brothers"
     },
     "semVelocidade": "No points for speed or travel time. Here, riding together and seeing places is what counts.",
-    "capitulosTitulo": "Chapters this month"
+    "capitulosTitulo": "Chapters this month",
+    "sairRanking": "Leave the ranking",
+    "sairRankingDetalhe": "You keep your XP and badges, but you do not show up in the list.",
+    "sairRankingErro": "Could not change it now. Try again.",
+    "rankingXp": "XP ranking",
+    "rankingGeral": "Overall",
+    "rankingCapitulo": "My chapter",
+    "rankingMes": "This month",
+    "rankingSempre": "All time",
+    "rankingVazio": "Nobody has scored in this list yet.",
+    "foraDoRanking": "You left the ranking. Only you can see your XP."
   },
   "feed": {
     "exemplo": "Sample posts until the social stage.",
@@ -1440,8 +1450,10 @@
       "meta": "Enter a valid goal.",
       "prazo": "Deadline is 1 to 90 days.",
       "umPorMes": "You already created a challenge this month. Try next month.",
-      "limiteCapitulo": "The chapter already has 3 active brother challenges. Wait for one to end."
-    }
+      "limiteCapitulo": "The chapter already has 3 active brother challenges. Wait for one to end.",
+      "servidor": "Could not do it now. Check your internet and try again."
+    },
+    "aprovarFila": "Approve challenges and brothers"
   },
   "aprovacoes": {
     "titulo": "Approve brothers",
@@ -1459,7 +1471,14 @@
     "recusar": "Decline",
     "motivoFalta": "Write the reason for declining. It is sent to the brother.",
     "erroCarregar": "Could not load requests. Check your internet.",
-    "erroDecidir": "Could not record the decision. Try again."
+    "erroDecidir": "Could not record the decision. Try again.",
+    "abaIrmaos": "Brothers",
+    "abaDesafios": "Challenges",
+    "desafiosVazio": "No challenge waiting for a decision.",
+    "desafioPor": "Created by {{nome}}",
+    "motivoDesafio": "Reason (required to reject)",
+    "aprovarDesafio": "Approve challenge",
+    "recusarDesafio": "Reject challenge"
   },
   "papeis": {
     "titulo": "Brothers' roles",

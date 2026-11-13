@@ -427,7 +427,17 @@
       "alerta": "Alerta de carretera confirmada por hermanos"
     },
     "semVelocidade": "Ningún punto por velocidad o tiempo de recorrido. Aquí vale rodar juntos y conocer lugares.",
-    "capitulosTitulo": "Capítulos del mes"
+    "capitulosTitulo": "Capítulos del mes",
+    "sairRanking": "Salir del ranking",
+    "sairRankingDetalhe": "Sigues con tu XP y tus sellos, pero no apareces en la lista.",
+    "sairRankingErro": "No fue posible cambiar ahora. Inténtalo de nuevo.",
+    "rankingXp": "Ranking por XP",
+    "rankingGeral": "General",
+    "rankingCapitulo": "Mi capítulo",
+    "rankingMes": "Este mes",
+    "rankingSempre": "Siempre",
+    "rankingVazio": "Aún nadie sumó puntos en esta lista.",
+    "foraDoRanking": "Saliste del ranking. Solo tú ves tu XP."
   },
   "feed": {
     "exemplo": "Publicaciones de ejemplo hasta la etapa social.",
@@ -1440,8 +1450,10 @@
       "meta": "Informa una meta válida.",
       "prazo": "El plazo va de 1 a 90 días.",
       "umPorMes": "Ya creaste un desafío este mes. Intenta el próximo.",
-      "limiteCapitulo": "El capítulo ya tiene 3 desafíos de hermanos activos. Espera que termine uno."
-    }
+      "limiteCapitulo": "El capítulo ya tiene 3 desafíos de hermanos activos. Espera que termine uno.",
+      "servidor": "No fue posible ahora. Revisa internet e inténtalo de nuevo."
+    },
+    "aprovarFila": "Aprobar desafíos y hermanos"
   },
   "aprovacoes": {
     "titulo": "Aprobar hermanos",
@@ -1459,7 +1471,14 @@
     "recusar": "Rechazar",
     "motivoFalta": "Escribe el motivo del rechazo. Le llega al hermano.",
     "erroCarregar": "No se pudieron cargar los pedidos. Revisa la internet.",
-    "erroDecidir": "No se pudo registrar la decisión. Intenta de nuevo."
+    "erroDecidir": "No se pudo registrar la decisión. Intenta de nuevo.",
+    "abaIrmaos": "Hermanos",
+    "abaDesafios": "Desafíos",
+    "desafiosVazio": "Ningún desafío esperando decisión.",
+    "desafioPor": "Creado por {{nome}}",
+    "motivoDesafio": "Motivo (obligatorio para rechazar)",
+    "aprovarDesafio": "Aprobar desafío",
+    "recusarDesafio": "Rechazar desafío"
   },
   "papeis": {
     "titulo": "Roles de los hermanos",
