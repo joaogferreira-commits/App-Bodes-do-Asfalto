@@ -1,0 +1,6 @@
+# Carga dos postos da ANP (cadastro + preços). Só roda DEPOIS de a migration postos_anp estar aplicada no banco.
+# Linhas opcionais: ufs=MT,GO  modo=completo|precos  max_geocodes=1500  enviar=sim
+ufs=MT
+modo=completo
+max_geocodes=1500
+enviar=sim
