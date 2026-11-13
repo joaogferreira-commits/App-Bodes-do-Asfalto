@@ -1,5 +1,5 @@
-# Carga dos postos da ANP (cadastro + preços). Centro-Oeste e Norte (13/11, rodada 2).
-ufs=MT,GO,MS,DF,RO,TO
+# Carga dos postos da ANP (cadastro + preços). Demais estados (13/11).
+ufs=PA,AM,AC,RR,AP,MA,PI,CE,RN,PB,PE,AL,SE,BA,MG,ES,RJ,SP,PR,SC,RS
 modo=completo
-max_geocodes=4000
+max_geocodes=6000
 enviar=sim
