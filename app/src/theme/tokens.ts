@@ -42,16 +42,16 @@ export const paletaNoite = {
   /** Anel "na estrada" (jeans clareado, 6:1 sobre o fundo). */
   estrada: '#6F95B8',
   // mapa
-  asfalto: '#E9DCC4',
+  asfalto: '#EFE3C8',
   viaLocal: '#7A6A54',
   terra: '#C68A45',
   terraEscura: '#5A3E1F',
   rotaTerra: '#F3D9B8',
   contornoRota: '#141110',
   pisoDesconhecido: '#8C857B',
-  agua: '#22323D',
+  agua: '#1F3A4D',
   rio: '#3D6E8F',
-  vegetacao: '#1C2318',
+  vegetacao: '#213022',
   chao: '#1A1612',
 } as const;
 
@@ -91,10 +91,10 @@ export const paletaSol: Paleta = {
   rotaTerra: '#FFE9CC',
   contornoRota: '#FFFFFF',
   pisoDesconhecido: '#8F887E',
-  agua: '#BCD3E0',
+  agua: '#A9CFE6',
   rio: '#5B8DB0',
-  vegetacao: '#E1E8D2',
-  chao: '#EAE3D5',
+  vegetacao: '#CFE3BE',
+  chao: '#F2EEE6',
 };
 
 /** Paleta padrão (noite). Componentes que trocam de tema usam `useCores()`. */

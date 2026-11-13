@@ -81,13 +81,17 @@ Contraste mínimo 4,5:1 para texto (creme e caramelo sobre sarja passam).
 - **Divisória:** linha de pesponto tracejado (`caramelo` 40%).
 
 ## 3. Mapa (estilo próprio)
-- Criar um estilo **MapLibre** próprio como arquivo de estilo (JSON, especificação MapLibre, dados OpenFreeMap) em `app/src/map/estilo-bodes.json`, versionado no repositório.
-- Base escura quente: terra `#1A1712`, água `#22323D` com rios `#3E5C7A`, vegetação `#1E2A1C`, relevo em sombreamento suave (hillshade) a 25%.
-- Estradas: rodovias creme `#EFE3C8` 60%, demais caramelo 35%; rótulos em Inter, creme/caramelo com halo escuro.
+Aprovado pelo dono em 13/11/2026 (`docs/MAPA_VISUAL_PROPOSTA.md`, opção A). Os dois estilos (noite e sol) são **gerados** por `python3 tools/gerar_estilo_mapa.py` em `app/src/map/estilo-bodes.json` e `estilo-bodes-sol.json`; nunca edite os JSON à mão. Dados OpenFreeMap (esquema OpenMapTiles), letras Noto Sans (Regular e Bold) do próprio OpenFreeMap; Barlow/Inter no mapa ficam para depois (exigem hospedar fontes).
+- **Cores (noite / sol):** chão `#1A1612` / `#F2EEE6`; cidade `#2A231D` / `#E9E3D6`; mato `#213022` / `#CFE3BE`; parques `#25402A` / `#BFDDAA`; água `#1F3A4D` / `#A9CFE6`; rios `#3D6E8F` / `#5B8DB0`.
+- **Estradas:** autoestrada e tronco âmbar `#F2B968` com contorno `#7A4A12` (sol `#FFD580` / `#B07A1E`); principais creme `#EFE3C8` (sol branco com contorno cinza); secundárias `#C9BBA2`; vias locais `#7A6A54` só a partir do zoom 13. Larguras das rodovias (zoom, px): (6, 1,4) (10, 3) (14, 8) (17, 18), contorno 1,35x; locais (13, 1) (16, 5). **Terra** continua tracejada ocre `#C68A45` sobre leito `#5A3E1F`: forma e cor, nunca só cor.
+- **Escudos:** camadas `escudos-br` (BR, halo azul) e `escudos-estaduais` (MT etc., halo âmbar): número da rodovia (`ref`) em negrito, 15 a 19 px, sobre a linha, a cada 400 px, a partir do zoom 8. Sem sprite: o "escudo" é o halo grosso do texto. Escudo desenhado de verdade fica para quando houver sprite.
+- **Nomes:** sem caixa alta; cidade 18 a 20 negrito (zoom 5+), cidade pequena 15 (zoom 8+), vila 13 (zoom 11+); halo 1,5 com blur 0,5; prioridade pelo campo `rank`.
+- **Camadas extras (pesam, ficam por último):** `extra-relevo` (hillshade, AWS Terrain Tiles Terrarium, 25% noite / 35% sol, zoom 5 a 12) e `extra-predios` (prédios 3D, zoom 16+, opacidade 0,85). **Toda camada cujo id começa com `extra-` deve ser escondida no modo pilotando** (`setLayoutProperty(id, 'visibility', 'none')`; a lista também está em `metadata.camadasExtras` do estilo).
+- **Dia e noite automático:** `app/src/map/temaMapa.ts` (nascer e pôr do sol calculados no aparelho, com histerese de 20 min).
+- **Atribuição obrigatória:** OpenStreetMap, OpenMapTiles, OpenFreeMap e Terrain Tiles (Mapzen/AWS), já nas fontes do estilo.
 - **Destaque de estradas com curvas** (opcional, v2): camada em laranja 40% para trechos sinuosos.
-- Rota ativa: laranja com contorno escuro e setas; trecho percorrido em caramelo.
+- Rota ativa: laranja com contorno escuro e setas; trecho percorrido em caramelo. Largura = 1,6x a rodovia.
 - Pinos com agrupamento (cluster) em emblema com contador.
-- Versão clara não é necessária na v1.
 
 ## 4. Limite de peso (obrigatório)
 | Item | Limite |
