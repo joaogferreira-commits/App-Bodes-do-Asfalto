@@ -1,5 +1,8 @@
 import '@/i18n';
 
+import { iniciarErros } from '@/erros/sentry';
+import { LimiteDeErro } from '@/erros/TelaDeErro';
+
 import { BarlowCondensed_600SemiBold, BarlowCondensed_700Bold } from '@expo-google-fonts/barlow-condensed';
 import {
   Inter_400Regular,
@@ -29,6 +32,8 @@ import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { DialogoHost } from '@/ui/Dialogo';
 import { paletaNoite, ProvedorTema, useTema } from '@/theme';
 
+iniciarErros();
+
 export default function Layout() {
   const [carregou] = useFonts({
     BarlowCondensed_600SemiBold,
@@ -41,27 +46,29 @@ export default function Layout() {
   if (!carregou) return <View style={{ flex: 1, backgroundColor: paletaNoite.fundo }} />;
   return (
     <ProvedorTema>
-      <ProvedorAcesso>
-        <ArvoreDaSessao>
-          <ProvedorAvatar>
-            <ProvedorPerfil>
-              <ProvedorAgapes>
-                <ProvedorMeusPosts>
-                  <ProvedorClassificados>
-                    <ProvedorViagem>
-                      <ProvedorConversas>
-                        <Telas />
-                      </ProvedorConversas>
-                    </ProvedorViagem>
-                  </ProvedorClassificados>
-                </ProvedorMeusPosts>
-              </ProvedorAgapes>
-            </ProvedorPerfil>
-          </ProvedorAvatar>
-        </ArvoreDaSessao>
-      </ProvedorAcesso>
-      <AberturaAnimada />
-      <DialogoHost />
+      <LimiteDeErro>
+        <ProvedorAcesso>
+          <ArvoreDaSessao>
+            <ProvedorAvatar>
+              <ProvedorPerfil>
+                <ProvedorAgapes>
+                  <ProvedorMeusPosts>
+                    <ProvedorClassificados>
+                      <ProvedorViagem>
+                        <ProvedorConversas>
+                          <Telas />
+                        </ProvedorConversas>
+                      </ProvedorViagem>
+                    </ProvedorClassificados>
+                  </ProvedorMeusPosts>
+                </ProvedorAgapes>
+              </ProvedorPerfil>
+            </ProvedorAvatar>
+          </ArvoreDaSessao>
+        </ProvedorAcesso>
+        <AberturaAnimada />
+        <DialogoHost />
+      </LimiteDeErro>
     </ProvedorTema>
   );
 }

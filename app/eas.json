@@ -9,6 +9,10 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true",
+        "EXPO_PUBLIC_AMBIENTE": "development"
       }
     },
     "preview": {
@@ -16,10 +20,18 @@
       "android": {
         "buildType": "apk"
       },
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true",
+        "EXPO_PUBLIC_AMBIENTE": "preview"
+      }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true",
+        "EXPO_PUBLIC_AMBIENTE": "production"
+      }
     }
   }
 }

@@ -80,6 +80,13 @@
           "icon": "./assets/icone/adaptativo-mono.png",
           "color": "#E8692A"
         }
+      ],
+      [
+        "@sentry/react-native",
+        {
+          "organization": "bodes-do-asfalto",
+          "project": "app"
+        }
       ]
     ],
     "owner": "joaogferreira",
