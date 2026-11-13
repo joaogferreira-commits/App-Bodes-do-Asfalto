@@ -1,1 +1,1 @@
-Aplicar desafios, XP e ranking (20261113140000_desafios_xp). Autorização permanente do dono de 13/11/2026 (CLAUDE.md); CI verde em b74172b.
+Aplicar Lojas, Guia de Negócios e membros (20261113160000). Autorização permanente do dono de 13/11/2026; CI verde em 2c5d9ba.
