@@ -324,3 +324,18 @@ class TestColunaPreco(unittest.TestCase):
         for nome in ['PREÇO DE REVENDA', 'Preço de Venda (R$/l)', 'VALOR DE VENDA', 'Preço Revenda']:
             self.assertEqual(chave_coluna(nome), 'PRECODEVENDA', nome)
         self.assertNotEqual(chave_coluna('PREÇO DE COMPRA'), 'PRECODEVENDA')
+
+
+class TestUfECnpjDaPlanilha(unittest.TestCase):
+    def test_uf_por_extenso(self):
+        from importar_anp import uf_sigla
+        self.assertEqual(uf_sigla('MATO GROSSO'), 'MT')
+        self.assertEqual(uf_sigla('Mato Grosso do Sul'), 'MS')
+        self.assertEqual(uf_sigla(' mt '), 'MT')
+        self.assertEqual(uf_sigla('São Paulo'), 'SP')
+
+    def test_cnpj_como_numero(self):
+        from importar_anp import cnpj_valido
+        self.assertEqual(cnpj_valido('1234567000190'), '01234567000190')
+        self.assertEqual(cnpj_valido('1234567000190.0'), '01234567000190')
+        self.assertEqual(cnpj_valido('12.345.678/0001-90'), '12345678000190')

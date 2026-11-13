@@ -304,8 +304,29 @@ def so_digitos(v):
 
 
 def cnpj_valido(v):
-    d = so_digitos(v)
+    t = str(v or '').strip()
+    if re.fullmatch(r'\d+\.0', t):  # planilha guardou o CNPJ como número (6.29e13 vira '62900000000000.0')
+        t = t[:-2]
+    d = so_digitos(t)
+    if 12 <= len(d) < 14:  # número perdeu os zeros da esquerda
+        d = d.zfill(14)
     return d if len(d) == 14 else None
+
+
+NOMES_UF = {
+    'ACRE': 'AC', 'ALAGOAS': 'AL', 'AMAPA': 'AP', 'AMAZONAS': 'AM', 'BAHIA': 'BA', 'CEARA': 'CE',
+    'DISTRITO FEDERAL': 'DF', 'ESPIRITO SANTO': 'ES', 'GOIAS': 'GO', 'MARANHAO': 'MA', 'MATO GROSSO': 'MT',
+    'MATO GROSSO DO SUL': 'MS', 'MINAS GERAIS': 'MG', 'PARA': 'PA', 'PARAIBA': 'PB', 'PARANA': 'PR',
+    'PERNAMBUCO': 'PE', 'PIAUI': 'PI', 'RIO DE JANEIRO': 'RJ', 'RIO GRANDE DO NORTE': 'RN',
+    'RIO GRANDE DO SUL': 'RS', 'RONDONIA': 'RO', 'RORAIMA': 'RR', 'SANTA CATARINA': 'SC', 'SAO PAULO': 'SP',
+    'SERGIPE': 'SE', 'TOCANTINS': 'TO',
+}
+
+
+def uf_sigla(v):
+    """'MT', 'mt', 'MATO GROSSO', 'Mato Grosso' -> 'MT'."""
+    t = re.sub(r'\s+', ' ', sem_acento(str(v or '')).upper()).strip()
+    return t if len(t) == 2 else NOMES_UF.get(t, t)
 
 
 PRODUTOS = {
@@ -343,7 +364,7 @@ def parse_lpc(linhas, ufs, hoje=None, max_idade_dias=None):
     saida = {}
     h = hoje or date.today()
     for l in linhas:
-        uf = (l.get('uf') or '').strip().upper()
+        uf = uf_sigla(l.get('uf'))
         if uf not in ufs:
             continue
         cnpj = cnpj_valido(l.get('cnpj'))
@@ -371,7 +392,7 @@ def parse_cadastro(linhas, ufs):
     ufs = set(ufs)
     saida = {}
     for l in linhas:
-        uf = (l.get('uf') or '').strip().upper()
+        uf = uf_sigla(l.get('uf'))
         cnpj = cnpj_valido(l.get('cnpj'))
         if uf not in ufs or not cnpj:
             continue
@@ -788,7 +809,16 @@ def carregar_tabelas(sessao, achados, ufs, usar_cadastro=True, log=print):
             log('  faltam colunas essenciais; ignorado')
             continue
         baixados += 1
-        for cnpj, reg in parse_lpc(linhas_csv(texto), ufs, max_idade_dias=180).items():
+        regs = parse_lpc(linhas_csv(texto), ufs, max_idade_dias=180)
+        if not regs:
+            amostra = list(linhas_csv(texto))[:3]
+            from collections import Counter
+            ufs_vistas = Counter(uf_sigla(l.get('uf')) for l in linhas_csv(texto)).most_common(6)
+            log(f'  0 postos de {sorted(ufs)} neste arquivo; UFs vistas: {ufs_vistas}')
+            for l in amostra:
+                log(f'  exemplo: uf={l.get("uf")!r} cnpj={str(l.get("cnpj"))[:6]}… produto={l.get("produto")!r} '
+                    f'valor={l.get("valor")!r} data={l.get("data")!r}')
+        for cnpj, reg in regs.items():
             atual = lpc.setdefault(cnpj, {'meta': reg['meta'], 'precos': {}})
             for p, v in reg['precos'].items():  # o semestre mais novo vem primeiro; vale a coleta mais recente
                 if p not in atual['precos'] or v['data_coleta'] > atual['precos'][p]['data_coleta']:
