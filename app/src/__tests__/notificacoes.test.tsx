@@ -49,6 +49,8 @@ describe('notificações push', () => {
   it('só abre rotas conhecidas ao tocar na notificação', () => {
     expect(rotaSegura('/conversa/3f2a9c1e-1111-2222-3333-444455556666')).toContain('/conversa/');
     expect(rotaSegura('/aprovacoes')).toBe('/aprovacoes');
+    expect(rotaSegura('/sos-ativo/3f2a9c1e-1111-2222-3333-444455556666')).toContain('/sos-ativo/');
+    expect(rotaSegura('/sos-ativo/../../x')).toBeNull();
     expect(rotaSegura('/conversas')).toBe('/conversas');
     expect(rotaSegura('https://mau.com')).toBeNull();
     expect(rotaSegura('/papeis')).toBeNull();

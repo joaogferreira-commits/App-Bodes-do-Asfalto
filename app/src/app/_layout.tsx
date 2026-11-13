@@ -18,6 +18,7 @@ import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 
+import { FaixaSosAtivo } from '@/componentes/FaixaSosAtivo';
 import { RegistroNotificacoes } from '@/componentes/RegistroNotificacoes';
 import { ProvedorAcesso, useAcesso } from '@/acesso/acesso';
 import { ProvedorAgapes } from '@/estado/agapes';
@@ -26,6 +27,7 @@ import { ProvedorClassificados } from '@/estado/classificados';
 import { ProvedorMeusPosts } from '@/estado/meusPosts';
 import { ProvedorPerfil } from '@/estado/perfil';
 import { ProvedorConversas } from '@/estado/conversas';
+import { ProvedorSosAtivo } from '@/estado/sosAtivo';
 import { ProvedorViagem } from '@/estado/viagem';
 import { TelaEmMovimento } from '@/seguranca/TelaEmMovimento';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
@@ -56,7 +58,9 @@ export default function Layout() {
                     <ProvedorClassificados>
                       <ProvedorViagem>
                         <ProvedorConversas>
-                          <Telas />
+                          <ProvedorSosAtivo>
+                            <Telas />
+                          </ProvedorSosAtivo>
                         </ProvedorConversas>
                       </ProvedorViagem>
                     </ProvedorClassificados>
@@ -103,7 +107,7 @@ function GuardaDeAcesso() {
 }
 
 /** Telas que continuam liberadas com a moto andando (as abas têm a própria trava). */
-const LIVRES_EM_MOVIMENTO = ['(abas)', 'pilotando', 'sos', 'rota', 'acesso'];
+const LIVRES_EM_MOVIMENTO = ['(abas)', 'pilotando', 'sos', 'sos-ativo', 'rota', 'acesso'];
 
 /** Trava em movimento (R3) para as telas fora das abas: classificados, garagem, publicar, ferramentas… */
 function TravaEmMovimento() {
@@ -124,6 +128,7 @@ function Telas() {
       <StatusBar style={modo === 'sol' ? 'dark' : 'light'} />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }} />
       <TravaEmMovimento />
+      <FaixaSosAtivo />
       <GuardaDeAcesso />
       <RegistroNotificacoes />
     </>

@@ -1513,5 +1513,30 @@
     "enviar": "Send details",
     "voltar": "Back to start",
     "enviado": "Thanks! We got the details."
+  },
+  "sosAtivo": {
+    "faixa": "SOS active",
+    "faixaTexto": "Your exact position is shared with the group.",
+    "encerrarRotulo": "End SOS",
+    "encerrarDica": "Hold for 1.5 seconds to say you are safe.",
+    "encerrarTexto": "Hold to end",
+    "avisarApp": "Alert the group and the board in the app",
+    "avisarAppDica": "Sends a notification and shows them your exact position until you end it.",
+    "enviando": "Alerting…",
+    "enviado": "Alert sent. They see your exact position until you end it.",
+    "falhou": "Could not alert through the app. Use WhatsApp below and call 192/193 if it is serious.",
+    "recebido": {
+      "titulo": "Help request from {{nome}}",
+      "oQue": "What happened",
+      "atualizado": "Exact position, updated at {{hora}}",
+      "ligar": "Call",
+      "rota": "Route to him",
+      "encerrado": "This SOS has already ended.",
+      "indisponivel": "Could not open this SOS (ended or no permission).",
+      "carregando": "Opening the help request…",
+      "aviso": "If it is serious, call 192 (SAMU) or 193 (Fire). The app does not replace official rescue.",
+      "voltar": "Back",
+      "mapa": "Map with the brother position"
+    }
   }
 }

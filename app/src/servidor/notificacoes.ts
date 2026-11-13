@@ -117,6 +117,7 @@ export async function salvarPreferencia(tipo: TipoNotificacao, ligado: boolean):
 export function rotaSegura(rota: unknown): string | null {
   if (typeof rota !== 'string') return null;
   if (/^\/conversa\/[0-9a-f-]{8,40}$/i.test(rota)) return rota;
+  if (/^\/sos-ativo\/[0-9a-f-]{8,40}$/i.test(rota)) return rota;
   if (
     rota === '/' ||
     rota === '/conversas' ||

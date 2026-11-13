@@ -9,6 +9,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { Coordenada } from '@/navegacao/destinos';
 import { usePerfilOpcional } from '@/estado/perfil';
+import { useSosAtivoOpcional } from '@/estado/sosAtivo';
+import { servidorConfigurado } from '@/servidor/supabase';
 import { linkWhatsApp } from '@/ferramentas/calculos';
 import { ehUrgente, MAX_MENSAGEM_AJUDA, mensagemSOS, tiposAjuda, type TipoAjuda } from '@/seguranca/sos';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
@@ -18,7 +20,8 @@ import { Botao, Cartao, Icone, Texto } from '@/ui';
 /**
  * SOS (versão sem servidor): pega a posição, monta a mensagem com o link do mapa e a ficha de emergência
  * e deixa tudo a UM toque — WhatsApp de cada contato, compartilhar no grupo do comboio, ligar 192/193.
- * Quando o Supabase existir, o aviso ao comboio por push sai sozinho (Etapa 4).
+ * Com o servidor (P10), o botão principal também avisa por push o grupo do passeio/comboio de hoje e a
+ * diretoria, mostrando a posição exata até encerrar. O WhatsApp continua como reserva.
  */
 export default function Sos() {
   const { t, i18n } = useTranslation();
@@ -31,6 +34,16 @@ export default function Sos() {
   const [posicao, setPosicao] = useState<Coordenada | null>(null);
   const [buscando, setBuscando] = useState(true);
   const [ficha, setFicha] = useState<Record<string, string> | null>(null);
+  const sosServidor = useSosAtivoOpcional();
+  const [falhouServidor, setFalhouServidor] = useState(false);
+  const servidorLigado = servidorConfigurado && !!sosServidor;
+
+  const avisarPeloApp = async (tipoEscolhido: TipoAjuda | null, livre: string) => {
+    if (!sosServidor) return;
+    setFalhouServidor(false);
+    const ok = await sosServidor.iniciar({ tipo: tipoEscolhido, mensagem: livre, posicao });
+    setFalhouServidor(!ok);
+  };
 
   useEffect(() => {
     void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => undefined);
@@ -96,7 +109,10 @@ export default function Sos() {
       JSON.stringify({ tipo: novo, em: new Date().toISOString() }),
     ).catch(() => undefined);
     // Em movimento: sem digitar, um toque basta e já envia.
-    if (emMovimento && novo) enviar(montar(novo, ''));
+    if (emMovimento && novo) {
+      if (servidorLigado && !sosServidor?.ativo) void avisarPeloApp(novo, '');
+      enviar(montar(novo, ''));
+    }
   };
 
   return (
@@ -174,6 +190,32 @@ export default function Sos() {
           <Cartao style={{ borderColor: cores.sos }}>
             <Texto style={{ color: cores.sos, fontFamily: fontes.textoMedio }}>{t('sos.urgente')}</Texto>
           </Cartao>
+        )}
+
+        {servidorLigado && (
+          <>
+            <Botao
+              titulo={sosServidor?.iniciando ? t('sosAtivo.enviando') : t('sosAtivo.avisarApp')}
+              variante="sos"
+              grande
+              icone="sos"
+              desativado={sosServidor?.iniciando || !!sosServidor?.ativo}
+              onPress={() => void avisarPeloApp(tipo, mensagem)}
+            />
+            <Texto variante="pequeno">{t('sosAtivo.avisarAppDica')}</Texto>
+            {sosServidor?.ativo && (
+              <Cartao style={{ borderColor: cores.sos }}>
+                <Texto style={{ color: cores.sos, fontFamily: fontes.textoMedio }}>
+                  {t('sosAtivo.enviado')}
+                </Texto>
+              </Cartao>
+            )}
+            {falhouServidor && (
+              <Cartao style={{ borderColor: cores.alerta }} accessibilityRole="alert">
+                <Texto>{t('sosAtivo.falhou')}</Texto>
+              </Cartao>
+            )}
+          </>
         )}
 
         <Texto variante="rotulo">{t('sos.avisar')}</Texto>

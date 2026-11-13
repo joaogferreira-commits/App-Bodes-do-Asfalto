@@ -1513,5 +1513,30 @@
     "enviar": "Enviar detalles",
     "voltar": "Volver al inicio",
     "enviado": "¡Gracias! Recibimos los detalles."
+  },
+  "sosAtivo": {
+    "faixa": "SOS activo",
+    "faixaTexto": "Tu posición exacta está con el grupo.",
+    "encerrarRotulo": "Terminar SOS",
+    "encerrarDica": "Mantén 1,5 segundos para avisar que estás bien.",
+    "encerrarTexto": "Mantén para terminar",
+    "avisarApp": "Avisar al grupo y a la directiva por la app",
+    "avisarAppDica": "Envía una notificación y les muestra tu posición exacta hasta que termines.",
+    "enviando": "Avisando…",
+    "enviado": "Aviso enviado. Ven tu posición exacta hasta que termines.",
+    "falhou": "No pude avisar por la app. Usa el WhatsApp de abajo y llama al 192/193 si es grave.",
+    "recebido": {
+      "titulo": "Pedido de ayuda de {{nome}}",
+      "oQue": "Qué pasó",
+      "atualizado": "Posición exacta, actualizada a las {{hora}}",
+      "ligar": "Llamar",
+      "rota": "Ruta hasta él",
+      "encerrado": "Este SOS ya terminó.",
+      "indisponivel": "No pude abrir este SOS (terminado o sin permiso).",
+      "carregando": "Abriendo el pedido de ayuda…",
+      "aviso": "En caso grave, llama al 192 (SAMU) o 193 (Bomberos). La app no sustituye el socorro oficial.",
+      "voltar": "Volver",
+      "mapa": "Mapa con la posición del hermano"
+    }
   }
 }

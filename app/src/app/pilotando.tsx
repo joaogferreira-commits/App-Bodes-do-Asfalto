@@ -16,6 +16,7 @@ import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { usePerfilOpcional } from '@/estado/perfil';
+import { sosRapido, useSosAtivoOpcional } from '@/estado/sosAtivo';
 import { useViagem } from '@/estado/viagem';
 import { useOdometro } from '@/seguranca/useOdometro';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
@@ -114,6 +115,7 @@ function Pilotando() {
   const iniciou = useRef(false);
   // Km rodados vão para a Manutenção e para a moto principal da garagem.
   const perfil = usePerfilOpcional();
+  const sosServidor = useSosAtivoOpcional();
   useOdometro((km) => {
     const m = perfil?.motoPrincipal;
     if (m) perfil.salvarMoto({ ...m, km: String((Number(m.km.replace(/\D/g, '')) || 0) + km) });
@@ -445,7 +447,10 @@ function Pilotando() {
                       rotulo={t('pilotando.sos')}
                       dica={t('pilotando.sosDica')}
                       corProgresso={c.sosPressionado}
-                      aoCompletar={() => router.push('/sos')}
+                      aoCompletar={() => {
+                        void sosRapido(sosServidor);
+                        router.push('/sos');
+                      }}
                       style={[
                         estilos.botao,
                         tamanhoBotao,
