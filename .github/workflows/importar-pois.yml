@@ -52,24 +52,24 @@ jobs:
           echo "ENVIAR=$(clean "${ENVIAR:-sim}")" >> "$GITHUB_ENV"
       - name: Testes do importador
         run: cd tools && python3 -m unittest test_importar_pois_osm
-      - name: Coletar no Overpass
-        run: |
-          ARGS=(--coletar --ufs "$UFS")
-          [ -n "$TIPOS" ] && ARGS+=(--tipos "$TIPOS")
-          python3 tools/importar_pois_osm.py "${ARGS[@]}"
       - uses: supabase/setup-cli@v1
         if: env.ENVIAR == 'sim'
         with:
           version: latest
-      - name: Enviar ao banco (chave de serviço mascarada)
-        if: env.ENVIAR == 'sim'
+      - name: Coletar no Overpass e enviar cada estado assim que terminar (chave de serviço mascarada)
         run: |
-          CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
-          echo "::add-mask::$CHAVE"
-          export SUPABASE_SERVICE_ROLE_KEY="$CHAVE"
-          export SUPABASE_URL="https://$REF.supabase.co"
-          python3 tools/importar_pois_osm.py --enviar --ufs "$UFS"
+          ARGS=(--coletar --ufs "$UFS")
+          [ -n "$TIPOS" ] && ARGS+=(--tipos "$TIPOS")
+          if [ "$ENVIAR" = "sim" ]; then
+            CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
+            echo "::add-mask::$CHAVE"
+            export SUPABASE_SERVICE_ROLE_KEY="$CHAVE"
+            export SUPABASE_URL="https://$REF.supabase.co"
+            ARGS+=(--enviar)
+          fi
+          python3 tools/importar_pois_osm.py "${ARGS[@]}"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: pois-ndjson
           path: tools/coleta/pois/

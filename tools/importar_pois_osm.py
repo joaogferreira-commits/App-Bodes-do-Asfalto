@@ -19,6 +19,8 @@ from pathlib import Path
 SAIDA = Path(__file__).parent / 'coleta' / 'pois'
 AGENTE = 'BodesDoAsfaltoPOIs/1.0 (importacao OSM para mapa de motoclube; contato via repositorio)'
 OVERPASS = 'https://overpass-api.de/api/interpreter'
+# Espelhos públicos do Overpass, tentados em sequência quando o principal falha.
+ESPELHOS = [OVERPASS, 'https://overpass.private.coffee/api/interpreter', 'https://overpass.kumi.systems/api/interpreter']
 
 # Mato Grosso primeiro, depois as demais UFs.
 UFS = ['MT'] + sorted(set(
@@ -165,37 +167,48 @@ def chamar_overpass(q, tentativas=4, sessao=None):
     import requests
     s = sessao or requests
     for n in range(tentativas):
+        servidor = ESPELHOS[n % len(ESPELHOS)]
         try:
-            r = s.post(OVERPASS, data={'data': q}, headers={'User-Agent': AGENTE}, timeout=360)
+            r = s.post(servidor, data={'data': q}, headers={'User-Agent': AGENTE}, timeout=360)
             if r.status_code == 200:
                 return r.json().get('elements', [])
-            print(f'Overpass respondeu {r.status_code}; tentativa {n + 1}', file=sys.stderr)
+            print(f'{servidor} respondeu {r.status_code}; tentativa {n + 1}', file=sys.stderr)
         except Exception as e:  # rede instável
-            print(f'Falha de rede ({type(e).__name__}); tentativa {n + 1}', file=sys.stderr)
+            print(f'{servidor}: falha de rede ({type(e).__name__}); tentativa {n + 1}', file=sys.stderr)
         time.sleep(30 * (n + 1))
     raise RuntimeError('Overpass não respondeu')
 
 
-def coletar(ufs, tipos, pausa=20):
+def coletar(ufs, tipos, pausa=20, ao_terminar_uf=None):
+    """Coleta UF por UF. Uma UF que falha não derruba as outras; devolve a lista das que falharam."""
     SAIDA.mkdir(parents=True, exist_ok=True)
     # Duas consultas por UF (estrada e turismo) para não estourar o tempo do servidor.
     grupos = [[t for t in tipos if t in ('posto', 'oficina_moto', 'borracharia', 'hospital', 'policia_rodoviaria')],
               [t for t in tipos if t not in ('posto', 'oficina_moto', 'borracharia', 'hospital', 'policia_rodoviaria')]]
+    falharam = []
     for uf in ufs:
         linhas = []
-        for g in grupos:
-            if not g:
-                continue
-            for el in chamar_overpass(consulta(uf, g)):
-                l = elemento_para_linha(el, uf)
-                if l and l['tipo'] in tipos:
-                    linhas.append(l)
-            time.sleep(pausa)
+        try:
+            for g in grupos:
+                if not g:
+                    continue
+                for el in chamar_overpass(consulta(uf, g)):
+                    l = elemento_para_linha(el, uf)
+                    if l and l['tipo'] in tipos:
+                        linhas.append(l)
+                time.sleep(pausa)
+        except RuntimeError as e:
+            print(f'{uf}: {e}; fica para a próxima rodada')
+            falharam.append(uf)
+            continue
         linhas = deduplicar(linhas)
         with open(SAIDA / f'{uf}.ndjson', 'w', encoding='utf-8') as f:
             for l in linhas:
                 f.write(json.dumps(l, ensure_ascii=False) + '\n')
         print(f'{uf}: {len(linhas)} pontos')
+        if ao_terminar_uf:
+            ao_terminar_uf(uf)  # envia já, para não perder o que deu certo
+    return falharam
 
 
 def enviar(ufs, lote=500):
@@ -234,10 +247,15 @@ def main(argv=None):
     invalidos = [u for u in ufs if u not in UFS] + [t for t in tipos if t not in TIPOS]
     if invalidos:
         sys.exit(f'Valores inválidos: {invalidos}')
+    falharam = []
     if a.coletar or not a.enviar:
-        coletar(ufs, tipos)
-    if a.enviar:
+        falharam = coletar(ufs, tipos, ao_terminar_uf=(lambda uf: enviar([uf])) if a.enviar else None)
+    elif a.enviar:
         enviar(ufs)
+    if falharam:
+        print(f'UFs que falharam (rodar de novo): {",".join(falharam)}')
+        if len(falharam) == len(ufs):
+            sys.exit(1)
 
 
 if __name__ == '__main__':
