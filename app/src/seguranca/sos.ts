@@ -1,13 +1,57 @@
 import { distanciaKm, type Coordenada } from '@/navegacao/destinos';
 
-/** Texto do SOS para o WhatsApp: quem, onde (link do mapa), hora e, se houver, a ficha de emergência. */
+import type { NomeIcone } from '@/ui/icones';
+
+export type TipoAjuda =
+  'acidente' | 'pane' | 'pneu' | 'combustivel' | 'perdido' | 'saude' | 'bateria' | 'outro';
+
+/** Tipos de pedido de ajuda (máx. 8). `urgente` destaca o 192/193. */
+export const tiposAjuda: { id: TipoAjuda; icone: NomeIcone; urgente: boolean }[] = [
+  { id: 'acidente', icone: 'alerta', urgente: true },
+  { id: 'saude', icone: 'hospital', urgente: true },
+  { id: 'pane', icone: 'oficina', urgente: false },
+  { id: 'pneu', icone: 'pneu', urgente: false },
+  { id: 'combustivel', icone: 'posto', urgente: false },
+  { id: 'perdido', icone: 'navegar', urgente: false },
+  { id: 'bateria', icone: 'bateria', urgente: false },
+  { id: 'outro', icone: 'comentario', urgente: false },
+];
+
+export const MAX_MENSAGEM_AJUDA = 200;
+
+export const ehUrgente = (tipo: TipoAjuda | null) =>
+  !!tipo && tiposAjuda.some((x) => x.id === tipo && x.urgente);
+
+/** Hora e data no idioma do app, com rótulo ("Enviado às 20:33 de 13/11"). */
+export function horaDataRotulada(
+  agora: Date,
+  idioma: string,
+  modelo: (hora: string, data: string) => string,
+) {
+  const hora = agora.toLocaleTimeString(idioma, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const data = agora.toLocaleDateString(idioma, { day: '2-digit', month: '2-digit' });
+  return modelo(hora, data);
+}
+
+/**
+ * Texto do pedido de ajuda para o WhatsApp: quem, o que houve, mensagem opcional, onde (link do mapa),
+ * hora rotulada e, se houver, a ficha de emergência. Nunca inclui dados maçônicos.
+ */
 export function mensagemSOS(o: {
   nome: string;
+  apelido?: string;
+  tipo?: string | null;
+  mensagem?: string;
   posicao: Coordenada | null;
   agora: Date;
+  idioma?: string;
   ficha?: { sangue?: string; alergias?: string; remedios?: string; plano?: string } | null;
   textos: {
     titulo: string;
+    quem: string;
+    oQueHouve: string;
+    onde: string;
+    enviadoAs: (hora: string, data: string) => string;
     semPosicao: string;
     sangue: string;
     alergias: string;
@@ -16,14 +60,19 @@ export function mensagemSOS(o: {
     rodape: string;
   };
 }): string {
-  const hora = `${String(o.agora.getHours()).padStart(2, '0')}:${String(o.agora.getMinutes()).padStart(2, '0')}`;
   const onde = o.posicao
     ? `https://maps.google.com/?q=${o.posicao.lat.toFixed(5)},${o.posicao.lng.toFixed(5)}`
     : o.textos.semPosicao;
   const f = o.ficha ?? {};
+  const apelido = o.apelido?.trim();
+  const livre = o.mensagem?.trim().slice(0, MAX_MENSAGEM_AJUDA);
   const linhas = [
-    `${o.textos.titulo} — ${o.nome} (${hora})`,
-    onde,
+    o.textos.titulo,
+    `${o.textos.quem}: ${o.nome}${apelido ? ` (${apelido})` : ''}`,
+    o.tipo && `${o.textos.oQueHouve}: ${o.tipo}`,
+    livre,
+    `${o.textos.onde}: ${onde}`,
+    horaDataRotulada(o.agora, o.idioma ?? 'pt-BR', o.textos.enviadoAs),
     f.sangue && `${o.textos.sangue}: ${f.sangue}`,
     f.alergias && `${o.textos.alergias}: ${f.alergias}`,
     f.remedios && `${o.textos.remedios}: ${f.remedios}`,
