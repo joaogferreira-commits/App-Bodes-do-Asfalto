@@ -5,6 +5,7 @@ import {
   acenar,
   fichaDoIrmao,
   fichaDoIrmaoAoVivo,
+  diaMesDaColeta,
   fichaDoLugar,
   lerPrecoCombustivel,
 } from './fichas';
@@ -125,5 +126,52 @@ describe('fichaDoIrmaoAoVivo', () => {
     expect(f.acoes).toEqual([]);
     expect(f.titulo).toBe('Zé Ferreira');
     expect(f.linhas.map((l) => l.chave)).toEqual(['ficha.posicaoCidade']);
+  });
+});
+
+describe('ficha de posto da ANP', () => {
+  const posto = {
+    id: 'anp/1',
+    tipo: 'posto' as const,
+    nome: 'Posto Trevo',
+    lat: -15.57,
+    lng: -56.07,
+    fonte: 'anp' as const,
+    bandeira: 'Ipiranga',
+    precosAnp: [
+      { produto: 'gasolina_comum' as const, valor: 6.29, data: '2026-11-03' },
+      { produto: 'etanol' as const, valor: 4.19, data: '2026-11-10' },
+    ],
+  };
+
+  it('mostra cada preço com a data e a fonte ANP com a coleta mais recente', () => {
+    const f = fichaDoLugar(posto);
+    expect(f.linhas.map((l) => l.chave)).toEqual([
+      'ficha.precoAnp_gasolina_comum',
+      'ficha.precoAnp_etanol',
+      'ficha.fonteAnp',
+      'ficha.texto',
+    ]);
+    expect(f.linhas[0]!.valores).toEqual({ preco: '6,29', dia: '03/11' });
+    expect(f.linhas[2]!.valores).toEqual({ dia: '10/11' });
+    expect(f.acoes).toEqual(['rota', 'informarPreco']);
+  });
+
+  it('sem preço da ANP avisa; local aproximado e preço de irmão aparecem', () => {
+    const f = fichaDoLugar(
+      { ...posto, precosAnp: [], localAproximado: true },
+      { valor: '6,10', dia: '12/11/2026' },
+    );
+    expect(f.linhas.map((l) => l.chave)).toEqual([
+      'ficha.precoIrmao',
+      'ficha.anpSemPreco',
+      'ficha.texto',
+      'ficha.localAproximado',
+    ]);
+  });
+
+  it('diaMesDaColeta formata AAAA-MM-DD', () => {
+    expect(diaMesDaColeta('2026-11-03')).toBe('03/11');
+    expect(diaMesDaColeta('lixo')).toBe('lixo');
   });
 });

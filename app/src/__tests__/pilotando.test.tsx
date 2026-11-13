@@ -15,7 +15,7 @@ jest.mock('@/servidor/avisosEstrada', () => ({
   ouvirAvisos: jest.fn(() => () => undefined),
 }));
 jest.mock('@/servidor/pontos', () => ({
-  carregarPontosDaArea: jest.fn(async () => [
+  carregarPostosDaArea: jest.fn(async () => [
     { id: 'node/1', tipo: 'posto', nome: 'Posto Central', lat: -15.61, lng: -56.1 },
   ]),
 }));

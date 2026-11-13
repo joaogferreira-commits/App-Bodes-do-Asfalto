@@ -32,7 +32,7 @@ import {
 } from '@/navegacao/fluxo';
 import { falar } from '@/seguranca/voz';
 import { conversaDoComboio, enviarAlerta, enviarReagrupar, ouvirAvisos } from '@/servidor/avisosEstrada';
-import { carregarPontosDaArea } from '@/servidor/pontos';
+import { carregarPostosDaArea } from '@/servidor/pontos';
 import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
 import { avisar as abrirAviso, Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
 
@@ -258,7 +258,7 @@ function Pilotando() {
     avisarTexto(t('pilotando.postoBuscando'));
     const atual = await posicaoAtual();
     if (!atual) return avisarTexto(t('pilotando.postoSemPosicao'), false);
-    const achado = await escolherPosto(modo, atual, viagem.rota?.forma, carregarPontosDaArea);
+    const achado = await escolherPosto(modo, atual, viagem.rota?.forma, carregarPostosDaArea);
     if (!achado) return avisarTexto(t('pilotando.postoNenhum'), false);
     const km = achado.km.toFixed(1).replace('.', ',');
     const nome = achado.posto.nome || t('pilotando.postoSemNome');

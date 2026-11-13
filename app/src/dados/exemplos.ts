@@ -13,7 +13,7 @@ export type LugarExemplo = {
   lng: number;
   lat: number;
   /** de onde veio o ponto (crédito na ficha) */
-  fonte?: 'osm' | 'rotaBiker';
+  fonte?: 'osm' | 'rotaBiker' | 'anp';
   link?: string;
   /** pontos vindos do banco (public.pontos_osm): contatos opcionais do OpenStreetMap */
   site?: string;
@@ -23,7 +23,15 @@ export type LugarExemplo = {
   lojaId?: string;
   negocioId?: string;
   detalhe?: string;
+  /** postos da ANP (public.postos_anp): bandeira, preços da coleta mais recente e se a posição é aproximada */
+  bandeira?: string;
+  precosAnp?: PrecoAnp[];
+  localAproximado?: boolean;
 };
+
+export type ProdutoAnp = 'gasolina_comum' | 'etanol' | 'diesel_s10';
+/** Preço de venda coletado pela ANP; `data` é a data da coleta (AAAA-MM-DD). */
+export type PrecoAnp = { produto: ProdutoAnp; valor: number; data: string };
 
 type PontoColetado = {
   id: string;

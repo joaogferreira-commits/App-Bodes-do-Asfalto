@@ -1,0 +1,100 @@
+name: Importar postos da ANP (cadastro e preços)
+
+# Baixa os dados abertos da ANP (cadastro de revendedores + Levantamento de Preços de Combustíveis), casa cada posto com o
+# OpenStreetMap ou geocodifica no Nominatim (1 req/s, com cache) e grava em public.postos_anp pela API REST.
+# NÃO aplica migrations: a tabela postos_anp precisa existir (aplicação do banco é outro passo, autorizado pelo dono).
+# Arquivo .github/anp-request.txt (chave=valor): ufs=MT,GO  modo=completo|precos  max_geocodes=1500  enviar=sim
+# Rotina semanal (segunda, 06h de Brasília): só preços, só das UFs que já estão em postos_anp.
+on:
+  push:
+    paths:
+      - .github/anp-request.txt
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      ufs:
+        description: 'UFs separadas por vírgula, ou "banco" (vazio = MT)'
+        default: 'MT'
+      modo:
+        description: 'completo (cadastro + preços + localização) ou precos'
+        default: 'completo'
+      max_geocodes:
+        description: 'Máximo de consultas ao Nominatim nesta rodada'
+        default: '1500'
+      enviar:
+        description: 'Enviar ao banco (sim/nao)'
+        default: 'sim'
+
+concurrency:
+  group: importar-anp
+  cancel-in-progress: false
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests openpyxl
+      - name: Ler os parâmetros
+        env:
+          IN_UFS: ${{ github.event.inputs.ufs }}
+          IN_MODO: ${{ github.event.inputs.modo }}
+          IN_GEO: ${{ github.event.inputs.max_geocodes }}
+          IN_ENVIAR: ${{ github.event.inputs.enviar }}
+          EVENTO: ${{ github.event_name }}
+        run: |
+          UFS="$IN_UFS"; MODO="$IN_MODO"; GEO="$IN_GEO"; ENVIAR="$IN_ENVIAR"
+          if [ "$EVENTO" = "schedule" ]; then
+            UFS=banco; MODO=precos; GEO=0; ENVIAR=sim
+          elif [ -f .github/anp-request.txt ] && [ "$EVENTO" = "push" ]; then
+            v() { grep -E "^$1=" .github/anp-request.txt | head -1 | cut -d= -f2- | tr -d ' \r'; }
+            [ -n "$(v ufs)" ] && UFS=$(v ufs)
+            [ -n "$(v modo)" ] && MODO=$(v modo)
+            [ -n "$(v max_geocodes)" ] && GEO=$(v max_geocodes)
+            [ -n "$(v enviar)" ] && ENVIAR=$(v enviar)
+          fi
+          # Só letras, números e vírgula (evita injeção de comando)
+          clean() { echo "$1" | tr -cd 'A-Za-z0-9_,'; }
+          echo "UFS=$(clean "${UFS:-MT}")" >> "$GITHUB_ENV"
+          echo "MODO=$(clean "${MODO:-completo}")" >> "$GITHUB_ENV"
+          echo "GEO=$(clean "${GEO:-1500}")" >> "$GITHUB_ENV"
+          echo "ENVIAR=$(clean "${ENVIAR:-sim}")" >> "$GITHUB_ENV"
+      - name: Testes do importador
+        run: cd tools && python3 -m unittest test_importar_anp
+      - name: Restaurar o cache de geocodificação
+        uses: actions/cache@v4
+        with:
+          path: tools/coleta/geocode_cache.json
+          key: geocode-anp-${{ github.run_id }}
+          restore-keys: geocode-anp-
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Coletar na ANP e enviar ao banco (chave de serviço mascarada)
+        run: |
+          CHAVE=$(supabase projects api-keys --project-ref "$REF" -o json | jq -r '.[] | select(.name=="service_role") | .api_key' | head -1)
+          echo "::add-mask::$CHAVE"
+          export SUPABASE_SERVICE_ROLE_KEY="$CHAVE"
+          export SUPABASE_URL="https://$REF.supabase.co"
+          ARGS=(--coletar --ufs "$UFS" --modo "$MODO" --max-geocodes "$GEO")
+          [ "$ENVIAR" = "sim" ] && ARGS+=(--enviar)
+          python3 tools/importar_anp.py "${ARGS[@]}"
+      - name: Guardar o log e as amostras (sem os CSV completos)
+        if: always()
+        run: |
+          mkdir -p tools/coleta/anp-artefato
+          cp tools/coleta/anp/descoberta.log tools/coleta/anp/amostra_*.txt tools/coleta/anp-artefato/ 2>/dev/null || true
+          cp tools/coleta/geocode_cache.json tools/coleta/anp-artefato/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anp-descoberta
+          path: tools/coleta/anp-artefato/

@@ -31,7 +31,7 @@ import { mesclarPontos } from '@/map/pontos';
 import { usePontosDoBanco } from '@/map/usePontosDoBanco';
 import { useIrmaosAoVivo } from '@/map/useIrmaosAoVivo';
 import { usePublicarPosicao } from '@/map/usePublicarPosicao';
-import type { Area } from '@/servidor/pontos';
+import { carregarPostosPerto, type Area } from '@/servidor/pontos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
 import { alturasFolha, FolhaDeslizante, type NivelFolha } from '@/componentes/FolhaDeslizante';
@@ -288,13 +288,15 @@ export default function Mapa() {
   };
 
   const grupoMais = gruposMais.find((g) => g.chave === filtro);
-  const irAoPosto = () => {
+  const irAoPosto = async () => {
     if (!servidorConfigurado) {
       definirDestino(postoExemplo);
       router.push('/rota');
       return;
     }
-    const achado = postoMaisProximo(referencia, todos);
+    // Postos da ANP + OpenStreetMap perto de você (servidor). Sem a função no servidor, usa os pontos já na tela.
+    const doServidor = chatNoServidor ? await carregarPostosPerto(referencia) : null;
+    const achado = postoMaisProximo(referencia, doServidor?.length ? doServidor : todos);
     if (!achado) {
       avisar(t('mapa.semPostoTitulo'), t('mapa.semPostoTexto'));
       return;
@@ -590,7 +592,7 @@ export default function Mapa() {
               variante="secundario"
               icone="posto"
               corIcone={cores.verdePosto}
-              onPress={irAoPosto}
+              onPress={() => void irAoPosto()}
             />
           </View>
         }

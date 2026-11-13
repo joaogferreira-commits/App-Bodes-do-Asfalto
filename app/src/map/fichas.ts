@@ -47,6 +47,41 @@ const negocioDoTipo: Partial<Record<LugarExemplo['tipo'], string>> = {
   restaurante: 'churrascaria',
 };
 
+/** "2026-11-10" → "10/11" (dia/mês da coleta). */
+export function diaMesDaColeta(iso: string): string {
+  const m = /^\d{4}-(\d{2})-(\d{2})$/.exec(iso);
+  return m ? `${m[2]}/${m[1]}` : iso;
+}
+
+/** Posto da ANP: preços da coleta mais recente, sempre com a fonte e a data. Preço de irmão (se houver) vem antes. */
+function fichaDoPostoAnp(
+  l: LugarExemplo,
+  base: Pick<Ficha, 'id' | 'tipo' | 'titulo' | 'posicao'>,
+  precoInformado?: { valor: string; dia: string },
+): Ficha {
+  const precos = l.precosAnp ?? [];
+  const recente = precos.reduce((m, p) => (p.data > m ? p.data : m), '');
+  const linhas: LinhaFicha[] = [];
+  if (precoInformado)
+    linhas.push({
+      icone: 'posto',
+      chave: 'ficha.precoIrmao',
+      valores: { preco: precoInformado.valor, dia: precoInformado.dia },
+    });
+  for (const p of precos)
+    linhas.push({
+      icone: 'posto',
+      chave: `ficha.precoAnp_${p.produto}`,
+      valores: { preco: p.valor.toFixed(2).replace('.', ','), dia: diaMesDaColeta(p.data) },
+    });
+  if (precos.length)
+    linhas.push({ icone: 'check', chave: 'ficha.fonteAnp', valores: { dia: diaMesDaColeta(recente) } });
+  else linhas.push({ icone: 'check', chave: 'ficha.anpSemPreco' });
+  if (l.bandeira) linhas.push({ icone: 'posto', chave: 'ficha.texto', valores: { texto: l.bandeira } });
+  if (l.localAproximado) linhas.push({ icone: 'localizacao', chave: 'ficha.localAproximado' });
+  return { ...base, subtitulo: 'ficha.tipos.posto', linhas, acoes: ['rota', 'informarPreco'] };
+}
+
 export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; dia: string }): Ficha {
   const base = { id: l.id, tipo: l.tipo, titulo: l.nome, posicao: { lat: l.lat, lng: l.lng } };
   // Negócio de irmão do servidor: benefício para irmãos e vitrine do Guia.
@@ -62,6 +97,7 @@ export function fichaDoLugar(l: LugarExemplo, precoInformado?: { valor: string; 
     };
   switch (l.tipo) {
     case 'posto': {
+      if (l.fonte === 'anp') return fichaDoPostoAnp(l, base, precoInformado);
       const preco = precoInformado?.valor ?? l.rotulo?.replace('R$', '').trim();
       return {
         ...base,
