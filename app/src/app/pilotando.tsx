@@ -281,14 +281,25 @@ function Pilotando() {
   };
 
   // Botões "Alerta" e "Postos" da tela do carro chamam as mesmas funções do celular.
-  const acoesCarro = useRef({ abrirAlertas, enviarUmAlerta, procurarPosto });
+  const acoesCarro = useRef({
+    abrirAlertas,
+    enviarUmAlerta,
+    procurarPosto,
+    sos: () => void sosRapido(sosServidor),
+  });
   useEffect(() => {
-    acoesCarro.current = { abrirAlertas, enviarUmAlerta, procurarPosto };
+    acoesCarro.current = {
+      abrirAlertas,
+      enviarUmAlerta,
+      procurarPosto,
+      sos: () => void sosRapido(sosServidor),
+    };
   });
 
   useEffect(() => {
     setOnCustomNavigationAutoEvent((evento) => {
       if (evento.type === 'encerrar') void encerrarRef.current();
+      else if (evento.type === 'sos') acoesCarro.current.sos();
       else if (evento.type === 'postos') void acoesCarro.current.procurarPosto('proximo', true);
       else if (evento.type.startsWith('alerta:')) {
         const tipo = evento.type.slice('alerta:'.length) as TipoAlerta;
