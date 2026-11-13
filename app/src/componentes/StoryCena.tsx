@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PanResponder, Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
@@ -24,12 +24,39 @@ const fonteDo = {
   estrada: fontes.tituloSemi,
 } as const;
 
-function Video({ uri, tocar, velocidade }: { uri: string; tocar: boolean; velocidade: number }) {
+function Video({
+  uri,
+  tocar,
+  velocidade,
+  aoTerminar,
+  aoDuracao,
+}: {
+  uri: string;
+  tocar: boolean;
+  velocidade: number;
+  aoTerminar?: () => void;
+  aoDuracao?: (ms: number) => void;
+}) {
   const player = useVideoPlayer(uri, (p) => {
-    p.loop = true;
+    // no visualizador o vídeo toca até o fim (quem chama avança); no editor repete
+    p.loop = !aoTerminar;
     p.playbackRate = velocidade;
     if (tocar) p.play();
   });
+  useEffect(() => {
+    if (tocar) player.play();
+    else player.pause();
+  }, [player, tocar]);
+  useEffect(() => {
+    const fim = aoTerminar ? player.addListener('playToEnd', aoTerminar) : null;
+    const carga = aoDuracao
+      ? player.addListener('sourceLoad', (e) => aoDuracao((e.duration * 1000) / velocidade))
+      : null;
+    return () => {
+      fim?.remove();
+      carga?.remove();
+    };
+  }, [player, aoTerminar, aoDuracao, velocidade]);
   return (
     <VideoView player={player} style={StyleSheet.absoluteFill} contentFit="cover" nativeControls={false} />
   );
@@ -144,10 +171,20 @@ type Props = {
   aoMoverTexto?: (id: string, dx: number, dy: number) => void;
   /** visualizador: permite votar na enquete */
   votavel?: boolean;
+  /** visualizador: vídeo sem repetir; avisa ao terminar e a duração real (ms) */
+  aoTerminarVideo?: () => void;
+  aoDuracaoVideo?: (ms: number) => void;
 };
 
 /** Desenha o story: mídia + filtro + desenho + textos + selos. Usado no editor e no visualizador. */
-export function StoryCena({ c, tocar = true, aoMoverTexto, votavel = false }: Props) {
+export function StoryCena({
+  c,
+  tocar = true,
+  aoMoverTexto,
+  votavel = false,
+  aoTerminarVideo,
+  aoDuracaoVideo,
+}: Props) {
   const { t } = useTranslation();
   const [tamanho, setTamanho] = useState({ w: 0, h: 0 });
   const f = filtros.find((x) => x.id === c.filtro) ?? filtros[0]!;
@@ -157,7 +194,13 @@ export function StoryCena({ c, tocar = true, aoMoverTexto, votavel = false }: Pr
       onLayout={(e) => setTamanho({ w: e.nativeEvent.layout.width, h: e.nativeEvent.layout.height })}
     >
       {c.tipo === 'video' ? (
-        <Video uri={c.uri} tocar={tocar} velocidade={c.velocidade ?? 1} />
+        <Video
+          uri={c.uri}
+          tocar={tocar}
+          velocidade={c.velocidade ?? 1}
+          aoTerminar={aoTerminarVideo}
+          aoDuracao={aoDuracaoVideo}
+        />
       ) : (
         <Image
           source={{ uri: c.uri }}
