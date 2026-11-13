@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Linking, Pressable, Share, StyleSheet, TextInput, View } from 'react-native';
 
 import { ListaAniversarios } from '@/componentes/ListaAniversarios';
+import { ListaEventos } from '@/componentes/ListaEventos';
 import { ListaLojas } from '@/componentes/ListaLojas';
 import { ListaMembros } from '@/componentes/ListaMembros';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
@@ -16,13 +17,14 @@ import { espaco, fontes, raios, toque, useCores, useEstilos, type Paleta } from 
 import { Avatar, Botao, Cartao, Icone, Pino, Texto, type StatusIrmao } from '@/ui';
 
 /**
- * Lista das ferramentas de diretório. Com o servidor ligado, Lojas, Membros e Aniversários vêm do banco;
+ * Lista das ferramentas de diretório. Com o servidor ligado, Lojas, Eventos, Membros e Aniversários vêm do banco;
  * as demais listas seguem com os dados do app (telefones) ou ficam escondidas (ver ferramentas/catalogo.ts).
  */
 export default function Lista() {
   const servidor = useClubeNoServidor();
   const { tipo } = useLocalSearchParams<{ tipo: TipoDiretorio }>();
   if (servidor && tipo === 'lojas') return <ListaLojas />;
+  if (servidor && tipo === 'eventos') return <ListaEventos />;
   if (servidor && tipo === 'membros') return <ListaMembros />;
   if (servidor && tipo === 'aniversarios') return <ListaAniversarios />;
   return <ListaLocal />;

@@ -1145,14 +1145,31 @@
       "semPagamento": "O pagamento é combinado entre vocês, fora do app.",
       "publicar": "Publicar anúncio",
       "whatsappVisivel": "Este número aparece para os irmãos que abrirem o anúncio.",
-      "vaiAparecer": "Vai aparecer assim: {{preco}}"
+      "vaiAparecer": "Vai aparecer assim: {{preco}}",
+      "publicado": "Anúncio publicado. Ele fica no ar por 60 dias.",
+      "erroEnviar": "Não foi possível publicar. Confira a internet e tente de novo.",
+      "whatsappOpcional": "WhatsApp (opcional)",
+      "contatoAceno": "Os irmãos falam com você por aceno e chat. O WhatsApp é opcional e só aparece para membros."
     },
     "guardar": "Guardar",
     "guardado": "Guardado",
     "contadorFotos": "{{n}} / {{total}}",
     "sim": "Sim",
     "nao": "Não",
-    "semContato": "Este anúncio não tem WhatsApp. Procure o irmão pelo capítulo."
+    "semContato": "Este anúncio não tem WhatsApp. Procure o irmão pelo capítulo.",
+    "aCombinar": "A combinar",
+    "carregando": "Carregando anúncios…",
+    "erro": "Não foi possível carregar os anúncios. Confira a internet.",
+    "vazio": "Nenhum anúncio por enquanto. Seja o primeiro a anunciar.",
+    "acenar": "Acenar ao vendedor",
+    "limite": "Você já tem 5 anúncios ativos. Marque um como vendido ou exclua para anunciar outro.",
+    "erroAcao": "Não deu certo agora. Tente de novo em instantes.",
+    "denunciarExplica": "A moderação vai olhar este anúncio. Ele continua visível até a análise.",
+    "quando": {
+      "agora": "agora há pouco",
+      "horas": "há {{n}} h",
+      "dias": "há {{n}} dias"
+    }
   },
   "sos": {
     "titulo": "SOS",
@@ -1546,7 +1563,10 @@
     "lojaPor": "Cadastrada por {{nome}}",
     "negocioPor": "Dono: {{nome}}",
     "motivoItem": "Motivo (obrigatório para recusar)",
-    "erroCarregarItens": "Não foi possível carregar a fila. Confira a internet."
+    "erroCarregarItens": "Não foi possível carregar a fila. Confira a internet.",
+    "abaEventos": "Eventos",
+    "eventosVazio": "Nenhum evento esperando decisão.",
+    "eventoPor": "Divulgado por {{nome}}"
   },
   "papeis": {
     "titulo": "Papéis dos irmãos",
@@ -1743,5 +1763,58 @@
       "escondido": "Escondido dos outros irmãos",
       "visivel": "Visível para os membros"
     }
+  },
+  "eventos": {
+    "cadastrar": "Divulgar um evento",
+    "novo": "Divulgar evento",
+    "editar": "Editar evento",
+    "explicaForm": "Divulgação gratuita de eventos de Lojas, Potências, eventos maçônicos e de motoclubes. A moderação confere antes de aparecer. A entrada segue o procedimento de cada organização.",
+    "nome": "Nome do evento",
+    "tipo": "Tipo de evento",
+    "dia": "Dia (dd/mm/aaaa)",
+    "hora": "Início (ex.: 19:30)",
+    "horaFim": "Fim (opcional)",
+    "local": "Local",
+    "cidade": "Cidade",
+    "descricao": "Detalhes",
+    "posicao": "Marcar no mapa com minha posição atual",
+    "posicaoMarcada": "Posição marcada (aproximada, cerca de 1 km)",
+    "tirarPosicao": "Tirar do mapa",
+    "semPermissao": "Sem permissão de localização. Libere nos ajustes do celular.",
+    "semGps": "Não foi possível achar sua posição agora.",
+    "semPagamento": "O app não vende ingresso nem recebe pagamento.",
+    "enviar": "Enviar para revisão",
+    "salvar": "Salvar alterações",
+    "enviado": "Evento enviado. Ele aparece para os irmãos depois da revisão da moderação.",
+    "salvo": "Alterações enviadas para nova revisão.",
+    "dataInvalida": "Confira o dia e a hora: use dd/mm/aaaa e uma data que ainda não passou.",
+    "fimInvalido": "O fim precisa ser depois do início, no mesmo dia.",
+    "erroEnviar": "Não foi possível enviar. Confira a internet e tente de novo.",
+    "limite": "Você já divulgou eventos demais hoje. Tente amanhã.",
+    "tipos": {
+      "todos": "Todos",
+      "loja": "Loja",
+      "potencia": "Potência",
+      "maconico": "Maçônico",
+      "motoclube": "Motoclube",
+      "outro": "Outro"
+    },
+    "status": {
+      "pendente": "Em revisão",
+      "aprovado": "Aprovado",
+      "recusado": "Recusado"
+    },
+    "motivoRecusa": "Motivo: {{motivo}}",
+    "acenar": "Acenar a quem divulgou",
+    "rota": "Rota",
+    "editarBotao": "Editar",
+    "apagar": "Apagar",
+    "apagarTitulo": "Apagar este evento?",
+    "apagarTexto": "Ele some para todos os irmãos.",
+    "erroApagar": "Não foi possível apagar. Tente de novo.",
+    "vazio": "Nenhum evento por enquanto. Divulgue o primeiro.",
+    "erro": "Não foi possível carregar os eventos. Confira a internet.",
+    "carregando": "Carregando eventos…",
+    "rodape": "Aparecem os eventos aprovados que ainda não terminaram."
   }
 }

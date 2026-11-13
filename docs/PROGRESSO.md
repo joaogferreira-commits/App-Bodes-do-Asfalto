@@ -150,3 +150,8 @@ Tarefas 2 a 12 concluídas (ver "Feito"). Pendências levadas para a Etapa 1: re
 - Montagem no GitHub: corrigido erro de compilação da tela do carro (o app agora declara o SDK de navegação).
 - P4 (feito pelo Mateus/Sonnet, revisado): `servidor/feed.ts` (posts, TFA, comentários, salvos, stories, denunciar, bloquear; mídias por URL assinada nos buckets privados) e telas do feed em modo servidor sem exemplos. 278 testes.
 - P5 (Mateus/Sonnet, revisado): `servidor/chat.ts` (conversas, mensagens com Realtime, acenos com aceitar/recusar, grupo do capítulo, avisos só diretoria/admin, denunciar, bloquear); aba Chat em modo servidor sem exemplos. 286 testes.
+
+### 13/11/2026 — Classificados e Eventos no servidor (Mateus)
+- Migration `supabase/pendentes/20261113190000_classificados_eventos.sql` + pgTAP ao lado (41 asserções; aguarda CI e aplicação pelo workflow): `classificados` (sem aprovação prévia, 5 ativos por irmão, 60 dias, bucket privado, denúncia tipo `classificado`, moderação marca `removido`) e `eventos` (pendente/aprovado/recusado, `decidir_evento`, 3 por dia, leitura só de aprovados que ainda não terminaram).
+- App: `servidor/classificados.ts`, `servidor/eventos.ts`, hooks em `servidor/useClube.ts`, `estado/classificados.tsx` (servidor x local), telas de classificados ligadas ao banco (aceno ao vendedor, WhatsApp opcional, "Vendido", denúncia), `componentes/ListaEventos.tsx`, `app/eventos/novo.tsx` (rascunho, posição opcional), aba "Eventos" em Aprovações. Os dois saíram de `soExemplo`.
+- Testes: `__tests__/classificados-eventos-servidor.test.tsx` (25), ajustes em `clube-servidor` e `sem-em-breve-servidor`.

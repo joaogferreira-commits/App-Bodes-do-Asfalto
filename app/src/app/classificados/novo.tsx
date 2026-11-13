@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
@@ -15,6 +16,8 @@ import {
 import { useClassificados } from '@/estado/classificados';
 import { usePerfilOpcional } from '@/estado/perfil';
 import { escolherFoto } from '@/feed/foto';
+import { criarClassificado, motivoDoErro, subirFotoClassificado } from '@/servidor/classificados';
+import { recarregarClube, useClubeNoServidor } from '@/servidor/useClube';
 import { espaco, raios, useCores } from '@/theme';
 import { Botao, Chip, Icone, Texto } from '@/ui';
 import { abrirMenu, avisar } from '@/ui/dialogo';
@@ -28,6 +31,8 @@ export default function NovoAnuncio() {
   const cores = useCores();
   const { anunciar } = useClassificados();
   const perfil = usePerfilOpcional();
+  const servidor = useClubeNoServidor();
+  const [enviando, setEnviando] = useState(false);
   const [fotos, setFotos, limpaFotos] = useRascunho<string[]>('anuncio.fotos', []);
   const [categoria, setCategoria, limpaCategoria] = useRascunho<CategoriaClassificado>(
     'anuncio.categoria',
@@ -46,7 +51,41 @@ export default function NovoAnuncio() {
   });
   const muda = (k: keyof typeof f) => (v: string) => setF((a) => ({ ...a, [k]: v }));
 
+  const publicarNoServidor = async () => {
+    const digitos = f.whatsapp.replace(/\D/g, '');
+    const falta = [
+      !fotos.length && t('classificados.form.fotos'),
+      f.titulo.trim().length < 3 && t('classificados.form.titulo'),
+      f.cidade.trim().length < 2 && t('acesso.form.cidade'),
+      digitos.length > 0 && digitos.length < 10 && t('classificados.form.whatsapp'),
+    ].filter(Boolean);
+    if (falta.length) return avisar(t('acesso.form.falta'), falta.join('\n'));
+    setEnviando(true);
+    try {
+      const caminhos: string[] = [];
+      for (const u of fotos) caminhos.push(await subirFotoClassificado(u));
+      await criarClassificado({
+        titulo: f.titulo,
+        descricao: f.descricao,
+        preco: lerPreco(f.preco),
+        categoria,
+        cidade: f.cidade,
+        whatsapp: f.whatsapp,
+        fotos: caminhos,
+      });
+      [limpaFotos, limpaCategoria, limpaEstado, limpaTroca, limpaF].forEach((l) => l());
+      recarregarClube();
+      avisar(t('classificados.form.publicado'));
+      router.back();
+    } catch (e) {
+      avisar(t(motivoDoErro(e) === 'limite' ? 'classificados.limite' : 'classificados.form.erroEnviar'));
+    } finally {
+      setEnviando(false);
+    }
+  };
+
   const publicar = () => {
+    if (servidor) return void publicarNoServidor();
     const falta = [
       !fotos.length && t('classificados.form.fotos'),
       !f.titulo.trim() && t('classificados.form.titulo'),
@@ -175,28 +214,32 @@ export default function NovoAnuncio() {
         />
         <Campo rotulo={t('acesso.form.cidade')} valor={f.cidade} aoMudar={muda('cidade')} />
       </View>
-      {categoria === 'motos' && (
+      {categoria === 'motos' && !servidor && (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.sm }}>
           <Campo rotulo={t('garagem.ano')} valor={f.ano} aoMudar={muda('ano')} teclado="numeric" />
           <Campo rotulo={t('garagem.km')} valor={f.km} aoMudar={muda('km')} teclado="numeric" sufixo="km" />
         </View>
       )}
-      <Texto variante="rotulo">{t('classificados.form.estado')}</Texto>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs }}>
-        {estados.map((e) => (
-          <Chip
-            key={e}
-            rotulo={t(`classificados.estados.${e}`)}
-            ativo={estado === e}
-            onPress={() => setEstado(e)}
-          />
-        ))}
-        <Chip
-          rotulo={t('classificados.aceitaTroca')}
-          ativo={aceitaTroca}
-          onPress={() => setAceitaTroca((v) => !v)}
-        />
-      </View>
+      {!servidor && (
+        <>
+          <Texto variante="rotulo">{t('classificados.form.estado')}</Texto>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: espaco.xs }}>
+            {estados.map((e) => (
+              <Chip
+                key={e}
+                rotulo={t(`classificados.estados.${e}`)}
+                ativo={estado === e}
+                onPress={() => setEstado(e)}
+              />
+            ))}
+            <Chip
+              rotulo={t('classificados.aceitaTroca')}
+              ativo={aceitaTroca}
+              onPress={() => setAceitaTroca((v) => !v)}
+            />
+          </View>
+        </>
+      )}
       <Campo
         rotulo={t('classificados.form.descricao')}
         valor={f.descricao}
@@ -204,19 +247,27 @@ export default function NovoAnuncio() {
         linhas={4}
       />
       <Campo
-        rotulo={t('classificados.form.whatsapp')}
+        rotulo={t(servidor ? 'classificados.form.whatsappOpcional' : 'classificados.form.whatsapp')}
         valor={f.whatsapp}
         aoMudar={muda('whatsapp')}
         teclado="phone-pad"
       />
-      <Texto variante="pequeno">{t('classificados.form.whatsappVisivel')}</Texto>
+      <Texto variante="pequeno">
+        {t(servidor ? 'classificados.form.contatoAceno' : 'classificados.form.whatsappVisivel')}
+      </Texto>
       {lerPreco(f.preco) > 0 && (
         <Texto variante="destaque">
           {t('classificados.form.vaiAparecer', { preco: formatarPreco(lerPreco(f.preco)) })}
         </Texto>
       )}
       <Texto variante="pequeno">{t('classificados.form.semPagamento')}</Texto>
-      <Botao titulo={t('classificados.form.publicar')} grande icone="check" onPress={publicar} />
+      <Botao
+        titulo={t('classificados.form.publicar')}
+        grande
+        icone="check"
+        desativado={enviando}
+        onPress={publicar}
+      />
     </TelaFerramenta>
   );
 }

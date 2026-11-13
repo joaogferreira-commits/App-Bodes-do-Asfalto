@@ -6,7 +6,9 @@ import { Linking, ScrollView, Share, useWindowDimensions, View } from 'react-nat
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { formatarPreco } from '@/dados/classificados';
+import { enviarAceno, avisarResultadoAceno } from '@/estado/avisoAceno';
 import { useClassificados } from '@/estado/classificados';
+import { denunciar } from '@/servidor/feed';
 import { linkWhatsApp } from '@/ferramentas/calculos';
 import { espaco, raios, useCores } from '@/theme';
 import { Avatar, Botao, BotaoIcone, Cartao, Texto } from '@/ui';
@@ -23,6 +25,20 @@ export default function Anuncio() {
   const [foto, setFoto] = useState(0);
   if (!c) return null;
   const fav = favoritos.includes(c.id);
+  const preco = c.preco > 0 ? formatarPreco(c.preco) : t('classificados.aCombinar');
+  const denunciarAnuncio = () =>
+    avisar(t('feed.denunciarPergunta'), t('classificados.denunciarExplica'), [
+      { text: t('comum.cancelar'), style: 'cancel' },
+      {
+        text: t('feed.denunciarConfirmar'),
+        style: 'destructive',
+        onPress: () =>
+          void denunciar('classificado', c.id, t('feed.motivoPadrao')).then(
+            () => avisar(t('feed.denunciar'), t('feed.denunciaRecebida')),
+            () => avisar(t('feed.erroAcao')),
+          ),
+      },
+    ]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: cores.fundo }}>
@@ -103,19 +119,22 @@ export default function Anuncio() {
             variante="numero"
             style={{ fontSize: 40, lineHeight: 44, color: c.vendido ? cores.textoApagado : cores.texto }}
           >
-            {formatarPreco(c.preco)}
+            {preco}
           </Texto>
           <Texto variante="subtitulo">{c.titulo}</Texto>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', rowGap: espaco.sm }}>
-            {[
-              [t('classificados.form.estado'), t(`classificados.estados.${c.estado}`)],
-              c.ano ? [t('garagem.ano'), c.ano] : null,
-              c.km ? [t('garagem.km'), `${c.km} km`] : null,
-              [
-                t('classificados.aceitaTroca'),
-                c.aceitaTroca ? t('classificados.sim') : t('classificados.nao'),
-              ],
-            ]
+            {(c.semFicha
+              ? []
+              : [
+                  [t('classificados.form.estado'), t(`classificados.estados.${c.estado}`)],
+                  c.ano ? [t('garagem.ano'), c.ano] : null,
+                  c.km ? [t('garagem.km'), `${c.km} km`] : null,
+                  [
+                    t('classificados.aceitaTroca'),
+                    c.aceitaTroca ? t('classificados.sim') : t('classificados.nao'),
+                  ],
+                ]
+            )
               .filter((x): x is string[] => !!x)
               .map(([rotulo, valor]) => (
                 <View key={rotulo} style={{ width: '50%', gap: 2 }}>
@@ -159,21 +178,35 @@ export default function Anuncio() {
               />
             </>
           ) : (
-            !c.vendido &&
-            (c.whatsapp ? (
-              <Botao
-                titulo={t('classificados.chamar')}
-                icone="comentario"
-                grande
-                onPress={() =>
-                  void Linking.openURL(
-                    linkWhatsApp(t('classificados.mensagem', { titulo: c.titulo }), c.whatsapp),
-                  )
-                }
-              />
-            ) : (
-              <Texto variante="secundario">{t('classificados.semContato')}</Texto>
-            ))
+            !c.vendido && (
+              <>
+                {!!c.autorId && (
+                  <Botao
+                    titulo={t('classificados.acenar')}
+                    icone="aceno"
+                    grande
+                    onPress={() =>
+                      void enviarAceno(c.autorId!).then((r) => avisarResultadoAceno(r, c.vendedor, t))
+                    }
+                  />
+                )}
+                {c.whatsapp ? (
+                  <Botao
+                    titulo={t('classificados.chamar')}
+                    icone="comentario"
+                    grande={!c.autorId}
+                    variante={c.autorId ? 'secundario' : 'principal'}
+                    onPress={() =>
+                      void Linking.openURL(
+                        linkWhatsApp(t('classificados.mensagem', { titulo: c.titulo }), c.whatsapp!),
+                      )
+                    }
+                  />
+                ) : (
+                  !c.autorId && <Texto variante="secundario">{t('classificados.semContato')}</Texto>
+                )}
+              </>
+            )
           )}
           <View style={{ flexDirection: 'row', gap: espaco.xs }}>
             <View style={{ flex: 1 }}>
@@ -181,9 +214,7 @@ export default function Anuncio() {
                 titulo={t('feed.compartilhar')}
                 icone="compartilhar"
                 variante="secundario"
-                onPress={() =>
-                  void Share.share({ message: `${c.titulo} — ${formatarPreco(c.preco)} (${c.cidade})` })
-                }
+                onPress={() => void Share.share({ message: `${c.titulo} — ${preco} (${c.cidade})` })}
               />
             </View>
             {!c.meu && (
@@ -191,7 +222,9 @@ export default function Anuncio() {
                 <Botao
                   titulo={t('comentarios.denunciar')}
                   variante="contorno"
-                  onPress={() => avisar(t('feed.denunciar'), t('feed.denunciaRecebida'))}
+                  onPress={() =>
+                    c.servidor ? denunciarAnuncio() : avisar(t('feed.denunciar'), t('feed.denunciaRecebida'))
+                  }
                 />
               </View>
             )}

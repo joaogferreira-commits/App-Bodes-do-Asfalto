@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Linking, TextInput, View } from 'react-native';
 
 import { useAcessoOpcional } from '@/acesso/acesso';
-import { AprovarLojas, AprovarNegocios } from '@/componentes/AprovarClube';
+import { AprovarEventos, AprovarLojas, AprovarNegocios } from '@/componentes/AprovarClube';
 import { AprovarDesafios } from '@/componentes/AprovarDesafios';
 import { AprovarSuporte } from '@/componentes/AprovarSuporte';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
@@ -25,7 +25,9 @@ export default function Aprovacoes() {
   const [ocupado, setOcupado] = useState<string | null>(null);
   const papel = useAcessoOpcional()?.papel;
   const moderacao = papel === 'moderador' || papel === 'admin';
-  const [aba, setAba] = useState<'irmaos' | 'desafios' | 'suporte' | 'lojas' | 'negocios'>('irmaos');
+  const [aba, setAba] = useState<'irmaos' | 'desafios' | 'suporte' | 'lojas' | 'negocios' | 'eventos'>(
+    'irmaos',
+  );
 
   const carregar = useCallback(async () => {
     try {
@@ -80,6 +82,13 @@ export default function Aprovacoes() {
         )}
         {moderacao && (
           <Chip
+            rotulo={t('aprovacoes.abaEventos')}
+            ativo={aba === 'eventos'}
+            onPress={() => setAba('eventos')}
+          />
+        )}
+        {moderacao && (
+          <Chip
             rotulo={t('aprovacoes.abaSuporte')}
             ativo={aba === 'suporte'}
             onPress={() => setAba('suporte')}
@@ -90,6 +99,7 @@ export default function Aprovacoes() {
       {aba === 'suporte' && moderacao && <AprovarSuporte />}
       {aba === 'lojas' && moderacao && <AprovarLojas />}
       {aba === 'negocios' && moderacao && <AprovarNegocios />}
+      {aba === 'eventos' && moderacao && <AprovarEventos />}
       {aba === 'irmaos' && pedidos === null && (
         <Texto variante="secundario">{t('aprovacoes.carregando')}</Texto>
       )}

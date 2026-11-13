@@ -2,10 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextInput, View } from 'react-native';
 
+import { decidirEvento, eventosPendentes, type EventoPendente } from '@/servidor/eventos';
 import { decidirLoja, lojasPendentes, type LojaPendente } from '@/servidor/lojas';
 import { decidirNegocio, negociosPendentes, type NegocioPendente } from '@/servidor/negocios';
 import { recarregarClube } from '@/servidor/useClube';
 import { espaco, fontes, raios, useCores } from '@/theme';
+import { textoPeriodo } from '@/componentes/ListaEventos';
 import { Botao, Cartao, Texto } from '@/ui';
 import { avisar } from '@/ui/dialogo';
 
@@ -159,6 +161,28 @@ export function AprovarNegocios() {
           t('negocios.beneficio') + ': ' + n.beneficio,
           ...(n.descricao ? [n.descricao] : []),
           t('aprovacoes.negocioPor', { nome: n.donoNome }),
+        ],
+      })}
+    />
+  );
+}
+
+/** Eventos esperando decisão (só moderador e admin). Recusar exige motivo. */
+export function AprovarEventos() {
+  const { t, i18n } = useTranslation();
+  return (
+    <Fila<EventoPendente>
+      carregar={eventosPendentes}
+      decidir={decidirEvento}
+      textoVazio={t('aprovacoes.eventosVazio')}
+      paraItem={(e) => ({
+        id: e.id,
+        titulo: e.titulo,
+        linhas: [
+          `${t(`eventos.tipos.${e.tipo}`)} · ${textoPeriodo(e, i18n.language)}`,
+          [e.local, e.cidade].filter(Boolean).join(' · '),
+          ...(e.descricao ? [e.descricao] : []),
+          t('aprovacoes.eventoPor', { nome: e.autorNome }),
         ],
       })}
     />

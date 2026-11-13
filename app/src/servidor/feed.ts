@@ -46,7 +46,7 @@ export type StoryServidor = {
   conteudo: ConteudoStory;
 };
 
-export type AlvoDenuncia = 'post' | 'comentario' | 'mensagem' | 'story' | 'usuario';
+export type AlvoDenuncia = 'post' | 'comentario' | 'mensagem' | 'story' | 'usuario' | 'classificado';
 
 export const TAMANHO_PAGINA = 20;
 const VALIDADE_URL_S = 3600;

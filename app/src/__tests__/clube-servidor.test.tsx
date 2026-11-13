@@ -157,8 +157,7 @@ describe('versão com servidor: Lojas, Guia, Membros e Aniversários voltam', ()
   it('o catálogo mostra as quatro ferramentas', () => {
     const chaves = ferramentasVisiveis(true).flatMap((g) => g.itens.map((i) => i.chave));
     for (const c of ['lojas', 'negocios', 'membros', 'aniversarios']) expect(chaves).toContain(c);
-    for (const c of ['bodeAmigo', 'irmaosPerto', 'classificados', 'eventos', 'meta'])
-      expect(chaves).not.toContain(c);
+    for (const c of ['bodeAmigo', 'irmaosPerto', 'meta']) expect(chaves).not.toContain(c);
   });
 
   it('Lojas: mostra as do servidor, acena ao contato e deixa editar só a minha', async () => {

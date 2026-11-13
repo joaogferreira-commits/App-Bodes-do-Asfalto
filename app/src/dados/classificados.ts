@@ -24,6 +24,10 @@ export type Classificado = {
   vendido?: boolean;
   meu?: boolean;
   whatsapp?: string;
+  /** vindo do servidor: sem estado, troca, ano e km (o banco não guarda) */
+  semFicha?: boolean;
+  autorId?: string;
+  servidor?: boolean;
 };
 
 export const categorias: CategoriaClassificado[] = [

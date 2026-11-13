@@ -1145,14 +1145,31 @@
       "semPagamento": "El pago se acuerda entre ustedes, fuera de la app.",
       "publicar": "Publicar anuncio",
       "whatsappVisivel": "Este número aparece para los hermanos que abran el anuncio.",
-      "vaiAparecer": "Aparecerá así: {{preco}}"
+      "vaiAparecer": "Aparecerá así: {{preco}}",
+      "publicado": "Anuncio publicado. Queda activo por 60 días.",
+      "erroEnviar": "No se pudo publicar. Revisa internet e inténtalo de nuevo.",
+      "whatsappOpcional": "WhatsApp (opcional)",
+      "contatoAceno": "Los hermanos hablan contigo por saludo y chat. El WhatsApp es opcional y solo lo ven los miembros."
     },
     "guardar": "Guardar",
     "guardado": "Guardado",
     "contadorFotos": "{{n}} / {{total}}",
     "sim": "Sí",
     "nao": "No",
-    "semContato": "Este anuncio no tiene WhatsApp. Busca al hermano por el capítulo."
+    "semContato": "Este anuncio no tiene WhatsApp. Busca al hermano por el capítulo.",
+    "aCombinar": "A convenir",
+    "carregando": "Cargando anuncios…",
+    "erro": "No se pudieron cargar los anuncios. Revisa internet.",
+    "vazio": "Aún no hay anuncios. Sé el primero en anunciar.",
+    "acenar": "Saludar al vendedor",
+    "limite": "Ya tienes 5 anuncios activos. Marca uno como vendido o bórralo para anunciar otro.",
+    "erroAcao": "No salió bien ahora. Inténtalo de nuevo en un momento.",
+    "denunciarExplica": "La moderación revisará este anuncio. Sigue visible hasta el análisis.",
+    "quando": {
+      "agora": "hace un momento",
+      "horas": "hace {{n}} h",
+      "dias": "hace {{n}} días"
+    }
   },
   "sos": {
     "titulo": "SOS",
@@ -1546,7 +1563,10 @@
     "lojaPor": "Registrada por {{nome}}",
     "negocioPor": "Dueño: {{nome}}",
     "motivoItem": "Motivo (obligatorio para rechazar)",
-    "erroCarregarItens": "No se pudo cargar la cola. Revisa internet."
+    "erroCarregarItens": "No se pudo cargar la cola. Revisa internet.",
+    "abaEventos": "Eventos",
+    "eventosVazio": "Ningún evento esperando decisión.",
+    "eventoPor": "Divulgado por {{nome}}"
   },
   "papeis": {
     "titulo": "Roles de los hermanos",
@@ -1743,5 +1763,58 @@
       "escondido": "Oculto para los otros hermanos",
       "visivel": "Visible para los miembros"
     }
+  },
+  "eventos": {
+    "cadastrar": "Divulgar un evento",
+    "novo": "Divulgar evento",
+    "editar": "Editar evento",
+    "explicaForm": "Divulgación gratuita de eventos de Logias, Potencias, eventos masónicos y de motoclubes. La moderación revisa antes de mostrarlo. La entrada sigue el procedimiento de cada organización.",
+    "nome": "Nombre del evento",
+    "tipo": "Tipo de evento",
+    "dia": "Día (dd/mm/aaaa)",
+    "hora": "Inicio (ej.: 19:30)",
+    "horaFim": "Fin (opcional)",
+    "local": "Lugar",
+    "cidade": "Ciudad",
+    "descricao": "Detalles",
+    "posicao": "Marcar en el mapa con mi posición actual",
+    "posicaoMarcada": "Posición marcada (aproximada, cerca de 1 km)",
+    "tirarPosicao": "Quitar del mapa",
+    "semPermissao": "Sin permiso de ubicación. Actívalo en los ajustes del teléfono.",
+    "semGps": "No se pudo encontrar tu posición ahora.",
+    "semPagamento": "La app no vende entradas ni recibe pagos.",
+    "enviar": "Enviar a revisión",
+    "salvar": "Guardar cambios",
+    "enviado": "Evento enviado. Aparece para los hermanos después de la revisión de la moderación.",
+    "salvo": "Cambios enviados a una nueva revisión.",
+    "dataInvalida": "Revisa el día y la hora: usa dd/mm/aaaa y una fecha que no haya pasado.",
+    "fimInvalido": "El fin debe ser después del inicio, el mismo día.",
+    "erroEnviar": "No se pudo enviar. Revisa internet e inténtalo de nuevo.",
+    "limite": "Ya divulgaste demasiados eventos hoy. Inténtalo mañana.",
+    "tipos": {
+      "todos": "Todos",
+      "loja": "Logia",
+      "potencia": "Potencia",
+      "maconico": "Masónico",
+      "motoclube": "Motoclub",
+      "outro": "Otro"
+    },
+    "status": {
+      "pendente": "En revisión",
+      "aprovado": "Aprobado",
+      "recusado": "Rechazado"
+    },
+    "motivoRecusa": "Motivo: {{motivo}}",
+    "acenar": "Saludar a quien lo divulgó",
+    "rota": "Ruta",
+    "editarBotao": "Editar",
+    "apagar": "Borrar",
+    "apagarTitulo": "¿Borrar este evento?",
+    "apagarTexto": "Desaparece para todos los hermanos.",
+    "erroApagar": "No se pudo borrar. Inténtalo de nuevo.",
+    "vazio": "Aún no hay eventos. Divulga el primero.",
+    "erro": "No se pudieron cargar los eventos. Revisa internet.",
+    "carregando": "Cargando eventos…",
+    "rodape": "Se muestran los eventos aprobados que aún no terminaron."
   }
 }

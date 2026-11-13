@@ -21,7 +21,8 @@ export default function Classificados() {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
-  const { todos, favoritos } = useClassificados();
+  const { todos, favoritos, servidor, carregando, erro } = useClassificados();
+  const preco = (v: number) => (v > 0 ? formatarPreco(v) : t('classificados.aCombinar'));
   const [cat, setCat] = useState<CategoriaClassificado | 'todos' | 'favoritos'>('todos');
   const [busca, setBusca] = useState('');
   const lista = todos
@@ -34,7 +35,7 @@ export default function Classificados() {
   const cartao = ({ item: c }: { item: Classificado }) => (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`${c.titulo}, ${formatarPreco(c.preco)}, ${c.cidade}${c.vendido ? `, ${t('classificados.vendido')}` : ''}`}
+      accessibilityLabel={`${c.titulo}, ${preco(c.preco)}, ${c.cidade}${c.vendido ? `, ${t('classificados.vendido')}` : ''}`}
       onPress={() => router.push(`/classificados/${c.id}`)}
       style={({ pressed }) => [
         estilos.cartao,
@@ -79,7 +80,7 @@ export default function Classificados() {
           style={{ color: c.vendido ? cores.textoApagado : cores.acao }}
           numberOfLines={1}
         >
-          {formatarPreco(c.preco)}
+          {preco(c.preco)}
         </Texto>
         <Texto variante="corpoForte" numberOfLines={2}>
           {c.titulo}
@@ -140,7 +141,17 @@ export default function Classificados() {
             <Texto variante="pequeno">{t('classificados.aviso')}</Texto>
           </View>
         }
-        ListEmptyComponent={<Texto variante="secundario">{t('busca.nada')}</Texto>}
+        ListEmptyComponent={
+          <Texto variante="secundario">
+            {servidor && carregando
+              ? t('classificados.carregando')
+              : servidor && erro
+                ? t('classificados.erro')
+                : servidor && todos.length === 0
+                  ? t('classificados.vazio')
+                  : t('busca.nada')}
+          </Texto>
+        }
         renderItem={cartao}
       />
     </SafeAreaView>

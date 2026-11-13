@@ -52,3 +52,9 @@ O teste `app/src/__tests__/sem-em-breve-servidor.test.tsx` confere que nenhuma a
 Lojas (Visitação), Guia de Negócios (com o cartão "Sou membro"), Lista de membros e Aniversários saíram da lista `soExemplo`.
 Migration em `supabase/pendentes/20261113160000_lojas_negocios_membros.sql` (com teste pgTAP ao lado); só vale no app depois de aplicada pelo workflow.
 Aniversário (só dia e mês) fica em tabela própria, escondido por padrão; a lista só o mostra se o irmão marcou.
+
+## Atualização (13/11/2026): Classificados e Eventos com dados reais do servidor
+
+Saíram da lista `soExemplo`. Migration em `supabase/pendentes/20261113190000_classificados_eventos.sql` (com teste pgTAP ao lado); só vale no app depois de aplicada pelo workflow.
+- Classificados: sem aprovação prévia (moderação por denúncia, tipo `classificado` em `denuncias`), até 5 ativos por irmão, vale 60 dias, fotos em bucket privado `classificados`, contato por aceno (WhatsApp opcional, só membros), "Vendido" pelo dono. Nenhum pagamento no app.
+- Eventos: qualquer irmão cadastra, moderador/admin aprova (aba "Eventos" em Aprovações, recusa com motivo), até 3 por dia; os irmãos veem só aprovados que ainda não terminaram.

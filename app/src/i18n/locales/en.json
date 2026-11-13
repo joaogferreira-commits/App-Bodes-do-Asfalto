@@ -1145,14 +1145,31 @@
       "semPagamento": "Payment is arranged between you, outside the app.",
       "publicar": "Publish ad",
       "whatsappVisivel": "This number is shown to brothers who open the ad.",
-      "vaiAparecer": "It will show as: {{preco}}"
+      "vaiAparecer": "It will show as: {{preco}}",
+      "publicado": "Listing published. It stays up for 60 days.",
+      "erroEnviar": "Could not publish. Check your internet and try again.",
+      "whatsappOpcional": "WhatsApp (optional)",
+      "contatoAceno": "Brothers reach you by wave and chat. WhatsApp is optional and only members see it."
     },
     "guardar": "Save",
     "guardado": "Saved",
     "contadorFotos": "{{n}} / {{total}}",
     "sim": "Yes",
     "nao": "No",
-    "semContato": "This ad has no WhatsApp. Find the brother through the chapter."
+    "semContato": "This ad has no WhatsApp. Find the brother through the chapter.",
+    "aCombinar": "Price on request",
+    "carregando": "Loading listings…",
+    "erro": "Could not load the listings. Check your internet.",
+    "vazio": "No listings yet. Be the first to post one.",
+    "acenar": "Wave at the seller",
+    "limite": "You already have 5 active listings. Mark one as sold or delete it to post another.",
+    "erroAcao": "That did not work. Try again in a moment.",
+    "denunciarExplica": "Moderators will review this listing. It stays visible until then.",
+    "quando": {
+      "agora": "just now",
+      "horas": "{{n}} h ago",
+      "dias": "{{n}} days ago"
+    }
   },
   "sos": {
     "titulo": "SOS",
@@ -1546,7 +1563,10 @@
     "lojaPor": "Registered by {{nome}}",
     "negocioPor": "Owner: {{nome}}",
     "motivoItem": "Reason (required to decline)",
-    "erroCarregarItens": "Could not load the queue. Check your internet."
+    "erroCarregarItens": "Could not load the queue. Check your internet.",
+    "abaEventos": "Events",
+    "eventosVazio": "No events waiting for a decision.",
+    "eventoPor": "Announced by {{nome}}"
   },
   "papeis": {
     "titulo": "Brothers' roles",
@@ -1743,5 +1763,58 @@
       "escondido": "Hidden from other brothers",
       "visivel": "Visible to members"
     }
+  },
+  "eventos": {
+    "cadastrar": "Announce an event",
+    "novo": "Announce event",
+    "editar": "Edit event",
+    "explicaForm": "Free announcements for Lodge, Grand Lodge and Masonic events, and for motorcycle clubs. Moderators check it before it shows. Entry follows each organization's procedure.",
+    "nome": "Event name",
+    "tipo": "Event type",
+    "dia": "Day (dd/mm/yyyy)",
+    "hora": "Start (e.g. 19:30)",
+    "horaFim": "End (optional)",
+    "local": "Place",
+    "cidade": "City",
+    "descricao": "Details",
+    "posicao": "Mark on the map with my current position",
+    "posicaoMarcada": "Position marked (approximate, about 1 km)",
+    "tirarPosicao": "Remove from map",
+    "semPermissao": "No location permission. Allow it in the phone settings.",
+    "semGps": "Could not find your position right now.",
+    "semPagamento": "The app does not sell tickets or take payments.",
+    "enviar": "Send for review",
+    "salvar": "Save changes",
+    "enviado": "Event sent. It shows to the brothers after moderator review.",
+    "salvo": "Changes sent for a new review.",
+    "dataInvalida": "Check the day and time: use dd/mm/yyyy and a date that has not passed.",
+    "fimInvalido": "The end must be after the start, on the same day.",
+    "erroEnviar": "Could not send. Check your internet and try again.",
+    "limite": "You announced too many events today. Try again tomorrow.",
+    "tipos": {
+      "todos": "All",
+      "loja": "Lodge",
+      "potencia": "Grand Lodge",
+      "maconico": "Masonic",
+      "motoclube": "Motorcycle club",
+      "outro": "Other"
+    },
+    "status": {
+      "pendente": "In review",
+      "aprovado": "Approved",
+      "recusado": "Declined"
+    },
+    "motivoRecusa": "Reason: {{motivo}}",
+    "acenar": "Wave at the organizer",
+    "rota": "Route",
+    "editarBotao": "Edit",
+    "apagar": "Delete",
+    "apagarTitulo": "Delete this event?",
+    "apagarTexto": "It disappears for all brothers.",
+    "erroApagar": "Could not delete. Try again.",
+    "vazio": "No events yet. Announce the first one.",
+    "erro": "Could not load the events. Check your internet.",
+    "carregando": "Loading events…",
+    "rodape": "Approved events that have not ended yet are shown."
   }
 }
