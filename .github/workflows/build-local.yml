@@ -52,6 +52,12 @@ jobs:
               --name GOOGLE_MAPS_API_KEY --value "$GOOGLE_MAPS_API_KEY" \
               --visibility sensitive --force --non-interactive
           fi
+      - name: Memória extra (evita a máquina desligar no meio da montagem)
+        run: |
+          sudo swapoff -a || true
+          sudo fallocate -l 10G /mnt/swapfile && sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile && sudo swapon /mnt/swapfile
+          free -h
       - name: Conferir o endereço do servidor (sem ele o app vira modo de teste offline)
         env:
           URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
@@ -63,6 +69,7 @@ jobs:
           fi
       - name: Montar o app
         env:
+          GRADLE_OPTS: -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs=-Xmx4g
           EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           EXPO_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
