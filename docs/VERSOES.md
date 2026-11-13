@@ -4,6 +4,12 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.19.1 — 13/11/2026 (correção do servidor)
+
+- O app limpa o endereço e a chave do servidor (espaços, quebras de linha, aspas, maiúsculas, caminho extra) antes de conferir; a 0.19.0 recusava o endereço por isso.
+- "Status do servidor" mostra separadamente se o endereço e a chave estão no formato certo.
+- A montagem confere endereço e chave com a mesma regra do app.
+
 ## 0.19.0 — 13/11/2026 (servidor garantido dentro do app)
 
 - Corrige: 0.16–0.18 saíram em modo offline (endereço do servidor não entrava no app). Agora a montagem grava o endereço na configuração e confere dentro do app pronto; sem ele, a versão não é entregue.

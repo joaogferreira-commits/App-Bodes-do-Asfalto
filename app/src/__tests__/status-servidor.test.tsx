@@ -12,6 +12,14 @@ jest.mock('@/servidor/supabase', () => ({
   get supabase() {
     return mockSb;
   },
+  get pecasServidor() {
+    return {
+      urlBruta: mockConfigurado,
+      urlValida: mockConfigurado,
+      chavePresente: mockConfigurado,
+      chaveValida: mockConfigurado,
+    };
+  },
 }));
 jest.mock('@/servidor/notificacoes', () => ({ tokenRegistrado: jest.fn(async () => true) }));
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));

@@ -7,7 +7,7 @@ import { useAcessoOpcional } from '@/acesso/acesso';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { tokenRegistrado } from '@/servidor/notificacoes';
 import { enderecoCurto, testarConexao, type ResultadoPing } from '@/servidor/statusServidor';
-import { servidorConfigurado } from '@/servidor/supabase';
+import { pecasServidor, servidorConfigurado } from '@/servidor/supabase';
 import { espaco, useCores } from '@/theme';
 import { Botao, Cartao, Texto } from '@/ui';
 
@@ -58,6 +58,7 @@ export default function StatusServidor() {
 
   const sim = (v: boolean) => t(v ? 'statusServidor.sim' : 'statusServidor.nao');
   const endereco = enderecoCurto();
+  const pecas = `${t('statusServidor.pecaUrl')}: ${sim(pecasServidor.urlValida)} · ${t('statusServidor.pecaChave')}: ${sim(pecasServidor.chaveValida)}`;
   const modoServidor = acesso?.modo === 'supabase';
   const logado = !!acesso && acesso.estado !== 'deslogado' && acesso.estado !== 'carregando' && modoServidor;
   const ambiente = process.env.EXPO_PUBLIC_AMBIENTE || t('statusServidor.semAmbiente');
@@ -75,6 +76,7 @@ export default function StatusServidor() {
     const linhas = [
       t('statusServidor.diagnostico'),
       `${t('statusServidor.endereco')}: ${sim(servidorConfigurado)}${endereco ? ` (${endereco})` : ''}`,
+      pecas,
       `${t('statusServidor.modo')}: ${t(modoServidor ? 'statusServidor.modoServidor' : 'statusServidor.modoLocal')}`,
       `${t('statusServidor.conexao')}: ${textoPing}`,
       `${t('statusServidor.sessao')}: ${sim(logado)}${logado ? `, ${t('statusServidor.papel', { papel: acesso?.papel ?? '-' })}, ${t('statusServidor.situacao', { situacao })}` : ''}`,
@@ -89,7 +91,7 @@ export default function StatusServidor() {
       <Linha
         titulo={t('statusServidor.endereco')}
         ok={servidorConfigurado}
-        linhas={[sim(servidorConfigurado), ...(endereco ? [endereco] : [])]}
+        linhas={[sim(servidorConfigurado), ...(endereco ? [endereco] : []), pecas]}
       />
       <Linha
         titulo={t('statusServidor.modo')}

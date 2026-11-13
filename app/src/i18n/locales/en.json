@@ -1855,6 +1855,8 @@
     "nao": "No",
     "testar": "Test again",
     "copiar": "Copy diagnostics",
-    "diagnostico": "Bodes do Asfalto app diagnostics"
+    "diagnostico": "Bodes do Asfalto app diagnostics",
+    "pecaUrl": "Address in the right format",
+    "pecaChave": "Public key"
   }
 }

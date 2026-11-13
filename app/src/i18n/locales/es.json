@@ -1855,6 +1855,8 @@
     "nao": "No",
     "testar": "Probar de nuevo",
     "copiar": "Copiar diagnóstico",
-    "diagnostico": "Diagnóstico de la app Bodes do Asfalto"
+    "diagnostico": "Diagnóstico de la app Bodes do Asfalto",
+    "pecaUrl": "Dirección en el formato correcto",
+    "pecaChave": "Clave pública"
   }
 }

@@ -73,6 +73,14 @@ jobs:
             echo "::error::Faltam os segredos SUPABASE_URL e SUPABASE_ANON_KEY no GitHub; o app sairia sem servidor."
             exit 1
           fi
+          # Mesma regra do app (app/src/servidor/supabase.ts): endereço *.supabase.co e chave sem espaços com mais de 20 letras.
+          U=$(printf '%s' "$URL_SUPABASE" | tr -d '[:space:]"' | tr 'A-Z' 'a-z')
+          echo "$U" | grep -Eq '^(https?://)?[a-z0-9-]+\.supabase\.co([/?#].*)?$' || { echo "::error::SUPABASE_URL não parece um endereço do Supabase (https://xxxx.supabase.co)."; exit 1; }
+          K=$(printf '%s' "$CHAVE_SUPABASE" | tr -d '"' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+          [ ${#K} -gt 20 ] || { echo "::error::SUPABASE_ANON_KEY curta demais (tamanho ${#K}); confira a chave anon/publishable."; exit 1; }
+          echo "$K" | grep -q '[[:space:]]' && { echo "::error::SUPABASE_ANON_KEY tem espaços no meio."; exit 1; }
+          case "$K" in sb_secret_*) echo "::error::SUPABASE_ANON_KEY é a chave SECRETA; use a publishable/anon."; exit 1;; esac
+          echo "Endereço e chave no formato certo (tamanho da chave: ${#K})."
       - name: Gravar o endereço do servidor na configuração da montagem (não vai para o repositório)
         env:
           URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
