@@ -172,7 +172,7 @@ describe('iniciarNavegacao', () => {
     });
     await expect(iniciarNavegacao(base(c))).resolves.toBe('ok');
     expect(c.setDestinations.mock.calls[1]![1]).toEqual({
-      routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+      routingOptions: { travelMode: MODO_CARRO, avoidFerries: true, avoidTolls: false, avoidHighways: false },
     });
   });
 

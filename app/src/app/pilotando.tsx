@@ -10,7 +10,7 @@ import {
 import * as Haptics from 'expo-haptics';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,12 +21,26 @@ import { useViagem } from '@/estado/viagem';
 import { useOdometro } from '@/seguranca/useOdometro';
 import { medidasGrade, ordemAcoes, type Acao } from '@/navegacao/gradePilotando';
 import { tokenParaSair } from '@/rotas/google';
+import { planejarBateVolta, planejarRota } from '@/rotas/valhalla';
+import type { TipoEstrada } from '@/rotas/tipos';
+import { FolhaOpcoes } from '@/navegacao/FolhaOpcoes';
+import {
+  carregarOpcoes,
+  evitarDe,
+  MAPA_SDK,
+  opcoesPadrao,
+  PERSPECTIVA_SDK,
+  salvarOpcoes,
+  VOZ_SDK,
+  type OpcoesNavegacao,
+} from '@/navegacao/opcoes';
 import { nomeDoDestino, posicaoDoDestino } from '@/navegacao/destinos';
 import { escolherPosto } from '@/navegacao/acoesPilotando';
 import { TIPOS_ALERTA, type TipoAlerta } from '@/navegacao/avisosEstrada';
 import {
   irParaDestino,
   iniciarNavegacao,
+  replanejarRota,
   type ControladorNavegacao,
   type ResultadoNavegacao,
 } from '@/navegacao/fluxo';
@@ -35,6 +49,7 @@ import { conversaDoComboio, enviarAlerta, enviarReagrupar, ouvirAvisos } from '@
 import { carregarPostosDaArea } from '@/servidor/pontos';
 import { cores, escalaMaxima, espaco, fontes, tema, toque, useCores, useTema } from '@/theme';
 import { avisar as abrirAviso, Botao, BotaoSegurar, Icone, Texto, type NomeIcone } from '@/ui';
+import type { NavigationViewController } from '@googlemaps/react-native-navigation-sdk';
 
 async function pedirPermissao() {
   const { granted } = await Location.requestForegroundPermissionsAsync();
@@ -93,6 +108,8 @@ const iconesAlerta: Record<TipoAlerta, NomeIcone> = {
   oleo: 'pneu',
 };
 const DURACAO_ENCERRAR = 1500;
+/** Botão de camadas: canto direito, abaixo do cartão de manobra do Google. */
+const TOPO_BOTAO_OPCOES = 150;
 const LARGURA_GRADE_DEITADO = 3 * 110 + 2 * toque.pilotandoEspaco + 2 * espaco.sm;
 
 function Pilotando() {
@@ -121,10 +138,28 @@ function Pilotando() {
     if (m) perfil.salvarMoto({ ...m, km: String((Number(m.km.replace(/\D/g, '')) || 0) + km) });
   });
 
+  // Camadas e opções (guardadas no aparelho e aplicadas ao abrir a navegação).
+  const [opcoes, setOpcoes] = useState<OpcoesNavegacao>(opcoesPadrao);
+  const opcoesRef = useRef<OpcoesNavegacao>(opcoesPadrao);
+  const [opcoesAbertas, setOpcoesAbertas] = useState(false);
+  const [recalculando, setRecalculando] = useState(false);
+  const visaoCtrl = useRef<NavigationViewController | null>(null);
+  const destinoAtual = useRef<{ title: string; position: { lat: number; lng: number } } | null>(null);
+
+  const aplicarVisao = useCallback((o: OpcoesNavegacao) => {
+    void visaoCtrl.current?.setFollowingPerspective(PERSPECTIVA_SDK[o.visao]).catch(() => undefined);
+  }, []);
+
   const iniciar = async () => {
     setErro(null);
     setEstado('preparando');
+    const guardadas = await carregarOpcoes();
+    opcoesRef.current = guardadas;
+    setOpcoes(guardadas);
+    if (!viagem.rota) viagem.definirTipoEstrada(guardadas.estrada);
     const resultado = await iniciarNavegacao({
+      evitar: evitarDe(guardadas),
+      voz: VOZ_SDK[guardadas.voz],
       controlador: navigationController as unknown as ControladorNavegacao,
       pedirPermissaoLocalizacao: pedir,
       posicaoAtual,
@@ -142,6 +177,7 @@ function Pilotando() {
     if (resultado === 'ok' || resultado === 'okRotaRapida') {
       setRotaRapida(resultado === 'okRotaRapida');
       setEstado('guiando');
+      aplicarVisao(guardadas);
     } else {
       setErro(resultado);
       setEstado('erro');
@@ -160,6 +196,77 @@ function Pilotando() {
     // inicia uma vez ao abrir a tela
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const guardar = (o: OpcoesNavegacao) => {
+    opcoesRef.current = o;
+    setOpcoes(o);
+    void salvarOpcoes(o);
+  };
+
+  const destinoDaRota = async () => {
+    if (destinoAtual.current) return destinoAtual.current;
+    const forma = viagem.rota?.forma;
+    if (forma?.length) return { title: nomeDoDestino(viagem.destino, t), position: forma[forma.length - 1]! };
+    const atual = await posicaoAtual();
+    return atual
+      ? { title: nomeDoDestino(viagem.destino, t), position: posicaoDoDestino(viagem.destino, atual) }
+      : null;
+  };
+
+  /** Um toque numa escolha: aplica na hora o que o SDK permite e guarda para a próxima vez. */
+  const mudarOpcoes = (parcial: Partial<OpcoesNavegacao>) => {
+    const nova = { ...opcoesRef.current, ...parcial };
+    guardar(nova);
+    const ctrl = navigationController as unknown as ControladorNavegacao;
+    if (parcial.voz) void ctrl.setAudioGuidanceType(VOZ_SDK[nova.voz]).catch(() => undefined);
+    if (parcial.visao) aplicarVisao(nova);
+    const mudouEvitar =
+      parcial.evitarPedagios !== undefined ||
+      parcial.evitarRodovias !== undefined ||
+      parcial.evitarBalsas !== undefined;
+    if (mudouEvitar && estado === 'guiando') void recalcular(viagem.tipoEstrada, nova, !!viagem.rota);
+  };
+
+  /**
+   * Recalcula a rota até o mesmo destino. Com rota planejada: Valhalla + token novo (tipo de estrada e
+   * "evitar" valem no planejamento). Sem rota planejada: o Google recalcula com as opções de evitar.
+   * Se falhar, a rota antiga continua.
+   */
+  const recalcular = async (tipo: TipoEstrada, o: OpcoesNavegacao, valhalla: boolean) => {
+    const ctrl = navigationController as unknown as ControladorNavegacao;
+    setRecalculando(true);
+    const destino = await destinoDaRota();
+    let ok = false;
+    let nova: { rota: NonNullable<typeof viagem.rota>; token: string } | null = null;
+    if (valhalla && destino) {
+      const r = await replanejarRota({
+        controlador: ctrl,
+        posicaoAtual,
+        destino,
+        tipo,
+        planejar: (atual, tp) => {
+          const evitar = evitarDe(o);
+          return viagem.bateVolta && !destinoAtual.current
+            ? planejarBateVolta(atual, { ...viagem.bateVolta, tipo: tp, evitar })
+            : planejarRota(atual, destino.position, tp, undefined, { evitar });
+        },
+        token: (rota, atual) => tokenParaSair(chaveGoogle, rota.forma, rota.km, atual),
+      });
+      ok = r.ok;
+      if (r.ok) nova = { rota: r.rota, token: r.token };
+    } else if (destino) {
+      ok = await irParaDestino(ctrl, destino, evitarDe(o));
+    }
+    setRecalculando(false);
+    if (ok) {
+      if (nova) viagem.definirRota(nova.rota, nova.token);
+      viagem.definirTipoEstrada(tipo);
+      guardar({ ...o, estrada: tipo });
+      avisarTexto(t('opcoesNav.recalculado'), false);
+    } else {
+      avisarTexto(t('opcoesNav.recalcFalhou'), false);
+    }
+  };
 
   const encerrar = async () => {
     try {
@@ -263,10 +370,13 @@ function Pilotando() {
     const km = achado.km.toFixed(1).replace('.', ',');
     const nome = achado.posto.nome || t('pilotando.postoSemNome');
     const ir = () => {
-      void irParaDestino(navigationController as unknown as ControladorNavegacao, {
-        title: nome,
-        position: { lat: achado.posto.lat, lng: achado.posto.lng },
-      }).then((ok) => {
+      const novoDestino = { title: nome, position: { lat: achado.posto.lat, lng: achado.posto.lng } };
+      void irParaDestino(
+        navigationController as unknown as ControladorNavegacao,
+        novoDestino,
+        evitarDe(opcoesRef.current),
+      ).then((ok) => {
+        if (ok) destinoAtual.current = novoDestino;
         const texto = ok ? t('pilotando.postoIndo', { km }) : t('pilotando.postoFalhou');
         if (ok) falar(texto);
         avisarTexto(texto, ok);
@@ -344,6 +454,7 @@ function Pilotando() {
   };
 
   const faixa =
+    (recalculando ? t('opcoesNav.recalculando') : null) ??
     (alertasAbertos ? t('pilotando.alertaTitulo') : null) ??
     aviso ??
     (estado === 'preparando'
@@ -371,6 +482,12 @@ function Pilotando() {
             style={StyleSheet.absoluteFill}
             navigationNightMode={modoNoturnoGoogle}
             androidStylingOptions={estiloCabecalho}
+            mapType={MAPA_SDK[opcoes.mapa]}
+            trafficEnabled={opcoes.transito}
+            onNavigationViewControllerCreated={(ctrl) => {
+              visaoCtrl.current = ctrl;
+              if (estado === 'guiando') aplicarVisao(opcoesRef.current);
+            }}
             myLocationEnabled
             speedometerEnabled
             reportIncidentButtonEnabled={false}
@@ -384,7 +501,32 @@ function Pilotando() {
             {permissao === 'negada' && <Botao titulo={t('navegacao.permitir')} onPress={iniciar} />}
           </SafeAreaView>
         )}
+        {permissao === 'concedida' && (
+          <SafeAreaView edges={['right']} pointerEvents="box-none" style={estilos.cantoOpcoes}>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('opcoesNav.botao')}
+              onPress={() => setOpcoesAbertas(true)}
+              hitSlop={4}
+              style={[estilos.botaoOpcoes, { backgroundColor: c.sobreMapa, borderColor: c.linhaForte }]}
+            >
+              <Icone nome="camadas" tamanho={26} cor={c.texto} />
+            </Pressable>
+          </SafeAreaView>
+        )}
       </View>
+
+      <FolhaOpcoes
+        visivel={opcoesAbertas}
+        opcoes={opcoes}
+        estrada={viagem.tipoEstrada}
+        recalculando={recalculando}
+        aoMudar={mudarOpcoes}
+        aoMudarEstrada={(tipo) => {
+          if (tipo !== viagem.tipoEstrada) void recalcular(tipo, opcoesRef.current, true);
+        }}
+        aoFechar={() => setOpcoesAbertas(false)}
+      />
 
       <SafeAreaView
         edges={deitado ? ['right', 'bottom'] : ['bottom']}
@@ -561,6 +703,15 @@ export default function TelaPilotando() {
 const estilos = StyleSheet.create({
   tela: { flex: 1 },
   mapa: { flex: 1 },
+  cantoOpcoes: { position: 'absolute', top: TOPO_BOTAO_OPCOES, right: 0, paddingRight: espaco.sm },
+  botaoOpcoes: {
+    width: toque.minimo,
+    height: toque.minimo,
+    borderRadius: 14,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   centro: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: espaco.md, padding: espaco.xl },
   faixa: {
     flexDirection: 'row',

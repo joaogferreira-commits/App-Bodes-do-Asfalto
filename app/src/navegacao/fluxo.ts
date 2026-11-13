@@ -1,4 +1,7 @@
+import type { RotaPlanejada, TipoEstrada } from '@/rotas/tipos';
+
 import type { Coordenada } from './destinos';
+import type { Evitar } from './opcoes';
 
 /** Partes do NavigationController do Google usadas pela prova (facilita os testes). */
 export type ControladorNavegacao = {
@@ -8,7 +11,7 @@ export type ControladorNavegacao = {
   setDestinations(
     waypoints: { title?: string; position: Coordenada }[],
     options?: {
-      routingOptions?: { travelMode?: number; avoidFerries?: boolean };
+      routingOptions?: { travelMode?: number } & Partial<Evitar>;
       routeTokenOptions?: { routeToken: string; travelMode?: number };
     },
   ): Promise<string>;
@@ -50,7 +53,14 @@ type Dependencias = {
   tokenNaHora?: (atual: Coordenada) => Promise<string | null>;
   /** Avisa o motivo quando o Google recusa a rota planejada (aparece pequeno na faixa de aviso). */
   aoRecusarRota?: (motivo: string) => void;
+  /** Evitar pedágios, rodovias e balsas (vale quando o Google escolhe a rota, sem token). */
+  evitar?: Evitar;
+  /** Tipo de voz do SDK (padrão: completa pelo Bluetooth). */
+  voz?: number;
 };
+
+/** Sem escolha do irmão, só as balsas são evitadas (como sempre foi). */
+const evitarPadrao: Evitar = { avoidTolls: false, avoidHighways: false, avoidFerries: true };
 
 /** Tempo máximo esperando o Google aceitar a rota planejada antes de seguir pela rota dele. */
 export const LIMITE_ROTA_MS = 8000;
@@ -120,13 +130,13 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     if (!seguiuPlanejada) {
       try {
         rota = await dep.controlador.setDestinations(destino, {
-          routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
+          routingOptions: { travelMode: MODO_MOTO, ...(dep.evitar ?? evitarPadrao) },
         });
       } catch (e) {
         // Algumas versões da ponte não aceitam moto: tenta de novo como carro.
         if (!/unsupported travel mode/i.test(String((e as Error)?.message ?? e))) throw e;
         rota = await dep.controlador.setDestinations(destino, {
-          routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+          routingOptions: { travelMode: MODO_CARRO, ...(dep.evitar ?? evitarPadrao) },
         });
       }
     }
@@ -134,7 +144,7 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
     if (rota === 'NETWORK_ERROR') return 'semRede';
     if (rota !== 'OK') return 'semRota';
 
-    await dep.controlador.setAudioGuidanceType(VOZ_COMPLETA_BLUETOOTH);
+    await dep.controlador.setAudioGuidanceType(dep.voz ?? VOZ_COMPLETA_BLUETOOTH);
     await dep.controlador.startGuidance();
     try {
       dep.controlador.setTurnByTurnLoggingEnabled?.(true);
@@ -154,17 +164,18 @@ export async function iniciarNavegacao(dep: Dependencias): Promise<ResultadoNave
 export async function irParaDestino(
   controlador: Pick<ControladorNavegacao, 'setDestinations' | 'startGuidance'>,
   destino: { title: string; position: Coordenada },
+  evitar: Evitar = evitarPadrao,
 ): Promise<boolean> {
   try {
     let rota: string;
     try {
       rota = await controlador.setDestinations([destino], {
-        routingOptions: { travelMode: MODO_MOTO, avoidFerries: true },
+        routingOptions: { travelMode: MODO_MOTO, ...evitar },
       });
     } catch (e) {
       if (!/unsupported travel mode/i.test(String((e as Error)?.message ?? e))) throw e;
       rota = await controlador.setDestinations([destino], {
-        routingOptions: { travelMode: MODO_CARRO, avoidFerries: true },
+        routingOptions: { travelMode: MODO_CARRO, ...evitar },
       });
     }
     if (rota !== 'OK') return false;
@@ -172,5 +183,41 @@ export async function irParaDestino(
     return true;
   } catch {
     return false;
+  }
+}
+
+type PedidoReplanejar = {
+  controlador: Pick<ControladorNavegacao, 'setDestinations' | 'startGuidance'>;
+  posicaoAtual: () => Promise<Coordenada | null>;
+  destino: { title: string; position: Coordenada };
+  tipo: TipoEstrada;
+  /** Planeja no Valhalla da posição atual até o destino, com o tipo de estrada escolhido. */
+  planejar: (atual: Coordenada, tipo: TipoEstrada) => Promise<RotaPlanejada>;
+  /** Pede ao Google o token da rota nova. */
+  token: (rota: RotaPlanejada, atual: Coordenada) => Promise<string | null>;
+};
+
+export type ResultadoReplanejar = { ok: true; rota: RotaPlanejada; token: string } | { ok: false };
+
+/**
+ * Replaneja a rota em andamento (ex.: o irmão trocou o tipo de estrada): Valhalla da posição atual até
+ * o mesmo destino, token novo e guia reiniciado. Se qualquer passo falhar, a rota antiga continua valendo
+ * (o destino só é trocado quando o Google aceita o token novo).
+ */
+export async function replanejarRota(p: PedidoReplanejar): Promise<ResultadoReplanejar> {
+  try {
+    const atual = await p.posicaoAtual();
+    if (!atual) return { ok: false };
+    const rota = await p.planejar(atual, p.tipo);
+    const token = await p.token(rota, atual);
+    if (!token) return { ok: false };
+    const resposta = await p.controlador.setDestinations([p.destino], {
+      routeTokenOptions: { routeToken: token, travelMode: MODO_CARRO },
+    });
+    if (resposta !== 'OK') return { ok: false };
+    await p.controlador.startGuidance();
+    return { ok: true, rota, token };
+  } catch {
+    return { ok: false };
   }
 }

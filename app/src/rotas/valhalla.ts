@@ -82,7 +82,13 @@ export async function planejarRota(
   destino: Coordenada,
   tipo: TipoEstrada,
   buscar: Buscar = fetch as unknown as Buscar,
-  extras: { passagens?: Coordenada[]; curvas?: boolean; sinal?: AbortSignal } = {},
+  extras: {
+    passagens?: Coordenada[];
+    curvas?: boolean;
+    sinal?: AbortSignal;
+    /** Evitar pedágios, rodovias e balsas (opções de navegação). */
+    evitar?: { avoidTolls: boolean; avoidHighways: boolean; avoidFerries: boolean };
+  } = {},
 ): Promise<RotaPlanejada> {
   const pontos = [origem, ...(extras.passagens ?? []), destino];
   const viagemCurta = distanciaKm(origem, destino) * 1.3 < LIMITE_KM_ALTERNATIVAS;
@@ -95,7 +101,13 @@ export async function planejarRota(
     })),
     costing: 'motorcycle',
     costing_options: {
-      motorcycle: { ...opcoesDeCusto(tipo, semCorteDeTerra), ...(extras.curvas ? { use_highways: 0 } : {}) },
+      motorcycle: {
+        ...opcoesDeCusto(tipo, semCorteDeTerra),
+        ...(extras.curvas ? { use_highways: 0 } : {}),
+        ...(extras.evitar?.avoidHighways ? { use_highways: 0 } : {}),
+        ...(extras.evitar?.avoidTolls ? { use_tolls: 0 } : {}),
+        ...(extras.evitar?.avoidFerries ? { use_ferry: 0 } : {}),
+      },
     },
     directions_options: { units: 'kilometers', language: 'pt-BR' },
     // Até 2 caminhos alternativos (R43); o Valhalla só calcula alternativas entre 2 pontos.
@@ -246,10 +258,22 @@ export function pontosBateVolta(
 /** Rota de ida e volta pela distância e direção escolhidas, com a preferência de estrada e "mais curvas". */
 export function planejarBateVolta(
   origem: Coordenada,
-  opcoes: { km: number; rumo: Rumo; tipo: TipoEstrada; curvas: boolean; variacao?: number },
+  opcoes: {
+    km: number;
+    rumo: Rumo;
+    tipo: TipoEstrada;
+    curvas: boolean;
+    variacao?: number;
+    evitar?: { avoidTolls: boolean; avoidHighways: boolean; avoidFerries: boolean };
+  },
   buscar: Buscar = fetch as unknown as Buscar,
   sinal?: AbortSignal,
 ) {
   const passagens = pontosBateVolta(origem, opcoes.km, rumos[opcoes.rumo], opcoes.variacao ?? 0);
-  return planejarRota(origem, origem, opcoes.tipo, buscar, { passagens, curvas: opcoes.curvas, sinal });
+  return planejarRota(origem, origem, opcoes.tipo, buscar, {
+    passagens,
+    curvas: opcoes.curvas,
+    sinal,
+    evitar: opcoes.evitar,
+  });
 }
