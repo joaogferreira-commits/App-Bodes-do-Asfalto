@@ -1,3 +1,3 @@
 # O agente altera este arquivo para montar o app no GitHub (grátis).
 perfil=preview
-pedido=12 (0.17.0 APK: passeios, SOS, desafios e suporte de verdade)
+pedido=13 (0.18.0 APK: varredura + Lojas e Guia)
