@@ -1,12 +1,30 @@
 import { Image } from 'expo-image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { lerPrecoCombustivel, type AcaoFicha, type Ficha } from '@/map/fichas';
+import {
+  ehPostoDoServidor,
+  informarPreco,
+  ultimosPrecos,
+  type PrecoIrmao,
+  type ProdutoIrmao,
+} from '@/servidor/precos';
 import { espaco, fontes, raios, useCores } from '@/theme';
 import { Avatar, Botao, BotaoIcone, Icone, pinos, Texto, type NomeIcone, type StatusIrmao } from '@/ui';
+import { avisar } from '@/ui/dialogo';
+
+const PRODUTOS: ProdutoIrmao[] = ['gasolina_comum', 'etanol', 'diesel_s10'];
+
+/** ISO com hora → dd/mm no fuso do aparelho. */
+const diaMes = (iso: string) => {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? iso
+    : `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+};
 
 const iconeDaAcao: Record<AcaoFicha, NomeIcone> = {
   rota: 'navegar',
@@ -41,10 +59,42 @@ export function FichaMapa({ ficha, status, feitas = [], aoFechar, aoAgir }: Prop
   const cores = useCores();
   const [preco, setPreco] = useState<string | null>(null);
   const [erroPreco, setErroPreco] = useState(false);
+  const [produto, setProduto] = useState<ProdutoIrmao>('gasolina_comum');
+  const [enviando, setEnviando] = useState(false);
+  const fichaId = ficha?.id;
+  const [carregados, setCarregados] = useState<{ id: string; lista: PrecoIrmao[] } | null>(null);
+  const doIrmaos = carregados && carregados.id === fichaId ? carregados.lista : [];
+
+  const noServidor = !!fichaId && ficha?.tipo === 'posto' && ehPostoDoServidor(fichaId);
+
+  const [recarga, setRecarga] = useState(0);
+
+  useEffect(() => {
+    if (!noServidor || !fichaId) return;
+    let ativo = true;
+    void ultimosPrecos([fichaId]).then((lista) => {
+      if (ativo) setCarregados({ id: fichaId, lista });
+    });
+    return () => {
+      ativo = false;
+    };
+  }, [noServidor, fichaId, recarga]);
+
+  const enviarAoServidor = async (valor: string) => {
+    if (!fichaId || enviando) return;
+    setEnviando(true);
+    const ok = await informarPreco(fichaId, produto, Number(valor.replace(',', '.')));
+    setEnviando(false);
+    if (!ok) return avisar(t('ficha.precoErroEnvio'));
+    setPreco(null);
+    avisar(t('ficha.precoObrigado'), t('ficha.precoObrigadoMsg'));
+    setRecarga((n) => n + 1);
+  };
 
   const fechar = () => {
     setPreco(null);
     setErroPreco(false);
+    setProduto('gasolina_comum');
     aoFechar();
   };
 
@@ -99,9 +149,39 @@ export function FichaMapa({ ficha, status, feitas = [], aoFechar, aoAgir }: Prop
               </View>
             ))}
 
+            {noServidor &&
+              doIrmaos.map((p) => (
+                <View
+                  key={p.produto}
+                  style={{ flexDirection: 'row', gap: espaco.sm, alignItems: 'flex-start' }}
+                >
+                  <Icone nome="posto" tamanho={22} cor={cores.textoSec} />
+                  <Texto style={{ flex: 1 }}>
+                    {t('ficha.precoIrmaoProduto', {
+                      produto: t(`ficha.produtos.${p.produto}`),
+                      preco: p.valor.toFixed(2).replace('.', ','),
+                      dia: diaMes(p.criadoEm),
+                    })}
+                  </Texto>
+                </View>
+              ))}
+
             {preco !== null ? (
               <View style={{ gap: espaco.sm }}>
                 <Texto variante="rotulo">{t('ficha.precoPergunta')}</Texto>
+                {noServidor && (
+                  <View style={{ flexDirection: 'row', gap: espaco.xs }}>
+                    {PRODUTOS.map((p) => (
+                      <View key={p} style={{ flex: 1 }}>
+                        <Botao
+                          titulo={t(`ficha.produtos.${p}`)}
+                          variante={produto === p ? 'principal' : 'secundario'}
+                          onPress={() => setProduto(p)}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                )}
                 <TextInput
                   value={preco}
                   onChangeText={(v) => {
@@ -130,6 +210,7 @@ export function FichaMapa({ ficha, status, feitas = [], aoFechar, aoAgir }: Prop
                   onPress={() => {
                     const v = lerPrecoCombustivel(preco);
                     if (!v) return setErroPreco(true);
+                    if (noServidor) return void enviarAoServidor(v);
                     aoAgir('informarPreco', v);
                     setPreco(null);
                   }}
