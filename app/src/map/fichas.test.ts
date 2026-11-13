@@ -1,6 +1,13 @@
 import { irmaosExemplo, lugaresExemplo } from '@/dados/exemplos';
 
-import { ACENOS_POR_DIA, acenar, fichaDoIrmao, fichaDoLugar, lerPrecoCombustivel } from './fichas';
+import {
+  ACENOS_POR_DIA,
+  acenar,
+  fichaDoIrmao,
+  fichaDoIrmaoAoVivo,
+  fichaDoLugar,
+  lerPrecoCombustivel,
+} from './fichas';
 
 describe('fichas do mapa', () => {
   it('todo lugar do mapa abre ficha com "Rota até aqui" como primeira ação', () => {
@@ -82,5 +89,41 @@ describe('pontos do banco (OpenStreetMap)', () => {
     expect(com.acoes).toEqual(['rota', 'telefone', 'site', 'salvar']);
     expect(com.link).toBe('https://museu.example');
     expect(com.telefone).toBe('+55 65 3000-0000');
+  });
+});
+
+describe('fichaDoIrmaoAoVivo', () => {
+  const base = {
+    id: 'u1',
+    nome: 'Zé Ferreira',
+    apelido: 'Zé Bode',
+    capitulo: 'Cuiabá',
+    status: 'cafe' as const,
+    lat: -15.6,
+    lng: -56.1,
+    precisao: 'aproximado' as const,
+  };
+  it('mostra apelido, nome, capítulo e status, com aceno', () => {
+    const f = fichaDoIrmaoAoVivo(base);
+    expect(f).toMatchObject({ id: 'u1', tipo: 'irmao', titulo: 'Zé Bode', subtitulo: 'ficha.status.cafe' });
+    expect(f.linhas.map((l) => l.chave)).toEqual([
+      'ficha.nomeDe',
+      'ficha.capituloDe',
+      'ficha.posicaoAproximada',
+    ]);
+    expect(f.acoes).toEqual(['acenar']);
+    expect(f.acoes).not.toContain('rota');
+  });
+  it('não perturbe não recebe aceno; precisão muda o texto', () => {
+    const f = fichaDoIrmaoAoVivo({
+      ...base,
+      status: 'naoPerturbe',
+      precisao: 'cidade',
+      apelido: null,
+      capitulo: null,
+    });
+    expect(f.acoes).toEqual([]);
+    expect(f.titulo).toBe('Zé Ferreira');
+    expect(f.linhas.map((l) => l.chave)).toEqual(['ficha.posicaoCidade']);
   });
 });

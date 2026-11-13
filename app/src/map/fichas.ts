@@ -1,4 +1,5 @@
 import type { IrmaoExemplo, LugarExemplo } from '@/dados/exemplos';
+import type { IrmaoAoVivo } from '@/servidor/aoVivo';
 import type { NomeIcone } from '@/ui';
 
 /**
@@ -141,6 +142,33 @@ export function fichaDoIrmao(i: IrmaoExemplo): Ficha {
     subtitulo: `ficha.status.${i.status}`,
     linhas: [{ icone: 'localizacao', chave: 'ficha.posicaoAproximada' }],
     acoes: podeAcenar ? ['acenar', 'perfil'] : ['perfil'],
+    posicao: { lat: i.lat, lng: i.lng },
+  };
+}
+
+/** Ficha de um irmão real do mapa ao vivo: nome, apelido, capítulo e status; contato só por aceno. */
+export function fichaDoIrmaoAoVivo(i: IrmaoAoVivo): Ficha {
+  const podeAcenar = i.status !== 'naoPerturbe';
+  const titulo = i.apelido || i.nome;
+  const linhas: LinhaFicha[] = [];
+  if (i.apelido) linhas.push({ icone: 'perfil', chave: 'ficha.nomeDe', valores: { nome: i.nome } });
+  if (i.capitulo) linhas.push({ icone: 'sede', chave: 'ficha.capituloDe', valores: { nome: i.capitulo } });
+  linhas.push({
+    icone: 'localizacao',
+    chave:
+      i.precisao === 'exata'
+        ? 'ficha.posicaoExata'
+        : i.precisao === 'cidade'
+          ? 'ficha.posicaoCidade'
+          : 'ficha.posicaoAproximada',
+  });
+  return {
+    id: i.id,
+    tipo: 'irmao',
+    titulo,
+    subtitulo: `ficha.status.${i.status}`,
+    linhas,
+    acoes: podeAcenar ? ['acenar'] : [],
     posicao: { lat: i.lat, lng: i.lng },
   };
 }

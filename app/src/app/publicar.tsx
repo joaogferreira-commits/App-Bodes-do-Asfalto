@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useMeusPosts, type VisibilidadePost } from '@/estado/meusPosts';
 import { escolherFoto } from '@/feed/foto';
@@ -28,12 +29,19 @@ export default function Publicar() {
     enquete?: string;
   }>();
   const existente = posts.find((p) => p.id === id);
-  const [texto, setTexto] = useState(existente?.texto ?? '');
-  const [foto, setFoto] = useState<string | undefined>(existente?.foto);
-  const [vis, setVis] = useState<VisibilidadePost>(existente?.visibilidade ?? 'todos');
+  const chaveRasc = `publicar.${id ?? 'novo'}`;
+  const [texto, setTexto, limpaTexto] = useRascunho(`${chaveRasc}.texto`, existente?.texto ?? '');
+  const [foto, setFoto, limpaFoto] = useRascunho<string | undefined>(`${chaveRasc}.foto`, existente?.foto);
+  const [vis, setVis, limpaVis] = useRascunho<VisibilidadePost>(
+    `${chaveRasc}.vis`,
+    existente?.visibilidade ?? 'todos',
+  );
   const [carregando, setCarregando] = useState(false);
   const ehEnquete = !!existente?.enquete || modoEnquete === '1';
-  const [opcoes, setOpcoes] = useState<string[]>(existente?.enquete ?? ['', '']);
+  const [opcoes, setOpcoes, limpaOpcoes] = useRascunho<string[]>(
+    `${chaveRasc}.opcoes`,
+    existente?.enquete ?? ['', ''],
+  );
   const opcoesValidas = opcoes.map((o) => o.trim()).filter(Boolean);
 
   const pegar = async (origem: 'galeria' | 'camera') => {
@@ -63,6 +71,7 @@ export default function Publicar() {
         return avisar(t('feed.erroAcao'));
       }
     }
+    [limpaTexto, limpaFoto, limpaVis, limpaOpcoes].forEach((l) => l());
     router.back();
   };
 

@@ -12,7 +12,7 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
@@ -21,6 +21,8 @@ import { useAgapes, type Agape } from '@/estado/agapes';
 import { filtrarLugares, irmaosExemplo, lugaresExemplo, todosOsLugares, type Filtro } from '@/dados/exemplos';
 import { mesclarPontos } from '@/map/pontos';
 import { usePontosDoBanco } from '@/map/usePontosDoBanco';
+import { useIrmaosAoVivo } from '@/map/useIrmaosAoVivo';
+import { usePublicarPosicao } from '@/map/usePublicarPosicao';
 import type { Area } from '@/servidor/pontos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
@@ -35,6 +37,7 @@ import {
   acenar,
   fichaDoAgape,
   fichaDoIrmao,
+  fichaDoIrmaoAoVivo,
   fichaDoLugar,
   type AcaoFicha,
   type Ficha,
@@ -43,8 +46,11 @@ import {
 import { ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
+import { useModoMapaAutomatico } from '@/map/temaMapa';
+import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
+import { avisar } from '@/ui/dialogo';
 import { postoExemplo } from '@/navegacao/destinos';
-import { espaco, raios, sombra, useCores, useEstilos, type NomeCor, type Paleta } from '@/theme';
+import { espaco, raios, sombra, useCores, useEstilos, useTema, type NomeCor, type Paleta } from '@/theme';
 import {
   Avatar,
   Botao,
@@ -116,7 +122,6 @@ export default function Mapa() {
   const cores = useCores();
   const coresStatus = coresDoStatus(cores);
   const estilos = useEstilos(criarEstilos);
-  const estiloMapa = useEstiloMapa();
   const mapa = useRef<MapRef>(null);
   const camera = useRef<CameraRef>(null);
   const [filtro, setFiltro] = useState<Filtro>('tudo');
@@ -131,9 +136,18 @@ export default function Mapa() {
    * Agora: usa na hora a última posição conhecida, depois refina com o GPS, e avisa se não der.
    */
   const [minhaPosicao, setMinhaPosicao] = useState<[number, number] | null>(null);
+  // Dia/noite automático pelo sol (só se o tema do app está em "auto"); pilotando (em movimento, sem
+  // liberação de garupa) esconde as camadas extras do estilo.
+  const { preferencia } = useTema();
+  const modoAuto = useModoMapaAutomatico(
+    minhaPosicao ? { lat: minhaPosicao[1], lon: minhaPosicao[0] } : null,
+    preferencia === 'auto',
+  );
+  const pilotando = useBloqueioEmMovimento();
+  const estiloMapa = useEstiloMapa(modoAuto, pilotando);
   const irParaMim = async () => {
     const { granted } = await Location.requestForegroundPermissionsAsync().catch(() => ({ granted: false }));
-    if (!granted) return Alert.alert(t('mapa.semPermissaoTitulo'), t('mapa.semPermissaoTexto'));
+    if (!granted) return avisar(t('mapa.semPermissaoTitulo'), t('mapa.semPermissaoTexto'));
     const voar = (lat: number, lng: number) => {
       setMinhaPosicao([lng, lat]);
       camera.current?.flyTo({ center: [lng, lat], zoom: 14, duration: 900 });
@@ -144,7 +158,7 @@ export default function Mapa() {
       () => null,
     );
     if (precisa) voar(precisa.coords.latitude, precisa.coords.longitude);
-    else if (!rapida) Alert.alert(t('mapa.semGpsTitulo'), t('mapa.semGpsTexto'));
+    else if (!rapida) avisar(t('mapa.semGpsTitulo'), t('mapa.semGpsTexto'));
   };
 
   /** Zoom por botão (R24): todo gesto tem um botão equivalente. */
@@ -175,7 +189,11 @@ export default function Mapa() {
   const doBanco = usePontosDoBanco(chatNoServidor, area, zoomAtual);
   const todos = useMemo(() => mesclarPontos(todosOsLugares(), doBanco), [doBanco]);
   const lugares = useMemo(() => filtrarLugares(todos, filtro), [todos, filtro]);
-  const irmaos = filtro === 'tudo' || filtro === 'irmaos' ? irmaosExemplo : [];
+  // Servidor + membro aprovado: irmãos de verdade (o servidor decide o que cada um mostra). Exemplos só no modo local.
+  const irmaosReais = useIrmaosAoVivo(chatNoServidor, area);
+  usePublicarPosicao(chatNoServidor, visibilidade.estado);
+  const fonteIrmaos = chatNoServidor ? irmaosReais : irmaosExemplo;
+  const irmaos = filtro === 'tudo' || filtro === 'irmaos' ? fonteIrmaos : [];
   const contagem = {
     irmaos: irmaos.length,
     sedes: lugares.filter((l) => l.tipo === 'sede').length,
@@ -192,6 +210,11 @@ export default function Mapa() {
     if (l) abrir(fichaDoLugar(l, precos[l.id]));
   };
   const tocarIrmao = (id: string) => {
+    if (chatNoServidor) {
+      const r = irmaosReais.find((x) => x.id === id);
+      if (r) abrir(fichaDoIrmaoAoVivo(r));
+      return;
+    }
     const i = irmaosExemplo.find((x) => x.id === id);
     if (i) abrir(fichaDoIrmao(i));
   };
@@ -224,16 +247,16 @@ export default function Mapa() {
         }
         const novo = acenar(acenos, ficha.id, hoje);
         if (!novo) {
-          if (!acenos.para.includes(ficha.id)) Alert.alert(t('ficha.limiteAcenos'));
+          if (!acenos.para.includes(ficha.id)) avisar(t('ficha.limiteAcenos'));
           return;
         }
         setAcenos(novo);
-        Alert.alert(t('ficha.acenoEnviado', { nome: ficha.titulo }), t('ficha.acenoExplica'));
+        avisar(t('ficha.acenoEnviado', { nome: ficha.titulo }), t('ficha.acenoExplica'));
         return;
       }
       case 'perfil':
       case 'falarContato':
-        Alert.alert(t('comum.emBreve'), t(`ficha.emBreve.${acao}`));
+        avisar(t('comum.emBreve'), t(`ficha.emBreve.${acao}`));
         return;
       case 'informarPreco':
         if (extra) {
@@ -596,7 +619,7 @@ export default function Mapa() {
       />
       <FichaMapa
         ficha={ficha}
-        status={irmaosExemplo.find((i) => i.id === ficha?.id)?.status}
+        status={fonteIrmaos.find((i) => i.id === ficha?.id)?.status}
         feitas={feitas}
         aoFechar={() => setFicha(null)}
         aoAgir={agir}

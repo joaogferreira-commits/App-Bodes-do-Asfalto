@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { MAX_CONTATOS, usePerfil } from '@/estado/perfil';
 import { espaco, useCores } from '@/theme';
@@ -13,8 +13,8 @@ export default function Contatos() {
   const { t } = useTranslation();
   const cores = useCores();
   const { contatos, salvarContato, apagarContato } = usePerfil();
-  const [nome, setNome] = useState('');
-  const [telefone, setTelefone] = useState('');
+  const [nome, setNome, limpaNome] = useRascunho('contato.nome', '');
+  const [telefone, setTelefone, limpaTelefone] = useRascunho('contato.telefone', '');
   const cheio = contatos.length >= MAX_CONTATOS;
 
   const adicionar = () => {
@@ -22,6 +22,8 @@ export default function Contatos() {
     if (salvarContato({ nome: nome.trim(), telefone: telefone.trim() })) {
       setNome('');
       setTelefone('');
+      limpaNome();
+      limpaTelefone();
     }
   };
 

@@ -10,7 +10,6 @@ module.exports = defineConfig([
   {
     // Alert nativo é cinza e difícil de fechar: use avisar()/abrirMenu() de '@/ui/dialogo'.
     files: ['src/**/*.{ts,tsx}'],
-    ignores: ['src/app/(abas)/index.tsx', 'src/componentes/FichaMapa.tsx'],
     rules: {
       'no-restricted-syntax': [
         'error',

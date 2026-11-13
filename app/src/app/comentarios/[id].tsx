@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useMeusPosts } from '@/estado/meusPosts';
 import { useModeracao } from '@/feed/moderacao';
@@ -22,7 +23,7 @@ export default function Comentarios() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { comentarios, comentar, apagarComentario, servidor } = useMeusPosts();
   const { confirmarDenuncia, confirmarBloqueio } = useModeracao();
-  const [texto, setTexto] = useState('');
+  const [texto, setTexto, limpaTexto] = useRascunho(`comentario.${id}`, '');
   const [doServidor, setDoServidor] = useState<feed.ComentarioServidor[]>([]);
   const meus = comentarios[id] ?? [];
   // Com o servidor ligado não há comentários de exemplo.
@@ -54,12 +55,14 @@ export default function Comentarios() {
     if (!servidor) {
       comentar(id, limpo, t('perfil.voce'));
       setTexto('');
+      limpaTexto();
       return;
     }
     feed
       .comentar(id, limpo)
       .then(() => {
         setTexto('');
+        limpaTexto();
         return recarregar();
       })
       .catch(() => avisar(t('feed.erroAcao')));

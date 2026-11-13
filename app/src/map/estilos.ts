@@ -8,9 +8,37 @@ import estiloSolJson from './estilo-bodes-sol.json';
 export const estiloNoite = estiloNoiteJson as unknown as StyleSpecification;
 export const estiloSol = estiloSolJson as unknown as StyleSpecification;
 
-/** Estilo do mapa que acompanha o tema (noite ou sol), R41. */
-export function useEstiloMapa(): StyleSpecification {
-  return useTema().modo === 'sol' ? estiloSol : estiloNoite;
+/** Camadas decorativas (relevo, prédios): somem no modo pilotando para o mapa ficar limpo e leve. */
+export const PREFIXO_EXTRAS = 'extra-';
+
+const cacheEstilos = new Map<string, StyleSpecification>();
+
+/**
+ * Estilo certo para o momento: sol de dia, noite à noite; pilotando tira as camadas "extra-".
+ * Devolve sempre o mesmo objeto para a mesma combinação (o mapa não recarrega o estilo à toa).
+ */
+export function estiloDoMapa(modo: 'sol' | 'noite', pilotando = false): StyleSpecification {
+  const base = modo === 'sol' ? estiloSol : estiloNoite;
+  if (!pilotando) return base;
+  const chave = `${modo}|p`;
+  let e = cacheEstilos.get(chave);
+  if (!e) {
+    e = {
+      ...base,
+      layers: base.layers.filter((l) => !l.id.startsWith(PREFIXO_EXTRAS)),
+    } as StyleSpecification;
+    cacheEstilos.set(chave, e);
+  }
+  return e;
+}
+
+/**
+ * Estilo do mapa (R41). `modo` vem do dia/noite automático (null = segue o tema do app);
+ * `pilotando` esconde as camadas extras.
+ */
+export function useEstiloMapa(modo?: 'sol' | 'noite' | null, pilotando = false): StyleSpecification {
+  const doTema = useTema().modo;
+  return estiloDoMapa(modo ?? doTema, pilotando);
 }
 
 /** Largura da rota: 1,6× a rodovia no mesmo zoom (gerada em tools/gerar_estilo_mapa.py), R38. */

@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   FlatList,
@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useRascunho } from '@/estado/rascunho';
 import { useAcessoOpcional } from '@/acesso/acesso';
 import { podeEscrever, respostasRapidas, type Mensagem } from '@/dados/conversas';
 import { useConversas } from '@/estado/conversas';
@@ -29,7 +30,7 @@ export default function Conversa() {
   const chat = useConversas();
   // Papel real vem do servidor; no modo local o irmão é membro comum.
   const papel = useAcessoOpcional()?.papel ?? 'membro';
-  const [texto, setTexto] = useState('');
+  const [texto, setTexto, limpaTexto] = useRascunho(`conversa.${id}`, '');
   const lista = useRef<FlatList<Mensagem>>(null);
   const c = chat.conversas.find((x) => x.id === id);
   const { marcarLida, carregarMensagens, servidor } = chat;
@@ -57,7 +58,10 @@ export default function Conversa() {
     const limpo = msg.trim();
     if (!limpo) return;
     chat.enviar(c.id, limpo, rapida);
-    setTexto('');
+    if (!rapida) {
+      setTexto('');
+      limpaTexto();
+    }
     setTimeout(() => lista.current?.scrollToEnd({ animated: true }), 50);
   };
 

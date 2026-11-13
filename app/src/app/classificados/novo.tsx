@@ -1,9 +1,9 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import {
   categorias,
@@ -28,11 +28,14 @@ export default function NovoAnuncio() {
   const cores = useCores();
   const { anunciar } = useClassificados();
   const perfil = usePerfilOpcional();
-  const [fotos, setFotos] = useState<string[]>([]);
-  const [categoria, setCategoria] = useState<CategoriaClassificado>('motos');
-  const [estado, setEstado] = useState<EstadoItem>('usado');
-  const [aceitaTroca, setAceitaTroca] = useState(false);
-  const [f, setF] = useState({
+  const [fotos, setFotos, limpaFotos] = useRascunho<string[]>('anuncio.fotos', []);
+  const [categoria, setCategoria, limpaCategoria] = useRascunho<CategoriaClassificado>(
+    'anuncio.categoria',
+    'motos',
+  );
+  const [estado, setEstado, limpaEstado] = useRascunho<EstadoItem>('anuncio.estado', 'usado');
+  const [aceitaTroca, setAceitaTroca, limpaTroca] = useRascunho('anuncio.troca', false);
+  const [f, setF, limpaF] = useRascunho('anuncio.campos', {
     titulo: '',
     preco: '',
     cidade: perfil?.perfil.cidade ?? '',
@@ -67,6 +70,7 @@ export default function NovoAnuncio() {
       capitulo: perfil?.perfil.cidade || 'Cuiabá',
       whatsapp: f.whatsapp,
     });
+    [limpaFotos, limpaCategoria, limpaEstado, limpaTroca, limpaF].forEach((l) => l());
     router.back();
   };
 

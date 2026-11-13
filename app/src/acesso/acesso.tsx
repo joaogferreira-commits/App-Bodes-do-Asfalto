@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
+import { limparTodosRascunhos } from '@/estado/rascunhoArmazem';
 import * as servidor from '@/servidor/auth';
 import { servidorConfigurado, supabase } from '@/servidor/supabase';
 
@@ -76,6 +77,7 @@ export async function apagarDadosPessoais() {
     (k) => k.startsWith('bodes.') && k !== 'bodes.tema',
   );
   await AsyncStorage.multiRemove(chaves).catch(() => undefined);
+  await limparTodosRascunhos();
 }
 const inicial: Dados = { estado: 'deslogado', consentimentos: [] };
 const Contexto = createContext<Valor | null>(null);

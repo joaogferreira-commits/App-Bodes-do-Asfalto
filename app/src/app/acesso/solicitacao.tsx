@@ -1,9 +1,9 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { useAcesso } from '@/acesso/acesso';
 import { nomesCapitulos } from '@/dados/capitulos';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
@@ -59,7 +59,7 @@ function FotoObrigatoria({
 export default function Solicitacao() {
   const { t } = useTranslation();
   const acesso = useAcesso();
-  const [f, setF] = useState({
+  const [f, setF, limparF] = useRascunho('solicitacao.campos', {
     nome: '',
     apelido: '',
     capitulo: '',
@@ -67,8 +67,14 @@ export default function Solicitacao() {
     telefone: '',
     indicadoPor: '',
   });
-  const [fotoColete, setFotoColete] = useState<string>();
-  const [fotoCarteirinha, setFotoCarteirinha] = useState<string>();
+  const [fotoColete, setFotoColete, limparColete] = useRascunho<string | undefined>(
+    'solicitacao.colete',
+    undefined,
+  );
+  const [fotoCarteirinha, setFotoCarteirinha, limparCarteirinha] = useRascunho<string | undefined>(
+    'solicitacao.carteirinha',
+    undefined,
+  );
   const muda = (k: keyof typeof f) => (v: string) => setF((a) => ({ ...a, [k]: v }));
   const faltando = [
     !f.nome.trim() && t('acesso.form.nome'),
@@ -84,7 +90,12 @@ export default function Solicitacao() {
     if (faltando.length) return avisar(t('acesso.form.falta'), faltando.join('\n'));
     void acesso
       .enviarSolicitacao({ ...f, fotoColete, fotoCarteirinha })
-      .then(() => router.replace('/acesso/espera'))
+      .then(() => {
+        limparF();
+        limparColete();
+        limparCarteirinha();
+        router.replace('/acesso/espera');
+      })
       .catch(() => avisar(t('acesso.form.erroEnvio')));
   };
 

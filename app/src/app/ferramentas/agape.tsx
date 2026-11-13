@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { useAgapes } from '@/estado/agapes';
 import { espaco } from '@/theme';
@@ -16,9 +17,9 @@ const horarios = ['30 min', '1 h', '2 h', '19h', '20h'];
 export default function CriarAgape() {
   const { t } = useTranslation();
   const { criar } = useAgapes();
-  const [local, setLocal] = useState('');
-  const [texto, setTexto] = useState('');
-  const [horario, setHorario] = useState(horarios[1]!);
+  const [local, setLocal, limpaLocal] = useRascunho('agape.local', '');
+  const [texto, setTexto, limpaTexto] = useRascunho('agape.texto', '');
+  const [horario, setHorario, limpaHorario] = useRascunho('agape.horario', horarios[1]!);
   const [salvando, setSalvando] = useState(false);
 
   const publicar = async () => {
@@ -36,6 +37,9 @@ export default function CriarAgape() {
       lat: p.coords.latitude,
       lng: p.coords.longitude,
     });
+    limpaLocal();
+    limpaTexto();
+    limpaHorario();
     avisar(t('ferramentas.agape.publicado'), t('ferramentas.agape.publicadoTexto'));
     router.navigate('/');
   };

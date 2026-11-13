@@ -1,8 +1,8 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { perfilExemplo } from '@/dados/perfil';
 import { tiposDesafio, validarDesafio, xpDoDesafio, type TipoDesafio } from '@/dados/desafios';
@@ -18,10 +18,10 @@ export default function NovoDesafio() {
   const { t } = useTranslation();
   const cores = useCores();
   const ds = useDesafios();
-  const [titulo, setTitulo] = useState('');
-  const [tipo, setTipo] = useState<TipoDesafio>('km');
-  const [meta, setMeta] = useState('');
-  const [dias, setDias] = useState<(typeof prazos)[number]>(30);
+  const [titulo, setTitulo, limpaTitulo] = useRascunho('desafio.titulo', '');
+  const [tipo, setTipo, limpaTipo] = useRascunho<TipoDesafio>('desafio.tipo', 'km');
+  const [meta, setMeta, limpaMeta] = useRascunho('desafio.meta', '');
+  const [dias, setDias, limpaDias] = useRascunho<(typeof prazos)[number]>('desafio.dias', 30);
   const metaN = Number(meta.replace(/\D/g, '')) || 0;
 
   const enviar = () => {
@@ -43,6 +43,10 @@ export default function NovoDesafio() {
     const erro = validarDesafio(novo, ds.todos);
     if (erro) return avisar(t(`desafios.erros.${erro}`));
     ds.criar(novo);
+    limpaTitulo();
+    limpaTipo();
+    limpaMeta();
+    limpaDias();
     avisar(t('desafios.enviado'), t('desafios.aguardandoExplica'));
     router.back();
   };

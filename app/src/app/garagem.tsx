@@ -1,9 +1,9 @@
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { usePerfil, type Moto } from '@/estado/perfil';
 import { escolherFoto } from '@/feed/foto';
@@ -21,17 +21,24 @@ export default function Garagem() {
   const { motos, salvarMoto, apagarMoto, tornarPrincipal } = usePerfil();
   // Vindo do perfil ("Editar moto"), já abre a ficha daquela moto.
   const { editar } = useLocalSearchParams<{ editar?: string }>();
-  const [rascunho, setRascunho] = useState<Rascunho | null>(() => {
-    const alvo = editar ? motos.find((m) => m.id === editar) : undefined;
-    return alvo ? { ...alvo } : motos.length ? null : vazio;
-  });
+  const [rascunho, setRascunho, limpaFicha] = useRascunho<Rascunho | null>(
+    `garagem.${editar ?? 'ficha'}`,
+    (() => {
+      const alvo = editar ? motos.find((m) => m.id === editar) : undefined;
+      return alvo ? { ...alvo } : motos.length ? null : vazio;
+    })(),
+  );
+  const fechar = () => {
+    setRascunho(null);
+    limpaFicha();
+  };
   const muda = (k: keyof Rascunho) => (v: string) => setRascunho((r) => (r ? { ...r, [k]: v } : r));
 
   const salvar = () => {
     if (!rascunho) return;
     if (!rascunho.marca.trim() || !rascunho.modelo.trim()) return avisar(t('garagem.falta'));
     salvarMoto({ ...rascunho, marca: rascunho.marca.trim(), modelo: rascunho.modelo.trim() });
-    setRascunho(null);
+    fechar();
   };
 
   const ficha = rascunho && (
@@ -69,9 +76,7 @@ export default function Garagem() {
         }
       />
       <Botao titulo={t('publicar.salvar')} grande icone="check" onPress={salvar} />
-      {motos.length > 0 && (
-        <Botao titulo={t('comum.cancelar')} variante="contorno" onPress={() => setRascunho(null)} />
-      )}
+      {motos.length > 0 && <Botao titulo={t('comum.cancelar')} variante="contorno" onPress={fechar} />}
     </Cartao>
   );
 

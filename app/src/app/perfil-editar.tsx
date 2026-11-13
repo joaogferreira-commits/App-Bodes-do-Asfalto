@@ -1,9 +1,9 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useRascunho } from '@/estado/rascunho';
 import { useAcesso } from '@/acesso/acesso';
 import { Campo, TelaFerramenta } from '@/componentes/TelaFerramenta';
 import type { Visibilidade } from '@/dados/perfil';
@@ -21,7 +21,7 @@ export default function EditarPerfil() {
   const cores = useCores();
   const { perfil, salvarPerfil } = usePerfil();
   const acesso = useAcesso();
-  const [p, setP] = useState<MeuPerfil>(perfil);
+  const [p, setP, limpaP] = useRascunho<MeuPerfil>('perfil.editar', perfil);
   const podeMacom = acesso.temConsentimento('dados_macons');
 
   return (
@@ -116,6 +116,7 @@ export default function EditarPerfil() {
         icone="check"
         onPress={() => {
           salvarPerfil({ ...p, nome: p.nome.trim(), apelido: p.apelido.trim(), cidade: p.cidade.trim() });
+          limpaP();
           router.back();
         }}
       />

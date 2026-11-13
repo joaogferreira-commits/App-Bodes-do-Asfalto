@@ -14,6 +14,7 @@ jest.mock('expo-image', () => {
 });
 jest.mock('expo-location', () => ({
   requestForegroundPermissionsAsync: jest.fn(async () => ({ granted: false })),
+  getForegroundPermissionsAsync: jest.fn(async () => ({ granted: false })),
   getLastKnownPositionAsync: jest.fn(async () => null),
   getCurrentPositionAsync: jest.fn(async () => null),
   Accuracy: { Balanced: 3 },
