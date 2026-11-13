@@ -4,7 +4,7 @@ import { distanciaKm, type Coordenada } from './destinos';
 
 export type PostoEscolhido = { posto: LugarExemplo; km: number };
 
-export const RAIO_POSTO_KM = 15;
+export const RAIO_POSTO_KM = 100;
 export const DESVIO_MAXIMO_KM = 1.5;
 
 const ponto = (l: { lat: number; lng: number }): Coordenada => ({ lat: l.lat, lng: l.lng });

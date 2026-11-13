@@ -28,8 +28,8 @@ describe('posto mais próximo', () => {
     expect(r!.km).toBeLessThan(2);
   });
 
-  it('sem posto no raio de 15 km devolve null', () => {
-    expect(postoMaisProximo(atual, [posto('longe', -15.6, -55.9)])).toBeNull();
+  it('sem posto no raio de 100 km devolve null', () => {
+    expect(postoMaisProximo(atual, [posto('longe', -16.6, -56.1)])).toBeNull();
   });
 });
 
@@ -59,9 +59,9 @@ describe('posto na rota', () => {
 });
 
 describe('busca no banco', () => {
-  it('"próximo" busca ~15 km em volta; "rota" cobre o trecho à frente', () => {
+  it('"próximo" busca ~100 km em volta (estrada); "rota" cobre o trecho à frente', () => {
     const a = areaDeBusca(atual);
-    expect(a.maxLat - a.minLat).toBeCloseTo(2 * (15 / 110), 2);
+    expect(a.maxLat - a.minLat).toBeCloseTo(2 * (100 / 110), 2);
     const b = areaDeBusca(atual, rota);
     expect(b.maxLon).toBeGreaterThan(-55.7);
   });

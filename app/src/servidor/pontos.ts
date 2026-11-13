@@ -148,7 +148,7 @@ const kmEntre = (a: Area) => {
  */
 export async function carregarPostosPerto(
   centro: { lat: number; lng: number },
-  raioKm = 15,
+  raioKm = 100,
   limite = 100,
 ): Promise<LugarExemplo[] | null> {
   if (!supabase) return null;

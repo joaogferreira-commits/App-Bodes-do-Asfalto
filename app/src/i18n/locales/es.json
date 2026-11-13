@@ -120,7 +120,7 @@
       "apoio": "Alojamiento y emergencia"
     },
     "semPostoTitulo": "Ninguna gasolinera cerca",
-    "semPostoTexto": "No encontré gasolinera en un radio de 15 km. Aleja el mapa o busca por nombre."
+    "semPostoTexto": "No encontré gasolinera en un radio de 100 km. Aleja el mapa o busca por nombre."
   },
   "rota": {
     "titulo": "Planear ruta",

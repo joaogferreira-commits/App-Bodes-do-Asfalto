@@ -120,7 +120,7 @@
       "apoio": "Lodging and emergency"
     },
     "semPostoTitulo": "No gas station nearby",
-    "semPostoTexto": "No gas station within 15 km. Zoom the map out or search by name."
+    "semPostoTexto": "No gas station within 100 km. Zoom the map out or search by name."
   },
   "rota": {
     "titulo": "Plan route",

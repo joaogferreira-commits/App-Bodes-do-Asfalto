@@ -40,14 +40,14 @@ grant select on public.postos_anp to authenticated;
 -- Último preço de cada combustível que o app mostra, com a data mais recente de coleta.
 create function public.postos_proximos(
   p_lat double precision, p_lng double precision,
-  raio_km double precision default 15, limite int default 20
+  raio_km double precision default 100, limite int default 20
 ) returns table (
   id text, nome text, bandeira text, lon double precision, lat double precision,
   distancia_km double precision, fonte text, precisao text, precos jsonb, preco_data date
 )
 language sql stable security invoker set search_path = public, extensions as $$
   with params as (
-    select p_lat as plat, p_lng as plng, greatest(0.1, least(coalesce(raio_km, 15), 100)) as r
+    select p_lat as plat, p_lng as plng, greatest(0.1, least(coalesce(raio_km, 100), 100)) as r
   ),
   alvo as (
     select plat, plng, r,

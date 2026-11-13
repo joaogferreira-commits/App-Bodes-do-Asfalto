@@ -120,7 +120,7 @@
       "apoio": "Hospedagem e emergência"
     },
     "semPostoTitulo": "Nenhum posto por perto",
-    "semPostoTexto": "Não achei posto num raio de 15 km. Afaste o mapa ou procure pelo nome na busca."
+    "semPostoTexto": "Não achei posto num raio de 100 km. Afaste o mapa ou procure pelo nome na busca."
   },
   "rota": {
     "titulo": "Planejar rota",
