@@ -13,8 +13,37 @@ on:
       - 'tools/coleta/**'
   pull_request:
 
+# Um push novo cancela a verificação antiga do mesmo ramo (economiza minutos).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  mudancas:
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.f.outputs.app }}
+      banco: ${{ steps.f.outputs.banco }}
+      ferramentas: ${{ steps.f.outputs.ferramentas }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: f
+        with:
+          filters: |
+            app:
+              - 'app/**'
+              - '.github/workflows/ci.yml'
+            banco:
+              - 'supabase/**'
+              - '.github/workflows/ci.yml'
+            ferramentas:
+              - 'tools/**'
+              - '.github/workflows/ci.yml'
+
   app:
+    needs: mudancas
+    if: needs.mudancas.outputs.app == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,11 +58,13 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm test -- --ci
+      - run: npm test -- --ci --maxWorkers=2 --forceExit
       - name: Empacotar o JavaScript (mesma etapa que roda no EAS)
         run: npx expo export --platform android --output-dir /tmp/export
 
   ferramentas:
+    needs: mudancas
+    if: needs.mudancas.outputs.ferramentas == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,6 +77,8 @@ jobs:
         run: python -m unittest
 
   banco:
+    needs: mudancas
+    if: needs.mudancas.outputs.banco == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
