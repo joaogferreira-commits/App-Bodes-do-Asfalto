@@ -148,12 +148,17 @@ export function ProvedorAcesso({ children, comecar }: { children: ReactNode; com
         }
         mudar((a) => ({ ...a, metodo, email, estado: a.solicitacao ? 'pendente' : 'semSolicitacao' }));
       },
-      entrarDemonstracao: () => mudar((a) => ({ ...a, metodo: 'demonstracao', estado: 'membro' })),
+      // Com o servidor ligado não existe entrada de demonstração nem aprovação simulada.
+      entrarDemonstracao: () => {
+        if (!usarServidor) mudar((a) => ({ ...a, metodo: 'demonstracao', estado: 'membro' }));
+      },
       enviarSolicitacao: async (s) => {
         if (usarServidor) await servidor.enviarSolicitacaoServidor(s);
         mudar((a) => ({ ...a, estado: 'pendente', solicitacao: { ...s, enviadaEm: Date.now() } }));
       },
-      simularAprovacao: () => mudar((a) => ({ ...a, estado: 'membro' })),
+      simularAprovacao: () => {
+        if (!usarServidor) mudar((a) => ({ ...a, estado: 'membro' }));
+      },
       consentir: (f) => {
         if (usarServidor && !ativo(f))
           void servidor.registrarConsentimento(f, VERSAO_TERMOS).catch(() => undefined);

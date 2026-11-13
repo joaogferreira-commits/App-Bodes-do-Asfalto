@@ -2,6 +2,7 @@ import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { ehProducao } from '@/ambiente';
 import { TelaFerramenta } from '@/componentes/TelaFerramenta';
 import { espaco, useCores } from '@/theme';
 import { Cartao, Icone, pinos, Texto } from '@/ui';
@@ -39,12 +40,14 @@ export default function Sobre() {
           <Texto style={{ flex: 1 }}>{t(`ferramentas.sobre.regras.${r}`)}</Texto>
         </View>
       ))}
-      <View style={{ flexDirection: 'row', gap: espaco.xs, alignItems: 'center' }}>
-        <Icone nome="alerta" tamanho={18} cor={cores.textoSec} />
-        <Texto variante="pequeno" style={{ flex: 1 }}>
-          {t('ferramentas.sobre.revisar')}
-        </Texto>
-      </View>
+      {!ehProducao() && (
+        <View style={{ flexDirection: 'row', gap: espaco.xs, alignItems: 'center' }}>
+          <Icone nome="alerta" tamanho={18} cor={cores.textoSec} />
+          <Texto variante="pequeno" style={{ flex: 1 }}>
+            {t('ferramentas.sobre.revisar')}
+          </Texto>
+        </View>
+      )}
     </TelaFerramenta>
   );
 }

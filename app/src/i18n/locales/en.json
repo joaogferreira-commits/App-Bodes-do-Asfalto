@@ -118,7 +118,9 @@
       "natureza": "Nature",
       "cultura": "Culture",
       "apoio": "Lodging and emergency"
-    }
+    },
+    "semPostoTitulo": "No gas station nearby",
+    "semPostoTexto": "No gas station within 15 km. Zoom the map out or search by name."
   },
   "rota": {
     "titulo": "Plan route",
@@ -259,7 +261,7 @@
     "capitulo": "Cuiabá chapter",
     "catalogo": "Component catalog",
     "catalogoDesc": "Every visual element in the app",
-    "versao": "Version {{versao}} (test)",
+    "versao": "Version {{versao}}",
     "emBreveCadastro": "Profile editing arrives with member registration (Stage 1).",
     "capituloCargo": "{{capitulo}} chapter · {{cargo}}",
     "cargos": {
@@ -319,7 +321,8 @@
     "editarMoto": "Edit {{moto}}",
     "editarMotoCurto": "Edit bike",
     "cadastrarMoto": "Add my bike",
-    "exemplo": "Example"
+    "exemplo": "Example",
+    "versaoTeste": "Version {{versao}} (test)"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -1186,7 +1189,8 @@
     "limite": "In this test version, the automatic push alert to the convoy does not exist yet (needs the server). WhatsApp asks for one tap to send.",
     "estouBem": "I am fine, close",
     "botaoAjuda": "Ask for help (SOS)",
-    "botaoAjudaDica": "Opens the emergency screen: call 192/193, alert your contacts and the brothers."
+    "botaoAjudaDica": "Opens the emergency screen: call 192/193, alert your contacts and the brothers.",
+    "naoSubstitui": "SOS alerts your group and contacts, but it does not replace 192 (SAMU) or 193 (Fire Dept)."
   },
   "negocios": {
     "titulo": "Business Guide",
@@ -1325,7 +1329,7 @@
     "colocarWidget": "Add SOS widget",
     "naoSuportado": "This phone does not allow pinned shortcuts. Press and hold the app icon to see SOS.",
     "widgetManual": "Press and hold an empty spot on the home screen, tap \"Widgets\" and look for \"SOS Bodes\".",
-    "bloqueio": "Lock screen: Android does not let apps add shortcuts there. On iPhone it comes with the iPhone version.",
+    "bloqueio": "Lock screen: Android does not let apps add shortcuts there.",
     "bloqueadoTitulo": "The phone blocked the shortcut",
     "bloqueadoTexto": "Some phones (Xiaomi, Redmi, Poco) need permission first:\n1. Tap \"Open settings\".\n2. Tap \"Other permissions\" (or \"Permissions\").\n3. Turn on \"Home screen shortcuts\".\n4. Come back and tap \"Add shortcut\" again.",
     "abrirConfig": "Open settings",

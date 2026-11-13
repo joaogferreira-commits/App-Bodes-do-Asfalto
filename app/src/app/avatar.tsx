@@ -93,7 +93,6 @@ export default function CriarAvatar() {
             />
           ))}
         </View>
-        <Texto variante="secundario">{t('avatar.ia')}</Texto>
         <Botao
           titulo={t('avatar.salvar')}
           grande

@@ -118,7 +118,9 @@
       "natureza": "Naturaleza",
       "cultura": "Cultura",
       "apoio": "Alojamiento y emergencia"
-    }
+    },
+    "semPostoTitulo": "Ninguna gasolinera cerca",
+    "semPostoTexto": "No encontré gasolinera en un radio de 15 km. Aleja el mapa o busca por nombre."
   },
   "rota": {
     "titulo": "Planear ruta",
@@ -259,7 +261,7 @@
     "capitulo": "Capítulo Cuiabá",
     "catalogo": "Catálogo de componentes",
     "catalogoDesc": "Todos los elementos visuales de la app",
-    "versao": "Versión {{versao}} (prueba)",
+    "versao": "Versión {{versao}}",
     "emBreveCadastro": "La edición del perfil llega con el registro de los hermanos (Etapa 1).",
     "capituloCargo": "Capítulo {{capitulo}} · {{cargo}}",
     "cargos": {
@@ -319,7 +321,8 @@
     "editarMoto": "Editar {{moto}}",
     "editarMotoCurto": "Editar moto",
     "cadastrarMoto": "Registrar mi moto",
-    "exemplo": "Ejemplo"
+    "exemplo": "Ejemplo",
+    "versaoTeste": "Versión {{versao}} (prueba)"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -1186,7 +1189,8 @@
     "limite": "En esta versión de prueba aún no existe el aviso automático por notificación al convoy (depende del servidor). WhatsApp pide un toque para enviar.",
     "estouBem": "Estoy bien, cerrar",
     "botaoAjuda": "Pedir ayuda (SOS)",
-    "botaoAjudaDica": "Abre la pantalla de socorro: llamar al 192/193, avisar a tus contactos y a los hermanos."
+    "botaoAjudaDica": "Abre la pantalla de socorro: llamar al 192/193, avisar a tus contactos y a los hermanos.",
+    "naoSubstitui": "El SOS avisa al grupo y a tus contactos, pero no sustituye al 192 (SAMU) ni al 193 (Bomberos)."
   },
   "negocios": {
     "titulo": "Guía de Negocios",
@@ -1325,7 +1329,7 @@
     "colocarWidget": "Poner widget de SOS",
     "naoSuportado": "Este celular no permite fijar atajos. Mantén pulsado el ícono de la app para ver el SOS.",
     "widgetManual": "Mantén pulsado un espacio vacío de la pantalla de inicio, toca \"Widgets\" y busca \"SOS Bodes\".",
-    "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí. En iPhone llegará con la versión para iPhone.",
+    "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí.",
     "bloqueadoTitulo": "El celular bloqueó el acceso directo",
     "bloqueadoTexto": "En algunos celulares (Xiaomi, Redmi, Poco) hay que permitirlo antes:\n1. Toca \"Abrir ajustes\".\n2. Toca \"Otros permisos\" (o \"Permisos\").\n3. Activa \"Accesos directos en la pantalla de inicio\".\n4. Vuelve aquí y toca otra vez \"Poner acceso directo\".",
     "abrirConfig": "Abrir ajustes",

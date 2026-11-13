@@ -63,6 +63,7 @@ import { useModoMapaAutomatico } from '@/map/temaMapa';
 import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { avisar } from '@/ui/dialogo';
 import { postoExemplo } from '@/navegacao/destinos';
+import { postoMaisProximo } from '@/navegacao/postos';
 import { espaco, raios, sombra, useCores, useEstilos, useTema, type NomeCor, type Paleta } from '@/theme';
 import { Avatar, Botao, BotaoIcone, Chip, coresDoStatus, Icone, pinos, Texto } from '@/ui';
 
@@ -164,7 +165,10 @@ export default function Mapa() {
   // Pontos do banco (OpenStreetMap) para a área visível, juntos com os que já vêm no app.
   const [area, setArea] = useState<Area>(AREA_INICIAL);
   const doBanco = usePontosDoBanco(chatNoServidor, area, zoomAtual);
-  const todos = useMemo(() => mesclarPontos(todosOsLugares(), doBanco), [doBanco]);
+  const todos = useMemo(
+    () => mesclarPontos(todosOsLugares([], chatNoServidor), doBanco),
+    [doBanco, chatNoServidor],
+  );
   const lugares = useMemo(() => filtrarLugares(todos, filtro), [todos, filtro]);
   // Servidor + membro aprovado: irmãos de verdade (o servidor decide o que cada um mostra). Exemplos só no modo local.
   const irmaosReais = useIrmaosAoVivo(chatNoServidor, area);
@@ -243,7 +247,8 @@ export default function Mapa() {
       }
       case 'perfil':
       case 'falarContato':
-        avisar(t('comum.emBreve'), t(`ficha.emBreve.${acao}`));
+        // Só as fichas de exemplo (modo local) trazem estas ações; com o servidor elas não existem.
+        if (!servidorConfigurado) avisar(t('comum.emBreve'), t(`ficha.emBreve.${acao}`));
         return;
       case 'informarPreco':
         if (extra) {
@@ -277,7 +282,21 @@ export default function Mapa() {
 
   const grupoMais = gruposMais.find((g) => g.chave === filtro);
   const irAoPosto = () => {
-    definirDestino(postoExemplo);
+    if (!servidorConfigurado) {
+      definirDestino(postoExemplo);
+      router.push('/rota');
+      return;
+    }
+    const achado = postoMaisProximo(referencia, todos);
+    if (!achado) {
+      avisar(t('mapa.semPostoTitulo'), t('mapa.semPostoTexto'));
+      return;
+    }
+    definirDestino({
+      chave: 'busca',
+      nome: achado.posto.nome,
+      posicao: { lat: achado.posto.lat, lng: achado.posto.lng },
+    });
     router.push('/rota');
   };
 

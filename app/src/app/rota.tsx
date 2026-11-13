@@ -8,6 +8,7 @@ import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 're
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { bateVoltaPadrao, useViagem } from '@/estado/viagem';
+import { servidorConfigurado } from '@/servidor/supabase';
 import { camadasDaRota, useEstiloMapa } from '@/map/estilos';
 import {
   destinosDaProva,
@@ -58,7 +59,13 @@ export default function Rota() {
   const [recolhido, setRecolhido] = useState(false);
   const [opcoes, setOpcoes] = useState<RotaPlanejada[]>([]);
   const [escolhida, setEscolhida] = useState(0);
-  const destinos = [...(destino.chave === 'busca' ? [destino] : []), ...destinosDaProva, postoExemplo];
+  // Com o servidor ligado somem os destinos só de prova (ponto a 5 km e posto de exemplo).
+  const destinos = [
+    ...(destino.chave === 'busca' ? [destino] : []),
+    ...(servidorConfigurado
+      ? destinosDaProva.filter((d) => d.chave !== 'cincoKm')
+      : [...destinosDaProva, postoExemplo]),
+  ];
 
   const corte = useRef<AbortController | null>(null);
   const [demorando, setDemorando] = useState(false);

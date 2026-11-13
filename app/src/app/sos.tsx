@@ -250,7 +250,7 @@ export default function Sos() {
           <Texto variante="pequeno">{t('sos.previa')}</Texto>
           <Texto style={{ fontFamily: fontes.textoMedio }}>{texto}</Texto>
         </Cartao>
-        <Texto variante="pequeno">{t('sos.limite')}</Texto>
+        <Texto variante="pequeno">{t(servidorLigado ? 'sos.naoSubstitui' : 'sos.limite')}</Texto>
         <Botao titulo={t('sos.estouBem')} variante="contorno" onPress={() => router.back()} />
       </ScrollView>
     </SafeAreaView>

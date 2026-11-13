@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import type { Filtro } from '@/dados/exemplos';
+import { servidorConfigurado } from '@/servidor/supabase';
 import {
   espaco,
   fontes,
@@ -121,7 +122,7 @@ export function LegendaTipos() {
           </Texto>
         </View>
       ))}
-      <Texto variante="pequeno">{t('mapa.dadosExemplo')}</Texto>
+      {!servidorConfigurado && <Texto variante="pequeno">{t('mapa.dadosExemplo')}</Texto>}
     </View>
   );
 }

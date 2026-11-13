@@ -6,7 +6,9 @@ import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { buscarEnderecos, buscarNoClube, type Resultado } from '@/busca/buscar';
+import { lugaresExemplo, lugaresReais } from '@/dados/exemplos';
 import { useViagem } from '@/estado/viagem';
+import { servidorConfigurado } from '@/servidor/supabase';
 import type { Coordenada } from '@/navegacao/destinos';
 import { formatarKm } from '@/rotas/formato';
 import { espaco, fontes, raios, toque, useCores, useEstilos, type Paleta } from '@/theme';
@@ -58,7 +60,10 @@ export default function Busca() {
     };
   }, [termo, perto]);
 
-  const doClube = useMemo(() => buscarNoClube(termo, perto), [termo, perto]);
+  const doClube = useMemo(
+    () => buscarNoClube(termo, perto, servidorConfigurado ? lugaresReais : lugaresExemplo),
+    [termo, perto],
+  );
   const resultados = [...doClube, ...enderecos];
 
   const escolher = (r: Resultado) => {

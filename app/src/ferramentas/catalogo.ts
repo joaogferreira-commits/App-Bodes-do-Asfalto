@@ -55,3 +55,24 @@ export const gruposFerramentas: { grupo: string; itens: Ferramenta[] }[] = [
     ],
   },
 ];
+
+/** Ferramentas que hoje só têm dados de exemplo (sem tabela no servidor): ficam escondidas na versão com servidor. */
+export const soExemplo = [
+  'bodeAmigo',
+  'irmaosPerto',
+  'membros',
+  'aniversarios',
+  'negocios',
+  'classificados',
+  'lojas',
+  'eventos',
+  'meta',
+];
+
+/** Catálogo que o irmão vê: com o servidor ligado, sem as ferramentas só de exemplo e sem grupos vazios. */
+export function ferramentasVisiveis(servidor: boolean) {
+  if (!servidor) return gruposFerramentas;
+  return gruposFerramentas
+    .map((g) => ({ ...g, itens: g.itens.filter((i) => !soExemplo.includes(i.chave)) }))
+    .filter((g) => g.itens.length > 0);
+}

@@ -55,4 +55,16 @@ describe('acesso com o servidor', () => {
     await act(async () => acesso().sair());
     expect(servidor.sairDoServidor).toHaveBeenCalled();
   });
+
+  it('com o servidor ligado não existe aprovação simulada nem entrada de demonstração', async () => {
+    await render(
+      <ProvedorAcesso>
+        <Espiao />
+      </ProvedorAcesso>,
+    );
+    await act(async () => avisar());
+    await act(async () => acesso().simularAprovacao());
+    await act(async () => acesso().entrarDemonstracao());
+    expect(screen.getByTestId('estado').props.children).toBe('pendente');
+  });
 });

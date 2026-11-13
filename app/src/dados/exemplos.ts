@@ -73,6 +73,20 @@ export const lugaresExemplo: LugarExemplo[] = [
   },
 ];
 
+/** Pontos inventados (sede, postos com preço, Loja, oficina, restaurante e ágape de exemplo): nunca aparecem com o servidor ligado. */
+export const idsSoExemplo = [
+  'sede-cuiaba',
+  'posto-trevo',
+  'posto-chapada',
+  'loja-exemplo',
+  'oficina-exemplo',
+  'agape-trevo',
+  'restaurante-irmao',
+];
+
+/** Lugares de verdade (monumentos, cachoeiras, mirantes), sem os pontos inventados. */
+export const lugaresReais: LugarExemplo[] = lugaresExemplo.filter((l) => !idsSoExemplo.includes(l.id));
+
 export const irmaosExemplo: IrmaoExemplo[] = [
   { id: 'ze', nome: 'Zé Ferreira', status: 'cafe', lng: -56.0745, lat: -15.5722 },
   { id: 'edu', nome: 'Edu Prado', status: 'estrada', lng: -55.95, lat: -15.52 },
@@ -96,8 +110,8 @@ export const tiposDoFiltro: Record<Filtro, TipoPino[] | 'todos' | 'nenhum'> = {
 };
 
 /** Lugares do clube (exemplo) + pontos coletados (+ pontos do banco, quando houver). */
-export const todosOsLugares = (extras: LugarExemplo[] = []): LugarExemplo[] => [
-  ...lugaresExemplo,
+export const todosOsLugares = (extras: LugarExemplo[] = [], servidor = false): LugarExemplo[] => [
+  ...(servidor ? lugaresReais : lugaresExemplo),
   ...pontosColetados,
   ...extras,
 ];

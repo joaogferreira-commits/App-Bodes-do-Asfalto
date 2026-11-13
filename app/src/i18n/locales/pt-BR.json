@@ -118,7 +118,9 @@
       "natureza": "Natureza",
       "cultura": "Cultura",
       "apoio": "Hospedagem e emergência"
-    }
+    },
+    "semPostoTitulo": "Nenhum posto por perto",
+    "semPostoTexto": "Não achei posto num raio de 15 km. Afaste o mapa ou procure pelo nome na busca."
   },
   "rota": {
     "titulo": "Planejar rota",
@@ -259,7 +261,7 @@
     "capitulo": "Capítulo Cuiabá",
     "catalogo": "Catálogo de componentes",
     "catalogoDesc": "Todos os elementos visuais do app",
-    "versao": "Versão {{versao}} (teste)",
+    "versao": "Versão {{versao}}",
     "emBreveCadastro": "A edição do perfil chega com o cadastro dos irmãos (Etapa 1).",
     "capituloCargo": "Capítulo {{capitulo}} · {{cargo}}",
     "cargos": {
@@ -319,7 +321,8 @@
     "editarMoto": "Editar {{moto}}",
     "editarMotoCurto": "Editar moto",
     "cadastrarMoto": "Cadastrar minha moto",
-    "exemplo": "Exemplo"
+    "exemplo": "Exemplo",
+    "versaoTeste": "Versão {{versao}} (teste)"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -1186,7 +1189,8 @@
     "limite": "Nesta versão de teste, o aviso automático por notificação ao comboio ainda não existe (depende do servidor). O WhatsApp pede um toque para enviar.",
     "estouBem": "Estou bem, fechar",
     "botaoAjuda": "Pedir ajuda (SOS)",
-    "botaoAjudaDica": "Abre a tela de socorro: ligar 192/193, avisar seus contatos e os irmãos."
+    "botaoAjudaDica": "Abre a tela de socorro: ligar 192/193, avisar seus contatos e os irmãos.",
+    "naoSubstitui": "O SOS avisa o grupo e seus contatos, mas não substitui o 192 (SAMU) ou o 193 (Bombeiros)."
   },
   "negocios": {
     "titulo": "Guia de Negócios",
@@ -1325,7 +1329,7 @@
     "colocarWidget": "Colocar widget de SOS",
     "naoSuportado": "Este celular não permite fixar atalhos. Segure o ícone do app para ver o SOS.",
     "widgetManual": "Segure um espaço vazio da tela inicial, toque em \"Widgets\" e procure \"SOS Bodes\".",
-    "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá. No iPhone isso chega com a versão para iPhone.",
+    "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá.",
     "bloqueadoTitulo": "O celular bloqueou o atalho",
     "bloqueadoTexto": "Em alguns celulares (Xiaomi, Redmi, Poco) é preciso liberar antes:\n1. Toque em \"Abrir configurações\".\n2. Toque em \"Outras permissões\" (ou \"Permissões\").\n3. Ligue \"Atalhos na tela inicial\".\n4. Volte aqui e toque de novo em \"Colocar atalho\".",
     "abrirConfig": "Abrir configurações",

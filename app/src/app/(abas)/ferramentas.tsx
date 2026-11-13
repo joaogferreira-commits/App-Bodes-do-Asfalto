@@ -4,7 +4,8 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { bateVoltaPadrao, useViagem } from '@/estado/viagem';
-import { gruposFerramentas } from '@/ferramentas/catalogo';
+import { ferramentasVisiveis } from '@/ferramentas/catalogo';
+import { servidorConfigurado } from '@/servidor/supabase';
 import { espaco, fontes, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Icone, Texto } from '@/ui';
 
@@ -19,7 +20,7 @@ export default function Ferramentas() {
       <ScrollView contentContainerStyle={{ padding: espaco.lg, gap: espaco.md, paddingBottom: espaco.xxxl }}>
         <Texto variante="titulo">{t('ferramentas.titulo')}</Texto>
         <Texto variante="secundario">{t('ferramentas.explicacao')}</Texto>
-        {gruposFerramentas.map((g) => (
+        {ferramentasVisiveis(servidorConfigurado).map((g) => (
           <View key={g.grupo} style={{ gap: espaco.sm }}>
             <Texto variante="rotulo">{t(`ferramentas.grupos.${g.grupo}`)}</Texto>
             <View style={estilos.grade}>

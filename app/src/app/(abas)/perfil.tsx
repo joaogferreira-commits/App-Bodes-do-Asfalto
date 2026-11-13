@@ -8,6 +8,8 @@ import { Linking, Platform, Pressable, ScrollView, StyleSheet, View } from 'reac
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
+import { ehProducao } from '@/ambiente';
+import { servidorConfigurado } from '@/servidor/supabase';
 import { AvatarMontado } from '@/componentes/AvatarMontado';
 import { SairDoRanking } from '@/componentes/SairDoRanking';
 import { useMeuProgresso } from '@/servidor/useGamificacao';
@@ -82,11 +84,12 @@ export default function Perfil() {
   const progressoServidor = useMeuProgresso();
   const xpMostrado = progressoServidor.servidor ? (progressoServidor.dados?.xp ?? 0) : exemploIrmao.xp;
   const nivel = nivelDoXp(xpMostrado);
-  const emBreve = () => avisar(t('comum.emBreve'), t('perfil.emBreveCadastro'));
   // O que o irmão cadastrou substitui o exemplo.
   const meu = usePerfilOpcional();
-  const nome = meu?.perfil.nome || eu.nome;
-  const apelido = meu?.perfil.apelido || eu.apelido;
+  // Com o servidor ligado, nunca aparecem dados de exemplo: só o que o irmão cadastrou.
+  const real = servidorConfigurado;
+  const nome = meu?.perfil.nome || (real ? t('perfil.voce') : eu.nome);
+  const apelido = meu?.perfil.apelido || (real ? '' : eu.apelido);
   const fotoPerfil = meu?.perfil.foto;
   const mp = meu?.motoPrincipal;
   const moto = mp
@@ -99,10 +102,13 @@ export default function Perfil() {
       }
     : { ...eu.moto, km: eu.moto.kmNoApp.toLocaleString('pt-BR') };
   const temMacom = !!meu && Object.values(meu.perfil.macom).some((c) => c.valor);
-  const macom = temMacom
-    ? (['loja', 'oriente', 'potencia'] as const).map((k) => ({ chave: k, ...meu!.perfil.macom[k] }))
-    : eu.macom;
-  const nContatos = meu ? meu.contatos.length : eu.contatos;
+  const macom =
+    temMacom || (real && meu)
+      ? (['loja', 'oriente', 'potencia'] as const).map((k) => ({ chave: k, ...meu!.perfil.macom[k] }))
+      : real
+        ? []
+        : eu.macom;
+  const nContatos = meu ? meu.contatos.length : real ? 0 : eu.contatos;
 
   return (
     <SafeAreaView edges={['top']} style={[estilos.tela, { backgroundColor: cores.fundo }]}>
@@ -134,10 +140,17 @@ export default function Perfil() {
               {nome}
             </Texto>
             {!!apelido && <Texto variante="secundario">“{apelido}”</Texto>}
-            <Texto variante="corpoForte" style={{ color: cores.acao }}>
-              {t('perfil.capituloCargo', { capitulo: eu.capitulo, cargo: t(`perfil.cargos.${eu.cargo}`) })}
-            </Texto>
-            <Texto variante="pequeno">{t('perfil.desde', { ano: eu.desde })}</Texto>
+            {!real && (
+              <>
+                <Texto variante="corpoForte" style={{ color: cores.acao }}>
+                  {t('perfil.capituloCargo', {
+                    capitulo: eu.capitulo,
+                    cargo: t(`perfil.cargos.${eu.cargo}`),
+                  })}
+                </Texto>
+                <Texto variante="pequeno">{t('perfil.desde', { ano: eu.desde })}</Texto>
+              </>
+            )}
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: espaco.xs }}>
@@ -180,49 +193,54 @@ export default function Perfil() {
               </Texto>
               <Icone nome="trofeu" tamanho={24} cor={cores.ouro} />
             </View>
-            <View style={estilos.numeros}>
-              {(['kmAno', 'viagens', 'passeios', 'selos'] as const).map((k) => (
-                <View key={k} style={estilos.numero}>
-                  <Texto variante="subtitulo" style={{ fontVariant: ['tabular-nums'] }}>
-                    {eu.numeros[k].toLocaleString('pt-BR')}
-                  </Texto>
-                  <Texto variante="pequeno" style={{ textAlign: 'center' }}>
-                    {t(`perfil.numeros.${k}`)}
-                  </Texto>
-                </View>
-              ))}
-            </View>
+            {!real && (
+              <View style={estilos.numeros}>
+                {(['kmAno', 'viagens', 'passeios', 'selos'] as const).map((k) => (
+                  <View key={k} style={estilos.numero}>
+                    <Texto variante="subtitulo" style={{ fontVariant: ['tabular-nums'] }}>
+                      {eu.numeros[k].toLocaleString('pt-BR')}
+                    </Texto>
+                    <Texto variante="pequeno" style={{ textAlign: 'center' }}>
+                      {t(`perfil.numeros.${k}`)}
+                    </Texto>
+                  </View>
+                ))}
+              </View>
+            )}
           </Cartao>
         </Pressable>
 
         {/* Moto */}
         <Secao titulo={t('perfil.minhaMoto')}>
           <Cartao semPadding style={{ overflow: 'hidden' }}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={
-                mp ? t('perfil.editarMoto', { moto: moto.modelo }) : t('perfil.cadastrarMoto')
-              }
-              onPress={() => router.push(mp ? `/garagem?editar=${mp.id}` : '/garagem')}
-            >
-              <Image source={moto.imagem} style={estilos.moto} contentFit="cover" accessible={false} />
-              {!mp && (
-                <View style={[estilos.seloExemplo, { backgroundColor: cores.fundo }]}>
-                  <Texto variante="rotulo">{t('perfil.exemplo')}</Texto>
+            {(mp || !real) && (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={
+                  mp ? t('perfil.editarMoto', { moto: moto.modelo }) : t('perfil.cadastrarMoto')
+                }
+                onPress={() => router.push(mp ? `/garagem?editar=${mp.id}` : '/garagem')}
+              >
+                <Image source={moto.imagem} style={estilos.moto} contentFit="cover" accessible={false} />
+                {!mp && (
+                  <View style={[estilos.seloExemplo, { backgroundColor: cores.fundo }]}>
+                    <Texto variante="rotulo">{t('perfil.exemplo')}</Texto>
+                  </View>
+                )}
+                <View style={{ padding: espaco.md, gap: 2 }}>
+                  <Texto variante="destaque">{moto.modelo}</Texto>
+                  <Texto variante="secundario">
+                    {t('perfil.motoDetalhe', { ano: moto.ano, apelido: moto.apelido, km: moto.km })}
+                  </Texto>
                 </View>
-              )}
-              <View style={{ padding: espaco.md, gap: 2 }}>
-                <Texto variante="destaque">{moto.modelo}</Texto>
-                <Texto variante="secundario">
-                  {t('perfil.motoDetalhe', { ano: moto.ano, apelido: moto.apelido, km: moto.km })}
-                </Texto>
-              </View>
-            </Pressable>
+              </Pressable>
+            )}
             <View
               style={{
                 flexDirection: 'row',
                 gap: espaco.xs,
                 paddingHorizontal: espaco.md,
+                paddingTop: mp || !real ? 0 : espaco.md,
                 paddingBottom: espaco.md,
               }}
             >
@@ -248,54 +266,58 @@ export default function Perfil() {
           </Cartao>
         </Secao>
 
-        {/* Capítulo */}
-        <Secao titulo={t('perfil.meuCapitulo')}>
-          <Cartao style={estilos.linha}>
-            <Image
-              source={pinos.sede.imagem}
-              style={{ width: 52, height: 64 }}
-              contentFit="contain"
-              accessible={false}
-            />
-            <View style={{ flex: 1 }}>
-              <Texto variante="destaque">{t('perfil.capituloNome', { capitulo: eu.capitulo })}</Texto>
-              <Texto variante="secundario">
-                {t('perfil.capituloInfo', {
-                  irmaos: eu.capituloInfo.irmaos,
-                  diretor: eu.capituloInfo.diretor,
-                  ano: eu.capituloInfo.fundado,
-                })}
-              </Texto>
-            </View>
-          </Cartao>
-        </Secao>
+        {/* Capítulo (dados de exemplo: só sem servidor) */}
+        {!real && (
+          <Secao titulo={t('perfil.meuCapitulo')}>
+            <Cartao style={estilos.linha}>
+              <Image
+                source={pinos.sede.imagem}
+                style={{ width: 52, height: 64 }}
+                contentFit="contain"
+                accessible={false}
+              />
+              <View style={{ flex: 1 }}>
+                <Texto variante="destaque">{t('perfil.capituloNome', { capitulo: eu.capitulo })}</Texto>
+                <Texto variante="secundario">
+                  {t('perfil.capituloInfo', {
+                    irmaos: eu.capituloInfo.irmaos,
+                    diretor: eu.capituloInfo.diretor,
+                    ano: eu.capituloInfo.fundado,
+                  })}
+                </Texto>
+              </View>
+            </Cartao>
+          </Secao>
+        )}
 
         {/* Dados maçônicos opcionais */}
-        <Secao titulo={t('perfil.maconaria')}>
-          <Cartao semPadding>
-            {macom.map((m, i) => (
-              <Pressable
-                key={m.chave}
-                accessibilityRole="button"
-                accessibilityLabel={`${t(`perfil.macom.${m.chave}`)}: ${m.valor || t('perfil.naoInformado')}, ${t(`perfil.visibilidade.${m.visibilidade}`)}`}
-                onPress={() => router.push('/perfil-editar')}
-                style={[estilos.macom, i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave }]}
-              >
-                <View style={{ flex: 1 }}>
-                  <Texto variante="pequeno">{t(`perfil.macom.${m.chave}`)}</Texto>
-                  <Texto variante="corpoForte" style={!m.valor && { color: cores.textoApagado }}>
-                    {m.valor || t('perfil.naoInformado')}
-                  </Texto>
-                </View>
-                <View style={[estilos.selo, { borderColor: cores.linhaForte }]}>
-                  <Icone nome={iconeVisibilidade[m.visibilidade]} tamanho={16} cor={cores.textoSec} />
-                  <Texto variante="pequeno">{t(`perfil.visibilidade.${m.visibilidade}`)}</Texto>
-                </View>
-              </Pressable>
-            ))}
-          </Cartao>
-          <Texto variante="pequeno">{t('perfil.maconariaAviso')}</Texto>
-        </Secao>
+        {macom.length > 0 && (
+          <Secao titulo={t('perfil.maconaria')}>
+            <Cartao semPadding>
+              {macom.map((m, i) => (
+                <Pressable
+                  key={m.chave}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${t(`perfil.macom.${m.chave}`)}: ${m.valor || t('perfil.naoInformado')}, ${t(`perfil.visibilidade.${m.visibilidade}`)}`}
+                  onPress={() => router.push('/perfil-editar')}
+                  style={[estilos.macom, i > 0 && { borderTopWidth: 1, borderTopColor: cores.linhaSuave }]}
+                >
+                  <View style={{ flex: 1 }}>
+                    <Texto variante="pequeno">{t(`perfil.macom.${m.chave}`)}</Texto>
+                    <Texto variante="corpoForte" style={!m.valor && { color: cores.textoApagado }}>
+                      {m.valor || t('perfil.naoInformado')}
+                    </Texto>
+                  </View>
+                  <View style={[estilos.selo, { borderColor: cores.linhaForte }]}>
+                    <Icone nome={iconeVisibilidade[m.visibilidade]} tamanho={16} cor={cores.textoSec} />
+                    <Texto variante="pequeno">{t(`perfil.visibilidade.${m.visibilidade}`)}</Texto>
+                  </View>
+                </Pressable>
+              ))}
+            </Cartao>
+            <Texto variante="pequeno">{t('perfil.maconariaAviso')}</Texto>
+          </Secao>
+        )}
 
         {/* Privacidade e segurança */}
         <Secao titulo={t('perfil.privacidade')}>
@@ -304,7 +326,7 @@ export default function Perfil() {
               icone="visivel"
               titulo={t('perfil.noMapa')}
               detalhe={t(`mapa.visib.modos.${visibilidadeMapa.modo}`)}
-              onPress={emBreve}
+              onPress={() => router.navigate('/')}
             />
             {acesso.papel === 'admin' && (
               <LinhaMenu
@@ -407,7 +429,9 @@ export default function Perfil() {
           style={{ textAlign: 'center' }}
           onLongPress={() => router.push('/catalogo')}
         >
-          {t('perfil.versao', { versao: Constants.expoConfig?.version ?? '' })}
+          {t(ehProducao() ? 'perfil.versao' : 'perfil.versaoTeste', {
+            versao: Constants.expoConfig?.version ?? '',
+          })}
         </Texto>
       </ScrollView>
     </SafeAreaView>

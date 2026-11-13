@@ -165,20 +165,22 @@ export default function Feed() {
           </View>
         </Pressable>
         <View style={estilos.ferramentas}>
-          {ferramentas.map((f) => (
-            <Pressable
-              key={f.chave}
-              accessibilityRole="button"
-              accessibilityLabel={t(`feed.ferramentas.${f.chave}`)}
-              onPress={() => usarFerramenta(f.chave)}
-              style={estilos.ferramenta}
-            >
-              <Icone nome={f.icone} tamanho={24} cor={cores.acao} />
-              <Texto variante="pequeno" style={{ color: cores.texto }}>
-                {t(`feed.ferramentas.${f.chave}`)}
-              </Texto>
-            </Pressable>
-          ))}
+          {ferramentas
+            .filter((f) => !(real && f.chave === 'video'))
+            .map((f) => (
+              <Pressable
+                key={f.chave}
+                accessibilityRole="button"
+                accessibilityLabel={t(`feed.ferramentas.${f.chave}`)}
+                onPress={() => usarFerramenta(f.chave)}
+                style={estilos.ferramenta}
+              >
+                <Icone nome={f.icone} tamanho={24} cor={cores.acao} />
+                <Texto variante="pequeno" style={{ color: cores.texto }}>
+                  {t(`feed.ferramentas.${f.chave}`)}
+                </Texto>
+              </Pressable>
+            ))}
         </View>
       </Cartao>
       {real && proximoPasseio && (
