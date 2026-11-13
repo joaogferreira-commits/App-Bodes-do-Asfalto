@@ -96,7 +96,9 @@ select set_config('request.jwt.claims', '{"sub":"f1000000-0000-0000-0000-0000000
 select is((select count(*) from public.classificados), 4::bigint, 'removido some para os outros irmãos');
 
 reset role;
+alter table public.classificados disable trigger user;
 update public.classificados set expira_em = now() - interval '1 day' where titulo = 'Anuncio D';
+alter table public.classificados enable trigger user;
 set local role authenticated;
 select set_config('request.jwt.claims', '{"sub":"f1000000-0000-0000-0000-0000000000a2"}', true);
 select is((select count(*) from public.classificados), 3::bigint, 'anúncio vencido some para os outros irmãos');
