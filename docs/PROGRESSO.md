@@ -2,6 +2,11 @@
 
 O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa lendo-o.
 
+## 13/11/2026 (madrugada)
+- Feito: janelas do clube no lugar das cinzas (78), rascunhos de 24 h nos formulários, mapa ao vivo com irmãos reais (P7), visual novo do mapa (dia/noite automático, rodovias âmbar com BR/MT), "Sou garupa / passageiro", toque nos irmãos (opacidade 0 → 0,01), navegação com rota no modo carro + Google em paralelo (6 s) + Cancelar, pedido de ajuda com 8 tipos, WhatsApp com nome e hora rotulada, stories em sequência, atalho/widget com instruções para Xiaomi.
+- Problema achado: a 0.15.0 saiu sem o endereço do servidor (modo offline). Build agora recebe SUPABASE_URL/ANON_KEY dos segredos e falha se faltarem.
+- Em andamento: tela limpa do mapa (itens 6–7), relatório de erros (Sentry; aguarda o dono criar a conta e o segredo SENTRY_DSN).
+
 ## Situação atual
 
 - **Etapa:** 0 — Ponto de Teste 0 **aprovado** (A–E); faltam portões do dono para iniciar a Etapa 1
