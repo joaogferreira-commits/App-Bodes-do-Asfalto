@@ -8,7 +8,10 @@ import { ProvedorViagem } from '@/estado/viagem';
 import * as aoVivo from '@/servidor/aoVivo';
 import * as chat from '@/servidor/chat';
 
-jest.mock('expo-router', () => ({ router: { push: jest.fn(), navigate: jest.fn() } }));
+jest.mock('expo-router', () => ({
+  router: { push: jest.fn(), navigate: jest.fn() },
+  useIsFocused: () => true,
+}));
 jest.mock('expo-image', () => {
   const { View } = jest.requireActual('react-native');
   return { Image: (p: object) => <View {...p} /> };

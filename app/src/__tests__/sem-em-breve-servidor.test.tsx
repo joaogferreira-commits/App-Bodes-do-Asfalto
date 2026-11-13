@@ -26,6 +26,7 @@ import { lugaresReais } from '@/dados/exemplos';
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), navigate: jest.fn(), replace: jest.fn() },
   useLocalSearchParams: () => ({}),
+  useIsFocused: () => true,
 }));
 jest.mock('expo-image', () => {
   const { View } = jest.requireActual('react-native');

@@ -7,6 +7,7 @@ import { escolherModo, modoEfetivo, visibilidadePadrao } from '@/estado/visibili
 
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), navigate: jest.fn() },
+  useIsFocused: () => true,
 }));
 jest.mock('expo-image', () => {
   const { View } = jest.requireActual('react-native');

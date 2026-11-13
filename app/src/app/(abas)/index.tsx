@@ -9,7 +9,7 @@ import {
 } from '@maplibre/maplibre-react-native';
 import { Image } from 'expo-image';
 import * as Location from 'expo-location';
-import { router } from 'expo-router';
+import { router, useIsFocused } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -30,6 +30,7 @@ import { filtrarLugares, irmaosExemplo, lugaresExemplo, todosOsLugares, type Fil
 import { mesclarPontos } from '@/map/pontos';
 import { usePontosDoBanco } from '@/map/usePontosDoBanco';
 import { useIrmaosAoVivo } from '@/map/useIrmaosAoVivo';
+import { useMinhaPosicao } from '@/map/useMinhaPosicao';
 import { usePublicarPosicao } from '@/map/usePublicarPosicao';
 import { carregarPostosPerto, type Area } from '@/servidor/pontos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
@@ -111,7 +112,17 @@ export default function Mapa() {
    * Botão "Eu": antes não dava retorno nenhum quando a permissão era negada ou o GPS demorava.
    * Agora: usa na hora a última posição conhecida, depois refina com o GPS, e avisa se não der.
    */
-  const [minhaPosicao, setMinhaPosicao] = useState<[number, number] | null>(null);
+  const focada = useIsFocused();
+  const { posicao: minhaPosicao, rumo, atualizar: atualizarPosicao } = useMinhaPosicao(focada);
+  // Modo seguir: a câmera acompanha cada nova posição (mantém o zoom); arrastar o mapa sai do modo.
+  const [seguindo, setSeguindo] = useState(false);
+  const ultimoVoo = useRef<[number, number] | null>(null);
+  useEffect(() => {
+    if (!seguindo || !minhaPosicao) return;
+    const v = ultimoVoo.current;
+    if (v && v[0] === minhaPosicao[0] && v[1] === minhaPosicao[1]) return;
+    camera.current?.easeTo({ center: minhaPosicao, duration: 500 });
+  }, [seguindo, minhaPosicao]);
   // Dia/noite automático pelo sol (só se o tema do app está em "auto"); pilotando (em movimento, sem
   // liberação de garupa) esconde as camadas extras do estilo.
   const { preferencia } = useTema();
@@ -125,9 +136,11 @@ export default function Mapa() {
     const { granted } = await Location.requestForegroundPermissionsAsync().catch(() => ({ granted: false }));
     if (!granted) return avisar(t('mapa.semPermissaoTitulo'), t('mapa.semPermissaoTexto'));
     const voar = (lat: number, lng: number) => {
-      setMinhaPosicao([lng, lat]);
+      ultimoVoo.current = [lng, lat];
+      atualizarPosicao(lng, lat);
       camera.current?.flyTo({ center: [lng, lat], zoom: 14, duration: 900 });
     };
+    setSeguindo(true);
     const rapida = await Location.getLastKnownPositionAsync().catch(() => null);
     if (rapida) voar(rapida.coords.latitude, rapida.coords.longitude);
     const precisa = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }).catch(
@@ -364,6 +377,9 @@ export default function Mapa() {
         ref={mapa}
         style={StyleSheet.absoluteFill}
         mapStyle={estiloMapa}
+        onRegionWillChange={(e) => {
+          if (e.nativeEvent.userInteraction) setSeguindo(false);
+        }}
         onRegionDidChange={(e) => {
           setZoomAtual(e.nativeEvent.zoom);
           const [minLon, minLat, maxLon, maxLat] = e.nativeEvent.bounds ?? [];
@@ -449,7 +465,27 @@ export default function Mapa() {
                 borderColor: cores.texto,
                 boxShadow: '0px 0px 0px 8px rgba(111,149,184,0.3)',
               }}
-            />
+            >
+              {rumo != null && (
+                <View
+                  testID="seta-rumo"
+                  style={{
+                    position: 'absolute',
+                    top: -17,
+                    left: 1,
+                    width: 0,
+                    height: 0,
+                    borderLeftWidth: 5,
+                    borderRightWidth: 5,
+                    borderBottomWidth: 9,
+                    borderLeftColor: 'transparent',
+                    borderRightColor: 'transparent',
+                    borderBottomColor: cores.estrada,
+                    transform: [{ translateY: 17 }, { rotate: `${rumo}deg` }, { translateY: -17 }],
+                  }}
+                />
+              )}
+            </View>
           </Marker>
         )}
         {/* De longe, cada irmão vira um ponto com a cor do status (não some e não polui o mapa). */}
@@ -557,6 +593,7 @@ export default function Mapa() {
             legenda={t('mapa.euCurto')}
             legendaAbaixo
             rotulo={t('mapa.minhaLocalizacao')}
+            ativo={seguindo}
             flutuante
             onPress={irParaMim}
           />

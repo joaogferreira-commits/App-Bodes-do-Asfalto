@@ -15,6 +15,8 @@ type Props = {
   /** Rótulo visível embaixo do ícone (botões laterais do mapa). */
   legendaAbaixo?: boolean;
   flutuante?: boolean;
+  /** Ligado (ex.: modo seguir): preenchido com a cor de ação. */
+  ativo?: boolean;
 };
 
 const criarEstilos = (c: Paleta) =>
@@ -37,25 +39,45 @@ const criarEstilos = (c: Paleta) =>
   });
 
 /** Botão de ícone (mínimo 48 dp). Superfície opaca sobre o mapa (R25). */
-export function BotaoIcone({ icone, rotulo, onPress, corIcone, legenda, legendaAbaixo, flutuante }: Props) {
+export function BotaoIcone({
+  icone,
+  rotulo,
+  onPress,
+  corIcone,
+  legenda,
+  legendaAbaixo,
+  flutuante,
+  ativo,
+}: Props) {
   const c = useCores();
   const estilos = useEstilos(criarEstilos);
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={rotulo}
+      accessibilityState={ativo === undefined ? undefined : { selected: ativo }}
       onPress={onPress}
       style={({ pressed }) => [
         estilos.base,
         legenda ? (legendaAbaixo ? estilos.abaixo : estilos.comLegenda) : null,
         flutuante && { boxShadow: sombra.flutuante },
+        ativo && { backgroundColor: c.acao, borderColor: c.acao },
         pressed && { backgroundColor: c.superficie3 },
       ]}
     >
       <View style={[estilos.centro, legenda ? (legendaAbaixo ? estilos.coluna : estilos.linha) : null]}>
-        <Icone nome={icone} tamanho={24} cor={corIcone ?? c.texto} espessura={2} />
+        <Icone
+          nome={icone}
+          tamanho={24}
+          cor={ativo ? c.textoSobreAcao : (corIcone ?? c.texto)}
+          espessura={2}
+        />
         {legenda && (
-          <Texto style={estilos.legenda} numberOfLines={1} maxFontSizeMultiplier={1.3}>
+          <Texto
+            style={[estilos.legenda, ativo && { color: c.textoSobreAcao }]}
+            numberOfLines={1}
+            maxFontSizeMultiplier={1.3}
+          >
             {legenda}
           </Texto>
         )}
