@@ -2,7 +2,7 @@
   "expo": {
     "name": "Bodes do Asfalto",
     "slug": "bodes-do-asfalto",
-    "version": "0.19.1",
+    "version": "0.20.0",
     "orientation": "portrait",
     "icon": "./assets/icone/icone.png",
     "userInterfaceStyle": "dark",

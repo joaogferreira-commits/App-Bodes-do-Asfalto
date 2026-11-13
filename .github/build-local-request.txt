@@ -1,3 +1,3 @@
 # O agente altera este arquivo para montar o app no GitHub (grátis).
 perfil=preview
-pedido=15 (0.19.1 APK: endereço/chave do servidor normalizados)
+pedido=16 (0.20.0 APK: postos ANP 100 km + opções da navegação)

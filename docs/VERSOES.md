@@ -4,6 +4,12 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.20.0 — 13/11/2026 (postos de verdade e opções da navegação)
+
+- Posto mais próximo a partir da sua posição, até 100 km, com postos da ANP (preço e data da coleta) e do OpenStreetMap.
+- Navegação: botão "Camadas e opções" (trânsito, satélite/híbrido, visão, voz, evitar pedágio/rodovia/balsa, evitar ou preferir terra), também em movimento.
+- Notificações: só funcionam quando o segredo GOOGLE_SERVICES_JSON existir no GitHub (a montagem avisa).
+
 ## 0.19.1 — 13/11/2026 (correção do servidor)
 
 - O app limpa o endereço e a chave do servidor (espaços, quebras de linha, aspas, maiúsculas, caminho extra) antes de conferir; a 0.19.0 recusava o endereço por isso.
