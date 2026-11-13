@@ -2,6 +2,12 @@
 
 O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa lendo-o.
 
+## 13/11/2026 (tarde)
+- 0.19.1 confirmada pelo dono: servidor ligado (status OK 258 ms, admin). Causa das versões offline: endereço com espaço/quebra de linha recusado pela regra estrita; agora o app normaliza e a montagem confere com a mesma regra.
+- Postos: tabela postos_anp + RPC postos_proximos (até 100 km, índice espacial). ANP: 107 postos de MT com preço (pesquisa semanal LPC 2026); OSM: 614 postos em MT. Cadastro completo da ANP não encontrado (dados.gov.br pede chave).
+- Navegação: folha "Camadas e opções" (trânsito, satélite/híbrido, visão, voz, evitar pedágio/rodovia/balsa, terra) disponível em movimento (decisão do dono).
+- Notificações não registram: provável falta do google-services.json na montagem local; build agora lê o segredo GOOGLE_SERVICES_JSON (aguarda o dono criar).
+
 ## 13/11/2026 (dia)
 - Feito e aplicado no banco: P8 passeios/Ágape, P9 botões do pilotando (voz expo-speech), P10 SOS real, P11 desafios/XP/ranking, P12 ajuda/suporte, Lojas, Guia de Negócios, membros/aniversários, Classificados, Eventos. P13: varredura sem "em breve" e rascunhos de política de privacidade e termos (docs/legal/).
 - Problema grave achado: as versões 0.16–0.18 saíram em modo offline (o endereço do servidor não entrava no app). Correção: a montagem grava o endereço no eas.json só na máquina de build e confere o app pronto; 0.19.0 passou na conferência.
