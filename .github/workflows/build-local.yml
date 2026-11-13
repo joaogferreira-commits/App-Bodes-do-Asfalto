@@ -73,12 +73,24 @@ jobs:
             echo "::error::Faltam os segredos SUPABASE_URL e SUPABASE_ANON_KEY no GitHub; o app sairia sem servidor."
             exit 1
           fi
+      - name: Gravar o endereço do servidor na configuração da montagem (não vai para o repositório)
+        env:
+          URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
+          CHAVE_SUPABASE: ${{ secrets.SUPABASE_ANON_KEY }}
+          DSN_SENTRY: ${{ secrets.SENTRY_DSN }}
+        run: |
+          P=${{ steps.pedido.outputs.perfil }}
+          jq --arg p "$P" --arg u "$URL_SUPABASE" --arg k "$CHAVE_SUPABASE" --arg d "$DSN_SENTRY" \
+            '.build[$p].env = ((.build[$p].env // {}) + {EXPO_PUBLIC_SUPABASE_URL:$u, EXPO_PUBLIC_SUPABASE_ANON_KEY:$k, EXPO_PUBLIC_SENTRY_DSN:$d})' \
+            eas.json > eas.tmp && mv eas.tmp eas.json
+          echo "eas.json preparado para o perfil $P (valores ocultos)."
       - name: Montar o app
         env:
           GRADLE_OPTS: -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.compiler.execution.strategy=in-process
           ORG_GRADLE_PROJECT_reactNativeArchitectures: arm64-v8a
           EAS_LOCAL_BUILD_WORKINGDIR: /mnt/trabalho/eas
           GRADLE_USER_HOME: /mnt/trabalho/gradle
+          EAS_NO_VCS: '1'
           EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           EXPO_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
@@ -87,6 +99,16 @@ jobs:
           eas build --local --non-interactive --platform android
           --profile ${{ steps.pedido.outputs.perfil }}
           --output "$GITHUB_WORKSPACE/bodes-do-asfalto.${{ steps.pedido.outputs.ext }}"
+      - name: Conferir se o endereço do servidor está DENTRO do app montado
+        working-directory: .
+        env:
+          URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
+        run: |
+          HOST=$(echo "$URL_SUPABASE" | sed -E 's#https?://##; s#/.*##')
+          mkdir -p /mnt/trabalho/confere && cd /mnt/trabalho/confere
+          unzip -o -q "$GITHUB_WORKSPACE/bodes-do-asfalto.${{ steps.pedido.outputs.ext }}" 'assets/index.android.bundle' 'base/assets/index.android.bundle' 2>/dev/null || true
+          B=$(find . -name index.android.bundle | head -1)
+          if [ -n "$B" ] && grep -a -q "$HOST" "$B"; then echo "OK: o app montado conhece o servidor."; else echo "::error::O app montado NÃO tem o endereço do servidor (sairia em modo offline)."; exit 1; fi
       - uses: actions/upload-artifact@v4
         with:
           name: bodes-do-asfalto-${{ steps.pedido.outputs.perfil }}
