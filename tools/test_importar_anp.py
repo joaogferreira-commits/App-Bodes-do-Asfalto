@@ -339,3 +339,11 @@ class TestUfECnpjDaPlanilha(unittest.TestCase):
         self.assertEqual(cnpj_valido('1234567000190'), '01234567000190')
         self.assertEqual(cnpj_valido('1234567000190.0'), '01234567000190')
         self.assertEqual(cnpj_valido('12.345.678/0001-90'), '12345678000190')
+
+
+class TestDatasComSublinhado(unittest.TestCase):
+    def test_novembro_com_sublinhado_vem_primeiro(self):
+        from importar_anp import ordenar_recentes
+        r = ordenar_recentes(['x/2026/revendas_lpc_2026-10-04_2026-10-10.xlsx',
+                              'x/2026/revendas_lpc_2026_11_01-2026_11_07.xlsx'])
+        self.assertEqual(r[0], 'x/2026/revendas_lpc_2026_11_01-2026_11_07.xlsx')

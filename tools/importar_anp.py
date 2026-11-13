@@ -263,7 +263,7 @@ def ordenar_recentes(urls):
     """Arquivos mais novos primeiro (pelo ano e pelas datas no nome); por semana as revendas antes do resumo."""
     def chave(u):
         anos = [int(a) for a in re.findall(r'20\d\d', u)] or [0]
-        datas = re.findall(r'\d{4}-\d{2}-\d{2}', u)
+        datas = [d.replace('_', '-') for d in re.findall(r'\d{4}[-_]\d{2}[-_]\d{2}', u)]
         return (max(anos), max(datas) if datas else '', 'revenda' in u.lower(), u)
     return sorted(dict.fromkeys(urls), key=chave, reverse=True)
 

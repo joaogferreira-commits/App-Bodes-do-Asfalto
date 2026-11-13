@@ -1,4 +1,4 @@
-# Carga dos postos da ANP (cadastro + preços). Tentativa 4 (13/11): UF por extenso e CNPJ numérico.
+# Carga dos postos da ANP (cadastro + preços). Tentativa 5 (13/11): planilhas mais novas (datas com _).
 # Linhas opcionais: ufs=MT,GO  modo=completo|precos  max_geocodes=1500  enviar=sim
 ufs=MT
 modo=completo
