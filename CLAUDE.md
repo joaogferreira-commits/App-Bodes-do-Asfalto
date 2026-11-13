@@ -24,6 +24,8 @@ O dono aceitou todas as recomendações do agente: stack Google + MapLibre + Val
 
 **12/11/2026:** a interface é prioridade igual ao desenvolvimento e passa pelo dono antes de virar código (Interface v2 em `docs/telas/v2/`). Tipo de estrada no planejamento (Só asfalto / Misto / Prefiro terra) e terra sempre com cor/traço próprios. Pendências externas (licença da marca, empresa) ficam para depois do app pronto.
 
+**13/11/2026 (mapa e movimento):** visual do mapa aprovado conforme `docs/MAPA_VISUAL_PROPOSTA.md` (opção A, Noto Sans nos rótulos por enquanto). A trava em movimento **não pode bloquear tudo**: o irmão pode ser garupa ou estar de passageiro num carro — a tela de movimento oferece "Sou garupa / passageiro" que libera o app até parar; o modo pilotando continua com os 6 botões grandes.
+
 **Como falar com o dono:** entregar **uma tarefa por vez**, em texto de passos numerados; só mandar a próxima depois que ele disser que a anterior foi feita.
 
 ## Decisões fechadas (não mude sem perguntar)

@@ -12,6 +12,7 @@ Ordem obrigatória; cada ciclo pega o primeiro não feito. Regra: o que não fic
 - ~~P5~~ FEITO 12/11 (falta: TFA em mensagem no servidor, acenos recebidos em tempo real, lista sem N+1). Chat em tempo real (Supabase Realtime): grupos do capítulo/passeio/comboio/Ágape automáticos, avisos da diretoria, 1:1 por aceno aceito; denúncia vai para a fila de moderação.
 - ~~P6~~ FEITO 12/11 (função e gatilhos publicados no servidor; falta avisar candidato antes de aprovado). Notificações push (Expo + Firebase do dono): mensagem, aceno, aprovação, SOS. Preferências por tipo (tirar "Notificações — em breve" do Perfil).
 - P6b. ~~Correções do mapa do dono (12/11)~~ FEITO 0.15.0: Ágape vira ponto, irmãos tocáveis, banner Vou/Não vou/X, seletor de visibilidade real, legenda fecha fora, 13 ícones novos, pontos do banco (tabela pontos_osm aguarda autorização do dono; importador importar-pois.yml). Inovações: docs/INOVACOES_20.md (top 5 depois do P13).
+- P6c. Visual do mapa aprovado (13/11, opção A): itens 1–9 de docs/MAPA_VISUAL_PROPOSTA.md. Trava em movimento com 'Sou garupa / passageiro'.
 - P7. Mapa ao vivo: irmãos reais (aproximado no servidor, zonas privadas, apagado em 7 dias), aceno real, "Falar com o contato" da Loja via aceno.
 - P8. Passeios reais: criar passeio (diretoria), "Vou/Talvez", grupo automático; Ágape real.
 - P9. Modo pilotando: Alerta (tipos de alerta para o comboio), Reagrupar, Posto mais próximo e Posto na rota funcionando; mesmos botões no Android Auto.
