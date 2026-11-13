@@ -52,7 +52,19 @@ jobs:
               --name GOOGLE_MAPS_API_KEY --value "$GOOGLE_MAPS_API_KEY" \
               --visibility sensitive --force --non-interactive
           fi
+      - name: Conferir o endereço do servidor (sem ele o app vira modo de teste offline)
+        env:
+          URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
+          CHAVE_SUPABASE: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$URL_SUPABASE" ] || [ -z "$CHAVE_SUPABASE" ]; then
+            echo "::error::Faltam os segredos SUPABASE_URL e SUPABASE_ANON_KEY no GitHub; o app sairia sem servidor."
+            exit 1
+          fi
       - name: Montar o app
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: >
           eas build --local --non-interactive --platform android
           --profile ${{ steps.pedido.outputs.perfil }}
