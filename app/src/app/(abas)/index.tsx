@@ -329,7 +329,7 @@ export default function Mapa() {
             minzoom={ZOOM_EMBLEMA}
             paint={{
               'circle-color': cores.ouro,
-              'circle-opacity': 0,
+              'circle-opacity': 0.01,
               'circle-radius': 34,
               'circle-translate': [0, -40],
             }}
@@ -395,7 +395,7 @@ export default function Mapa() {
             id="irmaos-toque"
             type="circle"
             minzoom={ZOOM_MINIMO_IRMAOS}
-            paint={{ 'circle-color': cores.fundo, 'circle-opacity': 0, 'circle-radius': 28 }}
+            paint={{ 'circle-color': cores.fundo, 'circle-opacity': 0.01, 'circle-radius': 28 }}
           />
         </GeoJSONSource>
         {zoomAtual >= ZOOM_MINIMO_IRMAOS &&
