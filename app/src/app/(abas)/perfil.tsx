@@ -409,6 +409,12 @@ export default function Perfil() {
             onPress={() => router.push('/ajuda')}
           />
           <LinhaMenu
+            icone="check"
+            titulo={t('perfil.statusServidor')}
+            detalhe={t('perfil.statusServidorDetalhe')}
+            onPress={() => router.push('/status-servidor')}
+          />
+          <LinhaMenu
             icone="cadeado"
             titulo={t('acesso.meusDados.titulo')}
             detalhe={t('perfil.meusDadosDetalhe')}

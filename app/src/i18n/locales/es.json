@@ -322,7 +322,9 @@
     "editarMotoCurto": "Editar moto",
     "cadastrarMoto": "Registrar mi moto",
     "exemplo": "Ejemplo",
-    "versaoTeste": "Versión {{versao}} (prueba)"
+    "versaoTeste": "Versión {{versao}} (prueba)",
+    "statusServidor": "Estado del servidor",
+    "statusServidorDetalhe": "Comprueba si la app habla con el servidor"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -1816,5 +1818,43 @@
     "erro": "No se pudieron cargar los eventos. Revisa internet.",
     "carregando": "Cargando eventos…",
     "rodape": "Se muestran los eventos aprobados que aún no terminaron."
+  },
+  "statusServidor": {
+    "menu": "Estado del servidor",
+    "menuDetalhe": "Comprueba si la app habla con el servidor",
+    "titulo": "Estado del servidor",
+    "explica": "Muestra si este dispositivo está conectado al servidor de la app. Aquí no aparece ninguna clave ni correo.",
+    "endereco": "Dirección del servidor en la app",
+    "modo": "Modo de la app",
+    "modoServidor": "Servidor",
+    "modoLocal": "Prueba sin conexión",
+    "conexao": "Conexión ahora",
+    "conexaoTestando": "Probando…",
+    "conexaoOk": "OK, respondió en {{ms}} ms",
+    "conexaoErro": "Falló: {{erro}}",
+    "conexaoSemServidor": "Esta app no tiene dirección de servidor",
+    "sessao": "Sesión",
+    "sessaoSim": "Entró en la cuenta",
+    "sessaoNao": "No entró en la cuenta",
+    "papel": "Rol: {{papel}}",
+    "situacao": "Situación: {{situacao}}",
+    "situacoes": {
+      "membro": "miembro",
+      "pendente": "pendiente",
+      "deslogado": "sin cuenta",
+      "semSolicitacao": "sin solicitud enviada",
+      "carregando": "cargando"
+    },
+    "notificacoes": "Notificaciones",
+    "notifSim": "Este dispositivo está registrado",
+    "notifNao": "Este dispositivo no está registrado",
+    "versao": "Versión de la app",
+    "ambiente": "Entorno: {{ambiente}}",
+    "semAmbiente": "no informado",
+    "sim": "Sí",
+    "nao": "No",
+    "testar": "Probar de nuevo",
+    "copiar": "Copiar diagnóstico",
+    "diagnostico": "Diagnóstico de la app Bodes do Asfalto"
   }
 }

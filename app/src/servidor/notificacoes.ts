@@ -77,6 +77,22 @@ export async function registrarToken(opcoes: { pedirPermissao: boolean }): Promi
   return true;
 }
 
+/** Diagnóstico: este aparelho tem permissão, token e linha em tokens_push? Nunca lança erro. */
+export async function tokenRegistrado(): Promise<boolean> {
+  try {
+    if (!supabase || !(await permissaoConcedida(false))) return false;
+    const token = await obterToken();
+    if (!token) return false;
+    const { count, error } = await supabase
+      .from('tokens_push')
+      .select('token', { head: true, count: 'exact' })
+      .eq('token', token);
+    return !error && (count ?? 0) > 0;
+  } catch {
+    return false;
+  }
+}
+
 /** Apaga o token deste aparelho (chamar ANTES de encerrar a sessão). Nunca lança erro. */
 export async function apagarToken(): Promise<void> {
   try {

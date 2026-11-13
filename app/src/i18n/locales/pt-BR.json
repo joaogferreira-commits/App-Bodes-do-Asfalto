@@ -322,7 +322,9 @@
     "editarMotoCurto": "Editar moto",
     "cadastrarMoto": "Cadastrar minha moto",
     "exemplo": "Exemplo",
-    "versaoTeste": "Versão {{versao}} (teste)"
+    "versaoTeste": "Versão {{versao}} (teste)",
+    "statusServidor": "Status do servidor",
+    "statusServidorDetalhe": "Confira se o app está falando com o servidor"
   },
   "catalogo": {
     "titulo": "Catálogo",
@@ -1816,5 +1818,43 @@
     "erro": "Não foi possível carregar os eventos. Confira a internet.",
     "carregando": "Carregando eventos…",
     "rodape": "Aparecem os eventos aprovados que ainda não terminaram."
+  },
+  "statusServidor": {
+    "menu": "Status do servidor",
+    "menuDetalhe": "Confira se o app está falando com o servidor",
+    "titulo": "Status do servidor",
+    "explica": "Mostra se este aparelho está ligado ao servidor do app. Nenhuma chave ou e-mail aparece aqui.",
+    "endereco": "Endereço do servidor no app",
+    "modo": "Modo do app",
+    "modoServidor": "Servidor",
+    "modoLocal": "Teste offline",
+    "conexao": "Conexão agora",
+    "conexaoTestando": "Testando…",
+    "conexaoOk": "OK, respondeu em {{ms}} ms",
+    "conexaoErro": "Falhou: {{erro}}",
+    "conexaoSemServidor": "Sem endereço do servidor neste app",
+    "sessao": "Sessão",
+    "sessaoSim": "Entrou na conta",
+    "sessaoNao": "Não entrou na conta",
+    "papel": "Papel: {{papel}}",
+    "situacao": "Situação: {{situacao}}",
+    "situacoes": {
+      "membro": "membro",
+      "pendente": "pendente",
+      "deslogado": "sem conta",
+      "semSolicitacao": "sem pedido enviado",
+      "carregando": "carregando"
+    },
+    "notificacoes": "Notificações",
+    "notifSim": "Este aparelho está registrado",
+    "notifNao": "Este aparelho não está registrado",
+    "versao": "Versão do app",
+    "ambiente": "Ambiente: {{ambiente}}",
+    "semAmbiente": "não informado",
+    "sim": "Sim",
+    "nao": "Não",
+    "testar": "Testar de novo",
+    "copiar": "Copiar diagnóstico",
+    "diagnostico": "Diagnóstico do app Bodes do Asfalto"
   }
 }

@@ -322,7 +322,9 @@
     "editarMotoCurto": "Edit bike",
     "cadastrarMoto": "Add my bike",
     "exemplo": "Example",
-    "versaoTeste": "Version {{versao}} (test)"
+    "versaoTeste": "Version {{versao}} (test)",
+    "statusServidor": "Server status",
+    "statusServidorDetalhe": "Check that the app is talking to the server"
   },
   "catalogo": {
     "titulo": "Catalog",
@@ -1816,5 +1818,43 @@
     "erro": "Could not load the events. Check your internet.",
     "carregando": "Loading events…",
     "rodape": "Approved events that have not ended yet are shown."
+  },
+  "statusServidor": {
+    "menu": "Server status",
+    "menuDetalhe": "Check that the app is talking to the server",
+    "titulo": "Server status",
+    "explica": "Shows whether this device is connected to the app server. No key or email is shown here.",
+    "endereco": "Server address in the app",
+    "modo": "App mode",
+    "modoServidor": "Server",
+    "modoLocal": "Offline test",
+    "conexao": "Connection now",
+    "conexaoTestando": "Testing…",
+    "conexaoOk": "OK, answered in {{ms}} ms",
+    "conexaoErro": "Failed: {{erro}}",
+    "conexaoSemServidor": "This app has no server address",
+    "sessao": "Session",
+    "sessaoSim": "Signed in",
+    "sessaoNao": "Not signed in",
+    "papel": "Role: {{papel}}",
+    "situacao": "Status: {{situacao}}",
+    "situacoes": {
+      "membro": "member",
+      "pendente": "pending",
+      "deslogado": "no account",
+      "semSolicitacao": "no request sent",
+      "carregando": "loading"
+    },
+    "notificacoes": "Notifications",
+    "notifSim": "This device is registered",
+    "notifNao": "This device is not registered",
+    "versao": "App version",
+    "ambiente": "Environment: {{ambiente}}",
+    "semAmbiente": "not set",
+    "sim": "Yes",
+    "nao": "No",
+    "testar": "Test again",
+    "copiar": "Copy diagnostics",
+    "diagnostico": "Bodes do Asfalto app diagnostics"
   }
 }
