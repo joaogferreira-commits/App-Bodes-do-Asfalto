@@ -2,6 +2,12 @@
 
 O agente atualiza este arquivo ao fim de cada tarefa. Toda nova sessão começa lendo-o.
 
+## 13/11/2026 (dia)
+- Feito e aplicado no banco: P8 passeios/Ágape, P9 botões do pilotando (voz expo-speech), P10 SOS real, P11 desafios/XP/ranking, P12 ajuda/suporte, Lojas, Guia de Negócios, membros/aniversários, Classificados, Eventos. P13: varredura sem "em breve" e rascunhos de política de privacidade e termos (docs/legal/).
+- Problema grave achado: as versões 0.16–0.18 saíram em modo offline (o endereço do servidor não entrava no app). Correção: a montagem grava o endereço no eas.json só na máquina de build e confere o app pronto; 0.19.0 passou na conferência.
+- Montagem no GitHub: máquina morria sem log (disco cheio). Correção: trabalho e cache no /mnt, só arm64, menos paralelismo.
+- Falta: dono testar a 0.19.0 com servidor; Bode Amigo e Meta de km (escondidos); e-mail/WhatsApp de suporte; conta de demonstração; publicar política/termos e o login do Google.
+
 ## 13/11/2026 (madrugada)
 - Feito: janelas do clube no lugar das cinzas (78), rascunhos de 24 h nos formulários, mapa ao vivo com irmãos reais (P7), visual novo do mapa (dia/noite automático, rodovias âmbar com BR/MT), "Sou garupa / passageiro", toque nos irmãos (opacidade 0 → 0,01), navegação com rota no modo carro + Google em paralelo (6 s) + Cancelar, pedido de ajuda com 8 tipos, WhatsApp com nome e hora rotulada, stories em sequência, atalho/widget com instruções para Xiaomi.
 - Problema achado: a 0.15.0 saiu sem o endereço do servidor (modo offline). Build agora recebe SUPABASE_URL/ANON_KEY dos segredos e falha se faltarem.
