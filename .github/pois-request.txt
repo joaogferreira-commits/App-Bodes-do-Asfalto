@@ -1,3 +1,3 @@
-# Carga dos pontos do mapa (OpenStreetMap). Dono autorizou a tabela de pontos em 12/11/2026.
-ufs=MT
+# Carga dos pontos do mapa (OpenStreetMap). Autorização permanente do dono (13/11/2026).
+ufs=GO,MS,DF,RO,TO,PA,AM,AC,RR,AP,MA,PI
 enviar=sim
