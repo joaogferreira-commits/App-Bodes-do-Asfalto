@@ -39,6 +39,14 @@
     "aprox": "Approx.",
     "camadas": "Map legend",
     "minhaLocalizacao": "My location",
+    "maisChip": "More",
+    "maisTitulo": "More groups",
+    "tiposDePonto": "Point types",
+    "oQueSignifica": "What each icon means",
+    "nestaAreaResumo": "In this area: {{irmaos}} brothers · {{postos}} gas stations",
+    "irmaosPerto": "Brothers nearby",
+    "semIrmaos": "No brothers nearby right now.",
+    "proximoEvento": "Next ride",
     "nestaArea": "In this area",
     "contagem": "{{irmaos}} brothers · {{sedes}} clubhouses · {{pontos}} places",
     "agapeRotulo": "Flash Agape · in {{tempo}}",
@@ -1239,7 +1247,12 @@
     "colocarWidget": "Add SOS widget",
     "naoSuportado": "This phone does not allow pinned shortcuts. Press and hold the app icon to see SOS.",
     "widgetManual": "Press and hold an empty spot on the home screen, tap \"Widgets\" and look for \"SOS Bodes\".",
-    "bloqueio": "Lock screen: Android does not let apps add shortcuts there. On iPhone it comes with the iPhone version."
+    "bloqueio": "Lock screen: Android does not let apps add shortcuts there. On iPhone it comes with the iPhone version.",
+    "bloqueadoTitulo": "The phone blocked the shortcut",
+    "bloqueadoTexto": "Some phones (Xiaomi, Redmi, Poco) need permission first:\n1. Tap \"Open settings\".\n2. Tap \"Other permissions\" (or \"Permissions\").\n3. Turn on \"Home screen shortcuts\".\n4. Come back and tap \"Add shortcut\" again.",
+    "abrirConfig": "Open settings",
+    "widgetTitulo": "Add the widget by hand",
+    "widgetPassos": "1. Go to your home screen.\n2. Press and hold an empty space.\n3. Tap \"Widgets\".\n4. Find \"Bodes do Asfalto\" and drag \"SOS Bodes\" to the screen."
   },
   "chat": {
     "titulo": "Chats",

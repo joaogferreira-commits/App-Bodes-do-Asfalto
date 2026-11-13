@@ -39,6 +39,14 @@
     "aprox": "Aprox.",
     "camadas": "Legenda do mapa",
     "minhaLocalizacao": "Minha localização",
+    "maisChip": "Mais",
+    "maisTitulo": "Mais grupos",
+    "tiposDePonto": "Tipos de ponto",
+    "oQueSignifica": "O que significa cada ícone",
+    "nestaAreaResumo": "Nesta área: {{irmaos}} irmãos · {{postos}} postos",
+    "irmaosPerto": "Irmãos por perto",
+    "semIrmaos": "Nenhum irmão por perto agora.",
+    "proximoEvento": "Próximo passeio",
     "nestaArea": "Nesta área",
     "contagem": "{{irmaos}} irmãos · {{sedes}} sedes · {{pontos}} pontos",
     "agapeRotulo": "Ágape Relâmpago · em {{tempo}}",
@@ -1239,7 +1247,12 @@
     "colocarWidget": "Colocar widget de SOS",
     "naoSuportado": "Este celular não permite fixar atalhos. Segure o ícone do app para ver o SOS.",
     "widgetManual": "Segure um espaço vazio da tela inicial, toque em \"Widgets\" e procure \"SOS Bodes\".",
-    "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá. No iPhone isso chega com a versão para iPhone."
+    "bloqueio": "Tela de bloqueio: o Android não deixa apps colocarem atalhos lá. No iPhone isso chega com a versão para iPhone.",
+    "bloqueadoTitulo": "O celular bloqueou o atalho",
+    "bloqueadoTexto": "Em alguns celulares (Xiaomi, Redmi, Poco) é preciso liberar antes:\n1. Toque em \"Abrir configurações\".\n2. Toque em \"Outras permissões\" (ou \"Permissões\").\n3. Ligue \"Atalhos na tela inicial\".\n4. Volte aqui e toque de novo em \"Colocar atalho\".",
+    "abrirConfig": "Abrir configurações",
+    "widgetTitulo": "Colocar o widget à mão",
+    "widgetPassos": "1. Volte à tela inicial do celular.\n2. Segure o dedo num espaço vazio.\n3. Toque em \"Widgets\".\n4. Procure \"Bodes do Asfalto\" e arraste o \"SOS Bodes\" para a tela."
   },
   "chat": {
     "titulo": "Conversas",

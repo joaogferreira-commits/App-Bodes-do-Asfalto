@@ -39,6 +39,14 @@
     "aprox": "Aprox.",
     "camadas": "Leyenda del mapa",
     "minhaLocalizacao": "Mi ubicación",
+    "maisChip": "Más",
+    "maisTitulo": "Más grupos",
+    "tiposDePonto": "Tipos de punto",
+    "oQueSignifica": "Qué significa cada ícono",
+    "nestaAreaResumo": "En esta zona: {{irmaos}} hermanos · {{postos}} gasolineras",
+    "irmaosPerto": "Hermanos cerca",
+    "semIrmaos": "Ningún hermano cerca ahora.",
+    "proximoEvento": "Próximo paseo",
     "nestaArea": "En esta zona",
     "contagem": "{{irmaos}} hermanos · {{sedes}} sedes · {{pontos}} puntos",
     "agapeRotulo": "Ágape Relámpago · en {{tempo}}",
@@ -1239,7 +1247,12 @@
     "colocarWidget": "Poner widget de SOS",
     "naoSuportado": "Este celular no permite fijar atajos. Mantén pulsado el ícono de la app para ver el SOS.",
     "widgetManual": "Mantén pulsado un espacio vacío de la pantalla de inicio, toca \"Widgets\" y busca \"SOS Bodes\".",
-    "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí. En iPhone llegará con la versión para iPhone."
+    "bloqueio": "Pantalla de bloqueo: Android no permite que las apps pongan atajos allí. En iPhone llegará con la versión para iPhone.",
+    "bloqueadoTitulo": "El celular bloqueó el acceso directo",
+    "bloqueadoTexto": "En algunos celulares (Xiaomi, Redmi, Poco) hay que permitirlo antes:\n1. Toca \"Abrir ajustes\".\n2. Toca \"Otros permisos\" (o \"Permisos\").\n3. Activa \"Accesos directos en la pantalla de inicio\".\n4. Vuelve aquí y toca otra vez \"Poner acceso directo\".",
+    "abrirConfig": "Abrir ajustes",
+    "widgetTitulo": "Poner el widget a mano",
+    "widgetPassos": "1. Vuelve a la pantalla de inicio.\n2. Mantén el dedo en un espacio vacío.\n3. Toca \"Widgets\".\n4. Busca \"Bodes do Asfalto\" y arrastra \"SOS Bodes\" a la pantalla."
   },
   "chat": {
     "titulo": "Conversaciones",

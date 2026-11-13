@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Linking, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAcesso } from '@/acesso/acesso';
@@ -346,7 +346,11 @@ export default function Perfil() {
                   variante="secundario"
                   onPress={() =>
                     void atalhos.fixarAtalhoSOS(t('atalhos.nomeAtalho')).then((ok) => {
-                      if (!ok) avisar(t('atalhos.naoSuportado'));
+                      if (!ok)
+                        avisar(t('atalhos.bloqueadoTitulo'), t('atalhos.bloqueadoTexto'), [
+                          { text: t('comum.cancelar'), style: 'cancel' },
+                          { text: t('atalhos.abrirConfig'), onPress: () => void Linking.openSettings() },
+                        ]);
                     })
                   }
                 />
@@ -356,7 +360,7 @@ export default function Perfil() {
                   variante="secundario"
                   onPress={() =>
                     void atalhos.fixarWidgetSOS().then((ok) => {
-                      if (!ok) avisar(t('atalhos.widgetManual'));
+                      if (!ok) avisar(t('atalhos.widgetTitulo'), t('atalhos.widgetPassos'));
                     })
                   }
                 />
