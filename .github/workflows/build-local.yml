@@ -81,6 +81,17 @@ jobs:
           echo "$K" | grep -q '[[:space:]]' && { echo "::error::SUPABASE_ANON_KEY tem espaços no meio."; exit 1; }
           case "$K" in sb_secret_*) echo "::error::SUPABASE_ANON_KEY é a chave SECRETA; use a publishable/anon."; exit 1;; esac
           echo "Endereço e chave no formato certo (tamanho da chave: ${#K})."
+      - name: Arquivo do Firebase (notificações) vindo dos segredos do GitHub
+        env:
+          GS_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GS_JSON" ]; then
+            printf '%s' "$GS_JSON" > /mnt/trabalho/google-services.json
+            python3 -c "import json;d=json.load(open('/mnt/trabalho/google-services.json'));print('Firebase ok:', d['project_info']['project_id'][:4]+'…')"
+            echo "GOOGLE_SERVICES_JSON=/mnt/trabalho/google-services.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::Sem o segredo GOOGLE_SERVICES_JSON: o app sai sem notificações."
+          fi
       - name: Gravar o endereço do servidor na configuração da montagem (não vai para o repositório)
         env:
           URL_SUPABASE: ${{ secrets.SUPABASE_URL }}
@@ -88,8 +99,8 @@ jobs:
           DSN_SENTRY: ${{ secrets.SENTRY_DSN }}
         run: |
           P=${{ steps.pedido.outputs.perfil }}
-          jq --arg p "$P" --arg u "$URL_SUPABASE" --arg k "$CHAVE_SUPABASE" --arg d "$DSN_SENTRY" \
-            '.build[$p].env = ((.build[$p].env // {}) + {EXPO_PUBLIC_SUPABASE_URL:$u, EXPO_PUBLIC_SUPABASE_ANON_KEY:$k, EXPO_PUBLIC_SENTRY_DSN:$d})' \
+          jq --arg p "$P" --arg u "$URL_SUPABASE" --arg k "$CHAVE_SUPABASE" --arg d "$DSN_SENTRY" --arg g "${GOOGLE_SERVICES_JSON:-}" \
+            '.build[$p].env = ((.build[$p].env // {}) + {EXPO_PUBLIC_SUPABASE_URL:$u, EXPO_PUBLIC_SUPABASE_ANON_KEY:$k, EXPO_PUBLIC_SENTRY_DSN:$d} + (if $g != "" then {GOOGLE_SERVICES_JSON:$g} else {} end))' \
             eas.json > eas.tmp && mv eas.tmp eas.json
           echo "eas.json preparado para o perfil $P (valores ocultos)."
       - name: Montar o app
@@ -117,6 +128,12 @@ jobs:
           unzip -o -q "$GITHUB_WORKSPACE/bodes-do-asfalto.${{ steps.pedido.outputs.ext }}" 'assets/index.android.bundle' 'base/assets/index.android.bundle' 2>/dev/null || true
           B=$(find . -name index.android.bundle | head -1)
           if [ -n "$B" ] && grep -a -q "$HOST" "$B"; then echo "OK: o app montado conhece o servidor."; else echo "::error::O app montado NÃO tem o endereço do servidor (sairia em modo offline)."; exit 1; fi
+      - name: Conferir se o Firebase (notificações) está dentro do app
+        working-directory: .
+        run: |
+          cd /mnt/trabalho/confere
+          unzip -o -q "$GITHUB_WORKSPACE/bodes-do-asfalto.${{ steps.pedido.outputs.ext }}" 'resources.arsc' 2>/dev/null || true
+          if grep -a -q "google_app_id" resources.arsc 2>/dev/null; then echo "OK: Firebase presente."; else echo "::warning::Firebase NÃO está no app montado: notificações não vão funcionar."; fi
       - uses: actions/upload-artifact@v4
         with:
           name: bodes-do-asfalto-${{ steps.pedido.outputs.perfil }}
