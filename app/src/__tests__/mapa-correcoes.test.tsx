@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import MapaTela from '@/app/(abas)/index';
@@ -29,6 +29,12 @@ jest.mock('@maplibre/maplibre-react-native', () => {
     Map: ({ children, onRegionDidChange }: { children: unknown; onRegionDidChange: (e: object) => void }) => (
       <View>
         <Pressable testID="zoom-longe" onPress={() => onRegionDidChange({ nativeEvent: { zoom: 6 } })} />
+        <Pressable
+          testID="zoom-sao-paulo"
+          onPress={() =>
+            onRegionDidChange({ nativeEvent: { zoom: 11, bounds: [-46.7, -23.6, -46.5, -23.4] } })
+          }
+        />
         <Pressable testID="zoom-perto" onPress={() => onRegionDidChange({ nativeEvent: { zoom: 14 } })} />
         {children as never}
       </View>
@@ -151,12 +157,49 @@ describe('mapa: correções do dono', () => {
     );
   });
 
-  it('legenda fecha ao tocar fora', async () => {
+  it('tem só 4 chips e "Mais" abre os grupos; escolher filtra e mostra o grupo no chip', async () => {
     await render(<Mapa />);
-    await fireEvent.press(screen.getByRole('button', { name: 'Legenda do mapa' }));
+    for (const n of ['Tudo', 'Irmãos', 'Postos', 'Mais'])
+      expect(screen.getByRole('button', { name: n })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Clube' })).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: 'Mais' }));
+    for (const n of ['Clube', 'Natureza', 'Cultura', 'Apoio'])
+      expect(screen.getByRole('radio', { name: n })).toBeTruthy();
+    await fireEvent.press(screen.getByRole('radio', { name: 'Natureza' }));
+    expect(screen.queryByRole('radio', { name: 'Clube' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Natureza', selected: true })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Mais' })).toBeNull();
+  });
+
+  it('a legenda saiu do mapa e vive em "O que significa cada ícone" dentro do Mais', async () => {
+    await render(<Mapa />);
+    expect(screen.queryByRole('button', { name: 'Legenda do mapa' })).toBeNull();
+    expect(screen.queryByTestId('legenda-tipos')).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: 'Mais' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'O que significa cada ícone' }));
+    expect(screen.getByTestId('legenda-tipos')).toBeTruthy();
     expect(screen.getByText('Asfalto')).toBeTruthy();
-    await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Fechar legenda' })));
-    expect(screen.queryByText('Asfalto')).toBeNull();
+  });
+
+  it('folha recolhida mostra o resumo e Posto mais próximo; sem "Posto na rota"', async () => {
+    await render(<Mapa />);
+    expect(screen.getByText('Nesta área: 3 irmãos · 1 postos')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Posto mais próximo' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Posto na rota' })).toBeNull();
+    expect(screen.queryByText('Irmãos por perto')).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: 'Abrir o painel' }));
+    expect(screen.getByText('Irmãos por perto')).toBeTruthy();
+    expect(screen.getByText('Próximo passeio')).toBeTruthy();
+  });
+
+  it('Ágape longe e fora da janela de 2 h não aparece', async () => {
+    const hora = new Date(2026, 10, 13, 10, 0).getTime(); // 10h; o Ágape é às 19h30
+    const agora = jest.spyOn(Date, 'now').mockReturnValue(hora);
+    await render(<Mapa />);
+    expect(screen.getByRole('button', { name: 'Não vou' })).toBeTruthy(); // perto (menos de 10 km)
+    await fireEvent.press(screen.getByTestId('zoom-sao-paulo'));
+    expect(screen.queryByRole('button', { name: 'Não vou' })).toBeNull();
+    agora.mockRestore();
   });
 });
 

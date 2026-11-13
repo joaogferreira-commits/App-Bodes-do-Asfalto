@@ -46,6 +46,8 @@ type Props = {
   rotuloStatus?: string;
   /** Avatar ilustrado gerado a partir do nome (padrão) ou só as iniciais. */
   ilustrado?: boolean;
+  /** Contorno branco de 2 px (avatar sobre o mapa no tema Sol). */
+  contornoBranco?: boolean;
 };
 
 export function iniciais(nome: string): string {
@@ -56,7 +58,14 @@ export function iniciais(nome: string): string {
 }
 
 /** Avatar redondo com anel de status. Até o irmão subir foto, mostra as iniciais. */
-export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus, ilustrado = true }: Props) {
+export function Avatar({
+  nome,
+  status = 'nenhum',
+  tamanho = 44,
+  rotuloStatus,
+  ilustrado = true,
+  contornoBranco,
+}: Props) {
   const c = useCores();
   const cor = coresDoStatus(c)[status];
   const selo = seloDoStatus[status];
@@ -76,6 +85,7 @@ export function Avatar({ nome, status = 'nenhum', tamanho = 44, rotuloStatus, il
           borderStyle: tracoDoStatus[status],
           backgroundColor: c.superficie3,
         },
+        contornoBranco && { boxShadow: '0px 0px 0px 2px #FFFFFF' },
       ]}
     >
       {ilustrado ? (

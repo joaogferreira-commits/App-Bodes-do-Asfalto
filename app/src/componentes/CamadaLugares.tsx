@@ -2,7 +2,15 @@ import { GeoJSONSource, Images, Layer, type GeoJSONSourceRef } from '@maplibre/m
 import { useRef } from 'react';
 
 import type { LugarExemplo } from '@/dados/exemplos';
-import { agrupamento, imagensPinos, lugaresGeoJSON, tamanhoPino, ZOOM_EMBLEMA } from '@/map/lugares';
+import {
+  agrupamento,
+  imagensPinos,
+  lugaresGeoJSON,
+  tamanhoPino,
+  ZOOM_EMBLEMA,
+  ZOOM_EMBLEMA_LUGARES,
+} from '@/map/lugares';
+import type { Area } from '@/servidor/pontos';
 import { useCores } from '@/theme';
 import { pinos, type TipoPino } from '@/ui';
 
@@ -10,6 +18,8 @@ type Props = {
   lugares: LugarExemplo[];
   aoTocarLugar: (id: string) => void;
   aoTocarGrupo: (centro: [number, number], zoom: number) => void;
+  /** Área visível: limita os emblemas a ~20 (o resto fica como pontinho). */
+  area?: Area;
 };
 
 type EventoToque = {
@@ -22,10 +32,11 @@ type EventoToque = {
  * Lugares do mapa como camadas nativas (rápidas): emblemas que diminuem de longe e se agrupam
  * num círculo com a contagem ao afastar. Sede, SOS, socorro e alertas nunca se agrupam.
  */
-export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
+export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo, area }: Props) {
   const cores = useCores();
   const fonte = useRef<GeoJSONSourceRef>(null);
-  const dados = lugaresGeoJSON(lugares);
+  const dados = lugaresGeoJSON(lugares, { area });
+  const idsEmblemas = dados.emblemas.features.map((f) => f.properties.id);
 
   const tocar = async (e: EventoToque) => {
     const f = e.nativeEvent.features?.[0];
@@ -47,26 +58,26 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
     cores.acao,
   ];
 
-  const ponto = (id: string, filtro?: unknown[]) => (
+  const ponto = (id: string, maxzoom: number, filtro?: unknown[]) => (
     <Layer
       id={id}
       type="circle"
-      maxzoom={ZOOM_EMBLEMA}
+      {...(maxzoom < 24 ? { maxzoom } : {})}
       {...(filtro ? { filter: filtro as never } : {})}
       paint={{
         'circle-color': corPorTipo as never,
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 3, ZOOM_EMBLEMA, 6] as never,
+        'circle-radius': 5,
         'circle-stroke-color': cores.superficie,
         'circle-stroke-width': 1.5,
       }}
     />
   );
 
-  const simbolo = (id: string, filtro?: unknown[]) => (
+  const simbolo = (id: string, minzoom: number, filtro?: unknown[]) => (
     <Layer
       id={id}
       type="symbol"
-      minzoom={ZOOM_EMBLEMA}
+      minzoom={minzoom}
       {...(filtro ? { filter: filtro as never } : {})}
       layout={{
         'icon-image': ['concat', 'pino-', ['get', 'tipo']],
@@ -74,7 +85,7 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
         'icon-anchor': 'bottom',
         'icon-allow-overlap': true,
         'symbol-sort-key': ['get', 'prioridade'],
-        'text-field': ['step', ['zoom'], '', 12, ['get', 'rotulo']],
+        'text-field': ['step', ['zoom'], '', ZOOM_EMBLEMA_LUGARES, ['get', 'rotulo']],
         'text-font': ['Noto Sans Bold'],
         'text-size': 13,
         'text-anchor': 'top',
@@ -117,16 +128,31 @@ export function CamadaLugares({ lugares, aoTocarLugar, aoTocarGrupo }: Props) {
           }}
           paint={{ 'text-color': cores.texto }}
         />
-        {ponto('lugares-soltos-ponto', ['!', ['has', 'point_count']])}
-        {simbolo('lugares-soltos', ['!', ['has', 'point_count']])}
+        {/* Pontinho de cada lugar; de perto some só o que já virou emblema. */}
+        {ponto('lugares-soltos-ponto', 24, [
+          'all',
+          ['!', ['has', 'point_count']],
+          [
+            'any',
+            ['<', ['zoom'], ZOOM_EMBLEMA_LUGARES],
+            ['!', ['in', ['get', 'id'], ['literal', idsEmblemas]]],
+          ],
+        ])}
+      </GeoJSONSource>
+      <GeoJSONSource
+        id="lugares-emblemas"
+        data={dados.emblemas as never}
+        onPress={(e) => void tocar(e as unknown as EventoToque)}
+      >
+        {simbolo('lugares-soltos', ZOOM_EMBLEMA_LUGARES)}
       </GeoJSONSource>
       <GeoJSONSource
         id="lugares-fixos"
         data={dados.fixos as never}
         onPress={(e) => void tocar(e as unknown as EventoToque)}
       >
-        {ponto('lugares-fixos-ponto')}
-        {simbolo('lugares-fixos-simbolo')}
+        {ponto('lugares-fixos-ponto', ZOOM_EMBLEMA)}
+        {simbolo('lugares-fixos-simbolo', ZOOM_EMBLEMA)}
       </GeoJSONSource>
     </>
   );

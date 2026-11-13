@@ -80,7 +80,7 @@ describe('registro local', () => {
     for (let i = 0; i < MAX_ERROS + 5; i++) await guardarErro(new Error(`e${i}`));
     const l = await lerErros();
     expect(l).toHaveLength(MAX_ERROS);
-    expect(l[l.length - 1].mensagem).toBe(`e${MAX_ERROS + 4}`);
+    expect(l[l.length - 1]?.mensagem).toBe(`e${MAX_ERROS + 4}`);
   });
 });
 

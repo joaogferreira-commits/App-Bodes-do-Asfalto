@@ -10,9 +10,17 @@ import {
 import { Image } from 'expo-image';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Linking,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { MarcadorAgape } from '@/componentes/MarcadorAgape';
@@ -26,6 +34,8 @@ import { usePublicarPosicao } from '@/map/usePublicarPosicao';
 import type { Area } from '@/servidor/pontos';
 import { CamadaLugares } from '@/componentes/CamadaLugares';
 import { BotaoSOS } from '@/componentes/BotaoSOS';
+import { alturasFolha, FolhaDeslizante, type NivelFolha } from '@/componentes/FolhaDeslizante';
+import { FolhaMais, gruposMais } from '@/componentes/FolhaMais';
 import { FichaMapa } from '@/componentes/FichaMapa';
 import { SeletorVisibilidade } from '@/componentes/SeletorVisibilidade';
 import { useVisibilidadeMapa } from '@/estado/visibilidadeMapa';
@@ -43,7 +53,9 @@ import {
   type Ficha,
   type RegistroAcenos,
 } from '@/map/fichas';
-import { ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
+import { tamanhoAvatarNoMapa, ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
+import { agapeRelevante, centroDaArea, distanciaKm } from '@/map/areaMapa';
+import { passeiosExemplo } from '@/dados/passeios';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { useModoMapaAutomatico } from '@/map/temaMapa';
@@ -51,65 +63,17 @@ import { useBloqueioEmMovimento } from '@/seguranca/useBloqueioEmMovimento';
 import { avisar } from '@/ui/dialogo';
 import { postoExemplo } from '@/navegacao/destinos';
 import { espaco, raios, sombra, useCores, useEstilos, useTema, type NomeCor, type Paleta } from '@/theme';
-import {
-  Avatar,
-  Botao,
-  BotaoIcone,
-  Chip,
-  coresDoStatus,
-  Icone,
-  PainelInferior,
-  pinos,
-  Texto,
-  type TipoPino,
-} from '@/ui';
+import { Avatar, Botao, BotaoIcone, Chip, coresDoStatus, Icone, pinos, Texto } from '@/ui';
 
 const CUIABA: [number, number] = [-56.0861, -15.5895];
 
 const filtros: { chave: Filtro; cor?: NomeCor }[] = [
   { chave: 'tudo' },
   { chave: 'irmaos', cor: 'acao' },
-  { chave: 'clube', cor: 'ouro' },
   { chave: 'postos', cor: 'verdePosto' },
-  { chave: 'natureza', cor: 'azulRio' },
-  { chave: 'cultura', cor: 'textoSec' },
-  { chave: 'apoio', cor: 'estrada' },
-];
-
-/** Legenda dos pinos por grupo: um ícone de traço de cada tipo, na cor do pino. */
-const legendaPontos: { chave: 'postos' | 'natureza' | 'cultura' | 'apoio'; tipos: TipoPino[] }[] = [
-  { chave: 'postos', tipos: ['posto', 'oficina_moto', 'borracharia'] },
-  { chave: 'natureza', tipos: ['cachoeira', 'mirante', 'praia', 'parque', 'camping'] },
-  { chave: 'cultura', tipos: ['museu', 'monumento', 'atracao', 'igreja_historica'] },
-  { chave: 'apoio', tipos: ['hospedagem', 'hospital', 'policia_rodoviaria'] },
 ];
 
 const AREA_INICIAL: Area = { minLon: -56.24, minLat: -15.75, maxLon: -55.94, maxLat: -15.45 };
-
-function LinhaLegenda({ terra, rota, texto }: { terra?: boolean; rota?: boolean; texto: string }) {
-  const cores = useCores();
-  const estilos = useEstilos(criarEstilos);
-  const cor = rota ? cores.acao : terra ? cores.terra : cores.asfalto;
-  return (
-    <View style={estilos.linhaLegenda}>
-      <View style={[estilos.amostra, { backgroundColor: terra && !rota ? cores.terraEscura : cor }]}>
-        {terra && (
-          <View style={estilos.tracejado}>
-            {[0, 1, 2, 3].map((i) => (
-              <View
-                key={i}
-                style={[estilos.traco, { backgroundColor: rota ? cores.rotaTerra : cores.terra }]}
-              />
-            ))}
-          </View>
-        )}
-      </View>
-      <Texto variante="pequeno" style={{ color: cores.texto }}>
-        {texto}
-      </Texto>
-    </View>
-  );
-}
 
 /** Id do ponto tocado numa camada GeoJSON. */
 function idTocado(e: unknown): string | undefined {
@@ -120,15 +84,24 @@ function idTocado(e: unknown): string | undefined {
 export default function Mapa() {
   const { t } = useTranslation();
   const cores = useCores();
+  const { modo } = useTema();
   const coresStatus = coresDoStatus(cores);
   const estilos = useEstilos(criarEstilos);
   const mapa = useRef<MapRef>(null);
   const camera = useRef<CameraRef>(null);
   const [filtro, setFiltro] = useState<Filtro>('tudo');
-  const [legenda, setLegenda] = useState(false);
+  const [maisAberto, setMaisAberto] = useState(false);
+  const [nivel, setNivel] = useState<NivelFolha>(0);
+  const { height: alturaTela } = useWindowDimensions();
+  const alturas = alturasFolha(alturaTela);
+  const [altura] = useState(() => new Animated.Value(alturas[0]));
+  const [agora, setAgora] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setAgora(Date.now()), 60000);
+    return () => clearInterval(id);
+  }, []);
   const [seletorAberto, setSeletorAberto] = useState(false);
   const visibilidade = useVisibilidadeMapa();
-  const [recolhido, setRecolhido] = useState(false);
   const [zoomAtual, setZoomAtual] = useState(11);
   const { definirDestino, definirBateVolta } = useViagem();
   /**
@@ -194,11 +167,21 @@ export default function Mapa() {
   usePublicarPosicao(chatNoServidor, visibilidade.estado);
   const fonteIrmaos = chatNoServidor ? irmaosReais : irmaosExemplo;
   const irmaos = filtro === 'tudo' || filtro === 'irmaos' ? fonteIrmaos : [];
+  const noArea = (p: { lat: number; lng: number }) =>
+    p.lng >= area.minLon && p.lng <= area.maxLon && p.lat >= area.minLat && p.lat <= area.maxLat;
   const contagem = {
-    irmaos: irmaos.length,
-    sedes: lugares.filter((l) => l.tipo === 'sede').length,
-    pontos: lugares.length,
+    irmaos: irmaos.filter(noArea).length,
+    postos: lugares.filter((l) => l.tipo === 'posto' && noArea(l)).length,
   };
+  const referencia = minhaPosicao ? { lat: minhaPosicao[1], lng: minhaPosicao[0] } : centroDaArea(area);
+  const irmaosPerto = [...irmaos]
+    .map((i) => ({ i, km: distanciaKm(referencia, i) }))
+    .sort((a, b) => a.km - b.km)
+    .slice(0, 20);
+  const proximoPasseio = passeiosExemplo.find((p) => p.quando === 'proximos');
+  const agapeBanner = agapes.find(
+    (ag) => !agapesDispensados.includes(ag.id) && agapeRelevante(ag, referencia, agora),
+  );
 
   const abrir = (f: Ficha) => {
     camera.current?.flyTo({ center: [f.posicao.lng, f.posicao.lat], duration: 600 });
@@ -285,10 +268,60 @@ export default function Mapa() {
     }
   };
 
+  const grupoMais = gruposMais.find((g) => g.chave === filtro);
   const irAoPosto = () => {
     definirDestino(postoExemplo);
     router.push('/rota');
   };
+
+  const cartaoAgape = agapeBanner && (
+    <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('mapa.agapeMarcador', {
+          local: agapeBanner.local,
+          tempo: agapeBanner.comecaEm,
+        })}
+        onPress={() => verAgape(agapeBanner)}
+        style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
+      >
+        <Image
+          source={pinos.agape.imagem}
+          style={{ width: 40, height: 50 }}
+          contentFit="contain"
+          accessible={false}
+        />
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <Texto variante="rotulo" style={{ color: cores.ouro }} numberOfLines={1}>
+            {t('mapa.agapeRotulo', { tempo: agapeBanner.comecaEm })}
+          </Texto>
+          <Texto variante="corpoForte" numberOfLines={1}>
+            {t('feed.agapeEm', { local: agapeBanner.local })}
+          </Texto>
+          <Texto variante="secundario" numberOfLines={1}>
+            {t('feed.vaoN', { n: agapeBanner.vao.length })}
+          </Texto>
+        </View>
+      </Pressable>
+      <View style={{ gap: espaco.xs }}>
+        <Botao titulo={t('mapa.vou')} onPress={() => responderAgape(agapeBanner.id, true)} />
+        <Botao
+          titulo={t('mapa.naoVou')}
+          variante="secundario"
+          onPress={() => responderAgape(agapeBanner.id, false)}
+        />
+      </View>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('mapa.agapeFechar')}
+        hitSlop={8}
+        onPress={() => dispensarAgape(agapeBanner.id)}
+        style={estilos.fecharAgape}
+      >
+        <Icone nome="fechar" tamanho={20} cor={cores.textoSec} />
+      </Pressable>
+    </View>
+  );
 
   return (
     <View style={estilos.tela}>
@@ -304,11 +337,12 @@ export default function Mapa() {
         }}
         logo={false}
         attribution
-        attributionPosition={{ bottom: recolhido ? 90 : 330, left: 8 }}
+        attributionPosition={{ bottom: alturas[nivel] + 8, left: 8 }}
       >
         <Camera ref={camera} initialViewState={{ center: CUIABA, zoom: 11 }} />
         <CamadaLugares
           lugares={lugares}
+          area={area}
           aoTocarLugar={tocarLugar}
           aoTocarGrupo={(centro, z) =>
             camera.current?.flyTo({ center: centro, zoom: z + 0.5, duration: 600 })
@@ -425,20 +459,17 @@ export default function Mapa() {
           irmaos.map((i) => (
             <Marker key={i.id} id={i.id} lngLat={[i.lng, i.lat]}>
               <View pointerEvents="none">
-                <Avatar nome={i.nome} status={i.status} tamanho={44} />
+                <Avatar
+                  nome={i.nome}
+                  status={i.status}
+                  tamanho={tamanhoAvatarNoMapa(zoomAtual)}
+                  contornoBranco={modo === 'sol'}
+                />
               </View>
             </Marker>
           ))}
       </Map>
 
-      {legenda && (
-        <Pressable
-          style={StyleSheet.absoluteFill}
-          accessibilityRole="button"
-          accessibilityLabel={t('mapa.fecharLegenda')}
-          onPress={() => setLegenda(false)}
-        />
-      )}
       <SafeAreaView edges={['top']} style={estilos.topo} pointerEvents="box-none">
         <View style={estilos.linhaBusca}>
           <Pressable
@@ -463,15 +494,20 @@ export default function Mapa() {
           {filtros.map((f) => (
             <Chip
               key={f.chave}
-              rotulo={t(`mapa.filtros.${f.chave === 'postos' ? 'postosOficinas' : f.chave}`)}
+              rotulo={t(`mapa.filtros.${f.chave}`)}
               corPonto={f.cor ? cores[f.cor] : undefined}
               ativo={filtro === f.chave}
               onPress={() => setFiltro(f.chave)}
             />
           ))}
+          <Chip
+            rotulo={t(grupoMais ? `mapa.filtros.${filtro}` : 'mapa.maisChip')}
+            corPonto={grupoMais ? cores[grupoMais.cor] : undefined}
+            ativo={!!grupoMais}
+            onPress={() => setMaisAberto(true)}
+          />
         </ScrollView>
         <View style={estilos.lateral} pointerEvents="box-none">
-          <BotaoSOS flutuante />
           <BotaoIcone
             icone="visivel"
             corIcone={cores.acao}
@@ -480,14 +516,6 @@ export default function Mapa() {
             rotulo={t('mapa.visibilidade')}
             flutuante
             onPress={() => setSeletorAberto(true)}
-          />
-          <BotaoIcone
-            icone="camadas"
-            legenda={t('mapa.legendaCurta')}
-            legendaAbaixo
-            rotulo={t('mapa.camadas')}
-            flutuante
-            onPress={() => setLegenda((v) => !v)}
           />
           <BotaoIcone
             icone="localizacao"
@@ -502,94 +530,28 @@ export default function Mapa() {
             <BotaoIcone icone="menos" rotulo={t('mapa.afastar')} flutuante onPress={() => void zoom(-1)} />
           </View>
         </View>
-        {legenda && (
-          <View style={estilos.legenda} accessibilityLabel={t('mapa.camadas')}>
-            <LinhaLegenda texto={t('mapa.legendaAsfalto')} />
-            <LinhaLegenda terra texto={t('mapa.legendaTerra')} />
-            <LinhaLegenda rota texto={t('mapa.legendaRota')} />
-            <LinhaLegenda rota terra texto={t('mapa.legendaRotaTerra')} />
-            <Texto variante="rotulo">{t('mapa.legendaPontos.titulo')}</Texto>
-            {legendaPontos.map((g) => (
-              <View key={g.chave} style={estilos.linhaLegenda} testID={`legenda-${g.chave}`}>
-                <View style={estilos.iconesLegenda}>
-                  {g.tipos.map((tp) => (
-                    <Icone key={tp} nome={pinos[tp].icone} tamanho={22} cor={cores[pinos[tp].cor]} />
-                  ))}
-                </View>
-                <Texto variante="pequeno" style={{ color: cores.texto, flexShrink: 1 }}>
-                  {t(`mapa.legendaPontos.${g.chave}`)}
-                </Texto>
-              </View>
-            ))}
-            <Texto variante="pequeno" style={{ maxWidth: 210 }}>
-              {t('mapa.dadosExemplo')}
-            </Texto>
-          </View>
-        )}
       </SafeAreaView>
 
-      <PainelInferior
-        style={estilos.painel}
-        recolhido={recolhido}
-        aoAlternar={setRecolhido}
+      <Animated.View style={[estilos.sos, { bottom: Animated.add(altura, 12) }]} pointerEvents="box-none">
+        <BotaoSOS flutuante />
+      </Animated.View>
+      {cartaoAgape && nivel === 0 && (
+        <Animated.View style={[estilos.bannerAgape, { bottom: Animated.add(altura, 84) }]}>
+          {cartaoAgape}
+        </Animated.View>
+      )}
+      <FolhaDeslizante
+        altura={altura}
+        alturas={alturas}
+        nivel={nivel}
+        aoMudarNivel={setNivel}
         resumo={
-          <View style={estilos.nestaArea}>
-            <Texto variante="rotulo">{t('mapa.nestaArea')}</Texto>
-            <Texto variante="secundario">{t('mapa.contagem', contagem)}</Texto>
-          </View>
-        }
-      >
-        {!agapesDispensados.includes(agapeExemplo.id) && (
-          <View style={[estilos.cartaoAgape, { borderColor: cores.ouro }]}>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('mapa.agapeMarcador', {
-                local: agapeExemplo.local,
-                tempo: agapeExemplo.comecaEm,
-              })}
-              onPress={() => verAgape()}
-              style={{ flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: espaco.sm }}
-            >
-              <Image
-                source={pinos.agape.imagem}
-                style={{ width: 40, height: 50 }}
-                contentFit="contain"
-                accessible={false}
-              />
-              <View style={{ flex: 1, minWidth: 0 }}>
-                <Texto variante="rotulo" style={{ color: cores.ouro }} numberOfLines={1}>
-                  {t('mapa.agapeRotulo', { tempo: agapeExemplo.comecaEm })}
-                </Texto>
-                <Texto variante="corpoForte" numberOfLines={1}>
-                  {t('feed.agapeEm', { local: agapeExemplo.local })}
-                </Texto>
-                <Texto variante="secundario" numberOfLines={1}>
-                  {t('feed.vaoN', { n: agapeExemplo.vao.length })}
-                </Texto>
-              </View>
-            </Pressable>
-            <View style={{ gap: espaco.xs }}>
-              <Botao titulo={t('mapa.vou')} onPress={() => responderAgape(agapeExemplo.id, true)} />
-              <Botao
-                titulo={t('mapa.naoVou')}
-                variante="secundario"
-                onPress={() => responderAgape(agapeExemplo.id, false)}
-              />
+          <View style={estilos.resumo}>
+            <View style={{ flex: 1, minWidth: 0 }}>
+              <Texto variante="corpoForte" numberOfLines={2}>
+                {t('mapa.nestaAreaResumo', contagem)}
+              </Texto>
             </View>
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('mapa.agapeFechar')}
-              hitSlop={8}
-              onPress={() => dispensarAgape(agapeExemplo.id)}
-              style={estilos.fecharAgape}
-            >
-              <Icone nome="fechar" tamanho={20} cor={cores.textoSec} />
-            </Pressable>
-          </View>
-        )}
-
-        <View style={estilos.postos}>
-          <View style={{ flex: 1 }}>
             <Botao
               titulo={t('mapa.postoProximo')}
               variante="secundario"
@@ -598,17 +560,55 @@ export default function Mapa() {
               onPress={irAoPosto}
             />
           </View>
-          <View style={{ flex: 1 }}>
-            <Botao
-              titulo={t('mapa.postoNaRota')}
-              variante="secundario"
-              icone="postoRota"
-              corIcone={cores.verdePosto}
-              onPress={irAoPosto}
-            />
-          </View>
-        </View>
-      </PainelInferior>
+        }
+      >
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: espaco.sm }}>
+          {cartaoAgape}
+          <Texto variante="rotulo">{t('mapa.irmaosPerto')}</Texto>
+          {irmaosPerto.length === 0 && <Texto variante="secundario">{t('mapa.semIrmaos')}</Texto>}
+          {irmaosPerto.map(({ i, km }) => (
+            <Pressable
+              key={i.id}
+              accessibilityRole="button"
+              accessibilityLabel={i.nome}
+              onPress={() => {
+                setNivel(0);
+                altura.setValue(alturas[0]);
+                tocarIrmao(i.id);
+              }}
+              style={estilos.linhaIrmao}
+            >
+              <Avatar nome={i.nome} status={i.status} tamanho={36} />
+              <Texto variante="corpoForte" style={{ flex: 1 }} numberOfLines={1}>
+                {i.nome}
+              </Texto>
+              <Texto variante="secundario">{`${km.toFixed(km < 10 ? 1 : 0)} km`}</Texto>
+            </Pressable>
+          ))}
+          {proximoPasseio && (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={proximoPasseio.titulo}
+              onPress={() => router.navigate('/passeios')}
+              style={estilos.cartaoPasseio}
+            >
+              <Texto variante="rotulo">{t('mapa.proximoEvento')}</Texto>
+              <Texto variante="corpoForte" numberOfLines={1}>
+                {proximoPasseio.titulo}
+              </Texto>
+              <Texto variante="secundario" numberOfLines={1}>
+                {`${proximoPasseio.dia} · ${proximoPasseio.hora} · ${proximoPasseio.saida}`}
+              </Texto>
+            </Pressable>
+          )}
+        </ScrollView>
+      </FolhaDeslizante>
+      <FolhaMais
+        aberto={maisAberto}
+        filtro={filtro}
+        aoEscolher={setFiltro}
+        aoFechar={() => setMaisAberto(false)}
+      />
       <SeletorVisibilidade
         aberto={seletorAberto}
         estado={visibilidade.estado}
@@ -659,24 +659,18 @@ const criarEstilos = (cores: Paleta) =>
     filtros: { gap: espaco.xs, paddingHorizontal: espaco.md, paddingVertical: espaco.sm },
     lateral: { position: 'absolute', right: espaco.md, top: 132, gap: espaco.xs, alignItems: 'flex-end' },
     zoom: { gap: espaco.xxs, marginTop: espaco.xs, alignItems: 'center', width: 64 },
-    legenda: {
-      alignSelf: 'flex-start',
-      marginLeft: espaco.md,
-      marginTop: espaco.xs,
-      backgroundColor: cores.sobreMapa,
+    sos: { position: 'absolute', left: espaco.md },
+    bannerAgape: { position: 'absolute', left: espaco.md, right: espaco.md },
+    resumo: { flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
+    linhaIrmao: { minHeight: 48, flexDirection: 'row', alignItems: 'center', gap: espaco.sm },
+    cartaoPasseio: {
+      backgroundColor: cores.superficie2,
+      borderRadius: raios.cartao,
       borderWidth: 1,
       borderColor: cores.linha,
-      borderRadius: 12,
-      padding: espaco.sm,
-      gap: espaco.xs,
+      padding: 14,
+      gap: 2,
     },
-    iconesLegenda: { flexDirection: 'row', gap: 4 },
-    linhaLegenda: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-    amostra: { width: 34, height: 7, borderRadius: 4, overflow: 'hidden', justifyContent: 'center' },
-    tracejado: { flexDirection: 'row', gap: 4, paddingHorizontal: 2 },
-    traco: { width: 5, height: 3, borderRadius: 2 },
-    painel: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingBottom: espaco.md, gap: 10 },
-    nestaArea: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' },
     cartaoAgape: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -693,13 +687,4 @@ const criarEstilos = (cores: Paleta) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    iconeAgape: {
-      width: 48,
-      height: 48,
-      borderRadius: 12,
-      backgroundColor: cores.superficie3,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    postos: { flexDirection: 'row', gap: 10 },
   });

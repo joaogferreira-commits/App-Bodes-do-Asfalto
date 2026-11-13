@@ -237,7 +237,7 @@ export default function Story() {
           </View>
         ) : (
           <Image
-            source={item.foto}
+            source={item.foto as never}
             style={StyleSheet.absoluteFill}
             contentFit="contain"
             accessibilityLabel={item.legenda || grupo.nome}

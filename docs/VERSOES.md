@@ -4,6 +4,15 @@ Cada versão de teste tem um número (mostrado em Perfil, no rodapé). Regra: o 
 (`0.MENOR.0`); correções dentro da mesma versão sobem o último número. O número interno do Android (versionCode) sobe
 sozinho no EAS. A versão mais nova fica no topo; o teste automático confere que este arquivo e o `app/app.json` batem.
 
+## 0.16.0 — 13/11/2026 (mapa novo, ajuda com tipos, janelas do clube)
+
+- Versão ligada ao servidor de verdade (a 0.15.0 saiu sem o endereço do servidor).
+- Mapa: visual novo (claro de dia, escuro à noite, rodovias âmbar com BR/MT), tela limpa (busca, 4 filtros, folha de baixo), pontinhos de longe, irmãos reais e tocáveis.
+- "Sou garupa / passageiro" libera o app em movimento.
+- Pedido de ajuda com 8 tipos e mensagem; WhatsApp com nome e hora.
+- Janelas no visual do clube (fecham fora e no voltar); formulários guardam o que foi digitado por 24 h.
+- Stories em sequência; navegação mais rápida (modo carro no Google); atalho/widget com instruções para Xiaomi; relatório de erros (Sentry, quando a conta existir).
+
 ## 0.15.0 — 12/11/2026 (mapa revisado e notificações)
 
 - Notificações de verdade: mensagem, aceno, pedido de entrada e decisão chegam no celular (cada tipo pode ser desligado; SOS sempre ligado).
