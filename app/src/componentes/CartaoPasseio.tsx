@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import type { Passeio } from '@/dados/passeios';
+import { clienteConsultas } from '@/servidor/consulta';
+import { CHAVE_PASSEIOS, responderPasseio } from '@/servidor/passeios';
+import { avisar } from '@/ui/dialogo';
 import { espaco, raios, useCores, useEstilos, type Paleta } from '@/theme';
 import { Avatar, Botao, Icone, Texto, type NomeIcone } from '@/ui';
 
@@ -24,7 +27,22 @@ export function CartaoPasseio({ passeio: p }: { passeio: Passeio }) {
   const { t } = useTranslation();
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
-  const [presenca, setPresenca] = useState<'vou' | 'talvez' | null>(null);
+  const [presenca, setPresenca] = useState<'vou' | 'talvez' | null>(p.minhaPresenca ?? null);
+  // No servidor a contagem já inclui a minha presença; no exemplo somamos o toque local.
+  const soma = (qual: 'vou' | 'talvez') => (!p.servidor && presenca === qual ? 1 : 0);
+  const escolher = (qual: 'vou' | 'talvez') => {
+    const novo = presenca === qual ? null : qual;
+    const anterior = presenca;
+    setPresenca(novo);
+    if (!p.servidor) return;
+    void responderPasseio(p.id, novo).then((ok) => {
+      if (ok) void clienteConsultas.invalidateQueries({ queryKey: CHAVE_PASSEIOS });
+      else {
+        setPresenca(anterior);
+        avisar(t('passeios.erroPresenca'));
+      }
+    });
+  };
   const passado = p.quando === 'passados';
   return (
     <View style={[estilos.cartao, p.oficial && { borderColor: cores.acao, borderWidth: 2 }]}>
@@ -72,8 +90,8 @@ export function CartaoPasseio({ passeio: p }: { passeio: Passeio }) {
             {passado
               ? t('passeios.foram', { n: p.vou })
               : t('feed.confirmados', {
-                  vou: p.vou + (presenca === 'vou' ? 1 : 0),
-                  talvez: p.talvez + (presenca === 'talvez' ? 1 : 0),
+                  vou: p.vou + soma('vou'),
+                  talvez: p.talvez + soma('talvez'),
                 })}
           </Texto>
         </View>
@@ -85,7 +103,7 @@ export function CartaoPasseio({ passeio: p }: { passeio: Passeio }) {
                 variante={presenca === 'vou' ? 'principal' : 'secundario'}
                 icone={presenca === 'vou' ? 'check' : undefined}
                 grande
-                onPress={() => setPresenca((v) => (v === 'vou' ? null : 'vou'))}
+                onPress={() => escolher('vou')}
               />
             </View>
             <View style={{ flex: 1 }}>
@@ -93,7 +111,7 @@ export function CartaoPasseio({ passeio: p }: { passeio: Passeio }) {
                 titulo={t('feed.talvez')}
                 variante={presenca === 'talvez' ? 'principal' : 'contorno'}
                 grande
-                onPress={() => setPresenca((v) => (v === 'talvez' ? null : 'talvez'))}
+                onPress={() => escolher('talvez')}
               />
             </View>
           </View>

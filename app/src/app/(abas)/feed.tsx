@@ -10,6 +10,7 @@ import { agapeExemplo } from '@/dados/agape';
 import { niveis, selos } from '@/dados/conquistas';
 import { postsExemplo, stories, type Post } from '@/dados/feed';
 import { passeiosExemplo } from '@/dados/passeios';
+import { usePasseios } from '@/servidor/usePasseios';
 import { useAgapes } from '@/estado/agapes';
 import { useMeusPosts } from '@/estado/meusPosts';
 import { useModeracao } from '@/feed/moderacao';
@@ -33,6 +34,8 @@ export default function Feed() {
   const estilos = useEstilos(criarEstilos);
   const emBreve = () => avisar(t('comum.emBreve'), t('feed.emBreve'));
   const { agapes } = useAgapes();
+  const { passeios: passeiosReais, servidor: passeiosNoServidor } = usePasseios();
+  const proximoPasseio = passeiosNoServidor ? passeiosReais.find((p) => p.quando === 'proximos') : undefined;
   const meus = useMeusPosts();
   const usarFerramenta = (chave: string) => {
     if (chave === 'foto') router.push('/publicar?foto=galeria');
@@ -178,6 +181,11 @@ export default function Feed() {
           ))}
         </View>
       </Cartao>
+      {real && proximoPasseio && (
+        <View style={{ paddingHorizontal: espaco.md }}>
+          <CartaoPasseio passeio={proximoPasseio} />
+        </View>
+      )}
     </View>
   );
 

@@ -55,7 +55,8 @@ import {
 } from '@/map/fichas';
 import { tamanhoAvatarNoMapa, ZOOM_EMBLEMA, ZOOM_MINIMO_IRMAOS } from '@/map/lugares';
 import { agapeRelevante, centroDaArea, distanciaKm } from '@/map/areaMapa';
-import { passeiosExemplo } from '@/dados/passeios';
+import { usePasseios } from '@/servidor/usePasseios';
+import { responderAgape as responderAgapeNoServidor } from '@/servidor/agapes';
 import { useViagem } from '@/estado/viagem';
 import { useEstiloMapa } from '@/map/estilos';
 import { useModoMapaAutomatico } from '@/map/temaMapa';
@@ -152,9 +153,12 @@ export default function Mapa() {
   const responderAgape = (id: string, vou: boolean) => {
     setVouAgape((l) => (vou ? (l.includes(id) ? l : [...l, id]) : l.filter((x) => x !== id)));
     dispensarAgape(id);
+    // Ágape de verdade (id do banco): grava a presença e o grupo do Ágape acompanha.
+    if (/^[0-9a-f-]{36}$/.test(id)) void responderAgapeNoServidor(id, vou);
   };
   const hoje = new Date().toISOString().slice(0, 10);
   const acesso = useAcessoOpcional();
+  const { passeios: passeiosDaAgenda } = usePasseios();
   const chatNoServidor = servidorConfigurado && acesso?.modo === 'supabase' && acesso.estado === 'membro';
 
   // Pontos do banco (OpenStreetMap) para a área visível, juntos com os que já vêm no app.
@@ -178,7 +182,7 @@ export default function Mapa() {
     .map((i) => ({ i, km: distanciaKm(referencia, i) }))
     .sort((a, b) => a.km - b.km)
     .slice(0, 20);
-  const proximoPasseio = passeiosExemplo.find((p) => p.quando === 'proximos');
+  const proximoPasseio = passeiosDaAgenda.find((p) => p.quando === 'proximos');
   const agapeBanner = agapes.find(
     (ag) => !agapesDispensados.includes(ag.id) && agapeRelevante(ag, referencia, agora),
   );
@@ -262,9 +266,12 @@ export default function Mapa() {
       case 'salvar':
         setSalvosMapa((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
         return;
-      case 'vou':
+      case 'vou': {
+        const jaVou = vouAgape.includes(ficha.id);
         setVouAgape((l) => (l.includes(ficha.id) ? l.filter((x) => x !== ficha.id) : [...l, ficha.id]));
+        if (/^[0-9a-f-]{36}$/.test(ficha.id)) void responderAgapeNoServidor(ficha.id, !jaVou);
         return;
+      }
     }
   };
 

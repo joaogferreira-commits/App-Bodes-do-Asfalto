@@ -5,7 +5,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CartaoPasseio } from '@/componentes/CartaoPasseio';
-import { passeiosExemplo } from '@/dados/passeios';
+import { usePasseios } from '@/servidor/usePasseios';
 import { espaco, useCores, useEstilos, type Paleta } from '@/theme';
 import { Botao, Chip, Texto } from '@/ui';
 import { avisar } from '@/ui/dialogo';
@@ -18,7 +18,8 @@ export default function Passeios() {
   const cores = useCores();
   const estilos = useEstilos(criarEstilos);
   const [filtro, setFiltro] = useState<Filtro>('proximos');
-  const lista = passeiosExemplo.filter((p) =>
+  const { passeios, servidor, podeCriar } = usePasseios();
+  const lista = passeios.filter((p) =>
     filtro === 'passados'
       ? p.quando === 'passados'
       : p.quando === 'proximos' && (filtro !== 'oficiais' || p.oficial),
@@ -34,16 +35,22 @@ export default function Passeios() {
           <View style={{ gap: espaco.md }}>
             <View>
               <Texto variante="titulo">{t('abas.passeios')}</Texto>
-              <Texto variante="pequeno">{t('passeios.exemplo')}</Texto>
+              <Texto variante="pequeno">{servidor ? t('passeios.subtitulo') : t('passeios.exemplo')}</Texto>
             </View>
             <View style={{ flexDirection: 'row', gap: espaco.xs }}>
-              <View style={{ flex: 1 }}>
-                <Botao
-                  titulo={t('passeios.criar')}
-                  icone="mais"
-                  onPress={() => avisar(t('comum.emBreve'), t('passeios.criarEmBreve'))}
-                />
-              </View>
+              {podeCriar && (
+                <View style={{ flex: 1 }}>
+                  <Botao
+                    titulo={t('passeios.criar')}
+                    icone="mais"
+                    onPress={() =>
+                      servidor
+                        ? router.push('/passeio-novo')
+                        : avisar(t('comum.emBreve'), t('passeios.criarEmBreve'))
+                    }
+                  />
+                </View>
+              )}
               <View style={{ flex: 1 }}>
                 <Botao
                   titulo={t('rota.bateVolta.chip')}
@@ -65,7 +72,8 @@ export default function Passeios() {
             </View>
           </View>
         }
-        renderItem={({ item }) => <CartaoPasseio passeio={item} />}
+        ListEmptyComponent={servidor ? <Texto variante="secundario">{t('passeios.vazio')}</Texto> : <View />}
+        renderItem={({ item }) => <CartaoPasseio key={item.id} passeio={item} />}
       />
     </SafeAreaView>
   );

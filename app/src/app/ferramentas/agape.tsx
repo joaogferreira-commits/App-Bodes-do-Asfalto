@@ -29,7 +29,7 @@ export default function CriarAgape() {
     const p = granted ? await Location.getCurrentPositionAsync({}).catch(() => null) : null;
     setSalvando(false);
     if (!p) return avisar(t('rota.erros.semLocalizacao'));
-    criar({
+    const ok = await criar({
       local: local.trim(),
       texto: texto.trim() || t('ferramentas.agape.textoPadrao'),
       horario,
@@ -37,6 +37,7 @@ export default function CriarAgape() {
       lat: p.coords.latitude,
       lng: p.coords.longitude,
     });
+    if (ok === false) return avisar(t('ferramentas.agape.erro'));
     limpaLocal();
     limpaTexto();
     limpaHorario();

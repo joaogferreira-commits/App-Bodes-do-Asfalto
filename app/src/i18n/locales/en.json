@@ -481,7 +481,28 @@
     "deIrmao": "Organized by {{nome}}",
     "trajeto": "{{saida}} → {{destino}}",
     "distancia": "{{km}} km · {{duracao}} · {{estrada}}",
-    "foram": "{{n}} brothers went"
+    "foram": "{{n}} brothers went",
+    "subtitulo": "Schedule for your chapter and the general rides.",
+    "vazio": "No rides here yet.",
+    "erroPresenca": "Could not save your attendance. Try again.",
+    "novo": {
+      "titulo": "Create ride",
+      "explicacao": "Schedule a ride for your chapter. Brothers who confirm \"I'm in\" join the ride group.",
+      "semPermissao": "Only the chapter board can create rides.",
+      "nome": "Ride name",
+      "dia": "Day (dd/mm/yyyy)",
+      "hora": "Time (e.g. 6:30)",
+      "saida": "Starting point",
+      "destino": "Destination",
+      "descricao": "Details (optional)",
+      "aviso": "All brothers can see the ride. The ride group is created automatically.",
+      "publicar": "Publish ride",
+      "faltaTitulo": "Give the ride a name.",
+      "dataInvalida": "Check the day and time: use dd/mm/yyyy and a date that has not passed.",
+      "erro": "Could not create the ride. Check your connection and try again.",
+      "criado": "Ride created",
+      "criadoTexto": "It now shows in the brothers' schedule."
+    }
   },
   "avatar": {
     "titulo": "Create avatar",
@@ -644,7 +665,8 @@
       "faltaLocal": "Say where the Agape will be.",
       "textoPadrao": "Come by, brother!",
       "publicado": "Agape published",
-      "publicadoTexto": "It already shows on the map and in the feed."
+      "publicadoTexto": "It already shows on the map and in the feed.",
+      "erro": "Could not publish the Agape. Try again in a moment."
     },
     "checklist": {
       "pronto": "All set. Ride safe!",

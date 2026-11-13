@@ -481,7 +481,28 @@
     "deIrmao": "Organizado por {{nome}}",
     "trajeto": "{{saida}} → {{destino}}",
     "distancia": "{{km}} km · {{duracao}} · {{estrada}}",
-    "foram": "{{n}} irmãos foram"
+    "foram": "{{n}} irmãos foram",
+    "subtitulo": "Agenda do seu capítulo e dos passeios gerais.",
+    "vazio": "Nenhum passeio por aqui ainda.",
+    "erroPresenca": "Não consegui registrar sua presença. Tente de novo.",
+    "novo": {
+      "titulo": "Criar passeio",
+      "explicacao": "Marque um passeio do seu capítulo. Quem confirmar \"Vou\" entra no grupo do passeio.",
+      "semPermissao": "Só a diretoria do capítulo pode criar passeios.",
+      "nome": "Nome do passeio",
+      "dia": "Dia (dd/mm/aaaa)",
+      "hora": "Hora (ex.: 6:30)",
+      "saida": "Ponto de saída",
+      "destino": "Destino",
+      "descricao": "Detalhes (opcional)",
+      "aviso": "Todos os irmãos veem o passeio. O grupo do passeio é criado automaticamente.",
+      "publicar": "Publicar passeio",
+      "faltaTitulo": "Dê um nome ao passeio.",
+      "dataInvalida": "Confira o dia e a hora: use dd/mm/aaaa e uma data que ainda não passou.",
+      "erro": "Não consegui criar o passeio. Confira sua conexão e tente de novo.",
+      "criado": "Passeio criado",
+      "criadoTexto": "Ele já aparece na agenda dos irmãos."
+    }
   },
   "avatar": {
     "titulo": "Criar avatar",
@@ -644,7 +665,8 @@
       "faltaLocal": "Diga onde vai ser o Ágape.",
       "textoPadrao": "Encosta aí, irmão!",
       "publicado": "Ágape publicado",
-      "publicadoTexto": "Ele já aparece no mapa e no feed."
+      "publicadoTexto": "Ele já aparece no mapa e no feed.",
+      "erro": "Não consegui publicar o Ágape. Tente de novo em instantes."
     },
     "checklist": {
       "pronto": "Tudo pronto. Boa estrada!",

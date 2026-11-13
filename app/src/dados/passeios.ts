@@ -21,6 +21,9 @@ export type Passeio = {
   imagem: number;
   quando: 'proximos' | 'passados';
   descricao: string;
+  /** Passeio real do servidor (Vou/Talvez gravam no banco). */
+  servidor?: boolean;
+  minhaPresenca?: 'vou' | 'talvez' | null;
 };
 
 const img = {
